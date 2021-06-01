@@ -1,0 +1,40 @@
+// Base element styles.
+// Please DO NOT add rules of this type.
+.co-quick-start-panel-content {
+  ul,
+  ol {
+    padding-left: 20px;
+    margin-left: 0;
+  }
+
+  dl {
+    margin: 0px;
+  }
+
+  // match pf4 styling / table col head styling
+  dt {
+    font-weight: var(--pf-global--FontWeight--bold);
+  }
+
+  dd {
+    margin-bottom: 20px;
+  }
+
+  dd:last-child {
+    margin-bottom: 0px;
+  }
+
+  input[type='number'] {
+    -webkit-appearance: textfield;
+    appearance: textfield;
+    max-width: 100px;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+  }
+
+  input[type='radio'] {
+    margin-right: 7px;
+  }
+}

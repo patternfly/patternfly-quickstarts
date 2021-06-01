@@ -1,0 +1,22 @@
+{
+    "name": "quickstarts-injector",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "description": "Injects quick starts",
+    "homepage_url": "https://github.com/cloudmosaic/quickstarts",
+    "background": {
+      "scripts": [
+        "background.js"
+      ],
+      "persistent": true
+    },
+    "browser_action": {
+      "default_title": "Activate quick starts"
+    },
+    "permissions": [
+        "https://*/*",
+        "http://*/*",
+        "tabs",
+        "activeTab"
+    ]
+  }

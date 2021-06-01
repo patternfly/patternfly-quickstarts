@@ -1,0 +1,12 @@
+metadata:
+  name: external
+spec:
+  displayName: Links to external resource
+  icon: ''
+  description: This card lists an external resource
+  link: 
+    href: https://github.com/cloudmosaic/quickstarts
+    text: Quick starts
+  type: 
+    text: Documentation
+    color: orange

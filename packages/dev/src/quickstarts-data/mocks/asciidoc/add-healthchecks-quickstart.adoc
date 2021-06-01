@@ -1,0 +1,103 @@
+:qs-id: sample-adoc
+
+:qs-display-name: [adoc] Adding health checks to your sample application
+
+:qs-duration-minutes: 5
+
+:qs-icon:
+
+:qs-description: You just created a sample application. Now, let’s add health checks to it.
+
+:qs-prerequisites: * Prereq 1 \
++ \
+* Prereq 2
+
+:qs-introduction: === This quick start shows you how to add health checks to your sample application. \
++ \
+You should have previously created the **sample-app** application and **nodejs-sample** deployment using the **Get started with a sample** quick start. If you haven't, you may be able to follow these tasks with any existing deployment without configured health checks.
+
+:qs-conclusion: Your sample application now has health checks. To ensure that your application is running correctly, take the *Monitor your sample application* quick start.
+
+:qs-next-quick-start: monitor-sampleapp
+
+[role=qs-task]
+====
+[role=qs-title]
+=====
+[discrete]
+== Viewing the details of your sample application
+=====
+
+[.qs-description]
+=====
+[discrete]
+=== To view the details of your sample application:
+
+. Go to the project your sample application was created in.
+. In the *</> Developer* perspective, go to *Topology*.
+. Click on the *nodejs-sample* deployment to view its details.
+
+A side panel is displayed containing the details of your sample application.
+=====
+
+[.qs-review.instructions]
+=====
+[discrete]
+==== To verify you are viewing the details of your sample application:
+Is the side panel titled *nodejs-sample*?
+=====
+
+[.qs-review.failedTaskHelp]
+=====
+This task isn’t verified yet. Try the task again.
+=====
+
+[.qs-summary.success]
+=====
+You have viewed the details of your sample app!
+=====
+
+[.qs-summary.failed]
+=====
+Try the steps again.
+=====
+====
+
+[role=qs-task]
+====
+[role=qs-title]
+=====
+[discrete]
+== Verifying that there are no health checks
+=====
+
+[.qs-description]
+=====
+[discrete]
+=== To verify that there your sample application has no health checks configured:
+
+. View the information in the *Resources* tab in the side panel.
+=====
+
+[.qs-review.instructions]
+=====
+[discrete]
+==== To verify there are no health checks configured:
+Do you see an inline alert stating that *nodejs-sample* does not have health checks?
+=====
+
+[.qs-review.failedTaskHelp]
+=====
+This task isn’t verified yet. Try the task again.
+=====
+
+[.qs-summary.success]
+=====
+You have verified that there are no existing health checks!
+=====
+
+[.qs-summary.failed]
+=====
+Try the steps again.
+=====
+====

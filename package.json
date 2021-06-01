@@ -1,0 +1,19 @@
+{
+  "name": "@patternfly/quickstarts-root",
+  "private": true,
+  "version": "0.0.0",
+  "description": "This library provides the quickstarts module",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "yarn workspace @patternfly/quickstarts build",
+    "start": "yarn workspace @patternfly/quickstarts-dev start",
+    "watch": "yarn build && concurrently --kill-others \"yarn workspace @patternfly/quickstarts watch\" \"yarn start\"",
+    "build:dev": "yarn workspace @patternfly/quickstarts-dev build"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  }
+}

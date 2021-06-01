@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]>
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<![endif]-->
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="Asciidoctor 2.0.12" name="generator">
+<title>[adoc html] Adding health checks to your sample application</title>
+<link href="https://static.redhat.com/libs/redhat/redhat-font/2/webfonts/red-hat-font.css" rel="stylesheet">
+<link href="//access.redhat.com/webassets/avalon/j/public_modules/node_modules/@cpelements/cp-documentation/dist/rhdocs.min.css" rel="stylesheet">
+<script>
+  window.portal = {
+    analytics : {},
+    host      : "https://access.redhat.com",
+    idp_url   : "https://sso.redhat.com",
+    lang      : "en",
+    version   : "7b09880",
+    builddate : "2020-06-10T14:50:01.831Z",
+    fetchdate : "2020-06-10T14:50:04-0400",
+    nrid      : "14615289",
+    nrlk      : "2a497fa56f"
+  };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.3.0/custom-elements-es5-adapter.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.3.0/webcomponents-bundle.js"></script>
+<script src="https://access.redhat.com/webassets/avalon/j/lib/require.js"></script>
+<script>
+  chrometwo_require(["//access.redhat.com/webassets/avalon/j/public_modules/node_modules/@cpelements/cp-documentation/dist/cp-documentation.umd.js"]);
+</script>
+<script>
+  window.addEventListener('load', function() {
+    var cpDocumentations = document.querySelectorAll('cp-documentation');
+    for (let index = 0; index < cpDocumentations.length; index++) {
+      const cpDocumentation = cpDocumentations[index];
+      cpDocumentation.setAttribute('pfe-c-non-prod', '');
+    }
+  });
+</script>
+</head>
+<body class="article pantheon-render rhdocs" id="adding-health-checks_{context}">
+<cp-documentation id="doc-content">
+<header class="rhdocs__header" id="rhdocs-header">
+<div class="rhdocs__header__primary-wrapper">
+<h1>[adoc html] Adding health checks to your sample application</h1>
+</div>
+</header>
+<article class="rhdocs-content" id="rhdocs-content">
+<div class="preamble" id="rhdocs-preamble">
+<section class="sectionbody">
+<div class="openblock qs-duration">
+<div class="content">
+<p><strong>Duration:</strong> 5 minutes</p>
+</div>
+</div>
+<div class="openblock qs-description">
+<div class="content">
+<p>You just created a sample application. Now, let’s add health checks to it.</p>
+</div>
+</div>
+<div class="openblock qs-prerequisites">
+<div class="content">
+<div class="ulist">
+<strong class="heading" id="ulist_heading_0">Prerequisites</strong>
+<ul aria-labelledby="ulist_heading_0">
+<li>
+<p>Prereq 1</p>
+</li>
+<li>
+<p>Prereq 2</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="openblock qs-intro _abstract">
+<div class="content">
+<h2 class="discrete" id="_this_quick_start_shows_you_how_to_add_health_checks_to_your_sample_application">This quick start shows you how to add health checks to your sample application</h2>
+<p>You should have previously created the <strong>sample-app</strong> application and <strong>nodejs-sample</strong> deployment using the <strong>Get started with a sample</strong> quick start. If you haven&#8217;t, you may be able to follow these tasks with any existing deployment without configured health checks.</p>
+</div>
+</div>
+<div class="openblock qs-task">
+<div class="content">
+<div class="exampleblock qs-task-description">
+<div class="content">
+<p>To view the details of your sample application:</p>
+</div>
+</div>
+<h2 class="discrete qs-task-title" id="viewing_the_details_of_your_sample_application_healthcheck-workflow">Viewing the details of your sample application</h2>
+<div class="olist arabic qs-task-procedure">
+<strong class="heading" id="olist_heading_1">Procedure</strong>
+<ol aria-labelledby="olist_heading_1" class="arabic">
+<li>
+<p>Go to the project your sample application was created in.</p>
+</li>
+<li>
+<p>In the <strong>&lt;/&gt; Developer</strong> perspective, go to <strong>Topology</strong>.</p>
+</li>
+<li>
+<p>Click on the <strong>nodejs-sample</strong> deployment to view its details.</p>
+</li>
+<li>
+<p>A side panel is displayed containing the details of your sample application.</p>
+</li>
+</ol>
+</div>
+<div class="olist arabic qs-task-verification">
+<strong class="heading" id="olist_heading_2">Verification</strong>
+<ol aria-labelledby="olist_heading_2" class="arabic">
+<li>
+<p>To verify you are viewing the details of your sample application:</p>
+<ol class="loweralpha" type="a">
+<li>
+<p>Is the side panel titled <strong>nodejs-sample</strong>?</p>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="openblock qs-task">
+<div class="content">
+<div class="exampleblock qs-task-description">
+<div class="content">
+<h3 class="discrete" id="_to_verify_that_there_your_sample_application_has_no_health_checks_configured">To verify that there your sample application has no health checks configured:</h3>
+</div>
+</div>
+<h2 class="discrete qs-task-title" id="verifying_that_there_are_no_health_checks_healthcheck-workflow">Verifying that there are no health checks</h2>
+<div class="olist arabic qs-task-procedure">
+<strong class="heading" id="olist_heading_4">Procedure</strong>
+<ol aria-labelledby="olist_heading_4" class="arabic">
+<li>
+<p>View the information in the <strong>Resources</strong> tab in the side panel.</p>
+</li>
+</ol>
+</div>
+<div class="olist arabic qs-task-verification">
+<strong class="heading" id="olist_heading_5">Verification</strong>
+<ol aria-labelledby="olist_heading_5" class="arabic">
+<li>
+<p>Do you see an inline alert stating that <strong>nodejs-sample</strong> does not have health checks?</p>
+</li>
+</ol>
+</div>
+<div class="exampleblock qs-review failedTaskHelp">
+<div class="content">
+<p>This task isn’t verified yet. Try the task again.</p>
+</div>
+</div>
+<div class="exampleblock qs-summary success">
+<div class="content">
+<p>You have verified that there are no existing health checks!</p>
+</div>
+</div>
+<div class="exampleblock qs-summary failed">
+<div class="content">
+<p>Try the steps again.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="openblock qs-conclusion">
+<div class="content">
+<h2 class="discrete" id="_conclusion">Conclusion</h2>
+<p>Your sample application now has health checks. To ensure that your application is running correctly, take the <strong>Monitor your sample application</strong> quick start.</p>
+</div>
+</div>
+<div class="openblock qs-next-quick-start">
+<div class="content">
+<p><a href="../monitor-sampleapp{refilesuffix}">Start monitor-sampleapp quick start</a></p>
+</div>
+</div>
+</section>
+</div>
+<section class="sect1 _additional-resources">
+<h2 id="_additional_resources">Additional resources</h2>
+<div class="sectionbody">
+<ul>
+<li>
+<p><a href="https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.9/">Product Documentation for {health-check-name}</a></p>
+</li>
+</ul>
+</div>
+</section>
+<div class="rh-docs-legal-notice">
+<a class="rh-docs-legal-notice__link" href="https://access.redhat.com/docs-legal-notice">Legal Notices for Trademarks</a>
+</div>
+</article>
+<footer class="rhdocs-footer" id="rhdocs-footer">
+<div class="rhdocs-footer-text" id="rhdocs-footer-text">
+Last updated 2021-02-24 17:41:02 UTC
+</div>
+</footer>
+</cp-documentation>
+</body>
+</html>

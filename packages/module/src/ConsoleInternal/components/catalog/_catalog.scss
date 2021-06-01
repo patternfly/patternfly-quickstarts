@@ -1,0 +1,390 @@
+// frontend/public/style/_vars.scss
+$font-size-base: 14px;
+$co-m-catalog-tile-height: 100%;
+$co-m-catalog-tile-width: 260px;
+
+$catalog-capability-level-icon-left: -20px;
+$catalog-capability-level-icon-top: 4px;
+$catalog-capability-level-inactive-color: var(--pf-global--Color--400);
+$catalog-item-icon-size-lg: 40px;
+$catalog-item-icon-size-sm: 24px;
+$co-modal-ignore-warning-icon-width: 30px;
+$catalog-tile-width: $co-m-catalog-tile-width;
+
+// reset font size back to 13px since console h5 font size is 14px
+.catalog-item-header-pf-subtitle {
+  font-size: 13px;
+}
+
+.catalog-tile-pf-body .catalog-tile-pf-subtitle {
+  font-size: ($font-size-base - 1);
+}
+
+.co-catalog {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  min-width: 515px; // in order to accommodate filters and tiles at mobile
+}
+
+.co-catalog-tile-view {
+  display: flex;
+  flex-wrap: wrap;
+  --pf-l-gallery--GridTemplateColumns: repeat(auto-fill, 260px) !important;
+}
+
+.co-catalog__body {
+  min-width: 575px; // Minimum shrinkable width of .co-catalog child elements => 15 + ((220 + 15) + (30 + 250 + 30)) + 15
+  @media (min-width: $screen-sm-min) {
+    min-width: 590px; // Left margin 30 instead of 15
+  }
+}
+
+.co-catalog-item-details {
+  display: flex;
+  margin: 0 0 10px;
+
+  &__description {
+    white-space: pre-wrap;
+  }
+
+  &__kind-label {
+    font-weight: var(--pf-global--FontWeight--bold);
+  }
+
+  &__name {
+    margin-bottom: 10px;
+  }
+
+  &__provider,
+  &__tags {
+    margin-bottom: 5px;
+  }
+
+  &__tag {
+    color: $color-pf-black-600;
+    font-size: ($font-size-base - 1);
+    margin-right: 5px;
+    text-transform: uppercase;
+  }
+}
+
+.co-catalog-item-icon {
+  padding-right: 10px;
+
+  &__icon {
+    font-size: $catalog-item-icon-size-sm;
+
+    &--large {
+      font-size: $catalog-item-icon-size-lg;
+    }
+  }
+
+  &__img {
+    max-height: $catalog-item-icon-size-sm;
+    max-width: $catalog-item-icon-size-sm;
+
+    &[src$='.svg'] {
+      width: $catalog-item-icon-size-sm;
+    }
+
+    &--large {
+      max-height: $catalog-item-icon-size-lg;
+      max-width: $catalog-item-icon-size-lg;
+
+      &[src$='.svg'] {
+        width: $catalog-item-icon-size-lg;
+      }
+    }
+  }
+}
+
+.co-catalog-page {
+  background: $color-pf-white;
+  border: 1px solid var(--pf-global--BorderColor--300);
+  display: flex;
+  flex: 1;
+  padding-top: ($grid-gutter-width / 2);
+
+  &--with-sidebar {
+    margin: 0 ($grid-gutter-width / 2);
+    padding-bottom: ($grid-gutter-width / 2);
+  }
+
+  &__btn-group__group-by {
+    display: inline;
+    margin-left: var(--pf-global--spacer--md);
+  }
+
+  &__content {
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+
+  &__description {
+    margin-top: -10px;
+    padding: 0 ($grid-gutter-width / 2) 10px;
+    @media (min-width: $grid-float-breakpoint) {
+      padding-left: $grid-gutter-width;
+      padding-right: $grid-gutter-width;
+    }
+  }
+
+  &__filter {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__filter-toggle {
+    margin-top: 5px;
+  }
+
+  &__grid {
+    background-color: $color-pf-black-150;
+  }
+
+  &__grouped-items {
+    margin-bottom: var(--pf-global--spacer--md);
+  }
+
+  &__group-title {
+    margin-bottom: var(--pf-global--spacer--sm);
+  }
+
+  &__header {
+    margin: 0 $grid-gutter-width 0 0;
+  }
+
+  &__heading {
+    font-size: 16px;
+    margin: 0 0 20px 30px;
+  }
+
+  &__hint {
+    margin: 0 0 var(--pf-global--spacer--md) 0;
+  }
+
+  &__input {
+    display: inline-flex !important;
+    margin: 0 0 20px 30px;
+    width: auto !important;
+  }
+
+  &__sort {
+    display: inline;
+    margin-left: var(--pf-global--spacer--md);
+  }
+
+  &__num-items {
+    font-weight: var(--pf-global--FontWeight--bold);
+    padding: 0 0 20px;
+  }
+
+  &__info-icon {
+    vertical-align: middle;
+    color: #6a6e73;
+    &:hover {
+      color: #151515;
+    }
+  }
+
+  // Enable scrolling on the modal
+  &__overlay {
+    border: 0 !important; // Collapse default PF4 modal border-width
+
+    .modal-body .co-hint-block {
+      margin-bottom: 10px;
+    }
+
+    .properties-side-panel-pf {
+      flex: 0 0 auto;
+    }
+  }
+
+  &__overlay--right {
+    bottom: 0;
+    padding: 0 !important;
+    right: 0;
+    top: 4.75rem; // --pf-c-page__header--MinHeight
+
+    .pf-c-modal-box__body {
+      // Required to position scroll shadows correctly on Chrome
+      display: flex;
+      flex-direction: column;
+      margin: 0 !important;
+      padding: 0;
+    }
+
+    .modal-body-inner-shadow-covers {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    h1 {
+      white-space: normal;
+    }
+  }
+
+  &__overlay-action {
+    align-items: baseline;
+    display: inline-flex !important;
+    margin: var(--pf-global--spacer--sm) var(--pf-global--spacer--sm) 0 0;
+    overflow-x: hidden;
+  }
+
+  &__overlay-action-icon {
+    flex-shrink: 0;
+    font-size: $font-size-base;
+    margin-left: 6px;
+  }
+
+  &__overlay-action-label {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__overlay-actions {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: var(--pf-global--spacer--md);
+    white-space: normal;
+  }
+
+  &__overlay-header {
+    margin-bottom: var(--pf-global--spacer--md);
+  }
+
+  &__overlay-body {
+    margin: 0;
+    padding-left: var(--pf-global--spacer--lg);
+    padding-right: var(--pf-global--spacer--lg);
+    padding-top: var(--pf-global--spacer--md);
+    @media (min-width: $screen-sm-min) {
+      display: flex;
+    }
+  }
+
+  &__overlay-description {
+    margin: 20px 0 0;
+    white-space: pre-wrap;
+    // TODO: find fix for urls that don't wrap
+    // fix below causes undesirable wrapping on non-urls
+    // word-break: break-all;
+    h1,
+    h2,
+    h3 {
+      color: #333; // same color as styles hardcoded in markdown text component
+    }
+
+    h2 {
+      font-size: 20px;
+    }
+
+    p,
+    li,
+    ol {
+      color: #333; // same color as styles hardcoded in markdown text component
+      font-size: $font-size-base !important;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      flex: 1 1 auto;
+      margin-left: 20px;
+      margin-top: 0;
+    }
+  }
+
+  &__tabs {
+    flex: 0 0 220px;
+    margin: 0 ($grid-gutter-width / 2) 0 0;
+  }
+}
+
+@media screen and (min-width: $screen-sm) {
+  .pf-c-modal-box.co-catalog-page__overlay {
+    width: 600px;
+  }
+}
+
+@media screen and (min-width: $screen-md) {
+  .pf-c-modal-box.co-catalog-page__overlay {
+    width: 900px;
+  }
+}
+
+.co-catalog-tab__empty {
+  color: $color-pf-black-600;
+}
+
+.co-modal-ignore-warning {
+  height: initial;
+
+  &__checkbox.checkbox {
+    margin-bottom: 0;
+    padding-top: 15px;
+  }
+  &__content {
+    display: flex;
+  }
+  &__icon {
+    font-size: $co-modal-ignore-warning-icon-width;
+    margin-right: 15px;
+    // Avoid the dialog shifting when the icon loads.
+    min-width: $co-modal-ignore-warning-icon-width;
+  }
+  &__link {
+    display: block;
+    margin: 10px 0;
+  }
+}
+
+.properties-side-panel-pf-property-label {
+  font-size: ($font-size-base - 1);
+}
+
+.properties-side-panel-pf-property-value__capability-level {
+  color: $catalog-capability-level-inactive-color;
+  margin-bottom: 5px;
+  position: relative;
+
+  &--active {
+    color: inherit;
+
+    &::before {
+      display: none; // hide empty circle since icon is present
+    }
+  }
+
+  &::before {
+    // empty circle
+    border: 1px solid $catalog-capability-level-inactive-color;
+    border-radius: 10px;
+    content: '';
+    height: 14px;
+    left: $catalog-capability-level-icon-left;
+    position: absolute;
+    top: $catalog-capability-level-icon-top;
+    width: 14px;
+  }
+
+  &:not(:last-child)::after {
+    // pipe after circle
+    background: $catalog-capability-level-inactive-color;
+    content: '';
+    height: 6px;
+    left: -13px;
+    position: absolute;
+    top: 21px;
+    width: 1px;
+  }
+}
+
+.properties-side-panel-pf-property-value__capability-level-icon {
+  left: $catalog-capability-level-icon-left;
+  position: absolute;
+  top: $catalog-capability-level-icon-top;
+}
+
+.properties-side-panel-pf-property-value__capability-levels {
+  list-style: none;
+}

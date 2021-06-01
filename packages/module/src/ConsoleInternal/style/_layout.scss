@@ -1,0 +1,75 @@
+html,
+body,
+#app,
+#content,
+#content-scrollable,
+.pf-c-page__main-section,
+.pf-c-drawer {
+  height: 100%; // so .co-p-has-sidebar, .yaml-editor are full height
+}
+
+#app,
+#content {
+  display: flex;
+  flex-direction: column;
+}
+
+#content-scrollable {
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto; // so catalog is scrollable at mobile
+  overflow-y: auto;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+  &:focus {
+    outline: 0;
+  }
+}
+
+.co-m-page__body {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.co-p-has-sidebar {
+  position: relative;
+  display: flex;
+  flex: 1;
+  height: 100%;
+
+  &__body {
+    flex: 1 1 700px;
+  }
+
+  &__sidebar {
+    position: relative;
+    @media (min-width: $screen-md-min) {
+      flex: 1 0 300px;
+      overflow-y: auto;
+    }
+
+    &--bordered {
+      @media (max-width: $screen-sm-max) {
+        border-top: 1px solid #ccc;
+      }
+      @media (min-width: $screen-md-min) {
+        border-left: 1px solid #ccc;
+      }
+    }
+  }
+
+  &__sidebar-body {
+    position: absolute;
+    width: 100%;
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  &__sidebar-heading {
+    @include co-break-word;
+    margin-bottom: 20px;
+    margin-top: 0;
+  }
+}

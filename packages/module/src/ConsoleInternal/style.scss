@@ -1,0 +1,18 @@
+@import 'style/vars';
+@import 'style/base';
+
+// Mixins
+@import 'style/mixin/break-word';
+
+// Overrides
+@import 'style/overrides';
+
+// React Components
+@import 'components/icon-and-text';
+@import 'components/catalog/catalog';
+
+.co-quick-start-panel-content,
+.ocs-page-layout__content {
+  --pf-global--FontSize--md: 14px;
+  --pf-global--FontSize--sm: 13px;
+}

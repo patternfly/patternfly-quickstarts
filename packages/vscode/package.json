@@ -1,0 +1,76 @@
+{
+  "name": "quickstarts-preview",
+  "displayName": "quickstarts-preview",
+  "description": "Quick start preview",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudmosaic/quickstarts.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cloudmosaic/quickstarts/issues"
+  },
+  "homepage": "https://github.com/cloudmosaic/quickstarts#readme",
+  "publisher": "PatternFly",
+  "engines": {
+    "vscode": "^1.29.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.qsPreview"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.qsPreview",
+        "title": "Quick Starts: Preview"
+      }
+    ]
+  },
+  "scripts": {
+    "clean": "rm -rf out && rm -rf quickstartsPreview",
+    "vscode:prepublish": "npm run prod:compile",
+    "prod:compile": "npm run clean && npm-run-all prod:compile:*",
+    "dev:compile": "npm run clean && npm-run-all dev:compile:*",
+    "watch": "npm-run-all -p watch:*",
+    "dev:compile:extension": "tsc -p ./",
+    "dev:compile:views": "webpack --mode development",
+    "prod:compile:extension": "tsc -p ./",
+    "prod:compile:views": "webpack --mode production",
+    "watch:extension": "tsc -watch -p ./",
+    "watch:views": "webpack --watch --mode development"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.0",
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^10.12.21",
+    "@types/react": "^16.14.4",
+    "@types/react-dom": "^16.9.11",
+    "css-loader": "^5.0.2",
+    "file-loader": "^6.2.0",
+    "npm-run-all": "^4.1.5",
+    "null-loader": "^4.0.1",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^8.0.17",
+    "tslint": "^6.1.3",
+    "typescript": "^4.1.5",
+    "url-loader": "^4.1.1",
+    "vscode": "^1.1.37",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5"
+  },
+  "dependencies": {
+    "@cloudmosaic/quickstarts": "0.0.6",
+    "@patternfly/patternfly": "^4.90.5",
+    "@patternfly/react-catalog-view-extension": "^4.10.13",
+    "asciidoctor": "^2.2.1",
+    "js-base64": "^3.6.0",
+    "js-yaml": "^4.0.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  }
+}
