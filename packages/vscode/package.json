@@ -5,13 +5,13 @@
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cloudmosaic/quickstarts.git"
+    "url": "git+https://github.com/patternfly/patternfly-quickstarts.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cloudmosaic/quickstarts/issues"
+    "url": "https://github.com/patternfly/patternfly-quickstarts/issues"
   },
-  "homepage": "https://github.com/cloudmosaic/quickstarts#readme",
+  "homepage": "https://github.com/patternfly/patternfly-quickstarts#readme",
   "publisher": "PatternFly",
   "engines": {
     "vscode": "^1.29.0"

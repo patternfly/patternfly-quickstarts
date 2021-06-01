@@ -146,4 +146,4 @@ In the rules array:
 ## yaml
 
 This section will get more info in the future. For now you can view sample yamls here:
-https://github.com/cloudmosaic/quickstarts/tree/main/packages/dev/src/quickstarts-data/mocks/yamls
+https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/dev/src/quickstarts-data/mocks/yamls

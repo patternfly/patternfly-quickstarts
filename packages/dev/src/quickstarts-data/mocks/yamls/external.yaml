@@ -5,7 +5,7 @@ spec:
   icon: ''
   description: This card lists an external resource
   link: 
-    href: https://github.com/cloudmosaic/quickstarts
+    href: https://github.com/patternfly/patternfly-quickstarts
     text: Quick starts
   type: 
     text: Documentation

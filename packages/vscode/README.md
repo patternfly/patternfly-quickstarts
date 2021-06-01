@@ -2,9 +2,9 @@
 
 This WYSIWYG type extension lets you preview .yaml or .adoc quick starts compatible files.
 
-Example .adoc file: https://github.com/cloudmosaic/quickstarts/blob/main/packages/dev/src/quickstarts-data/mocks/asciidoc/TEMPLATE_PROCEDURE.adoc
+Example .adoc file: https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/dev/src/quickstarts-data/mocks/asciidoc/TEMPLATE_PROCEDURE.adoc
 
-Example .yaml file: https://github.com/cloudmosaic/quickstarts/blob/main/packages/dev/src/quickstarts-data/mocks/yamls/add-healthchecks-quickstart.yaml
+Example .yaml file: https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/dev/src/quickstarts-data/mocks/yamls/add-healthchecks-quickstart.yaml
 
 ## Features
 

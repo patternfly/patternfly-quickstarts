@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "manifest_version": 2,
     "description": "Injects quick starts",
-    "homepage_url": "https://github.com/cloudmosaic/quickstarts",
+    "homepage_url": "https://github.com/patternfly/patternfly-quickstarts",
     "background": {
       "scripts": [
         "background.js"
