@@ -18,19 +18,33 @@ const props: QuickStartTaskHeaderProps = {
 
 describe('QuickStartTaskHeader', () => {
   beforeEach(() => {
+    // DOMPurify.addHook = jest.fn();
     wrapper = shallow(<QuickStartTaskHeader {...props} />);
   });
 
   it('should render subtitle for active task', () => {
-    expect(wrapper.find(WizardNavItem).dive().find(Title).length).toBe(1);
     expect(
-      wrapper.find(WizardNavItem).dive().find('[data-test-id="quick-start-task-subtitle"]').props()
-        .children,
+      wrapper
+        .find(WizardNavItem)
+        .dive()
+        .find(Title).length,
+    ).toBe(1);
+    expect(
+      wrapper
+        .find(WizardNavItem)
+        .dive()
+        .find('[data-test-id="quick-start-task-subtitle"]')
+        .props().children,
     ).toEqual(props.subtitle);
   });
   it('should not render subtitle if task is not active', () => {
     wrapper = shallow(<QuickStartTaskHeader {...props} isActiveTask={false} />);
-    expect(wrapper.find(WizardNavItem).dive().find(Title).length).toBe(1);
+    expect(
+      wrapper
+        .find(WizardNavItem)
+        .dive()
+        .find(Title).length,
+    ).toBe(1);
     expect(
       wrapper
         .find(WizardNavItem)

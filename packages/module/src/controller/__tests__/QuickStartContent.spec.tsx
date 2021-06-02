@@ -6,13 +6,14 @@ import QuickStartContent from '../QuickStartContent';
 import QuickStartIntroduction from '../QuickStartIntroduction';
 import QuickStartTasks from '../QuickStartTasks';
 import QuickStartConclusion from '../QuickStartConclusion';
+import { allQuickStarts } from '../../data/quick-start-test-data';
 
 type QuickStartContentProps = React.ComponentProps<typeof QuickStartContent>;
 
 let wrapper: ShallowWrapper<QuickStartContentProps>;
 
 const props: QuickStartContentProps = {
-  quickStart: getQuickStartByName('explore-serverless'),
+  quickStart: getQuickStartByName('explore-serverless', allQuickStarts),
   allTaskStatuses: [
     QuickStartTaskStatus.INIT,
     QuickStartTaskStatus.INIT,

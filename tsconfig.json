@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "baseUrl": "packages/module/",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es2016",
+    "jsx": "react",
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "noUnusedLocals": true,
+    "typeRoots": ["node_modules/@types", "@types"],
+    "types": ["node", "jest", "cypress", "cypress-axe"],
+    "paths": {
+      "@console/shared": ["src/ConsoleShared"],
+      "@console/shared/*": ["src/ConsoleShared/*"],
+      "@console/internal": ["src/ConsoleInternal"],
+      "@console/internal/*": ["src/ConsoleInternal/*"],
+      "@quickstarts/*": ["src/*"]
+    }
+  },
+  "exclude": [
+    ".yarn",
+    "**/node_modules",
+    "**/dist"
+  ],
+  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx", "**/*.json"]
+}

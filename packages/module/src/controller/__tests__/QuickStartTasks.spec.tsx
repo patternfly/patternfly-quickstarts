@@ -6,11 +6,12 @@ import QuickStartTask from '../QuickStartTasks';
 import TaskHeader from '../QuickStartTaskHeader';
 import QuickStartTaskReview from '../QuickStartTaskReview';
 import QuickStartMarkdownView from '../../QuickStartMarkdownView';
+import { allQuickStarts } from '../../data/quick-start-test-data';
 
 type QuickStartTaskProps = React.ComponentProps<typeof QuickStartTask>;
 let wrapper: ShallowWrapper<QuickStartTaskProps>;
 const props: QuickStartTaskProps = {
-  tasks: getQuickStartByName('monitor-sampleapp').spec.tasks,
+  tasks: getQuickStartByName('monitor-sampleapp', allQuickStarts).spec.tasks,
   allTaskStatuses: [
     QuickStartTaskStatus.SUCCESS,
     QuickStartTaskStatus.INIT,
@@ -35,33 +36,27 @@ describe('QuickStartTasks', () => {
   });
 
   it('should render correct number of tasks based on currentTaskIndex', () => {
-    expect(wrapper.find(TaskHeader).length).toBe(2);
+    expect(wrapper.find(TaskHeader).length).toBe(1);
   });
 
-  it('should render SyncMarkdownView with description or summary according to task status', () => {
+  it('should render SyncMarkdownView with description if a task is active', () => {
     wrapper = shallow(
       <QuickStartTask
         {...props}
         allTaskStatuses={[
           QuickStartTaskStatus.SUCCESS,
           QuickStartTaskStatus.FAILED,
-          QuickStartTaskStatus.INIT,
+          QuickStartTaskStatus.VISITED,
         ]}
         taskNumber={2}
       />,
     );
-
-    expect(wrapper.find(QuickStartMarkdownView).at(0).props().content).toEqual(
-      props.tasks[0].summary.success,
-    );
-
-    expect(wrapper.find(QuickStartMarkdownView).at(1).props().content).toEqual(
-      props.tasks[1].summary.failed,
-    );
-
-    expect(wrapper.find(QuickStartMarkdownView).at(2).props().content).toEqual(
-      props.tasks[2].description,
-    );
+    expect(
+      wrapper
+        .find(QuickStartMarkdownView)
+        .at(0)
+        .props().content,
+    ).toEqual(props.tasks[2].description);
   });
 
   it('should render review when task is active and in Review state', () => {

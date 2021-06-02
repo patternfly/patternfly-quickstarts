@@ -12,14 +12,11 @@ import {
   EmptyStateIcon,
   EmptyStatePrimary,
   Title,
-  TextContent,
   Text,
-  PageSection,
-  PageSectionVariants,
   Divider,
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
-import { removeQueryArgument } from '@console/internal/components/utils';
+import { EmptyBox, LoadingBox, removeQueryArgument } from '@console/internal/components/utils';
 import QuickStartCatalogFilter from './catalog/Toolbar/QuickStartCatalogFilter';
 
 type QuickStartCatalogPageProps = {
@@ -125,7 +122,10 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
     [allQuickStartStates, quickStarts],
   );
 
-  return (
+  if (!filteredQuickStarts) return <LoadingBox />;
+  return filteredQuickStarts.length === 0 ? (
+    <EmptyBox label={t('quickstart~Quick Starts')} />
+  ) : (
     <>
       {showTitle && (
         <div className="ocs-page-layout__header">

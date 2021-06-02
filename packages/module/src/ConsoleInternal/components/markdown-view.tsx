@@ -5,10 +5,12 @@ import _reduce from 'lodash-es/reduce';
 import _truncate from 'lodash-es/truncate';
 import _uniqueId from 'lodash-es/uniqueId';
 import { Converter } from 'showdown';
-import DOMPurify from 'dompurify';
 import { useTranslation } from 'react-i18next';
 
 import './_markdown-view.scss';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const DOMPurify = require('dompurify');
 
 const tableTags = ['table', 'thead', 'tbody', 'tr', 'th', 'td'];
 

@@ -5,11 +5,12 @@ import { getQuickStartByName } from '../../utils/quick-start-utils';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
 import QuickStartTaskReview from '../QuickStartTaskReview';
 import QuickStartMarkdownView from '../../QuickStartMarkdownView';
+import { allQuickStarts } from '../../data/quick-start-test-data';
 
 type QuickStartTaskReviewProps = React.ComponentProps<typeof QuickStartTaskReview>;
 let wrapper: ShallowWrapper<QuickStartTaskReviewProps>;
 const props: QuickStartTaskReviewProps = {
-  review: getQuickStartByName('explore-serverless').spec.tasks[0].review,
+  review: getQuickStartByName('explore-serverless', allQuickStarts).spec.tasks[0].review,
   taskStatus: QuickStartTaskStatus.REVIEW,
   onTaskReview: jest.fn(),
 };
@@ -42,8 +43,11 @@ describe('QuickStartTaskReview', () => {
 
   it('should render task help in markdown when task status is failed', () => {
     wrapper = shallow(<QuickStartTaskReview {...props} />);
-    expect(wrapper.find(QuickStartMarkdownView).at(1).props().content).toEqual(
-      props.review.failedTaskHelp,
-    );
+    expect(
+      wrapper
+        .find(QuickStartMarkdownView)
+        .at(1)
+        .props().content,
+    ).toEqual(props.review.failedTaskHelp);
   });
 });

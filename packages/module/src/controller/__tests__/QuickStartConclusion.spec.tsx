@@ -5,6 +5,7 @@ import { getQuickStartByName } from '../../utils/quick-start-utils';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
 import QuickStartConclusion from '../QuickStartConclusion';
 import QuickStartMarkdownView from '../../QuickStartMarkdownView';
+import { allQuickStarts } from '../../data/quick-start-test-data';
 
 jest.mock('react-i18next', () => {
   const reactI18next = require.requireActual('react-i18next');
@@ -19,7 +20,7 @@ const i18nNS = 'quickstart';
 type QuickStartConclusionProps = React.ComponentProps<typeof QuickStartConclusion>;
 let wrapper: ShallowWrapper<QuickStartConclusionProps>;
 const props: QuickStartConclusionProps = {
-  tasks: getQuickStartByName('explore-pipelines').spec.tasks,
+  tasks: getQuickStartByName('explore-pipelines', allQuickStarts).spec.tasks,
   allTaskStatuses: [
     QuickStartTaskStatus.SUCCESS,
     QuickStartTaskStatus.SUCCESS,
@@ -46,7 +47,7 @@ describe('QuickStartConclusion', () => {
 
   it('should render link for next quick start if nextQuickStart prop is available and there are no failed tasks', () => {
     wrapper = shallow(
-      <QuickStartConclusion {...props} nextQuickStart={getQuickStartByName('explore-pipelines')} />,
+      <QuickStartConclusion {...props} nextQuickStart={getQuickStartByName('explore-pipelines', allQuickStarts)} />,
     );
     expect(
       wrapper
@@ -64,7 +65,7 @@ describe('QuickStartConclusion', () => {
     wrapper = shallow(
       <QuickStartConclusion
         {...props}
-        {getQuickStartByName('explore-pipelines')}
+        nextQuickStart={getQuickStartByName('explore-pipelines', allQuickStarts)}
         allTaskStatuses={[
           QuickStartTaskStatus.FAILED,
           QuickStartTaskStatus.SUCCESS,
