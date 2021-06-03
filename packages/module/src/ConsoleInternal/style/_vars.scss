@@ -1,5 +1,8 @@
 // == Config
 
+// Root path where you plan to host console.
+$consoleWebDistPath: './';
+
 // PatternFly color variables -- imported here so they can be used throughout
 // PF3 color variables
 @import '~patternfly/dist/sass/patternfly/color-variables';
@@ -8,10 +11,11 @@
 // i.e., $color-pf-black-100 (PF3) vs $pf-color-black-100 (PF4)
 @import '~@patternfly/patternfly/sass-utilities/colors';
 
+
 // == Overrides of external dependency variables
 
 // FontAwesome font path.
-$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+$fa-font-path: $consoleWebDistPath + '/';
 // Use PatternFly 4 font family in PatternFly 3.
 $font-family-base: var(--pf-global--FontFamily--sans-serif);
 $font-size-base: 14px;
@@ -36,8 +40,14 @@ $link-hover-color: var(--pf-global--link--Color--hover);
 $pf-global--enable-reset: false;
 $pf-global--enable-shield: true;
 // PatternFly 4 font path.
-// $pf-global--font-path: '~@patternfly/patternfly/assets/fonts';
+$pf-global--font-path: '~@patternfly/patternfly/assets/fonts';
 $table-border-color: $color-pf-black-200;
+
+// :root {
+//   --pf-global--FontSize--md: 14px; // Numerical value required, same as $font-size-base
+//   --pf-global--FontSize--sm: 13px;
+// }
+
 
 // == Custom variables
 
@@ -48,6 +58,7 @@ $co-side-nav-font-size: $font-size-base; // Matches PF 4 --pf-c-nav__subnav__lin
 $co-side-nav-section-font-size: ($font-size-base + 2); // Matches PF 4 --pf-c-nav__link--FontSize
 $co-m-catalog-tile-height: 100%;
 $co-m-catalog-tile-width: 260px;
+
 
 // == Colors
 

@@ -3,28 +3,22 @@
 .co-quick-start-panel-content {
   ul,
   ol {
-    padding-left: 20px;
-    margin-left: 0;
-  }
+    padding-left: 20px; }
 
   dl {
-    margin: 0px;
-  }
+    margin: 0px; }
 
   // match pf4 styling / table col head styling
   dt {
-    font-weight: var(--pf-global--FontWeight--bold);
-  }
+    font-weight: var(--pf-global--FontWeight--bold); }
 
   dd {
-    margin-bottom: 20px;
-  }
+    margin-bottom: 20px; }
 
   dd:last-child {
-    margin-bottom: 0px;
-  }
+    margin-bottom: 0px; }
 
-  input[type='number'] {
+  input[type="number"] {
     -webkit-appearance: textfield;
     appearance: textfield;
     max-width: 100px;
@@ -34,7 +28,7 @@
     }
   }
 
-  input[type='radio'] {
+  input[type="radio"] {
     margin-right: 7px;
   }
 }

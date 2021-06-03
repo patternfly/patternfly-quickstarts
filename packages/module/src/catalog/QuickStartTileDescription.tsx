@@ -39,19 +39,17 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
             headerContent={t('quickstart~Prerequisites')}
             className="co-quick-start-panel-content"
             bodyContent={
-              <TextContent>
-                <TextList
-                  aria-label={t('quickstart~Prerequisites')}
-                  className="co-quick-start-tile-prerequisites-list"
-                >
-                  {prereqs.map((prerequisite, index) => (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <TextListItem key={index}>
-                      <QuickStartMarkdownView content={prerequisite} />
-                    </TextListItem>
-                  ))}
-                </TextList>
-              </TextContent>
+              <TextList
+                aria-label={t('quickstart~Prerequisites')}
+                className="co-quick-start-tile-prerequisites-list"
+              >
+                {prereqs.map((prerequisite, index) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <TextListItem key={index}>
+                    <QuickStartMarkdownView content={prerequisite} />
+                  </TextListItem>
+                ))}
+              </TextList>
             }
           >
             <Button

@@ -1,4 +1,5 @@
 @import 'style/vars';
+
 @import 'style/base';
 
 // Mixins
@@ -15,4 +16,8 @@
 .ocs-page-layout__content {
   --pf-global--FontSize--md: 14px;
   --pf-global--FontSize--sm: 13px;
+
+  ul {
+      list-style-type: disc;
+  }
 }
