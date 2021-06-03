@@ -25,7 +25,7 @@ ReactDOM.render(
         </App>
       </Route>
       <Route exact path="/quickstarts">
-        <App>
+        <App showCardFooters={false}>
           <QuickStartsLoader>
             {(quickStarts: QuickStart[], loaded: boolean) =>
               loaded ? (
