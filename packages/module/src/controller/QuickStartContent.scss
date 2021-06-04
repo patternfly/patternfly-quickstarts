@@ -4,4 +4,11 @@
   flex: 1 1 0;
   overflow: auto;
   padding: var(--pf-global--spacer--sm) var(--pf-global--spacer--lg);
+  font-size: 14px;
+
+  .pf-c-alert__description {
+    p {
+      font-size: 13px;
+    }
+  }
 }

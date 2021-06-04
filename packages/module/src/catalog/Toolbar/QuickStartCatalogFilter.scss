@@ -12,3 +12,10 @@
     font-weight: var(--pf-global--FontWeight--bold);
   }
 }
+
+.pf-c-toolbar.co-quick-start-catalog-filter__flex {
+  --pf-c-toolbar--PaddingTop: 0;
+  --pf-c-toolbar__content--PaddingLeft: 0;
+  --pf-c-toolbar__content--PaddingRight: 0;
+  --pf-c-toolbar--RowGap: var(--pf-global--spacer--md);
+}
