@@ -37,16 +37,11 @@ $kbd-color: $color-pf-black-600;
 $link-color: var(--pf-global--link--Color);
 $link-hover-color: var(--pf-global--link--Color--hover);
 // Disable PatternFly 4 reset.
-$pf-global--enable-reset: false;
-$pf-global--enable-shield: true;
+$pf-global--enable-reset: true;
+$pf-global--enable-shield: false;
 // PatternFly 4 font path.
 $pf-global--font-path: '~@patternfly/patternfly/assets/fonts';
 $table-border-color: $color-pf-black-200;
-
-// :root {
-//   --pf-global--FontSize--md: 14px; // Numerical value required, same as $font-size-base
-//   --pf-global--FontSize--sm: 13px;
-// }
 
 
 // == Custom variables

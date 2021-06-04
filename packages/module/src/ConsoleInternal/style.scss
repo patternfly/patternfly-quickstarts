@@ -2,12 +2,6 @@
 
 @import 'style/base';
 
-// Mixins
-@import 'style/mixin/break-word';
-
-// Overrides
-@import 'style/overrides';
-
 // React Components
 @import 'components/icon-and-text';
 @import 'components/catalog/catalog';
@@ -21,3 +15,6 @@
       list-style-type: disc;
   }
 }
+
+// Overrides
+// @import 'style/overrides';

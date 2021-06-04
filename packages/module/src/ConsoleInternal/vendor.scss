@@ -1,10 +1,10 @@
 // Config
-@import 'style/vars'; // keep
+@import 'style/vars';
 
 @import '~patternfly/dist/sass/patternfly/variables';
-@import '~bootstrap-sass/assets/stylesheets/bootstrap/variables'; // keep
-@import '~bootstrap-sass/assets/stylesheets/bootstrap/mixins'; // keep
-@import '~patternfly/dist/sass/patternfly/bootstrap-mixin-overrides'; // keep
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/variables';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/mixins';
+@import '~patternfly/dist/sass/patternfly/bootstrap-mixin-overrides';
 
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/normalize";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/scaffolding";

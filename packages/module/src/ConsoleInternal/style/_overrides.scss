@@ -1,530 +1,535 @@
-.co-quick-start-panel-content {
+@import './vars';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/variables';
+@import './mixin/break-word';
 
-  // Use this file to override styles from 3rd party dependencies
-  $pf-4-nav-bar-height: 76px; // Height of the PatternFly 4 masthead
+:root {
+  --pf-global--FontSize--md: 14px;
+  --pf-global--FontSize--sm: 13px;
+}
 
-  form.pf-c-form {
-    --pf-c-form__helper-text--Color: var(--pf-global--Color--200);
+// Use this file to override styles from 3rd party dependencies
+$pf-4-nav-bar-height: 76px; // Height of the PatternFly 4 masthead
+
+form.pf-c-form {
+  --pf-c-form__helper-text--Color: var(--pf-global--Color--200);
+}
+
+// account for collapsing space between .btn
+.btn + .btn {
+  margin-left: 3px;
+}
+
+// Removes PF white gradiant effect since it doesn't work in Firefox. Truncated text still has trailing ...
+// Upstream issue https://github.com/patternfly/patternfly-next/issues/2633
+.catalog-tile-pf-description .truncated::after {
+  background: none;
+}
+
+// Positions the img in OperatorHub that are nested with <span class="catalog-tile-pf-icon"><img ...>
+.catalog-tile-pf-icon--align-top {
+  vertical-align: top;
+}
+
+// Until Patternfly-React-Extensions is updated: https://github.com/patternfly/patternfly-react/issues/1146
+.catalog-tile-pf-title {
+  @include co-break-word;
+}
+
+// Override to remove accordion left border and prevent overlap https://bugzilla.redhat.com/show_bug.cgi?id=1942193
+.co-create-operand__form--toggle-no-border {
+  .pf-c-accordion__toggle.pf-m-expanded {
+    --pf-c-accordion__toggle--before--BackgroundColor: transparent;
+  }
+}
+
+// For input & label alignment while using bootstrap with @patternfly/react-catalog-view-extension
+.filter-panel-pf-category-item {
+  .pf-c-check {
+    align-items: inherit;
   }
 
-  // account for collapsing space between .btn
-  .btn + .btn {
-    margin-left: 3px;
+  .pf-c-check__input {
+    margin-top: 2px;
   }
+}
 
-  // Removes PF white gradiant effect since it doesn't work in Firefox. Truncated text still has trailing ...
-  // Upstream issue https://github.com/patternfly/patternfly-next/issues/2633
-  .catalog-tile-pf-description .truncated::after {
-    background: none;
-  }
+kbd {
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
 
-  // Positions the img in OperatorHub that are nested with <span class="catalog-tile-pf-icon"><img ...>
-  .catalog-tile-pf-icon--align-top {
-    vertical-align: top;
-  }
+.modal.right-side-modal-pf {
+  top: 76px; // since PatternFly 4's masthead is taller than PatternFly 3's
 
-  // Until Patternfly-React-Extensions is updated: https://github.com/patternfly/patternfly-react/issues/1146
-  .catalog-tile-pf-title {
-    @include co-break-word;
-  }
-
-  // Override to remove accordion left border and prevent overlap https://bugzilla.redhat.com/show_bug.cgi?id=1942193
-  .co-create-operand__form--toggle-no-border {
-    .pf-c-accordion__toggle.pf-m-expanded {
-      --pf-c-accordion__toggle--before--BackgroundColor: transparent;
-    }
-  }
-
-  // For input & label alignment while using bootstrap with @patternfly/react-catalog-view-extension
-  .filter-panel-pf-category-item {
-    .pf-c-check {
-      align-items: inherit;
-    }
-
-    .pf-c-check__input {
-      margin-top: 2px;
-    }
-  }
-
-  kbd {
-    border-radius: 3px;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
-  }
-
-  .modal.right-side-modal-pf {
-    top: 76px; // since PatternFly 4's masthead is taller than PatternFly 3's
-
-    .modal-dialog {
-      height: 100%; // Entend panel to bottom
-      margin-top: 0; // parent is positioned: fixed so margin isn't needed for positioning
-
-      .modal-content {
-        height: 100%; // Use % instead of vh so that scroll-shadows can be used
-        max-height: none;
-      }
-    }
-
-    &.fade {
-      .modal-dialog {
-        transition-duration: 200ms;
-      }
-      &:not(.in) .modal-dialog {
-        transform: translate3d(15px, 0, 0);
-      }
-    }
-  }
-
-  .modal-footer .alert {
-    text-align: left;
-  }
-
-  // fix bug where monaco-aria-container is visible in Firefox but shouldn't be
-  // bug occurs only if the suggestions overlay has been enabled
-  .monaco-aria-container {
-    top: -999em;
-  }
-
-  // PatternFly 4 overrides
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    // reset headings font family back to correct value
-    // bug caused by PF4 _shield-inheritable.scss
-    .pf-l-split {
-      font-family: $headings-font-family;
-    }
-  }
-
-  .pf-c-about-modal-box {
-    &__brand {
-      align-items: flex-start; // so logos don't stretch vertically
-      min-width: 220px;
-    }
-
-    &__brand-image {
-      height: auto !important; // allow logo to be taller
-    }
-  }
-
-  // Webpack will not properly bundle the background-image from PatternFly
-  // @media only screen and (min-width: 576px) {
-  //   .pf-c-about-modal-box__hero {
-  //     background-image: url('../imgs/pfbg_992.jpg') !important;
-  //   }
-  // }
-
-  .pf-c-about-modal-box__brand-image,
-  .pf-c-brand {
-    max-width: 100%;
-  }
-
-  .pf-c-alert--top-margin {
-    margin-top: var(--pf-global--spacer--lg);
-  }
-
-  .pf-c-app-launcher__group-title {
-    // Reset font to RedHatText so it doesn't appear too bold
-    font-family: $font-family-base;
-  }
-
-  // Temp fix to adjust user menu dropdown toggle padding until it can be converted back to a standard dropdown
-  .co-user-menu .pf-c-app-launcher__toggle {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .pf-c-breadcrumb {
-    padding-bottom: 12px;
-    padding-top: 25px;
-
-    &--no-padding-top {
-      padding-top: 0;
-    }
-  }
-
-  .pf-c-button--align-right {
-    margin-left: auto !important;
-  }
-
-  .pf-c-button.co-p-has-sidebar__sidebar-close {
-    float: right;
-    font-size: 21px !important;
-    line-height: 1;
-    opacity: 0.35;
-    padding: 0;
-    &:hover,
-    &:focus {
-      opacity: 1;
-    }
-  }
-
-  .pf-c-button {
-    &:hover,
-    &:focus {
-      .pf-c-button-icon--plain {
-        color: var(--pf-c-button--m-plain--hover--Color);
-      }
-    }
-  }
-
-  .pf-c-button-icon--plain {
-    color: var(--pf-c-button--m-plain--Color);
-  }
-
-  .pf-c-button.pf-c-button--no-default-values {
-    border: 0;
-    font-size: unset;
-    font-weight: unset;
-    line-height: unset;
-    padding: 0;
-    text-align: unset;
-    white-space: normal;
-  }
-
-  .pf-c-button.pf-m-inline {
-    text-align: left; // override default .pf-c-button text centering
-  }
-
-  .pf-c-button.pf-m-link {
-    white-space: normal; // override default .pf-c-button to enable wrapping
-  }
-
-  .pf-c-button.pf-m-link--align-left {
-    padding-left: 0;
-  }
-
-  .pf-c-button.pf-m-link--align-right {
-    padding-right: 0;
-  }
-
-  // Fix upstream issue https://github.com/patternfly/patternfly/issues/3996 introduced in v4.96.2
-  .pf-c-button.pf-m-primary {
-    color: var(--pf-c-button--m-primary--Color);
-  }
-
-  // Fix upstream issue https://github.com/patternfly/patternfly/issues/3996 introduced in v4.96.2
-  .pf-c-button.pf-m-plain:hover {
-    color: var(--pf-c-button--m-plain--hover--Color);
-  }
-
-  .pf-c-chip-group.pf-m-toolbar {
-    margin-bottom: var(--pf-global--spacer--xs);
-  }
-
-  //set pf datalist item background to transparent
-  .pf-c-data-list__item--transparent-bg {
-    --pf-c-data-list__item--BackgroundColor: transparent;
-  }
-
-  // PF components that calculate their correct height based on --pf-global--FontSize--md: 1rem
-  .pf-c-modal-box,
-  .pf-c-switch {
-    --pf-global--FontSize--md: 1rem;
-  }
-
-  .pf-c-modal-box__header {
-    // prevent header from collapsing in Safari
-    // temp fix for upstream issue https://github.com/patternfly/patternfly/issues/3825
-    flex-shrink: 0;
-  }
-
-  .pf-c-page {
-    display: block !important;
-    position: relative;
-
-    &__header {
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-
-    &__header-brand-link {
-      flex: 0 1 auto !important; // so link doesn't grow larger than logo
-    }
-
-    &__header-tools {
-      @media (max-width: $grid-float-breakpoint-max) {
-        margin-right: 8px !important;
-      }
-      .pf-c-dropdown__toggle,
-      .pf-c-app-launcher__toggle {
-        font-size: $pf-header-icon-fontsize !important;
-      }
-      .pf-c-notification-badge {
-        font-size: $pf-header-icon-fontsize;
-      }
-    }
-
-    &__main {
-      // `z-index: auto` is required for fullscreen terminal
-      --pf-c-page__main--ZIndex: auto;
-      bottom: 0;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: var(--pf-c-page__header--MinHeight);
-      transition: left 100ms ease;
-    }
-
-    // `.pf-c-page` specificity required
-    .pf-c-toolbar {
-      --pf-c-toolbar--PaddingTop: 0;
-      --pf-c-toolbar__content--PaddingLeft: 0;
-      --pf-c-toolbar__content--PaddingRight: 0;
-      --pf-c-toolbar--RowGap: var(--pf-global--spacer--md);
-    }
-
-    .pf-c-page__main-section {
-      overflow: hidden; // needed for Firefox to enable proper scrolling of content-scrollable
-      --pf-c-page__main-section--PaddingBottom: 0;
-      --pf-c-page__main-section--PaddingLeft: 0;
-      --pf-c-page__main-section--PaddingRight: 0;
-      --pf-c-page__main-section--PaddingTop: 0;
-    }
-
-    .pf-c-page__sidebar {
-      --pf-c-page__sidebar--Transition: all 100ms ease;
-    }
-  }
-
-  @media screen and (min-width: $grid-float-breakpoint) {
-    .pf-m-expanded + .pf-c-page__main {
-      left: var(--pf-c-page__sidebar--Width);
-    }
-  }
-
-  @-webkit-keyframes autofill-success {
-    to {
-      background: var(--pf-c-form-control--success--Background);
-    }
-  }
-  @-webkit-keyframes autofill-invalid {
-    to {
-      background: var(--pf-c-form-control--invalid--Background);
-    }
-  }
-
-  // specificity targeting form elements to override --pf-global--FontSize--md
-  .pf-c-page,
   .modal-dialog {
-    .pf-c-app-launcher,
-    .pf-c-button,
-    .pf-c-dropdown,
-    .pf-c-dropdown__menu-item,
+    height: 100%; // Entend panel to bottom
+    margin-top: 0; // parent is positioned: fixed so margin isn't needed for positioning
+
+    .modal-content {
+      height: 100%; // Use % instead of vh so that scroll-shadows can be used
+      max-height: none;
+    }
+  }
+
+  &.fade {
+    .modal-dialog {
+      transition-duration: 200ms;
+    }
+    &:not(.in) .modal-dialog {
+      transform: translate3d(15px, 0, 0);
+    }
+  }
+}
+
+.modal-footer .alert {
+  text-align: left;
+}
+
+// fix bug where monaco-aria-container is visible in Firefox but shouldn't be
+// bug occurs only if the suggestions overlay has been enabled
+.monaco-aria-container {
+  top: -999em;
+}
+
+// PatternFly 4 overrides
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  // reset headings font family back to correct value
+  // bug caused by PF4 _shield-inheritable.scss
+  .pf-l-split {
+    font-family: $headings-font-family;
+  }
+}
+
+.pf-c-about-modal-box {
+  &__brand {
+    align-items: flex-start; // so logos don't stretch vertically
+    min-width: 220px;
+  }
+
+  &__brand-image {
+    height: auto !important; // allow logo to be taller
+  }
+}
+
+// Webpack will not properly bundle the background-image from PatternFly
+// @media only screen and (min-width: 576px) {
+//   .pf-c-about-modal-box__hero {
+//     background-image: url('../imgs/pfbg_992.jpg') !important;
+//   }
+// }
+
+.pf-c-about-modal-box__brand-image,
+.pf-c-brand {
+  max-width: 100%;
+}
+
+.pf-c-alert--top-margin {
+  margin-top: var(--pf-global--spacer--lg);
+}
+
+.pf-c-app-launcher__group-title {
+  // Reset font to RedHatText so it doesn't appear too bold
+  font-family: $font-family-base;
+}
+
+// Temp fix to adjust user menu dropdown toggle padding until it can be converted back to a standard dropdown
+.co-user-menu .pf-c-app-launcher__toggle {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.pf-c-breadcrumb {
+  padding-bottom: 12px;
+  padding-top: 25px;
+
+  &--no-padding-top {
+    padding-top: 0;
+  }
+}
+
+.pf-c-button--align-right {
+  margin-left: auto !important;
+}
+
+.pf-c-button.co-p-has-sidebar__sidebar-close {
+  float: right;
+  font-size: 21px !important;
+  line-height: 1;
+  opacity: 0.35;
+  padding: 0;
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+
+.pf-c-button {
+  &:hover,
+  &:focus {
+    .pf-c-button-icon--plain {
+      color: var(--pf-c-button--m-plain--hover--Color);
+    }
+  }
+}
+
+.pf-c-button-icon--plain {
+  color: var(--pf-c-button--m-plain--Color);
+}
+
+.pf-c-button.pf-c-button--no-default-values {
+  border: 0;
+  font-size: unset;
+  font-weight: unset;
+  line-height: unset;
+  padding: 0;
+  text-align: unset;
+  white-space: normal;
+}
+
+.pf-c-button.pf-m-inline {
+  text-align: left; // override default .pf-c-button text centering
+}
+
+.pf-c-button.pf-m-link {
+  white-space: normal; // override default .pf-c-button to enable wrapping
+}
+
+.pf-c-button.pf-m-link--align-left {
+  padding-left: 0;
+}
+
+.pf-c-button.pf-m-link--align-right {
+  padding-right: 0;
+}
+
+// Fix upstream issue https://github.com/patternfly/patternfly/issues/3996 introduced in v4.96.2
+.pf-c-button.pf-m-primary {
+  color: var(--pf-c-button--m-primary--Color);
+}
+
+// Fix upstream issue https://github.com/patternfly/patternfly/issues/3996 introduced in v4.96.2
+.pf-c-button.pf-m-plain:hover {
+  color: var(--pf-c-button--m-plain--hover--Color);
+}
+
+.pf-c-chip-group.pf-m-toolbar {
+  margin-bottom: var(--pf-global--spacer--xs);
+}
+
+//set pf datalist item background to transparent
+.pf-c-data-list__item--transparent-bg {
+  --pf-c-data-list__item--BackgroundColor: transparent;
+}
+
+// PF components that calculate their correct height based on --pf-global--FontSize--md: 1rem
+.pf-c-modal-box,
+.pf-c-switch {
+  --pf-global--FontSize--md: 1rem;
+}
+
+.pf-c-modal-box__header {
+  // prevent header from collapsing in Safari
+  // temp fix for upstream issue https://github.com/patternfly/patternfly/issues/3825
+  flex-shrink: 0;
+}
+
+.pf-c-page {
+  display: block !important;
+  position: relative;
+
+  &__header {
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  &__header-brand-link {
+    flex: 0 1 auto !important; // so link doesn't grow larger than logo
+  }
+
+  &__header-tools {
+    @media (max-width: $grid-float-breakpoint-max) {
+      margin-right: 8px !important;
+    }
     .pf-c-dropdown__toggle,
-    .pf-c-form-control {
-      font-size: $font-size-base;
-      height: auto;
+    .pf-c-app-launcher__toggle {
+      font-size: $pf-header-icon-fontsize !important;
     }
-    .pf-l-stack {
-      font-size: $font-size-base;
+    .pf-c-notification-badge {
+      font-size: $pf-header-icon-fontsize;
     }
-    .pf-c-form-control.pf-m-success,
-    .pf-c-form-control[aria-invalid='true'] {
-      --pf-global--FontSize--md: #{$font-size-base};
-    }
-    .pf-c-form-control {
-      &:-webkit-autofill {
-        -webkit-animation-fill-mode: both;
-        &.pf-m-success {
-          -webkit-animation-name: autofill-success;
-        }
-        &[aria-invalid='true'] {
-          -webkit-animation-name: autofill-invalid;
-        }
-      }
-    }
+  }
+
+  &__main {
+    // `z-index: auto` is required for fullscreen terminal
+    --pf-c-page__main--ZIndex: auto;
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: var(--pf-c-page__header--MinHeight);
+    transition: left 100ms ease;
+  }
+
+  // `.pf-c-page` specificity required
+  .pf-c-toolbar {
+    --pf-c-toolbar--PaddingTop: 0;
+    --pf-c-toolbar__content--PaddingLeft: 0;
+    --pf-c-toolbar__content--PaddingRight: 0;
+    --pf-c-toolbar--RowGap: var(--pf-global--spacer--md);
+  }
+
+  .pf-c-page__main-section {
+    overflow: hidden; // needed for Firefox to enable proper scrolling of content-scrollable
+    --pf-c-page__main-section--PaddingBottom: 0;
+    --pf-c-page__main-section--PaddingLeft: 0;
+    --pf-c-page__main-section--PaddingRight: 0;
+    --pf-c-page__main-section--PaddingTop: 0;
   }
 
   .pf-c-page__sidebar {
-    --pf-c-page__sidebar-body--PaddingTop: 0;
-    bottom: 0;
-    left: 0;
-    position: absolute;
-    top: var(--pf-c-page__header--MinHeight);
-    width: 0 !important; // only set size when expanded (.pf-m-expanded is added)
+    --pf-c-page__sidebar--Transition: all 100ms ease;
+  }
+}
 
+@media screen and (min-width: $grid-float-breakpoint) {
+  .pf-m-expanded + .pf-c-page__main {
+    left: var(--pf-c-page__sidebar--Width);
+  }
+}
+
+@-webkit-keyframes autofill-success {
+  to {
+    background: var(--pf-c-form-control--success--Background);
+  }
+}
+@-webkit-keyframes autofill-invalid {
+  to {
+    background: var(--pf-c-form-control--invalid--Background);
+  }
+}
+
+// specificity targeting form elements to override --pf-global--FontSize--md
+.pf-c-page,
+.modal-dialog {
+  .pf-c-app-launcher,
+  .pf-c-button,
+  .pf-c-dropdown,
+  .pf-c-dropdown__menu-item,
+  .pf-c-dropdown__toggle,
+  .pf-c-form-control {
+    font-size: $font-size-base;
+    height: auto;
+  }
+  .pf-l-stack {
+    font-size: $font-size-base;
+  }
+  .pf-c-form-control.pf-m-success,
+  .pf-c-form-control[aria-invalid='true'] {
+    --pf-global--FontSize--md: #{$font-size-base};
+  }
+  .pf-c-form-control {
+    &:-webkit-autofill {
+      -webkit-animation-fill-mode: both;
+      &.pf-m-success {
+        -webkit-animation-name: autofill-success;
+      }
+      &[aria-invalid='true'] {
+        -webkit-animation-name: autofill-invalid;
+      }
+    }
+  }
+}
+
+.pf-c-page__sidebar {
+  --pf-c-page__sidebar-body--PaddingTop: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  top: var(--pf-c-page__header--MinHeight);
+  width: 0 !important; // only set size when expanded (.pf-m-expanded is added)
+
+  @media screen and (min-width: $grid-float-breakpoint) {
+    --pf-c-page__sidebar--BoxShadow: none;
+  }
+
+  &.pf-m-expanded {
+    width: var(
+      --pf-c-page__sidebar--Width
+    ) !important; // maintain desktop width so size doesn't animate before hiding when resizing to mobile
+  }
+
+  // Perspective switcher
+  &.pf-m-dark .pf-c-dropdown {
+    --pf-global--Color--100: var(--pf-global--Color--dark-100);
+  }
+
+  .pf-c-nav {
+    --pf-c-nav__list-link--PaddingRight: var(--pf-global--spacer--sm);
+    --pf-c-nav__list-link--PaddinLeft: var(--pf-global--spacer--md);
+    --pf-c-nav__list-link--after--Left: var(--pf-global--spacer--md);
     @media screen and (min-width: $grid-float-breakpoint) {
-      --pf-c-page__sidebar--BoxShadow: none;
+      --pf-c-nav__list-link--PaddingRight: var(--pf-global--spacer--md);
+      --pf-c-nav__list-link--PaddinLeft: var(--pf-global--spacer--lg);
+      --pf-c-nav__list-link--after--Left: var(--pf-global--spacer--lg);
+      --pf-c-nav__simple-list--nested__separator--MarginLeft: var(--pf-global--spacer--xl);
+      --pf-c-nav__simple-list-link--nested--PaddingLeft: var(--pf-global--spacer--xl);
     }
 
-    &.pf-m-expanded {
-      width: var(
-        --pf-c-page__sidebar--Width
-      ) !important; // maintain desktop width so size doesn't animate before hiding when resizing to mobile
+    .pf-c-nav__link {
+      font-size: $co-side-nav-section-font-size;
     }
 
-    // Perspective switcher
-    &.pf-m-dark .pf-c-dropdown {
-      --pf-global--Color--100: var(--pf-global--Color--dark-100);
-    }
-
-    .pf-c-nav {
-      --pf-c-nav__list-link--PaddingRight: var(--pf-global--spacer--sm);
-      --pf-c-nav__list-link--PaddinLeft: var(--pf-global--spacer--md);
-      --pf-c-nav__list-link--after--Left: var(--pf-global--spacer--md);
-      @media screen and (min-width: $grid-float-breakpoint) {
-        --pf-c-nav__list-link--PaddingRight: var(--pf-global--spacer--md);
-        --pf-c-nav__list-link--PaddinLeft: var(--pf-global--spacer--lg);
-        --pf-c-nav__list-link--after--Left: var(--pf-global--spacer--lg);
-        --pf-c-nav__simple-list--nested__separator--MarginLeft: var(--pf-global--spacer--xl);
-        --pf-c-nav__simple-list-link--nested--PaddingLeft: var(--pf-global--spacer--xl);
-      }
-
+    .pf-c-nav__subnav {
       .pf-c-nav__link {
-        font-size: $co-side-nav-section-font-size;
-      }
-
-      .pf-c-nav__subnav {
-        .pf-c-nav__link {
-          font-size: $co-side-nav-font-size;
-        }
-      }
-
-      // override list styles, necessary due to setting $pf-global--enable-reset to false
-      ul {
-        list-style: none;
+        font-size: $co-side-nav-font-size;
       }
     }
+
+    // override list styles, necessary due to setting $pf-global--enable-reset to false
+    ul {
+      list-style: none;
+    }
   }
+}
 
-  // Necessary due to setting $pf-global--enable-reset to false
-  .pf-c-pagination .pf-c-options-menu__menu,
-  .pf-c-alert-group {
-    list-style: none;
+// Necessary due to setting $pf-global--enable-reset to false
+.pf-c-pagination .pf-c-options-menu__menu,
+.pf-c-alert-group {
+  list-style: none;
+}
+
+// pf table overrides
+
+.pf-c-table tr > th {
+  font-weight: var(--pf-global--FontWeight--bold);
+}
+
+.pf-c-table {
+  table-layout: fixed;
+}
+
+.pf-c-table tr > * {
+  --pf-c-table--cell--FontSize: $font-size-base;
+  --pf-c-table--cell--PaddingLeft: 12px;
+  --pf-c-table--cell--PaddingRight: 12px;
+  --pf-c-table--m-compact--cell--first-last-child--PaddingLeft: 12px;
+  --pf-c-table--m-compact--cell--first-last-child--PaddingRight: 12px;
+  // fix bug where .pf-c-table__button::before overlays entire page
+  // caused by conflict with Bootstrap 3
+  // see https://github.com/twbs/bootstrap/blob/v3.4.1/less/tables.less#L24
+  // and https://github.com/patternfly/patternfly/blob/prerelease-v4.16.7/src/patternfly/components/Table/table.scss#L252-L253
+  position: relative !important;
+}
+
+.pf-c-table.pf-c-virtualized tr {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  &:first-child::before {
+    content: none;
+    width: 0 !important;
   }
+}
 
-  // pf table overrides
+// override .co-m-table-grid [class*='col-'], .co-m-table-grid .row
+.pf-c-table.pf-m-compact,
+.pf-c-table.pf-c-virtualized {
+  tr > td {
+    vertical-align: top;
+  }
+}
 
-  .pf-c-table tr > th {
+.pf-c-table__check {
+  width: 8.333% !important;
+
+  @media screen and (max-width: 768px) {
+    width: 16.66% !important;
+  }
+}
+
+.pf-c-table__action {
+  max-width: 44px !important;
+  padding: 8px 0 !important;
+  width: 44px !important;
+}
+
+// FIXME: Pass as `style` prop to `List` once this is resolved (https://github.com/bvaughn/react-virtualized/issues/876). This is for the kebab menus' overflow.
+.pf-c-window-scroller.ReactVirtualized__VirtualGrid,
+.pf-c-window-scroller .ReactVirtualized__VirtualGrid,
+.pf-c-window-scroller .ReactVirtualized__VirtualGrid__innerScrollContainer {
+  overflow: visible !important;
+}
+
+.table {
+  margin-bottom: 0;
+  &--layout-fixed {
+    table-layout: fixed;
+  }
+  td {
+    vertical-align: middle !important;
+  }
+  th {
     font-weight: var(--pf-global--FontWeight--bold);
+    padding-top: 0 !important;
   }
-
-  .pf-c-table {
-    table-layout: fixed;
+  thead > tr > th {
+    border-bottom: 0;
   }
-
-  .pf-c-table tr > * {
-    --pf-c-table--cell--FontSize: $font-size-base;
-    --pf-c-table--cell--PaddingLeft: 12px;
-    --pf-c-table--cell--PaddingRight: 12px;
-    --pf-c-table--m-compact--cell--first-last-child--PaddingLeft: 12px;
-    --pf-c-table--m-compact--cell--first-last-child--PaddingRight: 12px;
-    // fix bug where .pf-c-table__button::before overlays entire page
-    // caused by conflict with Bootstrap 3
-    // see https://github.com/twbs/bootstrap/blob/v3.4.1/less/tables.less#L24
-    // and https://github.com/patternfly/patternfly/blob/prerelease-v4.16.7/src/patternfly/components/Table/table.scss#L252-L253
-    position: relative !important;
+  tr:last-child {
+    border-bottom: 1px solid $table-border-color;
   }
+}
 
-  .pf-c-table.pf-c-virtualized tr {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-    &:first-child::before {
-      content: none;
-      width: 0 !important;
-    }
-  }
+.text-secondary {
+  color: $color-text-secondary;
+}
 
-  // override .co-m-table-grid [class*='col-'], .co-m-table-grid .row
-  .pf-c-table.pf-m-compact,
-  .pf-c-table.pf-c-virtualized {
-    tr > td {
-      vertical-align: top;
-    }
-  }
+.toolbar-pf {
+  background-color: transparent;
+  border-bottom: none;
+  box-shadow: none;
+  min-width: 0; // enable text-overflow: ellipsis
+  padding-top: 0;
+}
 
-  .pf-c-table__check {
-    width: 8.333% !important;
-
-    @media screen and (max-width: 768px) {
-      width: 16.66% !important;
-    }
-  }
-
-  .pf-c-table__action {
-    max-width: 44px !important;
-    padding: 8px 0 !important;
-    width: 44px !important;
-  }
-
-  // FIXME: Pass as `style` prop to `List` once this is resolved (https://github.com/bvaughn/react-virtualized/issues/876). This is for the kebab menus' overflow.
-  .pf-c-window-scroller.ReactVirtualized__VirtualGrid,
-  .pf-c-window-scroller .ReactVirtualized__VirtualGrid,
-  .pf-c-window-scroller .ReactVirtualized__VirtualGrid__innerScrollContainer {
-    overflow: visible !important;
-  }
-
-  .table {
+@media (max-width: $screen-md-max) {
+  .toolbar-pf-actions {
+    display: block;
     margin-bottom: 0;
-    &--layout-fixed {
-      table-layout: fixed;
-    }
-    td {
-      vertical-align: middle !important;
-    }
-    th {
-      font-weight: var(--pf-global--FontWeight--bold);
-      padding-top: 0 !important;
-    }
-    thead > tr > th {
-      border-bottom: 0;
-    }
-    tr:last-child {
-      border-bottom: 1px solid $table-border-color;
-    }
   }
+}
 
-  .text-secondary {
-    color: $color-text-secondary;
-  }
+.xterm .xterm-screen canvas {
+  // workaround bug where 1px white stripe appears atop terminal in Firefox for MacOS
+  // see https://github.com/xtermjs/xterm.js/issues/1974
+  border-right: 1px solid transparent;
+}
 
-  .toolbar-pf {
-    background-color: transparent;
-    border-bottom: none;
-    box-shadow: none;
-    min-width: 0; // enable text-overflow: ellipsis
-    padding-top: 0;
-  }
+button.pf-c-dropdown__menu-item.pf-m-disabled {
+  // enables tooltips for disabled menu items
+  pointer-events: auto;
+}
 
-  @media (max-width: $screen-md-max) {
-    .toolbar-pf-actions {
-      display: block;
-      margin-bottom: 0;
-    }
-  }
+.pf-c-select__menu {
+  list-style-type: none;
+}
 
-  .xterm .xterm-screen canvas {
-    // workaround bug where 1px white stripe appears atop terminal in Firefox for MacOS
-    // see https://github.com/xtermjs/xterm.js/issues/1974
-    border-right: 1px solid transparent;
-  }
+#modal-container .pf-c-backdrop {
+  position: absolute !important;
+}
 
-  button.pf-c-dropdown__menu-item.pf-m-disabled {
-    // enables tooltips for disabled menu items
-    pointer-events: auto;
-  }
+.text-muted {
+  color: var(--pf-global--Color--200);
+}
 
-  .pf-c-select__menu {
-    list-style-type: none;
-  }
-
-  #modal-container .pf-c-backdrop {
-    position: absolute !important;
-  }
-
-  .text-muted {
-    color: var(--pf-global--Color--200);
-  }
-
-  .form-group--doubled-bottom-margin {
-    margin-bottom: ($form-group-margin-bottom * 2);
-  }
-
+.form-group--doubled-bottom-margin {
+  margin-bottom: ($form-group-margin-bottom * 2);
 }

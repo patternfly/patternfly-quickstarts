@@ -24,16 +24,18 @@ const QuickStartCatalogFilter: React.FC<QuickStartCatalogFilterProps> = ({
   ...props
 }) => {
   return (
-    <Toolbar usePageInsets className="co-quick-start-catalog-filter__flex" {...props}>
-      <ToolbarContent>
-        <QuickStartCatalogFilterSearchWrapper onSearchInputChange={onSearchInputChange} />
-        <QuickStartCatalogFilterStatusWrapper
-          quickStartStatusCount={quickStartStatusCount}
-          onStatusChange={onStatusChange}
-        />
-        <QuickStartCatalogFilterCountWrapper quickStartsCount={quickStartsCount} />
-      </ToolbarContent>
-    </Toolbar>
+    <div className="co-quick-start-panel-content">
+      <Toolbar usePageInsets className="co-quick-start-catalog-filter__flex" {...props}>
+        <ToolbarContent>
+          <QuickStartCatalogFilterSearchWrapper onSearchInputChange={onSearchInputChange} />
+          <QuickStartCatalogFilterStatusWrapper
+            quickStartStatusCount={quickStartStatusCount}
+            onStatusChange={onStatusChange}
+          />
+          <QuickStartCatalogFilterCountWrapper quickStartsCount={quickStartsCount} />
+        </ToolbarContent>
+      </Toolbar>
+    </div>
   );
 };
 
