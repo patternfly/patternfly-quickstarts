@@ -122,8 +122,8 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
     [allQuickStartStates, quickStarts],
   );
 
-  if (!filteredQuickStarts) return <LoadingBox />;
-  return filteredQuickStarts.length === 0 ? (
+  if (!quickStarts) return <LoadingBox />;
+  return quickStarts.length === 0 ? (
     <EmptyBox label={t('quickstart~Quick Starts')} />
   ) : (
     <>
