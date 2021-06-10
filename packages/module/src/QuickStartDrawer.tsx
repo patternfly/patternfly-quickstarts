@@ -18,7 +18,9 @@ export interface QuickStartDrawerProps extends React.HTMLProps<HTMLDivElement> {
   appendTo?: HTMLElement | (() => HTMLElement);
   isStatic?: boolean;
   fullWidth?: boolean;
-  LoaderComponent?: React.FC<QuickStartsLoaderProps>
+  LoaderComponent?: React.FC<QuickStartsLoaderProps>;
+  onCloseInProgress?: any;
+  onCloseNotInProgress?: any;
 }
 
 export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
@@ -27,6 +29,8 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
   isStatic,
   fullWidth,
   LoaderComponent = QuickStartsLoader,
+  onCloseInProgress,
+  onCloseNotInProgress,
   ...props
 }) => {
   const allContext = React.useContext<QuickStartContextValues>(QuickStartContext);
@@ -48,9 +52,17 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
   const onClose = () => setActiveQuickStart('');
   const handleClose = () => {
     if (activeQuickStartStatus === QuickStartStatus.IN_PROGRESS) {
-      setModalOpen(true);
+      if (onCloseInProgress) {
+        onCloseInProgress();
+      } else {
+        setModalOpen(true);
+      }
     } else {
-      onClose();
+      if (onCloseNotInProgress) {
+        onCloseNotInProgress();
+      } else {
+        onClose();
+      }
     }
   };
 
