@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
+import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 import {
   SearchInput,
   Select,
@@ -13,11 +13,11 @@ import { removeQueryArgument, setQueryArgument } from '@console/internal/compone
 import { history } from '../../ConsoleInternal/components/utils/router';
 
 export const QuickStartCatalogFilterSearch = ({ searchInputText, handleTextChange, ...props }) => {
-  const { t } = useTranslation();
+  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <ToolbarItem className="co-quick-start-catalog-filter__input">
       <SearchInput
-        placeholder={t('quickstart~Filter by keyword...')}
+        placeholder={text['Filter by keyword...']}
         value={searchInputText}
         onChange={handleTextChange}
         onClear={() => handleTextChange('')}
@@ -35,15 +35,15 @@ export const QuickStartCatalogFilterSelect = ({
   dropdownItems,
   ...props
 }) => {
-  const { t } = useTranslation();
+  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <ToolbarItem>
       <Select
         variant={SelectVariant.checkbox}
-        aria-label={t('quickstart~Select filter')}
+        aria-label={text['Select filter']}
         isOpen={isDropdownOpen}
         onToggle={(isEnabled) => setIsDropdownOpen(isEnabled)}
-        placeholderText={t('quickstart~Status')}
+        placeholderText={text['Status']}
         onSelect={onRowfilterSelect}
         selections={selectedFilters}
         {...props}
@@ -55,13 +55,13 @@ export const QuickStartCatalogFilterSelect = ({
 };
 
 export const QuickStartCatalogFilterCount = ({ quickStartsCount }) => {
-  const { t } = useTranslation();
+  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <ToolbarItem
       className="co-quick-start-catalog-filter__count"
       alignment={{ default: 'alignRight' }}
     >
-      {t('quickstart~{{count, number}} item', { count: quickStartsCount })}
+      {text['{{count, number}} item'].replace('{{count, number}}', quickStartsCount)}
     </ToolbarItem>
   );
 };
@@ -150,17 +150,11 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<QuickStartCatalogFil
       unlisten();
     };
   });
-  const { t } = useTranslation();
+  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const statusTypes = {
-    [QuickStartStatus.COMPLETE]: t('quickstart~Complete ({{statusCount, number}})', {
-      statusCount: quickStartStatusCount[QuickStartStatus.COMPLETE],
-    }),
-    [QuickStartStatus.IN_PROGRESS]: t('quickstart~In progress ({{statusCount, number}})', {
-      statusCount: quickStartStatusCount[QuickStartStatus.IN_PROGRESS],
-    }),
-    [QuickStartStatus.NOT_STARTED]: t('quickstart~Not started ({{statusCount, number}})', {
-      statusCount: quickStartStatusCount[QuickStartStatus.NOT_STARTED],
-    }),
+    [QuickStartStatus.COMPLETE]: text['Complete ({{statusCount, number}})'].replace('{{statusCount, number}}', quickStartStatusCount[QuickStartStatus.COMPLETE]),
+    [QuickStartStatus.IN_PROGRESS]: text['In progress ({{statusCount, number}})'].replace('{{statusCount, number}}', quickStartStatusCount[QuickStartStatus.IN_PROGRESS]),
+    [QuickStartStatus.NOT_STARTED]: text['Not started ({{statusCount, number}})'].replace('{{statusCount, number}}', quickStartStatusCount[QuickStartStatus.NOT_STARTED]),
   };
   const initialSearchParams = new URLSearchParams(window.location.search);
   const initialStatusFilters =

@@ -78,6 +78,9 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
       showAllLink: currentPath !== quickStartPath,
       onShowAllLinkClick: () => history.push(quickStartPath),
     },
+    text: {
+      "Start": "Let's goooo"
+    }
   });
 
   if (!initialized) return <div>Loading</div>;
@@ -120,7 +123,9 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   return (
     <React.Suspense fallback={<div>Loading</div>}>
       {allQuickStartsLoaded && (
-        <QuickStartContext.Provider value={valuesForQuickstartContext}>
+        <QuickStartContext.Provider value={{
+          ...valuesForQuickstartContext
+        }}>
           <QuickStartDrawer>
             <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>
               {children}

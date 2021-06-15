@@ -3,8 +3,8 @@ import { Button, PageSection, Stack, StackItem } from "@patternfly/react-core";
 import {
   QuickStartContext,
   QuickStartContextValues,
-  i18n,
 } from "@patternfly/quickstarts";
+import i18n from './i18n/i18n';
 // import {
 //   ProcedureAsciiDocParser,
 //   getQuickStartStatus,
@@ -15,7 +15,7 @@ import {
 
 export const Home: React.FunctionComponent = () => {
   // const [inputValue, setInputValue] = React.useState("");
-  // const qsContext: QuickStartContextValues = React.useContext(QuickStartContext);
+  const qsContext: QuickStartContextValues = React.useContext(QuickStartContext);
 
   // console.log(getQuickStartStatus(qsContext.allQuickStartStates, 'managing-business-central-data-sources-proc'));
   // console.log(getQuickStartStatusCount(qsContext.allQuickStartStates, qsContext.allQuickStarts));
@@ -48,8 +48,9 @@ export const Home: React.FunctionComponent = () => {
   // };
 
   const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng)
+    i18n.changeLanguage(lng);
     localStorage.setItem('bridge/language', lng);
+    // qsContext.setText(i18n.getResourceBundle(lng, 'quickstart'));
   }
 
   return (

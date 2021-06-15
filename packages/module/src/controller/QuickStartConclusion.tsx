@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
+import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { Button } from '@patternfly/react-core';
 import { ArrowRightIcon } from '@patternfly/react-icons';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
@@ -25,7 +25,7 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
 }) => {
   const hasFailedTask = allTaskStatuses.includes(QuickStartTaskStatus.FAILED);
   const nextQSDisplayName = nextQuickStart?.spec?.displayName;
-  const { t } = useTranslation();
+  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <>
       {tasks.map((task, index) => (
@@ -41,9 +41,7 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
       <QuickStartMarkdownView
         content={
           hasFailedTask
-            ? t(
-                'quickstart~One or more verifications did not pass during this quick start. Revisit the tasks or the help links, and then try again.',
-              )
+            ? text['One or more verifications did not pass during this quick start. Revisit the tasks or the help links, and then try again.']
             : conclusion
         }
       />
@@ -53,7 +51,7 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
           onClick={() => onQuickStartChange(nextQuickStart.metadata.name)}
           isInline
         >
-          {t('quickstart~Start {{nextQSDisplayName}} quick start', { nextQSDisplayName })}{' '}
+          {text['Start {{nextQSDisplayName}} quick start'].replace('{{nextQSDisplayName}}', nextQSDisplayName)}{' '}
           <ArrowRightIcon
             style={{ marginLeft: 'var(--pf-global--spacer--xs)', verticalAlign: 'middle' }}
           />

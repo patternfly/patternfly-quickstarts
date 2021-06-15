@@ -1,6 +1,6 @@
 import * as React from 'react';
 import cx from 'classnames';
-import { useTranslation } from 'react-i18next';
+import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { Alert, Radio } from '@patternfly/react-core';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartTaskStatus, QuickStartTaskReview } from '../utils/quick-start-types';
@@ -30,14 +30,14 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
   onTaskReview,
 }) => {
   const { instructions, failedTaskHelp: taskHelp } = review;
-  const { t } = useTranslation();
+  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
   const alertClassNames = cx('co-quick-start-task-review', {
     'co-quick-start-task-review--success': taskStatus === QuickStartTaskStatus.SUCCESS,
     'co-quick-start-task-review--failed': taskStatus === QuickStartTaskStatus.FAILED,
   });
 
-  const title = <span className={alertClassNames}>{t('quickstart~Check your work')}</span>;
+  const title = <span className={alertClassNames}>{text['Check your work']}</span>;
 
   return (
     <Alert variant={getAlertVariant(taskStatus)} title={title} isInline>
@@ -47,7 +47,7 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
           id="review-success"
           name="review-success"
           data-testid="qs-drawer-check-yes"
-          label={t('quickstart~Yes')}
+          label={text['Yes']}
           className="co-quick-start-task-review__radio"
           isChecked={taskStatus === QuickStartTaskStatus.SUCCESS}
           onChange={() => onTaskReview(QuickStartTaskStatus.SUCCESS)}
@@ -56,7 +56,7 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
           id="review-failed"
           name="review-failed"
           data-testid="qs-drawer-check-no"
-          label={t('quickstart~No')}
+          label={text['No']}
           className="co-quick-start-task-review__radio"
           isChecked={taskStatus === QuickStartTaskStatus.FAILED}
           onChange={() => onTaskReview(QuickStartTaskStatus.FAILED)}

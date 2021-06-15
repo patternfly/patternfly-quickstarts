@@ -9,6 +9,7 @@ import {
 import { setQueryArgument, removeQueryArgument } from '../ConsoleInternal/components/utils/router';
 import { QUICKSTART_ID_FILTER_KEY, QUICKSTART_TASKS_INITIAL_STATES } from './const';
 import { getTaskStatusKey } from './quick-start-utils';
+import en from '../locales/en/quickstart.json';
 
 export type FooterProps = {
   show?: boolean;
@@ -34,7 +35,9 @@ export type QuickStartContextValues = {
   markdown?: {
     extensions?: any[];
     renderExtension?: (docContext: HTMLDocument, rootSelector: string) => React.ReactNode;
-  }
+  },
+  text?: any;
+  setText?: (text: any) => {};
 };
 
 export const QuickStartContext = createContext<QuickStartContextValues>({
@@ -45,7 +48,8 @@ export const QuickStartContext = createContext<QuickStartContextValues>({
   setActiveQuickStart: () => {},
   startQuickStart: () => {},
   restartQuickStart: () => {},
-  markdown: {}
+  markdown: {},
+  text: en
 });
 
 export const QuickStartContextProvider = QuickStartContext.Provider;
@@ -77,7 +81,8 @@ export type useValuesForQuickStartContextType = {
   markdown?: {
     extensions?: any[];
     renderExtension?: (docContext: HTMLDocument, rootSelector: string) => React.ReactNode;
-  }
+  },
+  text?: any;
 };
 
 export const useValuesForQuickStartContext = ({
@@ -91,7 +96,8 @@ export const useValuesForQuickStartContext = ({
   markdown = {
     extensions: [],
     renderExtension: (docContext, rootSelector) => null
-  }
+  },
+  text = en
 }: useValuesForQuickStartContextType): QuickStartContextValues => {
   const setActiveQuickStart = useCallback(
     (quickStartId: string, totalTasks?: number) => {
@@ -304,6 +310,10 @@ export const useValuesForQuickStartContext = ({
     getQuickStartForId,
     footer,
     useQueryParams,
-    markdown
+    markdown,
+    text: {
+      ...en,
+      ...text
+    }
   };
 };

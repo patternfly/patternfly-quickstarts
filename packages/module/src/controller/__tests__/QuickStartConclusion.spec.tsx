@@ -7,14 +7,6 @@ import QuickStartConclusion from '../QuickStartConclusion';
 import QuickStartMarkdownView from '../../QuickStartMarkdownView';
 import { allQuickStarts } from '../../data/quick-start-test-data';
 
-jest.mock('react-i18next', () => {
-  const reactI18next = require.requireActual('react-i18next');
-  return {
-    ...reactI18next,
-    useTranslation: () => ({ t: (key: string) => key }),
-  };
-});
-
 const i18nNS = 'quickstart';
 
 type QuickStartConclusionProps = React.ComponentProps<typeof QuickStartConclusion>;

@@ -6,14 +6,6 @@ import { QuickStartCatalogPage } from '../../QuickStartCatalogPage';
 import QuickStartCatalog from '../QuickStartCatalog';
 import { getQuickStarts } from '../../data/test-utils';
 
-jest.mock('react-i18next', () => {
-  const reactI18next = require.requireActual('react-i18next');
-  return {
-    ...reactI18next,
-    useTranslation: () => ({ t: (key: string) => key }),
-  };
-});
-
 jest.mock('@console/shared', () => {
   const ActualShared = require.requireActual('@console/shared');
   return {

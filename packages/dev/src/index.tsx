@@ -6,6 +6,7 @@ import "@patternfly/quickstarts/dist/quickstarts.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import './i18n/i18n';
 import App from "./App";
 import {
   QuickStartsLoader,

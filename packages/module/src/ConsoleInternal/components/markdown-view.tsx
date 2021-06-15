@@ -5,7 +5,7 @@ import _reduce from 'lodash-es/reduce';
 import _truncate from 'lodash-es/truncate';
 import _uniqueId from 'lodash-es/uniqueId';
 import { Converter } from 'showdown';
-import { useTranslation } from 'react-i18next';
+import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 
 import './_markdown-view.scss';
 
@@ -97,7 +97,7 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
   inline,
   className,
 }) => {
-  const { t } = useTranslation();
+  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const markup = React.useMemo(() => {
     const truncatedContent = truncateContent
       ? _truncate(content, {
@@ -106,8 +106,8 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
           omission: '\u2026',
         })
       : content;
-    return markdownConvert(truncatedContent || emptyMsg || t('Not available'), extensions);
-  }, [content, emptyMsg, extensions, t, truncateContent]);
+    return markdownConvert(truncatedContent || emptyMsg || text['Not available'], extensions);
+  }, [content, emptyMsg, extensions, text, truncateContent]);
   const innerProps: InnerSyncMarkdownProps = {
     renderExtension: extensions?.length > 0 ? renderExtension : undefined,
     exactHeight,

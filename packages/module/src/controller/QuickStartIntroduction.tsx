@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
+import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
 import TaskHeader from './QuickStartTaskHeader';
@@ -17,14 +17,12 @@ const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
   allTaskStatuses,
   onTaskSelect,
 }) => {
-  const { t } = useTranslation();
+  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <>
       <QuickStartMarkdownView content={introduction} />
       <p style={{ marginBottom: 'var(--pf-global--spacer--md)' }}>
-        {t('quickstart~In this quick start, you will complete {{count, number}} task', {
-          count: tasks.length,
-        })}
+        {text['In this quick start, you will complete {{count, number}} task'].replace('{{count, number}} ', tasks.length)}
         :
       </p>
       {tasks.map((task, index) => (

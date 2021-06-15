@@ -4,14 +4,6 @@ import { Button } from '@patternfly/react-core';
 import { QuickStartStatus } from '../../utils/quick-start-types';
 import QuickStartFooter from '../QuickStartFooter';
 
-jest.mock('react-i18next', () => {
-  const reactI18next = require.requireActual('react-i18next');
-  return {
-    ...reactI18next,
-    useTranslation: () => ({ t: (key) => key }),
-  };
-});
-
 jest.mock('react', () => {
   const ActualReact = require.requireActual('react');
   return {

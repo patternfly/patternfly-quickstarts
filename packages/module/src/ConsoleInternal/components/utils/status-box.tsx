@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import { useTranslation } from 'react-i18next';
+import { QuickStartContext, QuickStartContextValues } from '../../../utils/quick-start-context';
 
 // import * as restrictedSignImg from '../../imgs/restricted-sign.svg';
 // import { TimeoutError } from '../../co-fetch';
@@ -27,11 +27,11 @@ export const LoadingBox: React.FC<LoadingBoxProps> = ({ className, message }) =>
 LoadingBox.displayName = 'LoadingBox';
 
 export const EmptyBox: React.FC<EmptyBoxProps> = ({ label }) => {
-  const { t } = useTranslation();
+  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <Box>
       <div data-test="empty-message" className="text-center">
-        {label ? t('utils~No {{label}} found', { label }) : t('utils~Not found')}
+        {label ? text['No {{label}} found'].replace('{{label}}', label) : text['Not found']}
       </div>
     </Box>
   );
