@@ -17,12 +17,12 @@ const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
   allTaskStatuses,
   onTaskSelect,
 }) => {
-  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <>
       <QuickStartMarkdownView content={introduction} />
       <p style={{ marginBottom: 'var(--pf-global--spacer--md)' }}>
-        {text['In this quick start, you will complete {{count, number}} task'].replace('{{count, number}} ', tasks.length)}
+        {getResource('In this quick start, you will complete {{count, number}} task').replace('{{count, number}} ', tasks.length)}
         :
       </p>
       {tasks.map((task, index) => (

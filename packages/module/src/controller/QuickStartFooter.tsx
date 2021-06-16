@@ -25,7 +25,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   footerClass,
   quickStartId,
 }) => {
-  const { footer, restartQuickStart, text } = React.useContext<QuickStartContextValues>(
+  const { footer, restartQuickStart, getResource } = React.useContext<QuickStartContextValues>(
     QuickStartContext,
   );
 
@@ -34,19 +34,19 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
 
   const PrimaryButtonText = React.useMemo(() => {
     return {
-      START: text['Start'],
-      CONTINUE: text['Continue'],
-      NEXT: text['Next'],
-      CLOSE: text['Close'],
+      START: getResource('Start'),
+      CONTINUE: getResource('Continue'),
+      NEXT: getResource('Next'),
+      CLOSE: getResource('Close'),
     };
-  }, [text]);
+  }, [getResource]);
 
   const SecondaryButtonText = React.useMemo(() => {
     return {
-      BACK: text['Back'],
-      RESTART: text['Restart'],
+      BACK: getResource('Back'),
+      RESTART: getResource('Restart'),
     };
-  }, [text]);
+  }, [getResource]);
 
   const onRestart = React.useCallback(
     (e: React.SyntheticEvent) => {

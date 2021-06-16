@@ -21,7 +21,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
   onTaskReview,
   onTaskSelect,
 }) => {
-  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <>
       {tasks
@@ -37,7 +37,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
                 taskIndex={index + 1}
                 title={title}
                 size="md"
-                subtitle={text['{{index, number}} of {{tasks, number}}'].replace('{{index, number}}', index + 1).replace('{{tasks, number}}', tasks.length)}
+                subtitle={getResource('{{index, number}} of {{tasks, number}}').replace('{{index, number}}', index + 1).replace('{{tasks, number}}', tasks.length)}
                 taskStatus={taskStatus}
                 isActiveTask={isActiveTask}
                 onTaskSelect={onTaskSelect}

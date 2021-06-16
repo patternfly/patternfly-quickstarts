@@ -14,31 +14,31 @@ const QuickStartCloseModal: React.FC<QuickStartCloseModalProps> = ({
   onConfirm,
   onCancel,
 }) => {
-  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <Modal
       className="co-quick-start-drawer__modal"
       isOpen={isOpen}
       variant={ModalVariant.small}
       showClose={false}
-      title={text['Leave quick start?']}
+      title={getResource('Leave quick start?')}
       footer={
         <Flex>
           <FlexItem align={{ default: 'alignRight' }}>
             <Button variant="secondary" onClick={onCancel}>
-              {text['Cancel']}
+              {getResource('Cancel')}
             </Button>
           </FlexItem>
           <FlexItem>
             <Button variant="primary" onClick={onConfirm}>
-              {text['Leave']}
+              {getResource('Leave')}
             </Button>
           </FlexItem>
         </Flex>
       }
       isFullScreen
     >
-      {text['Your progress will be saved.']}
+      {getResource('Your progress will be saved.')}
     </Modal>
   );
 };

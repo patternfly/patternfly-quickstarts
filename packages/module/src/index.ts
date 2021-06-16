@@ -9,6 +9,5 @@ export * from './utils/quick-start-context';
 export * from './utils/quick-start-types';
 export * from './utils/quick-start-utils';
 export * from './utils/useLocalStorage';
-export { default as QuickStartsLoader } from './loader/QuickStartsLoader';
 export { default as QuickStartPanelContent } from './QuickStartPanelContent';
 export { default as QuickStartCloseModal } from './QuickStartCloseModal';

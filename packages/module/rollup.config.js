@@ -5,7 +5,7 @@ import typescript from 'rollup-plugin-typescript2';
 import scss from './rollup-plugin-scss';
 import json from '@rollup/plugin-json';
 import visualizer from 'rollup-plugin-visualizer';
-// import analyze from "rollup-plugin-analyzer";
+import analyze from "rollup-plugin-analyzer";
 
 import packageJson from './package.json';
 
@@ -34,7 +34,7 @@ const plugins = (esBundle) => {
       tsconfig: 'tsconfig.json',
     }),
     json(),
-    // analyze({ summaryOnly: true, limit: 10 }),
+    analyze({ summaryOnly: true, limit: 5 }),
     visualizer(),
   ];
 };

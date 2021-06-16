@@ -27,11 +27,11 @@ export const LoadingBox: React.FC<LoadingBoxProps> = ({ className, message }) =>
 LoadingBox.displayName = 'LoadingBox';
 
 export const EmptyBox: React.FC<EmptyBoxProps> = ({ label }) => {
-  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <Box>
       <div data-test="empty-message" className="text-center">
-        {label ? text['No {{label}} found'].replace('{{label}}', label) : text['Not found']}
+        {label ? getResource('No {{label}} found').replace('{{label}}', label) : getResource('Not found')}
       </div>
     </Box>
   );

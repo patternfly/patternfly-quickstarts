@@ -30,14 +30,14 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
   onTaskReview,
 }) => {
   const { instructions, failedTaskHelp: taskHelp } = review;
-  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
   const alertClassNames = cx('co-quick-start-task-review', {
     'co-quick-start-task-review--success': taskStatus === QuickStartTaskStatus.SUCCESS,
     'co-quick-start-task-review--failed': taskStatus === QuickStartTaskStatus.FAILED,
   });
 
-  const title = <span className={alertClassNames}>{text['Check your work']}</span>;
+  const title = <span className={alertClassNames}>{getResource('Check your work')}</span>;
 
   return (
     <Alert variant={getAlertVariant(taskStatus)} title={title} isInline>
@@ -47,7 +47,7 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
           id="review-success"
           name="review-success"
           data-testid="qs-drawer-check-yes"
-          label={text['Yes']}
+          label={getResource('Yes')}
           className="co-quick-start-task-review__radio"
           isChecked={taskStatus === QuickStartTaskStatus.SUCCESS}
           onChange={() => onTaskReview(QuickStartTaskStatus.SUCCESS)}
@@ -56,7 +56,7 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
           id="review-failed"
           name="review-failed"
           data-testid="qs-drawer-check-no"
-          label={text['No']}
+          label={getResource('No')}
           className="co-quick-start-task-review__radio"
           isChecked={taskStatus === QuickStartTaskStatus.FAILED}
           onChange={() => onTaskReview(QuickStartTaskStatus.FAILED)}

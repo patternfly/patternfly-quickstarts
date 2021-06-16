@@ -14,7 +14,7 @@ const QuickStartTileFooter: React.FC<QuickStartTileFooterProps> = ({
   status,
   totalTasks,
 }) => {
-  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const {
     activeQuickStartID,
     startQuickStart,
@@ -44,21 +44,21 @@ const QuickStartTileFooter: React.FC<QuickStartTileFooterProps> = ({
       {status === QuickStartStatus.NOT_STARTED && (
         <FlexItem>
           <Button onClick={start} variant="link" isInline data-testid="qs-card-notStarted-start">
-            {text['Start']}
+            {getResource('Start')}
           </Button>
         </FlexItem>
       )}
       {status === QuickStartStatus.IN_PROGRESS && activeQuickStartID !== quickStartId && (
         <FlexItem>
           <Button variant="link" isInline data-testid="qs-card-inProgress-resume">
-            {text['Continue']}
+            {getResource('Continue')}
           </Button>
         </FlexItem>
       )}
       {status === QuickStartStatus.COMPLETE && (
         <FlexItem>
           <Button onClick={restart} variant="link" isInline data-testid="qs-card-complete-restart">
-            {text['Start']}
+            {getResource('Start')}
           </Button>
         </FlexItem>
       )}
@@ -70,7 +70,7 @@ const QuickStartTileFooter: React.FC<QuickStartTileFooterProps> = ({
             isInline
             data-testid="qs-card-inProgress-restart"
           >
-            {text['Restart']}
+            {getResource('Restart')}
           </Button>
         </FlexItem>
       )}

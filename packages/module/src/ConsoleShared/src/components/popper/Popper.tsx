@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PopperJS, { PopperOptions } from 'popper.js';
+import PopperJS, { PopperOptions } from 'popper.js/dist/esm/popper.min.js';
 import { useCombineRefs } from '../../utils/useCombineRefs';
 import Portal from './Portal';
 

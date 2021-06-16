@@ -43,7 +43,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   showClose = true,
   ...props
 }) => {
-  const { text } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const [contentRef, setContentRef] = React.useState<HTMLDivElement>();
   const shadows = useScrollShadows(contentRef);
   const quickStart = quickStarts.find((qs) => qs.metadata.name === activeQuickStartID);
@@ -89,7 +89,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
             >
               {quickStart?.spec.displayName}{' '}
               <small className="co-quick-start-panel-content__duration text-secondary">
-                {text['{{duration, number}} minutes'].replace('{{duration, number}}', quickStart?.spec.durationMinutes)}
+                {getResource('{{duration, number}} minutes').replace('{{duration, number}}', quickStart?.spec.durationMinutes)}
               </small>
             </Title>
           </div>

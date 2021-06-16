@@ -40,12 +40,12 @@ const QuickStartMarkdownView: React.FC<QuickStartMarkdownViewProps> = ({
             return text.replace(/<em>(.*)<\/em>{#(.*)}/g, '<em id="$2">$1</em>');
           },
         },
-        ...markdown.extensions,
+        ...(markdown ? markdown.extensions: []),
       ]}
       renderExtension={(docContext, rootSelector) => (
         <>
           <MarkdownHighlightExtension docContext={docContext} rootSelector={rootSelector} />
-          {markdown.renderExtension(docContext, rootSelector)}
+          {markdown && markdown.renderExtension(docContext, rootSelector)}
         </>
       )}
       className={className}

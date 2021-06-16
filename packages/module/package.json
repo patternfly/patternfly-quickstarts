@@ -38,7 +38,8 @@
     "@patternfly/react-catalog-view-extension": ">=4.10.13",
     "@patternfly/react-core": ">=4.101.3",
     "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react-dom": ">=16.8.0",
+    "showdown": ">=1.8.6"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.9.0",
