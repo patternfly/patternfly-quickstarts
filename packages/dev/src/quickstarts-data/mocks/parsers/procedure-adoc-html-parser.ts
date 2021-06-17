@@ -33,12 +33,12 @@ export const ProcedureAdocHtmlParser = (
     bodyDOM.querySelector(".qs-conclusion")?.innerHTML.trim()
   );
 
-  let prerequisites: string[] = [];
+  const prerequisites: string[] = [];
   prereqs.forEach((n) => {
     prerequisites.push(n.textContent.trim());
   });
 
-  let qsTasks: QuickStartTask[] = [];
+  const qsTasks: QuickStartTask[] = [];
   procedures.forEach((procedure, index) => {
     const verificationBlock =
       procedure.querySelector(".olist.qs-task-verification ol");

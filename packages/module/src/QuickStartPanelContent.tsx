@@ -2,14 +2,14 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import {
-  DrawerPanelContent,
-  DrawerPanelBody,
-  DrawerHead,
   DrawerActions,
   DrawerCloseButton,
+  DrawerHead,
+  DrawerPanelBody,
+  DrawerPanelContent,
   Title,
 } from '@patternfly/react-core';
-import { useScrollShadows, Shadows } from '@console/shared';
+import { Shadows, useScrollShadows } from '@console/shared';
 import { QuickStart } from './utils/quick-start-types';
 import './QuickStartPanelContent.scss';
 import QuickStartController from './QuickStartController';

@@ -5,12 +5,12 @@ import "@patternfly/patternfly/utilities/Accessibility/accessibility.css";
 import "@patternfly/react-catalog-view-extension/dist/css/react-catalog-view-extension.css";
 import "@patternfly/quickstarts/dist/quickstarts.css";
 import {
-  QuickStartDrawer,
-  QuickStartCatalogPage,
-  useValuesForQuickStartContext,
-  QuickStartContext,
   ProcedureAsciiDocParser,
+  QuickStartCatalogPage,
+  QuickStartContext,
+  QuickStartDrawer,
   useLocalStorage,
+  useValuesForQuickStartContext,
 } from "@patternfly/quickstarts";
 import { Base64 } from "js-base64";
 

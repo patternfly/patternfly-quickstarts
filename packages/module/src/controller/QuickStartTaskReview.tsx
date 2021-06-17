@@ -3,7 +3,7 @@ import cx from 'classnames';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { Alert, Radio } from '@patternfly/react-core';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
-import { QuickStartTaskStatus, QuickStartTaskReview } from '../utils/quick-start-types';
+import { QuickStartTaskReview, QuickStartTaskStatus } from '../utils/quick-start-types';
 
 import './QuickStartTaskReview.scss';
 

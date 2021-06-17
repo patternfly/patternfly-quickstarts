@@ -1,14 +1,14 @@
 import React from "react";
 import {
-  Page,
-  Nav,
-  NavList,
-  NavItem,
-  PageSidebar,
   Avatar,
   Brand,
+  Nav,
+  NavItem,
+  NavList,
+  Page,
   PageHeader,
   PageHeaderTools,
+  PageSidebar,
 } from "@patternfly/react-core";
 import imgBrand from "./assets/images/imgBrand.svg";
 import imgAvatar from "./assets/images/imgAvatar.svg";
@@ -16,11 +16,11 @@ import { Link, useHistory } from "react-router-dom";
 import Demos from "./Demos";
 import "./App.css";
 import {
-  QuickStartDrawer,
-  useLocalStorage,
+  LoadingBox,
   QuickStartContextProvider,
   QuickStartContextValues,
-  LoadingBox
+  QuickStartDrawer,
+  useLocalStorage
 } from "@patternfly/quickstarts";
 import { allQuickStarts as yamlQuickStarts } from "./quickstarts-data/quick-start-test-data";
 import { loadJSONQuickStarts } from "./quickstarts-data/mas-guides/quickstartLoader";

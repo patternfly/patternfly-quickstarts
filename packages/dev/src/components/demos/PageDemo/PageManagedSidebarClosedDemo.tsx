@@ -3,9 +3,9 @@ import {
   Page,
   PageHeader,
   PageHeaderTools,
-  PageSidebar,
   PageSection,
-  PageSectionVariants
+  PageSectionVariants,
+  PageSidebar
 } from '@patternfly/react-core';
 
 export class PageManagedSidebarClosedDemo extends React.Component {

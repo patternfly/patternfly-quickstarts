@@ -2,9 +2,9 @@ import {
   QuickStart
 } from "@patternfly/quickstarts";
 import {
-  QuickstartAsciiDocParser,
-  ProcedureAsciiDocParser,
   ProcedureAdocHtmlParser,
+  ProcedureAsciiDocParser,
+  QuickstartAsciiDocParser,
 } from "./mocks/parsers";
 
 import { explorePipelinesQuickStart } from "./mocks/json/explore-pipeline-quickstart";

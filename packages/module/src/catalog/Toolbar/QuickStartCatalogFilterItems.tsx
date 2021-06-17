@@ -3,8 +3,8 @@ import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-st
 import {
   SearchInput,
   Select,
-  SelectVariant,
   SelectOption,
+  SelectVariant,
   ToolbarItem,
 } from '@patternfly/react-core';
 import { QuickStartStatus } from '../../utils/quick-start-types';

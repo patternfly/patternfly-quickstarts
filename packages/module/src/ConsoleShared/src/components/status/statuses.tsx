@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { HourglassHalfIcon, InProgressIcon } from '@patternfly/react-icons';
 import {
-  RedExclamationCircleIcon,
-  GreenCheckCircleIcon,
-  YellowExclamationTriangleIcon,
   BlueInfoCircleIcon,
+  GreenCheckCircleIcon,
+  RedExclamationCircleIcon,
+  YellowExclamationTriangleIcon,
 } from './icons';
 import GenericStatus from './GenericStatus';
 import { StatusComponentProps } from './types';

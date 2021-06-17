@@ -4,7 +4,7 @@ import * as path from "path";
 import { load as yamlLoad } from "js-yaml";
 import { Base64 } from 'js-base64';
 
-import { ICommand, CommandAction } from "./app/model";
+import { CommandAction, ICommand } from "./app/model";
 
 export default class ViewLoader {
   private readonly _panel: vscode.WebviewPanel | undefined;
@@ -94,7 +94,7 @@ export default class ViewLoader {
 
   private saveFileContent(fileUri: vscode.Uri, config: string) {
     if (fs.existsSync(fileUri.fsPath)) {
-      let content: string = JSON.stringify(config);
+      const content: string = JSON.stringify(config);
       fs.writeFileSync(fileUri.fsPath, content);
 
       vscode.window.showInformationMessage(

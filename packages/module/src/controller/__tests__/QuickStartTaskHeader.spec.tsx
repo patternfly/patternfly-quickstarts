@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { ShallowWrapper, shallow } from 'enzyme';
 import { Title, WizardNavItem } from '@patternfly/react-core';
 import QuickStartTaskHeader from '../QuickStartTaskHeader';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';

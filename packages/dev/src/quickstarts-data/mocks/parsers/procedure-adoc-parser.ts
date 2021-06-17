@@ -19,33 +19,33 @@ const asciiOptions = {
 };
 
 const getInnerText = (html: string) => {
-  let span = document.createElement("span");
+  const span = document.createElement("span");
   span.innerHTML = html;
   return span.textContent || span.innerText;
 };
 const getInnerList = (html: string) => {
-  let span = document.createElement("span");
+  const span = document.createElement("span");
   span.innerHTML = html;
   return span.querySelector("ol") || span.querySelector("ul");
 };
 const getListItems = (html: string) => {
-  let span = document.createElement("span");
+  const span = document.createElement("span");
   span.innerHTML = html;
   const elements = span.querySelectorAll("li");
-  let items: string[] = [];
+  const items: string[] = [];
   elements.forEach((el) => {
     items.push(el.textContent.trim());
   });
   return items;
 };
 const elementWithoutTitle = (html: string) => {
-  let span = document.createElement("span");
+  const span = document.createElement("span");
   span.innerHTML = html;
   span.querySelector(".title") && span.querySelector(".title").remove();
   return span;
 };
 const addClasses = (html: string) => {
-  let span = document.createElement("span");
+  const span = document.createElement("span");
   span.innerHTML = html;
   span
     .querySelectorAll("div.title")
@@ -86,7 +86,7 @@ const getIntro = (taskBlocks: any[]) => {
 };
 
 const getPrereqs = (taskBlocks: any[], startingIndex: number) => {
-  let lastIndex = startingIndex;
+  const lastIndex = startingIndex;
   const initialBlock = taskBlocks[startingIndex];
   if (
     (initialBlock.context !== "olist" || initialBlock.context !== "ulist") &&
@@ -192,7 +192,7 @@ export const ProcedureAsciiDocParser = (file: string, options: any = {}) => {
   );
   const remainingContent = getRest(taskBlocks, lastIndexProcedures);
 
-  let qsTasks: QuickStartTask[] = [];
+  const qsTasks: QuickStartTask[] = [];
   procedures.forEach((procedure, index) => {
     qsTasks.push({
       title: procedure.title || `Procedure ${index + 1}`,

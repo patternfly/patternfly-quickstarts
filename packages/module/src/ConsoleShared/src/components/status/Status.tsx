@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
-  ClipboardListIcon,
-  HourglassStartIcon,
-  HourglassHalfIcon,
-  SyncAltIcon,
   BanIcon,
+  ClipboardListIcon,
   ExclamationTriangleIcon,
+  HourglassHalfIcon,
+  HourglassStartIcon,
+  SyncAltIcon,
   UnknownIcon,
 } from '@patternfly/react-icons';
 import { DASH } from '../../constants';

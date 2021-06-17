@@ -5,13 +5,13 @@ import "@patternfly/react-catalog-view-extension/dist/css/react-catalog-view-ext
 import "@patternfly/quickstarts/dist/quickstarts.css";
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import './i18n/i18n';
 import App from "./App";
 import {
-  QuickStartCatalogPage,
-  QuickStart,
   LoadingBox,
+  QuickStart,
+  QuickStartCatalogPage,
 } from "@patternfly/quickstarts";
 import { Home } from "./Home";
 import { CustomCatalog } from "./CustomCatalog";

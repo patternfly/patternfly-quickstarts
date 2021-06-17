@@ -76,7 +76,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
   const fullWidthBodyStyle = fullWidth
     ? {
         style: {
-          display: !!activeQuickStartID ? 'none' : 'flex',
+          display: activeQuickStartID ? 'none' : 'flex',
         },
       }
     : {};

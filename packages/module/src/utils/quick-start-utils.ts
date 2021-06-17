@@ -1,4 +1,4 @@
-import { QuickStart, QuickStartStatus, AllQuickStartStates } from './quick-start-types';
+import { AllQuickStartStates, QuickStart, QuickStartStatus } from './quick-start-types';
 
 export const QUICK_START_NAME = 'console.openshift.io/name';
 

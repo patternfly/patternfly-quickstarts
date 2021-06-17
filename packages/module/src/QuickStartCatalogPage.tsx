@@ -1,18 +1,18 @@
 import * as React from 'react';
 import QuickStartCatalog from './catalog/QuickStartCatalog';
 import { QuickStart } from './utils/quick-start-types';
-import { getQuickStartStatusCount, filterQuickStarts } from './utils/quick-start-utils';
+import { filterQuickStarts, getQuickStartStatusCount } from './utils/quick-start-utils';
 import { QUICKSTART_SEARCH_FILTER_KEY, QUICKSTART_STATUS_FILTER_KEY } from './utils/const';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import {
   Button,
+  Divider,
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
   EmptyStatePrimary,
-  Title,
   Text,
-  Divider,
+  Title,
 } from '@patternfly/react-core';
 import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
 import { EmptyBox, LoadingBox, removeQueryArgument } from '@console/internal/components/utils';

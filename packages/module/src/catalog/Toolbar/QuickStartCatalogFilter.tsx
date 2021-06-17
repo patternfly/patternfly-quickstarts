@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Toolbar, ToolbarProps, ToolbarContent } from '@patternfly/react-core';
+import { Toolbar, ToolbarContent, ToolbarProps } from '@patternfly/react-core';
 import { QuickStartStatus } from '../../utils/quick-start-types';
 import {
-  QuickStartCatalogFilterSearchWrapper,
   QuickStartCatalogFilterCountWrapper,
+  QuickStartCatalogFilterSearchWrapper,
   QuickStartCatalogFilterStatusWrapper,
 } from './QuickStartCatalogFilterItems';
 

@@ -3,19 +3,19 @@ import {
   Avatar,
   Button,
   Dropdown,
+  DropdownGroup,
+  DropdownItem,
+  DropdownToggle,
+  KebabToggle,
   Page,
   PageHeader,
   PageHeaderTools,
   PageHeaderToolsGroup,
   PageHeaderToolsItem,
-  PageSidebar,
   PageSection,
   PageSectionVariants,
-  SkipToContent,
-  KebabToggle,
-  DropdownToggle,
-  DropdownGroup,
-  DropdownItem
+  PageSidebar,
+  SkipToContent
 } from '@patternfly/react-core';
 import CogIcon from '@patternfly/react-icons/dist/js/icons/cog-icon';
 import HelpIcon from '@patternfly/react-icons/dist/js/icons/help-icon';

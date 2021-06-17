@@ -19,15 +19,15 @@ const asciiOptions = {
 };
 
 const getInnerText = (html: string) => {
-  let span = document.createElement("span");
+  const span = document.createElement("span");
   span.innerHTML = html;
   return span.textContent || span.innerText;
 };
 const getListItems = (html: string) => {
-  let span = document.createElement("span");
+  const span = document.createElement("span");
   span.innerHTML = html;
   const elements = span.querySelectorAll("li");
-  let items: string[] = [];
+  const items: string[] = [];
   elements.forEach((el) => {
     items.push(el.textContent.trim());
   });
@@ -40,12 +40,12 @@ export const QuickstartAsciiDocParser = (file: string, options: any = {}) => {
     ...options,
   });
   const taskBlocks = fullAdoc.getBlocks();
-  let qsTasks: QuickStartTask[] = [];
+  const qsTasks: QuickStartTask[] = [];
   taskBlocks.forEach((taskBlock) => {
     const adocBlocks = taskBlock.getBlocks();
-    let qsTask: QuickStartTask = {};
-    let qsReview: QuickStartTaskReview = {};
-    let qsSummary: QuickStartTaskSummary = {};
+    const qsTask: QuickStartTask = {};
+    const qsReview: QuickStartTaskReview = {};
+    const qsSummary: QuickStartTaskSummary = {};
 
     for (const block in adocBlocks) {
       const content = adocBlocks[block].getContent();

@@ -45,7 +45,8 @@
     "import/no-unresolved": "off",
     "import/extensions": "off",
     "react/prop-types": "off",
-    "@typescript-eslint/no-empty-function": "off"
+    "@typescript-eslint/no-empty-function": "off",
+    "sort-imports": "warn"
   },
   "env": {
     "browser": true,

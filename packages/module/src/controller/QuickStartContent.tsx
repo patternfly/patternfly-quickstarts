@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { QuickStartTaskStatus, QuickStart } from '../utils/quick-start-types';
+import { QuickStart, QuickStartTaskStatus } from '../utils/quick-start-types';
 import QuickStartIntroduction from './QuickStartIntroduction';
 import QuickStartTasks from './QuickStartTasks';
 import QuickStartConclusion from './QuickStartConclusion';

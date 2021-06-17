@@ -1,12 +1,12 @@
 import React, { createContext, useCallback } from 'react';
 import {
   AllQuickStartStates,
+  QuickStart,
   QuickStartState,
   QuickStartStatus,
   QuickStartTaskStatus,
-  QuickStart,
 } from './quick-start-types';
-import { setQueryArgument, removeQueryArgument } from '../ConsoleInternal/components/utils/router';
+import { removeQueryArgument, setQueryArgument } from '../ConsoleInternal/components/utils/router';
 import { QUICKSTART_ID_FILTER_KEY, QUICKSTART_TASKS_INITIAL_STATES } from './const';
 import { getTaskStatusKey } from './quick-start-utils';
 import PluralResolver from './PluralResolver';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Flex, FlexItem, Button } from '@patternfly/react-core';
+import { Button, Flex, FlexItem } from '@patternfly/react-core';
 import ExternalLinkAltIcon from '@patternfly/react-icons/dist/esm/icons/external-link-alt-icon';
 import { QuickStartExternal } from '../utils/quick-start-types';
 
