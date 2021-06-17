@@ -6,9 +6,11 @@ import QuickStartPanelContent from './QuickStartPanelContent';
 import QuickStartCloseModal from './QuickStartCloseModal';
 import { QUICKSTART_ID_FILTER_KEY } from './utils/const';
 import { getQuickStartByName } from './utils/quick-start-utils';
+import { QuickStart } from './utils/quick-start-types';
 import './QuickStartDrawer.scss';
 
 export interface QuickStartDrawerProps extends React.HTMLProps<HTMLDivElement> {
+  quickStarts?: QuickStart[];
   children?: React.ReactNode;
   appendTo?: HTMLElement | (() => HTMLElement);
   isStatic?: boolean;
@@ -18,6 +20,7 @@ export interface QuickStartDrawerProps extends React.HTMLProps<HTMLDivElement> {
 }
 
 export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
+  quickStarts,
   children,
   appendTo,
   isStatic,
@@ -26,7 +29,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
   onCloseNotInProgress,
   ...props
 }) => {
-  const { activeQuickStartID, setActiveQuickStart, allQuickStarts, activeQuickStartState } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { activeQuickStartID, setActiveQuickStart, allQuickStarts = quickStarts, activeQuickStartState } = React.useContext<QuickStartContextValues>(QuickStartContext);
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const quickStartId = params.get(QUICKSTART_ID_FILTER_KEY) || '';

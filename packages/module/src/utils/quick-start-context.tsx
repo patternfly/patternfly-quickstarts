@@ -49,7 +49,6 @@ export type QuickStartContextValues = {
 };
 
 export const QuickStartContext = createContext<QuickStartContextValues>({
-  allQuickStarts: [],
   activeQuickStartID: '',
   allQuickStartStates: {},
   activeQuickStartState: {},

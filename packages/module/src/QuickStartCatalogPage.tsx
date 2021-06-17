@@ -19,6 +19,7 @@ import { EmptyBox, LoadingBox, removeQueryArgument } from '@console/internal/com
 import QuickStartCatalogFilter from './catalog/Toolbar/QuickStartCatalogFilter';
 
 type QuickStartCatalogPageProps = {
+  quickStarts?: QuickStart[];
   showFilter?: boolean;
   sortFnc?: (q1: QuickStart, q2: QuickStart) => number;
   title?: string;
@@ -47,13 +48,14 @@ export const QuickStartCatalogEmptyState = ({ clearFilters }) => {
 };
 
 export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
+  quickStarts,
   showFilter,
   sortFnc = (q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName),
   title,
   hint,
   showTitle = true,
 }) => {
-  const { allQuickStarts, allQuickStartStates, getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { allQuickStarts = quickStarts, allQuickStartStates, getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
   const initialQueryParams = new URLSearchParams(window.location.search);
   const initialSearchQuery = initialQueryParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
