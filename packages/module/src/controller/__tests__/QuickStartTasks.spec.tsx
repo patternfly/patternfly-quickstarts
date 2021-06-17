@@ -8,6 +8,14 @@ import QuickStartTaskReview from '../QuickStartTaskReview';
 import QuickStartMarkdownView from '../../QuickStartMarkdownView';
 import { allQuickStarts } from '../../data/quick-start-test-data';
 
+jest.mock('react', () => {
+  const ActualReact = require.requireActual('react');
+  return {
+    ...ActualReact,
+    useContext: () => jest.fn(),
+  };
+});
+
 type QuickStartTaskProps = React.ComponentProps<typeof QuickStartTask>;
 let wrapper: ShallowWrapper<QuickStartTaskProps>;
 const props: QuickStartTaskProps = {
@@ -24,6 +32,12 @@ const props: QuickStartTaskProps = {
 
 describe('QuickStartTasks', () => {
   beforeEach(() => {
+    spyOn(React, 'useContext').and.returnValue({
+      activeQuickStartID: '',
+      startQuickStart: () => {},
+      restartQuickStart: () => {},
+      getResource: key => `quickstart~${key}`
+    });
     wrapper = shallow(<QuickStartTask {...props} />);
   });
 

@@ -13,7 +13,6 @@ import PluralResolver from './PluralResolver';
 import en from '../locales/en/quickstart.json';
 
 const pluralResolver = new PluralResolver({ simplifyPluralSuffix: true });
-// const getText = (text: string) => {};
 
 export type FooterProps = {
   show?: boolean;
@@ -62,7 +61,7 @@ export const QuickStartContext = createContext<QuickStartContextValues>({
   lng: 'en',
 });
 
-const getResource = (resource: string, options: any, resourceBundle: any, lng: string) => {
+export const getResource = (resource: string, options: any, resourceBundle: any, lng: string) => {
   if (options && options.count) {
     const suffix = pluralResolver.getSuffix(lng, options.count);
     if (suffix) {
@@ -73,7 +72,6 @@ const getResource = (resource: string, options: any, resourceBundle: any, lng: s
   return resourceBundle[resource];
 }
 
-// export const QuickStartContextProvider = QuickStartContext.Provider;
 export const QuickStartContextProvider: React.FC<{
   children: React.ReactNode;
   value: QuickStartContextValues;

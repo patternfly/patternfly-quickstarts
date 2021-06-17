@@ -12,7 +12,6 @@ import {
   QUICKSTART_SEARCH_FILTER_KEY,
   QUICKSTART_STATUS_FILTER_KEY,
   QuickStartCatalogFilterSearchWrapper,
-  QuickStartCatalogFilterStatusWrapper,
   QuickStartCatalogFilterCountWrapper,
   clearQuickStartFilters,
   QuickStartCatalogHeader,
@@ -20,23 +19,16 @@ import {
   QuickStartCatalogSection,
 } from '@patternfly/quickstarts';
 import {
-  PageSection,
-  PageSectionVariants,
   TextContent,
   Text,
   Divider,
   Gallery,
   GalleryItem,
-  Toolbar,
   ToolbarContent,
 } from '@patternfly/react-core';
 
-type CustomCatalogProps = {
-  quickStarts: QuickStart[];
-};
-
-export const CustomCatalog: React.FC<CustomCatalogProps> = ({ quickStarts }) => {
-  const { activeQuickStartID, allQuickStartStates } = React.useContext<QuickStartContextValues>(
+export const CustomCatalog: React.FC = () => {
+  const { activeQuickStartID, allQuickStartStates, allQuickStarts } = React.useContext<QuickStartContextValues>(
     QuickStartContext,
   );
 
@@ -50,7 +42,7 @@ export const CustomCatalog: React.FC<CustomCatalogProps> = ({ quickStarts }) => 
   const sortFnc = (q1: QuickStart, q2: QuickStart) =>
     q1.spec.displayName.localeCompare(q2.spec.displayName);
   const initialFilteredQuickStarts = filterQuickStarts(
-    quickStarts,
+    allQuickStarts,
     initialSearchQuery,
     initialStatusFilters,
     allQuickStartStates,
@@ -60,12 +52,12 @@ export const CustomCatalog: React.FC<CustomCatalogProps> = ({ quickStarts }) => 
   );
 
   const quickStartStatusCount = React.useMemo(
-    () => getQuickStartStatusCount(allQuickStartStates, quickStarts),
-    [allQuickStartStates, quickStarts],
+    () => getQuickStartStatusCount(allQuickStartStates, allQuickStarts),
+    [allQuickStartStates, allQuickStarts],
   );
   const onSearchInputChange = (searchValue: string) => {
     const result = filterQuickStarts(
-      quickStarts,
+      allQuickStarts,
       searchValue,
       statusFilters,
       allQuickStartStates,
@@ -75,7 +67,7 @@ export const CustomCatalog: React.FC<CustomCatalogProps> = ({ quickStarts }) => 
   };
   const onStatusChange = (statusList: string[]) => {
     const result = filterQuickStarts(
-      quickStarts,
+      allQuickStarts,
       searchInputText,
       statusList,
       allQuickStartStates,
@@ -92,7 +84,7 @@ export const CustomCatalog: React.FC<CustomCatalogProps> = ({ quickStarts }) => 
           <Text component="p">Step-by-step instructions and tasks</Text>
         </TextContent>
         <Gallery className="co-quick-start-catalog__gallery" hasGutter>
-          {quickStarts
+          {allQuickStarts
             .filter(
               (quickStart) =>
                 !quickStart.spec.type || quickStart.spec.type.text !== 'Documentation',
@@ -123,7 +115,7 @@ export const CustomCatalog: React.FC<CustomCatalogProps> = ({ quickStarts }) => 
           <Text component="p">Technical information for using the service</Text>
         </TextContent>
         <Gallery className="co-quick-start-catalog__gallery" hasGutter>
-          {quickStarts
+          {allQuickStarts
             .filter((quickStart) => quickStart.spec.type?.text === 'Documentation')
             .map((quickStart) => {
               const {
@@ -148,7 +140,7 @@ export const CustomCatalog: React.FC<CustomCatalogProps> = ({ quickStarts }) => 
   const clearFilters = () => {
     clearQuickStartFilters();
     setFilteredQuickStarts(
-      quickStarts.sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName)),
+      allQuickStarts.sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName)),
     );
   };
 
@@ -169,7 +161,7 @@ export const CustomCatalog: React.FC<CustomCatalogProps> = ({ quickStarts }) => 
       <Divider component="div" />
       {filteredQuickStarts.length === 0 ? (
         <QuickStartCatalogEmptyState clearFilters={clearFilters} />
-      ) : filteredQuickStarts.length !== quickStarts.length ? (
+      ) : filteredQuickStarts.length !== allQuickStarts.length ? (
         <QuickStartCatalogSection>
           <QuickStartCatalog quickStarts={filteredQuickStarts} />
         </QuickStartCatalogSection>

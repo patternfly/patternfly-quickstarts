@@ -20,6 +20,7 @@ describe('QuickStartFooter', () => {
       activeQuickStartID: '',
       startQuickStart: () => {},
       restartQuickStart: () => {},
+      getResource: key => `quickstart~${key}`
     });
   });
 
