@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
 import { Button } from '@patternfly/react-core';
 import { QuickStartStatus } from '../utils/quick-start-types';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
@@ -26,8 +25,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   footerClass,
   quickStartId,
 }) => {
-  const { t } = useTranslation();
-  const { footer, restartQuickStart } = React.useContext<QuickStartContextValues>(
+  const { footer, restartQuickStart, getResource } = React.useContext<QuickStartContextValues>(
     QuickStartContext,
   );
 
@@ -36,19 +34,19 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
 
   const PrimaryButtonText = React.useMemo(() => {
     return {
-      START: t('quickstart~Start'),
-      CONTINUE: t('quickstart~Continue'),
-      NEXT: t('quickstart~Next'),
-      CLOSE: t('quickstart~Close'),
+      START: getResource('Start'),
+      CONTINUE: getResource('Continue'),
+      NEXT: getResource('Next'),
+      CLOSE: getResource('Close'),
     };
-  }, [t]);
+  }, [getResource]);
 
   const SecondaryButtonText = React.useMemo(() => {
     return {
-      BACK: t('quickstart~Back'),
-      RESTART: t('quickstart~Restart'),
+      BACK: getResource('Back'),
+      RESTART: getResource('Restart'),
     };
-  }, [t]);
+  }, [getResource]);
 
   const onRestart = React.useCallback(
     (e: React.SyntheticEvent) => {

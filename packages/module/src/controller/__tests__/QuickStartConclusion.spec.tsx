@@ -7,11 +7,11 @@ import QuickStartConclusion from '../QuickStartConclusion';
 import QuickStartMarkdownView from '../../QuickStartMarkdownView';
 import { allQuickStarts } from '../../data/quick-start-test-data';
 
-jest.mock('react-i18next', () => {
-  const reactI18next = require.requireActual('react-i18next');
+jest.mock('react', () => {
+  const ActualReact = require.requireActual('react');
   return {
-    ...reactI18next,
-    useTranslation: () => ({ t: (key: string) => key }),
+    ...ActualReact,
+    useContext: () => jest.fn(),
   };
 });
 
@@ -33,6 +33,12 @@ const props: QuickStartConclusionProps = {
 
 describe('QuickStartConclusion', () => {
   beforeEach(() => {
+    spyOn(React, 'useContext').and.returnValue({
+      activeQuickStartID: '',
+      startQuickStart: () => {},
+      restartQuickStart: () => {},
+      getResource: key => `quickstart~${key}`
+    });
     wrapper = shallow(<QuickStartConclusion {...props} />);
   });
 
@@ -54,7 +60,7 @@ describe('QuickStartConclusion', () => {
         .find(Button)
         .at(0)
         .props().children[0],
-    ).toEqual(`${i18nNS}~Start {{nextQSDisplayName}} quick start`);
+    ).toEqual(`${i18nNS}~Start Installing the Pipelines Operator quick start`);
   });
 
   it('should not render link for next quick start if nextQuickStart props is not available', () => {

@@ -17,12 +17,14 @@ import Demos from "./Demos";
 import "./App.css";
 import {
   QuickStartDrawer,
-  QuickStartContext,
-  useValuesForQuickStartContext,
   useLocalStorage,
+  QuickStartContextProvider,
+  QuickStartContextValues,
+  LoadingBox
 } from "@patternfly/quickstarts";
 import { allQuickStarts as yamlQuickStarts } from "./quickstarts-data/quick-start-test-data";
 import { loadJSONQuickStarts } from "./quickstarts-data/mas-guides/quickstartLoader";
+import i18n from './i18n/i18n';
 
 type AppProps = {
   children?: React.ReactNode;
@@ -64,22 +66,6 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     load();
   }, []);
 
-  const { pathname: currentPath } = window.location;
-  const quickStartPath = "/quickstarts";
-
-  const valuesForQuickstartContext = useValuesForQuickStartContext({
-    allQuickStarts,
-    activeQuickStartID,
-    setActiveQuickStartID,
-    allQuickStartStates,
-    setAllQuickStartStates,
-    footer: {
-      show: showCardFooters,
-      showAllLink: currentPath !== quickStartPath,
-      onShowAllLinkClick: () => history.push(quickStartPath),
-    },
-  });
-
   if (!initialized) return <div>Loading</div>;
 
   const AppToolbar = (
@@ -117,16 +103,40 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
 
   const AppSidebar = <PageSidebar isNavOpen nav={AppNav} />;
 
+  const { pathname: currentPath } = window.location;
+  const quickStartPath = "/quickstarts";
+
+  const resourceBundle = i18n.getResourceBundle(localStorage.getItem('bridge/language'), 'quickstart');
+
+  const valuesForQuickstartContext: QuickStartContextValues = {
+    allQuickStarts,
+    activeQuickStartID,
+    setActiveQuickStartID,
+    allQuickStartStates,
+    setAllQuickStartStates,
+    footer: {
+      show: showCardFooters,
+      showAllLink: currentPath !== quickStartPath,
+      onShowAllLinkClick: () => history.push(quickStartPath),
+    },
+    lng: localStorage.getItem('bridge/language'),
+    resourceBundle: {
+      ...resourceBundle,
+      "Start": "Let's goooo"
+    },
+    useQueryParams: false
+  };
+
   return (
-    <React.Suspense fallback={<div>Loading</div>}>
+    <React.Suspense fallback={<LoadingBox />}>
       {allQuickStartsLoaded && (
-        <QuickStartContext.Provider value={valuesForQuickstartContext}>
+        <QuickStartContextProvider value={valuesForQuickstartContext}>
           <QuickStartDrawer>
-            <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>
+             <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>
               {children}
-            </Page>
-          </QuickStartDrawer>
-        </QuickStartContext.Provider>
+             </Page>
+           </QuickStartDrawer>
+        </QuickStartContextProvider>
       )}
     </React.Suspense>
   );

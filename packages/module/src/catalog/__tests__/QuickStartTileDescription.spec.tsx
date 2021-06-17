@@ -4,15 +4,24 @@ import { Popover, Text } from '@patternfly/react-core';
 import QuickStartTileDescription from '../QuickStartTileDescription';
 import { getQuickStarts } from '../../data/test-utils';
 
-jest.mock('react-i18next', () => {
-  const reactI18next = require.requireActual('react-i18next');
+jest.mock('react', () => {
+  const ActualReact = require.requireActual('react');
   return {
-    ...reactI18next,
-    useTranslation: () => ({ t: (key: string) => key }),
+    ...ActualReact,
+    useContext: () => jest.fn(),
   };
 });
 
 describe('QuickStartCatalog', () => {
+  beforeEach(() => {
+    spyOn(React, 'useContext').and.returnValue({
+      activeQuickStartID: '',
+      startQuickStart: () => {},
+      restartQuickStart: () => {},
+      getResource: key => `quickstart~${key}`
+    });
+  });
+
   it('should show prerequisites only if provided', () => {
     // this quick start does not have prereqs
     const quickStart = getQuickStarts()[0].spec;

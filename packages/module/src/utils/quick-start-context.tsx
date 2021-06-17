@@ -9,6 +9,10 @@ import {
 import { setQueryArgument, removeQueryArgument } from '../ConsoleInternal/components/utils/router';
 import { QUICKSTART_ID_FILTER_KEY, QUICKSTART_TASKS_INITIAL_STATES } from './const';
 import { getTaskStatusKey } from './quick-start-utils';
+import PluralResolver from './PluralResolver';
+import en from '../locales/en/quickstart.json';
+
+const pluralResolver = new PluralResolver({ simplifyPluralSuffix: true });
 
 export type FooterProps = {
   show?: boolean;
@@ -21,6 +25,8 @@ export type QuickStartContextValues = {
   activeQuickStartID?: string;
   allQuickStartStates?: AllQuickStartStates;
   activeQuickStartState?: QuickStartState;
+  setActiveQuickStartID?: React.Dispatch<React.SetStateAction<string>>;
+  setAllQuickStartStates?: React.Dispatch<React.SetStateAction<AllQuickStartStates>>;
   setActiveQuickStart?: (quickStartId: string, totalTasks?: number) => void;
   startQuickStart?: (quickStartId: string, totalTasks?: number) => void;
   restartQuickStart?: (quickStartId: string, totalTasks: number) => void;
@@ -34,7 +40,12 @@ export type QuickStartContextValues = {
   markdown?: {
     extensions?: any[];
     renderExtension?: (docContext: HTMLDocument, rootSelector: string) => React.ReactNode;
-  }
+  };
+  resourceBundle?: any;
+  setResourceBundle?: any;
+  getResource?: any;
+  lng?: string;
+  setLng?: any;
 };
 
 export const QuickStartContext = createContext<QuickStartContextValues>({
@@ -45,54 +56,45 @@ export const QuickStartContext = createContext<QuickStartContextValues>({
   setActiveQuickStart: () => {},
   startQuickStart: () => {},
   restartQuickStart: () => {},
-  markdown: {}
+  resourceBundle: en,
+  getResource: () => {},
+  lng: 'en',
 });
 
-export const QuickStartContextProvider = QuickStartContext.Provider;
-
-export const getDefaultQuickStartState = (
-  totalTasks?: number,
-  initialStatus?: QuickStartStatus,
-) => {
-  const defaultQuickStartState = {
-    status: initialStatus || QuickStartStatus.NOT_STARTED,
-    taskNumber: -1,
-  };
-  if (totalTasks) {
-    for (let i = 0; i < totalTasks; i++) {
-      defaultQuickStartState[getTaskStatusKey(i)] = QuickStartTaskStatus.INIT;
+export const getResource = (resource: string, options: any, resourceBundle: any, lng: string) => {
+  if (options && options.count) {
+    const suffix = pluralResolver.getSuffix(lng, options.count);
+    if (suffix) {
+      // needs plural
+      return resourceBundle[`${resource}_${suffix}`];
     }
   }
-  return defaultQuickStartState;
-};
+  return resourceBundle[resource];
+}
 
-export type useValuesForQuickStartContextType = {
-  allQuickStarts?: QuickStart[];
-  activeQuickStartID?: string;
-  setActiveQuickStartID?: React.Dispatch<React.SetStateAction<string>>;
-  allQuickStartStates?: AllQuickStartStates;
-  setAllQuickStartStates?: React.Dispatch<React.SetStateAction<AllQuickStartStates>>;
-  footer?: FooterProps;
-  useQueryParams?: boolean;
-  markdown?: {
-    extensions?: any[];
-    renderExtension?: (docContext: HTMLDocument, rootSelector: string) => React.ReactNode;
+export const QuickStartContextProvider: React.FC<{
+  children: React.ReactNode;
+  value: QuickStartContextValues;
+}> = ({ children, value }) => {
+  const [resourceBundle, setResourceBundle] = React.useState({
+    ...en,
+    ...value.resourceBundle
+  });
+  const [lng, setLng] = React.useState(value.lng || 'en');
+  const changeResourceBundle = (resourceBundle: any) => {
+    setResourceBundle({
+      ...en,
+      ...resourceBundle
+    });
   }
-};
-
-export const useValuesForQuickStartContext = ({
-  allQuickStarts,
-  activeQuickStartID,
-  setActiveQuickStartID,
-  allQuickStartStates,
-  setAllQuickStartStates,
-  footer,
-  useQueryParams = true,
-  markdown = {
-    extensions: [],
-    renderExtension: (docContext, rootSelector) => null
+  const changeLng = (lng: string) => {
+    setLng(lng);
   }
-}: useValuesForQuickStartContextType): QuickStartContextValues => {
+  const findResource = (resource: string, count?: number) => {
+    return getResource(resource, count !== undefined ? { count } : null, resourceBundle, lng);
+  }
+  const { activeQuickStartID, setActiveQuickStartID, setAllQuickStartStates, useQueryParams, allQuickStartStates } = value;
+  
   const setActiveQuickStart = useCallback(
     (quickStartId: string, totalTasks?: number) => {
       setActiveQuickStartID((id) => {
@@ -110,7 +112,7 @@ export const useValuesForQuickStartContext = ({
           : { ...qs, [quickStartId]: getDefaultQuickStartState(totalTasks) },
       );
     },
-    [setActiveQuickStartID, setAllQuickStartStates],
+    [setActiveQuickStartID, setAllQuickStartStates, useQueryParams],
   );
 
   const startQuickStart = useCallback(
@@ -139,7 +141,7 @@ export const useValuesForQuickStartContext = ({
         };
       });
     },
-    [setActiveQuickStartID, setAllQuickStartStates],
+    [setActiveQuickStartID, setAllQuickStartStates, useQueryParams],
   );
 
   const restartQuickStart = useCallback(
@@ -157,7 +159,7 @@ export const useValuesForQuickStartContext = ({
         [quickStartId]: getDefaultQuickStartState(totalTasks, QuickStartStatus.IN_PROGRESS),
       }));
     },
-    [setActiveQuickStartID, setAllQuickStartStates],
+    [setActiveQuickStartID, setAllQuickStartStates, useQueryParams],
   );
 
   const nextStep = useCallback(
@@ -285,15 +287,19 @@ export const useValuesForQuickStartContext = ({
 
   const activeQuickStartState = allQuickStartStates?.[activeQuickStartID] ?? {};
 
-  const getQuickStartForId = useCallback((id: string) => allQuickStartStates[id], [
-    allQuickStartStates,
-  ]);
+  const getQuickStartForId = useCallback(
+    (id: string) => allQuickStartStates[id],
+    [allQuickStartStates],
+  );
 
-  return {
-    allQuickStarts,
-    activeQuickStartID,
+  return <QuickStartContext.Provider value={{
+    ...value,
+    resourceBundle,
+    setResourceBundle: changeResourceBundle,
+    lng,
+    setLng: changeLng,
+    getResource: findResource,
     activeQuickStartState,
-    allQuickStartStates,
     setActiveQuickStart,
     startQuickStart,
     restartQuickStart,
@@ -302,8 +308,22 @@ export const useValuesForQuickStartContext = ({
     setQuickStartTaskNumber,
     setQuickStartTaskStatus,
     getQuickStartForId,
-    footer,
-    useQueryParams,
-    markdown
-  };
+  }}>{children}</QuickStartContext.Provider>;
 };
+
+export const getDefaultQuickStartState = (
+  totalTasks?: number,
+  initialStatus?: QuickStartStatus,
+) => {
+  const defaultQuickStartState = {
+    status: initialStatus || QuickStartStatus.NOT_STARTED,
+    taskNumber: -1,
+  };
+  if (totalTasks) {
+    for (let i = 0; i < totalTasks; i++) {
+      defaultQuickStartState[getTaskStatusKey(i)] = QuickStartTaskStatus.INIT;
+    }
+  }
+  return defaultQuickStartState;
+};
+

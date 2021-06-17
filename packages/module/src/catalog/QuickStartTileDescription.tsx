@@ -1,15 +1,14 @@
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
+import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import {
   Button,
   Popover,
   Text,
   TextList,
   TextListItem,
-  TextVariants,
-  TextContent,
+  TextVariants
 } from '@patternfly/react-core';
-import { InfoCircleIcon } from '@patternfly/react-icons';
+import InfoCircleIcon from '@patternfly/react-icons/dist/esm/icons/info-circle-icon';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 
 import './QuickStartTileDescription.scss';
@@ -22,7 +21,7 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
   description,
   prerequisites,
 }) => {
-  const { t } = useTranslation();
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const prereqs = prerequisites?.filter((p) => p);
   return (
     <>
@@ -30,17 +29,15 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
       {prereqs?.length > 0 && (
         <div className="co-quick-start-tile-prerequisites">
           <Text component={TextVariants.h5} className="co-quick-start-tile-prerequisites__text">
-            {t('quickstart~Prerequisites ({{totalPrereqs}})', {
-              totalPrereqs: prereqs.length,
-            })}{' '}
+            {getResource('Prerequisites ({{totalPrereqs}})').replace('{{totalPrereqs}}', prereqs.length)}{' '}
           </Text>
           <Popover
-            aria-label={t('quickstart~Prerequisites')}
-            headerContent={t('quickstart~Prerequisites')}
+            aria-label={getResource('Prerequisites')}
+            headerContent={getResource('Prerequisites')}
             className="co-quick-start-panel-content"
             bodyContent={
               <TextList
-                aria-label={t('quickstart~Prerequisites')}
+                aria-label={getResource('Prerequisites')}
                 className="co-quick-start-tile-prerequisites-list"
               >
                 {prereqs.map((prerequisite, index) => (

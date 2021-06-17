@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
+import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import { Modal } from '@console/shared';
 import { ModalVariant, Flex, FlexItem, Button } from '@patternfly/react-core';
 
@@ -14,31 +14,31 @@ const QuickStartCloseModal: React.FC<QuickStartCloseModalProps> = ({
   onConfirm,
   onCancel,
 }) => {
-  const { t } = useTranslation();
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <Modal
       className="co-quick-start-drawer__modal"
       isOpen={isOpen}
       variant={ModalVariant.small}
       showClose={false}
-      title={t('quickstart~Leave quick start?')}
+      title={getResource('Leave quick start?')}
       footer={
         <Flex>
           <FlexItem align={{ default: 'alignRight' }}>
             <Button variant="secondary" onClick={onCancel}>
-              {t('quickstart~Cancel')}
+              {getResource('Cancel')}
             </Button>
           </FlexItem>
           <FlexItem>
             <Button variant="primary" onClick={onConfirm}>
-              {t('quickstart~Leave')}
+              {getResource('Leave')}
             </Button>
           </FlexItem>
         </Flex>
       }
       isFullScreen
     >
-      {t('quickstart~Your progress will be saved.')}
+      {getResource('Your progress will be saved.')}
     </Modal>
   );
 };

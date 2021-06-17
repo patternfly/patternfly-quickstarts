@@ -1,4 +1,5 @@
 import * as React from 'react';
+// popper.js/dist/esm/popper.min.js for smaller bundle? but jest won't like it
 import PopperJS, { PopperOptions } from 'popper.js';
 import { useCombineRefs } from '../../utils/useCombineRefs';
 import Portal from './Portal';

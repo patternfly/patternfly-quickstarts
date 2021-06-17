@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
 import QuickStartCatalog from './catalog/QuickStartCatalog';
 import { QuickStart } from './utils/quick-start-types';
 import { getQuickStartStatusCount, filterQuickStarts } from './utils/quick-start-utils';
@@ -15,12 +14,11 @@ import {
   Text,
   Divider,
 } from '@patternfly/react-core';
-import { SearchIcon } from '@patternfly/react-icons';
+import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
 import { EmptyBox, LoadingBox, removeQueryArgument } from '@console/internal/components/utils';
 import QuickStartCatalogFilter from './catalog/Toolbar/QuickStartCatalogFilter';
 
 type QuickStartCatalogPageProps = {
-  quickStarts: QuickStart[];
   showFilter?: boolean;
   sortFnc?: (q1: QuickStart, q2: QuickStart) => number;
   title?: string;
@@ -29,21 +27,19 @@ type QuickStartCatalogPageProps = {
 };
 
 export const QuickStartCatalogEmptyState = ({ clearFilters }) => {
-  const { t } = useTranslation();
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <EmptyState>
       <EmptyStateIcon icon={SearchIcon} />
       <Title size="lg" headingLevel="h4">
-        {t('quickstart~No results found')}
+        {getResource('No results found')}
       </Title>
       <EmptyStateBody>
-        {t(
-          'quickstart~No results match the filter criteria. Remove filters or clear all filters to show results.',
-        )}
+        {getResource('No results match the filter criteria. Remove filters or clear all filters to show results.')}
       </EmptyStateBody>
       <EmptyStatePrimary>
         <Button variant="link" onClick={clearFilters}>
-          {t('quickstart~Clear all filters')}
+          {getResource('Clear all filters')}
         </Button>
       </EmptyStatePrimary>
     </EmptyState>
@@ -51,15 +47,13 @@ export const QuickStartCatalogEmptyState = ({ clearFilters }) => {
 };
 
 export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
-  quickStarts,
   showFilter,
   sortFnc = (q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName),
   title,
   hint,
   showTitle = true,
 }) => {
-  const { t } = useTranslation();
-  const { allQuickStartStates } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { allQuickStarts, allQuickStartStates, getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
   const initialQueryParams = new URLSearchParams(window.location.search);
   const initialSearchQuery = initialQueryParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
@@ -70,34 +64,34 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
 
   const initialFilteredQuickStarts = showFilter
     ? filterQuickStarts(
-        quickStarts,
+        allQuickStarts,
         initialSearchQuery,
         initialStatusFilters,
         allQuickStartStates,
       ).sort(sortFnc)
-    : quickStarts;
+    : allQuickStarts;
 
   const [filteredQuickStarts, setFilteredQuickStarts] = React.useState(initialFilteredQuickStarts);
   React.useEffect(() => {
     const filteredQuickStarts = showFilter
-      ? filterQuickStarts(quickStarts, searchInputText, statusFilters, allQuickStartStates).sort(
+      ? filterQuickStarts(allQuickStarts, searchInputText, statusFilters, allQuickStartStates).sort(
           sortFnc,
         )
-      : quickStarts;
+      : allQuickStarts;
     setFilteredQuickStarts(filteredQuickStarts);
-  }, [quickStarts]);
+  }, [allQuickStarts]);
 
   const clearFilters = () => {
     removeQueryArgument(QUICKSTART_SEARCH_FILTER_KEY);
     removeQueryArgument(QUICKSTART_STATUS_FILTER_KEY);
     setFilteredQuickStarts(
-      quickStarts.sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName)),
+      allQuickStarts.sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName)),
     );
   };
 
   const onSearchInputChange = (searchValue) => {
     const result = filterQuickStarts(
-      quickStarts,
+      allQuickStarts,
       searchValue,
       statusFilters,
       allQuickStartStates,
@@ -108,7 +102,7 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
 
   const onStatusChange = (statusList) => {
     const result = filterQuickStarts(
-      quickStarts,
+      allQuickStarts,
       searchInputText,
       statusList,
       allQuickStartStates,
@@ -118,19 +112,19 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
   };
 
   const quickStartStatusCount = React.useMemo(
-    () => getQuickStartStatusCount(allQuickStartStates, quickStarts),
-    [allQuickStartStates, quickStarts],
+    () => getQuickStartStatusCount(allQuickStartStates, allQuickStarts),
+    [allQuickStartStates, allQuickStarts],
   );
 
-  if (!quickStarts) return <LoadingBox />;
-  return quickStarts.length === 0 ? (
-    <EmptyBox label={t('quickstart~Quick Starts')} />
+  if (!allQuickStarts) return <LoadingBox />;
+  return allQuickStarts.length === 0 ? (
+    <EmptyBox label={getResource('Quick Starts')} />
   ) : (
     <>
       {showTitle && (
         <div className="ocs-page-layout__header">
           <Text component="h1" className="ocs-page-layout__title">
-            {title || t('quickstart~Quick Starts')}
+            {title || getResource('Quick Starts')}
           </Text>
           {hint && <div className="ocs-page-layout__hint">{hint}</div>}
         </div>

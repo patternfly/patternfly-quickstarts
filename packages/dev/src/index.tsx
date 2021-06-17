@@ -6,9 +6,9 @@ import "@patternfly/quickstarts/dist/quickstarts.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import './i18n/i18n';
 import App from "./App";
 import {
-  QuickStartsLoader,
   QuickStartCatalogPage,
   QuickStart,
   LoadingBox,
@@ -26,32 +26,15 @@ ReactDOM.render(
       </Route>
       <Route exact path="/quickstarts">
         <App showCardFooters={false}>
-          <QuickStartsLoader>
-            {(quickStarts: QuickStart[], loaded: boolean) =>
-              loaded ? (
-                <QuickStartCatalogPage
-                  quickStarts={quickStarts}
-                  showFilter
-                  hint="Learn how to create, import, and run applications with step-by-step instructions and tasks."
-                />
-              ) : (
-                <LoadingBox />
-              )
-            }
-          </QuickStartsLoader>
+          <QuickStartCatalogPage
+            showFilter
+            hint="Learn how to create, import, and run applications with step-by-step instructions and tasks."
+          />
         </App>
       </Route>
       <Route exact path="/custom-catalog">
         <App showCardFooters>
-          <QuickStartsLoader>
-            {(quickStarts: QuickStart[], loaded: boolean) =>
-              loaded ? (
-                <CustomCatalog quickStarts={quickStarts} />
-              ) : (
-                <LoadingBox />
-              )
-            }
-          </QuickStartsLoader>
+          <CustomCatalog />
         </App>
       </Route>
     </Switch>

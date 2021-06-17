@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
+import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QUICKSTART_TASKS_INITIAL_STATES } from '../utils/const';
 import { QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
@@ -21,7 +21,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
   onTaskReview,
   onTaskSelect,
 }) => {
-  const { t } = useTranslation();
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <>
       {tasks
@@ -37,10 +37,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
                 taskIndex={index + 1}
                 title={title}
                 size="md"
-                subtitle={t('quickstart~{{index, number}} of {{tasks, number}}', {
-                  index: index + 1,
-                  tasks: tasks.length,
-                })}
+                subtitle={getResource('{{index, number}} of {{tasks, number}}').replace('{{index, number}}', index + 1).replace('{{tasks, number}}', tasks.length)}
                 taskStatus={taskStatus}
                 isActiveTask={isActiveTask}
                 onTaskSelect={onTaskSelect}

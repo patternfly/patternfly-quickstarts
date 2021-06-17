@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
+import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { StatusIcon } from '@console/shared';
 import { Label, Title } from '@patternfly/react-core';
-import { OutlinedClockIcon } from '@patternfly/react-icons';
+import OutlinedClockIcon from '@patternfly/react-icons/dist/esm/icons/outlined-clock-icon';
 import { QuickStartStatus, QuickStartType } from '../utils/quick-start-types';
 import './QuickStartTileHeader.scss';
 
@@ -25,12 +25,12 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
   name,
   type,
 }) => {
-  const { t } = useTranslation();
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
   const statusLocaleMap = {
-    [QuickStartStatus.COMPLETE]: t('quickstart~Complete'),
-    [QuickStartStatus.IN_PROGRESS]: t('quickstart~In progress'),
-    [QuickStartStatus.NOT_STARTED]: t('quickstart~Not started'),
+    [QuickStartStatus.COMPLETE]: getResource('Complete'),
+    [QuickStartStatus.IN_PROGRESS]: getResource('In progress'),
+    [QuickStartStatus.NOT_STARTED]: getResource('Not started'),
   };
 
   return (
@@ -48,7 +48,7 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
             icon={<OutlinedClockIcon />}
             className="co-quick-start-tile-header--margin"
           >
-            {t('quickstart~{{duration, number}} minutes', { duration })}
+            {getResource('{{duration, number}} minutes').replace('{{duration, number}}', duration)}
           </Label>
         )}
         {status !== QuickStartStatus.NOT_STARTED && (

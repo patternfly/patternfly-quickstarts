@@ -1,7 +1,6 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import { useTranslation } from 'react-i18next';
 import {
   DrawerPanelContent,
   DrawerPanelBody,
@@ -44,7 +43,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   showClose = true,
   ...props
 }) => {
-  const { t } = useTranslation();
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const [contentRef, setContentRef] = React.useState<HTMLDivElement>();
   const shadows = useScrollShadows(contentRef);
   const quickStart = quickStarts.find((qs) => qs.metadata.name === activeQuickStartID);
@@ -90,9 +89,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
             >
               {quickStart?.spec.displayName}{' '}
               <small className="co-quick-start-panel-content__duration text-secondary">
-                {t('quickstart~{{duration, number}} minutes', {
-                  duration: quickStart?.spec.durationMinutes,
-                })}
+                {getResource('{{duration, number}} minutes').replace('{{duration, number}}', quickStart?.spec.durationMinutes)}
               </small>
             </Title>
           </div>

@@ -1,11 +1,9 @@
 import * as React from 'react';
 import cx from 'classnames';
-import _includes from 'lodash-es/includes';
-import _reduce from 'lodash-es/reduce';
-import _truncate from 'lodash-es/truncate';
-import _uniqueId from 'lodash-es/uniqueId';
+import _truncate from 'lodash-es/truncate.js';
+import _uniqueId from 'lodash-es/uniqueId.js';
 import { Converter } from 'showdown';
-import { useTranslation } from 'react-i18next';
+import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 
 import './_markdown-view.scss';
 
@@ -25,7 +23,7 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
     tables: true,
     openLinksInNewWindow: true,
     strikethrough: true,
-    emoji: true,
+    emoji: false,
   });
 
   extensions && converter.addExtension(extensions);
@@ -97,7 +95,7 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
   inline,
   className,
 }) => {
-  const { t } = useTranslation();
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const markup = React.useMemo(() => {
     const truncatedContent = truncateContent
       ? _truncate(content, {
@@ -106,8 +104,8 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
           omission: '\u2026',
         })
       : content;
-    return markdownConvert(truncatedContent || emptyMsg || t('Not available'), extensions);
-  }, [content, emptyMsg, extensions, t, truncateContent]);
+    return markdownConvert(truncatedContent || emptyMsg || getResource('Not available'), extensions);
+  }, [content, emptyMsg, extensions, getResource, truncateContent]);
   const innerProps: InnerSyncMarkdownProps = {
     renderExtension: extensions?.length > 0 ? renderExtension : undefined,
     exactHeight,
@@ -178,11 +176,10 @@ const IFrameMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
 
   // Find the app's stylesheets and inject them into the frame to ensure consistent styling.
   const filteredLinks = Array.from(document.getElementsByTagName('link')).filter((l) =>
-    _includes(l.href, 'app-bundle'),
+    l.href.includes('app-bundle')
   );
 
-  const linkRefs = _reduce(
-    filteredLinks,
+  const linkRefs = filteredLinks.reduce(
     (refs, link) => `${refs}
     <link rel="stylesheet" href="${link.href}">`,
     '',
