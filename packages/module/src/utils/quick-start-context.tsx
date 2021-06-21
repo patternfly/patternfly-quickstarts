@@ -66,7 +66,7 @@ export const QuickStartContextDefaults = {
   startQuickStart: () => {},
   restartQuickStart: () => {},
   resourceBundle: en,
-  getResource: () => {},
+  getResource: () => '',
   lng: 'en',
   useQueryParams: true,
   setFilter: () => {},
@@ -81,7 +81,7 @@ export const getResource = (resource: string, options: any, resourceBundle: any,
       return resourceBundle[`${resource}_${suffix}`];
     }
   }
-  return resourceBundle[resource];
+  return resourceBundle && resourceBundle[resource] || '';
 }
 
 export const QuickStartContextProvider: React.FC<{

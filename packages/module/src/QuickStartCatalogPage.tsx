@@ -57,13 +57,6 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
 }) => {
   const { allQuickStarts = quickStarts, allQuickStartStates, getResource, filter, setFilter } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
-  // const initialQueryParams = new URLSearchParams(window.location.search);
-  // const initialSearchQuery = initialQueryParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
-  // const [searchInputText, setSearchInputText] = React.useState<string>(initialSearchQuery);
-  // const initialStatusFilters =
-  //   initialQueryParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
-  // const [statusFilters, setStatusFilters] = React.useState<string[]>(initialStatusFilters);
-
   const initialFilteredQuickStarts = showFilter
     ? filterQuickStarts(
         allQuickStarts,
