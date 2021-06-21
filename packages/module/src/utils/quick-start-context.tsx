@@ -118,11 +118,11 @@ export const QuickStartContextProvider: React.FC<{
   const initialStatusFilters = initialSearchParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
 
   const quickStartStatusCount = getQuickStartStatusCount(combinedValue.allQuickStartStates, combinedValue.allQuickStarts);
-  const statusTypes = {
+  const [statusTypes, setStatusTypes] = React.useState({
     [QuickStartStatus.COMPLETE]: findResource('Complete ({{statusCount, number}})').replace('{{statusCount, number}}', quickStartStatusCount[QuickStartStatus.COMPLETE]),
     [QuickStartStatus.IN_PROGRESS]: findResource('In progress ({{statusCount, number}})').replace('{{statusCount, number}}', quickStartStatusCount[QuickStartStatus.IN_PROGRESS]),
     [QuickStartStatus.NOT_STARTED]: findResource('Not started ({{statusCount, number}})').replace('{{statusCount, number}}', quickStartStatusCount[QuickStartStatus.NOT_STARTED]),
-  };
+  });
   const [statusFilters, setStatusFilters] = React.useState<string[]>(initialStatusFilters);
   const [selectedFilters, setSelectedFilters] = React.useState<string[]>(
     initialStatusFilters.map((filter) => statusTypes[filter]),
@@ -137,7 +137,17 @@ export const QuickStartContextProvider: React.FC<{
       setStatusFilters(value);
       setSelectedFilters(value.map((filterKey) => statusTypes[filterKey]));
     }
-  }
+  };
+
+  const updateAllQuickStarts = (quickStarts: QuickStart[]) => {
+    setQuickStarts(quickStarts);
+    const updatedQuickStartStatusCount = getQuickStartStatusCount(combinedValue.allQuickStartStates, quickStarts);
+    setStatusTypes({
+      [QuickStartStatus.COMPLETE]: findResource('Complete ({{statusCount, number}})').replace('{{statusCount, number}}', updatedQuickStartStatusCount[QuickStartStatus.COMPLETE]),
+      [QuickStartStatus.IN_PROGRESS]: findResource('In progress ({{statusCount, number}})').replace('{{statusCount, number}}', updatedQuickStartStatusCount[QuickStartStatus.IN_PROGRESS]),
+      [QuickStartStatus.NOT_STARTED]: findResource('Not started ({{statusCount, number}})').replace('{{statusCount, number}}', updatedQuickStartStatusCount[QuickStartStatus.NOT_STARTED]),
+    });
+  };
 
   const { activeQuickStartID, setActiveQuickStartID, setAllQuickStartStates, useQueryParams, allQuickStartStates } = combinedValue;
   
@@ -341,7 +351,7 @@ export const QuickStartContextProvider: React.FC<{
   return <QuickStartContext.Provider value={{
     ...combinedValue,
     allQuickStarts: quickStarts,
-    setAllQuickStarts: setQuickStarts,
+    setAllQuickStarts: updateAllQuickStarts,
     resourceBundle,
     setResourceBundle: changeResourceBundle,
     lng,

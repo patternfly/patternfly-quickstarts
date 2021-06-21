@@ -54,8 +54,14 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
   hint,
   showTitle = true,
 }) => {
-  const { allQuickStarts = quickStarts, allQuickStartStates, getResource, filter, setFilter } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { allQuickStarts = quickStarts, setAllQuickStarts, allQuickStartStates, getResource, filter, setFilter } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
+  React.useEffect(() => {
+    if (quickStarts) {
+      setAllQuickStarts(quickStarts);
+    }
+  }, [quickStarts]);
+  
   const initialFilteredQuickStarts = showFilter
     ? filterQuickStarts(
         allQuickStarts,

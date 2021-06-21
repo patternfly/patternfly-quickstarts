@@ -20,7 +20,8 @@ import {
   QuickStartContextProvider,
   QuickStartContextValues,
   QuickStartDrawer,
-  useLocalStorage
+  useLocalStorage,
+  QuickStart
 } from "@patternfly/quickstarts";
 import { allQuickStarts as yamlQuickStarts } from "./quickstarts-data/quick-start-test-data";
 import { loadJSONQuickStarts } from "./quickstarts-data/mas-guides/quickstartLoader";
@@ -56,7 +57,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     allQuickStartsLoaded,
     setAllQuickStartsLoaded,
   ] = React.useState<boolean>(false);
-  const [allQuickStarts, setAllQuickStarts] = React.useState<any[]>([]);
+  const [allQuickStarts, setAllQuickStarts] = React.useState<QuickStart[]>([]);
   React.useEffect(() => {
     const load = async () => {
       const masGuidesQuickstarts = await loadJSONQuickStarts("");
