@@ -54,7 +54,7 @@ export const removeQueryArgument = (k: string) => {
   }
 };
 
-export const clearQuickStartFilters = () => {
+export const clearFilterParams = () => {
   removeQueryArgument(QUICKSTART_SEARCH_FILTER_KEY);
   removeQueryArgument(QUICKSTART_STATUS_FILTER_KEY);
 };

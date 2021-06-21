@@ -72,14 +72,14 @@ interface QuickStartCatalogFilterSearchWrapperProps {
 export const QuickStartCatalogFilterSearchWrapper: React.FC<QuickStartCatalogFilterSearchWrapperProps> = ({
   onSearchInputChange = () => {},
 }) => {
-  const { useQueryParams } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { useQueryParams, filter, setFilter } = React.useContext<QuickStartContextValues>(QuickStartContext);
   React.useEffect(() => {
     //   use this effect to clear the search when a `clear all` action is performed higher up
     const unlisten = history.listen(({ action, location }) => {
       const searchParams = new URLSearchParams(location.search);
       const searchQuery = searchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
       if (searchQuery === '') {
-        setSearchInputText('');
+        setFilter('keyword', '');
         onSearchInputChange('');
       }
     });
@@ -87,26 +87,21 @@ export const QuickStartCatalogFilterSearchWrapper: React.FC<QuickStartCatalogFil
       unlisten();
     };
   });
-  const initialSearchParams = new URLSearchParams(window.location.search);
-  const initialSearchQuery = initialSearchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
-  const [searchInputText, setSearchInputText] = React.useState<string>(initialSearchQuery);
   const handleTextChange = (val: string) => {
-    if (useQueryParams) {
-      if (val.length > 0) {
-        setQueryArgument(QUICKSTART_SEARCH_FILTER_KEY, val);
-      } else {
-        removeQueryArgument(QUICKSTART_SEARCH_FILTER_KEY);
-      }
+    if (val.length > 0) {
+      useQueryParams && setQueryArgument(QUICKSTART_SEARCH_FILTER_KEY, val);
+    } else {
+      useQueryParams && removeQueryArgument(QUICKSTART_SEARCH_FILTER_KEY);
     }
-    if (searchInputText !== val) {
-      setSearchInputText(val);
+    if (filter?.keyword !== val) {
+      setFilter('keyword', val);
     }
     onSearchInputChange(val);
   };
 
   return (
     <QuickStartCatalogFilterSearch
-      searchInputText={searchInputText}
+      searchInputText={filter?.keyword}
       handleTextChange={handleTextChange}
     />
   );
@@ -125,21 +120,19 @@ export const equalsIgnoreOrder = (a: any[], b: any[]) => {
 };
 
 interface QuickStartCatalogFilterStatusWrapperProps {
-  quickStartStatusCount: Record<QuickStartStatus, number>;
   onStatusChange: any;
 }
 export const QuickStartCatalogFilterStatusWrapper: React.FC<QuickStartCatalogFilterStatusWrapperProps> = ({
-  quickStartStatusCount,
   onStatusChange = () => {},
 }) => {
+  const { useQueryParams, filter, setFilter } = React.useContext<QuickStartContextValues>(QuickStartContext);
   React.useEffect(() => {
     //   use this effect to clear the status when a `clear all` action is performed higher up
     const unlisten = history.listen(({ action, location }) => {
       const searchParams = new URLSearchParams(location.search);
       const updatedStatusFilters = searchParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
       if (updatedStatusFilters.length === 0) {
-        setStatusFilters([]);
-        setSelectedFilters([]);
+        setFilter('status', []);
         onStatusChange([]);
       }
     });
@@ -147,46 +140,29 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<QuickStartCatalogFil
       unlisten();
     };
   });
-  const { useQueryParams, getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
-  const statusTypes = {
-    [QuickStartStatus.COMPLETE]: getResource('Complete ({{statusCount, number}})').replace('{{statusCount, number}}', quickStartStatusCount[QuickStartStatus.COMPLETE]),
-    [QuickStartStatus.IN_PROGRESS]: getResource('In progress ({{statusCount, number}})').replace('{{statusCount, number}}', quickStartStatusCount[QuickStartStatus.IN_PROGRESS]),
-    [QuickStartStatus.NOT_STARTED]: getResource('Not started ({{statusCount, number}})').replace('{{statusCount, number}}', quickStartStatusCount[QuickStartStatus.NOT_STARTED]),
-  };
-  const initialSearchParams = new URLSearchParams(window.location.search);
-  const initialStatusFilters =
-    initialSearchParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
-
-  const [statusFilters, setStatusFilters] = React.useState<string[]>(initialStatusFilters);
-  const [selectedFilters, setSelectedFilters] = React.useState<string[]>(
-    initialStatusFilters.map((filter) => statusTypes[filter]),
-  );
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 
   const onRowfilterSelect = React.useCallback(
     (e, val) => {
       setIsDropdownOpen(false);
       const selection = e.target.parentElement.getAttribute('data-key');
-      const selectedFiltersList = statusFilters.includes(selection)
-        ? statusFilters.filter((status) => status !== selection)
-        : [...statusFilters, selection];
-      if (!equalsIgnoreOrder(statusFilters, selectedFiltersList)) {
-        setStatusFilters(selectedFiltersList);
-        setSelectedFilters(selectedFiltersList.map((filterKey) => statusTypes[filterKey]));
+      const selectedFiltersList = filter.status.statusFilters.includes(selection)
+        ? filter.status.statusFilters.filter((status) => status !== selection)
+        : [...filter.status.statusFilters, selection];
+      if (!equalsIgnoreOrder(filter.status.statusFilters, selectedFiltersList)) {
+        setFilter('status', selectedFiltersList);
       }
-      if (useQueryParams) {
-        if (selectedFiltersList.length > 0) {
-          setQueryArgument('status', selectedFiltersList.join(','));
-        } else {
-          removeQueryArgument(QUICKSTART_STATUS_FILTER_KEY);
-        }
+      if (selectedFiltersList.length > 0) {
+        useQueryParams && setQueryArgument('status', selectedFiltersList.join(','));
+      } else {
+        useQueryParams &&  removeQueryArgument(QUICKSTART_STATUS_FILTER_KEY);
       }
       onStatusChange(selectedFiltersList);
     },
-    [statusFilters, statusTypes],
+    [filter],
   );
 
-  const dropdownItems = Object.entries(statusTypes).map(([key, val]) => (
+  const dropdownItems = Object.entries(filter.status.statusTypes).map(([key, val]) => (
     <SelectOption key={key} data-key={key} value={val} />
   ));
 
@@ -195,7 +171,7 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<QuickStartCatalogFil
       isDropdownOpen={isDropdownOpen}
       setIsDropdownOpen={setIsDropdownOpen}
       onRowfilterSelect={onRowfilterSelect}
-      selectedFilters={selectedFilters}
+      selectedFilters={filter.status.selectedFilters}
       dropdownItems={dropdownItems}
     />
   );

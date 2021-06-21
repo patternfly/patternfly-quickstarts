@@ -4,13 +4,6 @@ import {
   QuickStartContext
 } from "@patternfly/quickstarts";
 import i18n from './i18n/i18n';
-// import {
-//   ProcedureAsciiDocParser,
-//   getQuickStartStatus,
-//   getQuickStartStatusCount
-// } from "./quickstarts-data/mocks/parsers";
-// import { allAsciiDocImports } from "./quickstarts-data/quick-start-test-data";
-// import { FormInput } from "./FormInput";
 
 export const Home: React.FunctionComponent = () => {
   // const [inputValue, setInputValue] = React.useState("");

@@ -7,8 +7,8 @@ import {
   QuickStartTaskStatus,
 } from './quick-start-types';
 import { removeQueryArgument, setQueryArgument } from '../ConsoleInternal/components/utils/router';
-import { QUICKSTART_ID_FILTER_KEY, QUICKSTART_TASKS_INITIAL_STATES } from './const';
-import { getTaskStatusKey } from './quick-start-utils';
+import { QUICKSTART_ID_FILTER_KEY, QUICKSTART_TASKS_INITIAL_STATES, QUICKSTART_SEARCH_FILTER_KEY, QUICKSTART_STATUS_FILTER_KEY } from './const';
+import { getTaskStatusKey, getQuickStartStatusCount } from './quick-start-utils';
 import PluralResolver from './PluralResolver';
 import en from '../locales/en/quickstart.json';
 
@@ -46,9 +46,18 @@ export type QuickStartContextValues = {
   getResource?: any;
   lng?: string;
   setLng?: any;
+  filter?: {
+    keyword?: string;
+    status?: {
+      statusTypes?: any;
+      statusFilters?: any;
+      selectedFilters?: any;
+    }
+  }
+  setFilter?: any;
 };
 
-export const QuickStartContext = createContext<QuickStartContextValues>({
+export const QuickStartContextDefaults = {
   activeQuickStartID: '',
   allQuickStartStates: {},
   activeQuickStartState: {},
@@ -58,7 +67,10 @@ export const QuickStartContext = createContext<QuickStartContextValues>({
   resourceBundle: en,
   getResource: () => {},
   lng: 'en',
-});
+  useQueryParams: true,
+  setFilter: () => {},
+};
+export const QuickStartContext = createContext<QuickStartContextValues>(QuickStartContextDefaults);
 
 export const getResource = (resource: string, options: any, resourceBundle: any, lng: string) => {
   if (options && options.count) {
@@ -75,11 +87,15 @@ export const QuickStartContextProvider: React.FC<{
   children: React.ReactNode;
   value: QuickStartContextValues;
 }> = ({ children, value }) => {
+  const combinedValue = {
+    ...QuickStartContextDefaults,
+    ...value
+  }
   const [resourceBundle, setResourceBundle] = React.useState({
     ...en,
-    ...value.resourceBundle
+    ...combinedValue.resourceBundle
   });
-  const [lng, setLng] = React.useState(value.lng || 'en');
+  const [lng, setLng] = React.useState(combinedValue.lng || 'en');
   const changeResourceBundle = (resourceBundle: any) => {
     setResourceBundle({
       ...en,
@@ -92,7 +108,34 @@ export const QuickStartContextProvider: React.FC<{
   const findResource = (resource: string, count?: number) => {
     return getResource(resource, count !== undefined ? { count } : null, resourceBundle, lng);
   }
-  const { activeQuickStartID, setActiveQuickStartID, setAllQuickStartStates, useQueryParams, allQuickStartStates } = value;
+
+  const initialSearchParams = new URLSearchParams(window.location.search);
+  const initialSearchQuery = initialSearchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
+  const initialStatusFilters = initialSearchParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
+
+  const quickStartStatusCount = getQuickStartStatusCount(combinedValue.allQuickStartStates, combinedValue.allQuickStarts);
+  const statusTypes = {
+    [QuickStartStatus.COMPLETE]: findResource('Complete ({{statusCount, number}})').replace('{{statusCount, number}}', quickStartStatusCount[QuickStartStatus.COMPLETE]),
+    [QuickStartStatus.IN_PROGRESS]: findResource('In progress ({{statusCount, number}})').replace('{{statusCount, number}}', quickStartStatusCount[QuickStartStatus.IN_PROGRESS]),
+    [QuickStartStatus.NOT_STARTED]: findResource('Not started ({{statusCount, number}})').replace('{{statusCount, number}}', quickStartStatusCount[QuickStartStatus.NOT_STARTED]),
+  };
+  const [statusFilters, setStatusFilters] = React.useState<string[]>(initialStatusFilters);
+  const [selectedFilters, setSelectedFilters] = React.useState<string[]>(
+    initialStatusFilters.map((filter) => statusTypes[filter]),
+  );
+
+  const [filterKeyword, setFilterKeyword] = React.useState(initialSearchQuery);
+
+  const setFilter = (type: 'keyword' | 'status', value: any) => {
+    if (type === 'keyword') {
+      setFilterKeyword(value);
+    } else if (type === 'status') {
+      setStatusFilters(value);
+      setSelectedFilters(value.map((filterKey) => statusTypes[filterKey]));
+    }
+  }
+
+  const { activeQuickStartID, setActiveQuickStartID, setAllQuickStartStates, useQueryParams, allQuickStartStates } = combinedValue;
   
   const setActiveQuickStart = useCallback(
     (quickStartId: string, totalTasks?: number) => {
@@ -292,12 +335,21 @@ export const QuickStartContextProvider: React.FC<{
   );
 
   return <QuickStartContext.Provider value={{
-    ...value,
+    ...combinedValue,
     resourceBundle,
     setResourceBundle: changeResourceBundle,
     lng,
     setLng: changeLng,
     getResource: findResource,
+    filter: {
+      keyword: filterKeyword,
+      status: {
+        statusTypes,
+        statusFilters,
+        selectedFilters,
+      }
+    },
+    setFilter,
     activeQuickStartState,
     setActiveQuickStart,
     startQuickStart,

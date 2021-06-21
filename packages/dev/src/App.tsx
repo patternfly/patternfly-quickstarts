@@ -122,9 +122,10 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     lng: localStorage.getItem('bridge/language'),
     resourceBundle: {
       ...resourceBundle,
-      "Start": "Let's goooo"
+      "Start": "Let's go!",
+      "Continue": "Resume",
+      "Restart": "Start over"
     },
-    useQueryParams: false
   };
 
   return (

@@ -1,7 +1,5 @@
 import * as React from 'react';
 import {
-  QUICKSTART_SEARCH_FILTER_KEY,
-  QUICKSTART_STATUS_FILTER_KEY,
   QuickStart,
   QuickStartCatalog,
   QuickStartCatalogEmptyState,
@@ -13,10 +11,9 @@ import {
   QuickStartContext,
   QuickStartContextValues,
   QuickStartTile,
-  clearQuickStartFilters,
+  clearFilterParams,
   filterQuickStarts,
   getQuickStartStatus,
-  getQuickStartStatusCount,
 } from '@patternfly/quickstarts';
 import {
   Divider,
@@ -28,51 +25,40 @@ import {
 } from '@patternfly/react-core';
 
 export const CustomCatalog: React.FC = () => {
-  const { activeQuickStartID, allQuickStartStates, allQuickStarts } = React.useContext<QuickStartContextValues>(
+  const { activeQuickStartID, allQuickStartStates, allQuickStarts, filter, setFilter } = React.useContext<QuickStartContextValues>(
     QuickStartContext,
   );
-
-  const initialQueryParams = new URLSearchParams(window.location.search);
-  const initialSearchQuery = initialQueryParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
-  const [searchInputText, setSearchInputText] = React.useState<string>(initialSearchQuery);
-  const initialStatusFilters =
-    initialQueryParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
-  const [statusFilters, setStatusFilters] = React.useState<string[]>(initialStatusFilters);
 
   const sortFnc = (q1: QuickStart, q2: QuickStart) =>
     q1.spec.displayName.localeCompare(q2.spec.displayName);
   const initialFilteredQuickStarts = filterQuickStarts(
     allQuickStarts,
-    initialSearchQuery,
-    initialStatusFilters,
+    filter.keyword,
+    filter.status.statusFilters,
     allQuickStartStates,
   ).sort(sortFnc);
   const [filteredQuickStarts, setFilteredQuickStarts] = React.useState<QuickStart[]>(
     initialFilteredQuickStarts,
   );
 
-  const quickStartStatusCount = React.useMemo(
-    () => getQuickStartStatusCount(allQuickStartStates, allQuickStarts),
-    [allQuickStartStates, allQuickStarts],
-  );
   const onSearchInputChange = (searchValue: string) => {
     const result = filterQuickStarts(
       allQuickStarts,
       searchValue,
-      statusFilters,
+      filter.status.statusFilters,
       allQuickStartStates,
     ).sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName));
-    setSearchInputText(searchValue);
+    setFilter('keyword', searchValue);
     setFilteredQuickStarts(result);
   };
   const onStatusChange = (statusList: string[]) => {
     const result = filterQuickStarts(
       allQuickStarts,
-      searchInputText,
+      filter.keyword,
       statusList,
       allQuickStartStates,
     ).sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName));
-    setStatusFilters(statusList);
+    setFilter('status', statusList);
     setFilteredQuickStarts(result);
   };
 
@@ -138,7 +124,9 @@ export const CustomCatalog: React.FC = () => {
   );
 
   const clearFilters = () => {
-    clearQuickStartFilters();
+    setFilter('keyword', '');
+    setFilter('status', []);
+    clearFilterParams();
     setFilteredQuickStarts(
       allQuickStarts.sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName)),
     );
@@ -152,7 +140,6 @@ export const CustomCatalog: React.FC = () => {
         <ToolbarContent>
           <QuickStartCatalogFilterSearchWrapper onSearchInputChange={onSearchInputChange} />
           {/* <QuickStartCatalogFilterStatusWrapper
-            quickStartStatusCount={quickStartStatusCount}
             onStatusChange={onStatusChange}
           /> */}
           <QuickStartCatalogFilterCountWrapper quickStartsCount={filteredQuickStarts.length} />
