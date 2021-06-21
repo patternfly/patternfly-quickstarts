@@ -25,6 +25,7 @@ export type QuickStartContextValues = {
   activeQuickStartID?: string;
   allQuickStartStates?: AllQuickStartStates;
   activeQuickStartState?: QuickStartState;
+  setAllQuickStarts?: React.Dispatch<React.SetStateAction<QuickStart[]>>;
   setActiveQuickStartID?: React.Dispatch<React.SetStateAction<string>>;
   setAllQuickStartStates?: React.Dispatch<React.SetStateAction<AllQuickStartStates>>;
   setActiveQuickStart?: (quickStartId: string, totalTasks?: number) => void;
@@ -62,6 +63,7 @@ export const QuickStartContextDefaults = {
   activeQuickStartID: '',
   allQuickStartStates: {},
   activeQuickStartState: {},
+  setAllQuickStarts: () => {},
   setActiveQuickStart: () => {},
   startQuickStart: () => {},
   restartQuickStart: () => {},
@@ -92,6 +94,7 @@ export const QuickStartContextProvider: React.FC<{
     ...QuickStartContextDefaults,
     ...value
   }
+  const [quickStarts, setQuickStarts] = React.useState(combinedValue.allQuickStarts);
   const [resourceBundle, setResourceBundle] = React.useState({
     ...en,
     ...combinedValue.resourceBundle
@@ -337,6 +340,8 @@ export const QuickStartContextProvider: React.FC<{
 
   return <QuickStartContext.Provider value={{
     ...combinedValue,
+    allQuickStarts: quickStarts,
+    setAllQuickStarts: setQuickStarts,
     resourceBundle,
     setResourceBundle: changeResourceBundle,
     lng,

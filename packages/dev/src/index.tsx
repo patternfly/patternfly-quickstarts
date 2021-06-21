@@ -8,12 +8,8 @@ import ReactDOM from "react-dom";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import './i18n/i18n';
 import App from "./App";
-import {
-  LoadingBox,
-  QuickStart,
-  QuickStartCatalogPage,
-} from "@patternfly/quickstarts";
 import { Home } from "./Home";
+import { DefaultCatalog } from "./DefaultCatalog";
 import { CustomCatalog } from "./CustomCatalog";
 
 ReactDOM.render(
@@ -26,10 +22,7 @@ ReactDOM.render(
       </Route>
       <Route exact path="/quickstarts">
         <App showCardFooters={false}>
-          <QuickStartCatalogPage
-            showFilter
-            hint="Learn how to create, import, and run applications with step-by-step instructions and tasks."
-          />
+          <DefaultCatalog />
         </App>
       </Route>
       <Route exact path="/custom-catalog">

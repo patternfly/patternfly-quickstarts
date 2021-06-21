@@ -2,7 +2,6 @@ import * as React from 'react';
 import QuickStartCatalog from './catalog/QuickStartCatalog';
 import { QuickStart } from './utils/quick-start-types';
 import { filterQuickStarts } from './utils/quick-start-utils';
-import { QUICKSTART_SEARCH_FILTER_KEY, QUICKSTART_STATUS_FILTER_KEY } from './utils/const';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import {
   Button,

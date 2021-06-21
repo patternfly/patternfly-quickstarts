@@ -23,22 +23,34 @@ import {
   TextContent,
   ToolbarContent,
 } from '@patternfly/react-core';
+import { allQuickStarts as yamlQuickStarts } from "./quickstarts-data/quick-start-test-data";
+import { loadJSONQuickStarts } from "./quickstarts-data/mas-guides/quickstartLoader";
 
 export const CustomCatalog: React.FC = () => {
-  const { activeQuickStartID, allQuickStartStates, allQuickStarts, filter, setFilter } = React.useContext<QuickStartContextValues>(
+  const { activeQuickStartID, allQuickStartStates, allQuickStarts, setAllQuickStarts, filter, setFilter } = React.useContext<QuickStartContextValues>(
     QuickStartContext,
   );
 
+  React.useEffect(() => {
+    // callback on state change
+    setFilteredQuickStarts(filterQuickStarts(
+      allQuickStarts,
+      filter.keyword,
+      filter.status.statusFilters,
+      allQuickStartStates,
+    ).sort(sortFnc),)
+  }, [allQuickStarts]);
+
   const sortFnc = (q1: QuickStart, q2: QuickStart) =>
     q1.spec.displayName.localeCompare(q2.spec.displayName);
-  const initialFilteredQuickStarts = filterQuickStarts(
-    allQuickStarts,
-    filter.keyword,
-    filter.status.statusFilters,
-    allQuickStartStates,
-  ).sort(sortFnc);
+
   const [filteredQuickStarts, setFilteredQuickStarts] = React.useState<QuickStart[]>(
-    initialFilteredQuickStarts,
+    filterQuickStarts(
+      allQuickStarts,
+      filter.keyword,
+      filter.status.statusFilters,
+      allQuickStartStates,
+    ).sort(sortFnc),
   );
 
   const onSearchInputChange = (searchValue: string) => {
@@ -131,6 +143,15 @@ export const CustomCatalog: React.FC = () => {
       allQuickStarts.sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName)),
     );
   };
+
+  // const load = async () => {
+  //   const masGuidesQuickstarts = await loadJSONQuickStarts("");
+  //   setAllQuickStarts(yamlQuickStarts.concat(masGuidesQuickstarts));
+  // };
+
+  // const loadQuickStarts = () => {
+  //   load();
+  // }
 
   return (
     <>
