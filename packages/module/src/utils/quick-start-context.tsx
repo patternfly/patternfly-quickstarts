@@ -52,7 +52,6 @@ export type QuickStartContextValues = {
     status?: {
       statusTypes?: any;
       statusFilters?: any;
-      selectedFilters?: any;
     }
   }
   setFilter?: any;
@@ -124,9 +123,6 @@ export const QuickStartContextProvider: React.FC<{
     [QuickStartStatus.NOT_STARTED]: findResource('Not started ({{statusCount, number}})').replace('{{statusCount, number}}', quickStartStatusCount[QuickStartStatus.NOT_STARTED]),
   });
   const [statusFilters, setStatusFilters] = React.useState<string[]>(initialStatusFilters);
-  const [selectedFilters, setSelectedFilters] = React.useState<string[]>(
-    initialStatusFilters.map((filter) => statusTypes[filter]),
-  );
 
   const [filterKeyword, setFilterKeyword] = React.useState(initialSearchQuery);
 
@@ -135,7 +131,6 @@ export const QuickStartContextProvider: React.FC<{
       setFilterKeyword(value);
     } else if (type === 'status') {
       setStatusFilters(value);
-      setSelectedFilters(value.map((filterKey) => statusTypes[filterKey]));
     }
   };
 
@@ -362,7 +357,6 @@ export const QuickStartContextProvider: React.FC<{
       status: {
         statusTypes,
         statusFilters,
-        selectedFilters,
       }
     },
     setFilter,

@@ -163,7 +163,7 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<QuickStartCatalogFil
   );
 
   const dropdownItems = Object.entries(filter.status.statusTypes).map(([key, val]) => (
-    <SelectOption key={key} data-key={key} value={val} />
+    <SelectOption key={key} data-key={key} value={key}>{val}</SelectOption>
   ));
 
   return (
@@ -171,7 +171,7 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<QuickStartCatalogFil
       isDropdownOpen={isDropdownOpen}
       setIsDropdownOpen={setIsDropdownOpen}
       onRowfilterSelect={onRowfilterSelect}
-      selectedFilters={filter.status.selectedFilters}
+      selectedFilters={filter.status.statusFilters}
       dropdownItems={dropdownItems}
     />
   );

@@ -53,16 +53,11 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     console.log(allQuickStartStates);
   }, [allQuickStartStates]);
 
-  const [
-    allQuickStartsLoaded,
-    setAllQuickStartsLoaded,
-  ] = React.useState<boolean>(false);
   const [allQuickStarts, setAllQuickStarts] = React.useState<QuickStart[]>([]);
   React.useEffect(() => {
     const load = async () => {
       const masGuidesQuickstarts = await loadJSONQuickStarts("");
       setAllQuickStarts(yamlQuickStarts.concat(masGuidesQuickstarts));
-      setAllQuickStartsLoaded(true);
     };
     load();
   }, []);
@@ -131,15 +126,13 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
 
   return (
     <React.Suspense fallback={<LoadingBox />}>
-      {allQuickStartsLoaded && (
-        <QuickStartContextProvider value={valuesForQuickstartContext}>
-          <QuickStartDrawer>
-             <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>
-              {children}
-             </Page>
-           </QuickStartDrawer>
-        </QuickStartContextProvider>
-      )}
+      {allQuickStarts && allQuickStarts.length && <QuickStartContextProvider value={valuesForQuickstartContext}>
+        <QuickStartDrawer>
+            <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>
+            {children}
+            </Page>
+          </QuickStartDrawer>
+      </QuickStartContextProvider>}
     </React.Suspense>
   );
 };
