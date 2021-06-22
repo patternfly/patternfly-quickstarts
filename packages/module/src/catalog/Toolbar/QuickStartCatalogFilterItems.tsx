@@ -7,7 +7,6 @@ import {
   SelectVariant,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { QuickStartStatus } from '../../utils/quick-start-types';
 import { QUICKSTART_SEARCH_FILTER_KEY, QUICKSTART_STATUS_FILTER_KEY } from '../../utils/const';
 import { removeQueryArgument, setQueryArgument } from '@console/internal/components/utils';
 import { history } from '../../ConsoleInternal/components/utils/router';
