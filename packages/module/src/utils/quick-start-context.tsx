@@ -409,7 +409,7 @@ export const QuickStartContextProvider: React.FC<{
   value: QuickStartContextValues;
 }> = ({ children, value }) => {
   return (
-    <QuickStartContext.Provider value={value}>
+    <QuickStartContext.Provider value={useValuesForQuickStartContext(value)}>
       {children}
     </QuickStartContext.Provider>
   );
