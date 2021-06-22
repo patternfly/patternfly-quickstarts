@@ -93,6 +93,14 @@ export const QuickStartContextProvider: React.FC<{
     ...QuickStartContextDefaults,
     ...value
   }
+  const { 
+    activeQuickStartID, 
+    setActiveQuickStartID, 
+    setAllQuickStartStates, 
+    useQueryParams, 
+    allQuickStartStates,
+    allQuickStarts
+  } = combinedValue;
   const [quickStarts, setQuickStarts] = React.useState(combinedValue.allQuickStarts);
   const [resourceBundle, setResourceBundle] = React.useState({
     ...en,
@@ -116,7 +124,7 @@ export const QuickStartContextProvider: React.FC<{
   const initialSearchQuery = initialSearchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
   const initialStatusFilters = initialSearchParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
 
-  const quickStartStatusCount = getQuickStartStatusCount(combinedValue.allQuickStartStates, combinedValue.allQuickStarts);
+  const quickStartStatusCount = getQuickStartStatusCount(allQuickStartStates, allQuickStarts);
   const [statusTypes, setStatusTypes] = React.useState({
     [QuickStartStatus.COMPLETE]: findResource('Complete ({{statusCount, number}})').replace('{{statusCount, number}}', quickStartStatusCount[QuickStartStatus.COMPLETE]),
     [QuickStartStatus.IN_PROGRESS]: findResource('In progress ({{statusCount, number}})').replace('{{statusCount, number}}', quickStartStatusCount[QuickStartStatus.IN_PROGRESS]),
@@ -134,17 +142,18 @@ export const QuickStartContextProvider: React.FC<{
     }
   };
 
-  const updateAllQuickStarts = (quickStarts: QuickStart[]) => {
-    setQuickStarts(quickStarts);
-    const updatedQuickStartStatusCount = getQuickStartStatusCount(combinedValue.allQuickStartStates, quickStarts);
+  React.useEffect(() => {
+    const updatedQuickStartStatusCount = getQuickStartStatusCount(allQuickStartStates, quickStarts);
     setStatusTypes({
       [QuickStartStatus.COMPLETE]: findResource('Complete ({{statusCount, number}})').replace('{{statusCount, number}}', updatedQuickStartStatusCount[QuickStartStatus.COMPLETE]),
       [QuickStartStatus.IN_PROGRESS]: findResource('In progress ({{statusCount, number}})').replace('{{statusCount, number}}', updatedQuickStartStatusCount[QuickStartStatus.IN_PROGRESS]),
       [QuickStartStatus.NOT_STARTED]: findResource('Not started ({{statusCount, number}})').replace('{{statusCount, number}}', updatedQuickStartStatusCount[QuickStartStatus.NOT_STARTED]),
     });
-  };
+  }, [allQuickStartStates, quickStarts])
 
-  const { activeQuickStartID, setActiveQuickStartID, setAllQuickStartStates, useQueryParams, allQuickStartStates } = combinedValue;
+  const updateAllQuickStarts = (quickStarts: QuickStart[]) => {
+    setQuickStarts(quickStarts);
+  };
   
   const setActiveQuickStart = useCallback(
     (quickStartId: string, totalTasks?: number) => {

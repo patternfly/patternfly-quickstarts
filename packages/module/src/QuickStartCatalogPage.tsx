@@ -79,7 +79,7 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
         )
       : allQuickStarts;
     setFilteredQuickStarts(filteredQuickStarts);
-  }, [allQuickStarts]);
+  }, [allQuickStarts, allQuickStartStates]);
 
   const clearFilters = () => {
     setFilter('keyword', '');
