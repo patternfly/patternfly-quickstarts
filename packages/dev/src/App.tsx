@@ -102,7 +102,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   const { pathname: currentPath } = window.location;
   const quickStartPath = "/quickstarts";
 
-  const resourceBundle = i18n.getResourceBundle(localStorage.getItem('bridge/language'), 'quickstart');
+  const resourceBundle = i18n.getResourceBundle(localStorage.getItem('bridge/language') || 'en', 'quickstart');
 
   const valuesForQuickstartContext: QuickStartContextValues = {
     allQuickStarts,
