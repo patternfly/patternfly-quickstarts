@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Toolbar, ToolbarContent, ToolbarProps } from '@patternfly/react-core';
 import {
   QuickStartCatalogFilterCountWrapper,
   QuickStartCatalogFilterSearchWrapper,
   QuickStartCatalogFilterStatusWrapper,
 } from './QuickStartCatalogFilterItems';
+import { Toolbar, ToolbarContent, ToolbarProps } from '@patternfly/react-core';
 
 import './QuickStartCatalogFilter.scss';
 

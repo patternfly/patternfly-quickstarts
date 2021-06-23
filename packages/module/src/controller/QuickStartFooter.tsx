@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from '@patternfly/react-core';
-import { QuickStartStatus } from '../utils/quick-start-types';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
+import { QuickStartStatus } from '../utils/quick-start-types';
 import { camelize } from '../utils/quick-start-utils';
 
 import './QuickStartFooter.scss';

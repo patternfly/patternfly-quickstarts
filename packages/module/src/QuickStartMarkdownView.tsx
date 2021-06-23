@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { SyncMarkdownView } from '@console/internal/components/markdown-view';
-import { MarkdownHighlightExtension } from '@console/shared';
 import { HIGHLIGHT_REGEXP } from '@console/shared/src/components/markdown-highlight-extension/highlight-consts';
+import { MarkdownHighlightExtension } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
+import { SyncMarkdownView } from '@console/internal/components/markdown-view';
 
 export const removeParagraphWrap = (markdown: string) => markdown.replace(/^<p>|<\/p>$/g, '');
 

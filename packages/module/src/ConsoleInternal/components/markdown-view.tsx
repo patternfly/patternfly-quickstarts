@@ -1,9 +1,9 @@
 import * as React from 'react';
-import cx from 'classnames';
-import _truncate from 'lodash-es/truncate.js';
-import _uniqueId from 'lodash-es/uniqueId.js';
 import { Converter } from 'showdown';
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
+import _truncate from 'lodash-es/truncate.js';
+import _uniqueId from 'lodash-es/uniqueId.js';
+import cx from 'classnames';
 
 import './_markdown-view.scss';
 

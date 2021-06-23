@@ -9,11 +9,11 @@ import {
   UnknownIcon,
 } from '@patternfly/react-icons';
 import { DASH } from '../../constants';
+import { ErrorStatus, InfoStatus, ProgressStatus, SuccessStatus } from './statuses';
+import { StatusComponentProps } from './types';
 import { YellowExclamationTriangleIcon } from './icons';
 import NotStartedIcon from './NotStartedIcon';
 import StatusIconAndText from './StatusIconAndText';
-import { ErrorStatus, InfoStatus, ProgressStatus, SuccessStatus } from './statuses';
-import { StatusComponentProps } from './types';
 
 export const Status: React.FC<StatusProps> = ({
   status,

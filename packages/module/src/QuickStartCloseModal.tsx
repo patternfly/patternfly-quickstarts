@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
-import { Modal } from '@console/shared';
 import { Button, Flex, FlexItem, ModalVariant } from '@patternfly/react-core';
+import { Modal } from '@console/shared';
+import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 
 type QuickStartCloseModalProps = {
   isOpen: boolean;

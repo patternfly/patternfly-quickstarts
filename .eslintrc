@@ -34,7 +34,8 @@
   "plugins": [
     "@typescript-eslint",
     "react-hooks",
-    "eslint-plugin-react-hooks"
+    "eslint-plugin-react-hooks",
+    "sort-imports-es6-autofix"
   ],
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "off",
@@ -46,7 +47,11 @@
     "import/extensions": "off",
     "react/prop-types": "off",
     "@typescript-eslint/no-empty-function": "off",
-    "sort-imports": "warn"
+    "sort-imports-es6-autofix/sort-imports-es6": [2, {
+      "ignoreCase": false,
+      "ignoreMemberSort": false,
+      "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+    }]
   },
   "env": {
     "browser": true,

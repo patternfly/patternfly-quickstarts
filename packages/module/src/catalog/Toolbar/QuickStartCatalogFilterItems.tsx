@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { QUICKSTART_SEARCH_FILTER_KEY, QUICKSTART_STATUS_FILTER_KEY } from '../../utils/const';
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 import {
   SearchInput,
@@ -7,9 +8,8 @@ import {
   SelectVariant,
   ToolbarItem,
 } from '@patternfly/react-core';
-import { QUICKSTART_SEARCH_FILTER_KEY, QUICKSTART_STATUS_FILTER_KEY } from '../../utils/const';
-import { removeQueryArgument, setQueryArgument } from '@console/internal/components/utils';
 import { history } from '../../ConsoleInternal/components/utils/router';
+import { removeQueryArgument, setQueryArgument } from '@console/internal/components/utils';
 
 export const QuickStartCatalogFilterSearch = ({ searchInputText, handleTextChange, ...props }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);

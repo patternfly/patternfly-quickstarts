@@ -7,7 +7,7 @@ import i18n from './i18n/i18n';
 
 export const Home: React.FunctionComponent = () => {
   // const [inputValue, setInputValue] = React.useState("");
-  const { setLng, setResourceBundle } = React.useContext(QuickStartContext);
+  const { setResourceBundle } = React.useContext(QuickStartContext);
 
   // console.log(getQuickStartStatus(qsContext.allQuickStartStates, 'managing-business-central-data-sources-proc'));
   // console.log(getQuickStartStatusCount(qsContext.allQuickStartStates, qsContext.allQuickStarts));
@@ -43,8 +43,7 @@ export const Home: React.FunctionComponent = () => {
     i18n.changeLanguage(lng);
     localStorage.setItem('bridge/language', lng);
     const resourceBundle = i18n.getResourceBundle(lng, 'quickstart');
-    setLng(lng);
-    setResourceBundle(resourceBundle);
+    setResourceBundle(resourceBundle, lng);
   }
 
   return (

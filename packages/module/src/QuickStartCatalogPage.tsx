@@ -1,8 +1,4 @@
 import * as React from 'react';
-import QuickStartCatalog from './catalog/QuickStartCatalog';
-import { QuickStart } from './utils/quick-start-types';
-import { filterQuickStarts } from './utils/quick-start-utils';
-import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import {
   Button,
   Divider,
@@ -13,9 +9,13 @@ import {
   Text,
   Title,
 } from '@patternfly/react-core';
-import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
 import { EmptyBox, LoadingBox, clearFilterParams } from '@console/internal/components/utils';
+import { QuickStart } from './utils/quick-start-types';
+import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
+import { filterQuickStarts } from './utils/quick-start-utils';
+import QuickStartCatalog from './catalog/QuickStartCatalog';
 import QuickStartCatalogFilter from './catalog/Toolbar/QuickStartCatalogFilter';
+import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
 
 type QuickStartCatalogPageProps = {
   quickStarts?: QuickStart[];
