@@ -1,6 +1,5 @@
+import './QuickStartPanelContent.scss';
 import * as React from 'react';
-import ReactDOM from 'react-dom';
-import classNames from 'classnames';
 import {
   DrawerActions,
   DrawerCloseButton,
@@ -9,12 +8,13 @@ import {
   DrawerPanelContent,
   Title,
 } from '@patternfly/react-core';
-import { Shadows, useScrollShadows } from '@console/shared';
 import { QuickStart } from './utils/quick-start-types';
-import './QuickStartPanelContent.scss';
-import QuickStartController from './QuickStartController';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
+import { Shadows, useScrollShadows } from '@console/shared';
 import { camelize } from './utils/quick-start-utils';
+import QuickStartController from './QuickStartController';
+import ReactDOM from 'react-dom';
+import classNames from 'classnames';
 
 type HandleClose = () => void;
 

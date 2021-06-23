@@ -1,7 +1,7 @@
-import * as React from 'react';
-import cx from 'classnames';
-import { Modal as PfModal, ModalProps as PfModalProps } from '@patternfly/react-core';
 import './Modal.scss';
+import * as React from 'react';
+import { Modal as PfModal, ModalProps as PfModalProps } from '@patternfly/react-core';
+import cx from 'classnames';
 
 type ModalProps = {
   isFullScreen?: boolean;

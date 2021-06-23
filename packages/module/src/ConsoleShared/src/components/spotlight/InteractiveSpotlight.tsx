@@ -1,7 +1,6 @@
-import * as React from 'react';
-import { PopperOptions } from 'popper.js';
-import { Popper } from '../popper';
 import './spotlight.scss';
+import * as React from 'react';
+import { Portal, SimplePopper } from '../popper';
 
 type InteractiveSpotlightProps = {
   element: Element;
@@ -17,22 +16,15 @@ const isInViewport = (elementToCheck: Element) => {
   );
 };
 
-const popperOptions: PopperOptions = {
-  modifiers: {
-    preventOverflow: {
-      enabled: false,
-    },
-    flip: {
-      enabled: false,
-    },
-  },
-};
-
 const InteractiveSpotlight: React.FC<InteractiveSpotlightProps> = ({ element }) => {
-  const { height, width } = element.getBoundingClientRect();
+  const { top, bottom, left, right, height, width } = element.getBoundingClientRect();
   const style: React.CSSProperties = {
     height,
     width,
+    top,
+    left,
+    bottom,
+    right,
   };
   const [clicked, setClicked] = React.useState(false);
 
@@ -53,9 +45,11 @@ const InteractiveSpotlight: React.FC<InteractiveSpotlightProps> = ({ element }) 
   if (clicked) return null;
 
   return (
-    <Popper reference={element} placement="top-start" popperOptions={popperOptions}>
-      <div className="ocs-spotlight ocs-spotlight__element-highlight-animate" style={style} />
-    </Popper>
+    <Portal>
+      <SimplePopper>
+        <div className="ocs-spotlight ocs-spotlight__element-highlight-animate" style={style} />
+      </SimplePopper>
+    </Portal>
   );
 };
 

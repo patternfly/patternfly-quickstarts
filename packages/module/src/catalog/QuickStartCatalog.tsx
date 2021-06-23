@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Gallery, GalleryItem } from '@patternfly/react-core';
 import { QuickStart } from '../utils/quick-start-types';
+import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { getQuickStartStatus } from '../utils/quick-start-utils';
 import QuickStartTile from './QuickStartTile';
-import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 
 import './QuickStartCatalog.scss';
 

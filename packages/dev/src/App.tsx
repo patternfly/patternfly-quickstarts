@@ -1,4 +1,4 @@
-import React from "react";
+import "./App.css";
 import {
   Avatar,
   Brand,
@@ -10,22 +10,22 @@ import {
   PageHeaderTools,
   PageSidebar,
 } from "@patternfly/react-core";
-import imgBrand from "./assets/images/imgBrand.svg";
-import imgAvatar from "./assets/images/imgAvatar.svg";
 import { Link, useHistory } from "react-router-dom";
-import Demos from "./Demos";
-import "./App.css";
 import {
   LoadingBox,
+  QuickStart,
   QuickStartContextProvider,
   QuickStartContextValues,
   QuickStartDrawer,
-  useLocalStorage,
-  QuickStart
+  useLocalStorage
 } from "@patternfly/quickstarts";
-import { allQuickStarts as yamlQuickStarts } from "./quickstarts-data/quick-start-test-data";
 import { loadJSONQuickStarts } from "./quickstarts-data/mas-guides/quickstartLoader";
+import { allQuickStarts as yamlQuickStarts } from "./quickstarts-data/quick-start-test-data";
+import Demos from "./Demos";
+import React from "react";
 import i18n from './i18n/i18n';
+import imgAvatar from "./assets/images/imgAvatar.svg";
+import imgBrand from "./assets/images/imgBrand.svg";
 
 type AppProps = {
   children?: React.ReactNode;
@@ -102,7 +102,8 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   const { pathname: currentPath } = window.location;
   const quickStartPath = "/quickstarts";
 
-  const resourceBundle = i18n.getResourceBundle(localStorage.getItem('bridge/language') || 'en', 'quickstart');
+  const language = localStorage.getItem('bridge/language') || 'en';
+  const resourceBundle = i18n.getResourceBundle(language, 'quickstart');
 
   const valuesForQuickstartContext: QuickStartContextValues = {
     allQuickStarts,
@@ -115,7 +116,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
       showAllLink: currentPath !== quickStartPath,
       onShowAllLinkClick: () => history.push(quickStartPath),
     },
-    lng: localStorage.getItem('bridge/language'),
+    language,
     resourceBundle: {
       ...resourceBundle,
       "Start": "Let's go!",

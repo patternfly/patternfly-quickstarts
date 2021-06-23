@@ -1,13 +1,13 @@
+import './QuickStartDrawer.scss';
 import * as React from 'react';
 import { Drawer, DrawerContent, DrawerContentBody } from '@patternfly/react-core';
+import { QUICKSTART_ID_FILTER_KEY } from './utils/const';
+import { QuickStart } from './utils/quick-start-types';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import { QuickStartStatus } from './utils/quick-start-types';
-import QuickStartPanelContent from './QuickStartPanelContent';
-import QuickStartCloseModal from './QuickStartCloseModal';
-import { QUICKSTART_ID_FILTER_KEY } from './utils/const';
 import { getQuickStartByName } from './utils/quick-start-utils';
-import { QuickStart } from './utils/quick-start-types';
-import './QuickStartDrawer.scss';
+import QuickStartCloseModal from './QuickStartCloseModal';
+import QuickStartPanelContent from './QuickStartPanelContent';
 
 export interface QuickStartDrawerProps extends React.HTMLProps<HTMLDivElement> {
   quickStarts?: QuickStart[];
@@ -35,7 +35,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
     const quickStartId = params.get(QUICKSTART_ID_FILTER_KEY) || '';
     if (quickStartId && activeQuickStartID !== quickStartId) {
       const activeQuickStart = getQuickStartByName(quickStartId, allQuickStarts);
-      if (activeQuickStart && !activeQuickStart.spec.link) {
+      if (!allQuickStarts || allQuickStarts.length === 0 || (activeQuickStart && !activeQuickStart.spec.link)) {
         // don't try to load a quick start that is actually just an external resource
         setActiveQuickStart(quickStartId);
       }

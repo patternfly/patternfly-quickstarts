@@ -1,6 +1,6 @@
 import * as React from 'react';
-import classNames from 'classnames';
 import { QuickStartContext, QuickStartContextValues } from '../../../utils/quick-start-context';
+import classNames from 'classnames';
 
 // import * as restrictedSignImg from '../../imgs/restricted-sign.svg';
 // import { TimeoutError } from '../../co-fetch';

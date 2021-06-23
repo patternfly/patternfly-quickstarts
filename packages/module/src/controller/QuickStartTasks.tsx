@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
-import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QUICKSTART_TASKS_INITIAL_STATES } from '../utils/const';
+import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
-import TaskHeader from './QuickStartTaskHeader';
+import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import QuickStartTaskReview from './QuickStartTaskReview';
+import TaskHeader from './QuickStartTaskHeader';
 
 type QuickStartTaskProps = {
   tasks: QuickStartTask[];

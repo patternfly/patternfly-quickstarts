@@ -1,4 +1,3 @@
-import React, { createContext, useCallback } from 'react';
 import {
   AllQuickStartStates,
   QuickStart,
@@ -6,15 +5,16 @@ import {
   QuickStartStatus,
   QuickStartTaskStatus,
 } from './quick-start-types';
-import { removeQueryArgument, setQueryArgument } from '../ConsoleInternal/components/utils/router';
 import {
   QUICKSTART_ID_FILTER_KEY,
-  QUICKSTART_TASKS_INITIAL_STATES,
   QUICKSTART_SEARCH_FILTER_KEY,
   QUICKSTART_STATUS_FILTER_KEY,
+  QUICKSTART_TASKS_INITIAL_STATES,
 } from './const';
-import { getTaskStatusKey, getQuickStartStatusCount } from './quick-start-utils';
+import { getQuickStartStatusCount, getTaskStatusKey } from './quick-start-utils';
+import { removeQueryArgument, setQueryArgument } from '../ConsoleInternal/components/utils/router';
 import PluralResolver from './PluralResolver';
+import React, { createContext, useCallback } from 'react';
 import en from '../locales/en/quickstart.json';
 
 const pluralResolver = new PluralResolver({ simplifyPluralSuffix: true });
@@ -50,8 +50,8 @@ export type QuickStartContextValues = {
   resourceBundle?: any;
   setResourceBundle?: any;
   getResource?: any;
-  lng?: string;
-  setLng?: any;
+  language?: string;
+  setLanguage?: any;
   filter?: {
     keyword?: string;
     status?: {
@@ -73,7 +73,7 @@ export const QuickStartContextDefaults = {
   restartQuickStart: () => {},
   resourceBundle: en,
   getResource: () => '',
-  lng: 'en',
+  language: 'en',
   useQueryParams: true,
   setFilter: () => {},
 };
@@ -82,7 +82,7 @@ export const QuickStartContext = createContext<QuickStartContextValues>(QuickSta
 export const getResource = (resource: string, options: any, resourceBundle: any, lng: string) => {
   if (options && options.count) {
     const suffix = pluralResolver.getSuffix(lng, options.count);
-    if (suffix) {
+    if (suffix && resourceBundle[`${resource}_${suffix}`]) {
       // needs plural
       return resourceBundle[`${resource}_${suffix}`];
     }
@@ -110,18 +110,16 @@ export const useValuesForQuickStartContext = (
     ...en,
     ...combinedValue.resourceBundle,
   });
-  const [lng, setLng] = React.useState(combinedValue.lng || 'en');
-  const changeResourceBundle = (resourceBundle: any) => {
+  const [language, setLanguage] = React.useState(combinedValue.language || 'en');
+  const changeResourceBundle = (resourceBundle: any, language?: string) => {
+    language && setLanguage(language);
     setResourceBundle({
       ...en,
       ...resourceBundle,
     });
   };
-  const changeLng = (lng: string) => {
-    setLng(lng);
-  };
   const findResource = (resource: string, count?: number) => {
-    return getResource(resource, count !== undefined ? { count } : null, resourceBundle, lng);
+    return getResource(resource, count !== undefined ? { count } : null, resourceBundle, language);
   };
 
   const initialSearchParams = new URLSearchParams(window.location.search);
@@ -381,8 +379,8 @@ export const useValuesForQuickStartContext = (
     setAllQuickStarts: updateAllQuickStarts,
     resourceBundle,
     setResourceBundle: changeResourceBundle,
-    lng,
-    setLng: changeLng,
+    language,
+    setLanguage,
     getResource: findResource,
     filter: {
       keyword: filterKeyword,

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import {
   Button,
   Popover,
@@ -8,6 +7,7 @@ import {
   TextListItem,
   TextVariants
 } from '@patternfly/react-core';
+import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import InfoCircleIcon from '@patternfly/react-icons/dist/esm/icons/info-circle-icon';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 

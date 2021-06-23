@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/quickstarts",
-  "version": "1.0.0-rc.18",
+  "version": "1.0.0-rc.19",
   "description": "PatternFly quick starts",
   "files": [
     "dist"
@@ -42,7 +42,6 @@
     "showdown": ">=1.8.6"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.9.0",
     "@patternfly/patternfly": "^4.90.5",
     "@patternfly/react-catalog-view-extension": "^4.10.13",
     "@patternfly/react-core": "^4.101.3",
@@ -51,7 +50,6 @@
     "dompurify": "^2.2.6",
     "history": "^5.0.0",
     "lodash-es": "^4.17.20",
-    "sass": "^1.30.0",
     "showdown": "1.8.6"
   },
   "devDependencies": {
@@ -66,7 +64,6 @@
     "@types/node": "^14.14.35",
     "@types/react": "^16.8.0",
     "@types/react-dom": "^16.8.0",
-    "@types/victory": "^33.1.4",
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
     "clean-css-cli": "^4.3.0",
@@ -76,11 +73,9 @@
     "eslint": "^7.11.0",
     "eslint-plugin-react": "^7.21.4",
     "eslint-plugin-react-hooks": "^4.1.2",
-    "express": "^4.17.1",
-    "imagemin": "^7.0.0",
+    "sass": "^1.30.0",
     "node-sass": "^5.0.0",
     "prettier": "^2.1.2",
-    "prop-types": "^15.6.1",
     "purgecss": "^4.0.0",
     "react": "^16.8.0",
     "react-axe": "^3.5.4",

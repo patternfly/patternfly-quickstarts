@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
-import { StatusIcon } from '@console/shared';
-import { Label, Title } from '@patternfly/react-core';
-import OutlinedClockIcon from '@patternfly/react-icons/dist/esm/icons/outlined-clock-icon';
-import { QuickStartStatus, QuickStartType } from '../utils/quick-start-types';
 import './QuickStartTileHeader.scss';
+import * as React from 'react';
+import { Label, Title } from '@patternfly/react-core';
+import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
+import { QuickStartStatus, QuickStartType } from '../utils/quick-start-types';
+import { StatusIcon } from '@console/shared';
+import OutlinedClockIcon from '@patternfly/react-icons/dist/esm/icons/outlined-clock-icon';
 
 type QuickStartTileHeaderProps = {
   status: string;

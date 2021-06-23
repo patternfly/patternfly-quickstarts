@@ -1,7 +1,7 @@
+import './spotlight.scss';
 import * as React from 'react';
 import { useBoundingClientRect } from '../../hooks';
 import Portal from '../popper/Portal';
-import './spotlight.scss';
 
 type StaticSpotlightProps = {
   element: Element;
