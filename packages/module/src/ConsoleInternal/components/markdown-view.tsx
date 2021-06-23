@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Converter } from 'showdown';
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
-import _truncate from 'lodash-es/truncate.js';
-import _uniqueId from 'lodash-es/uniqueId.js';
+// import _truncate from 'lodash-es/truncate.js';
+// import _uniqueId from 'lodash-es/uniqueId.js';
 import cx from 'classnames';
 
 import './_markdown-view.scss';
@@ -72,7 +72,7 @@ type SyncMarkdownProps = {
   content?: string;
   emptyMsg?: string;
   exactHeight?: boolean;
-  truncateContent?: boolean;
+  /*truncateContent?: boolean;*/
   extensions?: ShowdownExtension[];
   renderExtension?: (contentDocument: HTMLDocument, rootSelector: string) => React.ReactNode;
   inline?: boolean;
@@ -86,7 +86,7 @@ type InnerSyncMarkdownProps = Pick<SyncMarkdownProps, 'renderExtension' | 'exact
 };
 
 export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
-  truncateContent,
+  // truncateContent,
   content,
   emptyMsg,
   extensions,
@@ -97,24 +97,36 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const markup = React.useMemo(() => {
-    const truncatedContent = truncateContent
+    const truncatedContent = /*truncateContent
       ? _truncate(content, {
           length: 256,
           separator: ' ',
           omission: '\u2026',
         })
-      : content;
-    return markdownConvert(truncatedContent || emptyMsg || getResource('Not available'), extensions);
-  }, [content, emptyMsg, extensions, getResource, truncateContent]);
+      : */ content;
+    return markdownConvert(
+      truncatedContent || emptyMsg || getResource('Not available'),
+      extensions,
+    );
+  }, [content, emptyMsg, extensions, getResource /*, truncateContent*/]);
   const innerProps: InnerSyncMarkdownProps = {
     renderExtension: extensions?.length > 0 ? renderExtension : undefined,
     exactHeight,
     markup,
     isEmpty: !content,
-    className
+    className,
   };
   return inline ? <InlineMarkdownView {...innerProps} /> : <IFrameMarkdownView {...innerProps} />;
 };
+
+const uniqueId = (function () {
+  let num = 0;
+  return function (prefix) {
+    prefix = String(prefix) || '';
+    num += 1;
+    return prefix + num;
+  };
+})();
 
 const InlineMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
   markup,
@@ -122,7 +134,7 @@ const InlineMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
   renderExtension,
   className,
 }) => {
-  const id = React.useMemo(() => _uniqueId('markdown'), []);
+  const id = React.useMemo(() => uniqueId('markdown'), []);
   return (
     <div className={cx('co-markdown-view', { ['is-empty']: isEmpty }, className)} id={id}>
       <div dangerouslySetInnerHTML={{ __html: markup }} />
@@ -176,7 +188,7 @@ const IFrameMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
 
   // Find the app's stylesheets and inject them into the frame to ensure consistent styling.
   const filteredLinks = Array.from(document.getElementsByTagName('link')).filter((l) =>
-    l.href.includes('app-bundle')
+    l.href.includes('app-bundle'),
   );
 
   const linkRefs = filteredLinks.reduce(

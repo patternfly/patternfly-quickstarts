@@ -1,18 +1,18 @@
-import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import typescript from 'rollup-plugin-typescript2';
-import scss from './rollup-plugin-scss';
-import json from '@rollup/plugin-json';
-import visualizer from 'rollup-plugin-visualizer';
 import analyze from "rollup-plugin-analyzer";
+import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import resolve from '@rollup/plugin-node-resolve';
+import scss from './rollup-plugin-scss';
+import typescript from 'rollup-plugin-typescript2';
+import visualizer from 'rollup-plugin-visualizer';
 
 import packageJson from './package.json';
 
 const plugins = (esBundle) => {
   return [
     scss({
-      output: esBundle ? false : 'dist/quickstarts.css',
+      output: 'dist/quickstarts.css',
       includePaths: ['../../node_modules/'],
       importer(path) {
         return { file: path[0] !== '~' ? path : path.slice(1) };
@@ -35,21 +35,21 @@ const plugins = (esBundle) => {
     }),
     json(),
     analyze({ summaryOnly: true, limit: 5 }),
-    visualizer(),
+    visualizer({ template: 'treemap' }), // sunburst, treemap, network
   ];
 };
 
 export default [
-  {
-    input: 'src/index.ts',
-    output: {
-      file: packageJson.main,
-      format: 'cjs',
-      sourcemap: true,
-    },
-    external: ['react', 'react-dom'],
-    plugins: plugins(false),
-  },
+  // {
+  //   input: 'src/index.ts',
+  //   output: {
+  //     file: packageJson.main,
+  //     format: 'cjs',
+  //     sourcemap: true,
+  //   },
+  //   external: ['react', 'react-dom'],
+  //   plugins: plugins(false),
+  // },
   {
     input: 'src/index.ts',
     output: {
