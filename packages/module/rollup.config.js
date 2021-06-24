@@ -12,7 +12,7 @@ import packageJson from './package.json';
 const plugins = (esBundle) => {
   return [
     scss({
-      output: 'dist/quickstarts.css',
+      output: esBundle ? false : 'dist/quickstarts.css',
       includePaths: ['../../node_modules/'],
       importer(path) {
         return { file: path[0] !== '~' ? path : path.slice(1) };
@@ -40,16 +40,16 @@ const plugins = (esBundle) => {
 };
 
 export default [
-  // {
-  //   input: 'src/index.ts',
-  //   output: {
-  //     file: packageJson.main,
-  //     format: 'cjs',
-  //     sourcemap: true,
-  //   },
-  //   external: ['react', 'react-dom'],
-  //   plugins: plugins(false),
-  // },
+  {
+    input: 'src/index.ts',
+    output: {
+      file: packageJson.main,
+      format: 'cjs',
+      sourcemap: true,
+    },
+    external: ['react', 'react-dom'],
+    plugins: plugins(false),
+  },
   {
     input: 'src/index.ts',
     output: {
