@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Converter } from 'showdown';
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
-// import _truncate from 'lodash-es/truncate.js';
-// import _uniqueId from 'lodash-es/uniqueId.js';
 import cx from 'classnames';
+import { useForceRender } from '@console/shared';
 
 import './_markdown-view.scss';
 
@@ -97,18 +96,11 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const markup = React.useMemo(() => {
-    const truncatedContent = /*truncateContent
-      ? _truncate(content, {
-          length: 256,
-          separator: ' ',
-          omission: '\u2026',
-        })
-      : */ content;
     return markdownConvert(
-      truncatedContent || emptyMsg || getResource('Not available'),
+      content || emptyMsg || getResource('Not available'),
       extensions,
     );
-  }, [content, emptyMsg, extensions, getResource /*, truncateContent*/]);
+  }, [content, emptyMsg, extensions, getResource]);
   const innerProps: InnerSyncMarkdownProps = {
     renderExtension: extensions?.length > 0 ? renderExtension : undefined,
     exactHeight,
@@ -128,6 +120,43 @@ const uniqueId = (function () {
   };
 })();
 
+type RenderExtensionProps = {
+  renderExtension: (contentDocument: HTMLDocument, rootSelector: string) => React.ReactNode;
+  selector: string;
+  markup: string;
+  docContext?: HTMLDocument;
+};
+
+const RenderExtension: React.FC<RenderExtensionProps> = ({
+  renderExtension,
+  selector,
+  markup,
+  docContext,
+}) => {
+  const forceRender = useForceRender();
+  const markupRef = React.useRef<string>(null);
+  const shouldRenderExtension = React.useCallback(() => {
+    if (markupRef.current === markup) {
+      return true;
+    }
+    markupRef.current = markup;
+    return false;
+  }, [markup]);
+  /**
+   * During a render cycle in which markup changes, renderExtension receives an old copy of document
+   * because react is still updating the dom using `dangerouslySetInnerHTML` with latest markdown markup
+   * which causes the component rendered by renderExtension to receive old copy of document
+   * use forceRender to delay the rendering of extension by one render cycle
+   */
+  React.useEffect(() => {
+    renderExtension && forceRender();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [markup]);
+  return (
+    <>{shouldRenderExtension() ? renderExtension?.(docContext ?? document, selector) : null}</>
+  );
+};
+
 const InlineMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
   markup,
   isEmpty,
@@ -138,7 +167,7 @@ const InlineMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
   return (
     <div className={cx('co-markdown-view', { ['is-empty']: isEmpty }, className)} id={id}>
       <div dangerouslySetInnerHTML={{ __html: markup }} />
-      {renderExtension && renderExtension(document, `#${id}`)}
+      {renderExtension && <RenderExtension renderExtension={renderExtension} selector={`#${id}`} markup={markup} />}
     </div>
   );
 };
@@ -232,7 +261,14 @@ const IFrameMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
         onLoad={() => onLoad()}
         className={className}
       />
-      {loaded && frame && renderExtension && renderExtension(frame.contentDocument, '')}
+      {loaded && frame && renderExtension && (
+        <RenderExtension
+          markup={markup}
+          selector={''}
+          renderExtension={renderExtension}
+          docContext={frame.contentDocument}
+        />
+      )}
     </>
   );
 };
