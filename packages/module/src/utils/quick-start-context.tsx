@@ -80,7 +80,7 @@ export const QuickStartContextDefaults = {
 export const QuickStartContext = createContext<QuickStartContextValues>(QuickStartContextDefaults);
 
 export const getResource = (resource: string, options: any, resourceBundle: any, lng: string) => {
-  if (options && options.count) {
+  if (options && !isNaN(options.count)) {
     const suffix = pluralResolver.getSuffix(lng, options.count);
     if (suffix && resourceBundle[`${resource}_${suffix}`]) {
       // needs plural
