@@ -3,3 +3,4 @@ export * from './useResizeObserver';
 export * from './useScrollShadows';
 export * from './useBoundingClientRect';
 export * from './useForceRender';
+export * from './useEventListener';

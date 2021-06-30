@@ -1,11 +1,11 @@
 import {
-  QuickStart
-} from "@patternfly/quickstarts";
-import {
   ProcedureAdocHtmlParser,
   ProcedureAsciiDocParser,
   QuickstartAsciiDocParser,
 } from "./mocks/parsers";
+import {
+  QuickStart
+} from "@patternfly/quickstarts";
 
 import { explorePipelinesQuickStart } from "./mocks/json/explore-pipeline-quickstart";
 import { exploreServerlessQuickStart } from "./mocks/json/explore-serverless-quickstart";
@@ -13,11 +13,13 @@ import { monitorSampleAppQuickStart } from "./mocks/json/monitor-sampleapp-quick
 
 import addHealthchecksQuickstart from "./mocks/yamls/add-healthchecks-quickstart.yaml";
 import demo from "./mocks/yamls/demo.yaml";
+import external from "./mocks/yamls/external.yaml";
 import installAssociatePipelineQuickstart from "./mocks/yamls/install-associate-pipeline-quickstart.yaml";
+import nodeWithS2i from "./mocks/yamls/node-with-s2i.yaml";
 import sampleApplicationQuickstart from "./mocks/yamls/sample-application-quickstart.yaml";
 import serverlessApplicationQuickstart from "./mocks/yamls/serverless-application-quickstart.yaml";
-import external from "./mocks/yamls/external.yaml";
-import nodeWithS2i from "./mocks/yamls/node-with-s2i.yaml";
+import springWithS2i from "./mocks/yamls/spring-with-s2i.yaml";
+import copyExecuteSnippet from "./mocks/yamls/copy-execute-snippets.yaml";
 
 // import addHealthchecksQuickstartADoc from "raw-loader!./mocks/asciidoc/add-healthchecks-quickstart.adoc";
 // import template from "raw-loader!./mocks/asciidoc/TEMPLATE_PROCEDURE.adoc";
@@ -91,6 +93,8 @@ export const allQuickStarts: QuickStart[] = [
   serverlessApplicationQuickstart,
   external,
   nodeWithS2i,
+  springWithS2i,
+  copyExecuteSnippet,
   // QuickstartAsciiDocParser(addHealthchecksQuickstartADoc),
   // ProcedureAsciiDocParser(template, allAsciiDocImports.template.options),
   ProcedureAsciiDocParser(sampleA, allAsciiDocImports.sampleA.options),

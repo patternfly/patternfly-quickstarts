@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { HIGHLIGHT_REGEXP } from '@console/shared/src/components/markdown-highlight-extension/highlight-consts';
-import { MarkdownHighlightExtension } from '@console/shared';
+import { MarkdownCopyClipboard, MarkdownHighlightExtension, useInlineCopyClipboardShowdownExtension, useMultilineCopyClipboardShowdownExtension } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import { SyncMarkdownView } from '@console/internal/components/markdown-view';
 
@@ -18,6 +18,8 @@ const QuickStartMarkdownView: React.FC<QuickStartMarkdownViewProps> = ({
   className,
 }) => {
   const { markdown } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const inlineCopyClipboardShowdownExtension = useInlineCopyClipboardShowdownExtension();
+  const multilineCopyClipboardShowdownExtension = useMultilineCopyClipboardShowdownExtension();
   return (
     <SyncMarkdownView
       inline
@@ -40,11 +42,14 @@ const QuickStartMarkdownView: React.FC<QuickStartMarkdownViewProps> = ({
             return text.replace(/<em>(.*)<\/em>{#(.*)}/g, '<em id="$2">$1</em>');
           },
         },
+        inlineCopyClipboardShowdownExtension,
+        multilineCopyClipboardShowdownExtension,
         ...(markdown ? markdown.extensions: []),
       ]}
       renderExtension={(docContext, rootSelector) => (
         <>
           <MarkdownHighlightExtension docContext={docContext} rootSelector={rootSelector} />
+          <MarkdownCopyClipboard docContext={docContext} rootSelector={rootSelector} />
           {markdown && markdown.renderExtension(docContext, rootSelector)}
         </>
       )}
