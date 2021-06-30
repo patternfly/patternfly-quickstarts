@@ -37,5 +37,7 @@
   "Cancel": "Cancel",
   "Leave": "Leave",
   "Your progress will be saved.": "Your progress will be saved.",
-  "Not available": "Not available"
+  "Not available": "Not available",
+  "Copy to clipboard": "Copy to clipboard",
+  "Successfully copied to clipboard!": "Successfully copied to clipboard!"
 }

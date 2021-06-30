@@ -1,0 +1,99 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleQuickStart
+metadata:
+  name: copy-execute-snippets
+spec:
+  description: Description here
+  displayName: Execute and Copy snippets Demo
+  durationMinutes: 1
+  introduction: Introduction here
+  tasks:
+    - description: >
+        ### Inline Copy/Execute Snippets
+
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis non varius
+
+        lectus. 
+
+
+        Cras tellus arcu, convallis ac vehicula vitae, malesuada sed libero.
+
+        Aenean eu
+
+
+        dolor a magna lobortis vulputate. Sed interdum gravida orci, id mattis
+
+        elit 
+
+
+        blandit vel. `echo "Donec id est ante"`{{copy}}. 
+
+        Sed `echo "quis est at nisiullamcorper"`{{execute}} eleifend. 
+
+
+        Cras vestibulum, quam sed sodales aliquam, lorem turpis dictum felis, 
+
+
+        sit amet pellentesque augue purus a leo. Praesent auctor, enim sed 
+
+
+        ultrices tristique, diam nibh egestas mi, ut mollis nibh nunc sed
+
+        tortor.
+
+        ```
+
+
+        Nunc quis velit rhoncus, tempor nisi convallis, bibendum sem. Class
+
+        aptent 
+
+
+        ```{{copy}}
+
+
+        taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+
+        himenaeos. 
+
+
+        ```
+
+
+        echo "Ut eu quam fringilla enim varius tincidunt quis sit amet diam.
+        Praesent
+
+        libero"
+
+
+        ```{{execute}}
+
+
+        sapien, accumsan sed sapien vitae, euismod consectetur turpis. Aenean
+
+        sodales 
+
+
+        molestie arcu eget aliquam. Nullam semper consectetur erat, non lobortis
+
+        ligula facilisis et.
+      title: Copy/Execute
+    - description: >
+        ### Create a Project
+
+        In next step we will create a resource using
+        `https://github.com/sclorg/ruby-ex.git`{{copy}}
+
+        Create and deploy a ruby app
+
+        ```
+
+        oc new-app ruby~https://github.com/sclorg/ruby-ex.git
+
+
+        echo "Expose route using oc expose svc/ruby-ex"
+
+        oc expose svc/ruby-ex
+
+        ```{{execute}}
+      title: Create Ruby App
