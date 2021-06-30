@@ -60,21 +60,21 @@ export default [
     external: ['react', 'react-dom'],
     plugins: plugins(true),
   },
-  // {
-  //   input: 'src/overrides.ts',
-  //   output: {
-  //     file: 'dist/overrides.js',
-  //     format: 'es',
-  //     sourcemap: true,
-  //   },
-  //   plugins: [
-  //     scss({
-  //       output: 'dist/overrides.css',
-  //       includePaths: ['../../node_modules/'],
-  //       importer(path) {
-  //         return { file: path[0] !== '~' ? path : path.slice(1) };
-  //       }
-  //     }),
-  //   ],
-  // },
+  {
+    input: 'src/global.ts',
+    output: {
+      file: 'dist/global.js',
+      format: 'es',
+      sourcemap: true,
+    },
+    plugins: [
+      scss({
+        output: 'dist/global.css',
+        includePaths: ['../../node_modules/'],
+        importer(path) {
+          return { file: path[0] !== '~' ? path : path.slice(1) };
+        }
+      }),
+    ],
+  },
 ];

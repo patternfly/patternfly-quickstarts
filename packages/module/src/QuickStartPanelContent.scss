@@ -8,6 +8,9 @@
   &__body {
     display: flex;
     flex-direction: column;
+    ul, ol {
+      padding-left: 20px;
+    }
   }
   &__title {
     display: flex;

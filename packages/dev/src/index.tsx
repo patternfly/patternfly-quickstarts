@@ -3,6 +3,7 @@ import "@patternfly/patternfly/patternfly.min.css";
 import "@patternfly/patternfly/utilities/Accessibility/accessibility.css";
 import "@patternfly/react-catalog-view-extension/dist/css/react-catalog-view-extension.css";
 import "@patternfly/quickstarts/dist/quickstarts.css";
+import "@patternfly/quickstarts/dist/global.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
