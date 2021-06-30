@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button } from '@patternfly/react-core';
 import { QuickStart, QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
-import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
+import ArrowRightIcon from '@patternfly/react-icons/dist/js/icons/arrow-right-icon';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import TaskHeader from './QuickStartTaskHeader';
 

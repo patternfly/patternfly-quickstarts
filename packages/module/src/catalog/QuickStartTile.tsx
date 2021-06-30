@@ -8,7 +8,7 @@ import QuickStartTileDescription from './QuickStartTileDescription';
 import QuickStartTileFooter from './QuickStartTileFooter';
 import QuickStartTileFooterExternal from './QuickStartTileFooterExternal';
 import QuickStartTileHeader from './QuickStartTileHeader';
-import RocketIcon from '@patternfly/react-icons/dist/esm/icons/rocket-icon';
+import RocketIcon from '@patternfly/react-icons/dist/js/icons/rocket-icon';
 
 import './QuickStartTile.scss';
 

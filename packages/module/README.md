@@ -5,12 +5,10 @@ https://quickstarts.netlify.app/
 
 ## Install
 
-Note: These instructions can change over time as the module gets more refined
-
 ```bash
-`yarn add @patternfly/quickstarts @patternfly/patternfly`
+yarn add @patternfly/quickstarts @patternfly/patternfly
 or
-`npm install @patternfly/quickstarts @patternfly/patternfly`
+npm install @patternfly/quickstarts @patternfly/patternfly
 ```
 
 The package currently has these peer dependencies:
@@ -35,7 +33,7 @@ import '@patternfly/quickstarts/dist/quickstarts.css';
 
 ## Usage
 
-In your main app file wrap your application:
+In your main app file wrap your application with the QuickStartContext and the QuickStartDrawer:
 
 ```js
 import {
@@ -44,8 +42,7 @@ import {
   QuickStartCatalogPage,
   useValuesForQuickStartContext,
   useLocalStorage,
-  QuickStartContextValues,
-  QuickStartContext,
+  QuickStartContextValues
 } from '@patternfly/quickstarts';
 // for how these yaml files should look see below
 import quickstartOne from '.yamls/quickstart-one.yaml';
@@ -53,20 +50,16 @@ import quickstartTwo from '.yamls/quickstart-two.yaml';
 
 const App = () => {
   const allQuickStarts = [quickstartOne, quickstartTwo];
+  // You can use the useLocalStorage hook if you want to store user progress in local storage
+  // Otherwise you can use React.useState here or another means (backend) to store the active quick start ID and state
   const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage('quickstartId', '');
   const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage('quickstarts', {});
-  const { pathname: currentPath } = window.location;
-  const quickStartPath = '/quickstarts';
   const valuesForQuickstartContext = useValuesForQuickStartContext({
     allQuickStarts,
     activeQuickStartID,
     setActiveQuickStartID,
     allQuickStartStates,
-    setAllQuickStartStates,
-    footer: {
-      showAllLink: currentPath !== quickStartPath,
-      onShowAllLinkClick: () => history.push(quickStartPath),
-    },
+    setAllQuickStartStates
   });
 
   return (
@@ -86,7 +79,7 @@ const App = () => {
 };
 
 const SomeNestedComponent = () => {
-  const qsContext = React.useContext < QuickStartContextValues > QuickStartContext;
+  const qsContext = React.useContext<QuickStartContextValues> QuickStartContext;
   return (
     <button onClick={() => qsContext.setActiveQuickStart('a quickstart id')}>
       Open a quickstart from a nested component
