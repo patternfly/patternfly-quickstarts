@@ -4,7 +4,7 @@ import { Label, Title } from '@patternfly/react-core';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartStatus, QuickStartType } from '../utils/quick-start-types';
 import { StatusIcon } from '@console/shared';
-import OutlinedClockIcon from '@patternfly/react-icons/dist/esm/icons/outlined-clock-icon';
+import OutlinedClockIcon from '@patternfly/react-icons/dist/js/icons/outlined-clock-icon';
 
 type QuickStartTileHeaderProps = {
   status: string;

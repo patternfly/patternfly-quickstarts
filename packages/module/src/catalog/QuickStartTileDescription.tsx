@@ -8,7 +8,7 @@ import {
   TextVariants
 } from '@patternfly/react-core';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
-import InfoCircleIcon from '@patternfly/react-icons/dist/esm/icons/info-circle-icon';
+import InfoCircleIcon from '@patternfly/react-icons/dist/js/icons/info-circle-icon';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 
 import './QuickStartTileDescription.scss';
@@ -58,6 +58,7 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
                 e.preventDefault();
                 e.stopPropagation();
               }}
+              aria-label={getResource('Show prerequisites')}
             >
               <InfoCircleIcon />
             </Button>

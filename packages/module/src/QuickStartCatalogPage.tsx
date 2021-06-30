@@ -15,7 +15,7 @@ import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-
 import { filterQuickStarts } from './utils/quick-start-utils';
 import QuickStartCatalog from './catalog/QuickStartCatalog';
 import QuickStartCatalogFilter from './catalog/Toolbar/QuickStartCatalogFilter';
-import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
+import SearchIcon from '@patternfly/react-icons/dist/js/icons/search-icon';
 
 type QuickStartCatalogPageProps = {
   quickStarts?: QuickStart[];

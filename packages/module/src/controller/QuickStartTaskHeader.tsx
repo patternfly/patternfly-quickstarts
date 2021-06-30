@@ -4,8 +4,8 @@ import { QuickStartTaskStatus } from '../utils/quick-start-types';
 import { Title, WizardNavItem } from '@patternfly/react-core';
 import { markdownConvert } from '../ConsoleInternal/components/markdown-view';
 import { removeParagraphWrap } from '../QuickStartMarkdownView';
-import CheckCircleIcon from '@patternfly/react-icons/dist/esm/icons/check-circle-icon';
-import ExclamationCircleIcon from '@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon';
+import CheckCircleIcon from '@patternfly/react-icons/dist/js/icons/check-circle-icon';
+import ExclamationCircleIcon from '@patternfly/react-icons/dist/js/icons/exclamation-circle-icon';
 import cx from 'classnames';
 
 import './QuickStartTaskHeader.scss';
