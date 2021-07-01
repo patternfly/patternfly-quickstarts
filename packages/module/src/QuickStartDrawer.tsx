@@ -20,7 +20,7 @@ export interface QuickStartDrawerProps extends React.HTMLProps<HTMLDivElement> {
 }
 
 export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
-  quickStarts,
+  quickStarts = [],
   children,
   appendTo,
   isStatic,
@@ -29,13 +29,14 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
   onCloseNotInProgress,
   ...props
 }) => {
-  const { activeQuickStartID, setActiveQuickStart, allQuickStarts = quickStarts, activeQuickStartState } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { activeQuickStartID, setActiveQuickStart, allQuickStarts, activeQuickStartState } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const combinedQuickStarts = allQuickStarts.concat(quickStarts);
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const quickStartId = params.get(QUICKSTART_ID_FILTER_KEY) || '';
     if (quickStartId && activeQuickStartID !== quickStartId) {
-      const activeQuickStart = getQuickStartByName(quickStartId, allQuickStarts);
-      if (!allQuickStarts || allQuickStarts.length === 0 || (activeQuickStart && !activeQuickStart.spec.link)) {
+      const activeQuickStart = getQuickStartByName(quickStartId, combinedQuickStarts);
+      if (!combinedQuickStarts || combinedQuickStarts.length === 0 || (activeQuickStart && !activeQuickStart.spec.link)) {
         // don't try to load a quick start that is actually just an external resource
         setActiveQuickStart(quickStartId);
       }
@@ -86,7 +87,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
 
   const panelContent = (
     <QuickStartPanelContent
-      quickStarts={allQuickStarts}
+      quickStarts={combinedQuickStarts}
       handleClose={handleClose}
       activeQuickStartID={activeQuickStartID}
       appendTo={appendTo}

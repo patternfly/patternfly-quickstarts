@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/quickstarts",
-  "version": "1.0.0-rc.25",
+  "version": "1.0.0-rc.26",
   "description": "PatternFly quick starts",
   "files": [
     "dist"
@@ -43,10 +43,9 @@
     "showdown": ">=1.8.6"
   },
   "dependencies": {
-    "@patternfly/patternfly": "^4.90.5",
-    "@patternfly/react-catalog-view-extension": "^4.10.13",
-    "@patternfly/react-core": "^4.101.3",
-    "@patternfly/react-icons": "^4.9.5",
+    "@patternfly/patternfly": "4.108.2",
+    "@patternfly/react-catalog-view-extension": "4.11.42",
+    "@patternfly/react-core": "4.128.2",
     "bootstrap-sass": "^3.3.7",
     "classnames": "^2.2.6",
     "dompurify": "^2.2.6",
