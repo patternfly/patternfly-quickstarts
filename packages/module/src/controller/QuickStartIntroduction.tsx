@@ -22,7 +22,7 @@ const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
     <>
       <QuickStartMarkdownView content={introduction} />
       <p style={{ marginBottom: 'var(--pf-global--spacer--md)' }}>
-        {getResource('In this quick start, you will complete {{count, number}} task').replace('{{count, number}} ', tasks.length)}
+        {getResource('In this quick start, you will complete {{count, number}} task', tasks.length).replace('{{count, number}}', tasks.length)}
         :
       </p>
       {tasks.map((task, index) => (

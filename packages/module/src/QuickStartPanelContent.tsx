@@ -89,7 +89,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
             >
               {quickStart?.spec.displayName}{' '}
               <small className="co-quick-start-panel-content__duration text-secondary">
-                {getResource('{{duration, number}} minutes').replace('{{duration, number}}', quickStart?.spec.durationMinutes)}
+                {getResource('{{duration, number}} minutes', quickStart?.spec.durationMinutes).replace('{{duration, number}}', quickStart?.spec.durationMinutes)}
               </small>
             </Title>
           </div>

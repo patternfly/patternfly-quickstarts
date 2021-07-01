@@ -44,7 +44,7 @@ const TaskIcon: React.FC<{ taskIndex: number; taskStatus: QuickStartTaskStatus; 
     default:
       return (
         <span className="co-icon-and-text__icon co-quick-start-task-header__task-icon-init">
-          {getResource('{{taskIndex, number}}').replace('{{taskIndex, number}}', taskIndex)}
+          {getResource('{{taskIndex, number}}', taskIndex).replace('{{taskIndex, number}}', taskIndex)}
         </span>
       );
   }

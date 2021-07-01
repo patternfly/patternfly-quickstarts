@@ -48,7 +48,7 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
             icon={<OutlinedClockIcon />}
             className="co-quick-start-tile-header--margin"
           >
-            {getResource('{{duration, number}} minutes').replace('{{duration, number}}', duration)}
+            {getResource('{{duration, number}} minutes', duration).replace('{{duration, number}}', duration)}
           </Label>
         )}
         {status !== QuickStartStatus.NOT_STARTED && (
