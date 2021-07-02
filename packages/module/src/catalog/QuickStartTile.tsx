@@ -76,6 +76,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
         }
         onClick();
       }}
+      data-test={`tile ${id}`}
       description={
         <QuickStartTileDescription description={description} prerequisites={prerequisites} />
       }

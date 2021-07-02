@@ -77,6 +77,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
       className="co-quick-start-panel-content"
       data-testid={`qs-drawer-${camelize(quickStart.spec.displayName)}`}
       data-qs={`qs-step-${getStep()}`}
+      data-test="quickstart drawer"
       {...props}
     >
       <div className={`co-quick-start-panel-content-head ${headerClasses}`}>
@@ -100,7 +101,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
           )}
         </DrawerHead>
       </div>
-      <DrawerPanelBody hasNoPadding className="co-quick-start-panel-content__body">
+      <DrawerPanelBody hasNoPadding className="co-quick-start-panel-content__body" data-test="content">
         <QuickStartController
           quickStart={quickStart}
           nextQuickStarts={nextQuickStarts}
