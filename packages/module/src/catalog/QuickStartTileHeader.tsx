@@ -35,7 +35,7 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
 
   return (
     <div className="co-quick-start-tile-header">
-      <Title headingLevel="h3">{name}</Title>
+      <Title headingLevel="h3" data-test="title">{name}</Title>
       <div className="co-quick-start-tile-header__status">
         {type && (
           <Label className="co-quick-start-tile-header--margin" color={type.color}>
@@ -56,6 +56,7 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
             variant="outline"
             color={statusColorMap[status]}
             icon={<StatusIcon status={status} />}
+            data-test="status"
           >
             {statusLocaleMap[status]}
           </Label>

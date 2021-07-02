@@ -38,7 +38,7 @@ export const QuickStartCatalogEmptyState = ({ clearFilters }) => {
         {getResource('No results match the filter criteria. Remove filters or clear all filters to show results.')}
       </EmptyStateBody>
       <EmptyStatePrimary>
-        <Button variant="link" onClick={clearFilters}>
+        <Button variant="link" onClick={clearFilters} data-test="clear-filter button">
           {getResource('Clear all filters')}
         </Button>
       </EmptyStatePrimary>
@@ -119,7 +119,7 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
     <>
       {showTitle && (
         <div className="ocs-page-layout__header">
-          <Text component="h1" className="ocs-page-layout__title">
+          <Text component="h1" className="ocs-page-layout__title" data-test="page-title">
             {title || getResource('Quick Starts')}
           </Text>
           {hint && <div className="ocs-page-layout__hint">{hint}</div>}

@@ -69,7 +69,13 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
 
   const getPrimaryButton = React.useMemo(
     () => (
-      <Button variant="primary" className="co-quick-start-footer__actionbtn" onClick={onNext} data-testid={`qs-drawer-${camelize(getPrimaryButtonText)}`}>
+      <Button 
+        variant="primary" 
+        className="co-quick-start-footer__actionbtn" 
+        onClick={onNext} 
+        data-testid={`qs-drawer-${camelize(getPrimaryButtonText)}`}
+        data-test={`${getPrimaryButtonText} button`}
+      >
         {getPrimaryButtonText}
       </Button>
     ),
