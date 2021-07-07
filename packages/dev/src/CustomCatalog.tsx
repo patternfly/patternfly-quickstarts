@@ -93,7 +93,7 @@ export const CustomCatalog: React.FC = () => {
               } = quickStart;
 
               return (
-                <GalleryItem key={id}>
+                <GalleryItem key={id} className="co-quick-start-catalog__gallery-item">
                   <QuickStartTile
                     quickStart={quickStart}
                     isActive={id === activeQuickStartID}
