@@ -121,7 +121,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
       ...resourceBundle,
       "Start": "Let's go!",
       "Continue": "Resume",
-      "Restart": "Start over"
+      "Restart": "Start over",
     },
   };
 

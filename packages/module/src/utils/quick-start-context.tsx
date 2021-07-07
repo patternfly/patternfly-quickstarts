@@ -27,12 +27,12 @@ export type FooterProps = {
 
 export type QuickStartContextValues = {
   allQuickStarts?: QuickStart[];
-  activeQuickStartID?: string;
-  allQuickStartStates?: AllQuickStartStates;
-  activeQuickStartState?: QuickStartState;
   setAllQuickStarts?: React.Dispatch<React.SetStateAction<QuickStart[]>>;
+  activeQuickStartID?: string;
   setActiveQuickStartID?: React.Dispatch<React.SetStateAction<string>>;
+  allQuickStartStates?: AllQuickStartStates;
   setAllQuickStartStates?: React.Dispatch<React.SetStateAction<AllQuickStartStates>>;
+  activeQuickStartState?: QuickStartState;
   setActiveQuickStart?: (quickStartId: string, totalTasks?: number) => void;
   startQuickStart?: (quickStartId: string, totalTasks?: number) => void;
   restartQuickStart?: (quickStartId: string, totalTasks: number) => void;
@@ -48,8 +48,8 @@ export type QuickStartContextValues = {
     renderExtension?: (docContext: HTMLDocument, rootSelector: string) => React.ReactNode;
   };
   resourceBundle?: any;
-  setResourceBundle?: any;
   getResource?: any;
+  setResourceBundle?: any;
   language?: string;
   setLanguage?: any;
   filter?: {
@@ -68,14 +68,13 @@ export const QuickStartContextDefaults = {
   allQuickStartStates: {},
   activeQuickStartState: {},
   setAllQuickStarts: () => {},
-  setActiveQuickStart: () => {},
-  startQuickStart: () => {},
-  restartQuickStart: () => {},
   resourceBundle: en,
   getResource: () => '',
   language: 'en',
   useQueryParams: true,
   setFilter: () => {},
+  footer: null,
+  markdown: null
 };
 export const QuickStartContext = createContext<QuickStartContextValues>(QuickStartContextDefaults);
 
@@ -104,13 +103,15 @@ export const useValuesForQuickStartContext = (
     useQueryParams,
     allQuickStartStates,
     allQuickStarts,
+    footer,
+    markdown
   } = combinedValue;
   const [quickStarts, setQuickStarts] = React.useState(combinedValue.allQuickStarts);
   const [resourceBundle, setResourceBundle] = React.useState({
     ...en,
     ...combinedValue.resourceBundle,
   });
-  const [language, setLanguage] = React.useState(combinedValue.language || 'en');
+  const [language, setLanguage] = React.useState(combinedValue.language);
   const changeResourceBundle = (resourceBundle: any, language?: string) => {
     language && setLanguage(language);
     setResourceBundle({
@@ -374,14 +375,30 @@ export const useValuesForQuickStartContext = (
   );
 
   return {
-    ...combinedValue,
     allQuickStarts: quickStarts,
-    setAllQuickStarts: updateAllQuickStarts,
+    setAllQuickStarts: updateAllQuickStarts, // revisit if this should be in public context API
+    activeQuickStartID,
+    setActiveQuickStartID,
+    allQuickStartStates,
+    setAllQuickStartStates,
+    activeQuickStartState,
+    setActiveQuickStart: value.setActiveQuickStart || setActiveQuickStart,
+    startQuickStart: value.startQuickStart || startQuickStart,
+    restartQuickStart: value.restartQuickStart || restartQuickStart,
+    nextStep: value.nextStep || nextStep,
+    previousStep: value.previousStep || previousStep,
+    setQuickStartTaskNumber, // revisit if this should be in public context API
+    setQuickStartTaskStatus, // revisit if this should be in public context API
+    getQuickStartForId,
+    footer,
+    useQueryParams,
+    markdown,
     resourceBundle,
+    getResource: findResource, // revisit if this should be in public context API
     setResourceBundle: changeResourceBundle,
     language,
     setLanguage,
-    getResource: findResource,
+    // revisit if this should be in public context API
     filter: {
       keyword: filterKeyword,
       status: {
@@ -389,16 +406,7 @@ export const useValuesForQuickStartContext = (
         statusFilters,
       },
     },
-    setFilter,
-    activeQuickStartState,
-    setActiveQuickStart,
-    startQuickStart,
-    restartQuickStart,
-    nextStep,
-    previousStep,
-    setQuickStartTaskNumber,
-    setQuickStartTaskStatus,
-    getQuickStartForId,
+    setFilter, // revisit if this should be in public context API
   };
 };
 
