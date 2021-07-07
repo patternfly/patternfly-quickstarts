@@ -34,6 +34,8 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
     QuickStartContext,
   );
 
+  const ref = React.useRef<HTMLDivElement>(null);
+
   const quickStartIcon = (
     <FallbackImg
       className="co-catalog-item-icon__img--large"
@@ -49,39 +51,45 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
       <QuickStartTileFooter quickStartId={id} status={status} totalTasks={tasks?.length} />
     );
 
+  const handleClick = (e: React.SyntheticEvent<HTMLElement, Event>) => {
+    if (ref.current?.contains(e.target as Node)) {
+      if (link) {
+        window.open(link.href);
+      } else {
+        setActiveQuickStart(id, tasks?.length);
+      }
+      onClick();
+    }
+  };
+
   return (
-    <CatalogTile
-      // @ts-ignore
-      component="div"
-      style={{
-        cursor: 'pointer',
-      }}
-      icon={quickStartIcon}
-      className="co-quick-start-tile"
-      data-testid={`qs-card-${camelize(displayName)}`}
-      featured={isActive}
-      title={
-        <QuickStartTileHeader
-          name={displayName}
-          status={status}
-          duration={durationMinutes}
-          type={type}
-        />
-      }
-      onClick={() => {
-        if (link) {
-          window.open(link.href);
-        } else {
-          setActiveQuickStart(id, tasks?.length);
+    <div ref={ref}>
+      <CatalogTile
+        // @ts-ignore
+        component="div"
+        style={{
+          cursor: 'pointer',
+        }}
+        icon={quickStartIcon}
+        className="co-quick-start-tile"
+        data-testid={`qs-card-${camelize(displayName)}`}
+        featured={isActive}
+        title={
+          <QuickStartTileHeader
+            name={displayName}
+            status={status}
+            duration={durationMinutes}
+            type={type}
+          />
         }
-        onClick();
-      }}
-      data-test={`tile ${id}`}
-      description={
-        <QuickStartTileDescription description={description} prerequisites={prerequisites} />
-      }
-      footer={footerComponent}
-    />
+        onClick={handleClick}
+        data-test={`tile ${id}`}
+        description={
+          <QuickStartTileDescription description={description} prerequisites={prerequisites} />
+        }
+        footer={footerComponent}
+      />
+    </div>
   );
 };
 
