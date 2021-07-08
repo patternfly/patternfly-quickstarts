@@ -1,0 +1,11 @@
+.yarn
+__coverage__
+dist
+*.min.js
+public
+Godeps
+@types
+node_modules
+public
+bin
+build

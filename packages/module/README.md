@@ -107,35 +107,6 @@ Here are some examples:
 - `link:[Click me to highlight the logo, role="data-highlight__logo"]`
 - `link:[Click me to highlight the Home nav item, role="data-highlight__home"]`
 
-## Webpack
-
-You can reduce the size of your CSS bundle by using `clean-css-loader` and `null-loader`:
-`yarn add -D clean-css-loader null-loader` or `npm install --save-dev clean-css-loader null-loader`
-In the webpack config:
-
-```js
-const isProd = argv.mode === 'production';
-const cssLoaders = ['style-loader', 'css-loader'];
-if (isProd) {
-  // push loader for production mode only
-  cssLoaders.push('clean-css-loader');
-}
-```
-
-In the rules array:
-
-```js
-{
-    test: /\.css$/,
-    use: cssLoaders,
-},
-{
-    test: /\.css$/,
-    include: stylesheet => stylesheet.includes('@patternfly/react-styles/css/'),
-    use: ["null-loader"]
-},
-```
-
 ## yaml
 
 This section will get more info in the future. For now you can view sample yamls here:
