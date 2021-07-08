@@ -1,13 +1,13 @@
 import * as React from 'react';
+import { HourglassHalfIcon, InProgressIcon } from '@patternfly/react-icons';
+import GenericStatus from './GenericStatus';
 import {
   BlueInfoCircleIcon,
   GreenCheckCircleIcon,
   RedExclamationCircleIcon,
   YellowExclamationTriangleIcon,
 } from './icons';
-import { HourglassHalfIcon, InProgressIcon } from '@patternfly/react-icons';
 import { StatusComponentProps } from './types';
-import GenericStatus from './GenericStatus';
 
 export const ErrorStatus: React.FC<StatusComponentProps> = (props) => (
   <GenericStatus {...props} Icon={RedExclamationCircleIcon} title={props.title || 'Error'} />

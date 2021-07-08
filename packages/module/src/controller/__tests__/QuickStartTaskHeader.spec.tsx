@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { ShallowWrapper, shallow } from 'enzyme';
 import { Title, WizardNavItem } from '@patternfly/react-core';
-import QuickStartTaskHeader from '../QuickStartTaskHeader';
+import { ShallowWrapper, shallow } from 'enzyme';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
+import QuickStartTaskHeader from '../QuickStartTaskHeader';
 
 type QuickStartTaskHeaderProps = React.ComponentProps<typeof QuickStartTaskHeader>;
 let wrapper: ShallowWrapper<QuickStartTaskHeaderProps>;

@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
-import { QuickStartTaskStatus } from '../utils/quick-start-types';
 import { Title, WizardNavItem } from '@patternfly/react-core';
-import { markdownConvert } from '../ConsoleInternal/components/markdown-view';
-import { removeParagraphWrap } from '../QuickStartMarkdownView';
 import CheckCircleIcon from '@patternfly/react-icons/dist/js/icons/check-circle-icon';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/js/icons/exclamation-circle-icon';
 import cx from 'classnames';
+import { markdownConvert } from '../ConsoleInternal/components/markdown-view';
+import { removeParagraphWrap } from '../QuickStartMarkdownView';
+import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
+import { QuickStartTaskStatus } from '../utils/quick-start-types';
 
 import './QuickStartTaskHeader.scss';
 
@@ -20,7 +20,7 @@ type QuickStartTaskHeaderProps = {
   onTaskSelect: (index: number) => void;
 };
 
-const TaskIcon: React.FC<{ taskIndex: number; taskStatus: QuickStartTaskStatus; }> = ({
+const TaskIcon: React.FC<{ taskIndex: number; taskStatus: QuickStartTaskStatus }> = ({
   taskIndex,
   taskStatus,
 }) => {
@@ -44,7 +44,10 @@ const TaskIcon: React.FC<{ taskIndex: number; taskStatus: QuickStartTaskStatus; 
     default:
       return (
         <span className="co-icon-and-text__icon co-quick-start-task-header__task-icon-init">
-          {getResource('{{taskIndex, number}}', taskIndex).replace('{{taskIndex, number}}', taskIndex)}
+          {getResource('{{taskIndex, number}}', taskIndex).replace(
+            '{{taskIndex, number}}',
+            taskIndex,
+          )}
         </span>
       );
   }

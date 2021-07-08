@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
 import { Popover, Text } from '@patternfly/react-core';
-import QuickStartTileDescription from '../QuickStartTileDescription';
+import { shallow } from 'enzyme';
 import { getQuickStarts } from '../../data/test-utils';
+import QuickStartTileDescription from '../QuickStartTileDescription';
 
 jest.mock('react', () => {
   const ActualReact = require.requireActual('react');
@@ -18,7 +18,7 @@ describe('QuickStartCatalog', () => {
       activeQuickStartID: '',
       startQuickStart: () => {},
       restartQuickStart: () => {},
-      getResource: key => `quickstart~${key}`
+      getResource: (key) => `quickstart~${key}`,
     });
   });
 

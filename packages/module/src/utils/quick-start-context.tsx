@@ -1,3 +1,13 @@
+import React, { createContext, useCallback } from 'react';
+import { removeQueryArgument, setQueryArgument } from '../ConsoleInternal/components/utils/router';
+import en from '../locales/en/quickstart.json';
+import {
+  QUICKSTART_ID_FILTER_KEY,
+  QUICKSTART_SEARCH_FILTER_KEY,
+  QUICKSTART_STATUS_FILTER_KEY,
+  QUICKSTART_TASKS_INITIAL_STATES,
+} from './const';
+import PluralResolver from './PluralResolver';
 import {
   AllQuickStartStates,
   QuickStart,
@@ -5,17 +15,7 @@ import {
   QuickStartStatus,
   QuickStartTaskStatus,
 } from './quick-start-types';
-import {
-  QUICKSTART_ID_FILTER_KEY,
-  QUICKSTART_SEARCH_FILTER_KEY,
-  QUICKSTART_STATUS_FILTER_KEY,
-  QUICKSTART_TASKS_INITIAL_STATES,
-} from './const';
 import { getQuickStartStatusCount, getTaskStatusKey } from './quick-start-utils';
-import { removeQueryArgument, setQueryArgument } from '../ConsoleInternal/components/utils/router';
-import PluralResolver from './PluralResolver';
-import React, { createContext, useCallback } from 'react';
-import en from '../locales/en/quickstart.json';
 
 const pluralResolver = new PluralResolver({ simplifyPluralSuffix: true });
 
@@ -74,7 +74,7 @@ export const QuickStartContextDefaults = {
   useQueryParams: true,
   setFilter: () => {},
   footer: null,
-  markdown: null
+  markdown: null,
 };
 export const QuickStartContext = createContext<QuickStartContextValues>(QuickStartContextDefaults);
 
@@ -104,7 +104,7 @@ export const useValuesForQuickStartContext = (
     allQuickStartStates,
     allQuickStarts,
     footer,
-    markdown
+    markdown,
   } = combinedValue;
   const [quickStarts, setQuickStarts] = React.useState(combinedValue.allQuickStarts);
   const [resourceBundle, setResourceBundle] = React.useState({
@@ -119,9 +119,9 @@ export const useValuesForQuickStartContext = (
       ...resourceBundle,
     });
   };
-  const findResource = (resource: string, count?: number) => {
+  const findResource = useCallback((resource: string, count?: number) => {
     return getResource(resource, count !== undefined ? { count } : null, resourceBundle, language);
-  };
+  });
 
   const initialSearchParams = new URLSearchParams(window.location.search);
   const initialSearchQuery = initialSearchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
@@ -171,7 +171,7 @@ export const useValuesForQuickStartContext = (
         updatedQuickStartStatusCount[QuickStartStatus.NOT_STARTED],
       ),
     });
-  }, [allQuickStartStates, quickStarts]);
+  }, [allQuickStartStates, findResource, quickStarts]);
 
   const updateAllQuickStarts = (quickStarts: QuickStart[]) => {
     setQuickStarts(quickStarts);
@@ -183,10 +183,9 @@ export const useValuesForQuickStartContext = (
         if (!quickStartId || id === quickStartId) {
           useQueryParams && removeQueryArgument(QUICKSTART_ID_FILTER_KEY);
           return '';
-        } else {
-          useQueryParams && setQueryArgument(QUICKSTART_ID_FILTER_KEY, quickStartId);
-          return quickStartId;
         }
+        useQueryParams && setQueryArgument(QUICKSTART_ID_FILTER_KEY, quickStartId);
+        return quickStartId;
       });
       setAllQuickStartStates((qs) =>
         !quickStartId || qs[quickStartId]
@@ -246,7 +245,9 @@ export const useValuesForQuickStartContext = (
 
   const nextStep = useCallback(
     (totalTasks: number) => {
-      if (!activeQuickStartID) return;
+      if (!activeQuickStartID) {
+        return;
+      }
 
       setAllQuickStartStates((qs) => {
         const quickStart = qs[activeQuickStartID];
@@ -305,7 +306,9 @@ export const useValuesForQuickStartContext = (
       const quickStart = qs[activeQuickStartID];
       const taskNumber = quickStart?.taskNumber as number;
 
-      if (taskNumber < 0) return qs;
+      if (taskNumber < 0) {
+        return qs;
+      }
 
       return {
         ...qs,
@@ -369,10 +372,9 @@ export const useValuesForQuickStartContext = (
 
   const activeQuickStartState = allQuickStartStates?.[activeQuickStartID] ?? {};
 
-  const getQuickStartForId = useCallback(
-    (id: string) => allQuickStartStates[id],
-    [allQuickStartStates],
-  );
+  const getQuickStartForId = useCallback((id: string) => allQuickStartStates[id], [
+    allQuickStartStates,
+  ]);
 
   return {
     allQuickStarts: quickStarts,

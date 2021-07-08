@@ -1,13 +1,12 @@
 import './QuickStartDrawer.scss';
 import * as React from 'react';
 import { Drawer, DrawerContent, DrawerContentBody } from '@patternfly/react-core';
-import { QUICKSTART_ID_FILTER_KEY } from './utils/const';
-import { QuickStart } from './utils/quick-start-types';
-import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
-import { QuickStartStatus } from './utils/quick-start-types';
-import { getQuickStartByName } from './utils/quick-start-utils';
 import QuickStartCloseModal from './QuickStartCloseModal';
 import QuickStartPanelContent from './QuickStartPanelContent';
+import { QUICKSTART_ID_FILTER_KEY } from './utils/const';
+import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
+import { QuickStart, QuickStartStatus } from './utils/quick-start-types';
+import { getQuickStartByName } from './utils/quick-start-utils';
 
 export interface QuickStartDrawerProps extends React.HTMLProps<HTMLDivElement> {
   quickStarts?: QuickStart[];
@@ -29,19 +28,28 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
   onCloseNotInProgress,
   ...props
 }) => {
-  const { activeQuickStartID, setActiveQuickStart, allQuickStarts, activeQuickStartState } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const {
+    activeQuickStartID,
+    setActiveQuickStart,
+    allQuickStarts,
+    activeQuickStartState,
+  } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const combinedQuickStarts = allQuickStarts.concat(quickStarts);
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const quickStartId = params.get(QUICKSTART_ID_FILTER_KEY) || '';
     if (quickStartId && activeQuickStartID !== quickStartId) {
       const activeQuickStart = getQuickStartByName(quickStartId, combinedQuickStarts);
-      if (!combinedQuickStarts || combinedQuickStarts.length === 0 || (activeQuickStart && !activeQuickStart.spec.link)) {
+      if (
+        !combinedQuickStarts ||
+        combinedQuickStarts.length === 0 ||
+        (activeQuickStart && !activeQuickStart.spec.link)
+      ) {
         // don't try to load a quick start that is actually just an external resource
         setActiveQuickStart(quickStartId);
       }
     }
-  }, []);
+  }, [activeQuickStartID, combinedQuickStarts, setActiveQuickStart]);
 
   const [modalOpen, setModalOpen] = React.useState<boolean>(false);
   const activeQuickStartStatus = activeQuickStartState?.status;
@@ -53,12 +61,10 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
       } else {
         setModalOpen(true);
       }
+    } else if (onCloseNotInProgress) {
+      onCloseNotInProgress();
     } else {
-      if (onCloseNotInProgress) {
-        onCloseNotInProgress();
-      } else {
-        onClose();
-      }
+      onClose();
     }
   };
 

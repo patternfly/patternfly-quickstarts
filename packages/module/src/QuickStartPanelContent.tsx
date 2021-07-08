@@ -8,13 +8,13 @@ import {
   DrawerPanelContent,
   Title,
 } from '@patternfly/react-core';
-import { QuickStart } from './utils/quick-start-types';
-import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
-import { Shadows, useScrollShadows } from '@console/shared';
-import { camelize } from './utils/quick-start-utils';
-import QuickStartController from './QuickStartController';
-import ReactDOM from 'react-dom';
 import classNames from 'classnames';
+import ReactDOM from 'react-dom';
+import { Shadows, useScrollShadows } from '@console/shared';
+import QuickStartController from './QuickStartController';
+import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
+import { QuickStart } from './utils/quick-start-types';
+import { camelize } from './utils/quick-start-utils';
 
 type HandleClose = () => void;
 
@@ -65,7 +65,8 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
     const tasks = quickStart.spec.tasks.length;
     if (Number.parseInt(taskNumber as string) === -1) {
       return 'intro';
-    } else if (Number.parseInt(taskNumber as string) === tasks) {
+    }
+    if (Number.parseInt(taskNumber as string) === tasks) {
       return 'conclusion';
     }
     return Number.parseInt(taskNumber as string) + 1;
@@ -90,7 +91,10 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
             >
               {quickStart?.spec.displayName}{' '}
               <small className="co-quick-start-panel-content__duration text-secondary">
-                {getResource('{{duration, number}} minutes', quickStart?.spec.durationMinutes).replace('{{duration, number}}', quickStart?.spec.durationMinutes)}
+                {getResource(
+                  '{{duration, number}} minutes',
+                  quickStart?.spec.durationMinutes,
+                ).replace('{{duration, number}}', quickStart?.spec.durationMinutes)}
               </small>
             </Title>
           </div>
@@ -101,7 +105,11 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
           )}
         </DrawerHead>
       </div>
-      <DrawerPanelBody hasNoPadding className="co-quick-start-panel-content__body" data-test="content">
+      <DrawerPanelBody
+        hasNoPadding
+        className="co-quick-start-panel-content__body"
+        data-test="content"
+      >
         <QuickStartController
           quickStart={quickStart}
           nextQuickStarts={nextQuickStarts}

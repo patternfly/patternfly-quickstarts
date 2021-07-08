@@ -1,13 +1,12 @@
-import analyze from "rollup-plugin-analyzer";
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import resolve from '@rollup/plugin-node-resolve';
-import scss from './rollup-plugin-scss';
+import analyze from 'rollup-plugin-analyzer';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import typescript from 'rollup-plugin-typescript2';
 import visualizer from 'rollup-plugin-visualizer';
-
 import packageJson from './package.json';
+import scss from './rollup-plugin-scss';
 
 const plugins = (esBundle) => {
   return [
@@ -73,7 +72,7 @@ export default [
         includePaths: ['../../node_modules/'],
         importer(path) {
           return { file: path[0] !== '~' ? path : path.slice(1) };
-        }
+        },
       }),
     ],
   },

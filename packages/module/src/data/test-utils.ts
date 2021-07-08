@@ -4,8 +4,8 @@ import { allQuickStarts } from './quick-start-test-data';
 export const getQuickStarts = (): QuickStart[] => allQuickStarts;
 
 export const contextValues = {
-    allQuickStarts,
-    activeQuickStartID: '',
-    startQuickStart: () => {},
-    restartQuickStart: () => {}
+  allQuickStarts,
+  activeQuickStartID: '',
+  startQuickStart: () => {},
+  restartQuickStart: () => {},
 };

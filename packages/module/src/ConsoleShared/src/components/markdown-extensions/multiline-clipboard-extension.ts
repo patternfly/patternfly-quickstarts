@@ -1,6 +1,6 @@
-import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
-import { QuickStartContext, QuickStartContextValues } from '@quickstarts/utils/quick-start-context';
 import { useContext, useMemo } from 'react';
+import { QuickStartContext, QuickStartContextValues } from '@quickstarts/utils/quick-start-context';
+import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
 
 import './showdown-extension.scss';
 
@@ -17,7 +17,9 @@ const useMultilineCopyClipboardShowdownExtension = () => {
         groupType: string,
         groupId: string,
       ): string => {
-        if (!group || !subgroup || !groupType || !groupId) return text;
+        if (!group || !subgroup || !groupType || !groupId) {
+          return text;
+        }
         return `<div class="pf-c-code-block">
               <div class="pf-c-code-block__header">
                 <div class="pf-c-code-block__actions">

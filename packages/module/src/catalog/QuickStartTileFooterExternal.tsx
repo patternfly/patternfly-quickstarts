@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Flex, FlexItem } from '@patternfly/react-core';
-import { QuickStartExternal } from '../utils/quick-start-types';
 import ExternalLinkAltIcon from '@patternfly/react-icons/dist/js/icons/external-link-alt-icon';
+import { QuickStartExternal } from '../utils/quick-start-types';
 
 type QuickStartTileFooterProps = {
   link: QuickStartExternal;

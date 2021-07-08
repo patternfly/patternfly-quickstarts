@@ -14,11 +14,11 @@ export default function css(options = {}) {
   let dest = options.output;
 
   const styles = {};
-  const prefix = options.prefix ? options.prefix + '\n' : '';
+  const prefix = options.prefix ? `${options.prefix}\n` : '';
   let includePaths = options.includePaths || ['node_modules/'];
   includePaths.push(process.cwd());
 
-  const compileToCSS = function (scss) {
+  const compileToCSS = function(scss) {
     // Compile SASS to CSS
     if (scss.length) {
       includePaths = includePaths.filter((v, i, a) => a.indexOf(v) === i);
@@ -54,11 +54,11 @@ export default function css(options = {}) {
           throw e;
         }
         console.log();
-        console.log(red('Error:\n\t' + e.message));
+        console.log(red(`Error:\n\t${e.message}`));
         if (e.message.includes('Invalid CSS')) {
           console.log(green('Solution:\n\t' + 'fix your Sass code'));
-          console.log('Line:   ' + e.line);
-          console.log('Column: ' + e.column);
+          console.log(`Line:   ${e.line}`);
+          console.log(`Column: ${e.column}`);
         }
         if (e.message.includes('node-sass') && e.message.includes('find module')) {
           console.log(green('Solution:\n\t' + 'npm install --save node-sass'));
@@ -93,7 +93,7 @@ export default function css(options = {}) {
       // When output is disabled, the stylesheet is exported as a string
       if (options.output === false) {
         return Promise.resolve(compileToCSS(code, id)).then((css) => ({
-          code: 'export default ' + JSON.stringify(css),
+          code: `export default ${JSON.stringify(css)}`,
           map: { mappings: '' },
         }));
       }
@@ -143,7 +143,7 @@ export default function css(options = {}) {
           if (dest.endsWith('.js')) {
             dest = dest.slice(0, -3);
           }
-          dest = dest + '.css';
+          dest += '.css';
         }
 
         // Ensure that dest parent folders exist (create the missing ones)
@@ -165,19 +165,19 @@ export default function css(options = {}) {
 }
 
 function red(text) {
-  return '\x1b[1m\x1b[31m' + text + '\x1b[0m';
+  return `\x1b[1m\x1b[31m${text}\x1b[0m`;
 }
 
 function green(text) {
-  return '\x1b[1m\x1b[32m' + text + '\x1b[0m';
+  return `\x1b[1m\x1b[32m${text}\x1b[0m`;
 }
 
 function getSize(bytes) {
   return bytes < 10000
-    ? bytes.toFixed(0) + ' B'
+    ? `${bytes.toFixed(0)} B`
     : bytes < 1024000
-    ? (bytes / 1024).toPrecision(3) + ' kB'
-    : (bytes / 1024 / 1024).toPrecision(4) + ' MB';
+    ? `${(bytes / 1024).toPrecision(3)} kB`
+    : `${(bytes / 1024 / 1024).toPrecision(4)} MB`;
 }
 
 function ensureParentDirsSync(dir) {

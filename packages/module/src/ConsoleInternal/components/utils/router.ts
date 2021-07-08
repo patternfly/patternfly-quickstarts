@@ -16,7 +16,7 @@ try {
   createHistory = createBrowserHistory;
 }
 
-export const history: AppHistory = createHistory(/*{ basename: window.SERVER_FLAGS.basePath }*/);
+export const history: AppHistory = createHistory(/* { basename: window.SERVER_FLAGS.basePath } */);
 
 // const removeBasePath = (url = '/') =>
 //   _startsWith(url, window.SERVER_FLAGS.basePath)

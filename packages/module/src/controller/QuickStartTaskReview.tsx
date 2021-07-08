@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Alert, Radio } from '@patternfly/react-core';
+import cx from 'classnames';
+import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartTaskReview, QuickStartTaskStatus } from '../utils/quick-start-types';
-import QuickStartMarkdownView from '../QuickStartMarkdownView';
-import cx from 'classnames';
 
 import './QuickStartTaskReview.scss';
 

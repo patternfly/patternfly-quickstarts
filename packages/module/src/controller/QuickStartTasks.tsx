@@ -1,10 +1,10 @@
 import * as React from 'react';
+import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QUICKSTART_TASKS_INITIAL_STATES } from '../utils/const';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
-import QuickStartMarkdownView from '../QuickStartMarkdownView';
-import QuickStartTaskReview from './QuickStartTaskReview';
 import TaskHeader from './QuickStartTaskHeader';
+import QuickStartTaskReview from './QuickStartTaskReview';
 
 type QuickStartTaskProps = {
   tasks: QuickStartTask[];
@@ -37,7 +37,9 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
                 taskIndex={index + 1}
                 title={title}
                 size="md"
-                subtitle={getResource('{{index, number}} of {{tasks, number}}').replace('{{index, number}}', index + 1).replace('{{tasks, number}}', tasks.length)}
+                subtitle={getResource('{{index, number}} of {{tasks, number}}')
+                  .replace('{{index, number}}', index + 1)
+                  .replace('{{tasks, number}}', tasks.length)}
                 taskStatus={taskStatus}
                 isActiveTask={isActiveTask}
                 onTaskSelect={onTaskSelect}

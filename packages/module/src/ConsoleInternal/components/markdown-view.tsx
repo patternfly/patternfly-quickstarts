@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Converter } from 'showdown';
-import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 import cx from 'classnames';
+import { Converter } from 'showdown';
 import { useForceRender } from '@console/shared';
+import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 
 import './_markdown-view.scss';
 
@@ -28,7 +28,7 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
   extensions && converter.addExtension(extensions);
 
   // add hook to transform anchor tags
-  DOMPurify.addHook('beforeSanitizeElements', function (node) {
+  DOMPurify.addHook('beforeSanitizeElements', function(node) {
     // nodeType 1 = element type
     if (node.nodeType === 1 && node.nodeName.toLowerCase() === 'a') {
       node.setAttribute('rel', 'noopener noreferrer');
@@ -71,7 +71,7 @@ type SyncMarkdownProps = {
   content?: string;
   emptyMsg?: string;
   exactHeight?: boolean;
-  /*truncateContent?: boolean;*/
+  /* truncateContent?: boolean; */
   extensions?: ShowdownExtension[];
   renderExtension?: (contentDocument: HTMLDocument, rootSelector: string) => React.ReactNode;
   inline?: boolean;
@@ -96,10 +96,7 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const markup = React.useMemo(() => {
-    return markdownConvert(
-      content || emptyMsg || getResource('Not available'),
-      extensions,
-    );
+    return markdownConvert(content || emptyMsg || getResource('Not available'), extensions);
   }, [content, emptyMsg, extensions, getResource]);
   const innerProps: InnerSyncMarkdownProps = {
     renderExtension: extensions?.length > 0 ? renderExtension : undefined,
@@ -111,9 +108,9 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
   return inline ? <InlineMarkdownView {...innerProps} /> : <IFrameMarkdownView {...innerProps} />;
 };
 
-const uniqueId = (function () {
+const uniqueId = (function() {
   let num = 0;
-  return function (prefix) {
+  return function(prefix) {
     prefix = String(prefix) || '';
     num += 1;
     return prefix + num;
@@ -165,9 +162,11 @@ const InlineMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
 }) => {
   const id = React.useMemo(() => uniqueId('markdown'), []);
   return (
-    <div className={cx('co-markdown-view', { ['is-empty']: isEmpty }, className)} id={id}>
+    <div className={cx('co-markdown-view', { 'is-empty': isEmpty }, className)} id={id}>
       <div dangerouslySetInnerHTML={{ __html: markup }} />
-      {renderExtension && <RenderExtension renderExtension={renderExtension} selector={`#${id}`} markup={markup} />}
+      {renderExtension && (
+        <RenderExtension renderExtension={renderExtension} selector={`#${id}`} markup={markup} />
+      )}
     </div>
   );
 };
@@ -196,9 +195,8 @@ const IFrameMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
         frame.style.height = `${frame.contentWindow.document.body.firstElementChild.scrollHeight}px`;
       } else {
         // Increase by 15px for the case where a horizontal scrollbar might appear
-        frame.style.height = `${
-          frame.contentWindow.document.body.firstElementChild.scrollHeight + 15
-        }px`;
+        frame.style.height = `${frame.contentWindow.document.body.firstElementChild.scrollHeight +
+          15}px`;
       }
     });
   }, [frame, exactHeight]);

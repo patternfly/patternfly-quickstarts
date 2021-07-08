@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { ShallowWrapper, shallow } from 'enzyme';
 import { Button } from '@patternfly/react-core';
-import { getQuickStartByName } from '../../utils/quick-start-utils';
-import { QuickStartTaskStatus } from '../../utils/quick-start-types';
-import QuickStartConclusion from '../QuickStartConclusion';
-import QuickStartMarkdownView from '../../QuickStartMarkdownView';
+import { ShallowWrapper, shallow } from 'enzyme';
 import { allQuickStarts } from '../../data/quick-start-test-data';
+import QuickStartMarkdownView from '../../QuickStartMarkdownView';
+import { QuickStartTaskStatus } from '../../utils/quick-start-types';
+import { getQuickStartByName } from '../../utils/quick-start-utils';
+import QuickStartConclusion from '../QuickStartConclusion';
 
 jest.mock('react', () => {
   const ActualReact = require.requireActual('react');
@@ -37,7 +37,7 @@ describe('QuickStartConclusion', () => {
       activeQuickStartID: '',
       startQuickStart: () => {},
       restartQuickStart: () => {},
-      getResource: key => `quickstart~${key}`
+      getResource: (key) => `quickstart~${key}`,
     });
     wrapper = shallow(<QuickStartConclusion {...props} />);
   });
@@ -53,7 +53,10 @@ describe('QuickStartConclusion', () => {
 
   it('should render link for next quick start if nextQuickStart prop is available and there are no failed tasks', () => {
     wrapper = shallow(
-      <QuickStartConclusion {...props} nextQuickStart={getQuickStartByName('explore-pipelines', allQuickStarts)} />,
+      <QuickStartConclusion
+        {...props}
+        nextQuickStart={getQuickStartByName('explore-pipelines', allQuickStarts)}
+      />,
     );
     expect(
       wrapper

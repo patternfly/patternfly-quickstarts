@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { QuickStart, QuickStartStatus, QuickStartTaskStatus } from './utils/quick-start-types';
-import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import QuickStartContent from './controller/QuickStartContent';
 import QuickStartFooter from './controller/QuickStartFooter';
+import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
+import { QuickStart, QuickStartStatus, QuickStartTaskStatus } from './utils/quick-start-types';
 
 type QuickStartControllerProps = {
   quickStart: QuickStart;
@@ -63,8 +63,9 @@ const QuickStartController: React.FC<QuickStartControllerProps> = ({
   }, [getQuickStartActiveTask, setQuickStartTaskNumber, name]);
 
   const handleNext = React.useCallback(() => {
-    if (status === QuickStartStatus.COMPLETE && taskNumber === totalTasks)
+    if (status === QuickStartStatus.COMPLETE && taskNumber === totalTasks) {
       return handleQuickStartChange('');
+    }
 
     if (status !== QuickStartStatus.NOT_STARTED && taskNumber === -1) {
       return handleQuickStartContinue();

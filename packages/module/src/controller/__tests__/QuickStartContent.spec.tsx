@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { ShallowWrapper, shallow } from 'enzyme';
-import { getQuickStartByName } from '../../utils/quick-start-utils';
+import { allQuickStarts } from '../../data/quick-start-test-data';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
+import { getQuickStartByName } from '../../utils/quick-start-utils';
+import QuickStartConclusion from '../QuickStartConclusion';
 import QuickStartContent from '../QuickStartContent';
 import QuickStartIntroduction from '../QuickStartIntroduction';
 import QuickStartTasks from '../QuickStartTasks';
-import QuickStartConclusion from '../QuickStartConclusion';
-import { allQuickStarts } from '../../data/quick-start-test-data';
 
 type QuickStartContentProps = React.ComponentProps<typeof QuickStartContent>;
 

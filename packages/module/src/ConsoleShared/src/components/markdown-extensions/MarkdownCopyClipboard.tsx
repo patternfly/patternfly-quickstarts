@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
-import { QuickStartContext, QuickStartContextValues } from '@quickstarts/utils/quick-start-context';
 import { Tooltip } from '@patternfly/react-core';
+import { QuickStartContext, QuickStartContextValues } from '@quickstarts/utils/quick-start-context';
 import { useEventListener } from '../../hooks';
+import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
 
 type CopyClipboardProps = {
   element: HTMLElement;
@@ -54,10 +54,10 @@ export const CopyClipboard: React.FC<CopyClipboardProps> = ({
     />
   ) : (
     <Tooltip
-        key="before-copy"
-        reference={() => element as HTMLElement}
-        content={getResource('Copy to clipboard')}
-      />
+      key="before-copy"
+      reference={() => element as HTMLElement}
+      content={getResource('Copy to clipboard')}
+    />
   );
 };
 

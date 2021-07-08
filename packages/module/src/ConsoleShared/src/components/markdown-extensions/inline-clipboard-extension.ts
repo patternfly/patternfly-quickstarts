@@ -1,7 +1,7 @@
-import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
-import { QuickStartContext, QuickStartContextValues } from '@quickstarts/utils/quick-start-context';
-import { removeTemplateWhitespace } from './utils';
 import { useContext, useMemo } from 'react';
+import { QuickStartContext, QuickStartContextValues } from '@quickstarts/utils/quick-start-context';
+import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
+import { removeTemplateWhitespace } from './utils';
 
 import './showdown-extension.scss';
 
@@ -18,7 +18,9 @@ const useInlineCopyClipboardShowdownExtension = () => {
         groupType: string,
         groupId: string,
       ): string => {
-        if (!group || !subGroup || !groupType || !groupId) return text;
+        if (!group || !subGroup || !groupType || !groupId) {
+          return text;
+        }
         return removeTemplateWhitespace(
           `<span class="pf-c-clipboard-copy pf-m-inline">
               <span class="pf-c-clipboard-copy__text" ${MARKDOWN_SNIPPET_ID}="${groupType}">${group}</span>
