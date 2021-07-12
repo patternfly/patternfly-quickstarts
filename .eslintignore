@@ -2,8 +2,6 @@
 __coverage__
 dist
 *.min.js
-public
-Godeps
 @types
 node_modules
 public

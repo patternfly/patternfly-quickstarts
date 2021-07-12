@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 // https://github.com/i18next/i18next/blob/master/src/PluralResolver.js
 
@@ -249,9 +250,7 @@ const _rulesPluralsTypes = {
     return Number(n == 1 ? 0 : n == 2 ? 1 : (n < 0 || n > 10) && n % 10 == 0 ? 2 : 3);
   },
 };
-/* eslint-enable */
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function createRules() {
   const rules = {};
   sets.forEach((set) => {

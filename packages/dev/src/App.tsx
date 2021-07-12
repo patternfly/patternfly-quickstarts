@@ -113,8 +113,6 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     setAllQuickStartStates,
     footer: {
       show: showCardFooters,
-      showAllLink: currentPath !== quickStartPath,
-      onShowAllLinkClick: () => history.push(quickStartPath),
     },
     language,
     resourceBundle: {

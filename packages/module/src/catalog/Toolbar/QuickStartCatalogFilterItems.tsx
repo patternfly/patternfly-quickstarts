@@ -79,7 +79,7 @@ export const QuickStartCatalogFilterSearchWrapper: React.FC<QuickStartCatalogFil
   );
   React.useEffect(() => {
     //   use this effect to clear the search when a `clear all` action is performed higher up
-    const unlisten = history.listen(({ action, location }) => {
+    const unlisten = history.listen(({ location }) => {
       const searchParams = new URLSearchParams(location.search);
       const searchQuery = searchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
       if (searchQuery === '') {
@@ -138,7 +138,7 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<QuickStartCatalogFil
   );
   React.useEffect(() => {
     //   use this effect to clear the status when a `clear all` action is performed higher up
-    const unlisten = history.listen(({ action, location }) => {
+    const unlisten = history.listen(({ location }) => {
       const searchParams = new URLSearchParams(location.search);
       const updatedStatusFilters = searchParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
       if (updatedStatusFilters.length === 0) {
@@ -153,7 +153,7 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<QuickStartCatalogFil
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 
   const onRowfilterSelect = React.useCallback(
-    (e, val) => {
+    (e) => {
       setIsDropdownOpen(false);
       const selection = e.target.parentElement.getAttribute('data-key');
       const selectedFiltersList = filter.status.statusFilters.includes(selection)

@@ -12,12 +12,7 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:react/recommended',
     'plugin:console/json',
-    'plugin:console/prettier',
-    'plugin:console/react-typescript-prettier',
-    "plugin:console/base",
-    "plugin:console/node",
-    "plugin:console/json",
-    "plugin:console/prettier"
+    'plugin:console/prettier'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -30,6 +25,7 @@ module.exports = {
     extraFileExtensions: ['.json'],
     sourceType: 'module',
     tsconfigRootDir: './',
+    debugLevel: true
   },
   plugins: ['react', 'react-hooks', '@typescript-eslint'],
   rules: {
@@ -92,7 +88,10 @@ module.exports = {
   },
   settings: {
     'import/extensions': ['.js', '.jsx'],
-    'import/resolver': { node: { extensions: ['.js', '.jsx', '.ts', '.tsx'] } },
+    'import/resolver': { 
+      node: { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+      'typescript': {},
+    },
     react: {
       version: 'detect',
     },

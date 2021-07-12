@@ -39,7 +39,9 @@ export const useScrollDirection = (): [ScrollDirection, (event) => void] => {
           scrollHeight,
           clientHeight,
         );
-        if (direction && direction !== scrollDirection) setScrollDirection(direction);
+        if (direction && direction !== scrollDirection) {
+          setScrollDirection(direction);
+        }
       }
       scrollPosition.current = scrollTop;
     },

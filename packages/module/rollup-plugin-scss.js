@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * Copied https://github.com/thgh/rollup-plugin-scss/blob/master/index.es.js
  * Modified to filter out @patternfly css srylesheets

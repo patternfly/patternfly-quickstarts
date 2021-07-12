@@ -25,12 +25,9 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   footerClass,
   quickStartId,
 }) => {
-  const { footer, restartQuickStart, getResource } = React.useContext<QuickStartContextValues>(
+  const { restartQuickStart, getResource } = React.useContext<QuickStartContextValues>(
     QuickStartContext,
   );
-
-  const showAllLink = footer?.showAllLink;
-  const onShowAllLinkClick = footer?.onShowAllLinkClick;
 
   const PrimaryButtonText = React.useMemo(() => {
     return {

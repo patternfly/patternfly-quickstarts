@@ -43,7 +43,7 @@ const QuickStartMarkdownView: React.FC<QuickStartMarkdownViewProps> = ({
         },
         {
           type: 'output',
-          filter: function(text, converter, options) {
+          filter: function(text) {
             // check HTML for patterns like: <em>Status: unknown</em>{#extension-requirement-status}
             // and replace with <em id="extension-requirement-status">Status: unknown</em>
             return text.replace(/<em>(.*)<\/em>{#(.*)}/g, '<em id="$2">$1</em>');

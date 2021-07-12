@@ -56,6 +56,7 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
   hint,
   showTitle = true,
 }) => {
+  const sortFncCallback = React.useCallback(sortFnc, []);
   const {
     allQuickStarts = quickStarts,
     setAllQuickStarts,
@@ -77,27 +78,27 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
         filter.keyword,
         filter.status.statusFilters,
         allQuickStartStates,
-      ).sort(sortFnc)
+      ).sort(sortFncCallback)
     : allQuickStarts;
 
   const [filteredQuickStarts, setFilteredQuickStarts] = React.useState(initialFilteredQuickStarts);
   React.useEffect(() => {
-    const filteredQuickStarts = showFilter
+    const filteredQs = showFilter
       ? filterQuickStarts(
           allQuickStarts,
           filter.keyword,
           filter.status.statusFilters,
           allQuickStartStates,
-        ).sort(sortFnc)
+        ).sort(sortFncCallback)
       : allQuickStarts;
-    setFilteredQuickStarts(filteredQuickStarts);
+    setFilteredQuickStarts(filteredQs);
   }, [
     allQuickStarts,
     allQuickStartStates,
     showFilter,
     filter.keyword,
     filter.status.statusFilters,
-    sortFnc,
+    sortFncCallback,
   ]);
 
   const clearFilters = () => {

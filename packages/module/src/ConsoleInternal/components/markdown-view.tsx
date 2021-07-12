@@ -3,10 +3,9 @@ import cx from 'classnames';
 import { Converter } from 'showdown';
 import { useForceRender } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
-
 import './_markdown-view.scss';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const DOMPurify = require('dompurify');
 
 const tableTags = ['table', 'thead', 'tbody', 'tr', 'th', 'td'];
@@ -25,7 +24,9 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
     emoji: false,
   });
 
-  extensions && converter.addExtension(extensions);
+  if (extensions) {
+    converter.addExtension(extensions);
+  }
 
   // add hook to transform anchor tags
   DOMPurify.addHook('beforeSanitizeElements', function(node) {
@@ -63,7 +64,7 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
       'span',
     ],
     ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'src', 'alt', 'id'],
-    ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto|didact):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+    ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto|didact):|[^a-z]|[a-z+.-]+(?:[^a-z+.\-:]|$))/i,
   });
 };
 
@@ -111,9 +112,9 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
 const uniqueId = (function() {
   let num = 0;
   return function(prefix) {
-    prefix = String(prefix) || '';
+    const prefixStr = String(prefix) || '';
     num += 1;
-    return prefix + num;
+    return prefixStr + num;
   };
 })();
 
@@ -146,7 +147,9 @@ const RenderExtension: React.FC<RenderExtensionProps> = ({
    * use forceRender to delay the rendering of extension by one render cycle
    */
   React.useEffect(() => {
-    renderExtension && forceRender();
+    if (renderExtension) {
+      forceRender();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [markup]);
   return (

@@ -21,8 +21,22 @@ const pluralResolver = new PluralResolver({ simplifyPluralSuffix: true });
 
 export type FooterProps = {
   show?: boolean;
-  showAllLink?: boolean;
-  onShowAllLinkClick?: () => void | null;
+};
+
+export const getDefaultQuickStartState = (
+  totalTasks?: number,
+  initialStatus?: QuickStartStatus,
+) => {
+  const defaultQuickStartState = {
+    status: initialStatus || QuickStartStatus.NOT_STARTED,
+    taskNumber: -1,
+  };
+  if (totalTasks) {
+    for (let i = 0; i < totalTasks; i++) {
+      defaultQuickStartState[getTaskStatusKey(i)] = QuickStartTaskStatus.INIT;
+    }
+  }
+  return defaultQuickStartState;
 };
 
 export type QuickStartContextValues = {
@@ -112,16 +126,24 @@ export const useValuesForQuickStartContext = (
     ...combinedValue.resourceBundle,
   });
   const [language, setLanguage] = React.useState(combinedValue.language);
-  const changeResourceBundle = (resourceBundle: any, language?: string) => {
-    language && setLanguage(language);
+  const changeResourceBundle = (bundle: any, lng?: string) => {
+    lng && setLanguage(lng);
     setResourceBundle({
       ...en,
-      ...resourceBundle,
+      ...bundle,
     });
   };
-  const findResource = useCallback((resource: string, count?: number) => {
-    return getResource(resource, count !== undefined ? { count } : null, resourceBundle, language);
-  });
+  const findResource = useCallback(
+    (resource: string, count?: number) => {
+      return getResource(
+        resource,
+        count !== undefined ? { count } : null,
+        resourceBundle,
+        language,
+      );
+    },
+    [resourceBundle, language],
+  );
 
   const initialSearchParams = new URLSearchParams(window.location.search);
   const initialSearchQuery = initialSearchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
@@ -147,11 +169,11 @@ export const useValuesForQuickStartContext = (
 
   const [filterKeyword, setFilterKeyword] = React.useState(initialSearchQuery);
 
-  const setFilter = (type: 'keyword' | 'status', value: any) => {
+  const setFilter = (type: 'keyword' | 'status', val: any) => {
     if (type === 'keyword') {
-      setFilterKeyword(value);
+      setFilterKeyword(val);
     } else if (type === 'status') {
-      setStatusFilters(value);
+      setStatusFilters(val);
     }
   };
 
@@ -173,8 +195,8 @@ export const useValuesForQuickStartContext = (
     });
   }, [allQuickStartStates, findResource, quickStarts]);
 
-  const updateAllQuickStarts = (quickStarts: QuickStart[]) => {
-    setQuickStarts(quickStarts);
+  const updateAllQuickStarts = (qs: QuickStart[]) => {
+    setQuickStarts(qs);
   };
 
   const setActiveQuickStart = useCallback(
@@ -421,20 +443,4 @@ export const QuickStartContextProvider: React.FC<{
       {children}
     </QuickStartContext.Provider>
   );
-};
-
-export const getDefaultQuickStartState = (
-  totalTasks?: number,
-  initialStatus?: QuickStartStatus,
-) => {
-  const defaultQuickStartState = {
-    status: initialStatus || QuickStartStatus.NOT_STARTED,
-    taskNumber: -1,
-  };
-  if (totalTasks) {
-    for (let i = 0; i < totalTasks; i++) {
-      defaultQuickStartState[getTaskStatusKey(i)] = QuickStartTaskStatus.INIT;
-    }
-  }
-  return defaultQuickStartState;
 };
