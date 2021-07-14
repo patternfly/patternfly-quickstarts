@@ -5,6 +5,7 @@ import {
   QuickStartCatalogEmptyState,
   QuickStartCatalogFilterCountWrapper,
   QuickStartCatalogFilterSearchWrapper,
+  QuickStartCatalogFilterStatusWrapper,
   QuickStartCatalogHeader,
   QuickStartCatalogSection,
   QuickStartCatalogToolbar,
@@ -23,23 +24,15 @@ import {
   TextContent,
   ToolbarContent,
 } from '@patternfly/react-core';
-import { allQuickStarts as yamlQuickStarts } from "./quickstarts-data/quick-start-test-data";
-import { loadJSONQuickStarts } from "./quickstarts-data/mas-guides/quickstartLoader";
 
 export const CustomCatalog: React.FC = () => {
-  const { activeQuickStartID, allQuickStartStates, allQuickStarts, setAllQuickStarts, filter, setFilter } = React.useContext<QuickStartContextValues>(
-    QuickStartContext,
-  );
-
-  React.useEffect(() => {
-    // callback on state change
-    setFilteredQuickStarts(filterQuickStarts(
-      allQuickStarts,
-      filter.keyword,
-      filter.status.statusFilters,
-      allQuickStartStates,
-    ).sort(sortFnc),)
-  }, [allQuickStarts]);
+  const {
+    activeQuickStartID,
+    allQuickStartStates,
+    allQuickStarts,
+    filter,
+    setFilter,
+  } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
   const sortFnc = (q1: QuickStart, q2: QuickStart) =>
     q1.spec.displayName.localeCompare(q2.spec.displayName);
@@ -53,23 +46,40 @@ export const CustomCatalog: React.FC = () => {
     ).sort(sortFnc),
   );
 
+  React.useEffect(() => {
+    // callback on state change
+    setFilteredQuickStarts(
+      filterQuickStarts(
+        allQuickStarts,
+        filter.keyword,
+        filter.status.statusFilters,
+        allQuickStartStates,
+      ).sort(sortFnc),
+    );
+  }, [allQuickStartStates, allQuickStarts, filter.keyword, filter.status.statusFilters]);
+
   const onSearchInputChange = (searchValue: string) => {
     const result = filterQuickStarts(
       allQuickStarts,
       searchValue,
       filter.status.statusFilters,
       allQuickStartStates,
-    ).sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName));
+    ).sort((q1: QuickStart, q2: QuickStart) =>
+      q1.spec.displayName.localeCompare(q2.spec.displayName),
+    );
     setFilter('keyword', searchValue);
     setFilteredQuickStarts(result);
   };
+
   const onStatusChange = (statusList: string[]) => {
     const result = filterQuickStarts(
       allQuickStarts,
       filter.keyword,
       statusList,
       allQuickStartStates,
-    ).sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName));
+    ).sort((q1: QuickStart, q2: QuickStart) =>
+      q1.spec.displayName.localeCompare(q2.spec.displayName),
+    );
     setFilter('status', statusList);
     setFilteredQuickStarts(result);
   };
@@ -84,10 +94,10 @@ export const CustomCatalog: React.FC = () => {
         <Gallery className="co-quick-start-catalog__gallery" hasGutter>
           {allQuickStarts
             .filter(
-              (quickStart) =>
+              (quickStart: QuickStart) =>
                 !quickStart.spec.type || quickStart.spec.type.text !== 'Documentation',
             )
-            .map((quickStart) => {
+            .map((quickStart: QuickStart) => {
               const {
                 metadata: { name: id },
               } = quickStart;
@@ -114,8 +124,8 @@ export const CustomCatalog: React.FC = () => {
         </TextContent>
         <Gallery className="co-quick-start-catalog__gallery" hasGutter>
           {allQuickStarts
-            .filter((quickStart) => quickStart.spec.type?.text === 'Documentation')
-            .map((quickStart) => {
+            .filter((quickStart: QuickStart) => quickStart.spec.type?.text === 'Documentation')
+            .map((quickStart: QuickStart) => {
               const {
                 metadata: { name: id },
               } = quickStart;
@@ -140,18 +150,11 @@ export const CustomCatalog: React.FC = () => {
     setFilter('status', []);
     clearFilterParams();
     setFilteredQuickStarts(
-      allQuickStarts.sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName)),
+      allQuickStarts.sort((q1: QuickStart, q2: QuickStart) =>
+        q1.spec.displayName.localeCompare(q2.spec.displayName),
+      ),
     );
   };
-
-  // const load = async () => {
-  //   const masGuidesQuickstarts = await loadJSONQuickStarts("");
-  //   setAllQuickStarts(yamlQuickStarts.concat(masGuidesQuickstarts));
-  // };
-
-  // const loadQuickStarts = () => {
-  //   load();
-  // }
 
   return (
     <>
@@ -160,9 +163,7 @@ export const CustomCatalog: React.FC = () => {
       <QuickStartCatalogToolbar>
         <ToolbarContent>
           <QuickStartCatalogFilterSearchWrapper onSearchInputChange={onSearchInputChange} />
-          {/* <QuickStartCatalogFilterStatusWrapper
-            onStatusChange={onStatusChange}
-          /> */}
+          <QuickStartCatalogFilterStatusWrapper onStatusChange={onStatusChange} />
           <QuickStartCatalogFilterCountWrapper quickStartsCount={filteredQuickStarts.length} />
         </ToolbarContent>
       </QuickStartCatalogToolbar>
@@ -170,9 +171,7 @@ export const CustomCatalog: React.FC = () => {
       {filteredQuickStarts.length === 0 ? (
         <QuickStartCatalogEmptyState clearFilters={clearFilters} />
       ) : filteredQuickStarts.length !== allQuickStarts.length ? (
-        <QuickStartCatalogSection>
-          <QuickStartCatalog quickStarts={filteredQuickStarts} />
-        </QuickStartCatalogSection>
+        <QuickStartCatalog quickStarts={filteredQuickStarts} />
       ) : (
         CatalogWithSections
       )}

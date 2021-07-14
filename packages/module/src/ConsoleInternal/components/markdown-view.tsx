@@ -8,7 +8,7 @@ import './_markdown-view.scss';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const DOMPurify = require('dompurify');
 
-const tableTags = ['table', 'thead', 'tbody', 'tr', 'th', 'td'];
+// const tableTags = ['table', 'thead', 'tbody', 'tr', 'th', 'td'];
 
 type ShowdownExtension = {
   type: string;
@@ -38,33 +38,38 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
   });
 
   return DOMPurify.sanitize(converter.makeHtml(markdown), {
-    ALLOWED_TAGS: [
-      'b',
-      'i',
-      'strike',
-      's',
-      'del',
-      'em',
-      'strong',
-      'a',
-      'p',
-      'h1',
-      'h2',
-      'h3',
-      'h4',
-      'ul',
-      'ol',
-      'li',
-      'code',
-      'pre',
-      'button',
-      ...tableTags,
-      'div',
-      'img',
-      'span',
-    ],
-    ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'src', 'alt', 'id'],
-    ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto|didact):|[^a-z]|[a-z+.-]+(?:[^a-z+.\-:]|$))/i,
+    USE_PROFILES: {
+      html: true,
+      svg: true,
+    },
+    // ALLOWED_TAGS: [
+    //   'b',
+    //   'i',
+    //   'strike',
+    //   's',
+    //   'del',
+    //   'em',
+    //   'strong',
+    //   'a',
+    //   'p',
+    //   'h1',
+    //   'h2',
+    //   'h3',
+    //   'h4',
+    //   'ul',
+    //   'ol',
+    //   'li',
+    //   'code',
+    //   'pre',
+    //   'button',
+    //   ...tableTags,
+    //   'div',
+    //   'img',
+    //   'span',
+    //   'svg',
+    // ],
+    // ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'src', 'alt', 'id'],
+    // ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto|didact):|[^a-z]|[a-z+.-]+(?:[^a-z+.\-:]|$))/i,
   });
 };
 

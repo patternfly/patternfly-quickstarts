@@ -15,7 +15,9 @@
     "dev:serve": "yarn workspace @patternfly/quickstarts-dev serve",
     "test": "LANG=en_US.UTF-8 jest",
     "eslint": "eslint --ext .js,.jsx,.ts,.tsx --color",
-    "lint": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/module"
+    "lint": "yarn lint:module && yarn lint:dev",
+    "lint:module": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/module",
+    "lint:dev": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/dev"
   },
   "devDependencies": {
     "@types/jest": "^26.0.14",

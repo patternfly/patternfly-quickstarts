@@ -5,6 +5,7 @@ module.exports = {
     es6: true,
     jasmine: true,
     jest: true,
+    node: true
   },
   extends: [
     'eslint:recommended',

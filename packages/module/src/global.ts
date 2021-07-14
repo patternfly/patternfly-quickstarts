@@ -1,1 +1,0 @@
-import './ConsoleInternal/bootstrap.scss';

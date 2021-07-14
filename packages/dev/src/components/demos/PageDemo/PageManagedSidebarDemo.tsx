@@ -5,7 +5,7 @@ import {
   PageHeaderTools,
   PageSection,
   PageSectionVariants,
-  PageSidebar
+  PageSidebar,
 } from '@patternfly/react-core';
 
 export class PageManagedSidebarDemo extends React.Component {
@@ -19,7 +19,7 @@ export class PageManagedSidebarDemo extends React.Component {
       href: 'https://patternfly.org',
       // eslint-disable-next-line no-console
       onClick: () => console.log('clicked logo'),
-      target: '_blank'
+      target: '_blank',
     };
     const Header = (
       <PageHeader
@@ -34,7 +34,9 @@ export class PageManagedSidebarDemo extends React.Component {
 
     return (
       <Page id="page-managed-sidebar-demo" header={Header} sidebar={Sidebar} isManagedSidebar>
-        <PageSection variant={PageSectionVariants.darker}>Section with darker background</PageSection>
+        <PageSection variant={PageSectionVariants.darker}>
+          Section with darker background
+        </PageSection>
         <PageSection variant={PageSectionVariants.dark}>Section with dark background</PageSection>
         <PageSection variant={PageSectionVariants.light}>Section with light background</PageSection>
       </Page>

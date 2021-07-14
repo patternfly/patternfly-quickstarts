@@ -27,9 +27,11 @@
     "type-check": "tsc --noEmit",
     "ci-checks": "yarn type-check && yarn lint && yarn test",
     "build:ts": "yarn clean && tsc --p tsconfig.json",
-    "post-css": "yarn clean-css",
-    "purge-css": "purgecss --css dist/quickstarts.css --content dist/**/*.js --output dist",
-    "clean-css": "cleancss dist/quickstarts.css -o dist/quickstarts.min.css"
+    "post-css": "yarn purge-css && yarn clean-css",
+    "purge-css": "purgecss --config ./purgecss.config.js",
+    "clean-css:quickstarts": "cleancss dist/quickstarts.css -o dist/quickstarts.min.css",
+    "clean-css:bootstrap": "cleancss dist/quickstarts-bootstrap.css -o dist/quickstarts-bootstrap.min.css",
+    "clean-css": "yarn clean-css:quickstarts && yarn clean-css:bootstrap"
   },
   "peerDependencies": {
     "@patternfly/patternfly": ">=4.90.5",
@@ -66,8 +68,8 @@
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.15.5",
     "enzyme-to-json": "^3.6.1",
-    "sass": "^1.30.0",
-    "node-sass": "^5.0.0",
+    "sass": "^1.35.2",
+    "node-sass": "^6.0.1",
     "prettier": "^2.1.2",
     "purgecss": "^4.0.0",
     "react": "^16.8.0",
@@ -79,9 +81,10 @@
     "rollup": "^2.37.0",
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-scss": "^2.6.1",
+    "rollup-plugin-scss": "^3.0.0",
     "rollup-plugin-typescript2": "^0.29.0",
     "rollup-plugin-visualizer": "^5.5.0",
+    "rollup-plugin-copy": "^3.4.0",
     "tslib": "^2.0.3"
   }
 }

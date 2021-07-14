@@ -1,37 +1,36 @@
-import Processor from "asciidoctor";
-import {
-  QuickStart,
-  QuickStartTask,
-  QuickStartTaskReview,
-  QuickStartTaskSummary,
-} from "@patternfly/quickstarts";
+/* eslint-disable */
+
+import Processor from 'asciidoctor';
+import { QuickStart, QuickStartTask } from '@patternfly/quickstarts';
 
 const processor = Processor();
 const asciiOptions = {
   // https://docs.asciidoctor.org/asciidoc/latest/document/doctypes/
   // article, book, manpage, inline
-  doctype: "article",
+  doctype: 'article',
   // add header/footer when true
   standalone: false,
-  safe: "unsafe",
+  safe: 'unsafe',
   // base_dir: "quickstarts-data/asciidoc/",
   sourcemap: true,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getInnerText = (html: string) => {
-  const span = document.createElement("span");
+  const span = document.createElement('span');
   span.innerHTML = html;
   return span.textContent || span.innerText;
 };
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getInnerList = (html: string) => {
-  const span = document.createElement("span");
+  const span = document.createElement('span');
   span.innerHTML = html;
-  return span.querySelector("ol") || span.querySelector("ul");
+  return span.querySelector('ol') || span.querySelector('ul');
 };
 const getListItems = (html: string) => {
-  const span = document.createElement("span");
+  const span = document.createElement('span');
   span.innerHTML = html;
-  const elements = span.querySelectorAll("li");
+  const elements = span.querySelectorAll('li');
   const items: string[] = [];
   elements.forEach((el) => {
     items.push(el.textContent.trim());
@@ -39,22 +38,20 @@ const getListItems = (html: string) => {
   return items;
 };
 const elementWithoutTitle = (html: string) => {
-  const span = document.createElement("span");
+  const span = document.createElement('span');
   span.innerHTML = html;
-  span.querySelector(".title") && span.querySelector(".title").remove();
+  span.querySelector('.title') && span.querySelector('.title').remove();
   return span;
 };
 const addClasses = (html: string) => {
-  const span = document.createElement("span");
+  const span = document.createElement('span');
   span.innerHTML = html;
-  span
-    .querySelectorAll("div.title")
-    .forEach((el) => el.classList.add("pf-c-title", "pf-m-md"));
+  span.querySelectorAll('div.title').forEach((el) => el.classList.add('pf-c-title', 'pf-m-md'));
   return span;
 };
 
 const getIntro = (taskBlocks: any[]) => {
-  let intro = "";
+  let intro = '';
   let lastIndex = -1;
   // @ts-ignore-next-line
   taskBlocks.some((taskBlock) => {
@@ -62,13 +59,10 @@ const getIntro = (taskBlocks: any[]) => {
     let stopHere = false;
     // grab until we hit a subtitle, or an olist or ulist with a title of
     // Prerequisites || Procedure
-    if (taskBlock.context === "floating_title") {
+    if (taskBlock.context === 'floating_title') {
       stopHere = true;
-    } else if (taskBlock.context === "ulist" || taskBlock.context === "olist") {
-      if (
-        taskBlock.title === "Prerequisites" ||
-        taskBlock.title === "Procedure"
-      ) {
+    } else if (taskBlock.context === 'ulist' || taskBlock.context === 'olist') {
+      if (taskBlock.title === 'Prerequisites' || taskBlock.title === 'Procedure') {
         stopHere = true;
       }
     }
@@ -89,8 +83,8 @@ const getPrereqs = (taskBlocks: any[], startingIndex: number) => {
   const lastIndex = startingIndex;
   const initialBlock = taskBlocks[startingIndex];
   if (
-    (initialBlock.context !== "olist" || initialBlock.context !== "ulist") &&
-    initialBlock.title !== "Prerequisites"
+    (initialBlock.context !== 'olist' || initialBlock.context !== 'ulist') &&
+    initialBlock.title !== 'Prerequisites'
   ) {
     return {
       prereqs: [],
@@ -111,20 +105,13 @@ const getProcedures = (taskBlocks: any[], startingIndex: number) => {
   const procedures: any[] = [];
   let procedure: any;
   let lastIndex = startingIndex;
-  const nextPossibleSections = [
-    "Next steps",
-    "Verification",
-    "Additional resources",
-  ];
+  const nextPossibleSections = ['Next steps', 'Verification', 'Additional resources'];
   const endOfDoc = (block: any) => {
     return block.$$id === taskBlocks.slice(-1)[0].$$id;
   };
   // @ts-ignore-next-line
   taskBlocks.slice(startingIndex).some((taskBlock) => {
-    if (
-      (taskBlock.title && typeof taskBlock.title === "string") ||
-      endOfDoc(taskBlock)
-    ) {
+    if ((taskBlock.title && typeof taskBlock.title === 'string') || endOfDoc(taskBlock)) {
       // new section, first push the previous procedure
       procedure &&
         procedure.hasSeenList &&
@@ -134,25 +121,22 @@ const getProcedures = (taskBlocks: any[], startingIndex: number) => {
       if (nextPossibleSections.indexOf(taskBlock.title) > -1) {
         // another (non-procedure) section
         return true;
-      } else {
-        if (!procedure || procedure.hasSeenList) {
-          // next procedure
-          procedure = {
-            title: "",
-            description: "",
-            hasSeenList: false,
-          };
-        }
+      }
+      if (!procedure || procedure.hasSeenList) {
+        // next procedure
+        procedure = {
+          title: '',
+          description: '',
+          hasSeenList: false,
+        };
       }
     }
     lastIndex += 1;
-    if (taskBlock.context === "floating_title") {
+    if (taskBlock.context === 'floating_title') {
       (procedure as any).title = taskBlock.getTitle();
     } else {
-      (procedure as any).description += elementWithoutTitle(
-        taskBlock.convert()
-      ).outerHTML;
-      if (taskBlock.context === "olist" || taskBlock.context === "ulist") {
+      (procedure as any).description += elementWithoutTitle(taskBlock.convert()).outerHTML;
+      if (taskBlock.context === 'olist' || taskBlock.context === 'ulist') {
         (procedure as any).hasSeenList = true;
       }
     }
@@ -164,7 +148,7 @@ const getProcedures = (taskBlocks: any[], startingIndex: number) => {
 };
 
 const getRest = (taskBlocks: any[], startingIndex: number) => {
-  let remainingContent = "";
+  let remainingContent = '';
   taskBlocks.slice(startingIndex).some((taskBlock, index) => {
     remainingContent += addClasses(taskBlock.convert()).outerHTML;
   });
@@ -179,16 +163,11 @@ export const ProcedureAsciiDocParser = (file: string, options: any = {}) => {
   const docId = fullAdoc.getId();
   const docTitle = fullAdoc.getDocumentTitle();
   const taskBlocks = fullAdoc.getBlocks();
-  const { intro: docIntro, lastIndex: lastIndexIntro, nextBlock } = getIntro(
-    taskBlocks
-  );
-  const { prereqs, lastIndex: lastIndexPrereqs } = getPrereqs(
-    taskBlocks,
-    lastIndexIntro
-  );
+  const { intro: docIntro, lastIndex: lastIndexIntro, nextBlock } = getIntro(taskBlocks);
+  const { prereqs, lastIndex: lastIndexPrereqs } = getPrereqs(taskBlocks, lastIndexIntro);
   const { procedures, lastIndex: lastIndexProcedures } = getProcedures(
     taskBlocks,
-    lastIndexPrereqs
+    lastIndexPrereqs,
   );
   const remainingContent = getRest(taskBlocks, lastIndexProcedures);
 
@@ -198,43 +177,36 @@ export const ProcedureAsciiDocParser = (file: string, options: any = {}) => {
       title: procedure.title || `Procedure ${index + 1}`,
       description: procedure.description,
       review: {
-        instructions: "Have you completed these steps?",
-        failedTaskHelp: "This task isn’t verified yet. Try the task again.",
+        instructions: 'Have you completed these steps?',
+        failedTaskHelp: 'This task isn’t verified yet. Try the task again.',
       },
       summary: {
-        success: "You have completed this task!",
-        failed: "Try the steps again.",
+        success: 'You have completed this task!',
+        failed: 'Try the steps again.',
       },
     });
   });
 
   const processedAsciiDoc: QuickStart = {
     metadata: {
-      name: fullAdoc.getAttribute("qs-id") || docId,
+      name: fullAdoc.getAttribute('qs-id') || docId,
     },
     spec: {
-      displayName:
-        fullAdoc.getAttribute("qs-display-name") || (docTitle as string),
-      durationMinutes: fullAdoc.getAttribute("qs-duration-minutes"),
-      icon: fullAdoc.getAttribute("qs-icon"),
-      description: fullAdoc.getAttribute("qs-description") || docIntro,
+      displayName: fullAdoc.getAttribute('qs-display-name') || (docTitle as string),
+      durationMinutes: fullAdoc.getAttribute('qs-duration-minutes'),
+      icon: fullAdoc.getAttribute('qs-icon'),
+      description: fullAdoc.getAttribute('qs-description') || docIntro,
       introduction:
-        (fullAdoc.getAttribute("qs-introduction") &&
-          (processor.convert(
-            fullAdoc.getAttribute("qs-introduction")
-          ) as string)) ||
+        (fullAdoc.getAttribute('qs-introduction') &&
+          (processor.convert(fullAdoc.getAttribute('qs-introduction')) as string)) ||
         docIntro,
-      conclusion: fullAdoc.getAttribute("qs-conclusion") || remainingContent,
+      conclusion: fullAdoc.getAttribute('qs-conclusion') || remainingContent,
       prerequisites:
-        (fullAdoc.getAttribute("qs-prerequisites") &&
-          getListItems(
-            processor.convert(
-              fullAdoc.getAttribute("qs-prerequisites")
-            ) as string
-          )) ||
+        (fullAdoc.getAttribute('qs-prerequisites') &&
+          getListItems(processor.convert(fullAdoc.getAttribute('qs-prerequisites')) as string)) ||
         prereqs,
-      nextQuickStart: fullAdoc.getAttribute("qs-next-quick-start") && [
-        fullAdoc.getAttribute("qs-next-quick-start"),
+      nextQuickStart: fullAdoc.getAttribute('qs-next-quick-start') && [
+        fullAdoc.getAttribute('qs-next-quick-start'),
       ],
       tasks: qsTasks,
     },

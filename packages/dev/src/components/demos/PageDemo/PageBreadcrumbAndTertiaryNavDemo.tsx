@@ -9,7 +9,7 @@ import {
   PageHeader,
   PageHeaderTools,
   PageSection,
-  PageSectionVariants
+  PageSectionVariants,
 } from '@patternfly/react-core';
 
 export class PageBreadcrumbAndTertiaryNavDemo extends React.Component {
@@ -23,7 +23,7 @@ export class PageBreadcrumbAndTertiaryNavDemo extends React.Component {
       href: 'https://patternfly.org',
       // eslint-disable-next-line no-console
       onClick: () => console.log('clicked logo'),
-      target: '_blank'
+      target: '_blank',
     };
     const Header = (
       <PageHeader
@@ -69,7 +69,9 @@ export class PageBreadcrumbAndTertiaryNavDemo extends React.Component {
         isBreadcrumbGrouped
         isManagedSidebar
       >
-        <PageSection variant={PageSectionVariants.darker}>Section with darker background</PageSection>
+        <PageSection variant={PageSectionVariants.darker}>
+          Section with darker background
+        </PageSection>
         <PageSection variant={PageSectionVariants.dark}>Section with dark background</PageSection>
         <PageSection variant={PageSectionVariants.light}>Section with light background</PageSection>
       </Page>

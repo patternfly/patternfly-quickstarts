@@ -78,7 +78,7 @@ export default function css(options = {}) {
       if (!filter(id)) {
         return;
       }
-      //   console.log(`transform: ${id}`);
+        console.log(`transform: ${id}`);
 
       // Add the include path before doing any processing
       includePaths.push(dirname(id));
@@ -113,9 +113,11 @@ export default function css(options = {}) {
       // Combine all stylesheets
       let scss = '';
       for (const id in styles) {
-        // console.log(id);
+        console.log(id);
         if (id.indexOf('@patternfly') === -1) {
           scss += styles[id] || '';
+        } else {
+          console.log(`filtered out: ${id}`);
         }
       }
 

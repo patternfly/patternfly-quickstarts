@@ -9,7 +9,7 @@ import {
   Title,
 } from '@patternfly/react-core';
 import classNames from 'classnames';
-import ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom';
 import { Shadows, useScrollShadows } from '@console/shared';
 import QuickStartController from './QuickStartController';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';

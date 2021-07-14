@@ -1,13 +1,15 @@
-import { useContext, useMemo } from 'react';
+import * as React from 'react';
 import { QuickStartContext, QuickStartContextValues } from '@quickstarts/utils/quick-start-context';
 import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
 import { removeTemplateWhitespace } from './utils';
-
+import { renderToStaticMarkup } from 'react-dom/server';
+import CopyIcon from '@patternfly/react-icons/dist/js/icons/copy-icon';
+import '@patternfly/react-styles/css/components/ClipboardCopy/clipboard-copy';
 import './showdown-extension.scss';
 
 const useInlineCopyClipboardShowdownExtension = () => {
-  const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
-  return useMemo(
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  return React.useMemo(
     () => ({
       type: 'lang',
       regex: /`([^`](.*?)[^`])`{{copy}}/g,
@@ -29,7 +31,7 @@ const useInlineCopyClipboardShowdownExtension = () => {
                   <button class="pf-c-button pf-m-plain" aria-label="${getResource(
                     'Copy to clipboard',
                   )}" ${MARKDOWN_COPY_BUTTON_ID}="${groupType}">
-                    <i class="fas fa-copy"></i>
+                    ${renderToStaticMarkup(<CopyIcon />)}
                   </button>
                 </span>
               </span>

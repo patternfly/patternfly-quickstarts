@@ -1,8 +1,5 @@
 // == Config
 
-// Root path where you plan to host console.
-$consoleWebDistPath: './';
-
 // PatternFly color variables -- imported here so they can be used throughout
 // PF3 color variables
 @import '~patternfly/dist/sass/patternfly/color-variables';
@@ -14,8 +11,6 @@ $consoleWebDistPath: './';
 
 // == Overrides of external dependency variables
 
-// FontAwesome font path.
-$fa-font-path: $consoleWebDistPath + '/';
 // Use PatternFly 4 font family in PatternFly 3.
 $font-family-base: var(--pf-global--FontFamily--sans-serif);
 $font-size-base: 14px;
@@ -39,8 +34,7 @@ $link-hover-color: var(--pf-global--link--Color--hover);
 // Disable PatternFly 4 reset.
 $pf-global--enable-reset: true;
 $pf-global--enable-shield: false;
-// PatternFly 4 font path.
-$pf-global--font-path: '~@patternfly/patternfly/assets/fonts';
+
 $table-border-color: $color-pf-black-200;
 
 
