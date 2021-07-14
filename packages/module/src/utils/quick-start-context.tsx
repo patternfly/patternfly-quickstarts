@@ -86,6 +86,13 @@ export const QuickStartContextDefaults = {
   getResource: () => '',
   language: 'en',
   useQueryParams: true,
+  filter: {
+    keyword: '',
+    status: {
+      statusTypes: {},
+      statusFilters: [],
+    },
+  },
   setFilter: () => {},
   footer: null,
   markdown: null,
