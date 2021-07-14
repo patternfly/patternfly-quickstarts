@@ -1,7 +1,7 @@
 import * as React from 'react';
+import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
-import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import TaskHeader from './QuickStartTaskHeader';
 
 type QuickStartIntroductionProps = {
@@ -22,7 +22,10 @@ const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
     <>
       <QuickStartMarkdownView content={introduction} />
       <p style={{ marginBottom: 'var(--pf-global--spacer--md)' }}>
-        {getResource('In this quick start, you will complete {{count, number}} task', tasks.length).replace('{{count, number}}', tasks.length)}
+        {getResource(
+          'In this quick start, you will complete {{count, number}} task',
+          tasks.length,
+        ).replace('{{count, number}}', tasks.length)}
         :
       </p>
       {tasks.map((task, index) => (

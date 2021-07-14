@@ -42,7 +42,9 @@ const InteractiveSpotlight: React.FC<InteractiveSpotlightProps> = ({ element }) 
     return () => {};
   }, [element, clicked]);
 
-  if (clicked) return null;
+  if (clicked) {
+    return null;
+  }
 
   return (
     <Portal>

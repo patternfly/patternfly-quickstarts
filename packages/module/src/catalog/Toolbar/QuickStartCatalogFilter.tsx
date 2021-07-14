@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { Toolbar, ToolbarContent, ToolbarProps } from '@patternfly/react-core';
 import {
   QuickStartCatalogFilterCountWrapper,
   QuickStartCatalogFilterSearchWrapper,
   QuickStartCatalogFilterStatusWrapper,
 } from './QuickStartCatalogFilterItems';
-import { Toolbar, ToolbarContent, ToolbarProps } from '@patternfly/react-core';
 
 import './QuickStartCatalogFilter.scss';
 
@@ -25,9 +25,7 @@ const QuickStartCatalogFilter: React.FC<QuickStartCatalogFilterProps> = ({
       <Toolbar usePageInsets className="co-quick-start-catalog-filter__flex" {...props}>
         <ToolbarContent>
           <QuickStartCatalogFilterSearchWrapper onSearchInputChange={onSearchInputChange} />
-          <QuickStartCatalogFilterStatusWrapper
-            onStatusChange={onStatusChange}
-          />
+          <QuickStartCatalogFilterStatusWrapper onStatusChange={onStatusChange} />
           <QuickStartCatalogFilterCountWrapper quickStartsCount={quickStartsCount} />
         </ToolbarContent>
       </Toolbar>

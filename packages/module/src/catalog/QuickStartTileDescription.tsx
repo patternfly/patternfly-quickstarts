@@ -5,11 +5,11 @@ import {
   Text,
   TextList,
   TextListItem,
-  TextVariants
+  TextVariants,
 } from '@patternfly/react-core';
-import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import InfoCircleIcon from '@patternfly/react-icons/dist/js/icons/info-circle-icon';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
+import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 
 import './QuickStartTileDescription.scss';
 
@@ -29,7 +29,10 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
       {prereqs?.length > 0 && (
         <div className="co-quick-start-tile-prerequisites">
           <Text component={TextVariants.h5} className="co-quick-start-tile-prerequisites__text">
-            {getResource('Prerequisites ({{totalPrereqs}})').replace('{{totalPrereqs}}', prereqs.length)}{' '}
+            {getResource('Prerequisites ({{totalPrereqs}})').replace(
+              '{{totalPrereqs}}',
+              prereqs.length,
+            )}{' '}
           </Text>
           <Popover
             aria-label={getResource('Prerequisites')}

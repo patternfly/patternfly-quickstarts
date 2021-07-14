@@ -1,4 +1,7 @@
-import { AccessReviewResourceAttributes, ObjectMetadata } from '../ConsoleInternal/module/k8s/types';
+import {
+  AccessReviewResourceAttributes,
+  ObjectMetadata,
+} from '../ConsoleInternal/module/k8s/types';
 
 export type QuickStart = {
   apiVersion?: string;

@@ -1,12 +1,15 @@
-import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
+import * as React from 'react';
 import { QuickStartContext, QuickStartContextValues } from '@quickstarts/utils/quick-start-context';
-import { useContext, useMemo } from 'react';
+import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
+import { renderToStaticMarkup } from 'react-dom/server';
+import CopyIcon from '@patternfly/react-icons/dist/js/icons/copy-icon';
+import '@patternfly/react-styles/css/components/CodeBlock/code-block';
 
 import './showdown-extension.scss';
 
 const useMultilineCopyClipboardShowdownExtension = () => {
-  const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
-  return useMemo(
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  return React.useMemo(
     () => ({
       type: 'lang',
       regex: /```[\n]((.*?\n)+)```{{copy}}/g,
@@ -17,7 +20,9 @@ const useMultilineCopyClipboardShowdownExtension = () => {
         groupType: string,
         groupId: string,
       ): string => {
-        if (!group || !subgroup || !groupType || !groupId) return text;
+        if (!group || !subgroup || !groupType || !groupId) {
+          return text;
+        }
         return `<div class="pf-c-code-block">
               <div class="pf-c-code-block__header">
                 <div class="pf-c-code-block__actions">
@@ -25,7 +30,7 @@ const useMultilineCopyClipboardShowdownExtension = () => {
                     <button class="pf-c-button pf-m-plain" type="button" aria-label="${getResource(
                       'Copy to clipboard',
                     )}" ${MARKDOWN_COPY_BUTTON_ID}="${groupType}">
-                      <i class="fas fa-copy" aria-hidden="true"></i>
+                      ${renderToStaticMarkup(<CopyIcon />)}
                     </button>
                   </div>
                 </div>

@@ -25,12 +25,9 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   footerClass,
   quickStartId,
 }) => {
-  const { footer, restartQuickStart, getResource } = React.useContext<QuickStartContextValues>(
+  const { restartQuickStart, getResource } = React.useContext<QuickStartContextValues>(
     QuickStartContext,
   );
-
-  const showAllLink = footer?.showAllLink;
-  const onShowAllLinkClick = footer?.onShowAllLinkClick;
 
   const PrimaryButtonText = React.useMemo(() => {
     return {
@@ -58,21 +55,27 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   );
 
   const getPrimaryButtonText = React.useMemo(() => {
-    if (status === QuickStartStatus.NOT_STARTED) return PrimaryButtonText.START;
+    if (status === QuickStartStatus.NOT_STARTED) {
+      return PrimaryButtonText.START;
+    }
 
-    if (taskNumber === totalTasks) return PrimaryButtonText.CLOSE;
+    if (taskNumber === totalTasks) {
+      return PrimaryButtonText.CLOSE;
+    }
 
-    if (taskNumber > -1 && taskNumber < totalTasks) return PrimaryButtonText.NEXT;
+    if (taskNumber > -1 && taskNumber < totalTasks) {
+      return PrimaryButtonText.NEXT;
+    }
 
     return PrimaryButtonText.CONTINUE;
   }, [taskNumber, totalTasks, PrimaryButtonText, status]);
 
   const getPrimaryButton = React.useMemo(
     () => (
-      <Button 
-        variant="primary" 
-        className="co-quick-start-footer__actionbtn" 
-        onClick={onNext} 
+      <Button
+        variant="primary"
+        className="co-quick-start-footer__actionbtn"
+        onClick={onNext}
         data-testid={`qs-drawer-${camelize(getPrimaryButtonText)}`}
         data-test={`${getPrimaryButtonText} button`}
       >
@@ -102,7 +105,12 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
     () =>
       status === QuickStartStatus.COMPLETE &&
       taskNumber === totalTasks && (
-        <Button variant="link" className="pull-right" onClick={onRestart} data-testid="qs-drawer-side-note-action">
+        <Button
+          variant="link"
+          className="pull-right"
+          onClick={onRestart}
+          data-testid="qs-drawer-side-note-action"
+        >
           {SecondaryButtonText.RESTART}
         </Button>
       ),

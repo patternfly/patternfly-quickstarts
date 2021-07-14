@@ -1,10 +1,10 @@
 import './QuickStartTileHeader.scss';
 import * as React from 'react';
 import { Label, Title } from '@patternfly/react-core';
+import OutlinedClockIcon from '@patternfly/react-icons/dist/js/icons/outlined-clock-icon';
+import { StatusIcon } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartStatus, QuickStartType } from '../utils/quick-start-types';
-import { StatusIcon } from '@console/shared';
-import OutlinedClockIcon from '@patternfly/react-icons/dist/js/icons/outlined-clock-icon';
 
 type QuickStartTileHeaderProps = {
   status: string;
@@ -35,7 +35,9 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
 
   return (
     <div className="co-quick-start-tile-header">
-      <Title headingLevel="h3" data-test="title">{name}</Title>
+      <Title headingLevel="h3" data-test="title">
+        {name}
+      </Title>
       <div className="co-quick-start-tile-header__status">
         {type && (
           <Label className="co-quick-start-tile-header--margin" color={type.color}>
@@ -48,7 +50,10 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
             icon={<OutlinedClockIcon />}
             className="co-quick-start-tile-header--margin"
           >
-            {getResource('{{duration, number}} minutes', duration).replace('{{duration, number}}', duration)}
+            {getResource('{{duration, number}} minutes', duration).replace(
+              '{{duration, number}}',
+              duration,
+            )}
           </Label>
         )}
         {status !== QuickStartStatus.NOT_STARTED && (

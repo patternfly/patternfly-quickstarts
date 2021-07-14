@@ -14,13 +14,17 @@ const Spotlight: React.FC<SpotlightProps> = ({ selector, interactive }) => {
     let hiddenElement = highlightElement;
     while (hiddenElement) {
       const ariaHidden = hiddenElement.getAttribute('aria-hidden');
-      if (ariaHidden === 'true') return null;
+      if (ariaHidden === 'true') {
+        return null;
+      }
       hiddenElement = hiddenElement.parentElement;
     }
     return highlightElement;
   }, [selector]);
-  
-  if (!element) return null;
+
+  if (!element) {
+    return null;
+  }
   return interactive ? (
     <InteractiveSpotlight element={element} />
   ) : (

@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { ShallowWrapper, shallow } from 'enzyme';
 import { Alert } from '@patternfly/react-core';
-import { getQuickStartByName } from '../../utils/quick-start-utils';
-import { QuickStartTaskStatus } from '../../utils/quick-start-types';
-import QuickStartTaskReview from '../QuickStartTaskReview';
-import QuickStartMarkdownView from '../../QuickStartMarkdownView';
+import { ShallowWrapper, shallow } from 'enzyme';
 import { allQuickStarts } from '../../data/quick-start-test-data';
+import QuickStartMarkdownView from '../../QuickStartMarkdownView';
+import { QuickStartTaskStatus } from '../../utils/quick-start-types';
+import { getQuickStartByName } from '../../utils/quick-start-utils';
+import QuickStartTaskReview from '../QuickStartTaskReview';
 
 type QuickStartTaskReviewProps = React.ComponentProps<typeof QuickStartTaskReview>;
 let wrapper: ShallowWrapper<QuickStartTaskReviewProps>;

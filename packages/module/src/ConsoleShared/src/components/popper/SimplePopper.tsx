@@ -7,12 +7,9 @@ const SimplePopper: React.FC = ({ children }) => {
   const popperRef = React.useRef(null);
   const [isOpen, setOpenState] = React.useState(openProp);
 
-  const setOpen = React.useCallback(
-    (newOpen: boolean) => {
-      setOpenState(newOpen);
-    },
-    [],
-  );
+  const setOpen = React.useCallback((newOpen: boolean) => {
+    setOpenState(newOpen);
+  }, []);
 
   React.useEffect(() => {
     setOpen(openProp);
@@ -51,10 +48,7 @@ const SimplePopper: React.FC = ({ children }) => {
     }
 
     destroy();
-  }, [
-    isOpen,
-    destroy,
-  ]);
+  }, [isOpen, destroy]);
 
   const nodeRefCallback = React.useCallback(
     (node) => {
@@ -82,10 +76,7 @@ const SimplePopper: React.FC = ({ children }) => {
 
   return isOpen ? (
     <Portal>
-      <div
-        ref={nodeRefCallback}
-        style={{ zIndex: 9999, position: 'absolute', top: 0, left: 0 }}
-      >
+      <div ref={nodeRefCallback} style={{ zIndex: 9999, position: 'absolute', top: 0, left: 0 }}>
         {children}
       </div>
     </Portal>

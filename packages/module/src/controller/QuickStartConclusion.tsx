@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Button } from '@patternfly/react-core';
-import { QuickStart, QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
-import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import ArrowRightIcon from '@patternfly/react-icons/dist/js/icons/arrow-right-icon';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
+import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
+import { QuickStart, QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
 import TaskHeader from './QuickStartTaskHeader';
 
 type QuickStartConclusionProps = {
@@ -41,7 +41,9 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
       <QuickStartMarkdownView
         content={
           hasFailedTask
-            ? getResource('One or more verifications did not pass during this quick start. Revisit the tasks or the help links, and then try again.')
+            ? getResource(
+                'One or more verifications did not pass during this quick start. Revisit the tasks or the help links, and then try again.',
+              )
             : conclusion
         }
       />
@@ -51,7 +53,10 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
           onClick={() => onQuickStartChange(nextQuickStart.metadata.name)}
           isInline
         >
-          {getResource('Start {{nextQSDisplayName}} quick start').replace('{{nextQSDisplayName}}', nextQSDisplayName)}{' '}
+          {getResource('Start {{nextQSDisplayName}} quick start').replace(
+            '{{nextQSDisplayName}}',
+            nextQSDisplayName,
+          )}{' '}
           <ArrowRightIcon
             style={{ marginLeft: 'var(--pf-global--spacer--xs)', verticalAlign: 'middle' }}
           />

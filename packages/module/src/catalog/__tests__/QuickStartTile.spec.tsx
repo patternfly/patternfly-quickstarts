@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
 import { CatalogTile } from '@patternfly/react-catalog-view-extension';
+import { shallow } from 'enzyme';
 import { getQuickStarts } from '../../data/test-utils';
-import QuickStartTile from '../QuickStartTile';
 import { QuickStartStatus } from '../../utils/quick-start-types';
+import QuickStartTile from '../QuickStartTile';
 
 describe('QuickStartTile', () => {
   const quickstarts = getQuickStarts();

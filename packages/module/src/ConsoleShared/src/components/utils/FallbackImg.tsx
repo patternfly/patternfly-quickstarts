@@ -10,8 +10,9 @@ type FallbackImgProps = {
 const FallbackImg: React.FC<FallbackImgProps> = ({ src, alt, className, fallback }) => {
   const [isSrcValid, setIsSrcValid] = React.useState<boolean>(true);
 
-  if (src && isSrcValid)
+  if (src && isSrcValid) {
     return <img className={className} src={src} alt={alt} onError={() => setIsSrcValid(false)} />;
+  }
 
   return <>{fallback}</>;
 };

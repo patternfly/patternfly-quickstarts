@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { ShallowWrapper, shallow } from 'enzyme';
-import { getQuickStartByName } from '../../utils/quick-start-utils';
+import { allQuickStarts } from '../../data/quick-start-test-data';
+import QuickStartMarkdownView from '../../QuickStartMarkdownView';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
-import QuickStartTask from '../QuickStartTasks';
+import { getQuickStartByName } from '../../utils/quick-start-utils';
 import TaskHeader from '../QuickStartTaskHeader';
 import QuickStartTaskReview from '../QuickStartTaskReview';
-import QuickStartMarkdownView from '../../QuickStartMarkdownView';
-import { allQuickStarts } from '../../data/quick-start-test-data';
+import QuickStartTask from '../QuickStartTasks';
 
 jest.mock('react', () => {
   const ActualReact = require.requireActual('react');
@@ -36,7 +36,7 @@ describe('QuickStartTasks', () => {
       activeQuickStartID: '',
       startQuickStart: () => {},
       restartQuickStart: () => {},
-      getResource: key => `quickstart~${key}`
+      getResource: (key) => `quickstart~${key}`,
     });
     wrapper = shallow(<QuickStartTask {...props} />);
   });

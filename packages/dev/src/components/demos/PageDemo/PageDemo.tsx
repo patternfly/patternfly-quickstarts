@@ -15,7 +15,7 @@ import {
   PageSection,
   PageSectionVariants,
   PageSidebar,
-  SkipToContent
+  SkipToContent,
 } from '@patternfly/react-core';
 import CogIcon from '@patternfly/react-icons/dist/js/icons/cog-icon';
 import HelpIcon from '@patternfly/react-icons/dist/js/icons/help-icon';
@@ -26,36 +26,36 @@ export class PageDemo extends React.Component {
   state = {
     isNavOpen: true,
     isDropdownOpen: false,
-    isKebabDropdownOpen: false
+    isKebabDropdownOpen: false,
   };
 
   onNavToggle = () => {
     this.setState({
-      isNavOpen: !this.state.isNavOpen
+      isNavOpen: !this.state.isNavOpen,
     });
   };
 
   onDropdownToggle = (isDropdownOpen: boolean) => {
     this.setState({
-      isDropdownOpen
+      isDropdownOpen,
     });
   };
 
-  onDropdownSelect = (_event: any) => {
+  onDropdownSelect = () => {
     this.setState({
-      isDropdownOpen: !this.state.isDropdownOpen
+      isDropdownOpen: !this.state.isDropdownOpen,
     });
   };
 
   onKebabDropdownToggle = (isKebabDropdownOpen: boolean) => {
     this.setState({
-      isKebabDropdownOpen
+      isKebabDropdownOpen,
     });
   };
 
-  onKebabDropdownSelect = (_event: any) => {
+  onKebabDropdownSelect = () => {
     this.setState({
-      isKebabDropdownOpen: !this.state.isKebabDropdownOpen
+      isKebabDropdownOpen: !this.state.isKebabDropdownOpen,
     });
   };
 
@@ -71,7 +71,7 @@ export class PageDemo extends React.Component {
       href: 'https://patternfly.org',
       // eslint-disable-next-line no-console
       onClick: () => console.log('clicked logo'),
-      target: '_blank'
+      target: '_blank',
     };
 
     const kebabDropdownItems = [
@@ -80,7 +80,7 @@ export class PageDemo extends React.Component {
       </DropdownItem>,
       <DropdownItem key="group 1 help">
         <HelpIcon /> Help
-      </DropdownItem>
+      </DropdownItem>,
     ];
 
     const userDropdownItems = [
@@ -90,7 +90,7 @@ export class PageDemo extends React.Component {
           User management
         </DropdownItem>
         <DropdownItem key="group 2 logout">Logout</DropdownItem>
-      </DropdownGroup>
+      </DropdownGroup>,
     ];
 
     const headerTools = (
@@ -98,7 +98,7 @@ export class PageDemo extends React.Component {
         <PageHeaderToolsGroup
           visibility={{
             default: 'hidden',
-            lg: 'visible'
+            lg: 'visible',
           }} /** the settings and help icon buttons are only visible on desktop sizes and replaced by a kebab dropdown for other sizes */
         >
           <PageHeaderToolsItem>
@@ -115,7 +115,7 @@ export class PageDemo extends React.Component {
         <PageHeaderToolsGroup>
           <PageHeaderToolsItem
             visibility={{
-              lg: 'hidden'
+              lg: 'hidden',
             }}
             id="kebab-dropdown"
             /** this kebab dropdown replaces the icon buttons and is hidden for desktop sizes */
@@ -136,7 +136,7 @@ export class PageDemo extends React.Component {
               md: 'visible',
               lg: 'visible',
               xl: 'visible',
-              '2xl': 'visible'
+              '2xl': 'visible',
             }} /** this user dropdown is hidden on mobile sizes */
           >
             <Dropdown
@@ -180,7 +180,9 @@ export class PageDemo extends React.Component {
         skipToContent={PageSkipToContent}
         mainAriaLabel="page demo"
       >
-        <PageSection variant={PageSectionVariants.darker}>Section with darker background</PageSection>
+        <PageSection variant={PageSectionVariants.darker}>
+          Section with darker background
+        </PageSection>
         <PageSection variant={PageSectionVariants.dark}>Section with dark background</PageSection>
         <PageSection variant={PageSectionVariants.light} isWidthLimited>
           Section with light background
@@ -189,7 +191,7 @@ export class PageDemo extends React.Component {
           padding={{
             default: 'noPadding',
             md: 'padding',
-            lg: 'padding'
+            lg: 'padding',
           }}
         >
           Section with padding only on medium/large

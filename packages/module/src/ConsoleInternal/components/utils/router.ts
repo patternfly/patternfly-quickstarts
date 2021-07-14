@@ -16,20 +16,17 @@ try {
   createHistory = createBrowserHistory;
 }
 
-export const history: AppHistory = createHistory(/*{ basename: window.SERVER_FLAGS.basePath }*/);
+export const history: AppHistory = createHistory();
 
-// const removeBasePath = (url = '/') =>
-//   _startsWith(url, window.SERVER_FLAGS.basePath)
-//     ? url.slice(window.SERVER_FLAGS.basePath.length - 1)
-//     : url;
-
-// // Monkey patch history to slice off the base path
-// (history as any).__replace__ = history.replace;
-// history.replace = (url) => (history as any).__replace__(removeBasePath(url));
-
-// (history as any).__push__ = history.push;
-// history.push = (url) => (history as any).__push__(removeBasePath(url));
-// (history as any).pushPath = (path) => (history as any).__push__(path);
+export const removeQueryArgument = (k: string) => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.has(k)) {
+    params.delete(k);
+    const url = new URL(window.location.href);
+    // @ts-ignore
+    history.replace(`${url.pathname}?${params.toString()}${url.hash}`);
+  }
+};
 
 export const setQueryArgument = (k: string, v: string) => {
   if (!v) {
@@ -38,16 +35,6 @@ export const setQueryArgument = (k: string, v: string) => {
   const params = new URLSearchParams(window.location.search);
   if (params.get(k) !== v) {
     params.set(k, v);
-    const url = new URL(window.location.href);
-    // @ts-ignore
-    history.replace(`${url.pathname}?${params.toString()}${url.hash}`);
-  }
-};
-
-export const removeQueryArgument = (k: string) => {
-  const params = new URLSearchParams(window.location.search);
-  if (params.has(k)) {
-    params.delete(k);
     const url = new URL(window.location.href);
     // @ts-ignore
     history.replace(`${url.pathname}?${params.toString()}${url.hash}`);

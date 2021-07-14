@@ -1,36 +1,34 @@
-import { QuickStart, QuickStartTask } from "@patternfly/quickstarts";
+import { QuickStart, QuickStartTask } from '@patternfly/quickstarts';
 
 export const ProcedureAdocHtmlParser = (
   body: string,
   id: string,
-  environmentVariables?: { [name: string]: string }
+  environmentVariables?: { [name: string]: string },
 ) => {
   const replaceEnvironmentVariables = (s: string | undefined) =>
     s?.replace(/\${(\w+)}/, (substring, name) => {
-      return environmentVariables[name]
-        ? environmentVariables[name]
-        : substring;
+      return environmentVariables[name] ? environmentVariables[name] : substring;
     });
 
-  const bodyDOM = document.createElement("body");
+  const bodyDOM = document.createElement('body');
   bodyDOM.innerHTML = body;
 
   const displayName = replaceEnvironmentVariables(
-    bodyDOM.querySelector("header")?.textContent.trim()
+    bodyDOM.querySelector('header')?.textContent.trim(),
   );
   const introduction = replaceEnvironmentVariables(
-    bodyDOM.querySelector(".qs-intro")?.innerHTML.trim()
+    bodyDOM.querySelector('.qs-intro')?.innerHTML.trim(),
   );
-  const prereqs = bodyDOM.querySelectorAll(".qs-prerequisites ul li");
-  const procedures = bodyDOM.querySelectorAll(".qs-task");
-  const duration = bodyDOM.querySelector(".qs-duration")?.textContent.trim();
-  const durationMinutes = parseInt(duration.match(/\d+/)[0]);
-  const icon = bodyDOM.querySelector(".qs-icon .icon")?.innerHTML.trim();
+  const prereqs = bodyDOM.querySelectorAll('.qs-prerequisites ul li');
+  const procedures = bodyDOM.querySelectorAll('.qs-task');
+  const duration = bodyDOM.querySelector('.qs-duration')?.textContent.trim();
+  const durationMinutes = parseInt(duration.match(/\d+/)[0], 10);
+  const icon = bodyDOM.querySelector('.qs-icon .icon')?.innerHTML.trim();
   const description = replaceEnvironmentVariables(
-    bodyDOM.querySelector(".qs-description")?.innerHTML.trim()
+    bodyDOM.querySelector('.qs-description')?.innerHTML.trim(),
   );
   const conclusion = replaceEnvironmentVariables(
-    bodyDOM.querySelector(".qs-conclusion")?.innerHTML.trim()
+    bodyDOM.querySelector('.qs-conclusion')?.innerHTML.trim(),
   );
 
   const prerequisites: string[] = [];
@@ -39,36 +37,37 @@ export const ProcedureAdocHtmlParser = (
   });
 
   const qsTasks: QuickStartTask[] = [];
-  procedures.forEach((procedure, index) => {
-    const verificationBlock =
-      procedure.querySelector(".olist.qs-task-verification ol");
+  procedures.forEach((procedure) => {
+    const verificationBlock = procedure.querySelector('.olist.qs-task-verification ol');
     qsTasks.push({
       title: replaceEnvironmentVariables(
-        procedure.querySelector(".qs-task-title")?.textContent.trim()
+        procedure.querySelector('.qs-task-title')?.textContent.trim(),
       ),
       description:
         replaceEnvironmentVariables(
-          procedure.querySelector(".qs-task-description")?.innerHTML.trim()
+          procedure.querySelector('.qs-task-description')?.innerHTML.trim(),
         ) +
         replaceEnvironmentVariables(
-          procedure.querySelector(".olist.qs-task-procedure ol")?.outerHTML.trim()
+          procedure.querySelector('.olist.qs-task-procedure ol')?.outerHTML.trim(),
         ),
       review: {
-        instructions: verificationBlock ? replaceEnvironmentVariables(`<ul>${verificationBlock.innerHTML}</ul>`) : "Have you completed these steps?",
+        instructions: verificationBlock
+          ? replaceEnvironmentVariables(`<ul>${verificationBlock.innerHTML}</ul>`)
+          : 'Have you completed these steps?',
         failedTaskHelp:
           replaceEnvironmentVariables(
-            procedure.querySelector(".qs-review.failed")?.innerHTML.trim()
-          ) || "This task isn’t verified yet. Try the task again.",
+            procedure.querySelector('.qs-review.failed')?.innerHTML.trim(),
+          ) || 'This task isn’t verified yet. Try the task again.',
       },
       summary: {
         success:
           replaceEnvironmentVariables(
-            procedure.querySelector(".qs-summary.success")?.innerHTML.trim()
-          ) || "You have completed this task!",
+            procedure.querySelector('.qs-summary.success')?.innerHTML.trim(),
+          ) || 'You have completed this task!',
         failed:
           replaceEnvironmentVariables(
-            procedure.querySelector(".qs-summary.failed")?.innerHTML.trim()
-          ) || "Try the steps again.",
+            procedure.querySelector('.qs-summary.failed')?.innerHTML.trim(),
+          ) || 'Try the steps again.',
       },
     });
   });
@@ -78,14 +77,14 @@ export const ProcedureAdocHtmlParser = (
       name: id,
     },
     spec: {
-      displayName: displayName,
+      displayName,
       durationMinutes,
       icon,
       description,
       introduction,
       conclusion,
       prerequisites,
-      nextQuickStart: ["todo"],
+      nextQuickStart: ['todo'],
       tasks: qsTasks,
     },
   };

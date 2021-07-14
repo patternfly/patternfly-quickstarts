@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
 import { Gallery, GalleryItem } from '@patternfly/react-core';
+import { shallow } from 'enzyme';
 import { EmptyBox } from '@console/internal/components/utils';
+import { getQuickStarts } from '../../data/test-utils';
 import { QuickStartCatalogPage } from '../../QuickStartCatalogPage';
 import QuickStartCatalog from '../QuickStartCatalog';
-import { getQuickStarts } from '../../data/test-utils';
 
 jest.mock('@console/shared', () => {
   const ActualShared = require.requireActual('@console/shared');

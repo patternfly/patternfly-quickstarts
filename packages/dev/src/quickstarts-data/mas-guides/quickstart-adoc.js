@@ -1,32 +1,32 @@
-const yaml = require("yaml");
-const path = require("path");
-const jp = require("jsonpath");
-const fs = require("fs-extra");
-const {JSDOM} = require("jsdom");
+/* eslint-disable */
+
+const yaml = require('yaml');
+const path = require('path');
+const jp = require('jsonpath');
+const fs = require('fs-extra');
+const { JSDOM } = require('jsdom');
 const fetch = require('sync-fetch');
 const asciidoctor = require('asciidoctor')();
-const Ajv = require("ajv").default;
+const Ajv = require('ajv').default;
 
-const pantheonBaseUrl = process.env.PANTHEON_URL || "https://pantheon.corp.redhat.com/api";
-const attributesFile = process.env.ATTRIBUTES_FILE || "quickstart-attributes.yml";
+const pantheonBaseUrl = process.env.PANTHEON_URL || 'https://pantheon.corp.redhat.com/api';
+const attributesFile = process.env.ATTRIBUTES_FILE || 'quickstart-attributes.yml';
 
 const buildQuickStart = (content, filePath, basePath, asciidocOptions) => {
-
-
   const validateJSON = (instance, schemaPath) => {
-    const ajv =  new Ajv();
-    const rawSchema = fs.readFileSync(schemaPath, "utf8").toString();
+    const ajv = new Ajv();
+    const rawSchema = fs.readFileSync(schemaPath, 'utf8').toString();
     const schema = JSON.parse(rawSchema);
     const validate = ajv.compile(schema);
     const valid = validate(instance);
     if (!valid) {
-      throw new Error(`${filePath} ${validate.errors.map(error => error.message).toString()}`);
+      throw new Error(`${filePath} ${validate.errors.map((error) => error.message).toString()}`);
     }
-  }
+  };
 
   const snippetCache = {};
 
-  const pantheonMappingsPath = path.join(basePath, "pantheon.yml");
+  const pantheonMappingsPath = path.join(basePath, 'pantheon.yml');
 
   let pantheonMappings;
 
@@ -34,7 +34,7 @@ const buildQuickStart = (content, filePath, basePath, asciidocOptions) => {
     // load the pantheon mappings
     pantheonMappings = yaml.parse(fs.readFileSync(pantheonMappingsPath, 'utf8').toString());
     // validate it
-    validateJSON(pantheonMappings, path.join("../", "pantheon.schema.json"));
+    validateJSON(pantheonMappings, path.join('../', 'pantheon.schema.json'));
   }
 
   let attributes;
@@ -43,24 +43,25 @@ const buildQuickStart = (content, filePath, basePath, asciidocOptions) => {
     const extname = path.extname(attributesFile);
     // Support for attributes declared as an asciidoc file, like pantheon does it
     console.log(extname);
-    if (extname === ".asciidoc" || extname === ".adoc") {
+    if (extname === '.asciidoc' || extname === '.adoc') {
       const attributesDoc = asciidoctor.loadFile(attributesFile, {
         attributes: {
-          qs: "true"
-        }
+          qs: 'true',
+        },
       });
       attributes = attributesDoc.getAttributes();
-    } else if (extname === ".yml" || extname === ".yaml") {
-      attributes = yaml.parse(fs.readFileSync(attributesFile, "utf-8").toString()) || {};
+    } else if (extname === '.yml' || extname === '.yaml') {
+      attributes = yaml.parse(fs.readFileSync(attributesFile, 'utf-8').toString()) || {};
     } else {
-      throw new Error(`${attributesFile} type is unsupported, must be .yml, .yaml, .adoc or .asciidoc`);
+      throw new Error(
+        `${attributesFile} type is unsupported, must be .yml, .yaml, .adoc or .asciidoc`,
+      );
     }
-
   } else {
-    attributes = {}
+    attributes = {};
   }
   // Inject auto-set attributes
-  attributes.qs = "true";
+  attributes.qs = 'true';
 
   if (!asciidocOptions) {
     asciidocOptions = {};
@@ -71,7 +72,14 @@ const buildQuickStart = (content, filePath, basePath, asciidocOptions) => {
   }
   asciidocOptions.attributes = attributes;
 
-  const loadSnippet = (ref, tag, type, asciiDocCallback, defaultPathExpression, defaultCssSelector) => {
+  const loadSnippet = (
+    ref,
+    tag,
+    type,
+    asciiDocCallback,
+    defaultPathExpression,
+    defaultCssSelector,
+  ) => {
     if (pantheonMappings) {
       // Load from pantheon, if mapped
       const answer = loadFromPantheon(ref, tag, defaultPathExpression, defaultCssSelector);
@@ -81,7 +89,7 @@ const buildQuickStart = (content, filePath, basePath, asciidocOptions) => {
       // otherwise continue to load from asciidoc
     }
     if (!snippetCache[ref]) {
-      const parts = ref.split("#");
+      const parts = ref.split('#');
       if (parts.length !== 2) {
         throw Error(`malformed ${tag} ${ref}, must be like !${tag} README.adoc#task-1`);
       }
@@ -89,17 +97,17 @@ const buildQuickStart = (content, filePath, basePath, asciidocOptions) => {
       const filePath = path.normalize(path.join(basePath, fileName));
       const adoc = asciidoctor.loadFile(filePath, asciidocOptions);
       // create an array with all the blocks in the doc in it
-      const context = adoc.getAttribute("context", "{context}");
+      const context = adoc.getAttribute('context', '{context}');
       const blocks = flattenBlocks(adoc);
       blocks
         // only blocks with an id can be used
-        .filter(block => block.getId())
+        .filter((block) => block.getId())
         // If we are looking for a particular moduleType, we can filter for it
-        .filter(block => type ? getModuleType(block) === type : true)
-        .forEach(block => {
+        .filter((block) => (type ? getModuleType(block) === type : true))
+        .forEach((block) => {
           // create versions with, and without, the context
           const id = block.getId();
-          const contextLessId = block.getId().replace(`_${context}`, "");
+          const contextLessId = block.getId().replace(`_${context}`, '');
           snippetCache[`${fileName}#${id}`] = block;
           if (!snippetCache[`${fileName}#${contextLessId}`]) {
             snippetCache[`${fileName}#${contextLessId}`] = block;
@@ -114,7 +122,7 @@ const buildQuickStart = (content, filePath, basePath, asciidocOptions) => {
       return asciiDocCallback(snippetCache[ref]);
     }
     return snippetCache[ref];
-  }
+  };
 
   const loadFromPantheon = (ref, tag, defaultPathExpression, defaultCssSelector) => {
     const mapping = pantheonMappings[`${tag} ${ref}`];
@@ -123,13 +131,13 @@ const buildQuickStart = (content, filePath, basePath, asciidocOptions) => {
     }
     let uuid, type, cssSelector, pathExpression;
 
-    if (typeof mapping === "object") {
-      uuid = mapping["uuid"];
-      type = mapping["type"];
-      cssSelector = mapping["cssSelector"] || defaultCssSelector;
-      pathExpression = mapping["jsonPathExpression"] || defaultPathExpression;
-    } else if (typeof mapping === "string"){
-      if (mapping.startsWith("https")) {
+    if (typeof mapping === 'object') {
+      uuid = mapping.uuid;
+      type = mapping.type;
+      cssSelector = mapping.cssSelector || defaultCssSelector;
+      pathExpression = mapping.jsonPathExpression || defaultPathExpression;
+    } else if (typeof mapping === 'string') {
+      if (mapping.startsWith('https')) {
         const parts = mapping.match(/https:\/\/.*\/api\/(\w*)\/.*\/([a-z0-9-]*)/);
         if (parts.length !== 3) {
           throw new Error(`Unable to parse ${mapping} as pantheon URL`);
@@ -140,34 +148,36 @@ const buildQuickStart = (content, filePath, basePath, asciidocOptions) => {
         pathExpression = defaultPathExpression;
       }
     } else {
-      throw new Error("${tag} ${ref} mapping to pantheon API is unsupported, should either be a URL or have keys for uuid and type");
+      throw new Error(
+        '${tag} ${ref} mapping to pantheon API is unsupported, should either be a URL or have keys for uuid and type',
+      );
     }
 
     if (!uuid) {
-      throw new Error(`uuid not set in ${pantheonMappingsPath}`)
+      throw new Error(`uuid not set in ${pantheonMappingsPath}`);
     }
     if (!type) {
-      throw new Error(`type not set in ${pantheonMappingsPath}`)
+      throw new Error(`type not set in ${pantheonMappingsPath}`);
     }
     const data = loadFromPantheonApi(uuid, type, pathExpression);
     const result = jp.nodes(data, pathExpression);
     return result
-      .map(node => {
-        const path = node["path"];
-        if (cssSelector && path && path[path.length - 1] === "body") {
-          const dom = new JSDOM(node["value"]);
+      .map((node) => {
+        const path = node.path;
+        if (cssSelector && path && path[path.length - 1] === 'body') {
+          const dom = new JSDOM(node.value);
           return dom.window.document.querySelector(cssSelector);
         }
-        return node["value"];
+        return node.value;
       })
-      .reduce(((previousValue, currentValue) => `${previousValue} ${currentValue}`), "");
+      .reduce((previousValue, currentValue) => `${previousValue} ${currentValue}`, '');
   };
 
   const loadFromPantheonApi = (uuid, type) => {
     const url = `${pantheonBaseUrl}/${type}/variant.json/${uuid}`;
-    const res = fetch(url)
+    const res = fetch(url);
     if (res.status != 200) {
-      throw new Error(`error fetching from pantheon ${res.status} ${res.text()}`)
+      throw new Error(`error fetching from pantheon ${res.status} ${res.text()}`);
     }
     return res.json();
   };
@@ -177,58 +187,72 @@ const buildQuickStart = (content, filePath, basePath, asciidocOptions) => {
 
     flat.push(block);
     if (block.hasBlocks()) {
-      block.getBlocks().forEach(block => {
-          flat.push(...flattenBlocks(block));
+      block.getBlocks().forEach((block) => {
+        flat.push(...flattenBlocks(block));
       });
     }
     return flat;
-  }
+  };
 
   const snippetTag = {
-    identify: value => value instanceof asciidoctor.AbstractBlock,
+    identify: (value) => value instanceof asciidoctor.AbstractBlock,
     tag: '!snippet',
     resolve: (doc, cst) => {
-      const parts = cst.strValue.split("#");
+      const parts = cst.strValue.split('#');
       if (parts.length !== 2) {
         throw Error(`malformed !snippet ${cst.str}, must be like !snippet README.adoc#task-1`);
       }
       const id = parts[1];
-      return loadSnippet(cst.strValue, "!snippet", undefined, (block) => block.convert(), '$.*.body', `#${id}`);
+      return loadSnippet(
+        cst.strValue,
+        '!snippet',
+        undefined,
+        (block) => block.convert(),
+        '$.*.body',
+        `#${id}`,
+      );
     },
     stringify(item) {
       return item.convert();
-    }
+    },
   };
 
   const procTag = {
-    identify: value => value instanceof asciidoctor.AbstractBlock && getModuleType(value) === "proc",
+    identify: (value) =>
+      value instanceof asciidoctor.AbstractBlock && getModuleType(value) === 'proc',
     tag: '!snippet/proc',
-    resolve: (doc, cst) => loadSnippet(cst.strValue, "!snippet/proc", "proc", (block) => block.convert(), '$.*.body'),
-    stringify: () => ""
+    resolve: (doc, cst) =>
+      loadSnippet(cst.strValue, '!snippet/proc', 'proc', (block) => block.convert(), '$.*.body'),
+    stringify: () => '',
   };
 
   const titleTag = {
     identify: false,
     tag: '!snippet/title',
-    resolve: (doc, cst) => loadSnippet(cst.strValue, "!snippet/title", undefined,(block) => block.getTitle(), '$.*.title'),
-    stringify: () => ""
+    resolve: (doc, cst) =>
+      loadSnippet(
+        cst.strValue,
+        '!snippet/title',
+        undefined,
+        (block) => block.getTitle(),
+        '$.*.title',
+      ),
+    stringify: () => '',
   };
 
   // load the yaml
   const qs = yaml.parse(content.toString(), {
-    customTags: [snippetTag, procTag, titleTag]
+    customTags: [snippetTag, procTag, titleTag],
   });
 
-  validateJSON(qs, path.join("src/quickstarts-data/mas-guides/", "quickstart.schema.json"));
+  validateJSON(qs, path.join('src/quickstarts-data/mas-guides/', 'quickstart.schema.json'));
 
   // transform the yaml to json for the browser to load
   const json = JSON.stringify(qs);
   return json;
-}
+};
 
-
-
-const MODULE_TYPE_ATTRIBUTE = "module-type";
+const MODULE_TYPE_ATTRIBUTE = 'module-type';
 
 const getModuleType = (node) => {
   if (node.getAttributes()[MODULE_TYPE_ATTRIBUTE]) {
@@ -237,18 +261,18 @@ const getModuleType = (node) => {
 
   const id = node.getId();
 
-  if (id && id.startsWith("con-")) {
-    return "con";
+  if (id && id.startsWith('con-')) {
+    return 'con';
   }
 
-  if (id && id.startsWith("proc-")) {
-    return "proc";
+  if (id && id.startsWith('proc-')) {
+    return 'proc';
   }
 
-  if (id && id.startsWith("ref-")) {
-    return "ref";
+  if (id && id.startsWith('ref-')) {
+    return 'ref';
   }
-  return "unknown"; // punt, we don't know
-}
+  return 'unknown'; // punt, we don't know
+};
 
 exports.buildQuickStart = buildQuickStart;

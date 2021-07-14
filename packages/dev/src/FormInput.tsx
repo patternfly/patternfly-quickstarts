@@ -1,14 +1,16 @@
-import React from "react";
-import { Form, FormGroup, TextInput } from "@patternfly/react-core";
+import React from 'react';
+import { Form, FormGroup, TextInput } from '@patternfly/react-core';
 
-export const FormInput = ({ inputValue, setInputValue }: {inputValue: string; setInputValue: any}) => {
+export const FormInput = ({
+  inputValue,
+  setInputValue,
+}: {
+  inputValue: string;
+  setInputValue: any;
+}) => {
   return (
     <Form isWidthLimited>
-      <FormGroup
-        label="Substitution for 'CENTRAL'"
-        isRequired
-        fieldId="central-name"
-      >
+      <FormGroup label="Substitution for 'CENTRAL'" isRequired fieldId="central-name">
         <TextInput
           value={inputValue}
           type="text"

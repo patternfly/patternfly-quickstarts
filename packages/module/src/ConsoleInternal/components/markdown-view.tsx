@@ -1,15 +1,14 @@
 import * as React from 'react';
-import { Converter } from 'showdown';
-import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 import cx from 'classnames';
+import { Converter } from 'showdown';
 import { useForceRender } from '@console/shared';
-
+import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 import './_markdown-view.scss';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const DOMPurify = require('dompurify');
 
-const tableTags = ['table', 'thead', 'tbody', 'tr', 'th', 'td'];
+// const tableTags = ['table', 'thead', 'tbody', 'tr', 'th', 'td'];
 
 type ShowdownExtension = {
   type: string;
@@ -25,10 +24,12 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
     emoji: false,
   });
 
-  extensions && converter.addExtension(extensions);
+  if (extensions) {
+    converter.addExtension(extensions);
+  }
 
   // add hook to transform anchor tags
-  DOMPurify.addHook('beforeSanitizeElements', function (node) {
+  DOMPurify.addHook('beforeSanitizeElements', function(node) {
     // nodeType 1 = element type
     if (node.nodeType === 1 && node.nodeName.toLowerCase() === 'a') {
       node.setAttribute('rel', 'noopener noreferrer');
@@ -37,33 +38,38 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
   });
 
   return DOMPurify.sanitize(converter.makeHtml(markdown), {
-    ALLOWED_TAGS: [
-      'b',
-      'i',
-      'strike',
-      's',
-      'del',
-      'em',
-      'strong',
-      'a',
-      'p',
-      'h1',
-      'h2',
-      'h3',
-      'h4',
-      'ul',
-      'ol',
-      'li',
-      'code',
-      'pre',
-      'button',
-      ...tableTags,
-      'div',
-      'img',
-      'span',
-    ],
-    ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'src', 'alt', 'id'],
-    ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto|didact):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+    USE_PROFILES: {
+      html: true,
+      svg: true,
+    },
+    // ALLOWED_TAGS: [
+    //   'b',
+    //   'i',
+    //   'strike',
+    //   's',
+    //   'del',
+    //   'em',
+    //   'strong',
+    //   'a',
+    //   'p',
+    //   'h1',
+    //   'h2',
+    //   'h3',
+    //   'h4',
+    //   'ul',
+    //   'ol',
+    //   'li',
+    //   'code',
+    //   'pre',
+    //   'button',
+    //   ...tableTags,
+    //   'div',
+    //   'img',
+    //   'span',
+    //   'svg',
+    // ],
+    // ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'src', 'alt', 'id'],
+    // ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto|didact):|[^a-z]|[a-z+.-]+(?:[^a-z+.\-:]|$))/i,
   });
 };
 
@@ -71,7 +77,7 @@ type SyncMarkdownProps = {
   content?: string;
   emptyMsg?: string;
   exactHeight?: boolean;
-  /*truncateContent?: boolean;*/
+  /* truncateContent?: boolean; */
   extensions?: ShowdownExtension[];
   renderExtension?: (contentDocument: HTMLDocument, rootSelector: string) => React.ReactNode;
   inline?: boolean;
@@ -96,10 +102,7 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const markup = React.useMemo(() => {
-    return markdownConvert(
-      content || emptyMsg || getResource('Not available'),
-      extensions,
-    );
+    return markdownConvert(content || emptyMsg || getResource('Not available'), extensions);
   }, [content, emptyMsg, extensions, getResource]);
   const innerProps: InnerSyncMarkdownProps = {
     renderExtension: extensions?.length > 0 ? renderExtension : undefined,
@@ -111,12 +114,12 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
   return inline ? <InlineMarkdownView {...innerProps} /> : <IFrameMarkdownView {...innerProps} />;
 };
 
-const uniqueId = (function () {
+const uniqueId = (function() {
   let num = 0;
-  return function (prefix) {
-    prefix = String(prefix) || '';
+  return function(prefix) {
+    const prefixStr = String(prefix) || '';
     num += 1;
-    return prefix + num;
+    return prefixStr + num;
   };
 })();
 
@@ -149,7 +152,9 @@ const RenderExtension: React.FC<RenderExtensionProps> = ({
    * use forceRender to delay the rendering of extension by one render cycle
    */
   React.useEffect(() => {
-    renderExtension && forceRender();
+    if (renderExtension) {
+      forceRender();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [markup]);
   return (
@@ -165,9 +170,11 @@ const InlineMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
 }) => {
   const id = React.useMemo(() => uniqueId('markdown'), []);
   return (
-    <div className={cx('co-markdown-view', { ['is-empty']: isEmpty }, className)} id={id}>
+    <div className={cx('co-markdown-view', { 'is-empty': isEmpty }, className)} id={id}>
       <div dangerouslySetInnerHTML={{ __html: markup }} />
-      {renderExtension && <RenderExtension renderExtension={renderExtension} selector={`#${id}`} markup={markup} />}
+      {renderExtension && (
+        <RenderExtension renderExtension={renderExtension} selector={`#${id}`} markup={markup} />
+      )}
     </div>
   );
 };
@@ -196,9 +203,8 @@ const IFrameMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
         frame.style.height = `${frame.contentWindow.document.body.firstElementChild.scrollHeight}px`;
       } else {
         // Increase by 15px for the case where a horizontal scrollbar might appear
-        frame.style.height = `${
-          frame.contentWindow.document.body.firstElementChild.scrollHeight + 15
-        }px`;
+        frame.style.height = `${frame.contentWindow.document.body.firstElementChild.scrollHeight +
+          15}px`;
       }
     });
   }, [frame, exactHeight]);

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { QuickStartContext, QuickStartContextValues } from '../../../utils/quick-start-context';
 import classNames from 'classnames';
+import { QuickStartContext, QuickStartContextValues } from '../../../utils/quick-start-context';
 
 // import * as restrictedSignImg from '../../imgs/restricted-sign.svg';
 // import { TimeoutError } from '../../co-fetch';
@@ -31,7 +31,9 @@ export const EmptyBox: React.FC<EmptyBoxProps> = ({ label }) => {
   return (
     <Box>
       <div data-test="empty-message" className="text-center">
-        {label ? getResource('No {{label}} found').replace('{{label}}', label) : getResource('Not found')}
+        {label
+          ? getResource('No {{label}} found').replace('{{label}}', label)
+          : getResource('Not found')}
       </div>
     </Box>
   );
