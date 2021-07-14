@@ -6,29 +6,27 @@ https://quickstarts.netlify.app/
 ## Install
 
 ```bash
-yarn add @patternfly/quickstarts @patternfly/patternfly
-or
-npm install @patternfly/quickstarts @patternfly/patternfly
+yarn add @patternfly/quickstarts
 ```
 
-The package currently has these peer dependencies:
+### Peer dependencies
 
+If your project doesn't already have these installed, you'll need:
+```bash
+yarn add @patternfly/react-core showdown@1.8.6
 ```
-"react": ">=16.8.0",
-"react-dom": ">=16.8.0",
-"@patternfly/patternfly": ">=4.90.5",
-"@patternfly/react-core": ">=4.101.3"
-"@patternfly/react-catalog-view-extension": ">=4.10.13"
-```
+
+### Stylesheets
 
 In your web-apps entry point, add these stylesheets (these should be imported before modules from @patternfly/quickstarts are imported):
 
 ```js
-import '@patternfly/patternfly/base/patternfly-shield-inheritable.css';
-import '@patternfly/patternfly/patternfly.min.css';
-import '@patternfly/patternfly/utilities/Accessibility/accessibility.css';
-import '@patternfly/react-catalog-view-extension/dist/css/react-catalog-view-extension.css';
-import '@patternfly/quickstarts/dist/quickstarts.css';
+// base styles/variables for PatternFly-react
+import '@patternfly/react-core/dist/styles/base.css';
+// quick starts styles
+import '@patternfly/quickstarts/dist/quickstarts.min.css';
+// global bootstrap styles needed for quick starts
+import '@patternfly/quickstarts/dist/quickstarts-bootstrap.min.css';
 ```
 
 ## Usage
@@ -44,7 +42,7 @@ import {
   useLocalStorage,
   QuickStartContextValues
 } from '@patternfly/quickstarts';
-// for how these yaml files should look see below
+// for how these quick start yaml files should look see below
 import quickstartOne from '.yamls/quickstart-one.yaml';
 import quickstartTwo from '.yamls/quickstart-two.yaml';
 
