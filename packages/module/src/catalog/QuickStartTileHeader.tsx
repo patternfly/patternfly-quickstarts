@@ -47,6 +47,7 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
         {duration && (
           <Label
             variant="outline"
+            data-test="duration"
             icon={<OutlinedClockIcon />}
             className="co-quick-start-tile-header--margin"
           >
