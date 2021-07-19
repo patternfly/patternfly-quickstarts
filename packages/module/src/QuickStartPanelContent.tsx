@@ -53,12 +53,14 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
     quickStart?.spec.nextQuickStart?.includes(qs.metadata.name),
   );
 
-  const headerClasses = classNames({
-    'pf-u-box-shadow-sm-bottom': shadows === Shadows.top || shadows === Shadows.both,
+  const headerClasses = classNames('co-quick-start-panel-content__header', {
+    'co-quick-start-panel-content__header__shadow':
+      shadows === Shadows.top || shadows === Shadows.both,
   });
 
   const footerClass = classNames({
-    'pf-u-box-shadow-sm-top': shadows === Shadows.bottom || shadows === Shadows.both,
+    'co-quick-start-panel-content__footer__shadow':
+      shadows === Shadows.bottom || shadows === Shadows.both,
   });
 
   const getStep = () => {
@@ -81,7 +83,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
       data-test="quickstart drawer"
       {...props}
     >
-      <div className={`co-quick-start-panel-content-head ${headerClasses}`}>
+      <div className={headerClasses}>
         <DrawerHead>
           <div className="co-quick-start-panel-content__title">
             <Title
