@@ -43,9 +43,9 @@
     "showdown": ">=1.8.6"
   },
   "dependencies": {
-    "@patternfly/patternfly": "4.108.2",
-    "@patternfly/react-catalog-view-extension": "4.11.42",
-    "@patternfly/react-core": "4.128.2",
+    "@patternfly/patternfly": "4.122.2",
+    "@patternfly/react-catalog-view-extension": "4.12.15",
+    "@patternfly/react-core": "4.135.15",
     "bootstrap-sass": "^3.3.7",
     "classnames": "^2.2.6",
     "dompurify": "^2.2.6",
