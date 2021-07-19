@@ -21,16 +21,17 @@ const QuickStartCloseModal: React.FC<QuickStartCloseModalProps> = ({
       isOpen={isOpen}
       variant={ModalVariant.small}
       showClose={false}
+      data-test="leave-quickstart"
       title={getResource('Leave quick start?')}
       footer={
         <Flex>
           <FlexItem align={{ default: 'alignRight' }}>
-            <Button variant="secondary" onClick={onCancel}>
+            <Button variant="secondary" data-test="cancel button" onClick={onCancel}>
               {getResource('Cancel')}
             </Button>
           </FlexItem>
           <FlexItem>
-            <Button variant="primary" onClick={onConfirm}>
+            <Button variant="primary" data-test="leave button" onClick={onConfirm}>
               {getResource('Leave')}
             </Button>
           </FlexItem>
