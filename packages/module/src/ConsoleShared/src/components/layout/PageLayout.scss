@@ -22,5 +22,11 @@
   &__title {
     padding-left: var(--pf-global--spacer--lg);
     padding-right: var(--pf-global--spacer--lg);
+    font-size: var(--pf-global--FontSize--2xl);
+    margin-top: 23px;
+    margin-bottom: 11.5px;
+    font-family: var(--pf-global--FontFamily--heading--sans-serif);
+    font-weight: var(--pf-global--FontWeight--normal);
+    line-height: 1.1;
   }
 }

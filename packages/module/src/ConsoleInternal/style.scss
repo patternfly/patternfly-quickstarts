@@ -6,11 +6,17 @@
 @import 'components/catalog/catalog';
 
 .co-quick-start-panel-content,
-.ocs-page-layout__content {
+.ocs-page-layout__content,
+.ocs-page-layout__base {
   --pf-global--FontSize--md: 14px;
   --pf-global--FontSize--sm: 13px;
 
   ul {
       list-style-type: disc;
+  }
+
+  input[type='radio'],
+  input[type='checkbox'] {
+    margin-top: 1px !important;
   }
 }

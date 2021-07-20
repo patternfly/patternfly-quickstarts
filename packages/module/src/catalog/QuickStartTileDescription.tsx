@@ -37,7 +37,7 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
           <Popover
             aria-label={getResource('Prerequisites')}
             headerContent={getResource('Prerequisites')}
-            className="co-quick-start-panel-content"
+            className="ocs-page-layout__base"
             bodyContent={
               <TextList
                 aria-label={getResource('Prerequisites')}
