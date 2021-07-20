@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/quickstarts",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "PatternFly quick starts",
   "files": [
     "dist"
@@ -51,7 +51,7 @@
     "classnames": "^2.2.6",
     "dompurify": "^2.2.6",
     "history": "^5.0.0",
-    "showdown": "1.8.6"
+    "showdown": "^1.9.1"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",

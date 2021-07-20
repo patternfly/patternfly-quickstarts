@@ -26,7 +26,7 @@
     "eslint-plugin-react": "7.17.0",
     "eslint-plugin-react-hooks": "2.3.0",
     "eslint-plugin-sort-class-members": "1.6.0",
-    "merge": "1.2.1",
+    "merge": "2.1.1",
     "prettier": "1.19.1"
   }
 }

@@ -9,7 +9,7 @@
     "serve": "serve public"
   },
   "dependencies": {
-    "@patternfly/quickstarts": "1.0.1",
+    "@patternfly/quickstarts": "1.0.2",
     "@patternfly/react-core": "^4.101.3",
     "asciidoctor": "^2.2.1",
     "react": "^16.14.0",
@@ -20,7 +20,7 @@
     "i18next-parser": "^3.3.0",
     "i18next-pseudo": "^2.2.0",
     "react-i18next": "^11.7.3",
-    "showdown": "1.8.6"
+    "showdown": "^1.9.1"
   },
   "devDependencies": {
     "@types/react": "^16.8.0",

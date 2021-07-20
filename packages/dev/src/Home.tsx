@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, PageSection, Stack, StackItem } from '@patternfly/react-core';
+import { Button, PageSection, Stack, StackItem, Title } from '@patternfly/react-core';
 import { QuickStartContext } from '@patternfly/quickstarts';
 import i18n from './i18n/i18n';
 
@@ -16,8 +16,8 @@ export const Home: React.FunctionComponent = () => {
   return (
     <>
       <PageSection>
-        <h1>Quick starts demo app</h1>
-        <p>To view all quick starts, click the left "Quick Starts" nav item</p>
+        <Title headingLevel="h1">Quick starts demo app</Title>
+        <p>To view all quick starts, click the left "Quick starts" nav item</p>
       </PageSection>
       <PageSection>
         <Stack hasGutter>
