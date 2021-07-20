@@ -100,9 +100,9 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     language,
     resourceBundle: {
       ...resourceBundle,
-      Start: "Let's go!",
-      Continue: 'Resume',
-      Restart: 'Start over',
+      // Start: "Let's go!",
+      // Continue: 'Resume',
+      // Restart: 'Start over',
     },
   };
 
