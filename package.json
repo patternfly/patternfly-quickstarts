@@ -21,7 +21,6 @@
     "lint:dev": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/dev"
   },
   "devDependencies": {
-    "@percy/script": "^1.1.0",
     "@types/jest": "^26.0.14",
     "@typescript-eslint/eslint-plugin": "2.11.0",
     "@typescript-eslint/parser": "2.11.0",
