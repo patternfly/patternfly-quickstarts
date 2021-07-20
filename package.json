@@ -18,9 +18,11 @@
     "eslint": "eslint --ext .js,.jsx,.ts,.tsx --color",
     "lint": "yarn lint:module && yarn lint:dev",
     "lint:module": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/module",
-    "lint:dev": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/dev"
+    "lint:dev": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/dev",
+    "visual": "npx percy exec -- node snapshots.js"
   },
   "devDependencies": {
+    "@percy/script": "^1.1.0",
     "@types/jest": "^26.0.14",
     "@typescript-eslint/eslint-plugin": "2.11.0",
     "@typescript-eslint/parser": "2.11.0",
