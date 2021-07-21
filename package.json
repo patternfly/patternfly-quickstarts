@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "yarn workspace @patternfly/quickstarts build",
+    "build:quick": "yarn workspace @patternfly/quickstarts quick",
     "start": "yarn workspace @patternfly/quickstarts-dev start",
     "watch": "yarn build && concurrently --kill-others \"yarn workspace @patternfly/quickstarts watch\" \"yarn start\"",
     "dev:build": "yarn workspace @patternfly/quickstarts-dev build",

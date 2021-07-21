@@ -9,8 +9,7 @@ spec:
   durationMinutes: 15
   description: Learn how to create a Serverless application.
   prerequisites: ['']
-  introduction: This quick start guides you through creating and using a serverless
-    application.
+  introduction: This quick start guides you through creating and using a serverless application.
   tasks:
     - title: Creating a serverless application
       description: |-

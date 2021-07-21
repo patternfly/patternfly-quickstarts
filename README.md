@@ -24,6 +24,9 @@ yarn install
 # Start the development server
 yarn start
 
-# Run a production build (outputs to "packages/module/dist" dir)
+# Build the main module (outputs to "packages/module/dist" dir)
 yarn build
+
+# Quick build of the main module for local dev
+yarn build:quick
 ```

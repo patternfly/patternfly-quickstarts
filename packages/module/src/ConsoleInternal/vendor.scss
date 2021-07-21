@@ -4,14 +4,3 @@
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/mixins';
 @import '~patternfly/dist/sass/patternfly/bootstrap-mixin-overrides';
 @import '~@patternfly/react-catalog-view-extension/dist/sass/react-catalog-view-extension.scss';
-
-.co-quick-start-panel-content,
-.ocs-page-layout__content,
-.co-quick-start-catalog-filter__flex {
-  // Note(yaacov): Workaround bootstrap issue, checkbox and radio buttons are not alligned with input label
-  // hack should be removed once bootstrap is fixed
-  input[type='radio'],
-  input[type='checkbox'] {
-    margin-top: 1px !important;
-  }
-}

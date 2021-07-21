@@ -13,7 +13,7 @@ yarn add @patternfly/quickstarts
 
 If your project doesn't already have these installed, you'll need:
 ```bash
-yarn add @patternfly/react-core showdown@1.8.6
+yarn add @patternfly/react-core showdown
 ```
 
 ### Stylesheets
@@ -31,16 +31,15 @@ import '@patternfly/quickstarts/dist/quickstarts-bootstrap.min.css';
 
 ## Usage
 
-In your main app file wrap your application with the QuickStartContext and the QuickStartDrawer:
+In your main app file wrap your application with the QuickStartContextProvider and the QuickStartDrawer:
 
 ```js
 import {
   QuickStartDrawer,
   QuickStartContext,
+  QuickStartContextProvider,
   QuickStartCatalogPage,
-  useValuesForQuickStartContext,
   useLocalStorage,
-  QuickStartContextValues
 } from '@patternfly/quickstarts';
 // for how these quick start yaml files should look see below
 import quickstartOne from '.yamls/quickstart-one.yaml';
@@ -52,35 +51,32 @@ const App = () => {
   // Otherwise you can use React.useState here or another means (backend) to store the active quick start ID and state
   const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage('quickstartId', '');
   const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage('quickstarts', {});
-  const valuesForQuickstartContext = useValuesForQuickStartContext({
+  const valuesForQuickstartContext = {
+    // array of quick starts
     allQuickStarts,
+    // the next 4 items tie the quick start state to the main app
     activeQuickStartID,
     setActiveQuickStartID,
     allQuickStartStates,
     setAllQuickStartStates
-  });
+  };
 
   return (
-    <QuickStartContext.Provider value={valuesForQuickstartContext}>
+    <QuickStartContextProvider value={valuesForQuickstartContext}>
       <QuickStartDrawer>
-        <div>
-          <h1>My app</h1>
-          <button onClick={() => valuesForQuickstartContext.setActiveQuickStart('a quickstart id')}>
-            Open a quickstart
-          </button>
-          <QuickStartCatalogPage />
-        </div>
         <SomeNestedComponent />
+        <QuickStartCatalogPage />
       </QuickStartDrawer>
-    </QuickStartContext.Provider>
+    </QuickStartContextProvider>
   );
 };
 
 const SomeNestedComponent = () => {
-  const qsContext = React.useContext<QuickStartContextValues> QuickStartContext;
+  const qsContext = React.useContext<QuickStartContextValues>(QuickStartContext);
+  // the quick start ID is defined in the quick start object's metadata.name field
   return (
-    <button onClick={() => qsContext.setActiveQuickStart('a quickstart id')}>
-      Open a quickstart from a nested component
+    <button onClick={() => qsContext.setActiveQuickStart('a_quickstart_id')}>
+      Toggle quick start
     </button>
   );
 };

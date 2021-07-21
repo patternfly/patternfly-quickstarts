@@ -107,7 +107,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
       taskNumber === totalTasks && (
         <Button
           variant="link"
-          className="pull-right"
+          className="co-quick-start-footer__restartbtn"
           onClick={onRestart}
           data-testid="qs-drawer-side-note-action"
         >

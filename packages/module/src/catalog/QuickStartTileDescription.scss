@@ -4,12 +4,22 @@
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+
+    p {
+      margin: 0 0 11.5px;
+    }
   }
 
   &-prerequisites {
     display: inline-flex;
     &__text {
       margin-right: var(--pf-global--spacer--sm);
+      font-size: var(--pf-global--FontSize--md);
+      margin-top: 11.5px;
+      margin-bottom: 11.5px;
+      font-family: var(--pf-global--FontFamily--heading--sans-serif);
+      font-weight: var(--pf-global--FontWeight--normal);
+      line-height: 1.1;
     }
 
     &__icon {
@@ -18,6 +28,10 @@
       &:hover {
         color: var(--pf-global--info-color--200) !important;
       }
+    }
+
+    &-list {
+      padding-left: 20px;
     }
   }
 }

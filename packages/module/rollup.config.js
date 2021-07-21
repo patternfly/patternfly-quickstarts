@@ -2,7 +2,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import analyze from 'rollup-plugin-analyzer';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import externals from 'rollup-plugin-node-externals';
 import typescript from 'rollup-plugin-typescript2';
 import visualizer from 'rollup-plugin-visualizer';
 import packageJson from './package.json';
@@ -38,7 +38,7 @@ const cjsBuild = {
   },
   external: ['react', 'react-dom'],
   plugins: [
-    peerDepsExternal(),
+    externals({ builtins: false }),
     scss({
       output: false,
       ...commonScssOptions,
@@ -50,7 +50,7 @@ const cjsBuild = {
 // ES build
 // Outputs the compiled dist/index.es.js
 // as well as the main dist/quickstarts.css stylesheet
-const esBuild = {
+export const esBuild = {
   input: 'src/index.ts',
   output: {
     file: packageJson.module,
@@ -59,7 +59,7 @@ const esBuild = {
   },
   external: ['react', 'react-dom'],
   plugins: [
-    peerDepsExternal(),
+    externals(),
     scss({
       output: 'dist/quickstarts.css',
       ...commonScssOptions,
@@ -91,7 +91,7 @@ const esBuildWithDeps = {
 };
 
 // This is just for building out the quickstarts-bootstrap.css stylesheet
-const cssBootstrap = {
+export const cssBootstrap = {
   input: 'src/quickstarts-bootstrap.ts',
   output: {
     file: 'dist/quickstarts-bootstrap.js',

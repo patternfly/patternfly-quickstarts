@@ -1,14 +1,8 @@
-/*
-Projects would typically either load the base.css stylesheet (in combination with PF react components)
-or load the whole patternfly stylesheet (and maybe null load react-styles imported stylesheets from PF react components)
-*/
-
-// import '@patternfly/patternfly/patternfly.css';
-// import '@patternfly/patternfly/utilities/Accessibility/accessibility.css';
 import '@patternfly/react-core/dist/styles/base.css';
 
-import '@patternfly/quickstarts/dist/quickstarts.min.css';
-import '@patternfly/quickstarts/dist/quickstarts-bootstrap.min.css';
+import '@patternfly/quickstarts/dist/quickstarts.css';
+import '@patternfly/quickstarts/dist/quickstarts-bootstrap.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
