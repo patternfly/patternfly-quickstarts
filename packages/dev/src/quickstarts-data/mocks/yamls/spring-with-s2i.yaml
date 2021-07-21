@@ -68,7 +68,7 @@ spec:
     developer tooling to quickly scaffold new Spring projects, gain access to
     familiar Spring APIs in your favorite IDE, and deploy to Red Hat OpenShift
   tasks:
-    - description: |-
+    - description: >-
         To create a Spring application:
 
         1. Click on the [perspective switcher]{{highlight
