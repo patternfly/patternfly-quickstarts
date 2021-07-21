@@ -35,25 +35,24 @@
     "clean-css": "yarn clean-css:quickstarts && yarn clean-css:bootstrap"
   },
   "peerDependencies": {
-    "@patternfly/patternfly": ">=4.90.5",
-    "@patternfly/react-catalog-view-extension": ">=4.10.13",
-    "@patternfly/react-core": ">=4.101.3",
-    "@patternfly/react-icons": ">=4.9.5",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0",
+    "@patternfly/react-core": ">=4.101.3",
     "showdown": ">=1.8.6"
   },
   "dependencies": {
-    "@patternfly/patternfly": "4.122.2",
-    "@patternfly/react-catalog-view-extension": "4.12.15",
-    "@patternfly/react-core": "4.135.15",
     "bootstrap-sass": "^3.3.7",
     "classnames": "^2.2.6",
     "dompurify": "^2.2.6",
     "history": "^5.0.0",
-    "showdown": "^1.9.1"
+    "showdown": "1.8.6"
   },
   "devDependencies": {
+    "@patternfly/patternfly": "4.122.2",
+    "@patternfly/react-catalog-view-extension": "4.12.15",
+    "@patternfly/react-core": "4.135.15",
+    "@patternfly/react-icons": "4.11.4",
+    "@patternfly/react-tokens": "4.12.5",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
@@ -69,7 +68,6 @@
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.15.5",
     "enzyme-to-json": "^3.6.1",
-    "sass": "^1.35.2",
     "node-sass": "^6.0.1",
     "prettier": "^2.1.2",
     "purgecss": "^4.0.0",
@@ -81,11 +79,12 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.37.0",
     "rollup-plugin-analyzer": "^4.0.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-node-externals": "^2.2.0",
     "rollup-plugin-scss": "^3.0.0",
     "rollup-plugin-typescript2": "^0.29.0",
     "rollup-plugin-visualizer": "^5.5.0",
-    "rollup-plugin-copy": "^3.4.0",
+    "sass": "^1.35.2",
     "tslib": "^2.0.3"
   }
 }

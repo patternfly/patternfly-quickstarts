@@ -1,10 +1,3 @@
-/*
-Projects would typically either load the base.css stylesheet (in combination with PF react components)
-or load the whole patternfly stylesheet (and maybe null load react-styles imported stylesheets from PF react components)
-*/
-
-// import '@patternfly/patternfly/patternfly.css';
-// import '@patternfly/patternfly/utilities/Accessibility/accessibility.css';
 import '@patternfly/react-core/dist/styles/base.css';
 
 import '@patternfly/quickstarts/dist/quickstarts.css';

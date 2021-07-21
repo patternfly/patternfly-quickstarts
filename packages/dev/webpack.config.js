@@ -77,7 +77,8 @@ module.exports = (_env, argv) => {
         },
         {
           test: /\.ya?ml$/,
-          use: 'js-yaml-loader',
+          type: 'json',
+          use: 'yaml-loader',
         },
       ],
     },

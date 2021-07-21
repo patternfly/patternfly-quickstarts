@@ -89,7 +89,9 @@ export const CustomCatalog: React.FC = () => {
       <QuickStartCatalogSection>
         <TextContent>
           <Text component="h2">Quick starts</Text>
-          <Text component="p">Step-by-step instructions and tasks</Text>
+          <Text component="p" className="catalog-sub">
+            Step-by-step instructions and tasks
+          </Text>
         </TextContent>
         <Gallery className="co-quick-start-catalog__gallery" hasGutter>
           {allQuickStarts

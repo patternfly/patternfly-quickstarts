@@ -68,7 +68,7 @@ spec:
     developer tooling to quickly scaffold new Spring projects, gain access to
     familiar Spring APIs in your favorite IDE, and deploy to Red Hat OpenShift
   tasks:
-    - description: >-
+    - description: |-
         To create a Spring application:
 
         1. Click on the [perspective switcher]{{highlight
@@ -87,17 +87,17 @@ spec:
 
         1. In the **Git Repo URL** field, add 
           
-          ```
+            ```
             https://github.com/snowdrop/rest-http-example
-          ``` 
+            ``` 
 
         1. Click **Show advanced Git options** to expose additional form fields.
 
         1. Add 
 
-          ```
-          2.3.4-2-redhat
-          ``` 
+            ```
+            2.3.4-2-redhat
+            ``` 
         to the **Git reference** field.
 
         1. At the end of the form, click **Create**. 
