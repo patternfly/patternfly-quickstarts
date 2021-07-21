@@ -8,7 +8,7 @@ import {
   DrawerPanelContent,
   Title,
 } from '@patternfly/react-core';
-import classNames from 'classnames';
+import { css } from '@patternfly/react-styles';
 import * as ReactDOM from 'react-dom';
 import { Shadows, useScrollShadows } from '@console/shared';
 import QuickStartController from './QuickStartController';
@@ -53,12 +53,12 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
     quickStart?.spec.nextQuickStart?.includes(qs.metadata.name),
   );
 
-  const headerClasses = classNames('co-quick-start-panel-content__header', {
+  const headerClasses = css('co-quick-start-panel-content__header', {
     'co-quick-start-panel-content__header__shadow':
       shadows === Shadows.top || shadows === Shadows.both,
   });
 
-  const footerClass = classNames({
+  const footerClass = css({
     'co-quick-start-panel-content__footer__shadow':
       shadows === Shadows.bottom || shadows === Shadows.both,
   });

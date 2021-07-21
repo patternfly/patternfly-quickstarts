@@ -1,5 +1,5 @@
 import * as React from 'react';
-import cx from 'classnames';
+import { css } from '@patternfly/react-styles';
 import { Converter } from 'showdown';
 import { useForceRender } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
@@ -170,7 +170,7 @@ const InlineMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
 }) => {
   const id = React.useMemo(() => uniqueId('markdown'), []);
   return (
-    <div className={cx('co-markdown-view', { 'is-empty': isEmpty }, className)} id={id}>
+    <div className={css('co-markdown-view', { 'is-empty': isEmpty }, className)} id={id}>
       <div dangerouslySetInnerHTML={{ __html: markup }} />
       {renderExtension && (
         <RenderExtension renderExtension={renderExtension} selector={`#${id}`} markup={markup} />

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { css } from '@patternfly/react-styles';
 import { CamelCaseWrap } from '@console/internal/components/utils';
 import { DASH } from '../../constants';
 import { StatusComponentProps } from './types';
@@ -23,12 +23,12 @@ const StatusIconAndText: React.FC<StatusIconAndTextProps> = ({
 
   return (
     <span
-      className={classNames('co-icon-and-text', className)}
+      className={css('co-icon-and-text', className)}
       title={iconOnly && !noTooltip ? title : undefined}
     >
       {icon &&
         React.cloneElement(icon, {
-          className: classNames(
+          className: css(
             spin && 'fa-spin',
             icon.props.className,
             !iconOnly && 'co-icon-and-text__icon co-icon-flex-child',
