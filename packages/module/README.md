@@ -1,4 +1,4 @@
-# Quickstarts
+# Quick starts
 
 Demo
 https://quickstarts.netlify.app/
@@ -25,32 +25,59 @@ In your web-apps entry point, add these stylesheets (these should be imported be
 import '@patternfly/react-core/dist/styles/base.css';
 // quick starts styles
 import '@patternfly/quickstarts/dist/quickstarts.min.css';
-// global bootstrap styles needed for quick starts
+// additional styles needed for quick starts
+// not needed if you already globally use "bootstrap-sass": ">=3.3.7"
 import '@patternfly/quickstarts/dist/quickstarts-bootstrap.min.css';
 ```
 
-## Usage
+## Usage example
 
-In your main app file wrap your application with the QuickStartContextProvider and the QuickStartDrawer:
+Note: You can also view this example on [codesandbox](https://codesandbox.io/s/patternflyquickstarts-1386f?file=/src/App.js)!
+
+In your main app file wrap your application with the QuickStartContextProvider and the QuickStartDrawer.
 
 ```js
+import "./styles.css";
+
+// base styles/variables for PatternFly-react
+import "@patternfly/react-core/dist/styles/base.css";
+// quick starts styles
+import "@patternfly/quickstarts/dist/quickstarts.min.css";
+// additional styles needed for quick starts
+// not needed if you already globally use "bootstrap-sass": ">=3.3.7"
+import "@patternfly/quickstarts/dist/quickstarts-bootstrap.min.css";
+
+import * as React from "react";
 import {
   QuickStartDrawer,
   QuickStartContext,
   QuickStartContextProvider,
   QuickStartCatalogPage,
-  useLocalStorage,
-} from '@patternfly/quickstarts';
-// for how these quick start yaml files should look see below
-import quickstartOne from '.yamls/quickstart-one.yaml';
-import quickstartTwo from '.yamls/quickstart-two.yaml';
+  useLocalStorage
+} from "@patternfly/quickstarts";
+import jsYaml from "js-yaml";
+// quick start files could be yaml files or js files, or really anything,
+// as long as they get parsed out to the expexted JSON format
+import quickstartOne from "./quick-starts/quickstart-one.yaml";
+import quickstartTwo from "./quick-starts/quickstart-two.yaml";
+import quickstartThree from "./quick-starts/quickstart-three";
 
 const App = () => {
-  const allQuickStarts = [quickstartOne, quickstartTwo];
+  const allQuickStarts = [
+    jsYaml.load(quickstartOne),
+    jsYaml.load(quickstartTwo),
+    quickstartThree
+  ];
   // You can use the useLocalStorage hook if you want to store user progress in local storage
   // Otherwise you can use React.useState here or another means (backend) to store the active quick start ID and state
-  const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage('quickstartId', '');
-  const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage('quickstarts', {});
+  const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage(
+    "quickstartId",
+    ""
+  );
+  const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage(
+    "quickstarts",
+    {}
+  );
   const valuesForQuickstartContext = {
     // array of quick starts
     allQuickStarts,
@@ -58,50 +85,102 @@ const App = () => {
     activeQuickStartID,
     setActiveQuickStartID,
     allQuickStartStates,
-    setAllQuickStartStates
+    setAllQuickStartStates,
+    footer: {
+      // don't show card footers
+      show: false
+    }
   };
 
   return (
     <QuickStartContextProvider value={valuesForQuickstartContext}>
       <QuickStartDrawer>
         <SomeNestedComponent />
-        <QuickStartCatalogPage />
+        <QuickStartCatalogPage
+          showFilter
+          title="Quick starts"
+          hint="Learn how to create, import, and run applications with step-by-step instructions and tasks."
+        />
       </QuickStartDrawer>
     </QuickStartContextProvider>
   );
 };
 
 const SomeNestedComponent = () => {
-  const qsContext = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const qsContext = React.useContext(QuickStartContext);
   // the quick start ID is defined in the quick start object's metadata.name field
   return (
-    <button onClick={() => qsContext.setActiveQuickStart('a_quickstart_id')}>
-      Toggle quick start
+    <button onClick={() => qsContext.setActiveQuickStart("node-with-s2i")}>
+      Toggle a quick start from another component
     </button>
   );
 };
+
+export default App;
 ```
 
-## Features
+## Quick starts format
 
-### Highlighting elements in yaml+markdown
+Quick starts are parsed as markdown. To write your own quick start, if you use Typescript you can [check out the type definition here](https://github.com/patternfly/patternfly-quickstarts/blob/d52b194119f1ff16e69bf589d49a14931a19ac4b/packages/module/src/utils/quick-start-types.ts#L6).
 
-You can highlight an element on the page from the quick start. The element that should be highlightable needs an attribute like this:
-`data-quickstart-id="highlight-me"`
+A basic quick start has this structure:
+```yaml
+metadata:
+  name: id-of-this-quick-start
+spec:
+  displayName: Get started with Node
+  durationMinutes: 10
+  description: 'Import a Node Application from git, build, and deploy it onto OpenShift.'
+  introduction: >-
+    **Node.js** is based on the V8 JavaScript engine and allows you to write
+    server-side JavaScript applications. It provides an I/O model based on
+    events and non-blocking operations that enables you to write efficient
+    applications.
+  tasks:
+    - title: Create a Node application
+      description: First task description
+      review:
+        failedTaskHelp: This task isn’t verified yet. Try the task again.
+        instructions: >-
+          The application is represented by the light grey area with the white border. The deployment is a white circle. Verify that the application was successfully created.
+    - title: View the build status
+      description: Second task description
+      review:
+        failedTaskHelp: This task isn’t verified yet. Try the task again.
+        instructions: >-
+          This build may take a few minutes. When it's finished, a **Complete** badge will surface on the page header beside build name **nodejsrest-http-redhat-1**. Did this badge appear?
+  conclusion: Your Node application is deployed and ready.
+```
 
-In the quickstart .yaml file, you can add this type of markdown text to target this element:
-`Highlight [my element]{{highlight highlight-me}}`
+For more examples of quick starts, [you can go here](https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/dev/src/quickstarts-data/mocks/yamls).
 
-### Highlighting elements in asciidoc/adoc
+### Highlighting elements
 
-. To highlight items from a quick start, first the target item needs to have a data attribute: **data-quickstart-id="something"**
-. Then in asciidoc, the trigger element needs to have the `data-highlight__something` class/role, where the part after `data-highlight__` matches the data-quickstart-id of the target
-Here are some examples:
+You can highlight an element on the page from within a quick start. The element that should be highlightable needs a data-quickstart-id attribute. Example:
+```
+<button data-quickstart-id="special-btn">Click me</button>
+```
 
-- `link:[Click me to highlight the logo, role="data-highlight__logo"]`
-- `link:[Click me to highlight the Home nav item, role="data-highlight__home"]`
+In the quick start task description, you can add this type of markdown to target this element:
+```
+Highlight [special button]{{highlight special-btn}}
+```
 
-## yaml
+### Copyable text
 
-This section will get more info in the future. For now you can view sample yamls here:
-https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/dev/src/quickstarts-data/mocks/yamls
+You can have inline or block copyable text.
+
+#### Inline copyable text example
+```
+`echo "Donec id est ante"`{{copy}}
+```
+
+#### Multiline copyable text example
+```
+    ```
+      First line of text.
+      Second line of text.
+    ```{{copy}}
+```
+
+#### 
