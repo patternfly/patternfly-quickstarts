@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Alert, Radio } from '@patternfly/react-core';
-import cx from 'classnames';
+import { css } from '@patternfly/react-styles';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import {
@@ -35,7 +35,7 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
   const { instructions, failedTaskHelp: taskHelp } = review;
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
-  const alertClassNames = cx('co-quick-start-task-review', {
+  const alertClassNames = css('co-quick-start-task-review', {
     'co-quick-start-task-review--success': taskStatus === QuickStartTaskStatus.SUCCESS,
     'co-quick-start-task-review--failed': taskStatus === QuickStartTaskStatus.FAILED,
   });

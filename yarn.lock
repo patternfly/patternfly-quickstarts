@@ -346,15 +346,15 @@
   resolved "https://registry.yarnpkg.com/@patternfly/react-icons/-/react-icons-4.11.0.tgz#26790eeff22dc3204aa8cd094470f0a2f915634a"
   integrity sha512-WsIX34bO9rhVRmPG0jlV3GoFGfYgPC64TscNV0lxQosiVRnYIA6Z3nBSArtJsxo5Yn6c63glIefC/YTy6D/ZYg==
 
+"@patternfly/react-styles@4.11.4", "@patternfly/react-styles@^4.11.4":
+  version "4.11.4"
+  resolved "https://registry.yarnpkg.com/@patternfly/react-styles/-/react-styles-4.11.4.tgz#6b2a5cfd43bdd139179c5298677760d41db67b5e"
+  integrity sha512-I0fepc/eg3QBrJAB4qfBIsDBQY9yHMmWomUCAb19nM8ZcDDjZE/Z7jwIA3ioWN+/8brHXPfUXxnpkBmYkCNgVA==
+
 "@patternfly/react-styles@^4.11.0", "@patternfly/react-styles@^4.7.22":
   version "4.11.0"
   resolved "https://registry.yarnpkg.com/@patternfly/react-styles/-/react-styles-4.11.0.tgz#0068dcb18e1343242f93fa6024dcc077acd57fb9"
   integrity sha512-4eIqTwGI4mjt9DMqX6hnan4eRS+3LUWNaneTEJdmk+flKxtAE/O/OmQHvH4GetDnlSbyfATcA0VFbVtR0aRJAg==
-
-"@patternfly/react-styles@^4.11.4":
-  version "4.11.4"
-  resolved "https://registry.yarnpkg.com/@patternfly/react-styles/-/react-styles-4.11.4.tgz#6b2a5cfd43bdd139179c5298677760d41db67b5e"
-  integrity sha512-I0fepc/eg3QBrJAB4qfBIsDBQY9yHMmWomUCAb19nM8ZcDDjZE/Z7jwIA3ioWN+/8brHXPfUXxnpkBmYkCNgVA==
 
 "@patternfly/react-table@4.19.45":
   version "4.19.45"
@@ -2985,7 +2985,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5, classnames@^2.2.6:
+classnames@^2.2.5:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
   integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==

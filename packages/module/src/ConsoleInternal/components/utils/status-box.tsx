@@ -1,16 +1,16 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { css } from '@patternfly/react-styles';
 import { QuickStartContext, QuickStartContextValues } from '../../../utils/quick-start-context';
 
 // import * as restrictedSignImg from '../../imgs/restricted-sign.svg';
 // import { TimeoutError } from '../../co-fetch';
 
 export const Box: React.FC<BoxProps> = ({ children, className }) => (
-  <div className={classNames('cos-status-box', className)}>{children}</div>
+  <div className={css('cos-status-box', className)}>{children}</div>
 );
 
 export const Loading: React.FC<LoadingProps> = ({ className }) => (
-  <div className={classNames('co-m-loader co-an-fade-in-out', className)}>
+  <div className={css('co-m-loader co-an-fade-in-out', className)}>
     <div className="co-m-loader-dot__one" />
     <div className="co-m-loader-dot__two" />
     <div className="co-m-loader-dot__three" />
@@ -19,7 +19,7 @@ export const Loading: React.FC<LoadingProps> = ({ className }) => (
 Loading.displayName = 'Loading';
 
 export const LoadingBox: React.FC<LoadingBoxProps> = ({ className, message }) => (
-  <Box className={classNames('cos-status-box--loading', className)}>
+  <Box className={css('cos-status-box--loading', className)}>
     <Loading />
     {message && <div className="cos-status-box__loading-message">{message}</div>}
   </Box>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Title, WizardNavItem } from '@patternfly/react-core';
 import CheckCircleIcon from '@patternfly/react-icons/dist/js/icons/check-circle-icon';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/js/icons/exclamation-circle-icon';
-import cx from 'classnames';
+import { css } from '@patternfly/react-styles';
 import { markdownConvert } from '../ConsoleInternal/components/markdown-view';
 import { removeParagraphWrap } from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
@@ -62,7 +62,7 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   isActiveTask,
   onTaskSelect,
 }) => {
-  const classNames = cx('co-quick-start-task-header__title', {
+  const classNames = css('co-quick-start-task-header__title', {
     'co-quick-start-task-header__title-success': taskStatus === QuickStartTaskStatus.SUCCESS,
     'co-quick-start-task-header__title-failed': taskStatus === QuickStartTaskStatus.FAILED,
   });
