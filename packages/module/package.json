@@ -44,8 +44,7 @@
     "bootstrap-sass": "^3.3.7",
     "dompurify": "^2.2.6",
     "history": "^5.0.0",
-    "showdown": "1.8.6",
-    "@patternfly/react-catalog-view-extension": "4.12.15"
+    "showdown": "1.8.6"
   },
   "devDependencies": {
     "@patternfly/patternfly": "4.122.2",

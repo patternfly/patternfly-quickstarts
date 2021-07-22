@@ -170,7 +170,7 @@ const InlineMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
 }) => {
   const id = React.useMemo(() => uniqueId('markdown'), []);
   return (
-    <div className={css('pfe-markdown-view', { 'is-empty': isEmpty }, className)} id={id}>
+    <div className={css('pfext-markdown-view', { 'is-empty': isEmpty }, className)} id={id}>
       <div dangerouslySetInnerHTML={{ __html: markup }} />
       {renderExtension && (
         <RenderExtension renderExtension={renderExtension} selector={`#${id}`} markup={markup} />

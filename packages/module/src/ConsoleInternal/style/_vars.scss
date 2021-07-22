@@ -40,13 +40,13 @@ $table-border-color: $color-pf-black-200;
 
 // == Custom variables
 
-$pfe-m-label-line-height: 20px;
+$pfext-m-label-line-height: 20px;
 $pf-header-icon-fontsize: 16px; // Patternfly 4 default
 // Manually set because our default font size is different than PF 4
-$pfe-side-nav-font-size: $font-size-base; // Matches PF 4 --pf-c-nav__subnav__link--FontSize
-$pfe-side-nav-section-font-size: ($font-size-base + 2); // Matches PF 4 --pf-c-nav__link--FontSize
-$pfe-m-catalog-tile-height: 100%;
-$pfe-m-catalog-tile-width: 260px;
+$pfext-side-nav-font-size: $font-size-base; // Matches PF 4 --pf-c-nav__subnav__link--FontSize
+$pfext-side-nav-section-font-size: ($font-size-base + 2); // Matches PF 4 --pf-c-nav__link--FontSize
+$pfext-m-catalog-tile-height: 100%;
+$pfext-m-catalog-tile-width: 260px;
 
 
 // == Colors

@@ -7,10 +7,10 @@ export const Box: React.FC<BoxProps> = ({ children, className }) => (
 );
 
 export const Loading: React.FC<LoadingProps> = ({ className }) => (
-  <div className={css('pfe-m-loader pfe-an-fade-in-out', className)}>
-    <div className="pfe-m-loader-dot__one" />
-    <div className="pfe-m-loader-dot__two" />
-    <div className="pfe-m-loader-dot__three" />
+  <div className={css('pfext-m-loader pfext-an-fade-in-out', className)}>
+    <div className="pfext-m-loader-dot__one" />
+    <div className="pfext-m-loader-dot__two" />
+    <div className="pfext-m-loader-dot__three" />
   </div>
 );
 Loading.displayName = 'Loading';

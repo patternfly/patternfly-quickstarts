@@ -14,7 +14,7 @@ import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-st
 export const QuickStartCatalogFilterSearch = ({ searchInputText, handleTextChange, ...props }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
-    <ToolbarItem className="pfe-quick-start-catalog-filter__input">
+    <ToolbarItem className="pfext-quick-start-catalog-filter__input">
       <SearchInput
         placeholder={getResource('Filter by keyword...')}
         value={searchInputText}
@@ -57,7 +57,7 @@ export const QuickStartCatalogFilterCount = ({ quickStartsCount }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <ToolbarItem
-      className="pfe-quick-start-catalog-filter__count"
+      className="pfext-quick-start-catalog-filter__count"
       alignment={{ default: 'alignRight' }}
     >
       {getResource('{{count, number}} item', quickStartsCount).replace(

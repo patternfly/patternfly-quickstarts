@@ -35,9 +35,9 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
   const { instructions, failedTaskHelp: taskHelp } = review;
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
-  const alertClassNames = css('pfe-quick-start-task-review', {
-    'pfe-quick-start-task-review--success': taskStatus === QuickStartTaskStatus.SUCCESS,
-    'pfe-quick-start-task-review--failed': taskStatus === QuickStartTaskStatus.FAILED,
+  const alertClassNames = css('pfext-quick-start-task-review', {
+    'pfext-quick-start-task-review--success': taskStatus === QuickStartTaskStatus.SUCCESS,
+    'pfext-quick-start-task-review--failed': taskStatus === QuickStartTaskStatus.FAILED,
   });
 
   const title = <span className={alertClassNames}>{getResource('Check your work')}</span>;
@@ -45,13 +45,13 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
   return (
     <Alert variant={getAlertVariant(taskStatus)} title={title} isInline>
       <QuickStartMarkdownView content={instructions} />
-      <span className="pfe-quick-start-task-review__actions">
+      <span className="pfext-quick-start-task-review__actions">
         <Radio
           id="review-success"
           name="review-success"
           data-testid="qs-drawer-check-yes"
           label={getResource('Yes')}
-          className="pfe-quick-start-task-review__radio"
+          className="pfext-quick-start-task-review__radio"
           isChecked={taskStatus === QuickStartTaskStatus.SUCCESS}
           onChange={() => onTaskReview(QuickStartTaskStatus.SUCCESS)}
         />
@@ -60,7 +60,7 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
           name="review-failed"
           data-testid="qs-drawer-check-no"
           label={getResource('No')}
-          className="pfe-quick-start-task-review__radio"
+          className="pfext-quick-start-task-review__radio"
           isChecked={taskStatus === QuickStartTaskStatus.FAILED}
           onChange={() => onTaskReview(QuickStartTaskStatus.FAILED)}
         />
