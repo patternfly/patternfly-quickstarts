@@ -1,4 +1,4 @@
-@keyframes ocs-spotlight-expand {
+@keyframes pfext-spotlight-expand {
   0% {
     outline-offset: -4px;
     outline-width: 4px;
@@ -11,7 +11,7 @@
   }
 }
 
-@keyframes ocs-spotlight-fade-in {
+@keyframes pfext-spotlight-fade-in {
   0% {
     opacity: 0;
   }
@@ -20,7 +20,7 @@
   }
 }
 
-@keyframes ocs-spotlight-fade-out {
+@keyframes pfext-spotlight-fade-out {
   0% {
     opacity: 1;
   }
@@ -29,7 +29,7 @@
   }
 }
 
-.ocs-spotlight {
+.pfext-spotlight {
   pointer-events: none;
   position: absolute;
   &__with-backdrop {
@@ -45,7 +45,7 @@
     position: absolute;
     box-shadow: inset 0px 0px 0px 4px var(--pf-global--palette--blue-200);
     opacity: 0;
-    animation: 0.4s ocs-spotlight-fade-in 0s ease-in-out, 5s ocs-spotlight-fade-out 12.8s ease-in-out;
+    animation: 0.4s pfext-spotlight-fade-in 0s ease-in-out, 5s pfext-spotlight-fade-out 12.8s ease-in-out;
     animation-fill-mode: forwards;
     &::after {
       content: '';
@@ -54,7 +54,7 @@
       right: 0;
       top: 0;
       bottom: 0;
-      animation: 1.2s ocs-spotlight-expand 1.6s ease-out;
+      animation: 1.2s pfext-spotlight-expand 1.6s ease-out;
       animation-fill-mode: forwards;
       outline: 4px solid var(--pf-global--palette--blue-200);
       outline-offset: -4px;

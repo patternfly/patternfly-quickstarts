@@ -140,11 +140,11 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
   ) : (
     <>
       {showTitle && (
-        <div className="ocs-page-layout__header">
-          <Text component="h1" className="ocs-page-layout__title" data-test="page-title">
+        <div className="pfext-page-layout__header">
+          <Text component="h1" className="pfext-page-layout__title" data-test="page-title">
             {title || getResource('Quick Starts')}
           </Text>
-          {hint && <div className="ocs-page-layout__hint">{hint}</div>}
+          {hint && <div className="pfext-page-layout__hint">{hint}</div>}
         </div>
       )}
       {showTitle && <Divider component="div" />}

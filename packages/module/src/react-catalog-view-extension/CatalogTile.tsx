@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import {
   Card,
@@ -102,7 +104,7 @@ export class CatalogTile extends React.Component<CatalogTileProps> {
       vendor,
       description,
       footer,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // unused-var
       ref,
       children,
       ...props

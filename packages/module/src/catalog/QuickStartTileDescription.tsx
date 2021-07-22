@@ -25,7 +25,10 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
   const prereqs = prerequisites?.filter((p) => p);
   return (
     <>
-      <QuickStartMarkdownView content={description} className="pfext-quick-start-tile-description" />
+      <QuickStartMarkdownView
+        content={description}
+        className="pfext-quick-start-tile-description"
+      />
       {prereqs?.length > 0 && (
         <div className="pfext-quick-start-tile-prerequisites">
           <Text component={TextVariants.h5} className="pfext-quick-start-tile-prerequisites__text">
@@ -37,7 +40,7 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
           <Popover
             aria-label={getResource('Prerequisites')}
             headerContent={getResource('Prerequisites')}
-            className="ocs-page-layout__base"
+            className="pfext-page-layout__base"
             bodyContent={
               <TextList
                 aria-label={getResource('Prerequisites')}
