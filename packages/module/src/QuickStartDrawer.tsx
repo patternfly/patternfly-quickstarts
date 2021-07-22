@@ -107,7 +107,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
       <Drawer isExpanded={!!activeQuickStartID} isInline isStatic={isStatic} {...props}>
         {children ? (
           <DrawerContent panelContent={panelContent} {...fullWidthBodyStyle}>
-            <DrawerContentBody className="co-quick-start-drawer__body">
+            <DrawerContentBody className="pfe-quick-start-drawer__body">
               {children}
             </DrawerContentBody>
           </DrawerContent>

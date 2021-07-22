@@ -25,10 +25,10 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
   const prereqs = prerequisites?.filter((p) => p);
   return (
     <>
-      <QuickStartMarkdownView content={description} className="co-quick-start-tile-description" />
+      <QuickStartMarkdownView content={description} className="pfe-quick-start-tile-description" />
       {prereqs?.length > 0 && (
-        <div className="co-quick-start-tile-prerequisites">
-          <Text component={TextVariants.h5} className="co-quick-start-tile-prerequisites__text">
+        <div className="pfe-quick-start-tile-prerequisites">
+          <Text component={TextVariants.h5} className="pfe-quick-start-tile-prerequisites__text">
             {getResource('Prerequisites ({{totalPrereqs}})').replace(
               '{{totalPrereqs}}',
               prereqs.length,
@@ -41,7 +41,7 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
             bodyContent={
               <TextList
                 aria-label={getResource('Prerequisites')}
-                className="co-quick-start-tile-prerequisites-list"
+                className="pfe-quick-start-tile-prerequisites-list"
               >
                 {prereqs.map((prerequisite, index) => (
                   // eslint-disable-next-line react/no-array-index-key
@@ -55,7 +55,7 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
             <Button
               variant="link"
               isInline
-              className="co-quick-start-tile-prerequisites__icon"
+              className="pfe-quick-start-tile-prerequisites__icon"
               data-testid="qs-card-prereqs"
               onClick={(e) => {
                 e.preventDefault();

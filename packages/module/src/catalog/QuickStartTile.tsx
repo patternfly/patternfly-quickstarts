@@ -38,7 +38,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
 
   const quickStartIcon = (
     <FallbackImg
-      className="co-catalog-item-icon__img--large"
+      className="pfe-catalog-item-icon__img--large"
       src={icon}
       alt=""
       fallback={<RocketIcon />}
@@ -72,7 +72,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
           cursor: 'pointer',
         }}
         icon={quickStartIcon}
-        className="co-quick-start-tile"
+        className="pfe-quick-start-tile"
         data-testid={`qs-card-${camelize(displayName)}`}
         featured={isActive}
         title={

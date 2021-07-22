@@ -1,15 +1,15 @@
 // frontend/public/style/_vars.scss
 $font-size-base: 14px;
-$co-m-catalog-tile-height: 100%;
-$co-m-catalog-tile-width: 260px;
+$pfe-m-catalog-tile-height: 100%;
+$pfe-m-catalog-tile-width: 260px;
 
 $catalog-capability-level-icon-left: -20px;
 $catalog-capability-level-icon-top: 4px;
 $catalog-capability-level-inactive-color: var(--pf-global--Color--400);
 $catalog-item-icon-size-lg: 40px;
 $catalog-item-icon-size-sm: 24px;
-$co-modal-ignore-warning-icon-width: 30px;
-$catalog-tile-width: $co-m-catalog-tile-width;
+$pfe-modal-ignore-warning-icon-width: 30px;
+$catalog-tile-width: $pfe-m-catalog-tile-width;
 
 // reset font size back to 13px since console h5 font size is 14px
 .catalog-item-header-pf-subtitle {
@@ -20,27 +20,27 @@ $catalog-tile-width: $co-m-catalog-tile-width;
   font-size: ($font-size-base - 1);
 }
 
-.co-catalog {
+.pfe-catalog {
   display: flex;
   flex-direction: column;
   min-height: 100%;
   min-width: 515px; // in order to accommodate filters and tiles at mobile
 }
 
-.co-catalog-tile-view {
+.pfe-catalog-tile-view {
   display: flex;
   flex-wrap: wrap;
   --pf-l-gallery--GridTemplateColumns: repeat(auto-fill, 260px) !important;
 }
 
-.co-catalog__body {
-  min-width: 575px; // Minimum shrinkable width of .co-catalog child elements => 15 + ((220 + 15) + (30 + 250 + 30)) + 15
+.pfe-catalog__body {
+  min-width: 575px; // Minimum shrinkable width of .pfe-catalog child elements => 15 + ((220 + 15) + (30 + 250 + 30)) + 15
   @media (min-width: $screen-sm-min) {
     min-width: 590px; // Left margin 30 instead of 15
   }
 }
 
-.co-catalog-item-details {
+.pfe-catalog-item-details {
   display: flex;
   margin: 0 0 10px;
 
@@ -69,7 +69,7 @@ $catalog-tile-width: $co-m-catalog-tile-width;
   }
 }
 
-.co-catalog-item-icon {
+.pfe-catalog-item-icon {
   padding-right: 10px;
 
   &__icon {
@@ -99,7 +99,7 @@ $catalog-tile-width: $co-m-catalog-tile-width;
   }
 }
 
-.co-catalog-page {
+.pfe-catalog-page {
   background: $color-pf-white;
   border: 1px solid var(--pf-global--BorderColor--300);
   display: flex;
@@ -192,7 +192,7 @@ $catalog-tile-width: $co-m-catalog-tile-width;
   &__overlay {
     border: 0 !important; // Collapse default PF4 modal border-width
 
-    .modal-body .co-hint-block {
+    .modal-body .pfe-hint-block {
       margin-bottom: 10px;
     }
 
@@ -301,22 +301,22 @@ $catalog-tile-width: $co-m-catalog-tile-width;
 }
 
 @media screen and (min-width: $screen-sm) {
-  .pf-c-modal-box.co-catalog-page__overlay {
+  .pf-c-modal-box.pfe-catalog-page__overlay {
     width: 600px;
   }
 }
 
 @media screen and (min-width: $screen-md) {
-  .pf-c-modal-box.co-catalog-page__overlay {
+  .pf-c-modal-box.pfe-catalog-page__overlay {
     width: 900px;
   }
 }
 
-.co-catalog-tab__empty {
+.pfe-catalog-tab__empty {
   color: $color-pf-black-600;
 }
 
-.co-modal-ignore-warning {
+.pfe-modal-ignore-warning {
   height: initial;
 
   &__checkbox.checkbox {
@@ -327,10 +327,10 @@ $catalog-tile-width: $co-m-catalog-tile-width;
     display: flex;
   }
   &__icon {
-    font-size: $co-modal-ignore-warning-icon-width;
+    font-size: $pfe-modal-ignore-warning-icon-width;
     margin-right: 15px;
     // Avoid the dialog shifting when the icon loads.
-    min-width: $co-modal-ignore-warning-icon-width;
+    min-width: $pfe-modal-ignore-warning-icon-width;
   }
   &__link {
     display: block;

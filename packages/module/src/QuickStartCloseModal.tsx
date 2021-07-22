@@ -17,7 +17,7 @@ const QuickStartCloseModal: React.FC<QuickStartCloseModalProps> = ({
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <Modal
-      className="co-quick-start-drawer__modal"
+      className="pfe-quick-start-drawer__modal"
       isOpen={isOpen}
       variant={ModalVariant.small}
       showClose={false}

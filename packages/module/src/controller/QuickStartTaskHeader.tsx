@@ -28,22 +28,22 @@ const TaskIcon: React.FC<{ taskIndex: number; taskStatus: QuickStartTaskStatus }
   switch (taskStatus) {
     case QuickStartTaskStatus.SUCCESS:
       return (
-        <span className="co-icon-and-text__icon">
-          <CheckCircleIcon size="md" className="co-quick-start-task-header__task-icon-success" />
+        <span className="pfe-icon-and-text__icon">
+          <CheckCircleIcon size="md" className="pfe-quick-start-task-header__task-icon-success" />
         </span>
       );
     case QuickStartTaskStatus.FAILED:
       return (
-        <span className="co-icon-and-text__icon">
+        <span className="pfe-icon-and-text__icon">
           <ExclamationCircleIcon
             size="md"
-            className="co-quick-start-task-header__task-icon-failed"
+            className="pfe-quick-start-task-header__task-icon-failed"
           />
         </span>
       );
     default:
       return (
-        <span className="co-icon-and-text__icon co-quick-start-task-header__task-icon-init">
+        <span className="pfe-icon-and-text__icon pfe-quick-start-task-header__task-icon-init">
           {getResource('{{taskIndex, number}}', taskIndex).replace(
             '{{taskIndex, number}}',
             taskIndex,
@@ -62,13 +62,13 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   isActiveTask,
   onTaskSelect,
 }) => {
-  const classNames = css('co-quick-start-task-header__title', {
-    'co-quick-start-task-header__title-success': taskStatus === QuickStartTaskStatus.SUCCESS,
-    'co-quick-start-task-header__title-failed': taskStatus === QuickStartTaskStatus.FAILED,
+  const classNames = css('pfe-quick-start-task-header__title', {
+    'pfe-quick-start-task-header__title-success': taskStatus === QuickStartTaskStatus.SUCCESS,
+    'pfe-quick-start-task-header__title-failed': taskStatus === QuickStartTaskStatus.FAILED,
   });
 
   const content = (
-    <span className="co-quick-start-task-header">
+    <span className="pfe-quick-start-task-header">
       <Title headingLevel="h3" size={size} className={classNames}>
         <TaskIcon taskIndex={taskIndex} taskStatus={taskStatus} />
         <span dangerouslySetInnerHTML={{ __html: removeParagraphWrap(markdownConvert(title)) }} />
@@ -76,7 +76,7 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
           <>
             {' '}
             <span
-              className="co-quick-start-task-header__subtitle text-secondary"
+              className="pfe-quick-start-task-header__subtitle text-secondary"
               data-test-id="quick-start-task-subtitle"
             >
               {subtitle}
@@ -88,7 +88,7 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   );
 
   return (
-    <div className="co-quick-start-task-header">
+    <div className="pfe-quick-start-task-header">
       <WizardNavItem
         content={content}
         step={taskIndex}

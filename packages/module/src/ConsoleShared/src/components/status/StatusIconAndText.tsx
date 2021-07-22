@@ -23,7 +23,7 @@ const StatusIconAndText: React.FC<StatusIconAndTextProps> = ({
 
   return (
     <span
-      className={css('co-icon-and-text', className)}
+      className={css('pfe-icon-and-text', className)}
       title={iconOnly && !noTooltip ? title : undefined}
     >
       {icon &&
@@ -31,7 +31,7 @@ const StatusIconAndText: React.FC<StatusIconAndTextProps> = ({
           className: css(
             spin && 'fa-spin',
             icon.props.className,
-            !iconOnly && 'co-icon-and-text__icon co-icon-flex-child',
+            !iconOnly && 'pfe-icon-and-text__icon pfe-icon-flex-child',
           ),
         })}
       {!iconOnly && <CamelCaseWrap value={title} dataTest="status-text" />}

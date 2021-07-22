@@ -2,18 +2,15 @@ import * as React from 'react';
 import { css } from '@patternfly/react-styles';
 import { QuickStartContext, QuickStartContextValues } from '../../../utils/quick-start-context';
 
-// import * as restrictedSignImg from '../../imgs/restricted-sign.svg';
-// import { TimeoutError } from '../../co-fetch';
-
 export const Box: React.FC<BoxProps> = ({ children, className }) => (
   <div className={css('cos-status-box', className)}>{children}</div>
 );
 
 export const Loading: React.FC<LoadingProps> = ({ className }) => (
-  <div className={css('co-m-loader co-an-fade-in-out', className)}>
-    <div className="co-m-loader-dot__one" />
-    <div className="co-m-loader-dot__two" />
-    <div className="co-m-loader-dot__three" />
+  <div className={css('pfe-m-loader pfe-an-fade-in-out', className)}>
+    <div className="pfe-m-loader-dot__one" />
+    <div className="pfe-m-loader-dot__two" />
+    <div className="pfe-m-loader-dot__three" />
   </div>
 );
 Loading.displayName = 'Loading';
