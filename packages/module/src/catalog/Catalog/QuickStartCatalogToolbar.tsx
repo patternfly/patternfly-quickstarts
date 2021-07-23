@@ -6,7 +6,7 @@ export type QuickStartCatalogToolbarProps = {
 };
 
 export const QuickStartCatalogToolbar: React.FC<QuickStartCatalogToolbarProps> = ({ children }) => (
-  <Toolbar usePageInsets className="co-quick-start-catalog-filter__flex">
+  <Toolbar usePageInsets className="pfext-quick-start-catalog-filter__flex">
     {children}
   </Toolbar>
 );

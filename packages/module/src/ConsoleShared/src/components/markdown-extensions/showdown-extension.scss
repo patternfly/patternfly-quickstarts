@@ -1,5 +1,5 @@
-.co-markdown-view {
-  .ocs-code-block__pre {
+.pfext-markdown-view {
+  .pfext-code-block__pre {
     /* override the styles applied by showdown while parsing <pre /> */
     display: flex;
     border: none;
@@ -9,7 +9,7 @@
     padding: 0;
   }
   
-  .ocs-markdown-execute-snippet {
+  .pfext-markdown-execute-snippet {
   
     &__button {
       & > i.fa-check {

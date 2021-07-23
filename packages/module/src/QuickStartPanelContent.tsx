@@ -53,13 +53,13 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
     quickStart?.spec.nextQuickStart?.includes(qs.metadata.name),
   );
 
-  const headerClasses = css('co-quick-start-panel-content__header', {
-    'co-quick-start-panel-content__header__shadow':
+  const headerClasses = css('pfext-quick-start-panel-content__header', {
+    'pfext-quick-start-panel-content__header__shadow':
       shadows === Shadows.top || shadows === Shadows.both,
   });
 
   const footerClass = css({
-    'co-quick-start-panel-content__footer__shadow':
+    'pfext-quick-start-panel-content__footer__shadow':
       shadows === Shadows.bottom || shadows === Shadows.both,
   });
 
@@ -77,7 +77,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   const content = quickStart ? (
     <DrawerPanelContent
       isResizable={isResizable}
-      className="co-quick-start-panel-content"
+      className="pfext-quick-start-panel-content"
       data-testid={`qs-drawer-${camelize(quickStart.spec.displayName)}`}
       data-qs={`qs-step-${getStep()}`}
       data-test="quickstart drawer"
@@ -85,14 +85,14 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
     >
       <div className={headerClasses}>
         <DrawerHead>
-          <div className="co-quick-start-panel-content__title">
+          <div className="pfext-quick-start-panel-content__title">
             <Title
               headingLevel="h1"
               size="xl"
               style={{ marginRight: 'var(--pf-global--spacer--md)' }}
             >
               {quickStart?.spec.displayName}{' '}
-              <small className="co-quick-start-panel-content__duration text-secondary">
+              <small className="pfext-quick-start-panel-content__duration text-secondary">
                 {getResource(
                   '{{duration, number}} minutes',
                   quickStart?.spec.durationMinutes,
@@ -109,7 +109,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
       </div>
       <DrawerPanelBody
         hasNoPadding
-        className="co-quick-start-panel-content__body"
+        className="pfext-quick-start-panel-content__body"
         data-test="content"
       >
         <QuickStartController

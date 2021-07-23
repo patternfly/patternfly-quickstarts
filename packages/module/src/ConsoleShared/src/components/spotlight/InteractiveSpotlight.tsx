@@ -49,7 +49,7 @@ const InteractiveSpotlight: React.FC<InteractiveSpotlightProps> = ({ element }) 
   return (
     <Portal>
       <SimplePopper>
-        <div className="ocs-spotlight ocs-spotlight__element-highlight-animate" style={style} />
+        <div className="pfext-spotlight pfext-spotlight__element-highlight-animate" style={style} />
       </SimplePopper>
     </Portal>
   );

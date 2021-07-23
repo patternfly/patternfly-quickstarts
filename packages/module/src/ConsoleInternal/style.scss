@@ -5,9 +5,12 @@
 @import 'components/icon-and-text';
 @import 'components/catalog/catalog';
 
-.co-quick-start-panel-content,
-.ocs-page-layout__content,
-.ocs-page-layout__base {
+// drawer
+.pfext-quick-start-panel-content,
+// catalog gallery wrapper
+.pfext-page-layout__content,
+// catalog item prereq popover
+.pfext-page-layout__base {
   --pf-global--FontSize--md: 14px;
   --pf-global--FontSize--sm: 13px;
 

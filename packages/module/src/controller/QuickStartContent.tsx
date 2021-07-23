@@ -36,7 +36,7 @@ const QuickStartContent = React.forwardRef<HTMLDivElement, QuickStartContentProp
     const nextQS = nextQuickStarts.length > 0 && nextQuickStarts[0];
 
     return (
-      <div className="co-quick-start-content" ref={ref}>
+      <div className="pfext-quick-start-content" ref={ref}>
         {taskNumber === -1 && (
           <QuickStartIntroduction
             tasks={tasks}

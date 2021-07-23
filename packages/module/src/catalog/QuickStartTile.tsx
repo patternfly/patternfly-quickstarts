@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { CatalogTile } from '@patternfly/react-catalog-view-extension';
+// import { CatalogTile } from '@patternfly/react-catalog-view-extension';
+import { CatalogTile } from '../react-catalog-view-extension/CatalogTile';
 import RocketIcon from '@patternfly/react-icons/dist/js/icons/rocket-icon';
 import { FallbackImg } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
@@ -38,7 +39,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
 
   const quickStartIcon = (
     <FallbackImg
-      className="co-catalog-item-icon__img--large"
+      className="pfext-catalog-item-icon__img--large"
       src={icon}
       alt=""
       fallback={<RocketIcon />}
@@ -72,7 +73,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
           cursor: 'pointer',
         }}
         icon={quickStartIcon}
-        className="co-quick-start-tile"
+        className="pfext-quick-start-tile"
         data-testid={`qs-card-${camelize(displayName)}`}
         featured={isActive}
         title={

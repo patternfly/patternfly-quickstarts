@@ -1,6 +1,5 @@
-@import 'style/vars';
-@import '~patternfly/dist/sass/patternfly/variables';
-@import '~bootstrap-sass/assets/stylesheets/bootstrap/variables';
-@import '~bootstrap-sass/assets/stylesheets/bootstrap/mixins';
-@import '~patternfly/dist/sass/patternfly/bootstrap-mixin-overrides';
+@import '~@patternfly/patternfly/sass-utilities/all';
+
 @import '~@patternfly/react-catalog-view-extension/dist/sass/react-catalog-view-extension.scss';
+@import '~@patternfly/patternfly/components/ClipboardCopy/clipboard-copy.scss';
+@import '~@patternfly/patternfly/components/CodeBlock/code-block.scss';

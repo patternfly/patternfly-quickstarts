@@ -19,8 +19,11 @@ const StaticSpotlight: React.FC<StaticSpotlightProps> = ({ element }) => {
     : {};
   return clientRect ? (
     <Portal>
-      <div className="pf-c-backdrop ocs-spotlight__with-backdrop">
-        <div className="ocs-spotlight ocs-spotlight__element-highlight-noanimate" style={style} />
+      <div className="pf-c-backdrop pfext-spotlight__with-backdrop">
+        <div
+          className="pfext-spotlight pfext-spotlight__element-highlight-noanimate"
+          style={style}
+        />
       </div>
     </Portal>
   ) : null;

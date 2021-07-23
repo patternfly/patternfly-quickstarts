@@ -74,7 +74,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
     () => (
       <Button
         variant="primary"
-        className="co-quick-start-footer__actionbtn"
+        className="pfext-quick-start-footer__actionbtn"
         onClick={onNext}
         data-testid={`qs-drawer-${camelize(getPrimaryButtonText)}`}
         data-test={`${getPrimaryButtonText} button`}
@@ -107,7 +107,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
       taskNumber === totalTasks && (
         <Button
           variant="link"
-          className="co-quick-start-footer__restartbtn"
+          className="pfext-quick-start-footer__restartbtn"
           onClick={onRestart}
           data-testid="qs-drawer-side-note-action"
         >
@@ -118,7 +118,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   );
 
   return (
-    <div className={`co-quick-start-footer ${footerClass}`}>
+    <div className={`pfext-quick-start-footer ${footerClass}`}>
       {getPrimaryButton}
       {getSecondaryButton}
       {getSideNoteAction}

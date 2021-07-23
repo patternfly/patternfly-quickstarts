@@ -93,7 +93,7 @@ export const CustomCatalog: React.FC = () => {
             Step-by-step instructions and tasks
           </Text>
         </TextContent>
-        <Gallery className="co-quick-start-catalog__gallery" hasGutter>
+        <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
           {allQuickStarts
             .filter(
               (quickStart: QuickStart) =>
@@ -105,7 +105,7 @@ export const CustomCatalog: React.FC = () => {
               } = quickStart;
 
               return (
-                <GalleryItem key={id} className="co-quick-start-catalog__gallery-item">
+                <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
                   <QuickStartTile
                     quickStart={quickStart}
                     isActive={id === activeQuickStartID}
@@ -124,7 +124,7 @@ export const CustomCatalog: React.FC = () => {
           <Text component="h2">Documentation</Text>
           <Text component="p">Technical information for using the service</Text>
         </TextContent>
-        <Gallery className="co-quick-start-catalog__gallery" hasGutter>
+        <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
           {allQuickStarts
             .filter((quickStart: QuickStart) => quickStart.spec.type?.text === 'Documentation')
             .map((quickStart: QuickStart) => {

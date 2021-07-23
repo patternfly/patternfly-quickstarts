@@ -3,7 +3,6 @@ import { QuickStartContext, QuickStartContextValues } from '@quickstarts/utils/q
 import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
 import { renderToStaticMarkup } from 'react-dom/server';
 import CopyIcon from '@patternfly/react-icons/dist/js/icons/copy-icon';
-import '@patternfly/react-styles/css/components/CodeBlock/code-block';
 
 import './showdown-extension.scss';
 
@@ -36,7 +35,7 @@ const useMultilineCopyClipboardShowdownExtension = () => {
                 </div>
               </div>
               <div class="pf-c-code-block__content">
-                <pre class="pf-c-code-block__pre ocs-code-block__pre">
+                <pre class="pf-c-code-block__pre pfext-code-block__pre">
                   <code class="pf-c-code-block__code" 
                     ${MARKDOWN_SNIPPET_ID}="${groupType}">${group}</code>
                 </pre>

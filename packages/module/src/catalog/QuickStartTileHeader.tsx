@@ -34,13 +34,13 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
   };
 
   return (
-    <div className="co-quick-start-tile-header">
+    <div className="pfext-quick-start-tile-header">
       <Title headingLevel="h3" data-test="title">
         {name}
       </Title>
-      <div className="co-quick-start-tile-header__status">
+      <div className="pfext-quick-start-tile-header__status">
         {type && (
-          <Label className="co-quick-start-tile-header--margin" color={type.color}>
+          <Label className="pfext-quick-start-tile-header--margin" color={type.color}>
             {type.text}
           </Label>
         )}
@@ -49,7 +49,7 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
             variant="outline"
             data-test="duration"
             icon={<OutlinedClockIcon />}
-            className="co-quick-start-tile-header--margin"
+            className="pfext-quick-start-tile-header--margin"
           >
             {getResource('{{duration, number}} minutes', duration).replace(
               '{{duration, number}}',

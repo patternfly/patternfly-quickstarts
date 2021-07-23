@@ -17,15 +17,15 @@ const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts }) =>
   );
 
   return (
-    <div className="ocs-page-layout__content is-dark">
-      <Gallery className="co-quick-start-catalog__gallery" hasGutter>
+    <div className="pfext-page-layout__content is-dark">
+      <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
         {quickStarts.map((quickStart) => {
           const {
             metadata: { name: id },
           } = quickStart;
 
           return (
-            <GalleryItem key={id} className="co-quick-start-catalog__gallery-item">
+            <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
               <QuickStartTile
                 quickStart={quickStart}
                 isActive={id === activeQuickStartID}
