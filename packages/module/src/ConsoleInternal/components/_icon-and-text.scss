@@ -1,5 +1,3 @@
-$pfext-icon-and-text-icon-lg: 1.2rem;
-
 .pfext-icon-and-text {
   align-items: baseline;
   display: flex;
@@ -13,13 +11,4 @@ $pfext-icon-and-text-icon-lg: 1.2rem;
 .pfext-icon-and-text__icon {
   flex-shrink: 0;
   margin-right: 5px;
-}
-
-.pfext-icon-and-text--lg {
-  display: block;
-
-  .pfext-icon-and-text__icon {
-    font-size: $pfext-icon-and-text-icon-lg;
-    margin-right: 1rem;
-  }
 }

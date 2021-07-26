@@ -90,20 +90,20 @@ const esBuildWithDeps = {
   ],
 };
 
-// This is just for building out the quickstarts-bootstrap.css stylesheet
-export const cssBootstrap = {
-  input: 'src/quickstarts-bootstrap.ts',
+// This is just for building out the quickstarts-vendor.css stylesheet
+export const cssVendor = {
+  input: 'src/styles/vendor-entry.ts',
   output: {
-    file: 'dist/quickstarts-bootstrap.js',
+    file: 'dist/vendor.js',
     format: 'es',
     sourcemap: true,
   },
   plugins: [
     scss({
-      output: 'dist/quickstarts-bootstrap.css',
+      output: 'dist/quickstarts-vendor.css',
       ...commonScssOptions,
     }),
   ],
 };
 
-export default [cjsBuild, esBuild, esBuildWithDeps, cssBootstrap];
+export default [cjsBuild, esBuild, esBuildWithDeps, cssVendor];

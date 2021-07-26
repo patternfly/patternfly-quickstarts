@@ -5,7 +5,7 @@
 
 module.exports = {
   content: ['dist/quickstarts-full.es.js'],
-  css: ['dist/quickstarts.css', 'dist/quickstarts-bootstrap.css'],
+  css: ['dist/quickstarts-vendor.css'],
   fontFace: false,
   keyframes: true,
   variables: false,

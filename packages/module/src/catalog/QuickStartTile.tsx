@@ -1,6 +1,5 @@
 import * as React from 'react';
-// import { CatalogTile } from '@patternfly/react-catalog-view-extension';
-import { CatalogTile } from '../react-catalog-view-extension/CatalogTile';
+import { CatalogTile } from '@patternfly/react-catalog-view-extension';
 import RocketIcon from '@patternfly/react-icons/dist/js/icons/rocket-icon';
 import { FallbackImg } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';

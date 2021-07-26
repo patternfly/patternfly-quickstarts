@@ -1,3 +1,3 @@
-import { esBuild, cssBootstrap } from './rollup.config';
+import { esBuild, cssVendor } from './rollup.config';
 
-export default [esBuild, cssBootstrap];
+export default [esBuild, cssVendor];

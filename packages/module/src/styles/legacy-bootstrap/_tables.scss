@@ -1,0 +1,38 @@
+//
+// Tables
+// --------------------------------------------------
+
+
+table {
+  background-color: $table-bg;
+
+  // Table cell sizing
+  //
+  // Reset default table behavior
+
+  col[class*="col-"] {
+    position: static; // Prevent border hiding in Firefox and IE9-11 (see https://github.com/twbs/bootstrap/issues/11623)
+    display: table-column;
+    float: none;
+  }
+
+  td,
+  th {
+    &[class*="col-"] {
+      position: static; // Prevent border hiding in Firefox and IE9-11 (see https://github.com/twbs/bootstrap/issues/11623)
+      display: table-cell;
+      float: none;
+    }
+  }
+}
+
+caption {
+  padding-top: $table-cell-padding;
+  padding-bottom: $table-cell-padding;
+  color: $text-muted;
+  text-align: left;
+}
+
+th {
+  text-align: left;
+}

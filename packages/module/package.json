@@ -30,9 +30,7 @@
     "build:ts": "yarn clean && tsc --p tsconfig.json",
     "post-css": "yarn purge-css && yarn clean-css",
     "purge-css": "purgecss --config ./purgecss.config.js",
-    "clean-css:quickstarts": "cleancss dist/quickstarts.css -o dist/quickstarts.min.css",
-    "clean-css:bootstrap": "cleancss dist/quickstarts-bootstrap.css -o dist/quickstarts-bootstrap.min.css",
-    "clean-css": "yarn clean-css:quickstarts && yarn clean-css:bootstrap"
+    "clean-css": "cleancss dist/quickstarts.css -o dist/quickstarts.min.css"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
@@ -41,10 +39,10 @@
     "showdown": ">=1.8.6"
   },
   "dependencies": {
-    "bootstrap-sass": "^3.3.7",
     "dompurify": "^2.2.6",
     "history": "^5.0.0",
-    "showdown": "1.8.6"
+    "showdown": "1.8.6",
+    "@patternfly/react-catalog-view-extension": "4.12.15"
   },
   "devDependencies": {
     "@patternfly/patternfly": "4.122.2",

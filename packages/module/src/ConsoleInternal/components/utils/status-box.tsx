@@ -3,11 +3,11 @@ import { css } from '@patternfly/react-styles';
 import { QuickStartContext, QuickStartContextValues } from '../../../utils/quick-start-context';
 
 export const Box: React.FC<BoxProps> = ({ children, className }) => (
-  <div className={css('cos-status-box', className)}>{children}</div>
+  <div className={css('pfext-status-box', className)}>{children}</div>
 );
 
 export const Loading: React.FC<LoadingProps> = ({ className }) => (
-  <div className={css('pfext-m-loader pfext-an-fade-in-out', className)}>
+  <div className={css('pfext-m-loader', className)}>
     <div className="pfext-m-loader-dot__one" />
     <div className="pfext-m-loader-dot__two" />
     <div className="pfext-m-loader-dot__three" />
@@ -16,9 +16,9 @@ export const Loading: React.FC<LoadingProps> = ({ className }) => (
 Loading.displayName = 'Loading';
 
 export const LoadingBox: React.FC<LoadingBoxProps> = ({ className, message }) => (
-  <Box className={css('cos-status-box--loading', className)}>
+  <Box className={css('pfext-status-box--loading', className)}>
     <Loading />
-    {message && <div className="cos-status-box__loading-message">{message}</div>}
+    {message && <div className="pfext-status-box__loading-message">{message}</div>}
   </Box>
 );
 LoadingBox.displayName = 'LoadingBox';

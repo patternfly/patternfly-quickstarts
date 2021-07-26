@@ -1,0 +1,75 @@
+// PF3 variables
+$color-pf-black:                 #030303 !default;
+$color-pf-black-600:             #72767b !default;
+$color-pf-white:                 #fff !default;
+$color-pf-black-150:             #f5f5f5 !default;
+$color-pf-blue-600:              #004368 !default;
+$color-pf-blue-50:               #def3ff !default;
+$color-pf-black-100:             #fafafa !default;
+
+// PF3 bootstrap overrides
+$grid-gutter-width:                                                 40px !default;
+$font-size-base:                                                    12px !default;
+$line-height-base:                                                  1.66666667 !default; // 20/12
+$line-height-computed:                                              floor(($font-size-base * $line-height-base)) !default;
+$font-size-h1:                                                      ceil(($font-size-base * 2)) !default; // ~24px
+$font-size-h2:                                                      ceil(($font-size-base * 1.8333)) !default; // ~22px
+$font-size-h3:                                                      ceil(($font-size-base * 1.3333)) !default; // ~16px
+$font-size-h5:                                                      ceil(($font-size-base * 1.0833)) !default; // ~13px
+$gray-light:                                                        lighten($color-pf-black, 60%) !default;   // #999
+$gray-lighter:                                                      lighten($color-pf-black, 93.5%) !default; // #eee
+$gray-dark:                                                         lighten($color-pf-black, 20%) !default;   // #333
+$font-family-monospace:                                             Menlo, Monaco, Consolas, monospace !default;
+$code-color:                                                        $color-pf-blue-600 !default;
+$code-bg:                                                           $color-pf-blue-50 !default;
+$pre-bg:                                                            $color-pf-black-100 !default;
+$border-radius-base:                                                1px !default;
+$table-cell-padding:                                                10px !default;
+
+// bootstrap variables
+$screen-sm:                  768px !default;
+$screen-sm-min:              $screen-sm !default;
+$grid-gutter-width:         30px !default;
+$grid-float-breakpoint:     $screen-sm-min !default;
+$screen-md:                  992px !default;
+$headings-font-family:    inherit !default;
+$headings-font-weight:    500 !default;
+$headings-line-height:    1.1 !default;
+$headings-color:          inherit !default;
+$font-size-base:          14px !default;
+$line-height-base:        1.428571429 !default; // 20/14
+$line-height-computed:    floor(($font-size-base * $line-height-base)) !default; // ~20px
+$font-size-h1:            floor(($font-size-base * 2.6)) !default; // ~36px
+$font-size-h2:            floor(($font-size-base * 2.15)) !default; // ~30px
+$font-size-h3:            ceil(($font-size-base * 1.7)) !default; // ~24px
+$font-size-h4:            ceil(($font-size-base * 1.25)) !default; // ~18px
+$font-size-h5:            $font-size-base !default;
+$font-size-h6:            ceil(($font-size-base * .85)) !default; // ~12px
+$gray-base:              #000 !default;
+$gray-light:             lighten($gray-base, 46.7%) !default; // #777
+$gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
+$gray-dark:              lighten($gray-base, 20%) !default; 
+$blockquote-font-size:        ($font-size-base * 1.25) !default;
+$blockquote-border-color:     $gray-lighter !default;
+$font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
+$code-color:                  #c7254e !default;
+$code-bg:                     #f9f2f4 !default;
+$pre-bg:                      #f5f5f5 !default;
+$pre-color:                   $gray-dark !default;
+$pre-border-color:            #ccc !default;
+$border-radius-base:        4px !default;
+$table-cell-padding:            8px !default;
+$table-bg:                      transparent !default;
+$text-muted:                  $gray-light !default;
+
+// PF4 overrides
+$font-size-base: 14px;
+$font-size-h1: var(--pf-global--FontSize--2xl);
+$font-size-h2: 20px; // must be literal value because of calculation in patternfly/dist/sass/patternfly/_list-view.scss
+$font-size-h3: var(--pf-global--FontSize--lg);
+$font-size-h4: var(--pf-global--FontSize--md);
+$font-size-h5: var(--pf-global--FontSize--md);
+$font-size-h6: var(--pf-global--FontSize--md);
+$grid-gutter-width: 30px;
+$headings-font-family: var(--pf-global--FontFamily--heading--sans-serif);
+$headings-font-weight: var(--pf-global--FontWeight--normal);
