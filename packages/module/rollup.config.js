@@ -61,7 +61,7 @@ export const esBuild = {
   plugins: [
     externals(),
     scss({
-      output: 'dist/quickstarts.css',
+      output: 'dist/quickstarts-base.css',
       ...commonScssOptions,
     }),
     ...commonPlugins,
