@@ -1,9 +1,13 @@
-var concat = require('concat-files');
- 
-concat([
-  'dist/quickstarts-base.css',
-  'dist/quickstarts-vendor.css'
-], 'dist/quickstarts.css', function(err) {
-  if (err) throw err
-  console.log('created quickstarts.css');
-});
+const concat = require('concat-files');
+
+concat(
+  ['dist/quickstarts-base.css', 'dist/quickstarts-vendor.css'],
+  'dist/quickstarts.css',
+  function(err) {
+    if (err) {
+      throw err;
+    }
+    // eslint-disable-next-line
+    console.log('created quickstarts.css');
+  },
+);
