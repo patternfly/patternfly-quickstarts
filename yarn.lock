@@ -276,6 +276,16 @@
   resolved "https://registry.yarnpkg.com/@patternfly/patternfly/-/patternfly-4.70.2.tgz#94b733f68f4f63040ab142eb2fa3c3ac5d08f2ae"
   integrity sha512-XKCHnOjx1JThY3s98AJhsApSsGHPvEdlY7r+b18OecqUnmThVGw3nslzYYrwfCGlJ/xQtV5so29SduH2/uhHzA==
 
+"@patternfly/react-catalog-view-extension@4.12.15":
+  version "4.12.15"
+  resolved "https://registry.yarnpkg.com/@patternfly/react-catalog-view-extension/-/react-catalog-view-extension-4.12.15.tgz#edb0d6b97b3adf060129fdd1e0c1edc25c31d22e"
+  integrity sha512-1mp+Ogi7fJfgh5wV9q+PolmplbMj3Tcias8xs0eeD5GCirdzOQxG+wihEM5k6CAGhBAr7jHg5fRSgO8QLTt3UQ==
+  dependencies:
+    "@patternfly/patternfly" "4.122.2"
+    "@patternfly/react-core" "^4.135.15"
+    "@patternfly/react-styles" "^4.11.4"
+    classnames "^2.2.5"
+
 "@patternfly/react-catalog-view-extension@^4.10.13", "@patternfly/react-catalog-view-extension@^4.8.126":
   version "4.12.0"
   resolved "https://registry.yarnpkg.com/@patternfly/react-catalog-view-extension/-/react-catalog-view-extension-4.12.0.tgz#86b407ab43994006f355e321ecada429a018e26a"
@@ -308,6 +318,19 @@
     "@patternfly/react-icons" "^4.11.0"
     "@patternfly/react-styles" "^4.11.0"
     "@patternfly/react-tokens" "^4.12.0"
+    focus-trap "6.2.2"
+    react-dropzone "9.0.0"
+    tippy.js "5.1.2"
+    tslib "1.13.0"
+
+"@patternfly/react-core@^4.135.15":
+  version "4.141.0"
+  resolved "https://registry.yarnpkg.com/@patternfly/react-core/-/react-core-4.141.0.tgz#eb190cc784d119cdac28f8043568d3c25c698df8"
+  integrity sha512-cWITtWP6OOghi5s5Gv/o89l6rJtrR+sk5F/h+KCYQYZQ8+TKjv1E774fyep2s/jdlNASvjGvKrV5BdNDYXGXyQ==
+  dependencies:
+    "@patternfly/react-icons" "^4.11.4"
+    "@patternfly/react-styles" "^4.11.4"
+    "@patternfly/react-tokens" "^4.12.5"
     focus-trap "6.2.2"
     react-dropzone "9.0.0"
     tippy.js "5.1.2"
@@ -1961,6 +1984,11 @@ async@^3.1.0:
   resolved "https://registry.yarnpkg.com/async/-/async-3.2.0.tgz#b3a2685c5ebb641d3de02d161002c60fc9f85720"
   integrity sha512-TR2mEZFVOj2pLStYxLht7TyfuRzaydfpxr3k9RpHIzMgw7A64dzsdqCxH1WJyQdoe8T10nDXd9wnEigmiuHIZw==
 
+async@~0.2.6:
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/async/-/async-0.2.10.tgz#b6bbe0b0674b9d719708ca38de8c237cb526c3d1"
+  integrity sha1-trvgsGdLnXGXCMo43owjfLUmw9E=
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -3341,6 +3369,13 @@ compression@^1.7.4:
     on-headers "~1.0.2"
     safe-buffer "5.1.2"
     vary "~1.1.2"
+
+concat-files@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/concat-files/-/concat-files-0.1.1.tgz#7016ae60278ba3f6b0b561368fa211160e556db5"
+  integrity sha1-cBauYCeLo/awtWE2j6IRFg5VbbU=
+  dependencies:
+    async "~0.2.6"
 
 concat-map@0.0.1:
   version "0.0.1"

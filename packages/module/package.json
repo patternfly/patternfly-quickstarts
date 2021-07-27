@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/quickstarts",
-  "version": "1.1.0-rc.2",
+  "version": "1.1.0-rc.3",
   "description": "PatternFly quick starts",
   "files": [
     "dist"
@@ -20,28 +20,27 @@
   "scripts": {
     "clean": "rm -rf dist",
     "prebuild": "yarn clean",
-    "build": "rollup -c && yarn post-css",
+    "build": "rollup -c && yarn purge-css && yarn combine && yarn min-css",
     "watch": "rollup -w --config rollup-quick.config.js",
     "quick": "rollup --config rollup-quick.config.js",
+    "combine": "node ./combineCss.js",
     "test": "LANG=en_US.UTF-8 jest",
     "format": "prettier --check --write ./src/**/*.{tsx,ts}",
     "type-check": "tsc --noEmit",
     "ci-checks": "yarn type-check && yarn lint && yarn test",
     "build:ts": "yarn clean && tsc --p tsconfig.json",
-    "post-css": "yarn purge-css && yarn clean-css",
+    "post-css": "yarn purge-css && yarn min-css",
     "purge-css": "purgecss --config ./purgecss.config.js",
-    "clean-css:quickstarts": "cleancss dist/quickstarts.css -o dist/quickstarts.min.css",
-    "clean-css:bootstrap": "cleancss dist/quickstarts-bootstrap.css -o dist/quickstarts-bootstrap.min.css",
-    "clean-css": "yarn clean-css:quickstarts && yarn clean-css:bootstrap"
+    "min-css": "cleancss dist/quickstarts.css -o dist/quickstarts.min.css"
   },
   "peerDependencies": {
+    "@patternfly/react-core": ">=4.115.2",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0",
-    "@patternfly/react-core": ">=4.115.2",
     "showdown": ">=1.8.6"
   },
   "dependencies": {
-    "bootstrap-sass": "^3.3.7",
+    "@patternfly/react-catalog-view-extension": "4.12.15",
     "dompurify": "^2.2.6",
     "history": "^5.0.0",
     "showdown": "1.8.6"
@@ -50,8 +49,8 @@
     "@patternfly/patternfly": "4.122.2",
     "@patternfly/react-core": "4.135.15",
     "@patternfly/react-icons": "4.11.4",
-    "@patternfly/react-tokens": "4.12.5",
     "@patternfly/react-styles": "4.11.4",
+    "@patternfly/react-tokens": "4.12.5",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
@@ -64,6 +63,7 @@
     "@types/react": "^16.8.0",
     "@types/react-dom": "^16.8.0",
     "clean-css-cli": "^4.3.0",
+    "concat-files": "^0.1.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.15.5",
     "enzyme-to-json": "^3.6.1",

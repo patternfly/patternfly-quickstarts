@@ -25,9 +25,6 @@ In your web-apps entry point, add these stylesheets (these should be imported be
 import '@patternfly/react-core/dist/styles/base.css';
 // quick starts styles
 import '@patternfly/quickstarts/dist/quickstarts.min.css';
-// additional styles needed for quick starts
-// not needed if you already globally use "bootstrap-sass": ">=3.3.7"
-import '@patternfly/quickstarts/dist/quickstarts-bootstrap.min.css';
 ```
 
 ## Usage example

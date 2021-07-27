@@ -1,6 +1,5 @@
 import * as React from 'react';
-// import { CatalogTile } from '@patternfly/react-catalog-view-extension';
-import { CatalogTile } from '../../react-catalog-view-extension/CatalogTile';
+import { CatalogTile } from '@patternfly/react-catalog-view-extension';
 import { shallow } from 'enzyme';
 import { getQuickStarts } from '../../data/test-utils';
 import { QuickStartStatus } from '../../utils/quick-start-types';

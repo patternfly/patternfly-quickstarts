@@ -1,4 +1,4 @@
-import './style.scss';
+import './styles/style.scss';
 
 export * from './QuickStartCatalogPage';
 export * from './catalog';

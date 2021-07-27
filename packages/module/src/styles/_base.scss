@@ -28,3 +28,22 @@
     margin-right: 7px;
   }
 }
+
+// drawer
+.pfext-quick-start-panel-content,
+// catalog gallery wrapper
+.pfext-page-layout__content,
+// catalog item prereq popover
+.pfext-page-layout__base {
+  --pf-global--FontSize--md: 14px;
+  --pf-global--FontSize--sm: 13px;
+
+  ul {
+      list-style-type: disc;
+  }
+
+  input[type='radio'],
+  input[type='checkbox'] {
+    margin-top: 1px !important;
+  }
+}

@@ -1,7 +1,10 @@
 import '@patternfly/react-core/dist/styles/base.css';
 
-import '@patternfly/quickstarts/dist/quickstarts.css';
-import '@patternfly/quickstarts/dist/quickstarts-bootstrap.css';
+// import '@patternfly/quickstarts/dist/quickstarts.css';
+
+// can load a single quickstarts.css file or these 2 below
+import '@patternfly/quickstarts/dist/quickstarts-base.css';
+import '@patternfly/quickstarts/dist/quickstarts-vendor.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
