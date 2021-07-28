@@ -40,9 +40,6 @@ import "./styles.css";
 import "@patternfly/react-core/dist/styles/base.css";
 // quick starts styles
 import "@patternfly/quickstarts/dist/quickstarts.min.css";
-// additional styles needed for quick starts
-// not needed if you already globally use "bootstrap-sass": ">=3.3.7"
-import "@patternfly/quickstarts/dist/quickstarts-bootstrap.min.css";
 
 import * as React from "react";
 import {
