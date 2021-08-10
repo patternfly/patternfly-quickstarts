@@ -74,6 +74,8 @@ export type QuickStartContextValues = {
     };
   };
   setFilter?: any;
+  loading?: boolean;
+  setLoading?: any;
 };
 
 export const QuickStartContextDefaults = {
@@ -96,6 +98,7 @@ export const QuickStartContextDefaults = {
   setFilter: () => {},
   footer: null,
   markdown: null,
+  loading: false,
 };
 export const QuickStartContext = createContext<QuickStartContextValues>(QuickStartContextDefaults);
 
@@ -151,6 +154,7 @@ export const useValuesForQuickStartContext = (
     },
     [resourceBundle, language],
   );
+  const [loading, setLoading] = React.useState(combinedValue.loading);
 
   const initialSearchParams = new URLSearchParams(window.location.search);
   const initialSearchQuery = initialSearchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
@@ -438,6 +442,8 @@ export const useValuesForQuickStartContext = (
       },
     },
     setFilter, // revisit if this should be in public context API
+    loading,
+    setLoading,
   };
 };
 

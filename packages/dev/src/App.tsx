@@ -14,9 +14,8 @@ import { Link } from 'react-router-dom';
 import {
   LoadingBox,
   QuickStart,
-  QuickStartContextProvider,
-  QuickStartContextValues,
   QuickStartDrawer,
+  QuickStartDrawerProps,
   useLocalStorage,
 } from '@patternfly/quickstarts';
 import { loadJSONQuickStarts } from './quickstarts-data/mas-guides/quickstartLoader';
@@ -33,27 +32,6 @@ type AppProps = {
 };
 
 const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
-  const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage('quickstartId', '');
-
-  const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage('quickstarts', {});
-
-  // eslint-disable-next-line no-console
-  React.useEffect(() => console.log(activeQuickStartID), [activeQuickStartID]);
-  React.useEffect(() => {
-    // callback on state change
-    // eslint-disable-next-line no-console
-    console.log(allQuickStartStates);
-  }, [allQuickStartStates]);
-
-  const [allQuickStarts, setAllQuickStarts] = React.useState<QuickStart[]>([]);
-  React.useEffect(() => {
-    const load = async () => {
-      const masGuidesQuickstarts = await loadJSONQuickStarts('');
-      setAllQuickStarts(yamlQuickStarts.concat(masGuidesQuickstarts));
-    };
-    load();
-  }, []);
-
   const AppToolbar = (
     <PageHeaderTools>
       <Avatar src={imgAvatar} alt="Avatar image" />
@@ -85,38 +63,51 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
 
   const AppSidebar = <PageSidebar isNavOpen nav={AppNav} />;
 
+  const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage('quickstartId', '');
+  const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage('quickstarts', {});
   const language = localStorage.getItem('bridge/language') || 'en';
   const resourceBundle = i18n.getResourceBundle(language, 'quickstart');
 
-  const valuesForQuickstartContext: QuickStartContextValues = {
-    allQuickStarts,
+  // eslint-disable-next-line no-console
+  React.useEffect(() => console.log(activeQuickStartID), [activeQuickStartID]);
+  React.useEffect(() => {
+    // callback on state change
+    // eslint-disable-next-line no-console
+    console.log(allQuickStartStates);
+  }, [allQuickStartStates]);
+
+  const [loading, setLoading] = React.useState(true);
+  const [quickStarts, setQuickStarts] = React.useState<QuickStart[]>([]);
+  React.useEffect(() => {
+    const load = async () => {
+      const masGuidesQuickstarts = await loadJSONQuickStarts('');
+      setQuickStarts(yamlQuickStarts.concat(masGuidesQuickstarts));
+      setLoading(false);
+    };
+    setTimeout(() => {
+      load();
+    }, 3000);
+  }, []);
+
+  const drawerProps: QuickStartDrawerProps = {
+    quickStarts,
     activeQuickStartID,
-    setActiveQuickStartID,
     allQuickStartStates,
+    setActiveQuickStartID,
     setAllQuickStartStates,
-    footer: {
-      show: showCardFooters,
-    },
+    resourceBundle,
+    showCardFooters,
     language,
-    resourceBundle: {
-      ...resourceBundle,
-      // Start: "Let's go!",
-      // Continue: 'Resume',
-      // Restart: 'Start over',
-    },
+    loading,
   };
 
   return (
     <React.Suspense fallback={<LoadingBox />}>
-      {allQuickStarts && allQuickStarts.length && (
-        <QuickStartContextProvider value={valuesForQuickstartContext}>
-          <QuickStartDrawer>
-            <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>
-              {children}
-            </Page>
-          </QuickStartDrawer>
-        </QuickStartContextProvider>
-      )}
+      <QuickStartDrawer {...drawerProps}>
+        <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>
+          {children}
+        </Page>
+      </QuickStartDrawer>
     </React.Suspense>
   );
 };

@@ -58,19 +58,20 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
 }) => {
   const sortFncCallback = React.useCallback(sortFnc, []);
   const {
-    allQuickStarts = quickStarts,
+    allQuickStarts,
     setAllQuickStarts,
     allQuickStartStates,
     getResource,
     filter,
     setFilter,
+    loading,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
   React.useEffect(() => {
-    if (quickStarts) {
+    if (quickStarts && quickStarts !== allQuickStarts) {
       setAllQuickStarts(quickStarts);
     }
-  }, [quickStarts, setAllQuickStarts]);
+  }, [quickStarts, allQuickStarts, setAllQuickStarts]);
 
   const initialFilteredQuickStarts = showFilter
     ? filterQuickStarts(
@@ -132,10 +133,10 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
     setFilteredQuickStarts(result);
   };
 
-  if (!allQuickStarts) {
+  if (loading) {
     return <LoadingBox />;
   }
-  return allQuickStarts.length === 0 ? (
+  return !allQuickStarts || allQuickStarts.length === 0 ? (
     <EmptyBox label={getResource('Quick Starts')} />
   ) : (
     <>
