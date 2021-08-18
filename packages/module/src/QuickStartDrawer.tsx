@@ -84,7 +84,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
   });
 
   React.useEffect(() => {
-    if (quickStarts !== valuesForQuickstartContext.allQuickStarts) {
+    if (JSON.stringify(quickStarts) !== JSON.stringify(valuesForQuickstartContext.allQuickStarts)) {
       valuesForQuickstartContext.setAllQuickStarts(quickStarts);
     }
   }, [quickStarts, valuesForQuickstartContext]);
