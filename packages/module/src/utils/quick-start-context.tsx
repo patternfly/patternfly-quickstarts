@@ -126,11 +126,11 @@ export const useValuesForQuickStartContext = (
     setAllQuickStartStates,
     useQueryParams,
     allQuickStartStates,
-    allQuickStarts,
+    allQuickStarts = [],
     footer,
     markdown,
   } = combinedValue;
-  const [quickStarts, setQuickStarts] = React.useState(combinedValue.allQuickStarts);
+  const [quickStarts, setQuickStarts] = React.useState(combinedValue.allQuickStarts || []);
   const [resourceBundle, setResourceBundle] = React.useState({
     ...en,
     ...combinedValue.resourceBundle,

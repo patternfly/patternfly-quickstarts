@@ -12,7 +12,7 @@ import {
 import { QuickStart, QuickStartStatus, AllQuickStartStates } from './utils/quick-start-types';
 import { getQuickStartByName } from './utils/quick-start-utils';
 
-export interface QuickStartDrawerProps extends React.HTMLProps<HTMLDivElement> {
+export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement> {
   // array of quick starts
   quickStarts?: QuickStart[];
   // content to render in the page
@@ -45,7 +45,7 @@ export interface QuickStartDrawerProps extends React.HTMLProps<HTMLDivElement> {
   contextProps?: QuickStartContextValues;
 }
 
-export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
+export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
   quickStarts,
   children,
   activeQuickStartID,
@@ -84,7 +84,10 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
   });
 
   React.useEffect(() => {
-    if (JSON.stringify(quickStarts) !== JSON.stringify(valuesForQuickstartContext.allQuickStarts)) {
+    if (
+      quickStarts &&
+      JSON.stringify(quickStarts) !== JSON.stringify(valuesForQuickstartContext.allQuickStarts)
+    ) {
       valuesForQuickstartContext.setAllQuickStarts(quickStarts);
     }
   }, [quickStarts, valuesForQuickstartContext]);
@@ -105,12 +108,12 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
 
   return (
     <QuickStartContext.Provider value={valuesForQuickstartContext}>
-      <QuickStartContextDrawer {...drawerProps}>{children}</QuickStartContextDrawer>
+      <QuickStartDrawer {...drawerProps}>{children}</QuickStartDrawer>
     </QuickStartContext.Provider>
   );
 };
 
-export interface QuickStartContextDrawerProps extends React.HTMLProps<HTMLDivElement> {
+export interface QuickStartDrawerProps extends React.HTMLProps<HTMLDivElement> {
   quickStarts?: QuickStart[];
   children?: React.ReactNode;
   appendTo?: HTMLElement | (() => HTMLElement);
@@ -119,7 +122,7 @@ export interface QuickStartContextDrawerProps extends React.HTMLProps<HTMLDivEle
   onCloseNotInProgress?: any;
 }
 
-export const QuickStartContextDrawer: React.FC<QuickStartContextDrawerProps> = ({
+export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
   quickStarts = [],
   children,
   appendTo,
@@ -131,7 +134,7 @@ export const QuickStartContextDrawer: React.FC<QuickStartContextDrawerProps> = (
   const {
     activeQuickStartID,
     setActiveQuickStart,
-    allQuickStarts,
+    allQuickStarts = [],
     activeQuickStartState,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const combinedQuickStarts = allQuickStarts.concat(quickStarts);

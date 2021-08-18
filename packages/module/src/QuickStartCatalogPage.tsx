@@ -58,7 +58,7 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
 }) => {
   const sortFncCallback = React.useCallback(sortFnc, []);
   const {
-    allQuickStarts,
+    allQuickStarts = [],
     setAllQuickStarts,
     allQuickStartStates,
     getResource,
@@ -68,7 +68,8 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
   React.useEffect(() => {
-    if (quickStarts && quickStarts !== allQuickStarts) {
+    // passed through prop, not context
+    if (quickStarts && JSON.stringify(quickStarts) !== JSON.stringify(allQuickStarts)) {
       setAllQuickStarts(quickStarts);
     }
   }, [quickStarts, allQuickStarts, setAllQuickStarts]);
@@ -136,9 +137,12 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
   if (loading) {
     return <LoadingBox />;
   }
-  return !allQuickStarts || allQuickStarts.length === 0 ? (
-    <EmptyBox label={getResource('Quick Starts')} />
-  ) : (
+
+  if (!allQuickStarts || allQuickStarts.length === 0) {
+    return <EmptyBox label={getResource('Quick Starts')} />;
+  }
+
+  return (
     <>
       {showTitle && (
         <div className="pfext-page-layout__header">
