@@ -90,7 +90,7 @@ export const QuickStartCatalogFilterSearchWrapper: React.FC<QuickStartCatalogFil
     return () => {
       unlisten();
     };
-  });
+  }, [onSearchInputChange, setFilter]);
   const handleTextChange = (val: string) => {
     if (val.length > 0) {
       useQueryParams && setQueryArgument(QUICKSTART_SEARCH_FILTER_KEY, val);
