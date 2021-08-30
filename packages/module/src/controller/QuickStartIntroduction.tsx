@@ -2,7 +2,7 @@ import * as React from 'react';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
-import TaskHeader from './QuickStartTaskHeader';
+import TaskHeaderList from './QuickStartTaskHeaderList';
 
 type QuickStartIntroductionProps = {
   introduction: string;
@@ -28,16 +28,7 @@ const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
         ).replace('{{count, number}}', tasks.length)}
         :
       </p>
-      {tasks.map((task, index) => (
-        <TaskHeader
-          key={task.title}
-          title={task.title}
-          taskIndex={index + 1}
-          size="md"
-          taskStatus={allTaskStatuses[index]}
-          onTaskSelect={onTaskSelect}
-        />
-      ))}
+      <TaskHeaderList tasks={tasks} allTaskStatuses={allTaskStatuses} onTaskSelect={onTaskSelect} />
     </>
   );
 };

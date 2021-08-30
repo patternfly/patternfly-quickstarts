@@ -6,6 +6,8 @@ import { QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types
 import TaskHeader from './QuickStartTaskHeader';
 import QuickStartTaskReview from './QuickStartTaskReview';
 
+import './QuickStartTasks.scss';
+
 type QuickStartTaskProps = {
   tasks: QuickStartTask[];
   taskNumber: number;
@@ -23,7 +25,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
-    <>
+    <div className="pfext-quick-start-tasks__list">
       {tasks
         .filter((_, index) => allTaskStatuses[index] !== QuickStartTaskStatus.INIT)
         .map((task, index) => {
@@ -59,7 +61,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
             </React.Fragment>
           );
         })}
-    </>
+    </div>
   );
 };
 

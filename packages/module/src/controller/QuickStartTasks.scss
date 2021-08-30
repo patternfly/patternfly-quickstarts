@@ -1,0 +1,17 @@
+.pfext-quick-start-tasks {
+  &__list {
+    button::before {
+      content: none;
+    }
+
+    li {
+      &.pf-c-wizard__nav-item {
+        list-style-type: none;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: var(--pf-global--spacer--xs);
+      }
+    }
+  }
+}
