@@ -93,6 +93,8 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     }, 1500);
   }, []);
 
+  const withQueryParams = true;
+
   const drawerProps: QuickStartContainerProps = {
     quickStarts,
     activeQuickStartID,
@@ -103,6 +105,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     showCardFooters,
     language,
     loading,
+    useQueryParams: withQueryParams,
   };
 
   const toggleQuickStart = (quickStartId: string) => {
@@ -110,12 +113,12 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
       // activate
       setActiveQuickStartID(quickStartId);
       // optionally add the query param
-      setQueryArgument(QUICKSTART_ID_FILTER_KEY, quickStartId);
+      withQueryParams && setQueryArgument(QUICKSTART_ID_FILTER_KEY, quickStartId);
     } else {
       // deactivate
       setActiveQuickStartID('');
       // optionally remove the query param
-      removeQueryArgument(QUICKSTART_ID_FILTER_KEY);
+      withQueryParams && removeQueryArgument(QUICKSTART_ID_FILTER_KEY);
     }
   };
 

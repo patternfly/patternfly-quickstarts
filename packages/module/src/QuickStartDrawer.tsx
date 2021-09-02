@@ -4,42 +4,56 @@ import { Drawer, DrawerContent, DrawerContentBody } from '@patternfly/react-core
 import QuickStartCloseModal from './QuickStartCloseModal';
 import QuickStartPanelContent from './QuickStartPanelContent';
 import {
+  getDefaultQuickStartState,
   QuickStartContext,
   QuickStartContextValues,
   useValuesForQuickStartContext,
 } from './utils/quick-start-context';
+import { QUICKSTART_ID_FILTER_KEY } from './utils/const';
 import { QuickStart, QuickStartStatus, AllQuickStartStates } from './utils/quick-start-types';
+import { getQuickStartByName } from './utils/quick-start-utils';
 
 export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement> {
-  // array of quick starts
-  quickStarts?: QuickStart[];
-  // content to render in the page
+  /* array of quick starts */
+  quickStarts: QuickStart[];
+  /* id of the currently active quick start */
+  activeQuickStartID: string;
+  /* setter for the active quick starts */
+  setActiveQuickStartID: React.Dispatch<React.SetStateAction<string>>;
+  /* quick starts state object */
+  allQuickStartStates: AllQuickStartStates;
+  /* setter for the quick starts state object */
+  setAllQuickStartStates: React.Dispatch<React.SetStateAction<AllQuickStartStates>>;
+  /* content to render within the container */
   children?: React.ReactNode;
-  // id of the currently active quick start
-  activeQuickStartID?: string;
-  // setter for the active quick starts
-  setActiveQuickStartID?: React.Dispatch<React.SetStateAction<string>>;
-  // quick starts state object
-  allQuickStartStates?: AllQuickStartStates;
-  // setter for the quick starts state object
-  setAllQuickStartStates?: React.Dispatch<React.SetStateAction<AllQuickStartStates>>;
-  // element to render the drawer panel into
+  /* element to render the drawer panel into */
   appendTo?: HTMLElement | (() => HTMLElement);
-  // if true, the panel will take up the full browser width
+  /* if true, the panel will take up the full browser width */
   fullWidth?: boolean;
-  // callback when an in-progress quick start it closed
+  /* callback when an in-progress quick start is closed */
   onCloseInProgress?: any;
-  // callback when a not-in-progress quick start it closed
+  /* callback when a not-in-progress quick start is closed */
   onCloseNotInProgress?: any;
-  // true to show footer buttons in the catalog tiles
+  /* true to show footer buttons in the catalog tiles (default true) */
   showCardFooters?: boolean;
-  // text resources object
+  /* text resources object */
   resourceBundle?: any;
-  // language of the current resource bundle
+  /* language of the current resource bundle */
   language?: string;
-  // if true, will show a loading spinner on the catalog page
+  /* if true, will show a loading spinner on the catalog page (default false) */
   loading?: boolean;
-  // additional quick start context props
+  /* if true, will update the browser URL with ?quickstart={ID} (default true) */
+  useQueryParams?: boolean;
+  /**
+   * Additional markdown extensions and renderers to use
+   * TODO: example usage - In the meantime you can take a look at:
+   * https://github.com/openshift/console/blob/master/frontend/packages/console-app/src/components/quick-starts/utils/quick-start-context.tsx#L235
+   */
+  markdown?: {
+    extensions?: any[];
+    renderExtension?: (docContext: HTMLDocument, rootSelector: string) => React.ReactNode;
+  };
+  /* additional quick start context props */
   contextProps?: QuickStartContextValues;
 }
 
@@ -58,6 +72,8 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
   showCardFooters,
   language,
   loading = false,
+  useQueryParams = true,
+  markdown,
   contextProps,
   ...props
 }) => {
@@ -78,6 +94,8 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
       // Restart: 'Start over',
     },
     loading,
+    useQueryParams,
+    markdown,
     ...contextProps,
   });
 
@@ -134,8 +152,35 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
     setActiveQuickStart,
     allQuickStarts = [],
     activeQuickStartState,
+    allQuickStartStates,
+    setAllQuickStartStates,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const combinedQuickStarts = allQuickStarts.concat(quickStarts);
+
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    // if there is a quick start param, but the quick start is not active, set it
+    // this can happen if a new browser session is opened or an incognito window for example
+    const quickStartIdFromParam = params.get(QUICKSTART_ID_FILTER_KEY) || '';
+    if (quickStartIdFromParam && !activeQuickStartID) {
+      const activeQuickStart = getQuickStartByName(quickStartIdFromParam, combinedQuickStarts);
+      // don't try to load a quick start that is actually just an external resource (spec.link)
+      if (combinedQuickStarts.length > 0 && activeQuickStart && !activeQuickStart.spec.link) {
+        setActiveQuickStart(quickStartIdFromParam);
+      }
+    }
+  }, [activeQuickStartID, combinedQuickStarts, setActiveQuickStart]);
+
+  React.useEffect(() => {
+    // If activeQuickStartID was changed through prop from QuickStartContainer, need to init the state if it does not exist yet
+    if (activeQuickStartID && !allQuickStartStates[activeQuickStartID]) {
+      setAllQuickStartStates({
+        ...allQuickStartStates,
+        [activeQuickStartID]: getDefaultQuickStartState(),
+      });
+    }
+  }, [activeQuickStartID, allQuickStartStates, setAllQuickStartStates]);
+
   const [modalOpen, setModalOpen] = React.useState<boolean>(false);
   const activeQuickStartStatus = activeQuickStartState?.status;
   const onClose = () => setActiveQuickStart('');
