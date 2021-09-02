@@ -3,14 +3,12 @@ import * as React from 'react';
 import { Drawer, DrawerContent, DrawerContentBody } from '@patternfly/react-core';
 import QuickStartCloseModal from './QuickStartCloseModal';
 import QuickStartPanelContent from './QuickStartPanelContent';
-import { QUICKSTART_ID_FILTER_KEY } from './utils/const';
 import {
   QuickStartContext,
   QuickStartContextValues,
   useValuesForQuickStartContext,
 } from './utils/quick-start-context';
 import { QuickStart, QuickStartStatus, AllQuickStartStates } from './utils/quick-start-types';
-import { getQuickStartByName } from './utils/quick-start-utils';
 
 export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement> {
   // array of quick starts

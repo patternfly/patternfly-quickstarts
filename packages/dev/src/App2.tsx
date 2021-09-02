@@ -102,7 +102,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     resourceBundle,
     showCardFooters,
     language,
-    loading,
+    // loading,
   };
 
   const toggleQuickStart = (quickStartId: string) => {
