@@ -88,14 +88,12 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   );
 
   return (
-    <div className="pfext-quick-start-task-header">
-      <WizardNavItem
-        content={content}
-        step={taskIndex}
-        onNavItemClick={() => onTaskSelect(taskIndex - 1)}
-        navItemComponent="button"
-      />
-    </div>
+    <WizardNavItem
+      content={content}
+      step={taskIndex}
+      onNavItemClick={() => onTaskSelect(taskIndex - 1)}
+      navItemComponent="button"
+    />
   );
 };
 

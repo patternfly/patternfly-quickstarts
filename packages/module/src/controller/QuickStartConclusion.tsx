@@ -4,7 +4,7 @@ import ArrowRightIcon from '@patternfly/react-icons/dist/js/icons/arrow-right-ic
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStart, QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
-import TaskHeader from './QuickStartTaskHeader';
+import TaskHeaderList from './QuickStartTaskHeaderList';
 
 type QuickStartConclusionProps = {
   tasks: QuickStartTask[];
@@ -28,16 +28,7 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <>
-      {tasks.map((task, index) => (
-        <TaskHeader
-          key={task.title}
-          title={task.title}
-          taskIndex={index + 1}
-          size="md"
-          taskStatus={allTaskStatuses[index]}
-          onTaskSelect={onTaskSelect}
-        />
-      ))}
+      <TaskHeaderList tasks={tasks} allTaskStatuses={allTaskStatuses} onTaskSelect={onTaskSelect} />
       <QuickStartMarkdownView
         content={
           hasFailedTask
