@@ -93,7 +93,9 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
           allQuickStartStates,
         ).sort(sortFncCallback)
       : allQuickStarts;
-    setFilteredQuickStarts(filteredQs);
+    if (filteredQs.length !== filteredQuickStarts.length) {
+      setFilteredQuickStarts(filteredQs);
+    }
   }, [
     allQuickStarts,
     allQuickStartStates,
@@ -101,6 +103,7 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
     filter.keyword,
     filter.status.statusFilters,
     sortFncCallback,
+    filteredQuickStarts,
   ]);
 
   const clearFilters = () => {
@@ -119,8 +122,12 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
       filter.status.statusFilters,
       allQuickStartStates,
     ).sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName));
-    setFilter('keyword', searchValue);
-    setFilteredQuickStarts(result);
+    if (searchValue !== filter.keyword) {
+      setFilter('keyword', searchValue);
+    }
+    if (result.length !== filteredQuickStarts.length) {
+      setFilteredQuickStarts(result);
+    }
   };
 
   const onStatusChange = (statusList) => {
@@ -130,8 +137,12 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
       statusList,
       allQuickStartStates,
     ).sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName));
-    setFilter('status', statusList);
-    setFilteredQuickStarts(result);
+    if (JSON.stringify(statusList) !== JSON.stringify(filter.status)) {
+      setFilter('status', statusList);
+    }
+    if (result.length !== filteredQuickStarts.length) {
+      setFilteredQuickStarts(result);
+    }
   };
 
   if (loading) {

@@ -82,6 +82,7 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
     loading,
     ...contextProps,
   });
+  debugger;
 
   React.useEffect(() => {
     if (

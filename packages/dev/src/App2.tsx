@@ -95,9 +95,9 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     allQuickStartStates,
     setActiveQuickStartID,
     setAllQuickStartStates,
-    resourceBundle,
+    // resourceBundle,
     showCardFooters,
-    language,
+    // language,
     loading,
   };
 
