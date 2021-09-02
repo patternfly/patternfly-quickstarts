@@ -102,7 +102,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     resourceBundle,
     showCardFooters,
     language,
-    // loading,
+    loading,
   };
 
   const toggleQuickStart = (quickStartId: string) => {
@@ -117,7 +117,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
       // optionally remove the query param
       removeQueryArgument(QUICKSTART_ID_FILTER_KEY);
     }
-  }
+  };
 
   return (
     <React.Suspense fallback={<LoadingBox />}>
