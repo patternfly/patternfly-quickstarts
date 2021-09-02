@@ -53,7 +53,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     };
     setTimeout(() => {
       load();
-    }, 3000);
+    }, 1500);
   }, []);
 
   const AppToolbar = (

@@ -1,4 +1,12 @@
 .pfext-quick-start-task-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: var(--pf-global--spacer--xs);
+  button::before {
+    content: none;
+  }
+  
   &__title {
     color: var(--pf-global--primary-color--100) !important;
     margin-right: var(--pf-global--spacer--md) !important;

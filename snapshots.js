@@ -1,5 +1,5 @@
 const PercyScript = require('@percy/script');
-const options = { headless: false };
+const options = { headless: true };
 const withSnapshots = true;
 
 const runThroughQuickStart = async (id, page, percySnapshot) => {

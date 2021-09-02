@@ -31,8 +31,6 @@ import '@patternfly/quickstarts/dist/quickstarts.min.css';
 
 Note: You can also view this example on [codesandbox](https://codesandbox.io/s/patternflyquickstarts-1386f?file=/src/App.js)!
 
-In your main app file wrap your application with the QuickStartContextProvider and the QuickStartDrawer.
-
 ```js
 import "./styles.css";
 
@@ -57,46 +55,65 @@ import quickstartTwo from "./quick-starts/quickstart-two.yaml";
 import quickstartThree from "./quick-starts/quickstart-three";
 
 const App = () => {
-  const allQuickStarts = [
-    jsYaml.load(quickstartOne),
-    jsYaml.load(quickstartTwo),
-    quickstartThree
-  ];
+  const [quickStarts, setQuickStarts] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+
   // You can use the useLocalStorage hook if you want to store user progress in local storage
   // Otherwise you can use React.useState here or another means (backend) to store the active quick start ID and state
-  const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage(
-    "quickstartId",
-    ""
-  );
-  const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage(
-    "quickstarts",
-    {}
-  );
-  const valuesForQuickstartContext = {
-    // array of quick starts
-    allQuickStarts,
-    // the next 4 items tie the quick start state to the main app
+  const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage("quickstartId", "");
+  const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage("quickstarts", {});
+  // or
+  // const [activeQuickStartID, setActiveQuickStartID] = React.useState("");
+  // const [allQuickStartStates, setAllQuickStartStates] = React.useState({});
+
+  React.useEffect(() => {
+    const load = () => {
+      const loadedQuickStarts = [
+        jsYaml.load(quickstartOne),
+        jsYaml.load(quickstartTwo),
+        quickstartThree
+      ];
+      setQuickStarts(loadedQuickStarts);
+      setLoading(false);
+    };
+    setTimeout(() => {
+      // simulate loading time to get the quick starts from somewhere
+      load();
+    }, 1500);
+  }, []);
+
+  const drawerProps = {
+    quickStarts,
     activeQuickStartID,
-    setActiveQuickStartID,
     allQuickStartStates,
+    setActiveQuickStartID,
     setAllQuickStartStates,
-    footer: {
-      // don't show card footers
-      show: false
+    showCardFooters: false,
+    loading,
+  };
+
+  const toggleQuickStart = (quickStartId: string) => {
+    if (activeQuickStartID !== quickStartId) {
+      // activate
+      setActiveQuickStartID(quickStartId);
+    } else {
+      // deactivate
+      setActiveQuickStartID('');
     }
   };
 
   return (
-    <QuickStartContextProvider value={valuesForQuickstartContext}>
-      <QuickStartDrawer>
-        <SomeNestedComponent />
-        <QuickStartCatalogPage
-          showFilter
-          title="Quick starts"
-          hint="Learn how to create, import, and run applications with step-by-step instructions and tasks."
-        />
-      </QuickStartDrawer>
-    </QuickStartContextProvider>
+    <QuickStartContainer {...drawerProps}>
+      <Button onClick={() => toggleQuickStart("node-with-s2i")}>
+        Toggle quick start through prop
+      </Button>
+      <SomeNestedComponent />
+      <QuickStartCatalogPage
+        showFilter
+        title="Quick starts"
+        hint="Learn how to create, import, and run applications with step-by-step instructions and tasks."
+      />
+    </QuickStartContainer>
   );
 };
 
@@ -104,8 +121,8 @@ const SomeNestedComponent = () => {
   const qsContext = React.useContext(QuickStartContext);
   // the quick start ID is defined in the quick start object's metadata.name field
   return (
-    <button onClick={() => qsContext.setActiveQuickStart("node-with-s2i")}>
-      Toggle a quick start from another component
+    <button onClick={() => qsContext.setActiveQuickStart("monitor-sampleapp")}>
+      Toggle quick start through context
     </button>
   );
 };
