@@ -82,7 +82,6 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
     loading,
     ...contextProps,
   });
-  debugger;
 
   React.useEffect(() => {
     if (
@@ -139,22 +138,6 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
     activeQuickStartState,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const combinedQuickStarts = allQuickStarts.concat(quickStarts);
-  React.useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const quickStartId = params.get(QUICKSTART_ID_FILTER_KEY) || '';
-    if (quickStartId && activeQuickStartID !== quickStartId) {
-      const activeQuickStart = getQuickStartByName(quickStartId, combinedQuickStarts);
-      if (
-        !combinedQuickStarts ||
-        combinedQuickStarts.length === 0 ||
-        (activeQuickStart && !activeQuickStart.spec.link)
-      ) {
-        // don't try to load a quick start that is actually just an external resource
-        setActiveQuickStart(quickStartId);
-      }
-    }
-  }, [activeQuickStartID, combinedQuickStarts, setActiveQuickStart]);
-
   const [modalOpen, setModalOpen] = React.useState<boolean>(false);
   const activeQuickStartStatus = activeQuickStartState?.status;
   const onClose = () => setActiveQuickStart('');
