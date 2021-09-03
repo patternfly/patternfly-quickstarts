@@ -41,12 +41,15 @@ import "@patternfly/quickstarts/dist/quickstarts.min.css";
 
 import * as React from "react";
 import {
-  QuickStartDrawer,
-  QuickStartContext,
-  QuickStartContextProvider,
+  QuickStartContainer,
   QuickStartCatalogPage,
-  useLocalStorage
+  QuickStartContext,
+  useLocalStorage,
+  setQueryArgument,
+  removeQueryArgument,
+  QUICKSTART_ID_FILTER_KEY
 } from "@patternfly/quickstarts";
+import { Button } from "@patternfly/react-core";
 import jsYaml from "js-yaml";
 // quick start files could be yaml files or js files, or really anything,
 // as long as they get parsed out to the expexted JSON format
@@ -82,6 +85,8 @@ const App = () => {
     }, 1500);
   }, []);
 
+  const withQueryParams = true;
+
   const drawerProps = {
     quickStarts,
     activeQuickStartID,
@@ -90,15 +95,20 @@ const App = () => {
     setAllQuickStartStates,
     showCardFooters: false,
     loading,
+    useQueryParams: withQueryParams,
   };
 
   const toggleQuickStart = (quickStartId: string) => {
     if (activeQuickStartID !== quickStartId) {
       // activate
       setActiveQuickStartID(quickStartId);
+      // optionally add the browser URL query param
+      withQueryParams && setQueryArgument(QUICKSTART_ID_FILTER_KEY, quickStartId);
     } else {
       // deactivate
       setActiveQuickStartID('');
+      // optionally remove the browser URL query param
+      withQueryParams && removeQueryArgument(QUICKSTART_ID_FILTER_KEY);
     }
   };
 
