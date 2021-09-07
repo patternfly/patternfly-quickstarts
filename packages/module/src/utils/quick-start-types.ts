@@ -14,7 +14,7 @@ export type QuickStartSpec = {
   version?: number;
   displayName: string;
   durationMinutes?: number;
-  icon: string;
+  icon: React.ReactNode;
   description: string;
   prerequisites?: string[];
   introduction?: string;

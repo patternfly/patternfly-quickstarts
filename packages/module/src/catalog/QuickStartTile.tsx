@@ -36,14 +36,19 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
 
   const ref = React.useRef<HTMLDivElement>(null);
 
-  const quickStartIcon = (
-    <FallbackImg
-      className="pfext-catalog-item-icon__img--large"
-      src={icon}
-      alt=""
-      fallback={<RocketIcon />}
-    />
-  );
+  let quickStartIcon: React.ReactNode;
+  if (typeof icon === 'object') {
+    quickStartIcon = icon;
+  } else {
+    quickStartIcon = (
+      <FallbackImg
+        className="pfext-catalog-item-icon__img--large"
+        src={icon as string}
+        alt=""
+        fallback={<RocketIcon />}
+      />
+    );
+  }
 
   const footerComponent =
     footer && footer.show === false ? null : link ? (
