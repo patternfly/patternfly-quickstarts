@@ -1,4 +1,6 @@
+import * as React from 'react';
 import { QuickStart } from '@patternfly/quickstarts';
+import GithubIcon from '@patternfly/react-icons/dist/js/icons/github-icon';
 
 export const monitorSampleAppQuickStart: QuickStart = {
   apiVersion: 'console.openshift.io/v1',
@@ -10,7 +12,7 @@ export const monitorSampleAppQuickStart: QuickStart = {
     version: 4.7,
     displayName: 'Monitoring your sample application',
     durationMinutes: 10,
-    icon: '',
+    icon: <GithubIcon />,
     description: `Now that you’ve created a sample application and added health checks, let’s monitor your application.`,
     prerequisites: [`You completed the "Getting started with a sample" quick start.`],
     introduction: `### This quick start shows you how to monitor your sample application.

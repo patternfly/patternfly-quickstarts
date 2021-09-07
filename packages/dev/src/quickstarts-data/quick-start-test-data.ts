@@ -86,7 +86,7 @@ export const allAsciiDocImports = {
 export const allQuickStarts: QuickStart[] = [
   // explorePipelinesQuickStart,
   // exploreServerlessQuickStart,
-  // monitorSampleAppQuickStart,
+  monitorSampleAppQuickStart,
   addHealthchecksQuickstart,
   demo,
   installAssociatePipelineQuickstart,
