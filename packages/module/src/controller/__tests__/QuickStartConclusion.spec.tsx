@@ -55,7 +55,7 @@ describe('QuickStartConclusion', () => {
     wrapper = shallow(
       <QuickStartConclusion
         {...props}
-        nextQuickStart={getQuickStartByName('explore-pipelines', allQuickStarts)}
+        nextQuickStarts={[getQuickStartByName('explore-pipelines', allQuickStarts)]}
       />,
     );
     expect(

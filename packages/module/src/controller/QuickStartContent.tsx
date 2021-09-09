@@ -33,7 +33,6 @@ const QuickStartContent = React.forwardRef<HTMLDivElement, QuickStartContentProp
       spec: { introduction, tasks, conclusion },
     } = quickStart;
     const totalTasks = tasks.length;
-    const nextQS = nextQuickStarts.length > 0 && nextQuickStarts[0];
 
     return (
       <div className="pfext-quick-start-content" ref={ref}>
@@ -59,7 +58,7 @@ const QuickStartContent = React.forwardRef<HTMLDivElement, QuickStartContentProp
             tasks={tasks}
             conclusion={conclusion}
             allTaskStatuses={allTaskStatuses}
-            nextQuickStart={nextQS}
+            nextQuickStarts={nextQuickStarts}
             onQuickStartChange={onQuickStartChange}
             onTaskSelect={onTaskSelect}
           />

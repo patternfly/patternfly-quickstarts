@@ -10,7 +10,7 @@ type QuickStartConclusionProps = {
   tasks: QuickStartTask[];
   conclusion: string;
   allTaskStatuses: QuickStartTaskStatus[];
-  nextQuickStart?: QuickStart;
+  nextQuickStarts?: QuickStart[];
   onQuickStartChange: (quickStartid: string) => void;
   onTaskSelect: (selectedTaskNumber: number) => void;
 };
@@ -19,12 +19,11 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
   tasks,
   conclusion,
   allTaskStatuses,
-  nextQuickStart,
+  nextQuickStarts,
   onQuickStartChange,
   onTaskSelect,
 }) => {
   const hasFailedTask = allTaskStatuses.includes(QuickStartTaskStatus.FAILED);
-  const nextQSDisplayName = nextQuickStart?.spec?.displayName;
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <>
@@ -38,21 +37,26 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
             : conclusion
         }
       />
-      {nextQuickStart && !hasFailedTask && (
-        <Button
-          variant="link"
-          onClick={() => onQuickStartChange(nextQuickStart.metadata.name)}
-          isInline
-        >
-          {getResource('Start {{nextQSDisplayName}} quick start').replace(
-            '{{nextQSDisplayName}}',
-            nextQSDisplayName,
-          )}{' '}
-          <ArrowRightIcon
-            style={{ marginLeft: 'var(--pf-global--spacer--xs)', verticalAlign: 'middle' }}
-          />
-        </Button>
-      )}
+      {!hasFailedTask &&
+        nextQuickStarts &&
+        nextQuickStarts.length > 0 &&
+        nextQuickStarts.map((nextQuickStart, index) => (
+          <Button
+            variant="link"
+            onClick={() => onQuickStartChange(nextQuickStart.metadata.name)}
+            isInline
+            isBlock
+            key={index}
+          >
+            {getResource('Start {{nextQSDisplayName}} quick start').replace(
+              '{{nextQSDisplayName}}',
+              nextQuickStart?.spec?.displayName,
+            )}{' '}
+            <ArrowRightIcon
+              style={{ marginLeft: 'var(--pf-global--spacer--xs)', verticalAlign: 'middle' }}
+            />
+          </Button>
+        ))}
     </>
   );
 };
