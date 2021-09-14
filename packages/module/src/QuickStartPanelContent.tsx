@@ -34,13 +34,13 @@ const getElement = (appendTo: HTMLElement | (() => HTMLElement)) => {
   return appendTo;
 };
 
-const scrollTopOnTaskNumberChange = (node: HTMLElement, taskNumber: number): void => {
+const useScrollTopOnTaskNumberChange = (node: HTMLElement, taskNumber: number): void => {
   React.useEffect(() => {
     if (node) {
       node.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, [taskNumber])
-}
+  }, [taskNumber, node]);
+};
 
 const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   quickStarts = [],
@@ -57,7 +57,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   const quickStart = quickStarts.find((qs) => qs.metadata.name === activeQuickStartID);
   const { activeQuickStartState } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const taskNumber = activeQuickStartState?.taskNumber;
-  scrollTopOnTaskNumberChange(contentRef, taskNumber as number);
+  useScrollTopOnTaskNumberChange(contentRef, taskNumber as number);
   const nextQuickStarts: QuickStart[] = quickStarts.filter((qs: QuickStart) =>
     quickStart?.spec.nextQuickStart?.includes(qs.metadata.name),
   );
