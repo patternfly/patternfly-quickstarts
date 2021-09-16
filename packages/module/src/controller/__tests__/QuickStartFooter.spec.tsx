@@ -18,8 +18,8 @@ describe('QuickStartFooter', () => {
   beforeEach(() => {
     spyOn(React, 'useContext').and.returnValue({
       activeQuickStartID: '',
-      startQuickStart: () => { },
-      restartQuickStart: () => { },
+      startQuickStart: () => {},
+      restartQuickStart: () => {},
       getResource: (key) => `quickstart~${key}`,
     });
   });
