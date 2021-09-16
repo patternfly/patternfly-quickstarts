@@ -12,6 +12,7 @@
     "build:quick": "yarn workspace @patternfly/quickstarts quick",
     "start": "yarn workspace @patternfly/quickstarts-dev start",
     "watch": "yarn build && concurrently --kill-others \"yarn workspace @patternfly/quickstarts watch\" \"yarn start\"",
+    "watch:quick": "yarn build:quick && concurrently --kill-others \"yarn workspace @patternfly/quickstarts watch\" \"yarn start\"",
     "dev:build": "yarn workspace @patternfly/quickstarts-dev build",
     "dev:serve": "yarn workspace @patternfly/quickstarts-dev serve",
     "test": "LANG=en_US.UTF-8 jest",
