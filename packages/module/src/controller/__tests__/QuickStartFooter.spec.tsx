@@ -18,8 +18,8 @@ describe('QuickStartFooter', () => {
   beforeEach(() => {
     spyOn(React, 'useContext').and.returnValue({
       activeQuickStartID: '',
-      startQuickStart: () => {},
-      restartQuickStart: () => {},
+      startQuickStart: () => { },
+      restartQuickStart: () => { },
       getResource: (key) => `quickstart~${key}`,
     });
   });
@@ -76,7 +76,7 @@ describe('QuickStartFooter', () => {
     ).toBe('quickstart~Restart');
   });
 
-  it('should load Next and Back buttons for in progress tours in task page', () => {
+  it('should load Next and Back buttons, and Restart link for in progress tours in task page', () => {
     quickStartFooterProps = {
       status: QuickStartStatus.IN_PROGRESS,
       footerClass: 'test',
@@ -90,7 +90,7 @@ describe('QuickStartFooter', () => {
     const quickStartFooterWrapper = shallow(<QuickStartFooter {...quickStartFooterProps} />);
     const footerButtons = quickStartFooterWrapper.find(Button);
     expect(footerButtons.exists()).toBeTruthy();
-    expect(footerButtons.length).toEqual(2);
+    expect(footerButtons.length).toEqual(3);
     expect(
       footerButtons
         .at(0)
@@ -103,6 +103,12 @@ describe('QuickStartFooter', () => {
         .childAt(0)
         .text(),
     ).toBe('quickstart~Back');
+    expect(
+      footerButtons
+        .at(2)
+        .childAt(0)
+        .text(),
+    ).toBe('quickstart~Restart');
   });
 
   it('should load Close, Back and Restart buttons for completed tours in conclusion page', () => {
