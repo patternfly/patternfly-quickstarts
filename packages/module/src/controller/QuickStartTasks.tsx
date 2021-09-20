@@ -23,7 +23,9 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
   onTaskReview,
   onTaskSelect,
 }) => {
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource, alwaysShowTaskReview } = React.useContext<QuickStartContextValues>(
+    QuickStartContext,
+  );
   return (
     <div className="pfext-quick-start-tasks__list">
       {tasks
@@ -32,7 +34,9 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
           const { title, description, review } = task;
           const isActiveTask = index === taskNumber;
           const taskStatus = allTaskStatuses[index];
-
+          const shouldShowTaskReview =
+            (!QUICKSTART_TASKS_INITIAL_STATES.includes(taskStatus) || alwaysShowTaskReview) &&
+            review;
           return (
             <React.Fragment key={title}>
               <TaskHeader
@@ -49,7 +53,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
               {isActiveTask && (
                 <div style={{ marginBottom: 'var(--pf-global--spacer--md)' }}>
                   <QuickStartMarkdownView content={description} />
-                  {!QUICKSTART_TASKS_INITIAL_STATES.includes(taskStatus) && review && (
+                  {shouldShowTaskReview && (
                     <QuickStartTaskReview
                       review={review}
                       taskStatus={taskStatus}

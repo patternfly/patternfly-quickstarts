@@ -76,6 +76,8 @@ export type QuickStartContextValues = {
   setFilter?: any;
   loading?: boolean;
   setLoading?: any;
+  alwaysShowTaskReview?: boolean;
+  setAlwaysShowTaskReview?: any;
 };
 
 export const QuickStartContextDefaults = {
@@ -99,6 +101,7 @@ export const QuickStartContextDefaults = {
   footer: null,
   markdown: null,
   loading: false,
+  alwaysShowTaskReview: false,
 };
 export const QuickStartContext = createContext<QuickStartContextValues>(QuickStartContextDefaults);
 
@@ -155,6 +158,9 @@ export const useValuesForQuickStartContext = (
     [resourceBundle, language],
   );
   const [loading, setLoading] = React.useState(combinedValue.loading);
+  const [alwaysShowTaskReview, setAlwaysShowTaskReview] = React.useState(
+    combinedValue.alwaysShowTaskReview,
+  );
 
   const initialSearchParams = new URLSearchParams(window.location.search);
   const initialSearchQuery = initialSearchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
@@ -444,6 +450,8 @@ export const useValuesForQuickStartContext = (
     setFilter, // revisit if this should be in public context API
     loading,
     setLoading,
+    alwaysShowTaskReview,
+    setAlwaysShowTaskReview,
   };
 };
 
