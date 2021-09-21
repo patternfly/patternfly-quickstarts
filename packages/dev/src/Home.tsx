@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, PageSection, Stack, StackItem, Title } from '@patternfly/react-core';
-import { QuickStartContext } from '@patternfly/quickstarts';
+import { Button, PageSection, Stack, StackItem, Switch, Title } from '@patternfly/react-core';
+import { QuickStartContext, useLocalStorage } from '@patternfly/quickstarts';
 import i18n from './i18n/i18n';
 
 export const Home: React.FunctionComponent = () => {
@@ -12,6 +12,11 @@ export const Home: React.FunctionComponent = () => {
     const resourceBundle = i18n.getResourceBundle(lng, 'quickstart');
     setResourceBundle(resourceBundle, lng);
   };
+
+  const [alwaysShowTaskReview, setAlwaysShowTaskReview] = useLocalStorage(
+    'alwaysShowTaskReview',
+    false,
+  );
 
   return (
     <>
@@ -38,6 +43,14 @@ export const Home: React.FunctionComponent = () => {
             >
               Change lng - EN
             </Button>
+          </StackItem>
+          <StackItem>
+            <Switch
+              label="Always show task review under task details"
+              labelOff="Only show task review at end of task"
+              onChange={setAlwaysShowTaskReview}
+              isChecked={alwaysShowTaskReview}
+            />
           </StackItem>
         </Stack>
       </PageSection>

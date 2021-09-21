@@ -89,6 +89,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
 
   const language = localStorage.getItem('bridge/language') || 'en';
   const resourceBundle = i18n.getResourceBundle(language, 'quickstart');
+  const alwaysShowTaskReview = localStorage.getItem('alwaysShowTaskReview') === 'true';
 
   const valuesForQuickstartContext: QuickStartContextValues = {
     allQuickStarts,
@@ -106,6 +107,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
       // Continue: 'Resume',
       // Restart: 'Start over',
     },
+    alwaysShowTaskReview,
   };
 
   return (

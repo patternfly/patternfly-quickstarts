@@ -95,6 +95,8 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
 
   const withQueryParams = true;
 
+  const alwaysShowTaskReview = localStorage.getItem('alwaysShowTaskReview') === 'true';
+
   const drawerProps: QuickStartContainerProps = {
     quickStarts,
     activeQuickStartID,
@@ -106,6 +108,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     language,
     loading,
     useQueryParams: withQueryParams,
+    alwaysShowTaskReview,
   };
 
   const toggleQuickStart = (quickStartId: string) => {

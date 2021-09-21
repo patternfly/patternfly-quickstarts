@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Switch, Stack, StackItem } from '@patternfly/react-core';
+import { Button } from '@patternfly/react-core';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartStatus } from '../utils/quick-start-types';
 import { camelize } from '../utils/quick-start-utils';
@@ -25,12 +25,9 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   footerClass,
   quickStartId,
 }) => {
-  const {
-    restartQuickStart,
-    getResource,
-    setAlwaysShowTaskReview,
-    alwaysShowTaskReview,
-  } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { restartQuickStart, getResource } = React.useContext<QuickStartContextValues>(
+    QuickStartContext,
+  );
 
   const PrimaryButtonText = React.useMemo(() => {
     return {
@@ -120,31 +117,11 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
     [status, SecondaryButtonText, onRestart, taskNumber, totalTasks],
   );
 
-  const getToggleAlwaysShowTaskReview = React.useMemo(
-    () =>
-      taskNumber === -1 && (
-        <StackItem>
-          <Switch
-            label={`Always show ${getResource('Check your work')}`}
-            labelOff={`Don't always show ${getResource('Check your work')}`}
-            isChecked={alwaysShowTaskReview}
-            onChange={setAlwaysShowTaskReview}
-          />
-        </StackItem>
-      ),
-    [alwaysShowTaskReview, getResource, setAlwaysShowTaskReview, taskNumber],
-  );
-
   return (
     <div className={`pfext-quick-start-footer ${footerClass}`}>
-      <Stack hasGutter>
-        {getToggleAlwaysShowTaskReview}
-        <StackItem>
-          {getPrimaryButton}
-          {getSecondaryButton}
-          {getSideNoteAction}
-        </StackItem>
-      </Stack>
+      {getPrimaryButton}
+      {getSecondaryButton}
+      {getSideNoteAction}
     </div>
   );
 };
