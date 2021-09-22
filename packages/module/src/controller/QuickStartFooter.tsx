@@ -103,8 +103,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
 
   const getSideNoteAction = React.useMemo(
     () =>
-      status === QuickStartStatus.COMPLETE &&
-      taskNumber === totalTasks && (
+      taskNumber !== -1 && (
         <Button
           variant="link"
           className="pfext-quick-start-footer__restartbtn"
@@ -114,7 +113,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
           {SecondaryButtonText.RESTART}
         </Button>
       ),
-    [status, SecondaryButtonText, onRestart, taskNumber, totalTasks],
+    [taskNumber, onRestart, SecondaryButtonText.RESTART],
   );
 
   return (
