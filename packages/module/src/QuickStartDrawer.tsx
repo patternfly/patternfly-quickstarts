@@ -99,8 +99,8 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
     loading,
     useQueryParams,
     markdown,
-    ...contextProps,
     alwaysShowTaskReview,
+    ...contextProps,
   });
 
   React.useEffect(() => {
