@@ -11,14 +11,9 @@ interface DemoInterface {
 /** Add the name of the demo and it's component here to have them show up in the demo app */
 export const Demos: DemoInterface[] = [
   {
-    id: 'home',
-    name: 'Home',
-    to: '/',
-  },
-  {
     id: 'quickstarts',
     name: 'Quick starts',
-    to: '/quickstarts',
+    to: '/',
   },
   {
     id: 'custom-catalog',

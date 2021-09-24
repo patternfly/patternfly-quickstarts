@@ -8,7 +8,6 @@ import './i18n/i18n';
 import App from './App';
 import App2 from './App2';
 import { QuickStartContext } from '@patternfly/quickstarts';
-import { Home } from './Home';
 import { DefaultCatalog } from './DefaultCatalog';
 import { CustomCatalog } from './CustomCatalog';
 
@@ -26,11 +25,6 @@ ReactDOM.render(
   <Router>
     <Switch>
       <Route exact path="/">
-        <App>
-          <Home />
-        </App>
-      </Route>
-      <Route exact path="/quickstarts">
         <App showCardFooters={false}>
           <SomeNestedComponent />
           <DefaultCatalog />
