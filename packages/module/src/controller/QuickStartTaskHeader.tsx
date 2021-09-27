@@ -111,6 +111,7 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
       step={taskIndex}
       onNavItemClick={() => onTaskSelect(taskIndex - 1)}
       navItemComponent="button"
+      isCurrent={isActiveTask}
     />
   );
 };
