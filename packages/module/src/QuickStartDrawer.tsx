@@ -44,6 +44,8 @@ export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement
   loading?: boolean;
   /* if true, will update the browser URL with ?quickstart={ID} (default true) */
   useQueryParams?: boolean;
+  /* if true, the TaskReview component, aka "Check your work", will be shown regardless of task status */
+  alwaysShowTaskReview?: boolean;
   /**
    * Additional markdown extensions and renderers to use
    * TODO: example usage - In the meantime you can take a look at:
@@ -75,6 +77,7 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
   useQueryParams = true,
   markdown,
   contextProps,
+  alwaysShowTaskReview = false,
   ...props
 }) => {
   const valuesForQuickstartContext: QuickStartContextValues = useValuesForQuickStartContext({
@@ -96,6 +99,7 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
     loading,
     useQueryParams,
     markdown,
+    alwaysShowTaskReview,
     ...contextProps,
   });
 

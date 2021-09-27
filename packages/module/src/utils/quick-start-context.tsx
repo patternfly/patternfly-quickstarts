@@ -76,6 +76,8 @@ export type QuickStartContextValues = {
   setFilter?: any;
   loading?: boolean;
   setLoading?: any;
+  alwaysShowTaskReview?: boolean;
+  setAlwaysShowTaskReview?: any;
 };
 
 export const QuickStartContextDefaults = {
@@ -99,6 +101,7 @@ export const QuickStartContextDefaults = {
   footer: null,
   markdown: null,
   loading: false,
+  alwaysShowTaskReview: false,
 };
 export const QuickStartContext = createContext<QuickStartContextValues>(QuickStartContextDefaults);
 
@@ -155,6 +158,9 @@ export const useValuesForQuickStartContext = (
     [resourceBundle, language],
   );
   const [loading, setLoading] = React.useState(combinedValue.loading);
+  const [alwaysShowTaskReview, setAlwaysShowTaskReview] = React.useState(
+    combinedValue.alwaysShowTaskReview,
+  );
 
   const initialSearchParams = new URLSearchParams(window.location.search);
   const initialSearchQuery = initialSearchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
@@ -276,6 +282,11 @@ export const useValuesForQuickStartContext = (
     [setActiveQuickStartID, setAllQuickStartStates, useQueryParams],
   );
 
+  // When alwaysShowTaskReview preference is enabled, skip visited step and go directly to review
+  const stepAfterInitial = alwaysShowTaskReview
+    ? QuickStartTaskStatus.REVIEW
+    : QuickStartTaskStatus.VISITED;
+
   const nextStep = useCallback(
     (totalTasks: number) => {
       if (!activeQuickStartID) {
@@ -309,10 +320,11 @@ export const useValuesForQuickStartContext = (
         if (taskNumber < totalTasks && !updatedTaskStatus) {
           updatedTaskNumber = taskNumber + 1;
         }
-        const markInitialStepVisited =
+
+        const markInitialStepVisitedOrReview =
           updatedTaskNumber > -1 &&
           quickStart[getTaskStatusKey(updatedTaskNumber)] === QuickStartTaskStatus.INIT
-            ? QuickStartTaskStatus.VISITED
+            ? stepAfterInitial
             : quickStart[getTaskStatusKey(updatedTaskNumber)];
         const newState = {
           ...qs,
@@ -322,7 +334,7 @@ export const useValuesForQuickStartContext = (
             ...(updatedTaskNumber > -1
               ? {
                   taskNumber: updatedTaskNumber,
-                  [getTaskStatusKey(updatedTaskNumber)]: markInitialStepVisited,
+                  [getTaskStatusKey(updatedTaskNumber)]: markInitialStepVisitedOrReview,
                 }
               : {}),
             ...(updatedTaskStatus ? { [getTaskStatusKey(taskNumber)]: updatedTaskStatus } : {}),
@@ -331,7 +343,7 @@ export const useValuesForQuickStartContext = (
         return newState;
       });
     },
-    [activeQuickStartID, setAllQuickStartStates],
+    [activeQuickStartID, setAllQuickStartStates, stepAfterInitial],
   );
 
   const previousStep = useCallback(() => {
@@ -367,7 +379,7 @@ export const useValuesForQuickStartContext = (
         for (let taskIndex = 0; taskIndex <= taskNumber; taskIndex++) {
           const taskStatus = quickStart[getTaskStatusKey(taskIndex)];
           const newTaskStatus =
-            taskStatus === QuickStartTaskStatus.INIT ? QuickStartTaskStatus.VISITED : undefined;
+            taskStatus === QuickStartTaskStatus.INIT ? stepAfterInitial : undefined;
           if (newTaskStatus) {
             updatedTaskStatus = {
               ...updatedTaskStatus,
@@ -384,7 +396,7 @@ export const useValuesForQuickStartContext = (
         return { ...qs, [quickStartId]: updatedQuickStart };
       });
     },
-    [setAllQuickStartStates],
+    [setAllQuickStartStates, stepAfterInitial],
   );
 
   const setQuickStartTaskStatus = useCallback(
@@ -444,6 +456,8 @@ export const useValuesForQuickStartContext = (
     setFilter, // revisit if this should be in public context API
     loading,
     setLoading,
+    alwaysShowTaskReview,
+    setAlwaysShowTaskReview,
   };
 };
 
