@@ -20,11 +20,21 @@ type QuickStartTaskHeaderProps = {
   onTaskSelect: (index: number) => void;
 };
 
-const TaskIcon: React.FC<{ taskIndex: number; taskStatus: QuickStartTaskStatus }> = ({
-  taskIndex,
-  taskStatus,
-}) => {
+const TaskIcon: React.FC<{
+  taskIndex: number;
+  taskStatus: QuickStartTaskStatus;
+  isActiveTask: boolean;
+}> = ({ taskIndex, taskStatus, isActiveTask }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const stepNumberIcon = (
+    <span className="pfext-icon-and-text__icon pfext-quick-start-task-header__task-icon-init">
+      {getResource('{{taskIndex, number}}', taskIndex).replace('{{taskIndex, number}}', taskIndex)}
+    </span>
+  );
+  // When the task has been visited but is the active task, show number icon.
+  if (taskStatus === QuickStartTaskStatus.VISITED && isActiveTask) {
+    return stepNumberIcon;
+  }
   switch (taskStatus) {
     case QuickStartTaskStatus.SUCCESS:
       return (
@@ -43,14 +53,7 @@ const TaskIcon: React.FC<{ taskIndex: number; taskStatus: QuickStartTaskStatus }
         </span>
       );
     default:
-      return (
-        <span className="pfext-icon-and-text__icon pfext-quick-start-task-header__task-icon-init">
-          {getResource('{{taskIndex, number}}', taskIndex).replace(
-            '{{taskIndex, number}}',
-            taskIndex,
-          )}
-        </span>
-      );
+      return stepNumberIcon;
   }
 };
 
@@ -86,7 +89,7 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
     >
       <FlexItem>
         <Title headingLevel="h3" size={size} className={classNames}>
-          <TaskIcon taskIndex={taskIndex} taskStatus={taskStatus} />
+          <TaskIcon taskIndex={taskIndex} taskStatus={taskStatus} isActiveTask />
           <span dangerouslySetInnerHTML={{ __html: removeParagraphWrap(markdownConvert(title)) }} />
           {isActiveTask && subtitle && (
             <>
