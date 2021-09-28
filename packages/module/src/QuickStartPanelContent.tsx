@@ -95,23 +95,24 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
       <div className={headerClasses}>
         <DrawerHead>
           <div className="pfext-quick-start-panel-content__title">
-            <Title
-              headingLevel="h1"
-              size="xl"
-              style={{ marginRight: 'var(--pf-global--spacer--md)' }}
-            >
-              {quickStart?.spec.displayName}{' '}
-              <small className="pfext-quick-start-panel-content__duration text-secondary">
-                {getResource(
-                  '{{duration, number}} minutes',
-                  quickStart?.spec.durationMinutes,
-                ).replace('{{duration, number}}', quickStart?.spec.durationMinutes)}
-              </small>
+            <Title headingLevel="h1" size="xl" className="pfext-quick-start-panel-content__name">
+              {quickStart?.spec.displayName}
             </Title>
+            <p className="pfext-quick-start-panel-content__duration">
+              Quick start •{' '}
+              {getResource(
+                '{{duration, number}} minutes',
+                quickStart?.spec.durationMinutes,
+              ).replace('{{duration, number}}', quickStart?.spec.durationMinutes)}
+            </p>
           </div>
           {showClose && (
             <DrawerActions>
-              <DrawerCloseButton onClick={handleClose} data-testid="qs-drawer-close" />
+              <DrawerCloseButton
+                onClick={handleClose}
+                data-testid="qs-drawer-close"
+                className="pfext-quick-start-panel-content__close-button"
+              />
             </DrawerActions>
           )}
         </DrawerHead>

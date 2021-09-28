@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Title, WizardNavItem } from '@patternfly/react-core';
+import { Split, SplitItem, Title, WizardNavItem } from '@patternfly/react-core';
 import CheckCircleIcon from '@patternfly/react-icons/dist/js/icons/check-circle-icon';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/js/icons/exclamation-circle-icon';
 import { css } from '@patternfly/react-styles';
@@ -68,25 +68,25 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   });
 
   const content = (
-    <span className="pfext-quick-start-task-header">
-      <Title headingLevel="h3" size={size} className={classNames}>
+    <Split>
+      <SplitItem>
         <TaskIcon taskIndex={taskIndex} taskStatus={taskStatus} />
-        <span dangerouslySetInnerHTML={{ __html: removeParagraphWrap(markdownConvert(title)) }} />
-        {isActiveTask && subtitle && (
-          <>
-            {' '}
+      </SplitItem>
+      <SplitItem isFilled>
+        <Title headingLevel="h3" size={size} className={classNames}>
+          <span dangerouslySetInnerHTML={{ __html: removeParagraphWrap(markdownConvert(title)) }} />
+          {isActiveTask && subtitle && (
             <span
               className="pfext-quick-start-task-header__subtitle text-secondary"
               data-test-id="quick-start-task-subtitle"
             >
-              {subtitle}
+              &nbsp;&nbsp;{subtitle}
             </span>
-          </>
-        )}
-      </Title>
-    </span>
+          )}
+        </Title>
+      </SplitItem>
+    </Split>
   );
-
   return (
     <WizardNavItem
       content={content}

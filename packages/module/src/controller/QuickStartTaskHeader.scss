@@ -2,14 +2,13 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: var(--pf-global--spacer--xs);
+  padding-bottom: var(--pf-global--spacer--md);
   button::before {
     content: none;
   }
-  
+
   &__title {
     color: var(--pf-global--primary-color--100) !important;
-    margin-right: var(--pf-global--spacer--md) !important;
   }
 
   &__subtitle {
@@ -32,8 +31,8 @@
       color: var(--pf-global--Color--light-100);
       display: inline-flex;
       justify-content: center;
-      height: 1.5em;
-      width: 1.5em;
+      width: 24px;
+      line-height: 24px;
     }
 
     &-success,

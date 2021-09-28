@@ -21,7 +21,7 @@ const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
   return (
     <>
       <QuickStartMarkdownView content={introduction} />
-      <p style={{ marginBottom: 'var(--pf-global--spacer--md)' }}>
+      <p className="pfext-quick-start-content__willcomplete">
         {getResource(
           'In this quick start, you will complete {{count, number}} task',
           tasks.length,

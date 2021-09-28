@@ -10,7 +10,22 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        margin-bottom: var(--pf-global--spacer--xs);
+        &:not(:first-child) {
+          padding-top: var(--pf-global--spacer--md);
+        }
+      }
+    }
+  }
+  &__content {
+    padding-left: var(--pf-global--spacer--xl);
+    margin-top: var(--pf-global--spacer--sm);
+    margin-bottom: var(--pf-global--spacer--lg);
+    ol, ul {
+      font-size: var(--pf-global--FontSize--sm);
+    }
+    h1, h2, h3 {
+      &:first-of-type {
+        margin-top: 0;
       }
     }
   }

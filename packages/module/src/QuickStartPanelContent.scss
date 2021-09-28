@@ -2,10 +2,15 @@
   &__header {
     position: sticky;
     top: 0px;
-    background: inherit;
+    background-color: var(--pf-global--palette--blue-400);
     z-index: var(--pf-global--ZIndex--xs);
     &__shadow {
       box-shadow: var(--pf-global--BoxShadow--sm-bottom);
+    }
+  }
+  &__close-button {
+    button {
+      color: var(--pf-global--Color--light-100) !important;
     }
   }
   &__body {
@@ -14,18 +19,23 @@
     ul, ol {
       padding-left: 20px;
     }
+    background-color: var(--pf-global--palette---black-0100);
   }
   &__title {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    color: var(--pf-global--Color--light-100);
+    margin-right: var(--pf-global--spacer--sm);
+  }
+  &__name {
+    margin-bottom: var(--pf-global--spacer--sm);
   }
   &__duration {
-    display: inline-block;
-    font-size: 65%;
+    font-size: 16px;
     font-weight: 400;
     line-height: 1;
-    color: #9c9c9c;
+    color: var(--pf-global--Color--light-200);
   }
   &__footer {
     &__shadow {

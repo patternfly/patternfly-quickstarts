@@ -11,7 +11,9 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      margin-bottom: var(--pf-global--spacer--xs);
+      &:not(:first-child) {
+        padding-top: var(--pf-global--spacer--md);
+      }
     }
   }
 }
