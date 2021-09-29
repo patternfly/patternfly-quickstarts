@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Split, SplitItem, Title, WizardNavItem } from '@patternfly/react-core';
+import { FlexItem, Split, SplitItem, Title, WizardNavItem } from '@patternfly/react-core';
 import CheckCircleIcon from '@patternfly/react-icons/dist/js/icons/check-circle-icon';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/js/icons/exclamation-circle-icon';
 import { css } from '@patternfly/react-styles';
@@ -20,11 +20,21 @@ type QuickStartTaskHeaderProps = {
   onTaskSelect: (index: number) => void;
 };
 
-const TaskIcon: React.FC<{ taskIndex: number; taskStatus: QuickStartTaskStatus }> = ({
-  taskIndex,
-  taskStatus,
-}) => {
+const TaskIcon: React.FC<{
+  taskIndex: number;
+  taskStatus: QuickStartTaskStatus;
+  isActiveTask: boolean;
+}> = ({ taskIndex, taskStatus, isActiveTask }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const stepNumberIcon = (
+    <span className="pfext-icon-and-text__icon pfext-quick-start-task-header__task-icon-init">
+      {getResource('{{taskIndex, number}}', taskIndex).replace('{{taskIndex, number}}', taskIndex)}
+    </span>
+  );
+  // When the task has been visited but is the active task, show number icon.
+  if (taskStatus === QuickStartTaskStatus.VISITED && isActiveTask) {
+    return stepNumberIcon;
+  }
   switch (taskStatus) {
     case QuickStartTaskStatus.SUCCESS:
       return (
@@ -33,6 +43,7 @@ const TaskIcon: React.FC<{ taskIndex: number; taskStatus: QuickStartTaskStatus }
         </span>
       );
     case QuickStartTaskStatus.FAILED:
+    case QuickStartTaskStatus.VISITED:
       return (
         <span className="pfext-icon-and-text__icon">
           <ExclamationCircleIcon
@@ -42,14 +53,7 @@ const TaskIcon: React.FC<{ taskIndex: number; taskStatus: QuickStartTaskStatus }
         </span>
       );
     default:
-      return (
-        <span className="pfext-icon-and-text__icon pfext-quick-start-task-header__task-icon-init">
-          {getResource('{{taskIndex, number}}', taskIndex).replace(
-            '{{taskIndex, number}}',
-            taskIndex,
-          )}
-        </span>
-      );
+      return stepNumberIcon;
   }
 };
 
@@ -64,28 +68,44 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
 }) => {
   const classNames = css('pfext-quick-start-task-header__title', {
     'pfext-quick-start-task-header__title-success': taskStatus === QuickStartTaskStatus.SUCCESS,
-    'pfext-quick-start-task-header__title-failed': taskStatus === QuickStartTaskStatus.FAILED,
+    'pfext-quick-start-task-header__title-failed':
+      taskStatus === (QuickStartTaskStatus.FAILED || QuickStartTaskStatus.VISITED),
   });
+  const notCompleted = taskStatus === QuickStartTaskStatus.VISITED;
+  const skippedReviewOrFailed =
+    taskStatus === QuickStartTaskStatus.REVIEW || taskStatus === QuickStartTaskStatus.FAILED;
+  const tryAgain = !isActiveTask && (skippedReviewOrFailed || notCompleted) && (
+    <FlexItem>
+      <Title headingLevel="h4" className="pfext-quick-start-task-header__tryagain">
+        Try the steps again.
+      </Title>
+    </FlexItem>
+  );
 
   const content = (
-    <Split>
-      <SplitItem>
-        <TaskIcon taskIndex={taskIndex} taskStatus={taskStatus} />
-      </SplitItem>
-      <SplitItem isFilled>
-        <Title headingLevel="h3" size={size} className={classNames}>
-          <span dangerouslySetInnerHTML={{ __html: removeParagraphWrap(markdownConvert(title)) }} />
-          {isActiveTask && subtitle && (
+    <>
+      <Split>
+        <SplitItem>
+          <TaskIcon taskIndex={taskIndex} taskStatus={taskStatus} isActiveTask={isActiveTask} />
+        </SplitItem>
+        <SplitItem isFilled>
+          <Title headingLevel="h3" size={size} className={classNames}>
             <span
-              className="pfext-quick-start-task-header__subtitle text-secondary"
-              data-test-id="quick-start-task-subtitle"
-            >
-              {subtitle}
-            </span>
-          )}
-        </Title>
-      </SplitItem>
-    </Split>
+              dangerouslySetInnerHTML={{ __html: removeParagraphWrap(markdownConvert(title)) }}
+            />
+            {isActiveTask && subtitle && (
+              <span
+                className="pfext-quick-start-task-header__subtitle text-secondary"
+                data-test-id="quick-start-task-subtitle"
+              >
+                {subtitle}
+              </span>
+            )}
+          </Title>
+        </SplitItem>
+      </Split>
+      {tryAgain}
+    </>
   );
   return (
     <WizardNavItem
@@ -93,6 +113,7 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
       step={taskIndex}
       onNavItemClick={() => onTaskSelect(taskIndex - 1)}
       navItemComponent="button"
+      isCurrent={isActiveTask}
     />
   );
 };

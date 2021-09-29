@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   align-items: center;
   padding-bottom: var(--pf-global--spacer--md);
+  margin-bottom: var(--pf-global--spacer--xs);
   button::before {
     content: none;
   }
@@ -15,6 +16,13 @@
     display: inline-block;
     font-size: var(--pf-global--FontSize--sm);
     margin-left: 8px;
+    color: var(--pf-global--Color--400) !important;
+  }
+
+  &__tryagain {
+    display: block;
+    font-size: var(--pf-global--FontSize--sm);
+    color: var(--pf-global--Color--300) !important;
   }
 
   &__title-success {
