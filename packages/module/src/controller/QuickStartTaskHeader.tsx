@@ -72,8 +72,9 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
       taskStatus === (QuickStartTaskStatus.FAILED || QuickStartTaskStatus.VISITED),
   });
   const notCompleted = taskStatus === QuickStartTaskStatus.VISITED;
-  const skippedReview = taskStatus === QuickStartTaskStatus.REVIEW;
-  const tryAgain = !isActiveTask && (skippedReview || notCompleted) && (
+  const skippedReviewOrFailed =
+    taskStatus === QuickStartTaskStatus.REVIEW || taskStatus === QuickStartTaskStatus.FAILED;
+  const tryAgain = !isActiveTask && (skippedReviewOrFailed || notCompleted) && (
     <FlexItem>
       <Title headingLevel="h4" className="pfext-quick-start-task-header__tryagain">
         Try the steps again.
