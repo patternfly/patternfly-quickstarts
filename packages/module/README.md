@@ -29,7 +29,7 @@ import '@patternfly/quickstarts/dist/quickstarts.min.css';
 
 ## Usage example
 
-Note: You can also view this example on [codesandbox](https://codesandbox.io/s/patternflyquickstarts-1386f?file=/src/App.js) and [stackblitz](https://stackblitz.com/edit/react-ts-wcc244?file=Main.jsx)!
+Note: You can also view this example on [codesandbox](https://codesandbox.io/s/patternfly-quickstarts-finished-cnv53)!
 
 ```js
 import "./styles.css";
