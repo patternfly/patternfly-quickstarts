@@ -35,7 +35,8 @@ export const ProcQuickStartParser = (
       title,
       summaryFailed,
       success,
-      reviewFailed: string | undefined;
+      reviewFailed: string | undefined,
+      prerequisites;
     if (proc) {
       const taskDOM = document.createElement('div');
       taskDOM.innerHTML = proc;
@@ -66,6 +67,9 @@ export const ProcQuickStartParser = (
               case 'Verification':
                 verification = child?.querySelector(':not(.heading):not(.title)')?.outerHTML.trim();
                 break;
+              case 'Prerequisites':
+                prerequisites = child?.querySelector(':not(.heading):not(.title)')?.outerHTML.trim();
+                break;
             }
           } else if (!procedure) {
             // Otherwise if it comes before a procedure it's part of the description
@@ -80,7 +84,7 @@ export const ProcQuickStartParser = (
 
     answer.title = replaceEnvironmentVariables(answer.title || title);
     answer.description = replaceEnvironmentVariables(
-      answer.description || `${description} ${procedure}`,
+      answer.description || `${description} ${prerequisites || ''} ${procedure}`,
     );
     answer.review = answer.review || {};
     answer.review.instructions = replaceEnvironmentVariables(

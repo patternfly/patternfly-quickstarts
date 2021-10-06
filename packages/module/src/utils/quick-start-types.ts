@@ -31,6 +31,7 @@ export type QuickStartTask = {
   description?: string;
   review?: QuickStartTaskReview;
   summary?: QuickStartTaskSummary;
+  prerequisites?: string[];
 };
 
 export type QuickStartTaskReview = {
