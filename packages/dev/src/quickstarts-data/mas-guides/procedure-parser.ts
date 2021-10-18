@@ -58,9 +58,9 @@ export const ProcQuickStartParser = (
         for (let i = 0; i < sectionBody.children.length || 0; i++) {
           const child = sectionBody.children.item(i);
           // find the title
-          const title = child?.querySelector('.heading,.title');
-          if (title) {
-            switch (title?.textContent?.trim()) {
+          const sectionTitle = child?.querySelector('.heading,.title');
+          if (sectionTitle) {
+            switch (sectionTitle?.textContent?.trim()) {
               case 'Procedure':
                 procedure = child?.querySelector(':not(.heading):not(.title)')?.outerHTML.trim();
                 break;
@@ -68,7 +68,9 @@ export const ProcQuickStartParser = (
                 verification = child?.querySelector(':not(.heading):not(.title)')?.outerHTML.trim();
                 break;
               case 'Prerequisites':
-                prerequisites = child?.querySelector(':not(.heading):not(.title)')?.outerHTML.trim();
+                prerequisites = child
+                  ?.querySelector(':not(.heading):not(.title)')
+                  ?.outerHTML.trim();
                 break;
             }
           } else if (!procedure) {

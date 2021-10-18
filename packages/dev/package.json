@@ -43,6 +43,7 @@
     "style-loader": "^2.0.0",
     "sync-fetch": "^0.3.0",
     "ts-loader": "^8.0.5",
+    "ts-node": "^10.3.0",
     "tsconfig-paths-webpack-plugin": "^3.3.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.1.3",
