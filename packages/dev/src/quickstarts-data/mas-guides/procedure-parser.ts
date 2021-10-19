@@ -56,6 +56,21 @@ export const ProcQuickStartParser = (
       }
       if (sectionBody) {
         for (let i = 0; i < sectionBody.children.length || 0; i++) {
+          /**
+          child typically looks like:
+
+          <div class="paragraph|olist|ulist">
+             <div class="title">Procedure|Prerequisites|Verification</div>
+             <ol|ul class="arabic">
+               <li>
+               <li>...
+             </ol|ul>
+          </div>
+
+          And the below code extracts the <ol> or <ul>
+          Except for when there is no <div class="title|heading"/>, then the description is extracted
+          in the else if below
+          */
           const child = sectionBody.children.item(i);
           // find the title
           const sectionTitle = child?.querySelector('.heading,.title');
