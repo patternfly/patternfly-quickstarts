@@ -1,5 +1,5 @@
 import { Asciidoctor } from 'asciidoctor';
-import { isTaskLevelPrereqs, renderPFList } from './util';
+import { isTaskLevelPrereqs, isTaskLevelProcedure, renderPFList } from './util';
 
 const addReactConverter = (asciidoctor: Asciidoctor) => {
   class ReactConverter {
@@ -7,6 +7,9 @@ const addReactConverter = (asciidoctor: Asciidoctor) => {
 
     convert(node: Asciidoctor.AbstractBlock, transform: string) {
       if (isTaskLevelPrereqs(node)) {
+        return renderPFList(node as Asciidoctor.List);
+      }
+      if (isTaskLevelProcedure(node)) {
         return renderPFList(node as Asciidoctor.List);
       }
       return this.baseConverter.convert(node, transform);

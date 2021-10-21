@@ -13,5 +13,44 @@
         margin-bottom: var(--pf-global--spacer--xs);
       }
     }
+    .task-pflist {
+      &-title {
+        font-size: 14px !important;
+        margin-bottom: 6px;
+      }
+      &-subtitle {
+        color: var(--pf-global--Color--200);
+        font-size: 16px;
+      }
+      &-list {
+        font-size: 16px;
+        li + li {
+          margin-top: 4px;
+        }
+        &--prereq {
+          padding-left: var(--pf-global--spacer--lg);
+        }
+        &--proc {
+          padding-left: 14px;
+        }
+        &__item {
+          &--prereq {
+            &::marker {
+              font-size: 0.8rem;
+            }
+            .task-pflist-list__item__content {
+              position: relative;
+              left: 2px;
+            }
+          }
+          &--proc {
+            .task-pflist-list__item__content {
+              position: relative;
+              left: 2px;
+            }
+          }
+        }
+      }
+    }
   }
 }
