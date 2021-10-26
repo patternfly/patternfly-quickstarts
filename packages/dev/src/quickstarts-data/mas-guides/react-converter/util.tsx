@@ -1,12 +1,14 @@
 import { Asciidoctor } from 'asciidoctor/types';
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
-import { List, ListItem, Title } from '@patternfly/react-core';
+import { Alert, Card, CardBody, List, ListItem, Title } from '@patternfly/react-core';
 import { css } from '@patternfly/react-styles';
 
 const MODULE_TYPE_ATTRIBUTE = 'module-type';
 const PREREQUISITES = 'Prerequisites';
 const PROCEDURE = 'Procedure';
+const IMPORTANT = 'IMPORTANT';
+const NOTE = 'NOTE';
 
 export const getModuleType = (node: Asciidoctor.AbstractNode) => {
   if (node.getAttributes()[MODULE_TYPE_ATTRIBUTE]) {
@@ -37,30 +39,72 @@ export const isPrerequisites = (node: Asciidoctor.AbstractBlock) => {
   return node.getTitle && node.getTitle() === PREREQUISITES;
 };
 
-export const isList = (node: Asciidoctor.AbstractBlock) => {
+export const isListBlock = (node: Asciidoctor.AbstractBlock) => {
   return node.getNodeName() === 'olist' || node.getNodeName() === 'ulist';
 };
 
+export const isImportantBlock = (node: Asciidoctor.AbstractBlock) => {
+  return node.getAttribute('style') === IMPORTANT;
+};
+
+export const isNoteBlock = (node: Asciidoctor.AbstractBlock) => {
+  return node.getAttribute('style') === NOTE;
+};
+
+export const renderMarkup = (component: React.ReactElement) => {
+  return ReactDOMServer.renderToStaticMarkup(component);
+};
+
+export const renderPFImportant = (node: Asciidoctor.AbstractBlock) => {
+  const inlineWarningAlert = <Alert variant="warning" isInline title={node.getContent()} />;
+  // Don't render to markup yet, will be passed through by parent
+  return ReactDOMServer.renderToString(inlineWarningAlert);
+};
+
+export const renderPFNote = (node: Asciidoctor.AbstractBlock) => {
+  const noteTitle = (node.getAttribute && node.getAttribute('textlabel')) || 'Note';
+  const note = (
+    <Card isPlain isFlat isCompact className="task-pflist-list__item__content__note">
+      <CardBody className="task-pflist-list__item__content__note__body">
+        <strong>{noteTitle}:</strong> {node.getContent()}
+      </CardBody>
+    </Card>
+  );
+  // Don't render to markup yet, will be passed through by parent
+  return ReactDOMServer.renderToString(note);
+};
+
 export const getListTexts = (list: Asciidoctor.List) => {
+  let importantBlock: Asciidoctor.AbstractBlock, noteBlock: Asciidoctor.AbstractBlock;
   return list.getItems().map((listItem: Asciidoctor.ListItem) => {
+    importantBlock = listItem.getBlocks().find((block) => {
+      return isImportantBlock(block);
+    });
+    noteBlock = listItem.getBlocks().find((block) => {
+      return isNoteBlock(block);
+    });
+    if (importantBlock) {
+      const importantRendered = renderPFImportant(importantBlock);
+      return listItem.setText(listItem.getText() + importantRendered);
+    }
+    if (noteBlock) {
+      const noteRendered = renderPFNote(noteBlock);
+      return listItem.setText(listItem.getText() + noteRendered);
+    }
     return listItem.getText();
   });
 };
 
 export const isTaskLevelPrereqs = (node: Asciidoctor.AbstractBlock) => {
-  return isPrerequisites(node) && isList(node) && isProcedure(node.getParent());
+  return isPrerequisites(node) && isListBlock(node) && isProcedure(node.getParent());
 };
 
 export const isProcedureListBlock = (node: Asciidoctor.AbstractBlock) => {
-  return node.getTitle && node.getTitle() === PROCEDURE && isList(node);
+  return node.getTitle && node.getTitle() === PROCEDURE && isListBlock(node);
 };
 
 export const isTaskLevelProcedure = (node: Asciidoctor.AbstractBlock) => {
   return isProcedureListBlock(node) && isProcedure(node.getParent());
-};
-
-export const renderMarkup = (component: React.ReactElement) => {
-  return ReactDOMServer.renderToStaticMarkup(component);
 };
 
 export const withAdocWrapper = (Component: React.ReactNode, nodeName: string, title: string) => {
