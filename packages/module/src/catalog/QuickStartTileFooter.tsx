@@ -41,22 +41,42 @@ const QuickStartTileFooter: React.FC<QuickStartTileFooterProps> = ({
     <Flex justifyContent={{ default: 'justifyContentSpaceBetween' }}>
       {status === QuickStartStatus.NOT_STARTED && (
         <FlexItem>
-          <Button onClick={start} variant="link" isInline data-testid="qs-card-notStarted-start">
+          <Button
+            onClick={start}
+            variant="link"
+            isInline
+            data-testid="qs-card-notStarted-start"
+            id={`${quickStartId}-start`}
+            aria-labelledby={`${quickStartId}-start ${quickStartId}`}
+          >
             {getResource('Start')}
           </Button>
         </FlexItem>
       )}
       {status === QuickStartStatus.IN_PROGRESS && activeQuickStartID !== quickStartId && (
         <FlexItem>
-          <Button variant="link" isInline data-testid="qs-card-inProgress-resume">
+          <Button
+            variant="link"
+            isInline
+            data-testid="qs-card-inProgress-resume"
+            id={`${quickStartId}-continue`}
+            aria-labelledby={`${quickStartId}-continue ${quickStartId}`}
+          >
             {getResource('Continue')}
           </Button>
         </FlexItem>
       )}
       {status === QuickStartStatus.COMPLETE && (
         <FlexItem>
-          <Button onClick={restart} variant="link" isInline data-testid="qs-card-complete-restart">
-            {getResource('Start')}
+          <Button
+            onClick={restart}
+            variant="link"
+            isInline
+            data-testid="qs-card-complete-restart"
+            id={`${quickStartId}-restart`}
+            aria-labelledby={`${quickStartId}-restart ${quickStartId}`}
+          >
+            {getResource('Restart')}
           </Button>
         </FlexItem>
       )}
@@ -67,6 +87,8 @@ const QuickStartTileFooter: React.FC<QuickStartTileFooterProps> = ({
             variant="link"
             isInline
             data-testid="qs-card-inProgress-restart"
+            id={`${quickStartId}-restart`}
+            aria-labelledby={`${quickStartId}-restart ${quickStartId}`}
           >
             {getResource('Restart')}
           </Button>
