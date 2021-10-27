@@ -52,7 +52,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
 
   const footerComponent =
     footer && footer.show === false ? null : link ? (
-      <QuickStartTileFooterExternal link={link} />
+      <QuickStartTileFooterExternal link={link} quickStartId={id} />
     ) : (
       <QuickStartTileFooter quickStartId={id} status={status} totalTasks={tasks?.length} />
     );
@@ -86,6 +86,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
             status={status}
             duration={durationMinutes}
             type={type}
+            quickStartId={id}
           />
         }
         onClick={handleClick}
