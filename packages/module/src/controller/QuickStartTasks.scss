@@ -15,15 +15,12 @@
     }
     .task-pflist {
       &-title {
-        font-size: 14px !important;
         margin-bottom: 6px;
       }
       &-subtitle {
         color: var(--pf-global--Color--200);
-        font-size: 16px;
       }
       &-list {
-        font-size: 16px;
         li + li {
           margin-top: 4px;
         }

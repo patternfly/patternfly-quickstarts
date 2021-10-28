@@ -1,5 +1,6 @@
 .pfext-quick-start-intro {
   &__prereq {
+    font-size: 14px;
     margin-bottom: var(--pf-global--spacer--md);
     .pf-c-expandable-section__content {
       margin-top: var(--pf-global--spacer--sm);
@@ -8,6 +9,7 @@
       padding-top: 0;
       padding-bottom: 0;
       &-text {
+        font-family: var(--pf-global--FontFamily--heading--sans-serif);
         margin-left: var(--pf-global--spacer--sm);
       }
       &-icon {

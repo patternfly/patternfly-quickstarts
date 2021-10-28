@@ -11,4 +11,12 @@
       font-size: 13px;
     }
   }
+  .pfext-markdown-view {
+    div {
+      // Task level introduction paragraph
+      > p:first-child {
+        font-size: 16px;
+      }
+    }
+  }
 }
