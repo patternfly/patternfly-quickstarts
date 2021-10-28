@@ -10,7 +10,7 @@ export const monitorSampleAppQuickStart: QuickStart = {
   },
   spec: {
     version: 4.7,
-    displayName: 'Monitoring your sample application',
+    displayName: '%DISPLAY_NAME%',
     durationMinutes: 10,
     icon: <GithubIcon />,
     description: `Now that you’ve created a sample application and added health checks, let’s monitor your application.`,

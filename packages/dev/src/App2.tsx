@@ -8,6 +8,7 @@ import {
   useLocalStorage,
   setQueryArgument,
   removeQueryArgument,
+  stringReplacer,
   QUICKSTART_ID_FILTER_KEY,
 } from '@patternfly/quickstarts';
 import { loadJSONQuickStarts } from './quickstarts-data/mas-guides/quickstartLoader';
@@ -40,6 +41,22 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   React.useEffect(() => {
     const load = async () => {
       const masGuidesQuickstarts = await loadJSONQuickStarts('');
+      // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+      let monitorSampleApp = yamlQuickStarts.find((qs) => {
+        return qs.metadata.name === 'monitor-sampleapp';
+      });
+      monitorSampleApp = stringReplacer(monitorSampleApp.spec, {
+        delimiter: {
+          start: '%',
+          end: '%',
+        },
+        dictionary: {
+          DISPLAY_NAME: 'I am custom text passed through from the QS Container!',
+        },
+        skip: function(root: {}) {
+          return React.isValidElement(root);
+        },
+      });
       setQuickStarts(yamlQuickStarts.concat(masGuidesQuickstarts));
       setLoading(false);
     };
