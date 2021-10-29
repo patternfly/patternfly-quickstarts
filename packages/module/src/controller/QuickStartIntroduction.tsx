@@ -1,5 +1,5 @@
-import { ExpandableSection, List, ListItem } from '@patternfly/react-core';
 import * as React from 'react';
+import { ExpandableSection, List, ListItem } from '@patternfly/react-core';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
@@ -24,11 +24,14 @@ const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const prereqs = prerequisites?.filter((p) => p);
-  const [isPRExpanded, setIsPRExpanded] = React.useState(false);
+  const [isPrereqsExpanded, setIsPrereqsExpanded] = React.useState(false);
   const prereqList = prereqs?.length > 0 && (
     <ExpandableSection
-      toggleText={`View Prerequisites (${prereqs.length})`}
-      onToggle={() => setIsPRExpanded(!isPRExpanded)}
+      toggleText={getResource('View Prerequisites ({{totalPrereqs}})').replace(
+        '{{totalPrereqs}}',
+        prereqs.length,
+      )}
+      onToggle={() => setIsPrereqsExpanded(!isPrereqsExpanded)}
       className="pfext-quick-start-intro__prereq"
     >
       <List className="pfext-quick-start-intro__prereq-list">
