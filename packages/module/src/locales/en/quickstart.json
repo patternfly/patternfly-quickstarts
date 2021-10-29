@@ -12,6 +12,7 @@
   "{{count, number}} item": "{{count, number}} item",
   "{{count, number}} item_plural": "{{count, number}} items",
   "Prerequisites ({{totalPrereqs}})": "Prerequisites ({{totalPrereqs}})",
+  "View Prerequisites ({{totalPrereqs}})": "View Prerequisites ({{totalPrereqs}})",
   "Prerequisites": "Prerequisites",
   "Show prerequisites": "Show prerequisites",
   "Complete": "Complete",

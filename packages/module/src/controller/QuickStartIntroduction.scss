@@ -1,0 +1,35 @@
+.pfext-quick-start-intro {
+  &__prereq {
+    margin-bottom: var(--pf-global--spacer--md);
+    .pf-c-expandable-section__content {
+      margin-top: var(--pf-global--spacer--sm);
+    }
+    .pf-c-expandable-section__toggle {
+      padding-top: 0;
+      padding-bottom: 0;
+      &-text {
+        margin-left: var(--pf-global--spacer--sm);
+      }
+      &-icon {
+        color: var(--pf-c-expandable-section__toggle--Color);
+        &:focus, &:hover {
+          --pf-c-expandable-section__toggle--Color: var(--pf-c-expandable-section__toggle--focus--Color);
+        }
+      }
+    }
+
+    &-list {
+      padding-left: 20px;
+      &__item {
+        &::marker {
+          font-size: 0.8rem;
+        }
+        &-content {
+          position: relative;
+          left: 2px;
+        }
+      }
+    }
+
+  }
+}

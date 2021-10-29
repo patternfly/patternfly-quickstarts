@@ -30,7 +30,7 @@ const QuickStartContent = React.forwardRef<HTMLDivElement, QuickStartContentProp
     ref,
   ) => {
     const {
-      spec: { introduction, tasks, conclusion },
+      spec: { introduction, tasks, conclusion, prerequisites },
     } = quickStart;
     const totalTasks = tasks.length;
 
@@ -41,6 +41,7 @@ const QuickStartContent = React.forwardRef<HTMLDivElement, QuickStartContentProp
             tasks={tasks}
             allTaskStatuses={allTaskStatuses}
             introduction={introduction}
+            prerequisites={prerequisites}
             onTaskSelect={onTaskSelect}
           />
         )}
