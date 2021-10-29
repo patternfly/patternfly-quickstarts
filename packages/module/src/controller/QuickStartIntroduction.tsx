@@ -48,6 +48,7 @@ const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
   return (
     <>
       <QuickStartMarkdownView content={introduction} />
+      {prereqList}
       <p className="pfext-quick-start-content__willcomplete">
         {getResource(
           'In this quick start, you will complete {{count, number}} task',
