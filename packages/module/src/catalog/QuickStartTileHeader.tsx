@@ -11,6 +11,7 @@ type QuickStartTileHeaderProps = {
   duration: number;
   name: string;
   type?: QuickStartType;
+  quickStartId?: string;
 };
 
 const statusColorMap = {
@@ -24,6 +25,7 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
   duration,
   name,
   type,
+  quickStartId,
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
@@ -35,7 +37,7 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
 
   return (
     <div className="pfext-quick-start-tile-header">
-      <Title headingLevel="h3" data-test="title">
+      <Title headingLevel="h3" data-test="title" id={quickStartId}>
         {name}
       </Title>
       <div className="pfext-quick-start-tile-header__status">

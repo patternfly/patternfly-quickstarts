@@ -9,6 +9,9 @@ const fetch = require('sync-fetch');
 const asciidoctor = require('asciidoctor')();
 const Ajv = require('ajv').default;
 
+const { addReactConverter } = require('./react-converter');
+addReactConverter(asciidoctor);
+
 const pantheonBaseUrl = process.env.PANTHEON_URL || 'https://pantheon.corp.redhat.com/api';
 const attributesFile = process.env.ATTRIBUTES_FILE || 'quickstart-attributes.yml';
 
@@ -98,7 +101,9 @@ const buildQuickStart = (content, filePath, basePath, asciidocOptions) => {
       const adoc = asciidoctor.loadFile(filePath, asciidocOptions);
       // create an array with all the blocks in the doc in it
       const context = adoc.getAttribute('context', '{context}');
+
       const blocks = flattenBlocks(adoc);
+
       blocks
         // only blocks with an id can be used
         .filter((block) => block.getId())

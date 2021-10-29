@@ -43,7 +43,12 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
   const title = <span className={alertClassNames}>{getResource('Check your work')}</span>;
 
   return (
-    <Alert variant={getAlertVariant(taskStatus)} title={title} isInline>
+    <Alert
+      className="pfext-quick-start-task-review-alert"
+      variant={getAlertVariant(taskStatus)}
+      title={title}
+      isInline
+    >
       <QuickStartMarkdownView content={instructions} />
       <span className="pfext-quick-start-task-review__actions">
         <Radio

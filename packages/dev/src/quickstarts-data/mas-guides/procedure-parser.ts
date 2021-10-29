@@ -35,7 +35,8 @@ export const ProcQuickStartParser = (
       title,
       summaryFailed,
       success,
-      reviewFailed: string | undefined;
+      reviewFailed: string | undefined,
+      prerequisites;
     if (proc) {
       const taskDOM = document.createElement('div');
       taskDOM.innerHTML = proc;
@@ -55,16 +56,36 @@ export const ProcQuickStartParser = (
       }
       if (sectionBody) {
         for (let i = 0; i < sectionBody.children.length || 0; i++) {
+          /**
+          child typically looks like:
+
+          <div class="paragraph|olist|ulist">
+             <div class="title">Procedure|Prerequisites|Verification</div>
+             <ol|ul class="arabic">
+               <li>
+               <li>...
+             </ol|ul>
+          </div>
+
+          And the below code extracts the <ol> or <ul>
+          Except for when there is no <div class="title|heading"/>, then the description is extracted
+          in the else if below
+          */
           const child = sectionBody.children.item(i);
           // find the title
-          const title = child?.querySelector('.heading,.title');
-          if (title) {
-            switch (title?.textContent?.trim()) {
+          const sectionTitle = child?.querySelector('.heading,.title');
+          if (sectionTitle) {
+            switch (sectionTitle?.textContent?.trim()) {
               case 'Procedure':
                 procedure = child?.querySelector(':not(.heading):not(.title)')?.outerHTML.trim();
                 break;
               case 'Verification':
                 verification = child?.querySelector(':not(.heading):not(.title)')?.outerHTML.trim();
+                break;
+              case 'Prerequisites':
+                prerequisites = child
+                  ?.querySelector(':not(.heading):not(.title)')
+                  ?.outerHTML.trim();
                 break;
             }
           } else if (!procedure) {
@@ -80,7 +101,7 @@ export const ProcQuickStartParser = (
 
     answer.title = replaceEnvironmentVariables(answer.title || title);
     answer.description = replaceEnvironmentVariables(
-      answer.description || `${description} ${procedure}`,
+      answer.description || `${description} ${prerequisites || ''} ${procedure}`,
     );
     answer.review = answer.review || {};
     answer.review.instructions = replaceEnvironmentVariables(

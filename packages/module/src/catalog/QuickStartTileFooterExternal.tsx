@@ -5,9 +5,13 @@ import { QuickStartExternal } from '../utils/quick-start-types';
 
 type QuickStartTileFooterProps = {
   link: QuickStartExternal;
+  quickStartId?: string;
 };
 
-const QuickStartTileFooterExternal: React.FC<QuickStartTileFooterProps> = ({ link }) => {
+const QuickStartTileFooterExternal: React.FC<QuickStartTileFooterProps> = ({
+  link,
+  quickStartId,
+}) => {
   const { href, text } = link;
 
   return (
@@ -23,6 +27,8 @@ const QuickStartTileFooterExternal: React.FC<QuickStartTileFooterProps> = ({ lin
           isInline
           icon={<ExternalLinkAltIcon />}
           iconPosition="right"
+          id={quickStartId}
+          aria-labelledby={`${quickStartId}-external ${quickStartId}`}
         >
           {text || href}
         </Button>
