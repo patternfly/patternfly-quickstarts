@@ -23,38 +23,33 @@ type QuickStartTaskHeaderProps = {
 const TaskIcon: React.FC<{
   taskIndex: number;
   taskStatus: QuickStartTaskStatus;
-  isActiveTask: boolean;
-}> = ({ taskIndex, taskStatus, isActiveTask }) => {
+}> = ({ taskIndex, taskStatus }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
-  const stepNumberIcon = (
-    <span className="pfext-icon-and-text__icon pfext-quick-start-task-header__task-icon-init">
-      {getResource('{{taskIndex, number}}', taskIndex).replace('{{taskIndex, number}}', taskIndex)}
-    </span>
-  );
-  // When the task has been visited but is the active task, show number icon.
-  if (taskStatus === QuickStartTaskStatus.VISITED && isActiveTask) {
-    return stepNumberIcon;
+  const success = taskStatus === QuickStartTaskStatus.SUCCESS;
+  const failed = taskStatus === QuickStartTaskStatus.FAILED;
+
+  const classNames = css('pfext-icon-and-text__icon', {
+    'pfext-quick-start-task-header__task-icon-init': !failed && !success,
+  });
+  let content: {};
+  if (success) {
+    content = (
+      <CheckCircleIcon size="md" className="pfext-quick-start-task-header__task-icon-success" />
+    );
+  } else if (failed) {
+    content = (
+      <ExclamationCircleIcon
+        size="md"
+        className="pfext-quick-start-task-header__task-icon-failed"
+      />
+    );
+  } else {
+    content = getResource('{{taskIndex, number}}', taskIndex).replace(
+      '{{taskIndex, number}}',
+      taskIndex,
+    );
   }
-  switch (taskStatus) {
-    case QuickStartTaskStatus.SUCCESS:
-      return (
-        <span className="pfext-icon-and-text__icon">
-          <CheckCircleIcon size="md" className="pfext-quick-start-task-header__task-icon-success" />
-        </span>
-      );
-    case QuickStartTaskStatus.FAILED:
-    case QuickStartTaskStatus.VISITED:
-      return (
-        <span className="pfext-icon-and-text__icon">
-          <ExclamationCircleIcon
-            size="md"
-            className="pfext-quick-start-task-header__task-icon-failed"
-          />
-        </span>
-      );
-    default:
-      return stepNumberIcon;
-  }
+  return <span className={classNames}>{content}</span>;
 };
 
 const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
@@ -90,7 +85,7 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
     >
       <FlexItem>
         <Title headingLevel="h3" size={size} className={classNames}>
-          <TaskIcon taskIndex={taskIndex} taskStatus={taskStatus} isActiveTask />
+          <TaskIcon taskIndex={taskIndex} taskStatus={taskStatus} />
           <span dangerouslySetInnerHTML={{ __html: removeParagraphWrap(markdownConvert(title)) }} />
           {isActiveTask && subtitle && (
             <>
