@@ -25,6 +25,7 @@ type QuickStartPanelContentProps = {
   appendTo?: HTMLElement | (() => HTMLElement);
   isResizable?: boolean;
   showClose?: boolean;
+  headerVariant?: '' | 'blue-white';
 };
 
 const getElement = (appendTo: HTMLElement | (() => HTMLElement)) => {
@@ -49,6 +50,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   appendTo,
   isResizable = true,
   showClose = true,
+  headerVariant = '',
   ...props
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
@@ -65,6 +67,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   const headerClasses = css('pfext-quick-start-panel-content__header', {
     'pfext-quick-start-panel-content__header__shadow':
       shadows === Shadows.top || shadows === Shadows.both,
+    'pfext-quick-start-panel-content__header--blue-white': headerVariant === 'blue-white',
   });
 
   const footerClass = css({
@@ -98,10 +101,12 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
             <Title
               headingLevel="h1"
               size="xl"
+              className="pfext-quick-start-panel-content__name"
               style={{ marginRight: 'var(--pf-global--spacer--md)' }}
             >
               {quickStart?.spec.displayName}{' '}
-              <small className="pfext-quick-start-panel-content__duration text-secondary">
+              <small className="pfext-quick-start-panel-content__duration">
+                Quick start •{' '}
                 {getResource(
                   '{{duration, number}} minutes',
                   quickStart?.spec.durationMinutes,
@@ -111,7 +116,11 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
           </div>
           {showClose && (
             <DrawerActions>
-              <DrawerCloseButton onClick={handleClose} data-testid="qs-drawer-close" />
+              <DrawerCloseButton
+                onClick={handleClose}
+                className="pfext-quick-start-panel-content__close-button"
+                data-testid="qs-drawer-close"
+              />
             </DrawerActions>
           )}
         </DrawerHead>

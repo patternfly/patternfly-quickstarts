@@ -13,6 +13,11 @@
         margin-bottom: var(--pf-global--spacer--xs);
       }
     }
+    .pfext-quick-start-task__content {
+      margin-left: var(--pf-global--spacer--lg);
+      margin-bottom: var(--pf-global--spacer--md);
+    }
+    // Custom styles on PF React List rendered in custom react renderer
     .task-pflist {
       &-title {
         font-size: 14px !important;
@@ -24,14 +29,17 @@
       }
       &-list {
         font-size: 16px;
-        li + li {
-          margin-top: 4px;
-        }
         &--prereq {
           padding-left: var(--pf-global--spacer--lg);
+          li + li {
+            margin-top: 4px;
+          }
         }
         &--proc {
           padding-left: 10px;
+          li + li {
+            margin-top: 16px;
+          }
         }
         &__item {
           &--prereq {

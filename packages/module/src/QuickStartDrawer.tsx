@@ -232,6 +232,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
       activeQuickStartID={activeQuickStartID}
       appendTo={appendTo}
       isResizable={!fullWidth}
+      headerVariant="blue-white"
       {...fullWidthPanelStyle}
     />
   );
