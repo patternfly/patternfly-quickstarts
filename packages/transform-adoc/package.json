@@ -1,0 +1,48 @@
+{
+  "name": "@patternfly/quickstarts-adoc",
+  "version": "0.0.1",
+  "description": "Transform asciidoc content to the quick starts format",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "prebuild": "yarn clean",
+    "build": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patternfly/patternfly-quickstarts.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/patternfly/patternfly-quickstarts/issues"
+  },
+  "homepage": "https://github.com/patternfly/patternfly-quickstarts#readme",
+  "devDependencies": {
+    "@types/react": "^16.8.0",
+    "@types/react-dom": "^17.0.0",
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.1.0",
+    "node-sass": "^6.0.1",
+    "rollup": "^2.37.0",
+    "rollup-plugin-analyzer": "^4.0.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-node-externals": "^2.2.0",
+    "rollup-plugin-scss": "^3.0.0",
+    "rollup-plugin-typescript2": "^0.29.0",
+    "rollup-plugin-visualizer": "^5.5.0"
+  },
+  "dependencies": {
+    "@patternfly/react-core": "^4.135.0",
+    "asciidoctor": "^2.2.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  },
+  "peerDependencies": {
+    "@patternfly/react-core": ">=4.115.2",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  }
+}

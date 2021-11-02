@@ -20,7 +20,8 @@
     "lint": "yarn lint:module && yarn lint:dev",
     "lint:module": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/module",
     "lint:dev": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/dev",
-    "visual": "npx percy exec -- node snapshots.js"
+    "visual": "npx percy exec -- node snapshots.js",
+    "adoc:build": "yarn workspace @patternfly/quickstarts-adoc build"
   },
   "devDependencies": {
     "@percy/script": "^1.1.0",

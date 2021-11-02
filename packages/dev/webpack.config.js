@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const { buildQuickStart } = require('./src/quickstarts-data/mas-guides/quickstart-adoc');
+const { buildQuickStart } = require('./quickstart-adoc');
 const AssetsPlugin = require('assets-webpack-plugin');
 
 const staticDir = path.join(process.cwd(), 'static/');
@@ -44,6 +44,7 @@ module.exports = (_env, argv) => {
         },
         {
           test: /\.css$/,
+          // include: [path.join(__dirname, 'src')],
           use: cssLoaders,
         },
         // {
