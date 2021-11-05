@@ -1,20 +1,23 @@
 import * as React from 'react';
 import {
+  QUICKSTART_SEARCH_FILTER_KEY,
+  QUICKSTART_STATUS_FILTER_KEY,
   QuickStart,
   QuickStartCatalog,
   QuickStartCatalogEmptyState,
-  QuickStartCatalogFilterCountWrapper,
-  QuickStartCatalogFilterSearchWrapper,
-  QuickStartCatalogFilterStatusWrapper,
+  QuickStartCatalogFilterCount,
+  QuickStartCatalogFilterSearch,
+  QuickStartCatalogFilterStatus,
   QuickStartCatalogHeader,
   QuickStartCatalogSection,
   QuickStartCatalogToolbar,
   QuickStartContext,
   QuickStartContextValues,
   QuickStartTile,
-  clearFilterParams,
   filterQuickStarts,
   getQuickStartStatus,
+  history,
+  updateQueryArguments,
 } from '@patternfly/quickstarts';
 import {
   Divider,
@@ -30,59 +33,77 @@ export const CustomCatalog: React.FC = () => {
     activeQuickStartID,
     allQuickStartStates,
     allQuickStarts,
-    filter,
-    setFilter,
+    useQueryParams,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
-  const sortFnc = (q1: QuickStart, q2: QuickStart) =>
-    q1.spec.displayName.localeCompare(q2.spec.displayName);
-
-  const [filteredQuickStarts, setFilteredQuickStarts] = React.useState<QuickStart[]>(
-    filterQuickStarts(
-      allQuickStarts,
-      filter.keyword,
-      filter.status.statusFilters,
-      allQuickStartStates,
-    ).sort(sortFnc),
+  const sortFnc = React.useCallback(
+    (q1: QuickStart, q2: QuickStart) => q1.spec.displayName.localeCompare(q2.spec.displayName),
+    [],
   );
 
+  const [keywordFilter, setKeywordFilter] = React.useState<string>(() => {
+    if (useQueryParams) {
+      const searchParams = new URLSearchParams(location.search);
+      return searchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
+    }
+    return '';
+  });
+  const [statusFilters, setStatusFilters] = React.useState<string[]>(() => {
+    if (useQueryParams) {
+      const searchParams = new URLSearchParams(location.search);
+      return searchParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
+    }
+    return [];
+  });
+
+  const clearFilters = React.useCallback(() => {
+    if (useQueryParams) {
+      updateQueryArguments({
+        [QUICKSTART_SEARCH_FILTER_KEY]: '',
+        [QUICKSTART_STATUS_FILTER_KEY]: [],
+      });
+    } else {
+      setKeywordFilter('');
+      setStatusFilters([]);
+    }
+  }, [useQueryParams]);
+
+  // Update filters when URL changed, for example a `clear all` action is performed higher up
   React.useEffect(() => {
-    // callback on state change
-    setFilteredQuickStarts(
-      filterQuickStarts(
-        allQuickStarts,
-        filter.keyword,
-        filter.status.statusFilters,
-        allQuickStartStates,
-      ).sort(sortFnc),
-    );
-  }, [allQuickStartStates, allQuickStarts, filter.keyword, filter.status.statusFilters]);
+    if (useQueryParams) {
+      return history.listen(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const urlKeywordFilter = searchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
+        const urlStatusFilters = searchParams.get(QUICKSTART_STATUS_FILTER_KEY) || '';
+        if (urlKeywordFilter !== keywordFilter) {
+          setKeywordFilter(urlKeywordFilter);
+        }
+        if (urlStatusFilters !== statusFilters.join(',')) {
+          setStatusFilters(urlStatusFilters ? urlStatusFilters.split(',') : []);
+        }
+      });
+    }
+  }, [useQueryParams, keywordFilter, statusFilters]);
 
-  const onSearchInputChange = (searchValue: string) => {
-    const result = filterQuickStarts(
-      allQuickStarts,
-      searchValue,
-      filter.status.statusFilters,
-      allQuickStartStates,
-    ).sort((q1: QuickStart, q2: QuickStart) =>
-      q1.spec.displayName.localeCompare(q2.spec.displayName),
-    );
-    setFilter('keyword', searchValue);
-    setFilteredQuickStarts(result);
-  };
+  // Update URL when filters changed
+  React.useEffect(() => {
+    if (useQueryParams) {
+      updateQueryArguments({
+        [QUICKSTART_SEARCH_FILTER_KEY]: keywordFilter,
+        [QUICKSTART_STATUS_FILTER_KEY]: statusFilters,
+      });
+    }
+  }, [useQueryParams, keywordFilter, statusFilters]);
 
-  const onStatusChange = (statusList: string[]) => {
-    const result = filterQuickStarts(
+  // Reactive update of the filtered quick starts
+  const filteredQuickStarts = React.useMemo(() => {
+    return filterQuickStarts(
       allQuickStarts,
-      filter.keyword,
-      statusList,
+      keywordFilter,
+      statusFilters,
       allQuickStartStates,
-    ).sort((q1: QuickStart, q2: QuickStart) =>
-      q1.spec.displayName.localeCompare(q2.spec.displayName),
-    );
-    setFilter('status', statusList);
-    setFilteredQuickStarts(result);
-  };
+    ).sort(sortFnc);
+  }, [allQuickStarts, keywordFilter, statusFilters, allQuickStartStates, sortFnc]);
 
   const CatalogWithSections = (
     <>
@@ -147,26 +168,15 @@ export const CustomCatalog: React.FC = () => {
     </>
   );
 
-  const clearFilters = () => {
-    setFilter('keyword', '');
-    setFilter('status', []);
-    clearFilterParams();
-    setFilteredQuickStarts(
-      allQuickStarts.sort((q1: QuickStart, q2: QuickStart) =>
-        q1.spec.displayName.localeCompare(q2.spec.displayName),
-      ),
-    );
-  };
-
   return (
     <>
       <QuickStartCatalogHeader title="Resources" />
       <Divider component="div" />
       <QuickStartCatalogToolbar>
         <ToolbarContent>
-          <QuickStartCatalogFilterSearchWrapper onSearchInputChange={onSearchInputChange} />
-          <QuickStartCatalogFilterStatusWrapper onStatusChange={onStatusChange} />
-          <QuickStartCatalogFilterCountWrapper quickStartsCount={filteredQuickStarts.length} />
+          <QuickStartCatalogFilterSearch value={keywordFilter} onChange={setKeywordFilter} />
+          <QuickStartCatalogFilterStatus value={statusFilters} onChange={setStatusFilters} />
+          <QuickStartCatalogFilterCount itemCount={filteredQuickStarts.length} />
         </ToolbarContent>
       </QuickStartCatalogToolbar>
       <Divider component="div" />

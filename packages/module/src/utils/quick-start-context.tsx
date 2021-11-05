@@ -1,12 +1,7 @@
 import React, { createContext, useCallback } from 'react';
 import { removeQueryArgument, setQueryArgument } from '../ConsoleInternal/components/utils/router';
 import en from '../locales/en/quickstart.json';
-import {
-  QUICKSTART_ID_FILTER_KEY,
-  QUICKSTART_SEARCH_FILTER_KEY,
-  QUICKSTART_STATUS_FILTER_KEY,
-  QUICKSTART_TASKS_INITIAL_STATES,
-} from './const';
+import { QUICKSTART_ID_FILTER_KEY, QUICKSTART_TASKS_INITIAL_STATES } from './const';
 import PluralResolver from './PluralResolver';
 import {
   AllQuickStartStates,
@@ -15,7 +10,7 @@ import {
   QuickStartStatus,
   QuickStartTaskStatus,
 } from './quick-start-types';
-import { getQuickStartStatusCount, getTaskStatusKey } from './quick-start-utils';
+import { getTaskStatusKey } from './quick-start-utils';
 
 const pluralResolver = new PluralResolver({ simplifyPluralSuffix: true });
 
@@ -66,14 +61,6 @@ export type QuickStartContextValues = {
   setResourceBundle?: any;
   language?: string;
   setLanguage?: any;
-  filter?: {
-    keyword?: string;
-    status?: {
-      statusTypes?: any;
-      statusFilters?: any;
-    };
-  };
-  setFilter?: any;
   loading?: boolean;
   setLoading?: any;
   alwaysShowTaskReview?: boolean;
@@ -90,14 +77,6 @@ export const QuickStartContextDefaults = {
   getResource: () => '',
   language: 'en',
   useQueryParams: true,
-  filter: {
-    keyword: '',
-    status: {
-      statusTypes: {},
-      statusFilters: [],
-    },
-  },
-  setFilter: () => {},
   footer: null,
   markdown: null,
   loading: false,
@@ -129,7 +108,6 @@ export const useValuesForQuickStartContext = (
     setAllQuickStartStates,
     useQueryParams,
     allQuickStartStates,
-    allQuickStarts = [],
     footer,
     markdown,
   } = combinedValue;
@@ -161,56 +139,6 @@ export const useValuesForQuickStartContext = (
   const [alwaysShowTaskReview, setAlwaysShowTaskReview] = React.useState(
     combinedValue.alwaysShowTaskReview,
   );
-
-  const initialSearchParams = new URLSearchParams(window.location.search);
-  const initialSearchQuery = initialSearchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
-  const initialStatusFilters =
-    initialSearchParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
-
-  const quickStartStatusCount = getQuickStartStatusCount(allQuickStartStates, allQuickStarts);
-  const [statusTypes, setStatusTypes] = React.useState({
-    [QuickStartStatus.COMPLETE]: findResource('Complete ({{statusCount, number}})').replace(
-      '{{statusCount, number}}',
-      quickStartStatusCount[QuickStartStatus.COMPLETE],
-    ),
-    [QuickStartStatus.IN_PROGRESS]: findResource('In progress ({{statusCount, number}})').replace(
-      '{{statusCount, number}}',
-      quickStartStatusCount[QuickStartStatus.IN_PROGRESS],
-    ),
-    [QuickStartStatus.NOT_STARTED]: findResource('Not started ({{statusCount, number}})').replace(
-      '{{statusCount, number}}',
-      quickStartStatusCount[QuickStartStatus.NOT_STARTED],
-    ),
-  });
-  const [statusFilters, setStatusFilters] = React.useState<string[]>(initialStatusFilters);
-
-  const [filterKeyword, setFilterKeyword] = React.useState(initialSearchQuery);
-
-  const setFilter = (type: 'keyword' | 'status', val: any) => {
-    if (type === 'keyword') {
-      setFilterKeyword(val);
-    } else if (type === 'status') {
-      setStatusFilters(val);
-    }
-  };
-
-  React.useEffect(() => {
-    const updatedQuickStartStatusCount = getQuickStartStatusCount(allQuickStartStates, quickStarts);
-    setStatusTypes({
-      [QuickStartStatus.COMPLETE]: findResource('Complete ({{statusCount, number}})').replace(
-        '{{statusCount, number}}',
-        updatedQuickStartStatusCount[QuickStartStatus.COMPLETE],
-      ),
-      [QuickStartStatus.IN_PROGRESS]: findResource('In progress ({{statusCount, number}})').replace(
-        '{{statusCount, number}}',
-        updatedQuickStartStatusCount[QuickStartStatus.IN_PROGRESS],
-      ),
-      [QuickStartStatus.NOT_STARTED]: findResource('Not started ({{statusCount, number}})').replace(
-        '{{statusCount, number}}',
-        updatedQuickStartStatusCount[QuickStartStatus.NOT_STARTED],
-      ),
-    });
-  }, [allQuickStartStates, findResource, quickStarts]);
 
   const updateAllQuickStarts = (qs: QuickStart[]) => {
     setQuickStarts(qs);
@@ -445,15 +373,6 @@ export const useValuesForQuickStartContext = (
     setResourceBundle: changeResourceBundle,
     language,
     setLanguage,
-    // revisit if this should be in public context API
-    filter: {
-      keyword: filterKeyword,
-      status: {
-        statusTypes,
-        statusFilters,
-      },
-    },
-    setFilter, // revisit if this should be in public context API
     loading,
     setLoading,
     alwaysShowTaskReview,

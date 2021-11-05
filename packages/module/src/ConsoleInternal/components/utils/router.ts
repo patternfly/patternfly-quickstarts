@@ -1,5 +1,4 @@
 import { History, createBrowserHistory, createMemoryHistory } from 'history';
-import { QUICKSTART_SEARCH_FILTER_KEY, QUICKSTART_STATUS_FILTER_KEY } from '../../../utils/const';
 
 type AppHistory = History & { pushPath: History['push'] };
 
@@ -23,7 +22,6 @@ export const removeQueryArgument = (k: string) => {
   if (params.has(k)) {
     params.delete(k);
     const url = new URL(window.location.href);
-    // @ts-ignore
     history.replace(`${url.pathname}?${params.toString()}${url.hash}`);
   }
 };
@@ -36,12 +34,26 @@ export const setQueryArgument = (k: string, v: string) => {
   if (params.get(k) !== v) {
     params.set(k, v);
     const url = new URL(window.location.href);
-    // @ts-ignore
     history.replace(`${url.pathname}?${params.toString()}${url.hash}`);
   }
 };
 
-export const clearFilterParams = () => {
-  removeQueryArgument(QUICKSTART_SEARCH_FILTER_KEY);
-  removeQueryArgument(QUICKSTART_STATUS_FILTER_KEY);
+export const updateQueryArguments = (newParams: Record<string, string | string[]>) => {
+  const params = new URLSearchParams(window.location.search);
+  let update = false;
+  Object.keys(newParams).forEach((name) => {
+    const value = newParams[name];
+    const valueString = Array.isArray(value) ? (value.length === 0 ? '' : value.join(',')) : value;
+    if (!valueString && params.has(name)) {
+      params.delete(name);
+      update = true;
+    } else if (valueString && valueString !== params.get('name')) {
+      params.set(name, valueString);
+      update = true;
+    }
+  });
+  if (update) {
+    const url = new URL(window.location.href);
+    history.replace(`${url.pathname}?${params.toString()}${url.hash}`);
+  }
 };

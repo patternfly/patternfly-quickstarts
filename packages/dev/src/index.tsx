@@ -8,17 +8,42 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import './i18n/i18n';
 import App from './App';
 import App2 from './App2';
-import { QuickStartContext } from '@patternfly/quickstarts';
+import {
+  QUICKSTART_SEARCH_FILTER_KEY,
+  QUICKSTART_STATUS_FILTER_KEY,
+  QuickStartStatus,
+  QuickStartContext,
+  updateQueryArguments,
+} from '@patternfly/quickstarts';
 import { DefaultCatalog } from './DefaultCatalog';
 import { CustomCatalog } from './CustomCatalog';
 
 const SomeNestedComponent = () => {
   const qsContext = React.useContext(QuickStartContext);
   // the quick start ID is defined in the quick start object's metadata.name field
+
+  const setActiveQuickStart = () => {
+    qsContext.setActiveQuickStart('node-with-s2i');
+  };
+  const clearQuickStartFilters = () => {
+    updateQueryArguments({
+      [QUICKSTART_SEARCH_FILTER_KEY]: '',
+      [QUICKSTART_STATUS_FILTER_KEY]: [],
+    });
+  };
+  const setQuickStartFilters = () => {
+    updateQueryArguments({
+      [QUICKSTART_SEARCH_FILTER_KEY]: 'serverless',
+      [QUICKSTART_STATUS_FILTER_KEY]: [QuickStartStatus.NOT_STARTED, QuickStartStatus.IN_PROGRESS],
+    });
+  };
+
   return (
-    <button onClick={() => qsContext.setActiveQuickStart('node-with-s2i')}>
-      Toggle quick start through context
-    </button>
+    <>
+      <button onClick={setActiveQuickStart}>Toggle quick start through context</button>
+      <button onClick={clearQuickStartFilters}>Clear URL arguments</button>
+      <button onClick={setQuickStartFilters}>Set URL arguments</button>
+    </>
   );
 };
 

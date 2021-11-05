@@ -21,11 +21,11 @@ yarn install && yarn build && yarn start
 # Install development/build dependencies
 yarn install
 
-# Start the development server
-yarn start
-
 # Build the main module (outputs to "packages/module/dist" dir)
 yarn build
+
+# Start the development server
+yarn start
 
 # Quick build of the main module for local dev
 yarn build:quick

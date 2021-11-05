@@ -10,9 +10,15 @@ import {
   Title,
 } from '@patternfly/react-core';
 import SearchIcon from '@patternfly/react-icons/dist/js/icons/search-icon';
-import { EmptyBox, LoadingBox, clearFilterParams } from '@console/internal/components/utils';
+import {
+  EmptyBox,
+  LoadingBox,
+  history,
+  updateQueryArguments,
+} from '@console/internal/components/utils';
 import QuickStartCatalog from './catalog/QuickStartCatalog';
 import QuickStartCatalogFilter from './catalog/Toolbar/QuickStartCatalogFilter';
+import { QUICKSTART_SEARCH_FILTER_KEY, QUICKSTART_STATUS_FILTER_KEY } from './utils/const';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import { QuickStart } from './utils/quick-start-types';
 import { filterQuickStarts } from './utils/quick-start-utils';
@@ -62,9 +68,8 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
     setAllQuickStarts,
     allQuickStartStates,
     getResource,
-    filter,
-    setFilter,
     loading,
+    useQueryParams,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
   React.useEffect(() => {
@@ -74,76 +79,69 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
     }
   }, [quickStarts, allQuickStarts, setAllQuickStarts]);
 
-  const initialFilteredQuickStarts = showFilter
-    ? filterQuickStarts(
-        allQuickStarts,
-        filter.keyword,
-        filter.status.statusFilters,
-        allQuickStartStates,
-      ).sort(sortFncCallback)
-    : allQuickStarts;
+  const [keywordFilter, setKeywordFilter] = React.useState<string>(() => {
+    if (useQueryParams) {
+      const searchParams = new URLSearchParams(location.search);
+      return searchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
+    }
+    return '';
+  });
+  const [statusFilters, setStatusFilters] = React.useState<string[]>(() => {
+    if (useQueryParams) {
+      const searchParams = new URLSearchParams(location.search);
+      return searchParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
+    }
+    return [];
+  });
 
-  const [filteredQuickStarts, setFilteredQuickStarts] = React.useState(initialFilteredQuickStarts);
+  const clearFilters = React.useCallback(() => {
+    if (useQueryParams) {
+      updateQueryArguments({
+        [QUICKSTART_SEARCH_FILTER_KEY]: '',
+        [QUICKSTART_STATUS_FILTER_KEY]: [],
+      });
+    } else {
+      setKeywordFilter('');
+      setStatusFilters([]);
+    }
+  }, [useQueryParams]);
+
+  // Update filters when URL changed, for example a `clear all` action is performed higher up
   React.useEffect(() => {
-    const filteredQs = showFilter
-      ? filterQuickStarts(
-          allQuickStarts,
-          filter.keyword,
-          filter.status.statusFilters,
-          allQuickStartStates,
-        ).sort(sortFncCallback)
-      : allQuickStarts;
-    if (filteredQs.length !== filteredQuickStarts.length) {
-      setFilteredQuickStarts(filteredQs);
+    if (useQueryParams) {
+      return history.listen(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const urlKeywordFilter = searchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
+        const urlStatusFilters = searchParams.get(QUICKSTART_STATUS_FILTER_KEY) || '';
+        if (urlKeywordFilter !== keywordFilter) {
+          setKeywordFilter(urlKeywordFilter);
+        }
+        if (urlStatusFilters !== statusFilters.join(',')) {
+          setStatusFilters(urlStatusFilters ? urlStatusFilters.split(',') : []);
+        }
+      });
     }
-  }, [
-    allQuickStarts,
-    allQuickStartStates,
-    showFilter,
-    filter.keyword,
-    filter.status.statusFilters,
-    sortFncCallback,
-    filteredQuickStarts,
-  ]);
+  }, [useQueryParams, keywordFilter, statusFilters]);
 
-  const clearFilters = () => {
-    setFilter('keyword', '');
-    setFilter('status', []);
-    clearFilterParams();
-    setFilteredQuickStarts(
-      allQuickStarts.sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName)),
-    );
-  };
+  // Update URL when filters changed
+  React.useEffect(() => {
+    if (useQueryParams) {
+      updateQueryArguments({
+        [QUICKSTART_SEARCH_FILTER_KEY]: keywordFilter,
+        [QUICKSTART_STATUS_FILTER_KEY]: statusFilters,
+      });
+    }
+  }, [useQueryParams, keywordFilter, statusFilters]);
 
-  const onSearchInputChange = (searchValue) => {
-    const result = filterQuickStarts(
+  // Reactive update of the filtered quick starts
+  const filteredQuickStarts = React.useMemo(() => {
+    return filterQuickStarts(
       allQuickStarts,
-      searchValue,
-      filter.status.statusFilters,
+      keywordFilter,
+      statusFilters,
       allQuickStartStates,
-    ).sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName));
-    if (searchValue !== filter.keyword) {
-      setFilter('keyword', searchValue);
-    }
-    if (result.length !== filteredQuickStarts.length) {
-      setFilteredQuickStarts(result);
-    }
-  };
-
-  const onStatusChange = (statusList) => {
-    const result = filterQuickStarts(
-      allQuickStarts,
-      filter.keyword,
-      statusList,
-      allQuickStartStates,
-    ).sort((q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName));
-    if (JSON.stringify(statusList) !== JSON.stringify(filter.status)) {
-      setFilter('status', statusList);
-    }
-    if (result.length !== filteredQuickStarts.length) {
-      setFilteredQuickStarts(result);
-    }
-  };
+    ).sort(sortFncCallback);
+  }, [allQuickStarts, keywordFilter, statusFilters, allQuickStartStates, sortFncCallback]);
 
   if (loading) {
     return <LoadingBox />;
@@ -167,9 +165,11 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
       {showFilter && (
         <>
           <QuickStartCatalogFilter
-            quickStartsCount={filteredQuickStarts.length}
-            onSearchInputChange={onSearchInputChange}
-            onStatusChange={onStatusChange}
+            keywordFilter={keywordFilter}
+            setKeywordFilter={setKeywordFilter}
+            statusFilters={statusFilters}
+            setStatusFilters={setStatusFilters}
+            itemCount={filteredQuickStarts.length}
           />
           <Divider component="div" />
         </>
