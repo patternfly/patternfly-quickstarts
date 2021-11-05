@@ -1,7 +1,7 @@
 {
-  "name": "@patternfly/quickstarts-adoc",
+  "name": "@patternfly/transform-adoc",
   "version": "0.0.1",
-  "description": "Transform asciidoc content to the quick starts format",
+  "description": "Transforms asciidoc content by mapping known structures to PatternFly components",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -9,6 +9,7 @@
     "clean": "rm -rf dist",
     "prebuild": "yarn clean",
     "build": "rollup -c",
+    "watch": "rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -32,17 +33,17 @@
     "rollup-plugin-node-externals": "^2.2.0",
     "rollup-plugin-scss": "^3.0.0",
     "rollup-plugin-typescript2": "^0.29.0",
-    "rollup-plugin-visualizer": "^5.5.0"
-  },
-  "dependencies": {
-    "@patternfly/react-core": "^4.135.0",
+    "rollup-plugin-visualizer": "^5.5.0",
     "asciidoctor": "^2.2.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
   },
+  "dependencies": {
+    "@patternfly/react-core": "^4.135.0"
+  },
   "peerDependencies": {
-    "@patternfly/react-core": ">=4.115.2",
     "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react-dom": ">=16.8.0",
+    "asciidoctor": ">=2.2.1"
   }
 }

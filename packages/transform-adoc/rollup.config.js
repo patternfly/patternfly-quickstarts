@@ -16,7 +16,7 @@ const commonPlugins = [
     typescript: require('typescript'),
     tsconfig: 'tsconfig.json',
     sourceMap: true,
-    inlineSources: true
+    inlineSources: true,
   })
 ];
 
@@ -49,7 +49,7 @@ const cjsBuild = {
 
 // ES build
 // Outputs the compiled dist/index.es.js
-// as well as the main dist/quickstarts-adoc.css stylesheet
+// as well as the main dist/transform-adoc.css stylesheet
 export const esBuild = {
   input: 'src/index.ts',
   output: {
@@ -57,11 +57,11 @@ export const esBuild = {
     format: 'es',
     // sourcemap: true,
   },
-  external: ['react', 'react-dom'],
+  external: ['react', 'react-dom', '@patternfly/react-core', '@patternfly/react-styles'],
   plugins: [
     externals(),
     scss({
-      output: 'dist/quickstarts-adoc.css',
+      output: 'dist/transform-adoc.css',
       ...commonScssOptions,
     }),
     ...commonPlugins,

@@ -18,4 +18,3 @@ export const addReactConverter = (asciidoctor: Asciidoctor) => {
 
   asciidoctor.ConverterFactory.register(ReactConverter, ['html5']);
 };
-

@@ -6,8 +6,11 @@ const CopyPlugin = require('copy-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { buildQuickStart } = require('./quickstart-adoc');
 const AssetsPlugin = require('assets-webpack-plugin');
-
 const staticDir = path.join(process.cwd(), 'static/');
+
+const asciidoctor = require('asciidoctor')();
+const { addReactConverter } = require('@patternfly/quickstarts-adoc');
+addReactConverter(asciidoctor);
 
 module.exports = (_env, argv) => {
   const isProd = argv.mode === 'production';
