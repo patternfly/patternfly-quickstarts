@@ -10,9 +10,10 @@
   "scripts": {
     "build": "yarn workspace @patternfly/quickstarts build",
     "build:quick": "yarn workspace @patternfly/quickstarts quick",
+    "build:adoc": "yarn workspace @patternfly/transform-adoc build",
     "start": "yarn workspace @patternfly/quickstarts-dev start",
-    "watch": "yarn build && concurrently --kill-others \"yarn workspace @patternfly/quickstarts watch\" \"yarn workspace @patternfly/quickstarts-adoc watch\" \"yarn start\"",
-    "watch:quick": "yarn build:quick && concurrently --kill-others \"yarn workspace @patternfly/quickstarts watch\" \"yarn workspace @patternfly/quickstarts-adoc watch\" \"yarn start\"",
+    "watch": "yarn build && concurrently --kill-others \"yarn workspace @patternfly/quickstarts watch\" \"yarn start\"",
+    "watch:quick": "yarn build:quick && concurrently --kill-others \"yarn workspace @patternfly/quickstarts watch\" \"yarn start\"",
     "dev:build": "yarn workspace @patternfly/quickstarts-dev build",
     "dev:serve": "yarn workspace @patternfly/quickstarts-dev serve",
     "test": "LANG=en_US.UTF-8 jest",
@@ -20,8 +21,7 @@
     "lint": "yarn lint:module && yarn lint:dev",
     "lint:module": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/module",
     "lint:dev": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/dev",
-    "visual": "npx percy exec -- node snapshots.js",
-    "adoc:build": "yarn workspace @patternfly/quickstarts-adoc build"
+    "visual": "npx percy exec -- node snapshots.js"
   },
   "devDependencies": {
     "@percy/script": "^1.1.0",
