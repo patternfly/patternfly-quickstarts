@@ -2,6 +2,9 @@
   "name": "@patternfly/transform-adoc",
   "version": "0.0.1",
   "description": "Transforms asciidoc content by mapping known structures to PatternFly components",
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -21,6 +24,9 @@
     "url": "https://github.com/patternfly/patternfly-quickstarts/issues"
   },
   "homepage": "https://github.com/patternfly/patternfly-quickstarts#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@types/react": "^16.8.0",
     "@types/react-dom": "^17.0.0",
