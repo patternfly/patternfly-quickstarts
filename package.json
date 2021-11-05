@@ -8,7 +8,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "yarn workspace @patternfly/quickstarts build",
+    "build": "yarn workspace @patternfly/quickstarts build && yarn build:adoc",
     "build:quick": "yarn workspace @patternfly/quickstarts quick",
     "build:adoc": "yarn workspace @patternfly/transform-adoc build",
     "start": "yarn workspace @patternfly/quickstarts-dev start",
