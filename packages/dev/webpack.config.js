@@ -43,7 +43,6 @@ module.exports = (_env, argv) => {
         },
         {
           test: /\.css$/,
-          // include: [path.join(__dirname, 'src')],
           use: cssLoaders,
         },
         // {
