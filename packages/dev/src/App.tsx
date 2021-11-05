@@ -13,7 +13,6 @@ import { allQuickStarts as yamlQuickStarts } from './quickstarts-data/quick-star
 import React from 'react';
 import i18n from './i18n/i18n';
 import { AppHeader, AppSidebar } from './common/Page';
-import { addReactConverter } from '@patternfly/quickstarts-adoc';
 
 type AppProps = {
   children?: React.ReactNode;
@@ -22,8 +21,6 @@ type AppProps = {
 
 const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage('quickstartId', '');
-  const asd = addReactConverter;
-  debugger;
   const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage('quickstarts', {});
 
   // eslint-disable-next-line no-console
