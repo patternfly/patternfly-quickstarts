@@ -9,7 +9,7 @@ const fetch = require('sync-fetch');
 const asciidoctor = require('asciidoctor')();
 const Ajv = require('ajv').default;
 
-const { addReactConverter } = require('./react-converter');
+const { addReactConverter } = require('@patternfly/transform-adoc');
 addReactConverter(asciidoctor);
 
 const pantheonBaseUrl = process.env.PANTHEON_URL || 'https://pantheon.corp.redhat.com/api';

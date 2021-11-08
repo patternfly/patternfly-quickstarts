@@ -1,7 +1,7 @@
 import { Asciidoctor } from 'asciidoctor';
 import { isTaskLevelPrereqs, isTaskLevelProcedure, renderPFList } from './util';
 
-const addReactConverter = (asciidoctor: Asciidoctor) => {
+export const addReactConverter = (asciidoctor: Asciidoctor) => {
   class ReactConverter {
     baseConverter = asciidoctor.Html5Converter.create();
 
@@ -18,5 +18,3 @@ const addReactConverter = (asciidoctor: Asciidoctor) => {
 
   asciidoctor.ConverterFactory.register(ReactConverter, ['html5']);
 };
-
-exports.addReactConverter = addReactConverter;

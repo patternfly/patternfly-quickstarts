@@ -1,5 +1,6 @@
 import '@patternfly/react-core/dist/styles/base.css';
 import '@patternfly/quickstarts/dist/quickstarts.css';
+import '@patternfly/transform-adoc/dist/transform-adoc.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
