@@ -1,0 +1,25 @@
+name: Percy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  percy:
+    name: Visual testing
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build
+      run: yarn build
+    - name: Start server and run percy
+      env:
+        PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      run: |
+        yarn start &
+        sleep 60 &&
+        yarn visual
+      
