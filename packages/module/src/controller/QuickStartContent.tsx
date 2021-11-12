@@ -54,16 +54,16 @@ const QuickStartContent = React.forwardRef<HTMLDivElement, QuickStartContentProp
             onTaskSelect={onTaskSelect}
           />
         )}
-        {taskNumber === totalTasks && (
-          <QuickStartConclusion
-            tasks={tasks}
-            conclusion={conclusion}
-            allTaskStatuses={allTaskStatuses}
-            nextQuickStarts={nextQuickStarts}
-            onQuickStartChange={onQuickStartChange}
-            onTaskSelect={onTaskSelect}
-          />
-        )}
+        {/* {taskNumber === totalTasks && ( */}
+        <QuickStartConclusion
+          tasks={tasks}
+          conclusion={conclusion}
+          allTaskStatuses={allTaskStatuses}
+          nextQuickStarts={nextQuickStarts}
+          onQuickStartChange={onQuickStartChange}
+          onTaskSelect={onTaskSelect}
+        />
+        {/* )} */}
       </div>
     );
   },

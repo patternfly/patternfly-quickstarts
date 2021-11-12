@@ -20,4 +20,4 @@ spec:
   nextQuickStart:
     - 'kafkacat'
     - 'kafka-bin-scripts'
-    - 'quarkus-kafka'
+    - 'mas-quarkus-kafka'

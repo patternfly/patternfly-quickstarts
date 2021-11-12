@@ -21,3 +21,6 @@ spec:
   conclusion: !snippet README.adoc#conclusion
   nextQuickStart:
     - 'todo'
+    - 'mas-getting-started'
+    - 'serverless-application'
+    - 'install-app-and-associate-pipeline'

@@ -40,5 +40,6 @@
   "Your progress will be saved.": "Your progress will be saved.",
   "Not available": "Not available",
   "Copy to clipboard": "Copy to clipboard",
-  "Successfully copied to clipboard!": "Successfully copied to clipboard!"
+  "Successfully copied to clipboard!": "Successfully copied to clipboard!",
+  "Learning Path {{learningPathName}}": "Learning Path {{learningPathName}}"
 }
