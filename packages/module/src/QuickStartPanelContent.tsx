@@ -58,12 +58,8 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   const { activeQuickStartState } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const taskNumber = activeQuickStartState?.taskNumber;
   useScrollTopOnTaskNumberChange(contentRef, taskNumber as number);
-  // Iterate the entire array of quickstarts and apply a filter
+  // Filter nextQuickStart property on current quickStart for quickStarts that are currently available
   const nextQuickStarts: QuickStart[] = quickStarts.filter((qs: QuickStart) => {
-    console.log(quickStart?.spec.nextQuickStart);
-    console.log(qs.metadata.name);
-    // Return true if the current quickStart's nextQuickStart[] array
-    // includes the name of the current quickstart we are looking at
     return quickStart?.spec.nextQuickStart?.includes(qs.metadata.name);
   });
 
