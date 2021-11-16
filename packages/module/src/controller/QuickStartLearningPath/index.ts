@@ -3,10 +3,15 @@ import QuickStartLearningPath from './QuickStartLearningPath';
 export default QuickStartLearningPath;
 
 // TODO:
-// Map icons to qs status
-// Align text in header
+// refactor into smaller components
+// move styles to scss
+// add links to status cards to change QS
+// Header
 //  - update colors (all black text and arrow on left)
-// Check using proper font size
+// all strings to resource bundle
 // Thumb up/down icon
+
+// PR Mention
 // ?? Add animation to expander expanding?
-// Fit parent container to content, much height
+// Font seems too small for updated font size in rest of QS so updated to 14/16px
+// Indicator in list of QS of active QS?
