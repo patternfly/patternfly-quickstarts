@@ -13,14 +13,15 @@ import {
   Flex,
   FlexItem,
 } from '@patternfly/react-core';
-import StatusCard from './QuickStartLearningPathStatusCard';
+import ThumbsUpIcon from '@patternfly/react-icons/dist/js/icons/thumbs-up-icon';
+import ThumbsDownIcon from '@patternfly/react-icons/dist/js/icons/thumbs-down-icon';
 import { QuickStart } from '@quickstarts/utils/quick-start-types';
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 import { getQuickStartStatusCount } from '../../utils/quick-start-utils';
 import NextQSCard from './QuickStartLearningPathNextQSCard';
+import StatusCard from './QuickStartLearningPathStatusCard';
 
 import './QuickStartLearningPath.scss';
-// import '@patternfly/react-styles/css/utilities/Text/text.css';
 
 type QuickStartLearningPathProps = {
   nextQuickStarts: QuickStart[];
@@ -71,10 +72,24 @@ const QuickStartLearningPath: React.FC<QuickStartLearningPathProps> = ({
   const rating = (
     <Card className="pfext-quick-start-learning-path__rating">
       <CardBody>
-        <Bullseye>You're all finished with this quick start!!!!!!!!!!</Bullseye>
-        <span>THUMBUP</span>
-        {`    `}
-        <span>THUMBDOWN</span>
+        <Bullseye>
+          <Stack hasGutter>
+            <StackItem className="pf-u-text-align-center">
+              You’re all finished! How would you rate this quick start?
+            </StackItem>
+            <StackItem>
+              <Bullseye>
+                <ThumbsUpIcon
+                  color="var(--pf-global--active-color--100)"
+                  size="md"
+                  className="pf-u-mr-md"
+                />
+
+                <ThumbsDownIcon size="md" />
+              </Bullseye>
+            </StackItem>
+          </Stack>
+        </Bullseye>
       </CardBody>
     </Card>
   );
