@@ -4,7 +4,7 @@ import ArrowRightIcon from '@patternfly/react-icons/dist/js/icons/arrow-right-ic
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStart, QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
-import QuickStartLearningPath from './QuickStartLearningPath';
+import LearningPath from './QuickStartLearningPath';
 import TaskHeaderList from './QuickStartTaskHeaderList';
 
 type QuickStartConclusionProps = {
@@ -59,7 +59,7 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
           </Button>
         ))}
       {nextQuickStarts?.length > 0 ? (
-        <QuickStartLearningPath nextQuickStarts={nextQuickStarts} />
+        <LearningPath nextQuickStarts={nextQuickStarts} />
       ) : (
         'No further quickstarts in this path'
       )}

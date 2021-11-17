@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Bullseye,
-  Button,
   Card,
   CardBody,
   ExpandableSection,
@@ -14,12 +13,14 @@ import {
   Flex,
   FlexItem,
 } from '@patternfly/react-core';
-import { QuickStart, QuickStartStatus } from '@quickstarts/utils/quick-start-types';
+import StatusCard from './QuickStartLearningPathStatusCard';
+import { QuickStart } from '@quickstarts/utils/quick-start-types';
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
-import { getQuickStartStatus, getQuickStartStatusCount } from '../../utils/quick-start-utils';
-import ArrowRightIcon from '@patternfly/react-icons/dist/js/icons/arrow-right-icon';
-import CheckCircleIcon from '@patternfly/react-icons/dist/js/icons/check-circle-icon';
-import EllipsisHIcon from '@patternfly/react-icons/dist/js/icons/ellipsis-h-icon';
+import { getQuickStartStatusCount } from '../../utils/quick-start-utils';
+import NextQSCard from './QuickStartLearningPathNextQSCard';
+
+import './QuickStartLearningPath.scss';
+// import '@patternfly/react-styles/css/utilities/Text/text.css';
 
 type QuickStartLearningPathProps = {
   nextQuickStarts: QuickStart[];
@@ -30,13 +31,9 @@ const QuickStartLearningPath: React.FC<QuickStartLearningPathProps> = ({
   nextQuickStarts,
   learningPathName = '2',
 }) => {
-  const {
-    getResource,
-    activeQuickStartID,
-    allQuickStarts,
-    setActiveQuickStart,
-    allQuickStartStates,
-  } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource, activeQuickStartID, allQuickStarts, allQuickStartStates } = React.useContext<
+    QuickStartContextValues
+  >(QuickStartContext);
   const activeQuickStart = allQuickStarts.find((qs) => {
     return qs.metadata.name === activeQuickStartID;
   });
@@ -46,38 +43,34 @@ const QuickStartLearningPath: React.FC<QuickStartLearningPathProps> = ({
     activeQuickStart,
     ...nextQuickStarts,
   ]).Complete;
+  // add one to include activeQuickStart
   const totalQSInPath = [...nextQuickStarts].length + 1;
+
   const header = (
-    <StackItem style={{ fontSize: '16px' }}>
-      <Split style={{ alignItems: 'center' }}>
-        <SplitItem isFilled>
-          <ExpandableSectionToggle
-            isExpanded={isExpanded}
-            onToggle={() => setIsExpanded(!isExpanded)}
-            contentId={'learningpath'}
-            direction="down"
-            // this will need scss reaching into PF component tree
-            style={{ color: 'black', fontWeight: 600 }}
-          >
-            {getResource('Learning Path {{learningPathName}}').replace(
-              '{{learningPathName}}',
-              learningPathName,
-            )}
-          </ExpandableSectionToggle>
-        </SplitItem>
-        <SplitItem>
-          {/* TODO: add to resource bundle */}
-          <Text
-            style={{ color: 'var(--pf-global--Color--400)' }}
-          >{`${completedQuickStarts} of ${totalQSInPath} completed`}</Text>
-        </SplitItem>
-      </Split>
-    </StackItem>
+    <Split className="pfext-quick-start-learning-path__header-content">
+      <SplitItem isFilled>
+        <ExpandableSectionToggle
+          isExpanded={isExpanded}
+          onToggle={() => setIsExpanded(!isExpanded)}
+          contentId={'overview'}
+          direction="down"
+        >
+          {getResource('Learning Path {{learningPathName}}').replace(
+            '{{learningPathName}}',
+            learningPathName,
+          )}
+        </ExpandableSectionToggle>
+      </SplitItem>
+      <SplitItem>
+        {/* TODO: add to resource bundle */}
+        <Text className="pf-u-color-200">{`${completedQuickStarts} of ${totalQSInPath} completed`}</Text>
+      </SplitItem>
+    </Split>
   );
 
-  const reviewQuickStart = (
-    <Card>
-      <CardBody style={{ backgroundColor: 'lightgray' }}>
+  const rating = (
+    <Card className="pfext-quick-start-learning-path__rating">
+      <CardBody>
         <Bullseye>You're all finished with this quick start!!!!!!!!!!</Bullseye>
         <span>THUMBUP</span>
         {`    `}
@@ -86,121 +79,40 @@ const QuickStartLearningPath: React.FC<QuickStartLearningPathProps> = ({
     </Card>
   );
 
-  const quickStartStatusCard = (qs: QuickStart) => {
-    const { displayName } = qs.spec;
-    const status = getQuickStartStatus(allQuickStartStates, qs.metadata.name);
-    const taskIndex = allQuickStartStates?.[qs.metadata.name]?.taskNumber as number;
-    const totalTasks = qs.spec.tasks?.length;
-    const statusIconAndTextMap = {
-      [QuickStartStatus.COMPLETE]: {
-        text: getResource('Complete'),
-        textColor: 'var(--pf-global--success-color--100)',
-        icon: <CheckCircleIcon color="var(--pf-global--success-color--100)" size="sm" />,
-      },
-      [QuickStartStatus.IN_PROGRESS]: {
-        text: getResource('In progress'),
-        textColor: 'var(--pf-global--active-color--100)',
-        icon: <EllipsisHIcon color="var(--pf-global--active-color--100)" size="sm" />,
-      },
-      [QuickStartStatus.NOT_STARTED]: {
-        text: getResource('Not started'),
-        textColor: 'var(--pf-global--Color--400)',
-        icon: <ArrowRightIcon color="var(--pf-global--active-color--100)" size="sm" />,
-      },
-    };
-    const { text, textColor, icon } = statusIconAndTextMap[status];
-    return (
-      <Card>
-        <CardBody style={{ fontSize: '14px' }}>
-          <Split>
-            <SplitItem isFilled style={{ marginRight: '16px' }}>
-              {displayName}
-            </SplitItem>
-            <SplitItem>
-              <Split>
-                <SplitItem style={{ color: textColor, marginRight: '10px', whiteSpace: 'nowrap' }}>
-                  {text}
-                  {status === QuickStartStatus.IN_PROGRESS &&
-                    ` (${taskIndex + 1} of ${totalTasks})`}
-                </SplitItem>
-                <SplitItem>
-                  <Bullseye>{icon}</Bullseye>
-                </SplitItem>
-              </Split>
-            </SplitItem>
-          </Split>
-        </CardBody>
-      </Card>
-    );
-  };
-
   const pathOverview = (
-    <Stack hasGutter className="">
-      <StackItem>{quickStartStatusCard(activeQuickStart)}</StackItem>
-      {nextQuickStarts.map((qs) => {
+    <Stack hasGutter>
+      <StackItem>
+        <StatusCard quickStart={activeQuickStart} />
+      </StackItem>
+      {nextQuickStarts.map((quickStart) => {
         return (
-          <StackItem key={qs.spec.displayName} className="">
-            {quickStartStatusCard(qs)}
+          <StackItem key={quickStart.spec.displayName}>
+            <StatusCard quickStart={quickStart} />
           </StackItem>
         );
       })}
     </Stack>
   );
 
-  const nextCourse = (
-    <Card>
-      <CardBody>
-        <Split>
-          <SplitItem isFilled>
-            {nextQSInPath && (
-              <Stack>
-                <StackItem style={{ color: 'var(--pf-global--palette--black-500)' }}>
-                  Recommended next course
-                </StackItem>
-                <StackItem>{nextQSInPath?.spec.displayName}</StackItem>
-              </Stack>
-            )}
-            {!nextQSInPath && `No next QS`}
-          </SplitItem>
-          {nextQSInPath && (
-            <SplitItem>
-              <Bullseye>
-                <Button
-                  variant="link"
-                  onClick={() => setActiveQuickStart(nextQSInPath.metadata.name)}
-                >
-                  <ArrowRightIcon size="sm" />
-                </Button>
-              </Bullseye>
-            </SplitItem>
-          )}
-        </Split>
-      </CardBody>
-    </Card>
-  );
-
   const body = (
     <Stack hasGutter>
       <StackItem>
-        <ExpandableSection isExpanded={isExpanded} isDetached contentId={'learningpath'}>
+        <ExpandableSection isExpanded={isExpanded} isDetached contentId={'overview'}>
           {pathOverview}
         </ExpandableSection>
+        {!isExpanded && <NextQSCard nextQSInPath={nextQSInPath} />}
       </StackItem>
-      {!isExpanded && <StackItem>{nextCourse}</StackItem>}
-      <StackItem>{reviewQuickStart}</StackItem>
+      <StackItem>{rating}</StackItem>
     </Stack>
   );
 
   return (
     <Flex
+      className="pfext-quick-start-learning-path pf-u-background-color-200"
       direction={{ default: 'column' }}
-      style={{
-        backgroundColor: 'var(--pf-global--palette--black-200)',
-        padding: '10px 20px',
-      }}
     >
-      <FlexItem>{header}</FlexItem>
-      <FlexItem>{body}</FlexItem>
+      <FlexItem className="pfext-quick-start-learning-path__header">{header}</FlexItem>
+      <FlexItem className="pfext-quick-start-learning-path__body">{body}</FlexItem>
     </Flex>
   );
 };

@@ -54,7 +54,7 @@ export type QuickStartContextValues = {
   previousStep?: () => void;
   setQuickStartTaskNumber?: (quickStartId: string, taskNumber: number) => void;
   setQuickStartTaskStatus?: (taskStatus: QuickStartTaskStatus) => void;
-  getQuickStartForId?: (id: string) => QuickStartState;
+  getQuickStartStateById?: (id: string) => QuickStartState;
   footer?: FooterProps;
   useQueryParams?: boolean;
   markdown?: {
@@ -417,9 +417,12 @@ export const useValuesForQuickStartContext = (
 
   const activeQuickStartState = allQuickStartStates?.[activeQuickStartID] ?? {};
 
-  const getQuickStartForId = useCallback((id: string) => allQuickStartStates[id], [
-    allQuickStartStates,
-  ]);
+  const getQuickStartStateById = useCallback(
+    (id: string) => {
+      return allQuickStartStates[id] ?? { status: QuickStartStatus.NOT_STARTED };
+    },
+    [allQuickStartStates],
+  );
 
   return {
     allQuickStarts: quickStarts,
@@ -436,7 +439,7 @@ export const useValuesForQuickStartContext = (
     previousStep: value.previousStep || previousStep,
     setQuickStartTaskNumber, // revisit if this should be in public context API
     setQuickStartTaskStatus, // revisit if this should be in public context API
-    getQuickStartForId,
+    getQuickStartStateById,
     footer,
     useQueryParams,
     markdown,
