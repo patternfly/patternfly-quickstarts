@@ -5,6 +5,9 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+    
+env:
+  PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
 
 jobs:
   percy:
@@ -22,8 +25,6 @@ jobs:
     - name: Build
       run: yarn build
     - name: Start server and run percy
-      env:
-        PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       run: |
         yarn start &
         sleep 60 &&
