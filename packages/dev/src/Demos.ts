@@ -25,6 +25,11 @@ export const Demos: DemoInterface[] = [
     name: 'Quick starts prop based',
     to: '/quickstarts-props',
   },
+  {
+    id: 'learning-path-catalog',
+    name: 'Learning Path Catalog',
+    to: '/learning-path-catalog',
+  },
 ];
 
 export default Demos;

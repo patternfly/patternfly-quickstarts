@@ -3,6 +3,7 @@ import { Page, Button } from '@patternfly/react-core';
 import {
   LoadingBox,
   QuickStart,
+  QuickStartLearningPath,
   QuickStartContainer,
   QuickStartContainerProps,
   useLocalStorage,
@@ -50,6 +51,17 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
 
   const withQueryParams = true;
 
+  const exmapleLearningPath: QuickStartLearningPath = {
+    name: 'example-learning-path',
+    displayName: 'Example Learning Path',
+    quickStarts: {
+      1: 'example-learning-path-part-1',
+      2: 'example-learning-path-part-2',
+      3: 'example-learning-path-part-3',
+      4: 'example-learning-path-part-4',
+    },
+  };
+
   const drawerProps: QuickStartContainerProps = {
     quickStarts,
     activeQuickStartID,
@@ -61,7 +73,8 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     language,
     loading,
     useQueryParams: withQueryParams,
-    alwaysShowTaskReview: false,
+    alwaysShowTaskReview: true,
+    learningPaths: [exmapleLearningPath],
   };
 
   const toggleQuickStart = (quickStartId: string) => {

@@ -70,3 +70,9 @@ export type QuickStartType = {
   text: string;
   color?: 'blue' | 'cyan' | 'green' | 'orange' | 'purple' | 'red' | 'grey';
 };
+
+export type QuickStartLearningPath = {
+  name: string;
+  displayName: string;
+  quickStarts: Record<number, string>;
+};

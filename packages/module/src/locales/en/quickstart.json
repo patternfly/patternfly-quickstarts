@@ -41,5 +41,7 @@
   "Not available": "Not available",
   "Copy to clipboard": "Copy to clipboard",
   "Successfully copied to clipboard!": "Successfully copied to clipboard!",
-  "Learning Path {{learningPathName}}": "Learning Path {{learningPathName}}"
+  "Learning Path": "Learning Path",
+  " of {{totalQSInPath}} completed": " of {{totalQSInPath}} completed",
+  "You've completed {{learningPathName}}": "You've completed {{learningPathName}}"
 }

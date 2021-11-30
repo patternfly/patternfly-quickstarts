@@ -20,7 +20,9 @@ type QuickStartLearningPathNextQSCardProps = {
 const QuickStartLearningPathNextQSCard: React.FC<QuickStartLearningPathNextQSCardProps> = ({
   nextQSInPath,
 }) => {
-  const { setActiveQuickStart } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { setActiveQuickStart, getResource } = React.useContext<QuickStartContextValues>(
+    QuickStartContext,
+  );
   return (
     <Card>
       <CardBody>
@@ -28,7 +30,9 @@ const QuickStartLearningPathNextQSCard: React.FC<QuickStartLearningPathNextQSCar
           <SplitItem isFilled>
             {nextQSInPath && (
               <Stack>
-                <StackItem className="pf-u-color-400">Recommended next QS</StackItem>
+                <StackItem className="pf-u-color-400">
+                  {getResource('Recommended next Quick Start')}
+                </StackItem>
                 <StackItem>{nextQSInPath?.spec.displayName}</StackItem>
               </Stack>
             )}

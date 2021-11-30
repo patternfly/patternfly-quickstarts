@@ -25,7 +25,9 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
   onTaskSelect,
 }) => {
   const hasFailedTask = allTaskStatuses.includes(QuickStartTaskStatus.FAILED);
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource, currentLearningPath } = React.useContext<QuickStartContextValues>(
+    QuickStartContext,
+  );
   return (
     <>
       <TaskHeaderList tasks={tasks} allTaskStatuses={allTaskStatuses} onTaskSelect={onTaskSelect} />
@@ -58,8 +60,8 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
             />
           </Button>
         ))}
-      {nextQuickStarts?.length > 0 ? (
-        <LearningPath nextQuickStarts={nextQuickStarts} />
+      {currentLearningPath ? (
+        <LearningPath learningPath={currentLearningPath} />
       ) : (
         'No further quickstarts in this path'
       )}

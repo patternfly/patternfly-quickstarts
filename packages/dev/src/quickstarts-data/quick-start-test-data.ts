@@ -21,6 +21,10 @@ import sampleApplicationQuickstart from './mocks/yamls/sample-application-quicks
 import serverlessApplicationQuickstart from './mocks/yamls/serverless-application-quickstart.yaml';
 import springWithS2i from './mocks/yamls/spring-with-s2i.yaml';
 import copyExecuteSnippet from './mocks/yamls/copy-execute-snippets.yaml';
+import exampleLearningPath from './mocks/yamls/example-learning-path-1.yaml';
+import exampleLearningPath2 from './mocks/yamls/example-learning-path-2.yaml';
+import exampleLearningPath3 from './mocks/yamls/example-learning-path-3.yaml';
+import exampleLearningPath4 from './mocks/yamls/example-learning-path-4.yaml';
 
 // import addHealthchecksQuickstartADoc from "raw-loader!./mocks/asciidoc/add-healthchecks-quickstart.adoc";
 // import template from "raw-loader!./mocks/asciidoc/TEMPLATE_PROCEDURE.adoc";
@@ -105,5 +109,9 @@ export const allQuickStarts: QuickStart[] = [
   //   BOOTSTRAP_SERVER_HOST: "foo.kafka.devshift.net:443"
   // }),
   // ProcQuickStartParser(masGettingStarted),
-  // ProcQuickStartParser(masKafkaBinScripts)
+  // ProcQuickStartParser(masKafkaBinScripts),
+  exampleLearningPath,
+  exampleLearningPath2,
+  exampleLearningPath3,
+  exampleLearningPath4,
 ];

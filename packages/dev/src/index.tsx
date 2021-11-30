@@ -11,6 +11,7 @@ import App2 from './App2';
 import { QuickStartContext } from '@patternfly/quickstarts';
 import { DefaultCatalog } from './DefaultCatalog';
 import { CustomCatalog } from './CustomCatalog';
+import { LearningPathCatalog } from './LearningPathCatalog';
 
 const SomeNestedComponent = () => {
   const qsContext = React.useContext(QuickStartContext);
@@ -42,6 +43,12 @@ ReactDOM.render(
           <SomeNestedComponent />
           <CustomCatalog />
         </App>
+      </Route>
+      <Route exact path="/learning-path-catalog">
+        <App2 showCardFooters>
+          <SomeNestedComponent />
+          <LearningPathCatalog />
+        </App2>
       </Route>
     </Switch>
   </Router>,
