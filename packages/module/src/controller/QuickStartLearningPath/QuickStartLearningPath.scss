@@ -18,8 +18,13 @@
     &__rating {
       background-color: lightgray;
     }
-    &__status-card__status {
-      margin-right: 10px;
-      white-space: nowrap;
+
+    &__status-card {
+      cursor: pointer;
+      &__status {
+        margin-right: 10px;
+        white-space: nowrap;
+      }
     }
+
 }

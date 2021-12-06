@@ -1,7 +1,15 @@
 import React from 'react';
 import { QuickStart, QuickStartStatus } from '@quickstarts/utils/quick-start-types';
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
-import { Card, CardBody, Split, SplitItem, Bullseye } from '@patternfly/react-core';
+import {
+  Card,
+  CardBody,
+  Split,
+  SplitItem,
+  Bullseye,
+  Stack,
+  StackItem,
+} from '@patternfly/react-core';
 import ArrowRightIcon from '@patternfly/react-icons/dist/js/icons/arrow-right-icon';
 import CheckCircleIcon from '@patternfly/react-icons/dist/js/icons/check-circle-icon';
 import EllipsisHIcon from '@patternfly/react-icons/dist/js/icons/ellipsis-h-icon';
@@ -14,14 +22,27 @@ type QuickStartLearningPathStatusCardProps = {
 const QuickStartLearningPathStatusCard: React.FC<QuickStartLearningPathStatusCardProps> = ({
   quickStart,
 }) => {
-  const { getResource, getQuickStartStateById } = React.useContext<QuickStartContextValues>(
-    QuickStartContext,
-  );
+  const {
+    getResource,
+    getQuickStartStateById,
+    setActiveQuickStart,
+    activeQuickStartID,
+  } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
-  const { displayName, tasks } = quickStart.spec;
+  const {
+    metadata: { name: id },
+    spec: { displayName, tasks },
+  } = quickStart;
   const totalTasks = tasks?.length;
-  const qsState = getQuickStartStateById(quickStart.metadata.name);
-  const { status, taskNumber } = qsState;
+  const isActiveQuickStart = id === activeQuickStartID;
+  const { status, taskNumber } = getQuickStartStateById(id);
+
+  const handleClick = () => {
+    if (isActiveQuickStart) {
+      return false;
+    }
+    setActiveQuickStart(id);
+  };
 
   const statusIconAndTextMap = {
     [QuickStartStatus.COMPLETE]: {
@@ -42,11 +63,20 @@ const QuickStartLearningPathStatusCard: React.FC<QuickStartLearningPathStatusCar
   };
   const { text, icon, modifier } = statusIconAndTextMap[status];
   return (
-    <Card>
+    <Card
+      className="pfext-quick-start-learning-path__status-card"
+      onClick={handleClick}
+      isHoverable={!isActiveQuickStart}
+    >
       <CardBody className="pf-u-font-size-md">
         <Split>
           <SplitItem isFilled className="pf-u-mr-md">
-            {displayName}
+            <Stack>
+              {isActiveQuickStart && (
+                <StackItem>{id === activeQuickStartID && 'Current course'}</StackItem>
+              )}
+              <StackItem>{displayName}</StackItem>
+            </Stack>
           </SplitItem>
           <SplitItem>
             <Split>

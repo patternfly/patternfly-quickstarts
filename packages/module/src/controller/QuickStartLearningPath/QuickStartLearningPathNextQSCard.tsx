@@ -31,12 +31,11 @@ const QuickStartLearningPathNextQSCard: React.FC<QuickStartLearningPathNextQSCar
             {nextQSInPath && (
               <Stack>
                 <StackItem className="pf-u-color-400">
-                  {getResource('Recommended next Quick Start')}
+                  {getResource('Recommended next quick start')}
                 </StackItem>
                 <StackItem>{nextQSInPath?.spec.displayName}</StackItem>
               </Stack>
             )}
-            {!nextQSInPath && `No next QS`}
           </SplitItem>
           {nextQSInPath && (
             <SplitItem>

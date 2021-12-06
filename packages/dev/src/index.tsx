@@ -8,10 +8,9 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import './i18n/i18n';
 import App from './App';
 import App2 from './App2';
-import { QuickStartContext } from '@patternfly/quickstarts';
+import { QuickStart, QuickStartContext } from '@patternfly/quickstarts';
 import { DefaultCatalog } from './DefaultCatalog';
 import { CustomCatalog } from './CustomCatalog';
-import { LearningPathCatalog } from './LearningPathCatalog';
 
 const SomeNestedComponent = () => {
   const qsContext = React.useContext(QuickStartContext);
@@ -47,7 +46,12 @@ ReactDOM.render(
       <Route exact path="/learning-path-catalog">
         <App2 showCardFooters>
           <SomeNestedComponent />
-          <LearningPathCatalog />
+          <CustomCatalog
+            customFilter={(quickStart: QuickStart) => {
+              return quickStart.metadata.name.includes('learning-path');
+            }}
+            headerTitle="Learning Path Catalog"
+          />
         </App2>
       </Route>
     </Switch>

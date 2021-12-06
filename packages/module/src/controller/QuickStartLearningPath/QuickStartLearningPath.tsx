@@ -71,11 +71,9 @@ const QuickStartLearningPathComponent: React.FC<QuickStartLearningPathProps> = (
       </SplitItem>
       <SplitItem>
         <Text className="pf-u-color-200">
-          {completedQuickStarts}
-          {getResource(' of {{totalQSInPath}} completed').replace(
-            '{{totalQSInPath}}',
-            learningPathQuickStarts.length,
-          )}
+          {getResource('{{completedQuickStarts, number}} of {{totalQSInPath, number}} completed')
+            .replace('{{completedQuickStarts, number}}', completedQuickStarts)
+            .replace('{{totalQSInPath, number}}', learningPathQuickStarts.length)}
         </Text>
       </SplitItem>
     </Split>
@@ -87,7 +85,7 @@ const QuickStartLearningPathComponent: React.FC<QuickStartLearningPathProps> = (
         <Bullseye>
           <Stack hasGutter>
             <StackItem className="pf-u-text-align-center">
-              You’re all finished! How would you rate this quick start?
+              {getResource('You’re all finished! How would you rate this quick start?')}
             </StackItem>
             <StackItem>
               <Bullseye>

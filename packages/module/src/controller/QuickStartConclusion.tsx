@@ -63,7 +63,7 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
       {currentLearningPath ? (
         <LearningPath learningPath={currentLearningPath} />
       ) : (
-        'No further quickstarts in this path'
+        getResource('No further quickstarts in this path')
       )}
     </>
   );

@@ -42,6 +42,9 @@
   "Copy to clipboard": "Copy to clipboard",
   "Successfully copied to clipboard!": "Successfully copied to clipboard!",
   "Learning Path": "Learning Path",
-  " of {{totalQSInPath}} completed": " of {{totalQSInPath}} completed",
-  "You've completed {{learningPathName}}": "You've completed {{learningPathName}}"
+  "{{completedQuickStarts, number}} of {{totalQSInPath, number}} completed": "{{completedQuickStarts, number}} of {{totalQSInPath, number}} completed",
+  "You've completed {{learningPathName}}": "You've completed {{learningPathName}}",
+  "Recommended next quick qtart": "Recommended next quick start",
+  "You’re all finished! How would you rate this quick start?": "You’re all finished! How would you rate this quick start?",
+  "No further quickstarts in this path": "No further quickstarts in this path"
 }
