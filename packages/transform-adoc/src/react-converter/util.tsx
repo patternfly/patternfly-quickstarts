@@ -3,6 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 import { Alert, Card, CardBody, List, ListItem, Title } from '@patternfly/react-core';
 import { css } from '@patternfly/react-styles';
+import './util.scss';
 
 const MODULE_TYPE_ATTRIBUTE = 'module-type';
 const PREREQUISITES = 'Prerequisites';

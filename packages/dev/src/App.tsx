@@ -21,7 +21,6 @@ type AppProps = {
 
 const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage('quickstartId', '');
-
   const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage('quickstarts', {});
 
   // eslint-disable-next-line no-console

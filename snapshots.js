@@ -6,7 +6,7 @@ const runThroughQuickStart = async (id, page, percySnapshot) => {
   const snapshotOptions = {
     widths: [375],
   };
-  await page.goto(`http://localhost:3000/quickstarts?quickstart=${id}`);
+  await page.goto(`http://localhost:3000?quickstart=${id}`);
   // ensure the page has loaded before capturing a snapshot
   await page.waitFor('.pf-c-drawer__panel.pfext-quick-start-panel-content');
   withSnapshots && (await percySnapshot(`${id}__intro`, snapshotOptions));
@@ -40,7 +40,7 @@ const runThroughQuickStart = async (id, page, percySnapshot) => {
 
 PercyScript.run(async (page, percySnapshot) => {
   // catalog screenshot
-  await page.goto('http://localhost:3000/quickstarts');
+  await page.goto('http://localhost:3000');
   await page.waitFor('.pfext-quick-start-tile');
   withSnapshots && (await percySnapshot('catalog', { widths: [1280] }));
 
