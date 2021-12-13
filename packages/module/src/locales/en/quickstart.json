@@ -44,7 +44,10 @@
   "Learning Path": "Learning Path",
   "{{completedQuickStarts, number}} of {{totalQSInPath, number}} completed": "{{completedQuickStarts, number}} of {{totalQSInPath, number}} completed",
   "You've completed {{learningPathName}}": "You've completed {{learningPathName}}",
-  "Recommended next quick qtart": "Recommended next quick start",
+  "Recommended next course": "Recommended next course",
   "You’re all finished! How would you rate this quick start?": "You’re all finished! How would you rate this quick start?",
-  "No further quickstarts in this path": "No further quickstarts in this path"
+  "No further quickstarts in this path": "No further quickstarts in this path",
+  "Show all": "Show all",
+  "Show less": "Show less",
+  "Current course": "Current course"
 }

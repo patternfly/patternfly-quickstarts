@@ -6,6 +6,7 @@ import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start
 import { QuickStart, QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
 import LearningPath from './QuickStartLearningPath';
 import TaskHeaderList from './QuickStartTaskHeaderList';
+import QuickStartRating from './QuickStartRating';
 
 type QuickStartConclusionProps = {
   tasks: QuickStartTask[];
@@ -60,6 +61,7 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
             />
           </Button>
         ))}
+      <QuickStartRating />
       {currentLearningPath ? (
         <LearningPath learningPath={currentLearningPath} />
       ) : (

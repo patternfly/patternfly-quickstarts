@@ -15,35 +15,46 @@ import ArrowRightIcon from '@patternfly/react-icons/dist/js/icons/arrow-right-ic
 
 type QuickStartLearningPathNextQSCardProps = {
   nextQSInPath: QuickStart;
+  learningPathName: string;
 };
 
 const QuickStartLearningPathNextQSCard: React.FC<QuickStartLearningPathNextQSCardProps> = ({
   nextQSInPath,
+  learningPathName,
 }) => {
   const { setActiveQuickStart, getResource } = React.useContext<QuickStartContextValues>(
     QuickStartContext,
   );
+
+  const handleClick = () => {
+    if (nextQSInPath) {
+      setActiveQuickStart(nextQSInPath.metadata.name);
+    }
+  };
+
   return (
-    <Card>
+    <Card onClick={handleClick} isHoverable={nextQSInPath !== undefined}>
       <CardBody>
         <Split>
           <SplitItem isFilled>
-            {nextQSInPath && (
+            {nextQSInPath ? (
               <Stack>
                 <StackItem className="pf-u-color-400">
-                  {getResource('Recommended next quick start')}
+                  {getResource('Recommended next course')}
                 </StackItem>
                 <StackItem>{nextQSInPath?.spec.displayName}</StackItem>
               </Stack>
+            ) : (
+              getResource("You've completed {{learningPathName}}").replace(
+                '{{learningPathName}}',
+                learningPathName,
+              )
             )}
           </SplitItem>
           {nextQSInPath && (
             <SplitItem>
               <Bullseye>
-                <Button
-                  variant="link"
-                  onClick={() => setActiveQuickStart(nextQSInPath.metadata.name)}
-                >
+                <Button variant="link">
                   <ArrowRightIcon size="sm" />
                 </Button>
               </Bullseye>

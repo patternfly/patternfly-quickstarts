@@ -1,10 +1,6 @@
 import * as React from 'react';
 import {
   Bullseye,
-  Card,
-  CardBody,
-  ExpandableSection,
-  ExpandableSectionToggle,
   Split,
   SplitItem,
   Stack,
@@ -12,9 +8,8 @@ import {
   Text,
   Flex,
   FlexItem,
+  Button,
 } from '@patternfly/react-core';
-import ThumbsUpIcon from '@patternfly/react-icons/dist/js/icons/thumbs-up-icon';
-import ThumbsDownIcon from '@patternfly/react-icons/dist/js/icons/thumbs-down-icon';
 import { QuickStart, QuickStartLearningPath } from '@quickstarts/utils/quick-start-types';
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 import { getQuickStartStatusCount } from '../../utils/quick-start-utils';
@@ -33,6 +28,7 @@ const QuickStartLearningPathComponent: React.FC<QuickStartLearningPathProps> = (
   const { getResource, allQuickStarts, allQuickStartStates, activeQuickStartID } = React.useContext<
     QuickStartContextValues
   >(QuickStartContext);
+
   // Expanded state of <ExpandableSection />
   const [isExpanded, setIsExpanded] = React.useState(true);
 
@@ -43,15 +39,20 @@ const QuickStartLearningPathComponent: React.FC<QuickStartLearningPathProps> = (
     } = quickStart;
     return Object.values(learningPathIDs).includes(id);
   });
-  const activeQuickStartPositionInLearningPath = Object.keys(learningPath.quickStarts).find(
-    (key) => learningPath.quickStarts[key] === activeQuickStartID,
+
+  const activeQuickStartPositionInLearningPath = Number(
+    Object.keys(learningPath.quickStarts).find(
+      (key) => learningPath.quickStarts[key] === activeQuickStartID,
+    ),
   );
+
   const nextQSInPath = learningPathQuickStarts.find((quickStart) => {
     const {
       metadata: { name: id },
     } = quickStart;
-    return id === learningPath.quickStarts[Number(activeQuickStartPositionInLearningPath) + 1];
+    return id === learningPath.quickStarts[activeQuickStartPositionInLearningPath + 1];
   });
+
   const completedQuickStarts = getQuickStartStatusCount(
     allQuickStartStates,
     learningPathQuickStarts,
@@ -59,15 +60,8 @@ const QuickStartLearningPathComponent: React.FC<QuickStartLearningPathProps> = (
 
   const header = (
     <Split className="pfext-quick-start-learning-path__header-content">
-      <SplitItem isFilled>
-        <ExpandableSectionToggle
-          isExpanded={isExpanded}
-          onToggle={() => setIsExpanded(!isExpanded)}
-          contentId={'overview'}
-          direction="down"
-        >
-          {learningPath.displayName || getResource('Learning Path')}
-        </ExpandableSectionToggle>
+      <SplitItem isFilled className="pf-u-font-weight-bold">
+        {learningPath.displayName || getResource('Learning Path')}
       </SplitItem>
       <SplitItem>
         <Text className="pf-u-color-200">
@@ -79,36 +73,21 @@ const QuickStartLearningPathComponent: React.FC<QuickStartLearningPathProps> = (
     </Split>
   );
 
-  const rating = (
-    <Card className="pfext-quick-start-learning-path__rating">
-      <CardBody>
-        <Bullseye>
-          <Stack hasGutter>
-            <StackItem className="pf-u-text-align-center">
-              {getResource('You’re all finished! How would you rate this quick start?')}
-            </StackItem>
-            <StackItem>
-              <Bullseye>
-                <ThumbsUpIcon
-                  color="var(--pf-global--active-color--100)"
-                  size="md"
-                  className="pf-u-mr-md"
-                />
-                <ThumbsDownIcon size="md" />
-              </Bullseye>
-            </StackItem>
-          </Stack>
-        </Bullseye>
-      </CardBody>
-    </Card>
-  );
-
   const pathOverview = (
-    <Stack hasGutter>
-      {learningPathQuickStarts.map((quickStart) => {
+    <Stack className="pfext-quick-start-learning-path__overview">
+      {learningPathQuickStarts.map((quickStart, index) => {
+        const {
+          metadata: { name: id },
+        } = quickStart;
+        const isActiveQuickStart = id === activeQuickStartID;
+        const isNextQuickStartInLearningPath = activeQuickStartPositionInLearningPath === index;
         return (
-          <StackItem key={quickStart.spec.displayName}>
-            <StatusCard quickStart={quickStart} />
+          <StackItem className="pf-u-mb-sm" key={quickStart.spec.displayName}>
+            <StatusCard
+              quickStart={quickStart}
+              isActiveQuickStart={isActiveQuickStart}
+              isNextQuickStartInLearningPath={isNextQuickStartInLearningPath}
+            />
           </StackItem>
         );
       })}
@@ -118,20 +97,18 @@ const QuickStartLearningPathComponent: React.FC<QuickStartLearningPathProps> = (
   const body = (
     <Stack hasGutter>
       <StackItem>
-        <ExpandableSection isExpanded={isExpanded} isDetached contentId={'overview'}>
-          {pathOverview}
-        </ExpandableSection>
-        {!isExpanded &&
-          (nextQSInPath ? (
-            <NextQSCard nextQSInPath={nextQSInPath} />
-          ) : (
-            getResource("You've completed {{learningPathName}}").replace(
-              '{{learningPathName}}',
-              learningPath.displayName,
-            )
-          ))}
+        {isExpanded && pathOverview}
+        {!isExpanded && (
+          <NextQSCard nextQSInPath={nextQSInPath} learningPathName={learningPath.displayName} />
+        )}
       </StackItem>
-      <StackItem>{rating}</StackItem>
+      <StackItem onClick={() => setIsExpanded(!isExpanded)} className="pf-u-mb-sm">
+        <Bullseye>
+          <Button variant="link" isInline>
+            {isExpanded ? getResource('Show less') : getResource('Show all')}
+          </Button>
+        </Bullseye>
+      </StackItem>
     </Stack>
   );
 

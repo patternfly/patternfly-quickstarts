@@ -17,24 +17,24 @@ import { css } from '@patternfly/react-styles';
 
 type QuickStartLearningPathStatusCardProps = {
   quickStart: QuickStart;
+  isActiveQuickStart: boolean;
+  isNextQuickStartInLearningPath: boolean;
 };
 
 const QuickStartLearningPathStatusCard: React.FC<QuickStartLearningPathStatusCardProps> = ({
   quickStart,
+  isActiveQuickStart,
+  isNextQuickStartInLearningPath,
 }) => {
-  const {
-    getResource,
-    getQuickStartStateById,
-    setActiveQuickStart,
-    activeQuickStartID,
-  } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource, getQuickStartStateById, setActiveQuickStart } = React.useContext<
+    QuickStartContextValues
+  >(QuickStartContext);
 
   const {
     metadata: { name: id },
     spec: { displayName, tasks },
   } = quickStart;
   const totalTasks = tasks?.length;
-  const isActiveQuickStart = id === activeQuickStartID;
   const { status, taskNumber } = getQuickStartStateById(id);
 
   const handleClick = () => {
@@ -69,30 +69,34 @@ const QuickStartLearningPathStatusCard: React.FC<QuickStartLearningPathStatusCar
       isHoverable={!isActiveQuickStart}
     >
       <CardBody className="pf-u-font-size-md">
-        <Split>
-          <SplitItem isFilled className="pf-u-mr-md">
-            <Stack>
-              {isActiveQuickStart && (
-                <StackItem>{id === activeQuickStartID && 'Current course'}</StackItem>
-              )}
-              <StackItem>{displayName}</StackItem>
-            </Stack>
-          </SplitItem>
-          <SplitItem>
+        <Stack>
+          {isActiveQuickStart ? (
+            <StackItem className="pf-u-color-200">{getResource('Current course')}</StackItem>
+          ) : isNextQuickStartInLearningPath ? (
+            <StackItem className="pf-u-color-200">
+              {getResource('Recommended next course')}
+            </StackItem>
+          ) : null}
+          <StackItem>
             <Split>
-              <SplitItem
-                className={css('pfext-quick-start-learning-path__status-card__status', modifier)}
-              >
-                {text}
-                {status === QuickStartStatus.IN_PROGRESS &&
-                  ` (${(taskNumber as number) + 1} of ${totalTasks})`}
+              <SplitItem isFilled className="pf-u-mr-md">
+                {displayName}
               </SplitItem>
               <SplitItem>
-                <Bullseye>{icon}</Bullseye>
+                <Split>
+                  <SplitItem className={css('pf-u-mr-sm', 'pf-u-text-nowrap', modifier)}>
+                    {text}
+                    {status === QuickStartStatus.IN_PROGRESS &&
+                      ` (${(taskNumber as number) + 1} of ${totalTasks})`}
+                  </SplitItem>
+                  <SplitItem>
+                    <Bullseye>{icon}</Bullseye>
+                  </SplitItem>
+                </Split>
               </SplitItem>
             </Split>
-          </SplitItem>
-        </Split>
+          </StackItem>
+        </Stack>
       </CardBody>
     </Card>
   );

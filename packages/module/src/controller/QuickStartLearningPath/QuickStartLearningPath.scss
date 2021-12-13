@@ -1,5 +1,4 @@
 .pfext-quick-start-learning-path {
-    // background-color: var(--pf-global--palette--black-200);
     padding: 10px 20px;
 
     &__header {
@@ -7,24 +6,6 @@
 
       &-content {
         align-items: center;
-
-        .pf-c-expandable-section__toggle {
-          color: var(--pf-global--Color--100);
-          font-weight: var(--pf-global--FontWeight--bold);
-        }
       }
     }
-
-    &__rating {
-      background-color: lightgray;
-    }
-
-    &__status-card {
-      cursor: pointer;
-      &__status {
-        margin-right: 10px;
-        white-space: nowrap;
-      }
-    }
-
 }
