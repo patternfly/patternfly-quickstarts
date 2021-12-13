@@ -43,14 +43,20 @@ ReactDOM.render(
           <CustomCatalog />
         </App>
       </Route>
-      <Route exact path="/learning-path-catalog">
+      <Route exact path="/kafka-learning-path">
         <App2 showCardFooters>
           <SomeNestedComponent />
           <CustomCatalog
             customFilter={(quickStart: QuickStart) => {
-              return quickStart.metadata.name.includes('learning-path');
+              return quickStart.metadata.name.includes('kafka');
             }}
-            headerTitle="Learning Path Catalog"
+            customSort={(qs1: QuickStart, qs2: QuickStart) => {
+              const learningPath = ['kafka-getting-started', 'kafkacat', 'kafka-bin-scripts'];
+              return (
+                learningPath.indexOf(qs1.metadata.name) - learningPath.indexOf(qs2.metadata.name)
+              );
+            }}
+            headerTitle="Kafka Learning Path"
           />
         </App2>
       </Route>

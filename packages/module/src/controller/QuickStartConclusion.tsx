@@ -42,6 +42,7 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
         }
       />
       {!hasFailedTask &&
+        !currentLearningPath &&
         nextQuickStarts &&
         nextQuickStarts.length > 0 &&
         nextQuickStarts.map((nextQuickStart, index) => (

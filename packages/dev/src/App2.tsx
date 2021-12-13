@@ -51,14 +51,13 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
 
   const withQueryParams = true;
 
-  const exmapleLearningPath: QuickStartLearningPath = {
-    name: 'example-learning-path',
-    displayName: 'Example Learning Path',
+  const kafkaLearningPath: QuickStartLearningPath = {
+    name: 'kafka-learning-path',
+    displayName: 'Kafka Learning Path',
     quickStarts: {
-      1: 'example-learning-path-part-1',
-      2: 'example-learning-path-part-2',
-      3: 'example-learning-path-part-3',
-      4: 'example-learning-path-part-4',
+      1: 'kafka-getting-started',
+      2: 'kafkacat',
+      3: 'kafka-bin-scripts',
     },
   };
 
@@ -74,7 +73,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     loading,
     useQueryParams: withQueryParams,
     alwaysShowTaskReview: true,
-    learningPaths: [exmapleLearningPath],
+    learningPaths: [kafkaLearningPath],
   };
 
   const toggleQuickStart = (quickStartId: string) => {

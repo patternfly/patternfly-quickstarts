@@ -26,9 +26,9 @@ export const Demos: DemoInterface[] = [
     to: '/quickstarts-props',
   },
   {
-    id: 'learning-path-catalog',
-    name: 'Learning Path Catalog',
-    to: '/learning-path-catalog',
+    id: 'kafka-learning-path',
+    name: 'Kafka Learning Path',
+    to: '/kafka-learning-path',
   },
 ];
 
