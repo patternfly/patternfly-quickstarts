@@ -32,12 +32,14 @@ const QuickStartLearningPathNextQSCard: React.FC<QuickStartLearningPathNextQSCar
     }
   };
 
+  const hasNextQSInPath = nextQSInPath !== undefined;
+
   return (
-    <Card onClick={handleClick} isHoverable={nextQSInPath !== undefined}>
+    <Card onClick={handleClick} isHoverable={hasNextQSInPath} isSelectable={hasNextQSInPath}>
       <CardBody>
         <Split>
           <SplitItem isFilled>
-            {nextQSInPath ? (
+            {hasNextQSInPath ? (
               <Stack>
                 <StackItem className="pf-u-color-400">
                   {getResource('Recommended next course')}

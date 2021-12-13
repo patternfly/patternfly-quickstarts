@@ -67,6 +67,7 @@ const QuickStartLearningPathStatusCard: React.FC<QuickStartLearningPathStatusCar
       className="pfext-quick-start-learning-path__status-card"
       onClick={handleClick}
       isHoverable={!isActiveQuickStart}
+      isSelectable={!isActiveQuickStart}
     >
       <CardBody className="pf-u-font-size-md">
         <Stack>
