@@ -173,10 +173,8 @@ export const useValuesForQuickStartContext = (
     (id: string) => {
       return learningPaths.find((learningPath) => {
         const { quickStarts: learningPathQuickStarts } = learningPath;
-        for (const num in learningPathQuickStarts) {
-          if (learningPathQuickStarts[num] === id) {
-            return true;
-          }
+        if (learningPathQuickStarts.includes(id)) {
+          return true;
         }
       });
     },

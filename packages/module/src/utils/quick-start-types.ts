@@ -74,5 +74,5 @@ export type QuickStartType = {
 export type QuickStartLearningPath = {
   name: string;
   displayName: string;
-  quickStarts: Record<number, string>;
+  quickStarts: string[];
 };

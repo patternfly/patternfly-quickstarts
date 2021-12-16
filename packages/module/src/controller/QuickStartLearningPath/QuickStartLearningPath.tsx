@@ -37,13 +37,11 @@ const QuickStartLearningPathComponent: React.FC<QuickStartLearningPathProps> = (
     const {
       metadata: { name: id },
     } = quickStart;
-    return Object.values(learningPathIDs).includes(id);
+    return learningPathIDs.includes(id);
   });
 
-  const activeQuickStartPositionInLearningPath = Number(
-    Object.keys(learningPath.quickStarts).find(
-      (key) => learningPath.quickStarts[key] === activeQuickStartID,
-    ),
+  const activeQuickStartPositionInLearningPath = learningPath.quickStarts.indexOf(
+    activeQuickStartID,
   );
 
   const nextQSInPath = learningPathQuickStarts.find((quickStart) => {
@@ -80,7 +78,7 @@ const QuickStartLearningPathComponent: React.FC<QuickStartLearningPathProps> = (
           metadata: { name: id },
         } = quickStart;
         const isActiveQuickStart = id === activeQuickStartID;
-        const isNextQuickStartInLearningPath = activeQuickStartPositionInLearningPath === index;
+        const isNextQuickStartInLearningPath = activeQuickStartPositionInLearningPath + 1 === index;
         return (
           <StackItem className="pf-u-mb-sm" key={quickStart.spec.displayName}>
             <StatusCard

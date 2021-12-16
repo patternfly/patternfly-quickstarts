@@ -54,11 +54,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   const kafkaLearningPath: QuickStartLearningPath = {
     name: 'kafka-learning-path',
     displayName: 'Kafka Learning Path',
-    quickStarts: {
-      1: 'kafka-getting-started',
-      2: 'kafkacat',
-      3: 'kafka-bin-scripts',
-    },
+    quickStarts: ['kafka-getting-started', 'kafkacat', 'kafka-bin-scripts'],
   };
 
   const drawerProps: QuickStartContainerProps = {
