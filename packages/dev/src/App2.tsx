@@ -3,7 +3,6 @@ import { Page, Button } from '@patternfly/react-core';
 import {
   LoadingBox,
   QuickStart,
-  QuickStartLearningPath,
   QuickStartContainer,
   QuickStartContainerProps,
   useLocalStorage,
