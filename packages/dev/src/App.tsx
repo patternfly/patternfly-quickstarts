@@ -9,7 +9,10 @@ import {
   useLocalStorage,
 } from '@patternfly/quickstarts';
 import { loadJSONQuickStarts } from './quickstarts-data/mas-guides/quickstartLoader';
-import { allQuickStarts as yamlQuickStarts } from './quickstarts-data/quick-start-test-data';
+import {
+  allQuickStarts as yamlQuickStarts,
+  learningPaths,
+} from './quickstarts-data/quick-start-test-data';
 import React from 'react';
 import i18n from './i18n/i18n';
 import { AppHeader, AppSidebar } from './common/Page';
@@ -61,6 +64,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
       // Continue: 'Resume',
       // Restart: 'Start over',
     },
+    learningPaths,
   };
 
   return (
