@@ -12,7 +12,10 @@ import {
   QUICKSTART_ID_FILTER_KEY,
 } from '@patternfly/quickstarts';
 import { loadJSONQuickStarts } from './quickstarts-data/mas-guides/quickstartLoader';
-import { allQuickStarts as yamlQuickStarts } from './quickstarts-data/quick-start-test-data';
+import {
+  allQuickStarts as yamlQuickStarts,
+  learningPaths,
+} from './quickstarts-data/quick-start-test-data';
 import React from 'react';
 import i18n from './i18n/i18n';
 import { AppHeader, AppSidebar } from './common/Page';
@@ -51,12 +54,6 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
 
   const withQueryParams = true;
 
-  const kafkaLearningPath: QuickStartLearningPath = {
-    name: 'kafka-learning-path',
-    displayName: 'Kafka Learning Path',
-    quickStarts: ['kafka-getting-started', 'kafkacat', 'kafka-bin-scripts'],
-  };
-
   const drawerProps: QuickStartContainerProps = {
     quickStarts,
     activeQuickStartID,
@@ -69,7 +66,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     loading,
     useQueryParams: withQueryParams,
     alwaysShowTaskReview: true,
-    learningPaths: [kafkaLearningPath],
+    learningPaths,
   };
 
   const toggleQuickStart = (quickStartId: string) => {

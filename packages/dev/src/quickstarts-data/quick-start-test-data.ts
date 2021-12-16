@@ -7,6 +7,7 @@ import {
   QuickstartAsciiDocParser,
 } from './mocks/parsers';
 import { QuickStart } from '@patternfly/quickstarts';
+import { QuickStartLearningPath } from '@patternfly/quickstarts';
 
 import { explorePipelinesQuickStart } from './mocks/json/explore-pipeline-quickstart';
 import { exploreServerlessQuickStart } from './mocks/json/explore-serverless-quickstart';
@@ -21,14 +22,11 @@ import sampleApplicationQuickstart from './mocks/yamls/sample-application-quicks
 import serverlessApplicationQuickstart from './mocks/yamls/serverless-application-quickstart.yaml';
 import springWithS2i from './mocks/yamls/spring-with-s2i.yaml';
 import copyExecuteSnippet from './mocks/yamls/copy-execute-snippets.yaml';
-import exampleLearningPath from './mocks/yamls/example-learning-path-1.yaml';
-import exampleLearningPath2 from './mocks/yamls/example-learning-path-2.yaml';
-import exampleLearningPath3 from './mocks/yamls/example-learning-path-3.yaml';
-import exampleLearningPath4 from './mocks/yamls/example-learning-path-4.yaml';
 
 // import addHealthchecksQuickstartADoc from "raw-loader!./mocks/asciidoc/add-healthchecks-quickstart.adoc";
 // import template from "raw-loader!./mocks/asciidoc/TEMPLATE_PROCEDURE.adoc";
 import sampleA from 'raw-loader!./mocks/asciidoc/business-central-editing-data-sources-proc.adoc';
+
 // import sampleB from "raw-loader!./mocks/asciidoc/case-management-dynamic-user-task-API-proc.adoc";
 // import sampleC from "raw-loader!./mocks/asciidoc/template-deploy-replicas-auth-proc.adoc";
 
@@ -37,6 +35,8 @@ import sampleA from 'raw-loader!./mocks/asciidoc/business-central-editing-data-s
 // import { ProcQuickStartParser } from './mas-guides/procedure-parser';
 // import masGettingStarted from "./mas-guides/getting-started/output/getting-started.quickstart.json";
 // import masKafkaBinScripts from "./mas-guides/kafka-bin-scripts/output/kafka-bin-scripts.quickstart.json";
+
+import kafkaLearningPath from './mocks/learning-paths/kafka-learning-path.yaml';
 
 export const allAsciiDocImports = {
   //   'template': {
@@ -110,8 +110,6 @@ export const allQuickStarts: QuickStart[] = [
   // }),
   // ProcQuickStartParser(masGettingStarted),
   // ProcQuickStartParser(masKafkaBinScripts),
-  exampleLearningPath,
-  exampleLearningPath2,
-  exampleLearningPath3,
-  exampleLearningPath4,
 ];
+
+export const learningPaths: QuickStartLearningPath[] = [kafkaLearningPath];
