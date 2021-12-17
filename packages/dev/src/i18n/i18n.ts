@@ -4,6 +4,7 @@ import detector from 'i18next-browser-languagedetector';
 
 import { dateTimeFormatter, fromNow } from './datetime';
 
+import cs from '../locales/cs/quickstart.json';
 import en from '../locales/en/quickstart.json';
 import ja from '../locales/ja/quickstart.json';
 import ko from '../locales/ko/quickstart.json';
@@ -24,6 +25,9 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     resources: {
+      cs: {
+        quickstart: cs,
+      },
       en: {
         quickstart: en,
       },
