@@ -204,4 +204,9 @@ You can have inline or block copyable text.
     ```{{copy}}
 ```
 
+## Localization
+We use i18next for localization purposes. To translate quick start to another language, use this [file](https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/module/src/locales/en/quickstart.json) as a base for your translations.
+
+Each language is different, especially when it comes to plurals. Try [this utility](https://jsfiddle.net/6bpxsgd4) sourced from [i18next](https://www.i18next.com/translation-function/plurals#how-to-find-the-correct-plural-suffix) to determine the suffixes for the right plural format.
+
 #### 
