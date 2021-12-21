@@ -27,7 +27,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
   const languages = [
     { name: 'English', shortName: 'en' },
     { name: 'Japanese', shortName: 'ja' },
-    { name: 'Czech', shortName: 'cs' }
+    { name: 'Czech', shortName: 'cs' },
   ];
 
   const [language, setLanguage] = React.useState(currentLanguage);
