@@ -86,7 +86,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   const content = quickStart ? (
     <DrawerPanelContent
       isResizable={isResizable}
-      className="pfext-quick-start-panel-content"
+      className={css('pfext-quick-start-panel-content', 'pfext-quick-start__base')}
       data-testid={`qs-drawer-${camelize(quickStart.spec.displayName)}`}
       data-qs={`qs-step-${getStep()}`}
       data-test="quickstart drawer"

@@ -1,0 +1,28 @@
+// pulls in the patternfly styles, in case the consumer does not have them
+// which can happen when they're not using PatternFly, or a different (older) version
+// that could be incompatible with the version of PatternFly that we're using
+
+@import '~@patternfly/patternfly/sass-utilities/all';
+// gets added globally to :root
+@import "~@patternfly/patternfly/base/variables";
+
+.pfext-quick-start__base {
+    $pf-global--enable-reset: false;
+    // @import '~@patternfly/patternfly/patternfly-no-reset.scss';
+    // @import "patternfly-base.scss";
+    // @import "~@patternfly/patternfly/sass-utilities/all";
+    // @import "~@patternfly/patternfly/base/variables";
+    // @import "~@patternfly/patternfly/base/fonts";
+    @import "~@patternfly/patternfly/base/base";
+    @import "~@patternfly/patternfly/utilities/Accessibility/accessibility.scss";
+    // .pf-screen-reader {
+    //     @include pf-u-screen-reader; // for use with assistive technologies
+    // }
+    // @import "~@patternfly/patternfly/base/themes";
+    // @import "~@patternfly/patternfly/base/icons";
+    @import "~@patternfly/patternfly/components/all";
+    @import "~@patternfly/patternfly/layouts/all";
+
+    // some apps globally set text-align: center
+    text-align: left;
+}

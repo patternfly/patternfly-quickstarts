@@ -5,7 +5,7 @@
 
 module.exports = {
   content: ['dist/quickstarts-full.es.js'],
-  css: ['dist/quickstarts-vendor.css'],
+  css: ['dist/quickstarts-vendor.css', 'dist/patternfly-global.css', 'dist/patternfly-nested.css'],
   fontFace: false,
   keyframes: true,
   variables: false,

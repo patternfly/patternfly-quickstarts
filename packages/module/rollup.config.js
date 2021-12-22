@@ -7,6 +7,10 @@ import typescript from 'rollup-plugin-typescript2';
 import visualizer from 'rollup-plugin-visualizer';
 import packageJson from './package.json';
 import scss from 'rollup-plugin-scss';
+import copy from 'rollup-plugin-copy';
+
+const globImporter = require('node-sass-glob-importer');
+const magicImporter = require('node-sass-magic-importer/dist/toolbox');
 
 const commonPlugins = [
   resolve({
@@ -20,10 +24,24 @@ const commonPlugins = [
   json(),
 ];
 
+const includePaths = ['node_modules/', '../../node_modules/'];
 const commonScssOptions = {
-  includePaths: ['node_modules/', '../../node_modules/'],
-  importer(path) {
-    return { file: path[0] !== '~' ? path : path.slice(1) };
+  includePaths,
+  importer(url, prev) {
+    // return { file: url[0] !== '~' ? globImporter(url, prev) : url.slice(1) };
+    const path = url[0] !== '~' ? url : url.slice(1);
+
+    // globbing support
+    // const importerIncludePaths = magicImporter.buildIncludePaths(includePaths, prev);
+    // const filePaths = magicImporter.resolveGlobUrl(path, importerIncludePaths);
+    // if (filePaths) {
+    //   const contents = filePaths.map((x) => `@import '${x}';`).join(`\n`);
+    //   return { contents };
+    // }
+    // return null;
+    return {
+      file: path
+    };
   },
   sass: require('node-sass'),
 };
@@ -91,6 +109,7 @@ const esBuildWithDeps = {
 };
 
 // This is just for building out the quickstarts-vendor.css stylesheet
+// bundles in react-catalog-view-extension, CodeBlock, and ClipboardCopy styles
 export const cssVendor = {
   input: 'src/styles/vendor-entry.ts',
   output: {
@@ -106,4 +125,56 @@ export const cssVendor = {
   ],
 };
 
-export default [cjsBuild, esBuild, esBuildWithDeps, cssVendor];
+// wraps the quick starts styles within .pfext-quick-start__base
+// quickstarts-standalone.scss is used in conjunction with patternfly-nested.scss,
+// for consumers that have a different major version of PatternFly
+export const quickStartsStyles = {
+  input: 'src/styles/quickstarts-standalone-entry.ts',
+  output: false,
+  plugins: [
+    scss({
+      output: 'dist/quickstarts-standalone.css',
+      includePaths,
+      importer: globImporter(),
+    }),
+  ],
+};
+
+// wraps PatternFly styles within .pfext-quick-start__base
+// useful for consumers that use a different major version of PatternFly
+// which might be incompatible with the PatternFly styles we depend upon
+export const pfStyles = {
+  input: 'src/styles/patternfly-nested-entry.ts',
+  output: false,
+  plugins: [
+    scss({
+      output: 'dist/patternfly-nested.css',
+      ...commonScssOptions,
+    }),
+  ],
+};
+
+// Drawer, Popover, and Modal styles
+export const pfGlobalStyles = {
+  input: 'src/styles/patternfly-global-entry.ts',
+  output: false,
+  plugins: [
+    scss({
+      output: 'dist/patternfly-global.css',
+      ...commonScssOptions,
+    }),
+    // copy({
+    //   targets: [{ src: 'node_modules/@patternfly/patternfly/assets', dest: 'dist' }],
+    // }),
+  ],
+};
+
+export default [
+  cjsBuild,
+  esBuild,
+  esBuildWithDeps,
+  cssVendor,
+  pfStyles,
+  pfGlobalStyles,
+  quickStartsStyles,
+];

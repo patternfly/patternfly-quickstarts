@@ -40,7 +40,7 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
           <Popover
             aria-label={getResource('Prerequisites')}
             headerContent={getResource('Prerequisites')}
-            className="pfext-page-layout__base"
+            className="pfext-page-layout__base pfext-quick-start__base"
             bodyContent={
               <TextList
                 aria-label={getResource('Prerequisites')}

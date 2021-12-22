@@ -25,7 +25,7 @@ const AppToolbar = () => {
         Settings
       </Button>
       <SettingsModal isOpen={isModalOpen} onClose={onModalClose} />
-      <Avatar src={imgAvatar} alt="Avatar image" />
+      {/* <Avatar src={imgAvatar} alt="Avatar image" /> */}
     </PageHeaderTools>
   );
 };

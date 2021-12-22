@@ -45,11 +45,11 @@ module.exports = (_env, argv) => {
           test: /\.css$/,
           use: cssLoaders,
         },
-        // {
-        //   test: /\.css$/,
-        //   include: (stylesheet) => stylesheet.includes('@patternfly/react-styles/css/'),
-        //   use: ['null-loader'],
-        // },
+        {
+          test: /\.css$/,
+          include: (stylesheet) => stylesheet.includes('@patternfly/react-styles/css/'),
+          use: ['null-loader'],
+        },
         {
           test: /\.(png|jpe?g|webp|gif|svg)$/,
           use: {
@@ -68,7 +68,7 @@ module.exports = (_env, argv) => {
             {
               loader: 'file-loader',
               options: {
-                name: '[name].[ext]',
+                name: '[name].[hash:8].[ext]',
                 outputPath: 'fonts/',
               },
             },
