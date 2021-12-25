@@ -40,19 +40,21 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
           <Popover
             aria-label={getResource('Prerequisites')}
             headerContent={getResource('Prerequisites')}
-            className="pfext-page-layout__base pfext-quick-start__base"
+            className="pfext-quick-start__base"
             bodyContent={
-              <TextList
-                aria-label={getResource('Prerequisites')}
-                className="pfext-quick-start-tile-prerequisites-list"
-              >
-                {prereqs.map((prerequisite, index) => (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <TextListItem key={index}>
-                    <QuickStartMarkdownView content={prerequisite} />
-                  </TextListItem>
-                ))}
-              </TextList>
+              <div className="pfext-popover__base">
+                <TextList
+                  aria-label={getResource('Prerequisites')}
+                  className="pfext-quick-start-tile-prerequisites-list"
+                >
+                  {prereqs.map((prerequisite, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <TextListItem key={index}>
+                      <QuickStartMarkdownView content={prerequisite} />
+                    </TextListItem>
+                  ))}
+                </TextList>
+              </div>
             }
           >
             <Button

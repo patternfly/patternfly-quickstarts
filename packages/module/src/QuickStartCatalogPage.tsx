@@ -154,7 +154,7 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
   }
 
   return (
-    <>
+    <div className="pfext-quick-start__base">
       {showTitle && (
         <div className="pfext-page-layout__header">
           <Text component="h1" className="pfext-page-layout__title" data-test="page-title">
@@ -181,6 +181,6 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
           <QuickStartCatalog quickStarts={filteredQuickStarts} />
         )}
       </>
-    </>
+    </div>
   );
 };

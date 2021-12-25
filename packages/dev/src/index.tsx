@@ -4,7 +4,7 @@ import '@patternfly/quickstarts/dist/patternfly-global.css';
 // PF styles nested within .pfext-quick-start__base
 import '@patternfly/quickstarts/dist/patternfly-nested.css';
 // quick starts styles
-import '@patternfly/quickstarts/dist/quickstarts.css';
+import '@patternfly/quickstarts/dist/quickstarts-standalone.css';
 import '@patternfly/transform-adoc/dist/transform-adoc.css';
 
 import React from 'react';

@@ -240,7 +240,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
     <>
       <Drawer isExpanded={!!activeQuickStartID} isInline {...props}>
         {children ? (
-          <DrawerContent panelContent={panelContent} {...fullWidthBodyStyle}>
+          <DrawerContent className="qsExtRoot" panelContent={panelContent} {...fullWidthBodyStyle}>
             <DrawerContentBody className="pfext-quick-start-drawer__body">
               {children}
             </DrawerContentBody>

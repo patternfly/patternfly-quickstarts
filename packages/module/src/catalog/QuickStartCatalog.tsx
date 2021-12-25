@@ -17,7 +17,7 @@ const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts }) =>
   );
 
   return (
-    <div className="pfext-page-layout__content pfext-is-dark pfext-quick-start__base">
+    <div className="pfext-page-layout__content pfext-is-dark">
       <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
         {quickStarts.map((quickStart) => {
           const {

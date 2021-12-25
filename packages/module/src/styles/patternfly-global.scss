@@ -1,10 +1,23 @@
 // pulls in the patternfly drawer styles, in case the consumer does not have them
 // which can happen when they're not using PatternFly, or a different (older) version
 
-@import '~@patternfly/patternfly/sass-utilities/all';
-@import "~@patternfly/patternfly/components/Drawer/drawer.scss";
-@import "~@patternfly/patternfly/components/Popover/popover.scss";
+@import '@patternfly/patternfly/sass-utilities/all';
+@import '@patternfly/patternfly/components/Drawer/drawer.scss';
+@import '@patternfly/patternfly/components/Popover/popover.scss';
 
-@import "~@patternfly/patternfly/components/ModalBox/modal-box.scss";
-@import "~@patternfly/patternfly/components/Backdrop/backdrop.scss";
-@import "~@patternfly/patternfly/layouts/Bullseye/bullseye.scss";
+// for the 'Leave quick start?` modal
+@import '@patternfly/patternfly/components/ModalBox/modal-box.scss';
+@import '@patternfly/patternfly/components/Backdrop/backdrop.scss';
+@import '@patternfly/patternfly/layouts/Bullseye/bullseye.scss';
+
+// for the markdown extension that lets users copy text to clipboard
+@import '@patternfly/patternfly/components/Tooltip/tooltip.scss';
+
+
+// what do we really need to expose globally?
+// class=pf-c-popover pfext-quick-start__base pf-m-right
+// class=pf-c-modal-box pfext-modal pfext-quick-start-drawer__modal pfext-quick-start__base pf-m-sm
+// class=pf-c-backdrop__open
+// class=pf-c-backdrop
+// class=pf-l-bullseye
+// class=pf-c-tooltip pf-m-top pfext-quick-start__base

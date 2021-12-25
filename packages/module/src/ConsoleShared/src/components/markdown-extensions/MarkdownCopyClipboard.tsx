@@ -51,12 +51,14 @@ export const CopyClipboard: React.FC<CopyClipboardProps> = ({
       isVisible
       reference={() => element as HTMLElement}
       content={getResource('Successfully copied to clipboard!')}
+      className="pfext-quick-start__base"
     />
   ) : (
     <Tooltip
       key="before-copy"
       reference={() => element as HTMLElement}
       content={getResource('Copy to clipboard')}
+      className="pfext-quick-start__base"
     />
   );
 };

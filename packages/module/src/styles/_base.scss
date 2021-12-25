@@ -1,6 +1,6 @@
 // Base element styles.
 // Please DO NOT add rules of this type.
-.pfext-quick-start-panel-content {
+.pfext-quick-start-panel-content__body {
   dl {
     margin: 0px; }
 
@@ -30,11 +30,12 @@
 }
 
 // drawer
-.pfext-quick-start-panel-content,
+.pfext-quick-start-panel-content__header,
+.pfext-quick-start-panel-content__body,
 // catalog gallery wrapper
 .pfext-page-layout__content,
 // catalog item prereq popover
-.pfext-page-layout__base {
+.pfext-popover__base {
   --pf-global--FontSize--md: 14px;
   --pf-global--FontSize--sm: 13px;
 

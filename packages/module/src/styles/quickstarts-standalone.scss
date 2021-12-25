@@ -1,4 +1,7 @@
 .pfext-quick-start__base {
-    @import "../catalog/**/*.scss";
-    @import "../controller/**/*.scss";
+    @import './style.scss';
+    @import '../*.scss';
+    @import '../catalog/**/*.scss';
+    @import '../controller/**/*.scss';
+    @import './vendor.scss';
 }

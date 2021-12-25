@@ -10,7 +10,6 @@ import scss from 'rollup-plugin-scss';
 import copy from 'rollup-plugin-copy';
 
 const globImporter = require('node-sass-glob-importer');
-const magicImporter = require('node-sass-magic-importer/dist/toolbox');
 
 const commonPlugins = [
   resolve({
@@ -27,23 +26,8 @@ const commonPlugins = [
 const includePaths = ['node_modules/', '../../node_modules/'];
 const commonScssOptions = {
   includePaths,
-  importer(url, prev) {
-    // return { file: url[0] !== '~' ? globImporter(url, prev) : url.slice(1) };
-    const path = url[0] !== '~' ? url : url.slice(1);
-
-    // globbing support
-    // const importerIncludePaths = magicImporter.buildIncludePaths(includePaths, prev);
-    // const filePaths = magicImporter.resolveGlobUrl(path, importerIncludePaths);
-    // if (filePaths) {
-    //   const contents = filePaths.map((x) => `@import '${x}';`).join(`\n`);
-    //   return { contents };
-    // }
-    // return null;
-    return {
-      file: path
-    };
-  },
   sass: require('node-sass'),
+  importer: globImporter(),
 };
 
 // CommonJS build
@@ -67,7 +51,8 @@ const cjsBuild = {
 
 // ES build
 // Outputs the compiled dist/index.es.js
-// as well as the main dist/quickstarts.css stylesheet
+// as well as the dist/quickstarts-base.css stylesheet
+// (which will be merged with quickstarts-vendor.css into quickstarts.css)
 export const esBuild = {
   input: 'src/index.ts',
   output: {
@@ -134,8 +119,7 @@ export const quickStartsStyles = {
   plugins: [
     scss({
       output: 'dist/quickstarts-standalone.css',
-      includePaths,
-      importer: globImporter(),
+      ...commonScssOptions,
     }),
   ],
 };
@@ -150,11 +134,14 @@ export const pfStyles = {
     scss({
       output: 'dist/patternfly-nested.css',
       ...commonScssOptions,
+      processor: css => {
+        return css.replace(':root', '.pfext-quick-start__base');
+      },
     }),
   ],
 };
 
-// Drawer, Popover, and Modal styles
+// Drawer, Popover, and Modal (including Backdrop and Bullseye) styles
 export const pfGlobalStyles = {
   input: 'src/styles/patternfly-global-entry.ts',
   output: false,
@@ -162,6 +149,12 @@ export const pfGlobalStyles = {
     scss({
       output: 'dist/patternfly-global.css',
       ...commonScssOptions,
+      processor: css => {
+        console.log(css);
+        console.log('\n--------------------------------------\n')
+        return css;
+        // return css.replace('/*date*/', '/* ' + new Date().toJSON() + ' */');
+      },
     }),
     // copy({
     //   targets: [{ src: 'node_modules/@patternfly/patternfly/assets', dest: 'dist' }],
