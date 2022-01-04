@@ -1,20 +1,24 @@
 import * as React from 'react';
 import { Gallery, GalleryItem, Tab, Tabs } from '@patternfly/react-core';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
-import { QuickStart } from '../utils/quick-start-types';
+import { QuickStart, QuickStartLearningPath } from '../utils/quick-start-types';
 import { getQuickStartStatus } from '../utils/quick-start-utils';
 import QuickStartTile from './QuickStartTile';
 
 import './QuickStartCatalog.scss';
+import LearningPathTile from './LearningPathTile';
 
 type QuickStartCatalogProps = {
   quickStarts: QuickStart[];
+  learningPaths?: QuickStartLearningPath[];
 };
 
-const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts }) => {
-  const { activeQuickStartID, allQuickStartStates } = React.useContext<QuickStartContextValues>(
-    QuickStartContext,
-  );
+const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts, learningPaths }) => {
+  const {
+    activeQuickStartID,
+    allQuickStartStates,
+    learningPaths: contextLearningPaths,
+  } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
   const [activeTabKey, setActiveTabKey] = React.useState('lpTab');
   const handleTabSelect = (_event, tabKey) => {
@@ -48,28 +52,24 @@ const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts }) =>
           </Gallery>
         </Tab>
         <Tab title={'Learning Paths'} eventKey={'lpTab'}>
-          <Gallery
-            className="pfext-quick-start-catalog__gallery"
-            hasGutter
-            style={{ paddingTop: '20px' }}
-          >
-            {quickStarts.map((quickStart) => {
-              const {
-                metadata: { name: id },
-              } = quickStart;
+          {contextLearningPaths && (
+            <Gallery
+              className="pfext-quick-start-catalog__gallery"
+              hasGutter
+              style={{ paddingTop: '20px' }}
+            >
+              {contextLearningPaths.map((learningPath: QuickStartLearningPath) => {
+                const { name: id } = learningPath;
 
-              return (
-                <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
-                  <QuickStartTile
-                    quickStart={quickStart}
-                    isActive={id === activeQuickStartID}
-                    status={getQuickStartStatus(allQuickStartStates, id)}
-                    isLearningPath
-                  />
-                </GalleryItem>
-              );
-            })}
-          </Gallery>
+                return (
+                  <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
+                    <LearningPathTile learningPath={learningPath} />
+                  </GalleryItem>
+                );
+              })}
+            </Gallery>
+          )}
+          {!contextLearningPaths && 'no lps'}
         </Tab>
       </Tabs>
     </div>
