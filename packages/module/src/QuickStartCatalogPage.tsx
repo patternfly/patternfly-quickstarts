@@ -61,6 +61,7 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
     allQuickStarts = [],
     setAllQuickStarts,
     allQuickStartStates,
+    learningPaths,
     getResource,
     filter,
     setFilter,
@@ -76,22 +77,22 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
 
   const initialFilteredQuickStarts = showFilter
     ? filterQuickStarts(
-        allQuickStarts,
-        filter.keyword,
-        filter.status.statusFilters,
-        allQuickStartStates,
-      ).sort(sortFncCallback)
+      allQuickStarts,
+      filter.keyword,
+      filter.status.statusFilters,
+      allQuickStartStates,
+    ).sort(sortFncCallback)
     : allQuickStarts;
 
   const [filteredQuickStarts, setFilteredQuickStarts] = React.useState(initialFilteredQuickStarts);
   React.useEffect(() => {
     const filteredQs = showFilter
       ? filterQuickStarts(
-          allQuickStarts,
-          filter.keyword,
-          filter.status.statusFilters,
-          allQuickStartStates,
-        ).sort(sortFncCallback)
+        allQuickStarts,
+        filter.keyword,
+        filter.status.statusFilters,
+        allQuickStartStates,
+      ).sort(sortFncCallback)
       : allQuickStarts;
     if (filteredQs.length !== filteredQuickStarts.length) {
       setFilteredQuickStarts(filteredQs);
@@ -178,7 +179,7 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
         {filteredQuickStarts.length === 0 ? (
           <QuickStartCatalogEmptyState clearFilters={clearFilters} />
         ) : (
-          <QuickStartCatalog quickStarts={filteredQuickStarts} />
+          <QuickStartCatalog quickStarts={filteredQuickStarts} learningPaths={learningPaths} />
         )}
       </>
     </>
