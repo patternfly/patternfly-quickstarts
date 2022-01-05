@@ -204,4 +204,26 @@ You can have inline or block copyable text.
     ```{{copy}}
 ```
 
+## Localization
+We use English as the default language. You can override the default by providing your own key/value pairs to the `QuickStartContainer` or `QuickStartContextProvider` resourceBundle prop.
+
+Example:
+```js
+// load my own resource Czech translations resource bundle using i18next
+const resourceBundle = i18n.getResourceBundle('cs', 'quickstart');
+const resources = {
+  ...resourceBundle,
+  Start: "Let's go!",
+  Continue: 'Resume',
+  Restart: 'Start over',
+};
+return (
+  <QuickStartContainer resourceBundle={resources}>
+  </QuickStartContainer>
+)
+```
+
+Use this [file](https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/module/src/locales/en/quickstart.json) as a base for your translations.
+Each language is different, especially when it comes to plurals. Try [this utility](https://jsfiddle.net/6bpxsgd4) sourced from [i18next](https://www.i18next.com/translation-function/plurals#how-to-find-the-correct-plural-suffix) to determine the suffixes for the right plural format.
+
 #### 
