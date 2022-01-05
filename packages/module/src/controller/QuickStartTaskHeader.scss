@@ -1,5 +1,8 @@
 .pfext-quick-start-task-header {
-  margin-bottom: var(--pf-global--spacer--xs);
+  margin-bottom: var(--pf-global--spacer--sm);
+  display: grid;
+  grid-template-columns: min-content auto;
+  font-size: var(--pf-global--FontSize--md);
   button::before {
     content: none;
   }
@@ -10,14 +13,13 @@
   }
 
   &__subtitle {
-    display: inline-block;
     font-size: var(--pf-global--FontSize--sm);
     color: var(--pf-global--Color--400) !important;
   }
 
   &__tryagain {
     display: block;
-    font-size: var(--pf-global--FontSize--sm);
+    font-size: var(--pf-global--FontSize--md);
     color: var(--pf-global--Color--300) !important;
   }
 
@@ -43,6 +45,14 @@
     &-success,
     &-failed {
       vertical-align: middle !important;
+    }
+
+    &-success {
+      color: var(--pf-global--palette--green-500) !important;
+    }
+
+    &-failed {
+      color: var(--pf-global--danger-color--100) !important;
     }
   }
 }

@@ -7,6 +7,20 @@
     &__shadow {
       box-shadow: var(--pf-global--BoxShadow--sm-bottom);
     }
+    &--blue-white {
+      background-color: var(--pf-global--palette--blue-400);
+      .pfext-quick-start-panel-content__title {
+        color: var(--pf-global--Color--light-100);
+      }
+      .pfext-quick-start-panel-content__duration {
+        color: var(--pf-global--Color--light-200);
+      }
+      .pfext-quick-start-panel-content__close-button {
+        button {
+          color: var(--pf-global--Color--light-100) !important;
+        }
+      }
+    }
   }
   &__body {
     display: flex;
@@ -22,7 +36,7 @@
   }
   &__duration {
     display: inline-block;
-    font-size: 65%;
+    font-size: var(--pf-global--FontSize--md);
     font-weight: 400;
     line-height: 1;
     color: #9c9c9c;

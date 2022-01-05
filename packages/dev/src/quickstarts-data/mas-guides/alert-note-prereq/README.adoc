@@ -1,0 +1,40 @@
+[id="chap-alert-note-prereq"]
+= Alert, note, and prerequisites example quickstart
+
+.Prerequisites
+* You want to see some new features condensed into one example quickstart.
+
+ifdef::qs[]
+[#description]
+Preview newly added features: Alert, note, and prerequisite sections rendered using Patternfly React Components.
+
+[#introduction]
+Welcome to this example quickstart making it easy to see some new features, which will be included in a design rework of the quickstart drawer.
+endif::[]
+
+[id="task-1_{context}",module-type="proc"]
+== Look at the new features
+
+In this Quick Start you will preview some design changes.
+
+.Prerequisites
+* Take a look at the new design changes, including this prerequisites section.
+* Also take a look at the note and alert sections.
+
+.Procedure
+. Note section
++
+NOTE: I am a Note rendered by Patternfly React Components.
++
+
+. Alert section
++
+IMPORTANT: I am an Alert (aka IMPORTANT in asciidoc) rendered by Patternfly React Components.
+
+.Verification
+. Do you see a note section?
+. Do you see an alert section and task-level prerequisites?.
+
+[#conclusion]
+Congratulations! You successfully completed the example quick start, and are now aware of the new features.
+
