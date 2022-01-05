@@ -58,9 +58,10 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   const { activeQuickStartState } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const taskNumber = activeQuickStartState?.taskNumber;
   useScrollTopOnTaskNumberChange(contentRef, taskNumber as number);
-  const nextQuickStarts: QuickStart[] = quickStarts.filter((qs: QuickStart) =>
-    quickStart?.spec.nextQuickStart?.includes(qs.metadata.name),
-  );
+  // Filter nextQuickStart property on current quickStart for quickStarts that are currently available
+  const nextQuickStarts: QuickStart[] = quickStarts.filter((qs: QuickStart) => {
+    return quickStart?.spec.nextQuickStart?.includes(qs.metadata.name);
+  });
 
   const headerClasses = css('pfext-quick-start-panel-content__header', {
     'pfext-quick-start-panel-content__header__shadow':

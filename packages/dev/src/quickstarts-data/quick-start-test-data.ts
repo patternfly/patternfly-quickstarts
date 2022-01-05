@@ -7,6 +7,7 @@ import {
   QuickstartAsciiDocParser,
 } from './mocks/parsers';
 import { QuickStart } from '@patternfly/quickstarts';
+import { QuickStartLearningPath } from '@patternfly/quickstarts';
 
 import { explorePipelinesQuickStart } from './mocks/json/explore-pipeline-quickstart';
 import { exploreServerlessQuickStart } from './mocks/json/explore-serverless-quickstart';
@@ -25,6 +26,7 @@ import copyExecuteSnippet from './mocks/yamls/copy-execute-snippets.yaml';
 // import addHealthchecksQuickstartADoc from "raw-loader!./mocks/asciidoc/add-healthchecks-quickstart.adoc";
 // import template from "raw-loader!./mocks/asciidoc/TEMPLATE_PROCEDURE.adoc";
 import sampleA from 'raw-loader!./mocks/asciidoc/business-central-editing-data-sources-proc.adoc';
+
 // import sampleB from "raw-loader!./mocks/asciidoc/case-management-dynamic-user-task-API-proc.adoc";
 // import sampleC from "raw-loader!./mocks/asciidoc/template-deploy-replicas-auth-proc.adoc";
 
@@ -33,6 +35,8 @@ import sampleA from 'raw-loader!./mocks/asciidoc/business-central-editing-data-s
 // import { ProcQuickStartParser } from './mas-guides/procedure-parser';
 // import masGettingStarted from "./mas-guides/getting-started/output/getting-started.quickstart.json";
 // import masKafkaBinScripts from "./mas-guides/kafka-bin-scripts/output/kafka-bin-scripts.quickstart.json";
+
+import kafkaLearningPath from './mocks/learning-paths/kafka-learning-path.yaml';
 
 export const allAsciiDocImports = {
   //   'template': {
@@ -105,5 +109,7 @@ export const allQuickStarts: QuickStart[] = [
   //   BOOTSTRAP_SERVER_HOST: "foo.kafka.devshift.net:443"
   // }),
   // ProcQuickStartParser(masGettingStarted),
-  // ProcQuickStartParser(masKafkaBinScripts)
+  // ProcQuickStartParser(masKafkaBinScripts),
 ];
+
+export const learningPaths: QuickStartLearningPath[] = [kafkaLearningPath];

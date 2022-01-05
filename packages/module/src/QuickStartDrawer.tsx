@@ -10,7 +10,12 @@ import {
   useValuesForQuickStartContext,
 } from './utils/quick-start-context';
 import { QUICKSTART_ID_FILTER_KEY } from './utils/const';
-import { QuickStart, QuickStartStatus, AllQuickStartStates } from './utils/quick-start-types';
+import {
+  QuickStart,
+  QuickStartStatus,
+  AllQuickStartStates,
+  QuickStartLearningPath,
+} from './utils/quick-start-types';
 import { getQuickStartByName } from './utils/quick-start-utils';
 
 export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement> {
@@ -57,6 +62,7 @@ export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement
   };
   /* additional quick start context props */
   contextProps?: QuickStartContextValues;
+  learningPaths?: QuickStartLearningPath[];
 }
 
 export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
@@ -78,6 +84,7 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
   markdown,
   contextProps,
   alwaysShowTaskReview = false,
+  learningPaths = [],
   ...props
 }) => {
   const valuesForQuickstartContext: QuickStartContextValues = useValuesForQuickStartContext({
@@ -100,6 +107,7 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
     useQueryParams,
     markdown,
     alwaysShowTaskReview,
+    learningPaths,
     ...contextProps,
   });
 

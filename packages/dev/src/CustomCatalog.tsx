@@ -25,7 +25,20 @@ import {
   ToolbarContent,
 } from '@patternfly/react-core';
 
-export const CustomCatalog: React.FC = () => {
+type CustomCatalogProps = {
+  // Pass a custom filter function to only show certain quickstarts regardless of search criteria
+  customFilter?: (quickStart: QuickStart) => boolean;
+  // Pass a custom sortFn to show quickstarts in a certain order
+  customSort?: (quickStart1: QuickStart, quickStart2: QuickStart) => number;
+  // Custom header title
+  headerTitle?: string;
+};
+
+export const CustomCatalog: React.FC<CustomCatalogProps> = ({
+  customFilter,
+  customSort,
+  headerTitle = 'Resources',
+}) => {
   const {
     activeQuickStartID,
     allQuickStartStates,
@@ -34,8 +47,15 @@ export const CustomCatalog: React.FC = () => {
     setFilter,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
-  const sortFnc = (q1: QuickStart, q2: QuickStart) =>
-    q1.spec.displayName.localeCompare(q2.spec.displayName);
+  const sortFnc = React.useCallback(
+    (q1: QuickStart, q2: QuickStart) => {
+      if (customSort) {
+        return customSort(q1, q2);
+      }
+      return q1.spec.displayName.localeCompare(q2.spec.displayName);
+    },
+    [customSort],
+  );
 
   const [filteredQuickStarts, setFilteredQuickStarts] = React.useState<QuickStart[]>(
     filterQuickStarts(
@@ -54,9 +74,21 @@ export const CustomCatalog: React.FC = () => {
         filter.keyword,
         filter.status.statusFilters,
         allQuickStartStates,
-      ).sort(sortFnc),
+      )
+        .sort(sortFnc)
+        .filter((quickStart) => {
+          return customFilter ? customFilter(quickStart) : true;
+        }),
     );
-  }, [allQuickStartStates, allQuickStarts, filter.keyword, filter.status.statusFilters]);
+  }, [
+    allQuickStartStates,
+    allQuickStarts,
+    customFilter,
+    filter.keyword,
+    filter.status.statusFilters,
+    setFilter,
+    sortFnc,
+  ]);
 
   const onSearchInputChange = (searchValue: string) => {
     const result = filterQuickStarts(
@@ -160,7 +192,7 @@ export const CustomCatalog: React.FC = () => {
 
   return (
     <>
-      <QuickStartCatalogHeader title="Resources" />
+      <QuickStartCatalogHeader title={headerTitle} />
       <Divider component="div" />
       <QuickStartCatalogToolbar>
         <ToolbarContent>

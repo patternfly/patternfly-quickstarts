@@ -4,7 +4,9 @@ import ArrowRightIcon from '@patternfly/react-icons/dist/js/icons/arrow-right-ic
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStart, QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
+import LearningPath from './QuickStartLearningPath';
 import TaskHeaderList from './QuickStartTaskHeaderList';
+import QuickStartRating from './QuickStartRating';
 
 type QuickStartConclusionProps = {
   tasks: QuickStartTask[];
@@ -24,7 +26,9 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
   onTaskSelect,
 }) => {
   const hasFailedTask = allTaskStatuses.includes(QuickStartTaskStatus.FAILED);
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource, currentLearningPath } = React.useContext<QuickStartContextValues>(
+    QuickStartContext,
+  );
   return (
     <>
       <TaskHeaderList tasks={tasks} allTaskStatuses={allTaskStatuses} onTaskSelect={onTaskSelect} />
@@ -38,6 +42,7 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
         }
       />
       {!hasFailedTask &&
+        !currentLearningPath &&
         nextQuickStarts &&
         nextQuickStarts.length > 0 &&
         nextQuickStarts.map((nextQuickStart, index) => (
@@ -57,6 +62,12 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
             />
           </Button>
         ))}
+      <QuickStartRating />
+      {currentLearningPath ? (
+        <LearningPath learningPath={currentLearningPath} />
+      ) : (
+        getResource('No further quickstarts in this path')
+      )}
     </>
   );
 };

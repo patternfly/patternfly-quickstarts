@@ -1,0 +1,6 @@
+name: kafka-learning-path
+displayName: Kafka Learning Path
+quickStarts:
+  - 'kafka-getting-started'
+  - 'kafkacat'
+  - 'kafka-bin-scripts'

@@ -14,6 +14,7 @@ import {
   QuickStartState,
   QuickStartStatus,
   QuickStartTaskStatus,
+  QuickStartLearningPath,
 } from './quick-start-types';
 import { getQuickStartStatusCount, getTaskStatusKey } from './quick-start-utils';
 
@@ -54,7 +55,7 @@ export type QuickStartContextValues = {
   previousStep?: () => void;
   setQuickStartTaskNumber?: (quickStartId: string, taskNumber: number) => void;
   setQuickStartTaskStatus?: (taskStatus: QuickStartTaskStatus) => void;
-  getQuickStartForId?: (id: string) => QuickStartState;
+  getQuickStartStateById?: (id: string) => QuickStartState;
   footer?: FooterProps;
   useQueryParams?: boolean;
   markdown?: {
@@ -78,6 +79,9 @@ export type QuickStartContextValues = {
   setLoading?: any;
   alwaysShowTaskReview?: boolean;
   setAlwaysShowTaskReview?: any;
+  learningPaths?: QuickStartLearningPath[];
+  currentLearningPath?: QuickStartLearningPath;
+  setCurrentLearningPath?: React.Dispatch<React.SetStateAction<QuickStartLearningPath>>;
 };
 
 export const QuickStartContextDefaults = {
@@ -102,6 +106,9 @@ export const QuickStartContextDefaults = {
   markdown: null,
   loading: false,
   alwaysShowTaskReview: false,
+  learningPaths: [],
+  currentLearningPath: null,
+  setCurrentLearningPath: () => {},
 };
 export const QuickStartContext = createContext<QuickStartContextValues>(QuickStartContextDefaults);
 
@@ -160,6 +167,21 @@ export const useValuesForQuickStartContext = (
   const [loading, setLoading] = React.useState(combinedValue.loading);
   const [alwaysShowTaskReview, setAlwaysShowTaskReview] = React.useState(
     combinedValue.alwaysShowTaskReview,
+  );
+  const learningPaths = combinedValue.learningPaths;
+  const findLearningPath = useCallback(
+    (id: string) => {
+      return learningPaths.find((learningPath) => {
+        const { quickStarts: learningPathQuickStarts } = learningPath;
+        if (learningPathQuickStarts.includes(id)) {
+          return true;
+        }
+      });
+    },
+    [learningPaths],
+  );
+  const [currentLearningPath, setCurrentLearningPath] = React.useState(
+    findLearningPath(activeQuickStartID),
   );
 
   const initialSearchParams = new URLSearchParams(window.location.search);
@@ -231,8 +253,9 @@ export const useValuesForQuickStartContext = (
           ? qs
           : { ...qs, [quickStartId]: getDefaultQuickStartState(totalTasks) },
       );
+      setCurrentLearningPath(findLearningPath(quickStartId));
     },
-    [setActiveQuickStartID, setAllQuickStartStates, useQueryParams],
+    [findLearningPath, setActiveQuickStartID, setAllQuickStartStates, useQueryParams],
   );
 
   const startQuickStart = useCallback(
@@ -417,9 +440,12 @@ export const useValuesForQuickStartContext = (
 
   const activeQuickStartState = allQuickStartStates?.[activeQuickStartID] ?? {};
 
-  const getQuickStartForId = useCallback((id: string) => allQuickStartStates[id], [
-    allQuickStartStates,
-  ]);
+  const getQuickStartStateById = useCallback(
+    (id: string) => {
+      return allQuickStartStates[id] ?? { status: QuickStartStatus.NOT_STARTED };
+    },
+    [allQuickStartStates],
+  );
 
   return {
     allQuickStarts: quickStarts,
@@ -436,7 +462,7 @@ export const useValuesForQuickStartContext = (
     previousStep: value.previousStep || previousStep,
     setQuickStartTaskNumber, // revisit if this should be in public context API
     setQuickStartTaskStatus, // revisit if this should be in public context API
-    getQuickStartForId,
+    getQuickStartStateById,
     footer,
     useQueryParams,
     markdown,
@@ -458,6 +484,9 @@ export const useValuesForQuickStartContext = (
     setLoading,
     alwaysShowTaskReview,
     setAlwaysShowTaskReview,
+    learningPaths,
+    currentLearningPath,
+    setCurrentLearningPath,
   };
 };
 
