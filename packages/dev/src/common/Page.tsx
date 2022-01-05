@@ -2,7 +2,6 @@ import React from 'react';
 import {
   PageHeaderTools,
   Button,
-  Avatar,
   PageHeader,
   Brand,
   Nav,
@@ -13,7 +12,6 @@ import {
 import { Link } from 'react-router-dom';
 import Demos from '../Demos';
 import { SettingsModal } from '../SettingsModal';
-import imgAvatar from '../assets/images/imgAvatar.svg';
 import imgBrand from '../assets/images/imgBrand.svg';
 
 const AppToolbar = () => {
@@ -25,7 +23,6 @@ const AppToolbar = () => {
         Settings
       </Button>
       <SettingsModal isOpen={isModalOpen} onClose={onModalClose} />
-      {/* <Avatar src={imgAvatar} alt="Avatar image" /> */}
     </PageHeaderTools>
   );
 };

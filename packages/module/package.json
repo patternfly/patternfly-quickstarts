@@ -20,7 +20,7 @@
   "scripts": {
     "clean": "rm -rf dist",
     "prebuild": "yarn clean",
-    "build": "rollup -c && yarn purge-css && yarn combine && yarn min-css",
+    "build": "rollup -c && yarn purge-css && yarn combine && yarn min-css && yarn min-css-standalone",
     "watch": "rollup -w --config rollup-quick.config.js",
     "quick": "rollup --config rollup-quick.config.js",
     "combine": "node ./combineCss.js",
@@ -29,9 +29,10 @@
     "type-check": "tsc --noEmit",
     "ci-checks": "yarn type-check && yarn lint && yarn test",
     "build:ts": "yarn clean && tsc --p tsconfig.json",
-    "post-css": "yarn purge-css && yarn min-css",
+    "post-css": "yarn purge-css && yarn min-css && yarn min-css-standalone",
     "purge-css": "purgecss --config ./purgecss.config.js",
-    "min-css": "cleancss dist/quickstarts.css -o dist/quickstarts.min.css"
+    "min-css": "cleancss dist/quickstarts.css -o dist/quickstarts.min.css",
+    "min-css-standalone": "cleancss -o dist/quickstarts-standalone.min.css dist/patternfly-nested.css dist/quickstarts-standalone.css"
   },
   "peerDependencies": {
     "@patternfly/react-core": ">=4.115.2",

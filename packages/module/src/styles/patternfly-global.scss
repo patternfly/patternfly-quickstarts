@@ -1,7 +1,21 @@
 // pulls in the patternfly drawer styles, in case the consumer does not have them
 // which can happen when they're not using PatternFly, or a different (older) version
+// some global styles that quickstarts uses (Drawer, Popover, Modal, Backdrop, Bullseye)
+
+// TODO: Investigate if we can remove and/or nest these within patternfly-nested.css
+// what do we really need to expose globally?
+// here are the classes that exist outside the scope of .pfext-quick-start__base:
+// class="pf-c-popover pfext-quick-start__base pf-m-right"
+// class="pf-c-modal-box pfext-modal pfext-quick-start-drawer__modal pfext-quick-start__base pf-m-sm"
+// class="pf-c-backdrop__open"
+// class="pf-c-backdrop"
+// class="pf-l-bullseye"
+// class="pf-c-tooltip pf-m-top pfext-quick-start__base"
 
 @import '@patternfly/patternfly/sass-utilities/all';
+// gets added globally to :root
+@import '@patternfly/patternfly/base/variables';
+
 @import '@patternfly/patternfly/components/Drawer/drawer.scss';
 @import '@patternfly/patternfly/components/Popover/popover.scss';
 
@@ -12,12 +26,3 @@
 
 // for the markdown extension that lets users copy text to clipboard
 @import '@patternfly/patternfly/components/Tooltip/tooltip.scss';
-
-
-// what do we really need to expose globally?
-// class=pf-c-popover pfext-quick-start__base pf-m-right
-// class=pf-c-modal-box pfext-modal pfext-quick-start-drawer__modal pfext-quick-start__base pf-m-sm
-// class=pf-c-backdrop__open
-// class=pf-c-backdrop
-// class=pf-l-bullseye
-// class=pf-c-tooltip pf-m-top pfext-quick-start__base

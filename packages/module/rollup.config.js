@@ -7,7 +7,7 @@ import typescript from 'rollup-plugin-typescript2';
 import visualizer from 'rollup-plugin-visualizer';
 import packageJson from './package.json';
 import scss from 'rollup-plugin-scss';
-import copy from 'rollup-plugin-copy';
+// import copy from 'rollup-plugin-copy';
 
 const globImporter = require('node-sass-glob-importer');
 
@@ -134,9 +134,9 @@ export const pfStyles = {
     scss({
       output: 'dist/patternfly-nested.css',
       ...commonScssOptions,
-      processor: css => {
-        return css.replace(':root', '.pfext-quick-start__base');
-      },
+      // processor: css => {
+      //   return css.replace(':root', '.pfext-quick-start__base');
+      // },
     }),
   ],
 };
@@ -149,12 +149,6 @@ export const pfGlobalStyles = {
     scss({
       output: 'dist/patternfly-global.css',
       ...commonScssOptions,
-      processor: css => {
-        console.log(css);
-        console.log('\n--------------------------------------\n')
-        return css;
-        // return css.replace('/*date*/', '/* ' + new Date().toJSON() + ' */');
-      },
     }),
     // copy({
     //   targets: [{ src: 'node_modules/@patternfly/patternfly/assets', dest: 'dist' }],

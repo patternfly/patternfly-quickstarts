@@ -45,11 +45,12 @@ module.exports = (_env, argv) => {
           test: /\.css$/,
           use: cssLoaders,
         },
-        {
-          test: /\.css$/,
-          include: (stylesheet) => stylesheet.includes('@patternfly/react-styles/css/'),
-          use: ['null-loader'],
-        },
+        // here for testing with quickstarts-standalone.css (see src/index.tsx)
+        // {
+        //   test: /\.css$/,
+        //   include: (stylesheet) => stylesheet.includes('@patternfly/react-styles/css/'),
+        //   use: ['null-loader'],
+        // },
         {
           test: /\.(png|jpe?g|webp|gif|svg)$/,
           use: {
