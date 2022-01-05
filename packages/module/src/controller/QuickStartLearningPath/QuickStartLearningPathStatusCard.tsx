@@ -69,7 +69,7 @@ const QuickStartLearningPathStatusCard: React.FC<QuickStartLearningPathStatusCar
       isHoverable={!isActiveQuickStart}
       isSelectable={!isActiveQuickStart}
     >
-      <CardBody className="pf-u-font-size-md">
+      <CardBody className="pf-u-font-size-md pf-u-p-md">
         <Stack>
           {isActiveQuickStart ? (
             <StackItem className="pf-u-color-200">{getResource('Current course')}</StackItem>

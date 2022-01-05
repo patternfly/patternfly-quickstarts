@@ -57,7 +57,7 @@ const QuickStartLearningPathComponent: React.FC<QuickStartLearningPathProps> = (
   ).Complete;
 
   const header = (
-    <Split className="pfext-quick-start-learning-path__header-content">
+    <Split className="pfext-quick-start-learning-path__header-content pf-u-pt-md">
       <SplitItem isFilled className="pf-u-font-weight-bold">
         {learningPath.displayName || getResource('Learning Path')}
       </SplitItem>
