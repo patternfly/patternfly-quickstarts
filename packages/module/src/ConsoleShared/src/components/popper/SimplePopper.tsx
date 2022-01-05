@@ -76,7 +76,11 @@ const SimplePopper: React.FC = ({ children }) => {
 
   return isOpen ? (
     <Portal>
-      <div ref={nodeRefCallback} style={{ zIndex: 9999, position: 'absolute', top: 0, left: 0 }}>
+      <div
+        ref={nodeRefCallback}
+        style={{ zIndex: 9999, position: 'absolute', top: 0, left: 0 }}
+        className="pfext-quick-start__base"
+      >
         {children}
       </div>
     </Portal>

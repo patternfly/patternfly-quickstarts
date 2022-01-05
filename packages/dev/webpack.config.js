@@ -45,6 +45,7 @@ module.exports = (_env, argv) => {
           test: /\.css$/,
           use: cssLoaders,
         },
+        // here for testing with quickstarts-standalone.css (see src/index.tsx)
         // {
         //   test: /\.css$/,
         //   include: (stylesheet) => stylesheet.includes('@patternfly/react-styles/css/'),
@@ -68,7 +69,7 @@ module.exports = (_env, argv) => {
             {
               loader: 'file-loader',
               options: {
-                name: '[name].[ext]',
+                name: '[name].[hash:8].[ext]',
                 outputPath: 'fonts/',
               },
             },

@@ -7,14 +7,14 @@ Before we had a dependency on bootstrap-sass and pulled in several of their styl
 ```
 .pfext-markdown-view {
   @import './ConsoleInternal/style/vars';
-  @import '~patternfly/dist/sass/patternfly/variables';
-  @import '~bootstrap-sass/assets/stylesheets/bootstrap/variables';
-  @import '~bootstrap-sass/assets/stylesheets/bootstrap/mixins';
-  @import '~patternfly/dist/sass/patternfly/bootstrap-mixin-overrides';
+  @import 'patternfly/dist/sass/patternfly/variables';
+  @import 'bootstrap-sass/assets/stylesheets/bootstrap/variables';
+  @import 'bootstrap-sass/assets/stylesheets/bootstrap/mixins';
+  @import 'patternfly/dist/sass/patternfly/bootstrap-mixin-overrides';
 
-  @import '~bootstrap-sass/assets/stylesheets/bootstrap/type';
-  @import '~bootstrap-sass/assets/stylesheets/bootstrap/code';
-  @import '~bootstrap-sass/assets/stylesheets/bootstrap/tables';
+  @import 'bootstrap-sass/assets/stylesheets/bootstrap/type';
+  @import 'bootstrap-sass/assets/stylesheets/bootstrap/code';
+  @import 'bootstrap-sass/assets/stylesheets/bootstrap/tables';
 }
 ```
 

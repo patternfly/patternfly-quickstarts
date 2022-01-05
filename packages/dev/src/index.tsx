@@ -1,6 +1,15 @@
+// fonts, variables
 import '@patternfly/react-core/dist/styles/base.css';
-import '@patternfly/quickstarts/dist/quickstarts.css';
 import '@patternfly/transform-adoc/dist/transform-adoc.css';
+
+import '@patternfly/quickstarts/dist/quickstarts.css';
+
+// the following stylesheets are here for testing quickstarts-standalone
+
+// global styles for Drawer, Popover, Modal (including Backdrop and Bullseye)
+// import '@patternfly/quickstarts/dist/patternfly-global.css';
+// PF and quickstarts styles nested within .pfext-quick-start__base
+// import '@patternfly/quickstarts/dist/quickstarts-standalone.min.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

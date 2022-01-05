@@ -27,6 +27,23 @@ import '@patternfly/react-core/dist/styles/base.css';
 import '@patternfly/quickstarts/dist/quickstarts.min.css';
 ```
 
+### Stylesheets if you use an older version of PatternFly
+If you use an older version of @patternfly/react-core (older than "4.115.2"), and you can't upgrade yet, you can pull in the necessary PatternFly styles that @patternfly/quickstarts depends upon.
+
+Ideally @patternfly/quickstarts will use the consumer provided PatternFly styles, only use these stylesheets if really needed.
+
+`quickstarts-standalone.min.css` nests the css classes within a **.pfext-quick-start__base** parent, so that they have higher specificity. `patternfly-global.css` includes component styles that we cannot nest with more specificiy (for example Drawer since it can include consumer components that depend on an older PF version).
+
+> Note: Only use these stylesheets if necessary!
+```js
+// import base from PatternFly to get the font
+import '@patternfly/react-core/dist/styles/base.css';
+// some global styles and variables that quickstarts uses (Drawer, Popover, Modal, Backdrop, Bullseye)
+import '@patternfly/quickstarts/dist/patternfly-global.css';
+// PF and quickstarts styles nested within .pfext-quick-start__base
+import '@patternfly/quickstarts/dist/quickstarts-standalone.min.css';
+```
+
 ## Usage example
 
 Note: You can also view this example on [codesandbox](https://codesandbox.io/s/patternfly-quickstarts-finished-cnv53)!

@@ -1,0 +1,18 @@
+// pulls in the patternfly styles, in case the consumer does not have them
+// which can happen when they're not using PatternFly, or a different (older) version
+// that could be incompatible with the version of PatternFly that we're using
+
+@import '@patternfly/patternfly/sass-utilities/all';
+
+.pfext-quick-start__base {
+    $pf-global--enable-reset: false;
+    @import '@patternfly/patternfly/base/common';
+    @import '@patternfly/patternfly/utilities/Accessibility/accessibility.scss';
+
+    // it's okay that we include everything since we'll purge the unused styles
+    @import '@patternfly/patternfly/components/all';
+    @import '@patternfly/patternfly/layouts/all';
+
+    // some apps globally set text-align: center
+    text-align: left;
+}
