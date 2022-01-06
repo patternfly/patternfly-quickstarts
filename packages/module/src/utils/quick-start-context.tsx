@@ -56,6 +56,7 @@ export type QuickStartContextValues = {
   setQuickStartTaskStatus?: (taskStatus: QuickStartTaskStatus) => void;
   getQuickStartForId?: (id: string) => QuickStartState;
   footer?: FooterProps;
+  useLegacyHeaderColors?: boolean;
   useQueryParams?: boolean;
   markdown?: {
     extensions?: any[];
@@ -99,6 +100,7 @@ export const QuickStartContextDefaults = {
   },
   setFilter: () => {},
   footer: null,
+  useLegacyHeaderColors: false,
   markdown: null,
   loading: false,
   alwaysShowTaskReview: false,
@@ -131,6 +133,7 @@ export const useValuesForQuickStartContext = (
     allQuickStartStates,
     allQuickStarts = [],
     footer,
+    useLegacyHeaderColors,
     markdown,
   } = combinedValue;
   const [quickStarts, setQuickStarts] = React.useState(combinedValue.allQuickStarts || []);
@@ -438,6 +441,7 @@ export const useValuesForQuickStartContext = (
     setQuickStartTaskStatus, // revisit if this should be in public context API
     getQuickStartForId,
     footer,
+    useLegacyHeaderColors,
     useQueryParams,
     markdown,
     resourceBundle,
