@@ -34,6 +34,8 @@ import sampleA from 'raw-loader!./mocks/asciidoc/business-central-editing-data-s
 // import masGettingStarted from "./mas-guides/getting-started/output/getting-started.quickstart.json";
 // import masKafkaBinScripts from "./mas-guides/kafka-bin-scripts/output/kafka-bin-scripts.quickstart.json";
 
+import deHealthChecks from './mocks/yamls/de/add-healthchecks-quickstart.yaml';
+
 export const allAsciiDocImports = {
   //   'template': {
   //     file: template,
@@ -106,4 +108,8 @@ export const allQuickStarts: QuickStart[] = [
   // }),
   // ProcQuickStartParser(masGettingStarted),
   // ProcQuickStartParser(masKafkaBinScripts)
+];
+
+export const deQuickStarts: QuickStart[] = [
+  deHealthChecks
 ];

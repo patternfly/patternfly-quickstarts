@@ -11,7 +11,7 @@ import {
   QUICKSTART_ID_FILTER_KEY,
 } from '@patternfly/quickstarts';
 import { loadJSONQuickStarts } from './quickstarts-data/mas-guides/quickstartLoader';
-import { allQuickStarts as yamlQuickStarts } from './quickstarts-data/quick-start-test-data';
+import { allQuickStarts as yamlQuickStarts, deQuickStarts } from './quickstarts-data/quick-start-test-data';
 import React from 'react';
 import i18n from './i18n/i18n';
 import { AppHeader, AppSidebar } from './common/Page';
@@ -48,6 +48,15 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     }, 1500);
   }, []);
 
+  const onLanguageChange = (lng: string) => {
+    if (lng !== 'en') {
+      console.log(deQuickStarts);
+      const updatedQuickStarts = quickStarts.filter(qs => qs.metadata.name !== deQuickStarts[0].metadata.name).concat(deQuickStarts);
+      debugger;
+      setQuickStarts(updatedQuickStarts);
+    }
+  };
+
   const withQueryParams = true;
 
   const drawerProps: QuickStartContainerProps = {
@@ -82,6 +91,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     <React.Suspense fallback={<LoadingBox />}>
       <QuickStartContainer {...drawerProps}>
         <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>
+          <button onClick={() => onLanguageChange('de')}>de</button>
           <Button onClick={() => toggleQuickStart('copy-execute-snippets')}>
             Toggle quick start through prop
           </Button>
