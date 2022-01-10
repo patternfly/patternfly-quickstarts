@@ -9,7 +9,7 @@ import {
   useLocalStorage,
 } from '@patternfly/quickstarts';
 import { loadJSONQuickStarts } from './quickstarts-data/mas-guides/quickstartLoader';
-import { allQuickStarts as yamlQuickStarts, deQuickStarts } from './quickstarts-data/quick-start-test-data';
+import { allQuickStarts as yamlQuickStarts } from './quickstarts-data/quick-start-test-data';
 import React from 'react';
 import i18n from './i18n/i18n';
 import { AppHeader, AppSidebar } from './common/Page';
@@ -45,13 +45,6 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   const language = localStorage.getItem('bridge/language') || 'en';
   const resourceBundle = i18n.getResourceBundle(language, 'quickstart');
 
-  const onLanguageChange = (lng: string) => {
-    if (lng !== 'en') {
-      console.log(deQuickStarts);
-      setAllQuickStarts(allQuickStarts.concat(deQuickStarts));
-    }
-  };
-
   const valuesForQuickstartContext: QuickStartContextValues = {
     allQuickStarts,
     activeQuickStartID,
@@ -76,7 +69,6 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
         <QuickStartContextProvider value={valuesForQuickstartContext}>
           <QuickStartDrawer>
             <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>
-              <button onClick={() => onLanguageChange('de')}>de</button>
               {children}
             </Page>
           </QuickStartDrawer>

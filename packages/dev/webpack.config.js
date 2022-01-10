@@ -27,7 +27,7 @@ module.exports = (_env, argv) => {
     devServer: {
       hot: true,
       historyApiFallback: true,
-      port: 3001,
+      port: 3000,
       clientLogLevel: 'info',
       stats: 'minimal',
     },
