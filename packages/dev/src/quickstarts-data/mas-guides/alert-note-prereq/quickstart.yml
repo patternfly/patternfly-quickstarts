@@ -1,0 +1,20 @@
+apiVersion: console.openshift.io/v1
+kind: QuickStarts
+metadata:
+  name: mas-alert-note-prereq
+spec:
+  version: 0.1
+  displayName: !snippet/title README.adoc#chap-alert-note-prereq
+  durationMinutes: 2
+  icon: ''
+  description: !snippet README.adoc#description
+  prerequisites:
+    - Get ready to see a note in the task 1 steps
+    - Get ready to see an alert in the task 1 steps
+    - Get ready to see prerequisites displayed in task 1
+  introduction: !snippet README.adoc#introduction
+  tasks:
+    - !snippet/proc README.adoc#task-1
+  conclusion: !snippet README.adoc#conclusion
+  nextQuickStart:
+    - 'kafka-bin-scripts'

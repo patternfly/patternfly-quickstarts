@@ -13,5 +13,78 @@
         margin-bottom: var(--pf-global--spacer--xs);
       }
     }
+    .pfext-quick-start-task__content {
+      margin-left: var(--pf-global--spacer--lg);
+      margin-bottom: var(--pf-global--spacer--md);
+    }
+    // Custom styles on PF React List rendered in custom react renderer
+    .task-pflist {
+      &-title {
+        font-size: 14px !important;
+        margin-bottom: 6px;
+      }
+      &-subtitle {
+        color: var(--pf-global--Color--200);
+        font-size: 16px;
+      }
+      &-list {
+        font-size: 16px;
+        &--prereq {
+          padding-left: var(--pf-global--spacer--lg);
+          li + li {
+            margin-top: 4px;
+          }
+        }
+        &--proc {
+          padding-left: 10px;
+          li + li {
+            margin-top: 16px;
+          }
+        }
+        &__item {
+          &--prereq {
+            &::marker {
+              font-size: 0.8rem;
+            }
+            .task-pflist-list__item__content {
+              position: relative;
+              left: 2px;
+            }
+          }
+          &--proc {
+            font-size: 14px;
+            .task-pflist-list__item__content {
+              position: relative;
+              left: 4px;
+            }
+          }
+          &__content {
+            .pf-c-alert {
+              // add margins to match design
+              margin: var(--pf-global--spacer--md) 0;
+            }
+            .pf-c-alert__title {
+              // remove margins from markdown css
+              margin-top: 0;
+              margin-bottom: 0;
+              // lift PF style specificity to override markdown css
+              font-weight: var(--pf-c-alert__title--FontWeight);
+              font-family: inherit;
+              line-height: inherit;
+              color: var(--pf-c-alert__title--Color);
+              word-break: break-word;
+            }
+            .task-pflist-list__item__content__note {
+              background-color: var(--pf-global--palette--blue-50);
+              border-color: var(--pf-global--active-color--200);
+              margin: var(--pf-global--spacer--md) 0;
+              &__body {
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

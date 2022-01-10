@@ -36,6 +36,8 @@ export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement
   onCloseNotInProgress?: any;
   /* true to show footer buttons in the catalog tiles (default true) */
   showCardFooters?: boolean;
+  /* true to use legacy drawer header variant colors */
+  useLegacyHeaderColors?: boolean;
   /* text resources object */
   resourceBundle?: any;
   /* language of the current resource bundle */
@@ -72,6 +74,7 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
   onCloseNotInProgress,
   resourceBundle,
   showCardFooters,
+  useLegacyHeaderColors,
   language,
   loading = false,
   useQueryParams = true,
@@ -89,6 +92,7 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
     footer: {
       show: showCardFooters,
     },
+    useLegacyHeaderColors,
     language,
     resourceBundle: {
       ...resourceBundle,
@@ -158,6 +162,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
     activeQuickStartState,
     allQuickStartStates,
     setAllQuickStartStates,
+    useLegacyHeaderColors,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const combinedQuickStarts = allQuickStarts.concat(quickStarts);
 
@@ -232,6 +237,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
       activeQuickStartID={activeQuickStartID}
       appendTo={appendTo}
       isResizable={!fullWidth}
+      headerVariant={useLegacyHeaderColors ? '' : 'blue-white'}
       {...fullWidthPanelStyle}
     />
   );

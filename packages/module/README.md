@@ -110,7 +110,10 @@ const App = () => {
     allQuickStartStates,
     setActiveQuickStartID,
     setAllQuickStartStates,
+    // Set to true to opt-out of default hidden card footers
     showCardFooters: false,
+    // Set to true to opt-out of default drawer header colors of blue with white text
+    useLegacyHeaderColors: false,
     loading,
     useQueryParams: withQueryParams,
   };
@@ -156,6 +159,10 @@ const SomeNestedComponent = () => {
 
 export default App;
 ```
+
+## Design update, option to opt-out of new drawer header coloring
+
+See above usage of `useLegacyHeaderColors` boolean to opt-out of update. Should only be used if new color scheme clashes with the usage context.
 
 ## Quick starts format
 

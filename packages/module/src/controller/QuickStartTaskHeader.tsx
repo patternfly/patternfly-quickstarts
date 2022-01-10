@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Flex, FlexItem, Title, WizardNavItem } from '@patternfly/react-core';
+import { Title, WizardNavItem } from '@patternfly/react-core';
 import CheckCircleIcon from '@patternfly/react-icons/dist/js/icons/check-circle-icon';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/js/icons/exclamation-circle-icon';
 import { css } from '@patternfly/react-styles';
@@ -69,39 +69,31 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   const notCompleted = taskStatus === QuickStartTaskStatus.VISITED;
   const skippedReviewOrFailed =
     taskStatus === QuickStartTaskStatus.REVIEW || taskStatus === QuickStartTaskStatus.FAILED;
+
   const tryAgain = !isActiveTask && (skippedReviewOrFailed || notCompleted) && (
-    <FlexItem>
-      <Title headingLevel="h4" className="pfext-quick-start-task-header__tryagain">
-        Try the steps again.
-      </Title>
-    </FlexItem>
+    <>
+      <div />
+      <div className="pfext-quick-start-task-header__tryagain">Try the steps again.</div>
+    </>
   );
 
   const content = (
-    <Flex
-      className="pfext-quick-start-task-header"
-      direction={{ default: 'column' }}
-      spaceItems={{ default: 'spaceItemsXs' }}
-    >
-      <FlexItem>
-        <Title headingLevel="h3" size={size} className={classNames}>
-          <TaskIcon taskIndex={taskIndex} taskStatus={taskStatus} />
-          <span dangerouslySetInnerHTML={{ __html: removeParagraphWrap(markdownConvert(title)) }} />
-          {isActiveTask && subtitle && (
-            <>
-              {' '}
-              <span
-                className="pfext-quick-start-task-header__subtitle"
-                data-test-id="quick-start-task-subtitle"
-              >
-                {subtitle}
-              </span>
-            </>
-          )}
-        </Title>
-      </FlexItem>
+    <div className="pfext-quick-start-task-header">
+      <TaskIcon taskIndex={taskIndex} taskStatus={taskStatus} />
+      <Title headingLevel="h3" size={size} className={classNames}>
+        <span dangerouslySetInnerHTML={{ __html: removeParagraphWrap(markdownConvert(title)) }} />
+        {isActiveTask && subtitle && (
+          <span
+            className="pfext-quick-start-task-header__subtitle"
+            data-test-id="quick-start-task-subtitle"
+          >
+            {' '}
+            {subtitle}
+          </span>
+        )}
+      </Title>
       {tryAgain}
-    </Flex>
+    </div>
   );
 
   return (

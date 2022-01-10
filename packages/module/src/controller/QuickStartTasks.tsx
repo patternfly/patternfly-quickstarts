@@ -51,7 +51,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
                 onTaskSelect={onTaskSelect}
               />
               {isActiveTask && (
-                <div style={{ marginBottom: 'var(--pf-global--spacer--md)' }}>
+                <div className="pfext-quick-start-task__content">
                   <QuickStartMarkdownView content={description} />
                   {shouldShowTaskReview && (
                     <QuickStartTaskReview
