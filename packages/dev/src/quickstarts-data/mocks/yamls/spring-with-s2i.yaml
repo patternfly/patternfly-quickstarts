@@ -201,9 +201,9 @@ spec:
 
         1. Add an additional label: 
 
-          ```
-          app.openshift.io/runtime=rh-spring-boot
-          ```
+            ```
+            app.openshift.io/runtime=rh-spring-boot
+            ```
 
         1. Click on **Save** to save the labels.
       review:
