@@ -9,7 +9,7 @@
     "serve": "serve public"
   },
   "dependencies": {
-    "@patternfly/quickstarts": "2.0.1-rc.1",
+    "@patternfly/quickstarts": "2.0.1-rc.2",
     "@patternfly/transform-adoc": "*",
     "@patternfly/react-core": "^4.135.0",
     "asciidoctor": "^2.2.1",
