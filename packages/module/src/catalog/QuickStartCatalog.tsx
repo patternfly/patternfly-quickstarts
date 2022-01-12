@@ -13,7 +13,7 @@ type QuickStartCatalogProps = {
   learningPaths?: QuickStartLearningPath[];
 };
 
-const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts, learningPaths }) => {
+const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts }) => {
   const {
     activeQuickStartID,
     allQuickStartStates,
@@ -23,6 +23,13 @@ const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts, lear
   const [activeTabKey, setActiveTabKey] = React.useState('lpTab');
   const handleTabSelect = (_event, tabKey) => {
     setActiveTabKey(tabKey);
+  };
+
+  const [currentLearningPath, setCurrentLearningPath] = React.useState(contextLearningPaths[0]);
+
+  const openLearningPathView = (learningPath) => {
+    setCurrentLearningPath(learningPath);
+    setActiveTabKey('clpTab');
   };
 
   return (
@@ -63,7 +70,10 @@ const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts, lear
 
                 return (
                   <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
-                    <LearningPathTile learningPath={learningPath} />
+                    <LearningPathTile
+                      learningPath={learningPath}
+                      onClick={() => openLearningPathView(learningPath)}
+                    />
                   </GalleryItem>
                 );
               })}

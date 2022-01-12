@@ -1,0 +1,7 @@
+name: explore-learning-path
+displayName: Explore Learning Path
+quickStartNames:
+  - 'explore-pipelines'
+  - 'explore-serverless'
+  - 'monitor-sampleapp'
+description: This learning path guides you through using openshift pipelines, serverless and monitoring a sample application.

@@ -82,6 +82,7 @@ export type QuickStartContextValues = {
   learningPaths?: QuickStartLearningPath[];
   currentLearningPath?: QuickStartLearningPath;
   setCurrentLearningPath?: React.Dispatch<React.SetStateAction<QuickStartLearningPath>>;
+  getLearningPathQuickStarts?: (learningPathQuickStartNames: string[]) => QuickStart[];
 };
 
 export const QuickStartContextDefaults = {
@@ -109,6 +110,7 @@ export const QuickStartContextDefaults = {
   learningPaths: [],
   currentLearningPath: null,
   setCurrentLearningPath: () => {},
+  getlearningPathQuickStarts: () => [],
 };
 export const QuickStartContext = createContext<QuickStartContextValues>(QuickStartContextDefaults);
 
@@ -172,8 +174,8 @@ export const useValuesForQuickStartContext = (
   const findLearningPath = useCallback(
     (id: string) => {
       return learningPaths.find((learningPath) => {
-        const { quickStarts: learningPathQuickStarts } = learningPath;
-        if (learningPathQuickStarts.includes(id)) {
+        const { quickStartNames } = learningPath;
+        if (quickStartNames.includes(id)) {
           return true;
         }
       });
@@ -183,6 +185,11 @@ export const useValuesForQuickStartContext = (
   const [currentLearningPath, setCurrentLearningPath] = React.useState(
     findLearningPath(activeQuickStartID),
   );
+  const getLearningPathQuickStarts = (learningPathQuickStartNames: string[]) => {
+    return allQuickStarts.filter((quickStart) => {
+      return learningPathQuickStartNames.includes(quickStart.metadata.name);
+    });
+  };
 
   const initialSearchParams = new URLSearchParams(window.location.search);
   const initialSearchQuery = initialSearchParams.get(QUICKSTART_SEARCH_FILTER_KEY) || '';
@@ -487,6 +494,7 @@ export const useValuesForQuickStartContext = (
     learningPaths,
     currentLearningPath,
     setCurrentLearningPath,
+    getLearningPathQuickStarts,
   };
 };
 

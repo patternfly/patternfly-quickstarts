@@ -37,6 +37,7 @@ import sampleA from 'raw-loader!./mocks/asciidoc/business-central-editing-data-s
 // import masKafkaBinScripts from "./mas-guides/kafka-bin-scripts/output/kafka-bin-scripts.quickstart.json";
 
 import kafkaLearningPath from './mocks/learning-paths/kafka-learning-path.yaml';
+import exploreLearningPath from './mocks/learning-paths/explore-learning-path.yaml';
 
 export const allAsciiDocImports = {
   //   'template': {
@@ -112,4 +113,4 @@ export const allQuickStarts: QuickStart[] = [
   // ProcQuickStartParser(masKafkaBinScripts),
 ];
 
-export const learningPaths: QuickStartLearningPath[] = [kafkaLearningPath];
+export const learningPaths: QuickStartLearningPath[] = [kafkaLearningPath, exploreLearningPath];

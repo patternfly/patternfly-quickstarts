@@ -1,6 +1,7 @@
 name: kafka-learning-path
 displayName: Kafka Learning Path
-quickStarts:
+quickStartNames:
   - 'kafka-getting-started'
   - 'kafkacat'
   - 'kafka-bin-scripts'
+description: Some description of this quickstart grouping. This is a loose grouping of quick starts that help to introduct you to Kafka. Quick starts in this grouping may appear in other groupings as well.

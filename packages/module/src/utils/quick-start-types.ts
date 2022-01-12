@@ -74,5 +74,7 @@ export type QuickStartType = {
 export type QuickStartLearningPath = {
   name: string;
   displayName: string;
-  quickStarts: string[];
+  quickStartNames: string[];
+  icon: React.ReactNode;
+  description: string;
 };

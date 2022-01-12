@@ -33,14 +33,14 @@ const QuickStartLearningPathComponent: React.FC<QuickStartLearningPathProps> = (
   const [isExpanded, setIsExpanded] = React.useState(true);
 
   const learningPathQuickStarts: QuickStart[] = allQuickStarts.filter((quickStart) => {
-    const { quickStarts: learningPathIDs } = learningPath;
+    const { quickStartNames } = learningPath;
     const {
       metadata: { name: id },
     } = quickStart;
-    return learningPathIDs.includes(id);
+    return quickStartNames.includes(id);
   });
 
-  const activeQuickStartPositionInLearningPath = learningPath.quickStarts.indexOf(
+  const activeQuickStartPositionInLearningPath = learningPath.quickStartNames.indexOf(
     activeQuickStartID,
   );
 
@@ -48,7 +48,7 @@ const QuickStartLearningPathComponent: React.FC<QuickStartLearningPathProps> = (
     const {
       metadata: { name: id },
     } = quickStart;
-    return id === learningPath.quickStarts[activeQuickStartPositionInLearningPath + 1];
+    return id === learningPath.quickStartNames[activeQuickStartPositionInLearningPath + 1];
   });
 
   const completedQuickStarts = getQuickStartStatusCount(
