@@ -11,19 +11,22 @@ import QuickStartTileFooterExternal from './QuickStartTileFooterExternal';
 import QuickStartTileHeader from './QuickStartTileHeader';
 
 import './QuickStartTile.scss';
+import { Card } from '@patternfly/react-core';
 
 type QuickStartTileProps = {
   quickStart: QuickStart;
   status: QuickStartStatus;
   isActive: boolean;
   onClick?: () => void;
+  isLearningPath?: boolean;
 };
 
 const QuickStartTile: React.FC<QuickStartTileProps> = ({
   quickStart,
   status,
   isActive,
-  onClick = () => {},
+  onClick = () => { },
+  isLearningPath,
 }) => {
   const {
     metadata: { name: id },
@@ -68,8 +71,25 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
     }
   };
 
+  const offset = 10;
+  const lpTileContainerStyle = {
+    position: 'relative',
+    zIndex: 1,
+    margin: `0 ${offset}px ${offset}px 0`,
+  };
+  const lpBottomCardStyle: React.CSSProperties = {
+    position: 'absolute',
+    left: '0px',
+    top: '0px',
+    height: '100%',
+    width: '100%',
+    zIndex: -1,
+    transform: `translate(${offset}px, ${offset}px)`,
+  };
+  const containerStyle = isLearningPath ? lpTileContainerStyle : {};
+
   return (
-    <div ref={ref}>
+    <div ref={ref} style={containerStyle}>
       <CatalogTile
         // @ts-ignore
         component="div"
@@ -96,6 +116,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
         }
         footer={footerComponent}
       />
+      {isLearningPath && <Card isFlat style={lpBottomCardStyle} />}
     </div>
   );
 };

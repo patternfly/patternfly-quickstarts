@@ -68,7 +68,7 @@ const LearningPathTile: React.FC<LearningPathTileProps> = ({
   const lpTileContainerStyle: React.CSSProperties = {
     position: 'relative',
     zIndex: 1,
-    // margin: `0 ${offset}px ${offset}px 0`,
+    margin: `0 ${offset}px ${offset}px 0`,
   };
   const lpBottomCardStyle: React.CSSProperties = {
     position: 'absolute',
