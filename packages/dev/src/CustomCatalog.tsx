@@ -12,6 +12,7 @@ import {
   QuickStartContext,
   QuickStartContextValues,
   QuickStartTile,
+  LearningPathDetailPage,
   clearFilterParams,
   filterQuickStarts,
   getQuickStartStatus,
@@ -45,6 +46,7 @@ export const CustomCatalog: React.FC<CustomCatalogProps> = ({
     allQuickStarts,
     filter,
     setFilter,
+    learningPathDetailID,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
   const sortFnc = React.useCallback(
@@ -190,24 +192,33 @@ export const CustomCatalog: React.FC<CustomCatalogProps> = ({
     );
   };
 
+  const [shouldShowLearningPathView, setShouldShowLearningPathView] = React.useState(false);
+  React.useEffect(() => {
+    setShouldShowLearningPathView(learningPathDetailID !== '');
+  }, [learningPathDetailID]);
   return (
     <>
-      <QuickStartCatalogHeader title={headerTitle} />
-      <Divider component="div" />
-      <QuickStartCatalogToolbar>
-        <ToolbarContent>
-          <QuickStartCatalogFilterSearchWrapper onSearchInputChange={onSearchInputChange} />
-          <QuickStartCatalogFilterStatusWrapper onStatusChange={onStatusChange} />
-          <QuickStartCatalogFilterCountWrapper quickStartsCount={filteredQuickStarts.length} />
-        </ToolbarContent>
-      </QuickStartCatalogToolbar>
-      <Divider component="div" />
-      {filteredQuickStarts.length === 0 ? (
-        <QuickStartCatalogEmptyState clearFilters={clearFilters} />
-      ) : filteredQuickStarts.length !== allQuickStarts.length ? (
-        <QuickStartCatalog quickStarts={filteredQuickStarts} />
-      ) : (
-        CatalogWithSections
+      {shouldShowLearningPathView && <LearningPathDetailPage />}
+      {!shouldShowLearningPathView && (
+        <>
+          <QuickStartCatalogHeader title={headerTitle} />
+          <Divider component="div" />
+          <QuickStartCatalogToolbar>
+            <ToolbarContent>
+              <QuickStartCatalogFilterSearchWrapper onSearchInputChange={onSearchInputChange} />
+              <QuickStartCatalogFilterStatusWrapper onStatusChange={onStatusChange} />
+              <QuickStartCatalogFilterCountWrapper quickStartsCount={filteredQuickStarts.length} />
+            </ToolbarContent>
+          </QuickStartCatalogToolbar>
+          <Divider component="div" />
+          {filteredQuickStarts.length === 0 ? (
+            <QuickStartCatalogEmptyState clearFilters={clearFilters} />
+          ) : filteredQuickStarts.length !== allQuickStarts.length ? (
+            <QuickStartCatalog quickStarts={filteredQuickStarts} />
+          ) : (
+            CatalogWithSections
+          )}
+        </>
       )}
     </>
   );

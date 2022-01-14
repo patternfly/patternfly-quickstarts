@@ -1,6 +1,7 @@
 import './styles/style.scss';
 
 export * from './QuickStartCatalogPage';
+export * from './LearningPathDetailPage';
 export * from './catalog';
 export * from './ConsoleInternal/components/utils';
 export * from './QuickStartDrawer';

@@ -25,13 +25,6 @@ const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts }) =>
     setActiveTabKey(tabKey);
   };
 
-  const [currentLearningPath, setCurrentLearningPath] = React.useState(contextLearningPaths[0]);
-
-  const openLearningPathView = (learningPath) => {
-    setCurrentLearningPath(learningPath);
-    setActiveTabKey('clpTab');
-  };
-
   return (
     <div className="pfext-page-layout__content pfext-is-dark">
       <Tabs isBox defaultActiveKey={activeTabKey} onSelect={handleTabSelect}>
@@ -70,10 +63,7 @@ const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts }) =>
 
                 return (
                   <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
-                    <LearningPathTile
-                      learningPath={learningPath}
-                      onClick={() => openLearningPathView(learningPath)}
-                    />
+                    <LearningPathTile learningPath={learningPath} />
                   </GalleryItem>
                 );
               })}

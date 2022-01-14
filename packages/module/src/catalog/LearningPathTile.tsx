@@ -13,13 +13,9 @@ import './QuickStartTile.scss';
 
 type LearningPathTileProps = {
   learningPath: QuickStartLearningPath;
-  onClick?: () => void;
 };
 
-const LearningPathTile: React.FC<LearningPathTileProps> = ({
-  learningPath,
-  onClick = () => {},
-}) => {
+const LearningPathTile: React.FC<LearningPathTileProps> = ({ learningPath }) => {
   const {
     name: id,
     displayName,
@@ -28,9 +24,9 @@ const LearningPathTile: React.FC<LearningPathTileProps> = ({
     quickStartNames: learningPathQuickStartNames,
   } = learningPath;
 
-  const { getLearningPathQuickStarts } = React.useContext<QuickStartContextValues>(
-    QuickStartContext,
-  );
+  const { getLearningPathQuickStarts, setLearningPathDetailID } = React.useContext<
+    QuickStartContextValues
+  >(QuickStartContext);
 
   const learningPathQuickStarts: QuickStart[] = getLearningPathQuickStarts(
     learningPathQuickStartNames,
@@ -60,8 +56,7 @@ const LearningPathTile: React.FC<LearningPathTileProps> = ({
   }
 
   const handleClick = () => {
-    // Open learning path view
-    onClick();
+    setLearningPathDetailID(id);
   };
 
   const offset = 10;
