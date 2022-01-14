@@ -25,6 +25,11 @@ export const Demos: DemoInterface[] = [
     name: 'Quick starts prop based',
     to: '/quickstarts-props',
   },
+  {
+    id: 'quickstarts-localized',
+    name: 'Quick starts localized',
+    to: '/quickstarts-localized',
+  },
 ];
 
 export default Demos;

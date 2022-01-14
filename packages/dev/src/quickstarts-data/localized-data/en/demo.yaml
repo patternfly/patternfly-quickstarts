@@ -1,0 +1,36 @@
+metadata:
+  name: demo
+  language: en
+spec:
+  displayName: Quick starts demo
+  durationMinutes: 5
+  icon: ''
+  description: This demo will walk you through quick start features
+  introduction: |-
+    ### This demo will walk you through quick start features
+  tasks:
+    - title: Highlighting (yaml+markdown)
+      description: |-
+        1. You can highlight elements by assigning a `data-quickstart-id` attribute. 
+          
+          **Example**
+
+          ```data-quickstart-id="highlight-me"```
+        1. From within the quick start, you can trigger that by by writing markdown such as:
+          
+          **Example**
+
+          `Highlight [my element]{{highlight highlight-me}}`
+        1. Two examples:
+          - [Highlight quick starts nav item]{{highlight quickstarts}}
+          - [Highlight reload button]{{highlight reload-qs}}
+      review:
+        instructions: |-
+          #### To verify:
+          Did you see the elements highlighted?
+        failedTaskHelp: This task isn’t verified yet. Try the task again.
+      summary:
+        success: You have learned about highlighting elements!
+        failed: Try the steps again.
+  conclusion: You have finished the quick starts features overview
+  nextQuickStart: []

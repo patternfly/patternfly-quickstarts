@@ -17,6 +17,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import './i18n/i18n';
 import App from './App';
 import App2 from './App2';
+import App3 from './App3';
 import { QuickStartContext } from '@patternfly/quickstarts';
 import { DefaultCatalog } from './DefaultCatalog';
 import { CustomCatalog } from './CustomCatalog';
@@ -45,6 +46,12 @@ ReactDOM.render(
           <SomeNestedComponent />
           <DefaultCatalog />
         </App2>
+      </Route>
+      <Route exact path="/quickstarts-localized">
+        <App3 showCardFooters>
+          <SomeNestedComponent />
+          <DefaultCatalog />
+        </App3>
       </Route>
       <Route exact path="/custom-catalog">
         <App showCardFooters>

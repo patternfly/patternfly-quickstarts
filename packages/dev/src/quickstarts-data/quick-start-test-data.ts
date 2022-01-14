@@ -22,6 +22,9 @@ import serverlessApplicationQuickstart from './mocks/yamls/serverless-applicatio
 import springWithS2i from './mocks/yamls/spring-with-s2i.yaml';
 import copyExecuteSnippet from './mocks/yamls/copy-execute-snippets.yaml';
 
+import csDemo from './localized-data/cs/demo.yaml';
+import enDemo from './localized-data/en/demo.yaml';
+
 // import addHealthchecksQuickstartADoc from "raw-loader!./mocks/asciidoc/add-healthchecks-quickstart.adoc";
 // import template from "raw-loader!./mocks/asciidoc/TEMPLATE_PROCEDURE.adoc";
 import sampleA from 'raw-loader!./mocks/asciidoc/business-central-editing-data-sources-proc.adoc';
@@ -106,4 +109,9 @@ export const allQuickStarts: QuickStart[] = [
   // }),
   // ProcQuickStartParser(masGettingStarted),
   // ProcQuickStartParser(masKafkaBinScripts)
+];
+
+export const localizedQuickStarts: QuickStart[] = [
+  csDemo,
+  enDemo
 ];
