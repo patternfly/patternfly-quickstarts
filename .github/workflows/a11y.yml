@@ -1,0 +1,25 @@
+name: A11y CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  a11y:
+    name: A11y testing
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Use Node.js 15
+      uses: actions/setup-node@v2
+      with:
+        node-version: 15
+    - name: Install
+      run: yarn install
+    - name: Build
+      run: yarn build
+    - name: Start server and run a11y tests
+      run: yarn start && yarn test:a11y
