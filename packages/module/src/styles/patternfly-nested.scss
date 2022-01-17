@@ -25,16 +25,16 @@
   @import '@patternfly/patternfly/components/all';
   @import '@patternfly/patternfly/layouts/all';
 
-  // this style uses ampersand which would not nest correctly
-  // https://github.com/patternfly/patternfly/blob/main/src/patternfly/components/Select/select.scss#L365
-  .pfext-quick-start__base * + .pf-c-select__toggle-arrow {
-    margin-right: var(--pf-c-select__toggle-arrow--MarginRight);
-    margin-left: var(--pf-c-select__toggle-arrow--MarginLeft);
-  }
-  .pfext-quick-start__base .pf-c-select.pf-m-top.pf-m-expanded .pf-c-select__toggle-arrow {
-    transform: rotate(var(--pf-c-select__toggle-arrow--m-top--m-expanded__toggle-arrow--Rotate));
-  }
-
   // some apps globally set text-align: center
   text-align: left;
+}
+
+// this style uses ampersand which would not nest correctly
+// https://github.com/patternfly/patternfly/blob/main/src/patternfly/components/Select/select.scss#L365
+.pfext-quick-start__base * + .pf-c-select__toggle-arrow {
+  margin-right: var(--pf-c-select__toggle-arrow--MarginRight);
+  margin-left: var(--pf-c-select__toggle-arrow--MarginLeft);
+}
+.pfext-quick-start__base .pf-c-select.pf-m-top.pf-m-expanded .pf-c-select__toggle-arrow {
+  transform: rotate(var(--pf-c-select__toggle-arrow--m-top--m-expanded__toggle-arrow--Rotate));
 }
