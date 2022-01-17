@@ -45,7 +45,6 @@ ReactDOM.render(
       </Route>
       <Route exact path="/kafka-learning-path">
         <App2 showCardFooters>
-          <SomeNestedComponent />
           <CustomCatalog
             customFilter={(quickStart: QuickStart) => {
               return quickStart.metadata.name.includes('kafka');
