@@ -1,11 +1,16 @@
 import './QuickStartPanelContent.scss';
 import * as React from 'react';
 import {
+  Button,
+  Divider,
   DrawerActions,
   DrawerCloseButton,
   DrawerHead,
   DrawerPanelBody,
   DrawerPanelContent,
+  Stack,
+  StackItem,
+  Text,
   Title,
 } from '@patternfly/react-core';
 import { css } from '@patternfly/react-styles';
@@ -86,7 +91,51 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
     return Number.parseInt(taskNumber as string, 10) + 1;
   };
 
-  const content = quickStart ? (
+  const simpleContent = (
+    <DrawerPanelContent
+      isResizable={isResizable}
+      className="pfext-quick-start__base"
+      data-testid={`qs-drawer-${camelize(quickStart.spec.displayName)}`}
+      data-qs={`qs-step-${getStep()}`}
+      data-test="quickstart drawer"
+      {...props}
+    >
+      <div>
+        <Title headingLevel="h3" style={{ padding: '30px' }}>
+          Connect to Github
+        </Title>
+        <Divider />
+        <Text style={{ padding: '20px' }}>
+          Deploy your source code from a Github repository. Fusce gravida diam vitae ex condimentum
+          placerat id in quam. In consectetur maximus justo, ut aliquam ex ullamcorper quis. Etiam
+          lobortis viverra ex nec pharetra. Mauris quis blandit mi. In sed augue at augue commodo
+          hendrerit vel ac turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+          posuere cubilia curae; In luctus erat at urna consectetur molestie. Fusce hendrerit odio
+          et scelerisque congue. Nullam eget lectus id velit eleifend faucibus sed laoreet ipsum.
+          Etiam consectetur volutpat maxi
+        </Text>
+        <Divider />
+        <Text style={{ padding: '20px' }}>
+          <Stack>
+            <StackItem>
+              <a>Learn More</a>
+            </StackItem>
+            <StackItem>
+              <a>Code based service</a>
+            </StackItem>
+            <StackItem>
+              <a>Creating an app runner service</a>
+            </StackItem>
+            <StackItem>
+              <a>Other link</a>
+            </StackItem>
+          </Stack>
+        </Text>
+      </div>
+    </DrawerPanelContent>
+  );
+
+  const content = !quickStart ? (
     <DrawerPanelContent
       isResizable={isResizable}
       className="pfext-quick-start__base"
@@ -137,7 +186,9 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
         />
       </DrawerPanelBody>
     </DrawerPanelContent>
-  ) : null;
+  ) : (
+    simpleContent
+  );
 
   if (appendTo) {
     return ReactDOM.createPortal(content, getElement(appendTo));
