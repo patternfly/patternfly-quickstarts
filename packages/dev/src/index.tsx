@@ -49,7 +49,6 @@ ReactDOM.render(
       </Route>
       <Route exact path="/quickstarts-localized">
         <App3 showCardFooters>
-          <SomeNestedComponent />
           <DefaultCatalog />
         </App3>
       </Route>
