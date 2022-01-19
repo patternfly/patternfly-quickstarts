@@ -11,8 +11,8 @@ import {
 } from '@patternfly/react-core';
 import SearchIcon from '@patternfly/react-icons/dist/js/icons/search-icon';
 import { EmptyBox, LoadingBox, clearFilterParams } from '@console/internal/components/utils';
-import QuickStartCatalog from './catalog/QuickStartCatalog';
-import QuickStartCatalogFilter from './catalog/Toolbar/QuickStartCatalogFilter';
+import QuickStartCatalog from './catalog/QuickStartCatalog/QuickStartCatalog';
+import QuickStartCatalogFilter from './catalog/QuickStartCatalogFilter/QuickStartCatalogFilter';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import { QuickStart } from './utils/quick-start-types';
 import { filterQuickStarts } from './utils/quick-start-utils';
@@ -77,22 +77,22 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
 
   const initialFilteredQuickStarts = showFilter
     ? filterQuickStarts(
-      allQuickStarts,
-      filter.keyword,
-      filter.status.statusFilters,
-      allQuickStartStates,
-    ).sort(sortFncCallback)
+        allQuickStarts,
+        filter.keyword,
+        filter.status.statusFilters,
+        allQuickStartStates,
+      ).sort(sortFncCallback)
     : allQuickStarts;
 
   const [filteredQuickStarts, setFilteredQuickStarts] = React.useState(initialFilteredQuickStarts);
   React.useEffect(() => {
     const filteredQs = showFilter
       ? filterQuickStarts(
-        allQuickStarts,
-        filter.keyword,
-        filter.status.statusFilters,
-        allQuickStartStates,
-      ).sort(sortFncCallback)
+          allQuickStarts,
+          filter.keyword,
+          filter.status.statusFilters,
+          allQuickStartStates,
+        ).sort(sortFncCallback)
       : allQuickStarts;
     if (filteredQs.length !== filteredQuickStarts.length) {
       setFilteredQuickStarts(filteredQs);

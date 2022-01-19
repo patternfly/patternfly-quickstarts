@@ -92,6 +92,8 @@ export const allQuickStarts: QuickStart[] = [
   // explorePipelinesQuickStart,
   // exploreServerlessQuickStart,
   monitorSampleAppQuickStart,
+  explorePipelinesQuickStart,
+  exploreServerlessQuickStart,
   addHealthchecksQuickstart,
   demo,
   installAssociatePipelineQuickstart,

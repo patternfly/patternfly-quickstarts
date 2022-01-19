@@ -2,14 +2,16 @@ import * as React from 'react';
 import { CatalogTile } from '@patternfly/react-catalog-view-extension';
 import RocketIcon from '@patternfly/react-icons/dist/js/icons/rocket-icon';
 import { FallbackImg } from '@console/shared';
-import { QuickStart, QuickStartLearningPath, QuickStartStatus } from '../utils/quick-start-types';
-import { camelize } from '../utils/quick-start-utils';
-import QuickStartTileHeader from './QuickStartTileHeader';
+import {
+  QuickStart,
+  QuickStartLearningPath,
+  QuickStartStatus,
+} from '../../utils/quick-start-types';
+import { camelize } from '../../utils/quick-start-utils';
+import QuickStartTileHeader from '../QuickStartCatalog/QuickStartTileHeader';
 import { Card } from '@patternfly/react-core';
 import LearningPathTileFooter from './LearningPathTileFooter';
-import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
-
-import './QuickStartTile.scss';
+import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 
 type LearningPathTileProps = {
   learningPath: QuickStartLearningPath;
@@ -89,6 +91,7 @@ const LearningPathTile: React.FC<LearningPathTileProps> = ({ learningPath }) => 
         title={
           <QuickStartTileHeader
             name={displayName}
+            // TODO: status correct?
             status={QuickStartStatus.NOT_STARTED}
             duration={learningPathDurationMinutes}
             quickStartId={id}

@@ -14,10 +14,11 @@ import {
   ProgressStep,
 } from '@patternfly/react-core';
 import * as React from 'react';
-import QuickStartTile from './catalog/QuickStartTile';
+import QuickStartTile from './catalog/QuickStartCatalog/QuickStartTile';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import { getQuickStartStatus } from './utils/quick-start-utils';
 import { QuickStart, QuickStartLearningPath, QuickStartStatus } from './utils/quick-start-types';
+import { removeQueryArgument } from './ConsoleInternal/components/utils/router';
 
 // import './LearningPathDetailPage.scss';
 
@@ -26,26 +27,13 @@ type LearningPathDetailpageProps = {
   // onClick?: () => void;
 };
 
-export const LearningPathDetailPage: React.FC<LearningPathDetailpageProps> = (
-  {
-    // learningPath,
-    // onClick = () => {},
-  },
-) => {
-  const {
-    learningPathDetailID,
-    setLearningPathDetailID,
-    learningPaths,
-    getLearningPathQuickStarts,
-    allQuickStartStates,
-  } = React.useContext<QuickStartContextValues>(QuickStartContext);
-
-  const learningPath: QuickStartLearningPath = learningPaths.find((lp) => {
-    return lp.name === learningPathDetailID;
-  });
+export const LearningPathDetailPage: React.FC<LearningPathDetailpageProps> = () => {
+  const { getLearningPathQuickStarts, allQuickStartStates, currentLearningPath } = React.useContext<
+    QuickStartContextValues
+  >(QuickStartContext);
 
   const { displayName, quickStartNames: learningPathQuickStartNames, description } =
-    learningPath || {};
+    currentLearningPath || {};
 
   const learningPathQuickStarts: QuickStart[] = getLearningPathQuickStarts(
     learningPathQuickStartNames,
@@ -59,6 +47,10 @@ export const LearningPathDetailPage: React.FC<LearningPathDetailpageProps> = (
   //   0,
   // );
 
+  const removeLPQueryParam = () => {
+    // TODO wrap this in context method for setting current learning path
+    removeQueryArgument('learningPath');
+  };
   return (
     <div className="lpdetailpagecontainer" style={{ backgroundColor: 'white' }}>
       <div className="lpdetailpageheader" style={{ padding: '20px' }}>
@@ -94,7 +86,7 @@ export const LearningPathDetailPage: React.FC<LearningPathDetailpageProps> = (
         </Grid>
       </div>
       <Divider />
-      <Button onClick={() => setLearningPathDetailID('')}>Back</Button>
+      <Button onClick={() => removeLPQueryParam()}>Back</Button>
       <Divider />
       <div style={{ backgroundColor: '#F5F5F5', padding: '20px' }}>
         <ProgressStepper isVertical style={{ maxWidth: '40%' }}>
@@ -103,18 +95,22 @@ export const LearningPathDetailPage: React.FC<LearningPathDetailpageProps> = (
               allQuickStartStates,
               quickStart.metadata.name,
             );
-            const stepperVariant = (status) => {
-              if (status === QuickStartStatus.COMPLETE) {
+            const stepperVariant = (qsStatus: QuickStartStatus) => {
+              if (qsStatus === QuickStartStatus.COMPLETE) {
                 return 'success';
               }
-              if (status === QuickStartStatus.IN_PROGRESS) {
+              if (qsStatus === QuickStartStatus.IN_PROGRESS) {
                 return 'info';
               }
               return 'pending';
             };
             const isCurrent = status === QuickStartStatus.IN_PROGRESS;
             return (
-              <ProgressStep variant={stepperVariant(status)} isCurrent={isCurrent}>
+              <ProgressStep
+                key={quickStart.metadata.name}
+                variant={stepperVariant(status)}
+                isCurrent={isCurrent}
+              >
                 <QuickStartTile
                   quickStart={quickStart}
                   status={getQuickStartStatus(allQuickStartStates, quickStart.metadata.name)}

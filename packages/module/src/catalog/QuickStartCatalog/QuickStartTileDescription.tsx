@@ -8,8 +8,8 @@ import {
   TextVariants,
 } from '@patternfly/react-core';
 import InfoCircleIcon from '@patternfly/react-icons/dist/js/icons/info-circle-icon';
-import QuickStartMarkdownView from '../QuickStartMarkdownView';
-import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
+import QuickStartMarkdownView from '../../QuickStartMarkdownView';
+import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 
 import './QuickStartTileDescription.scss';
 

@@ -193,9 +193,12 @@ export const useValuesForQuickStartContext = (
     findLearningPath(activeQuickStartID),
   );
   const getLearningPathQuickStarts = (learningPathQuickStartNames: string[]) => {
-    return allQuickStarts.filter((quickStart) => {
-      return learningPathQuickStartNames.includes(quickStart.metadata.name);
-    });
+    if (learningPathQuickStartNames) {
+      return allQuickStarts.filter((quickStart) => {
+        return learningPathQuickStartNames.includes(quickStart.metadata.name);
+      });
+    }
+    return [];
   };
   const [learningPathDetailID, setLearningPathDetailID] = React.useState('');
 

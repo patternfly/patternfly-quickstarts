@@ -2,9 +2,9 @@ import * as React from 'react';
 import { CatalogTile } from '@patternfly/react-catalog-view-extension';
 import RocketIcon from '@patternfly/react-icons/dist/js/icons/rocket-icon';
 import { FallbackImg } from '@console/shared';
-import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
-import { QuickStart, QuickStartStatus } from '../utils/quick-start-types';
-import { camelize } from '../utils/quick-start-utils';
+import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
+import { QuickStart, QuickStartStatus } from '../../utils/quick-start-types';
+import { camelize } from '../../utils/quick-start-utils';
 import QuickStartTileDescription from './QuickStartTileDescription';
 import QuickStartTileFooter from './QuickStartTileFooter';
 import QuickStartTileFooterExternal from './QuickStartTileFooterExternal';
@@ -25,7 +25,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
   quickStart,
   status,
   isActive,
-  onClick = () => { },
+  onClick = () => {},
   isLearningPath,
 }) => {
   const {

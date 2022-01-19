@@ -1,8 +1,10 @@
 import './styles/style.scss';
 
 export * from './QuickStartCatalogPage';
+export * from './catalog/QuickStartCatalog';
 export * from './LearningPathDetailPage';
-export * from './catalog';
+export * from './catalog/LearningPathCatalog';
+export * from './PageController';
 export * from './ConsoleInternal/components/utils';
 export * from './QuickStartDrawer';
 export * from './utils/const';

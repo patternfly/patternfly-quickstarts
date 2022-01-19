@@ -8,7 +8,12 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import './i18n/i18n';
 import App from './App';
 import App2 from './App2';
-import { QuickStart, QuickStartContext } from '@patternfly/quickstarts';
+import {
+  QuickStart,
+  QuickStartContext,
+  PageController,
+  LearningPathDetailPage,
+} from '@patternfly/quickstarts';
 import { DefaultCatalog } from './DefaultCatalog';
 import { CustomCatalog } from './CustomCatalog';
 
@@ -45,11 +50,16 @@ ReactDOM.render(
       </Route>
       <Route exact path="/learning-path-demo">
         <App2 showCardFooters>
-          <CustomCatalog
-            headerTitle="Learning Path Demo"
-            customFilter={(quickStart: QuickStart) => {
-              return quickStart.metadata.name.includes('kafka');
-            }}
+          <PageController
+            catalogPage={
+              <CustomCatalog
+                headerTitle="Learning Path Demo"
+                customFilter={(quickStart: QuickStart) => {
+                  return quickStart.metadata.name.includes('kafka');
+                }}
+              />
+            }
+            learningPathDetailPage={<LearningPathDetailPage />}
           />
         </App2>
       </Route>
