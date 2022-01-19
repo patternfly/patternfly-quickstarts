@@ -1,7 +1,6 @@
 import './QuickStartPanelContent.scss';
 import * as React from 'react';
 import {
-  Button,
   Divider,
   DrawerActions,
   DrawerCloseButton,
