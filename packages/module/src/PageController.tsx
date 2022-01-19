@@ -20,7 +20,7 @@ export const PageController: React.FC<PageControllerProps> = ({
   //   });
   // });
 
-  const { learningPaths, currentLearningPath, setCurrentLearningPath } = React.useContext(
+  const { learningPaths, activeDetailLearningPath, onSetActiveDetailLearningPath } = React.useContext(
     QuickStartContext,
   );
 
@@ -30,33 +30,26 @@ export const PageController: React.FC<PageControllerProps> = ({
 
     const loadedLearningPath = learningPaths.find((lp) => lp.name === learningPathName);
 
-    setCurrentLearningPath(loadedLearningPath);
-    console.log('learningPath ACTUAL from loaded from learningPaths', loadedLearningPath);
-    console.log('learningPathName from queryParams', learningPathName);
-  }, [learningPaths, setCurrentLearningPath]);
+    onSetActiveDetailLearningPath(loadedLearningPath);
+  }, []);
 
-  React.useEffect(() => {
-    //   use this effect to clear the search when a `clear all` action is performed higher up
-    const unlisten = history.listen(({ location }) => {
-      const searchParams = new URLSearchParams(location.search);
-      const learningPathIDFromParams = searchParams.get('learningPath') || '';
-      if (learningPathIDFromParams === '') {
-        setCurrentLearningPath(null);
-      }
-    });
-    return () => {
-      unlisten();
-    };
-  }, [setCurrentLearningPath]);
+  // React.useEffect(() => {
+  //   //   use this effect to clear the search when a `clear all` action is performed higher up
+  //   const unlisten = history.listen(({ location }) => {
+  //     const searchParams = new URLSearchParams(location.search);
+  //     const learningPathIDFromParams = searchParams.get('learningPath') || '';
+  //     if (learningPathIDFromParams === '') {
+  //       setCurrentLearningPath(null);
+  //     }
+  //   });
+  //   return () => {
+  //     unlisten();
+  //   };
+  // }, [setCurrentLearningPath]);
 
-  const hasCurrentLearningPath = currentLearningPath !== undefined;
   return (
     <div>
-      I'm the page controller
-      {JSON.stringify(currentLearningPath)}
-      {console.log('currentLearningPath in PageController', currentLearningPath)}
-      {console.log('hasCurrentLearningPath in PageController', hasCurrentLearningPath)}
-      {hasCurrentLearningPath ? learningPathDetailPage : catalogPage}
+      {activeDetailLearningPath ? learningPathDetailPage : catalogPage}
     </div>
   );
 };

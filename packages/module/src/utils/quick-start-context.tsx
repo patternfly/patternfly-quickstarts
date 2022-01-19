@@ -89,6 +89,9 @@ export type QuickStartContextValues = {
   // learning path to be displayed on the <LearningPathDetailPage /> (instead of the catalog)
   learningPathDetailID?: string;
   setLearningPathDetailID?: React.Dispatch<React.SetStateAction<string>>;
+  activeDetailLearningPath?: QuickStartLearningPath;
+  setActiveDetailLearningPath?: React.Dispatch<React.SetStateAction<QuickStartLearningPath>>;
+  onSetActiveDetailLearningPath?: (learningPath: QuickStartLearningPath) => void;
 };
 
 export const QuickStartContextDefaults = {
@@ -118,6 +121,8 @@ export const QuickStartContextDefaults = {
   setCurrentLearningPath: () => {},
   getlearningPathQuickStarts: () => [],
   learningPathDetailID: '',
+  activeDetailLearningPath: null,
+  setActiveDetailLearningPath: () => {},
 };
 export const QuickStartContext = createContext<QuickStartContextValues>(QuickStartContextDefaults);
 
@@ -465,6 +470,21 @@ export const useValuesForQuickStartContext = (
     [allQuickStartStates],
   );
 
+  const [activeDetailLearningPath, setActiveDetailLearningPath] = React.useState(null);
+  const onSetActiveDetailLearningPath = React.useCallback(
+    (learningPath: QuickStartLearningPath) => {
+      if (learningPath) {
+        setQueryArgument('learningPath', learningPath.name);
+        setActiveDetailLearningPath(learningPath);
+        setActiveQuickStart(learningPath.quickStartNames[0]);
+        return;
+      }
+      removeQueryArgument('learningPath');
+      setActiveDetailLearningPath(null);
+    },
+    [setActiveQuickStart],
+  );
+
   return {
     allQuickStarts: quickStarts,
     setAllQuickStarts: updateAllQuickStarts, // revisit if this should be in public context API
@@ -508,6 +528,9 @@ export const useValuesForQuickStartContext = (
     getLearningPathQuickStarts,
     learningPathDetailID,
     setLearningPathDetailID,
+    onSetActiveDetailLearningPath,
+    activeDetailLearningPath,
+    setActiveDetailLearningPath,
   };
 };
 

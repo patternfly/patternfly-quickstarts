@@ -26,7 +26,7 @@ const LearningPathTile: React.FC<LearningPathTileProps> = ({ learningPath }) => 
     quickStartNames: learningPathQuickStartNames,
   } = learningPath;
 
-  const { getLearningPathQuickStarts, setLearningPathDetailID } = React.useContext<
+  const { getLearningPathQuickStarts, onSetActiveDetailLearningPath } = React.useContext<
     QuickStartContextValues
   >(QuickStartContext);
 
@@ -58,23 +58,34 @@ const LearningPathTile: React.FC<LearningPathTileProps> = ({ learningPath }) => 
   }
 
   const handleClick = () => {
-    setLearningPathDetailID(id);
+    onSetActiveDetailLearningPath(learningPath);
   };
 
-  const offset = 10;
+  const rotate1 = 1;
+  const rotate2 = 2;
+  const margin = 10;
   const lpTileContainerStyle: React.CSSProperties = {
     position: 'relative',
     zIndex: 1,
-    margin: `0 ${offset}px ${offset}px 0`,
+    margin: `0 ${margin}px ${margin}px 0`,
   };
-  const lpBottomCardStyle: React.CSSProperties = {
+  const lpBottomCardStyle1: React.CSSProperties = {
     position: 'absolute',
-    left: '0px',
-    top: '0px',
-    height: '100%',
-    width: '100%',
+    left: '24px',
+    top: '24px',
+    height: '95%',
+    width: '95%',
     zIndex: -1,
-    transform: `translate(${offset}px, ${offset}px)`,
+    transform: `rotate(${rotate1}deg)`,
+  };
+  const lpBottomCardStyle2: React.CSSProperties = {
+    position: 'absolute',
+    left: '16px',
+    top: '16px',
+    height: '95%',
+    width: '95%',
+    zIndex: -1,
+    transform: `rotate(${rotate2}deg)`,
   };
 
   return (
@@ -102,7 +113,8 @@ const LearningPathTile: React.FC<LearningPathTileProps> = ({ learningPath }) => 
         description={description}
         footer={<LearningPathTileFooter quickStarts={learningPathQuickStarts} />}
       />
-      <Card isFlat style={lpBottomCardStyle} />
+      <Card isFlat style={lpBottomCardStyle1} className="pf-u-box-shadow-sm" />
+      <Card isFlat style={lpBottomCardStyle2} className="pf-u-background-color-light-200" />
     </div>
   );
 };

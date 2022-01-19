@@ -28,12 +28,15 @@ type LearningPathDetailpageProps = {
 };
 
 export const LearningPathDetailPage: React.FC<LearningPathDetailpageProps> = () => {
-  const { getLearningPathQuickStarts, allQuickStartStates, currentLearningPath } = React.useContext<
-    QuickStartContextValues
-  >(QuickStartContext);
+  const {
+    getLearningPathQuickStarts,
+    allQuickStartStates,
+    activeDetailLearningPath,
+    onSetActiveDetailLearningPath,
+  } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
   const { displayName, quickStartNames: learningPathQuickStartNames, description } =
-    currentLearningPath || {};
+    activeDetailLearningPath || {};
 
   const learningPathQuickStarts: QuickStart[] = getLearningPathQuickStarts(
     learningPathQuickStartNames,
@@ -47,10 +50,10 @@ export const LearningPathDetailPage: React.FC<LearningPathDetailpageProps> = () 
   //   0,
   // );
 
-  const removeLPQueryParam = () => {
-    // TODO wrap this in context method for setting current learning path
-    removeQueryArgument('learningPath');
-  };
+  // const removeLPQueryParam = () => {
+  //   // TODO wrap this in context method for setting current learning path
+  //   removeQueryArgument('learningPath');
+  // };
   return (
     <div className="lpdetailpagecontainer" style={{ backgroundColor: 'white' }}>
       <div className="lpdetailpageheader" style={{ padding: '20px' }}>
@@ -86,7 +89,7 @@ export const LearningPathDetailPage: React.FC<LearningPathDetailpageProps> = () 
         </Grid>
       </div>
       <Divider />
-      <Button onClick={() => removeLPQueryParam()}>Back</Button>
+      <Button onClick={() => onSetActiveDetailLearningPath(null)}>Back</Button>
       <Divider />
       <div style={{ backgroundColor: '#F5F5F5', padding: '20px' }}>
         <ProgressStepper isVertical style={{ maxWidth: '40%' }}>

@@ -55,7 +55,7 @@ ReactDOM.render(
               <CustomCatalog
                 headerTitle="Learning Path Demo"
                 customFilter={(quickStart: QuickStart) => {
-                  return quickStart.metadata.name.includes('kafka');
+                  return !quickStart.metadata.name.includes('demo');
                 }}
               />
             }
