@@ -17,8 +17,7 @@ import * as React from 'react';
 import QuickStartTile from './catalog/QuickStartCatalog/QuickStartTile';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import { getQuickStartStatus } from './utils/quick-start-utils';
-import { QuickStart, QuickStartLearningPath, QuickStartStatus } from './utils/quick-start-types';
-import { removeQueryArgument } from './ConsoleInternal/components/utils/router';
+import { QuickStart, QuickStartStatus } from './utils/quick-start-types';
 
 // import './LearningPathDetailPage.scss';
 

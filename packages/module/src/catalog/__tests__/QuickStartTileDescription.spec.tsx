@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Popover, Text } from '@patternfly/react-core';
 import { shallow } from 'enzyme';
 import { getQuickStarts } from '../../data/test-utils';
-import QuickStartTileDescription from '../QuickStartTileDescription';
+import QuickStartTileDescription from '../QuickStartCatalog/QuickStartTileDescription';
 
 jest.mock('react', () => {
   const ActualReact = require.requireActual('react');
