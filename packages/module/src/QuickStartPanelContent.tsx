@@ -94,8 +94,6 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
     <DrawerPanelContent
       isResizable={isResizable}
       className="pfext-quick-start__base"
-      data-testid={`qs-drawer-${camelize(quickStart.spec.displayName)}`}
-      data-qs={`qs-step-${getStep()}`}
       data-test="quickstart drawer"
       {...props}
     >
@@ -134,60 +132,63 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
     </DrawerPanelContent>
   );
 
-  const content = !quickStart ? (
-    <DrawerPanelContent
-      isResizable={isResizable}
-      className="pfext-quick-start__base"
-      data-testid={`qs-drawer-${camelize(quickStart.spec.displayName)}`}
-      data-qs={`qs-step-${getStep()}`}
-      data-test="quickstart drawer"
-      {...props}
-    >
-      <div className={headerClasses}>
-        <DrawerHead>
-          <div className="pfext-quick-start-panel-content__title">
-            <Title
-              headingLevel="h1"
-              size="xl"
-              className="pfext-quick-start-panel-content__name"
-              style={{ marginRight: 'var(--pf-global--spacer--md)' }}
-            >
-              {quickStart?.spec.displayName}{' '}
-              <small className="pfext-quick-start-panel-content__duration">
-                {getResource(
-                  'Quick start • {{duration, number}} minutes',
-                  quickStart?.spec.durationMinutes,
-                ).replace('{{duration, number}}', quickStart?.spec.durationMinutes)}
-              </small>
-            </Title>
-          </div>
-          {showClose && (
-            <DrawerActions>
-              <DrawerCloseButton
-                onClick={handleClose}
-                className="pfext-quick-start-panel-content__close-button"
-                data-testid="qs-drawer-close"
-              />
-            </DrawerActions>
-          )}
-        </DrawerHead>
-      </div>
-      <DrawerPanelBody
-        hasNoPadding
-        className="pfext-quick-start-panel-content__body"
-        data-test="content"
+  const showSimpleContent = true;
+
+  const content =
+    quickStart && !showSimpleContent ? (
+      <DrawerPanelContent
+        isResizable={isResizable}
+        className="pfext-quick-start__base"
+        data-testid={`qs-drawer-${camelize(quickStart?.spec.displayName)}`}
+        data-qs={`qs-step-${getStep()}`}
+        data-test="quickstart drawer"
+        {...props}
       >
-        <QuickStartController
-          quickStart={quickStart}
-          nextQuickStarts={nextQuickStarts}
-          footerClass={footerClass}
-          contentRef={setContentRef}
-        />
-      </DrawerPanelBody>
-    </DrawerPanelContent>
-  ) : (
-    simpleContent
-  );
+        <div className={headerClasses}>
+          <DrawerHead>
+            <div className="pfext-quick-start-panel-content__title">
+              <Title
+                headingLevel="h1"
+                size="xl"
+                className="pfext-quick-start-panel-content__name"
+                style={{ marginRight: 'var(--pf-global--spacer--md)' }}
+              >
+                {quickStart?.spec.displayName}{' '}
+                <small className="pfext-quick-start-panel-content__duration">
+                  {getResource(
+                    'Quick start • {{duration, number}} minutes',
+                    quickStart?.spec.durationMinutes,
+                  ).replace('{{duration, number}}', quickStart?.spec.durationMinutes)}
+                </small>
+              </Title>
+            </div>
+            {showClose && (
+              <DrawerActions>
+                <DrawerCloseButton
+                  onClick={handleClose}
+                  className="pfext-quick-start-panel-content__close-button"
+                  data-testid="qs-drawer-close"
+                />
+              </DrawerActions>
+            )}
+          </DrawerHead>
+        </div>
+        <DrawerPanelBody
+          hasNoPadding
+          className="pfext-quick-start-panel-content__body"
+          data-test="content"
+        >
+          <QuickStartController
+            quickStart={quickStart}
+            nextQuickStarts={nextQuickStarts}
+            footerClass={footerClass}
+            contentRef={setContentRef}
+          />
+        </DrawerPanelBody>
+      </DrawerPanelContent>
+    ) : (
+      simpleContent
+    );
 
   if (appendTo) {
     return ReactDOM.createPortal(content, getElement(appendTo));
