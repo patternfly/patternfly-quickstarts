@@ -1,0 +1,37 @@
+metadata:
+  name: demo
+  language: cs
+  countryCode: CZ
+spec:
+  displayName: Quick starts demo
+  durationMinutes: 5
+  icon: ''
+  description: V tomto demu si ukážeme, co quick start umí.
+  introduction: |-
+    ### V tomto demu si ukážeme, co quick start umí.
+  tasks:
+    - title: Zvýraznění-Highligting (yaml+markdown)
+      description: |-
+        1. Použitím atributu `data-quickstart-id` můžete zvýraznit prvky.
+          
+          **Příklad**
+
+          ```data-quickstart-id="highlight-me"```
+        1. Z quick startu, se zvýraznění použije díky markdownu takto:
+          
+          **Příklad**
+
+          `Highlight [my element]{{highlight highlight-me}}`
+        1. Dva příklady:
+          - [Highlight quick starts nav item]{{highlight Dashboard}}
+          - [Highlight reload button]{{highlight reload-qs}}
+      review:
+        instructions: |-
+          #### K ověření:
+          Vidíte zvýrazněné prvky?
+        failedTaskHelp: Tento úkol ještě nebyl ověřen. Zkuste to znovu.
+      summary:
+        success: Teď už umíte vytvořit zvýrazněné prvky.
+        failed: Zkuste kroky zopakovat.
+  conclusion: Demo je dokončené.
+  nextQuickStart: []

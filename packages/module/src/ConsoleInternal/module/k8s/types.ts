@@ -27,6 +27,7 @@ export type OwnerReference = {
 };
 
 export type ObjectMetadata = {
+  name: string;
   annotations?: { [key: string]: string };
   clusterName?: string;
   creationTimestamp?: string;
@@ -37,9 +38,16 @@ export type ObjectMetadata = {
   generation?: number;
   labels?: { [key: string]: string };
   managedFields?: any[];
-  name?: string;
   namespace?: string;
   ownerReferences?: OwnerReference[];
   resourceVersion?: string;
   uid?: string;
+  // language can be: en
+  language?: string;
+  // country can be: US
+  country?: string;
+  // locale is a combination of language and country, for example: en_US
+  locale?: string;
+  // anything else to custom define
+  [key: string]: any;
 };

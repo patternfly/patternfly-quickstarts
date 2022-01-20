@@ -250,4 +250,6 @@ return (
 Use this [file](https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/module/src/locales/en/quickstart.json) as a base for your translations.
 Each language is different, especially when it comes to plurals. Try [this utility](https://jsfiddle.net/6bpxsgd4) sourced from [i18next](https://www.i18next.com/translation-function/plurals#how-to-find-the-correct-plural-suffix) to determine the suffixes for the right plural format.
 
+For localizing the content of quick starts files, we provide the option to include `language` and `countryCode` key to your translated file. Based on these keys you can filter out quick starts. We have a demo of this behaviour in our [demo app](https://quickstarts.netlify.app/). You can have a look at the code [here](https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/dev/src/App3.tsx).
+
 #### 

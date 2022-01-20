@@ -93,7 +93,11 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
           allQuickStartStates,
         ).sort(sortFncCallback)
       : allQuickStarts;
-    if (filteredQs.length !== filteredQuickStarts.length) {
+    // also needs a check whether the content of the QS changed
+    if (
+      filteredQs.length !== filteredQuickStarts.length ||
+      JSON.stringify(filteredQs) !== JSON.stringify(filteredQuickStarts)
+    ) {
       setFilteredQuickStarts(filteredQs);
     }
   }, [
