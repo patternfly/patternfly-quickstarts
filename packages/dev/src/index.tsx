@@ -17,6 +17,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import './i18n/i18n';
 import App from './App';
 import App2 from './App2';
+import Editor from './editor/Editor';
 import { QuickStartContext } from '@patternfly/quickstarts';
 import { DefaultCatalog } from './DefaultCatalog';
 import { CustomCatalog } from './CustomCatalog';
@@ -51,6 +52,9 @@ ReactDOM.render(
           <SomeNestedComponent />
           <CustomCatalog />
         </App>
+      </Route>
+      <Route exact path="/editor">
+        <Editor />
       </Route>
     </Switch>
   </Router>,
