@@ -165,13 +165,12 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
     useLegacyHeaderColors,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const combinedQuickStarts = allQuickStarts.concat(quickStarts);
-
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     // if there is a quick start param, but the quick start is not active, set it
     // this can happen if a new browser session is opened or an incognito window for example
     const quickStartIdFromParam = params.get(QUICKSTART_ID_FILTER_KEY) || '';
-    if (quickStartIdFromParam && !activeQuickStartID) {
+    if (quickStartIdFromParam && activeQuickStartID !== quickStartIdFromParam) {
       const activeQuickStart = getQuickStartByName(quickStartIdFromParam, combinedQuickStarts);
       // don't try to load a quick start that is actually just an external resource (spec.link)
       if (combinedQuickStarts.length > 0 && activeQuickStart && !activeQuickStart.spec.link) {

@@ -5,7 +5,6 @@ metadata:
   instructional: true
 spec:
   displayName: Getting started with quick starts
-  durationMinutes: 10
   # Optional type section, will display as a tile on the card
   type: 
     text: Type
