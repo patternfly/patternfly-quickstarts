@@ -26,6 +26,7 @@
   },
   "include": [
     "./src/*",
-    "./src/**/*"
+    "./src/**/*", 
+    "src/quickstarts-data/asciidoc/.build/parsers"
   ]
 }

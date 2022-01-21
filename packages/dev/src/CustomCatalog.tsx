@@ -15,6 +15,7 @@ import {
   clearFilterParams,
   filterQuickStarts,
   getQuickStartStatus,
+  LoadingBox,
 } from '@patternfly/quickstarts';
 import {
   Divider,
@@ -32,6 +33,7 @@ export const CustomCatalog: React.FC = () => {
     allQuickStarts,
     filter,
     setFilter,
+    loading,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
   const sortFnc = (q1: QuickStart, q2: QuickStart) =>
@@ -88,17 +90,41 @@ export const CustomCatalog: React.FC = () => {
     <>
       <QuickStartCatalogSection>
         <TextContent>
-          <Text component="h2">Quick starts</Text>
+          <Text component="h2">Instructional</Text>
           <Text component="p" className="catalog-sub">
-            Step-by-step instructions and tasks
+            Instructional examples
           </Text>
         </TextContent>
         <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
           {allQuickStarts
-            .filter(
-              (quickStart: QuickStart) =>
-                !quickStart.spec.type || quickStart.spec.type.text !== 'Documentation',
-            )
+            .filter((quickStart: QuickStart) => quickStart.metadata.instructional)
+            .map((quickStart: QuickStart) => {
+              const {
+                metadata: { name: id },
+              } = quickStart;
+
+              return (
+                <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
+                  <QuickStartTile
+                    quickStart={quickStart}
+                    isActive={id === activeQuickStartID}
+                    status={getQuickStartStatus(allQuickStartStates, id)}
+                  />
+                </GalleryItem>
+              );
+            })}
+        </Gallery>
+      </QuickStartCatalogSection>
+      <QuickStartCatalogSection>
+        <TextContent>
+          <Text component="h2">Real-world examples</Text>
+          <Text component="p" className="catalog-sub">
+            Additional examples
+          </Text>
+        </TextContent>
+        <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
+          {allQuickStarts
+            .filter((quickStart: QuickStart) => !quickStart.metadata.instructional)
             .map((quickStart: QuickStart) => {
               const {
                 metadata: { name: id },
@@ -119,31 +145,6 @@ export const CustomCatalog: React.FC = () => {
       <QuickStartCatalogSection>
         <Divider />
       </QuickStartCatalogSection>
-      <QuickStartCatalogSection>
-        <TextContent>
-          <Text component="h2">Documentation</Text>
-          <Text component="p">Technical information for using the service</Text>
-        </TextContent>
-        <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
-          {allQuickStarts
-            .filter((quickStart: QuickStart) => quickStart.spec.type?.text === 'Documentation')
-            .map((quickStart: QuickStart) => {
-              const {
-                metadata: { name: id },
-              } = quickStart;
-
-              return (
-                <GalleryItem key={id}>
-                  <QuickStartTile
-                    quickStart={quickStart}
-                    isActive={id === activeQuickStartID}
-                    status={getQuickStartStatus(allQuickStartStates, id)}
-                  />
-                </GalleryItem>
-              );
-            })}
-        </Gallery>
-      </QuickStartCatalogSection>
     </>
   );
 
@@ -157,6 +158,10 @@ export const CustomCatalog: React.FC = () => {
       ),
     );
   };
+
+  if (loading) {
+    return <LoadingBox />;
+  }
 
   return (
     <>

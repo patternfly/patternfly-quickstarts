@@ -110,7 +110,7 @@ module.exports = (_env, argv) => {
         patterns: [{ from: path.resolve(__dirname, '_redirects'), to: '' }],
       }),
       new CopyPlugin({
-        patterns: [{ from: 'src/quickstarts-data/mas-guides/getting-started/images', to: '' }],
+        patterns: [{ from: 'src/quickstarts-data/asciidoc/getting-started/images', to: '' }],
       }),
       new AssetsPlugin({
         keepInMemory: _env === 'development',
@@ -119,7 +119,7 @@ module.exports = (_env, argv) => {
       new CopyPlugin({
         patterns: [
           {
-            from: 'src/quickstarts-data/mas-guides/**/quickstart.yml',
+            from: 'src/quickstarts-data/asciidoc/**/quickstart.yml',
             to: ({ absoluteFilename }) => {
               // The dirname of quickstart is used as the output key
               const dirName = path.basename(path.dirname(absoluteFilename));

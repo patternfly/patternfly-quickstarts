@@ -15,48 +15,34 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import './i18n/i18n';
-import App from './App';
-import App2 from './App2';
-import App3 from './App3';
-import { QuickStartContext } from '@patternfly/quickstarts';
+import AppContext from './AppContext';
+import AppProps from './AppProps';
+import AppLocalized from './AppLocalized';
 import { DefaultCatalog } from './DefaultCatalog';
 import { CustomCatalog } from './CustomCatalog';
-
-const SomeNestedComponent = () => {
-  const qsContext = React.useContext(QuickStartContext);
-  // the quick start ID is defined in the quick start object's metadata.name field
-  return (
-    <button onClick={() => qsContext.setActiveQuickStart('node-with-s2i')}>
-      Toggle quick start through context
-    </button>
-  );
-};
 
 ReactDOM.render(
   <Router>
     <Switch>
       <Route exact path="/">
-        <App showCardFooters={false}>
-          <SomeNestedComponent />
-          <DefaultCatalog />
-        </App>
-      </Route>
-      <Route exact path="/quickstarts-props">
-        <App2 showCardFooters={false}>
-          <SomeNestedComponent />
-          <DefaultCatalog />
-        </App2>
+        <AppProps showCardFooters={false}>
+          <CustomCatalog />
+        </AppProps>
       </Route>
       <Route exact path="/quickstarts-localized">
-        <App3 showCardFooters>
-          <DefaultCatalog />
-        </App3>
+        <AppLocalized showCardFooters={false}>
+          <DefaultCatalog hint="This catalog displays quick starts that have been localized" />
+        </AppLocalized>
       </Route>
-      <Route exact path="/custom-catalog">
-        <App showCardFooters>
-          <SomeNestedComponent />
-          <CustomCatalog />
-        </App>
+      <Route exact path="/quickstarts-props">
+        <AppProps showCardFooters={false}>
+          <DefaultCatalog hint="This catalog is for testing the component props based quick starts approach by utilizing the QuickStartContainer component" />
+        </AppProps>
+      </Route>
+      <Route exact path="/quickstarts-context">
+        <AppContext showCardFooters={false}>
+          <DefaultCatalog hint="This catalog is for testing the context based quick starts approach by utilizing the QuickStartContextProvider" />
+        </AppContext>
       </Route>
     </Switch>
   </Router>,

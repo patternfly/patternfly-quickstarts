@@ -99,7 +99,7 @@ const App = () => {
     setTimeout(() => {
       // simulate loading time to get the quick starts from somewhere
       load();
-    }, 1500);
+    }, 500);
   }, []);
 
   const withQueryParams = true;
@@ -197,7 +197,7 @@ spec:
   conclusion: Your Node application is deployed and ready.
 ```
 
-For more examples of quick starts, [you can go here](https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/dev/src/quickstarts-data/mocks/yamls).
+For more examples of quick starts, [you can go here](https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/dev/src/quickstarts-data/yaml).
 
 ### Highlighting elements
 
