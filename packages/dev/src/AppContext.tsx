@@ -8,7 +8,7 @@ import {
   QuickStartDrawer,
   useLocalStorage,
 } from '@patternfly/quickstarts';
-import { loadJSONQuickStarts } from './quickstarts-data/mas-guides/quickstartLoader';
+import { loadJSONQuickStarts } from './quickstarts-data/asciidoc/quickstartLoader';
 import { allQuickStarts as yamlQuickStarts } from './quickstarts-data/quick-start-test-data';
 import React from 'react';
 import i18n from './i18n/i18n';
@@ -39,7 +39,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     };
     setTimeout(() => {
       load();
-    }, 1500);
+    }, 500);
   }, []);
 
   const language = localStorage.getItem('bridge/language') || 'en';

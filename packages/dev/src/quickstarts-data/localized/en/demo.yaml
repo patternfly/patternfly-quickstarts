@@ -1,12 +1,14 @@
 metadata:
   name: demo
+  language: en
 spec:
   displayName: Quick starts demo
   durationMinutes: 5
   icon: ''
-  description: This demo will walk you through quick start features
+  description: |-
+    This demo is available in both **English** and in **Czech**
   introduction: |-
-    ### This demo will walk you through quick start features
+    ### You can change the language in the [Settings]{{highlight settings}} modal
   tasks:
     - title: Highlighting (yaml+markdown)
       description: |-

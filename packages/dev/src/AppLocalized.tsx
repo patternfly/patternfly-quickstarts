@@ -60,7 +60,7 @@ const App3: React.FC<AppProps> = ({ children, showCardFooters }) => {
     };
     setTimeout(() => {
       load();
-    }, 1500);
+    }, 500);
   }, [language]);
 
   const withQueryParams = true;

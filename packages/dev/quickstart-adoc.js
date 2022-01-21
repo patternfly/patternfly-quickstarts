@@ -250,7 +250,7 @@ const buildQuickStart = (content, filePath, basePath, asciidocOptions) => {
     customTags: [snippetTag, procTag, titleTag],
   });
 
-  validateJSON(qs, path.join('src/quickstarts-data/mas-guides/', 'quickstart.schema.json'));
+  validateJSON(qs, path.join('src/quickstarts-data/asciidoc/', 'quickstart.schema.json'));
 
   // transform the yaml to json for the browser to load
   const json = JSON.stringify(qs);

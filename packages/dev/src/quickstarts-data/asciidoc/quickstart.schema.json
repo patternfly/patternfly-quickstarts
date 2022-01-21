@@ -16,6 +16,10 @@
         "durationMinutes": 15,
         "icon": "",
         "description": "!snippet README.adoc#description",
+        "type":  {
+          "text": "Instructional",
+          "color": "green"
+        },
         "prerequisites": [
           "Requirement 1",
           "Requirement 2",
@@ -73,8 +77,6 @@
     }
   ],
   "required": [
-    "apiVersion",
-    "kind",
     "metadata",
     "spec"
   ],
@@ -117,7 +119,7 @@
           ]
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "spec": {
       "$id": "#/properties/spec",
@@ -178,7 +180,6 @@
         }
       ],
       "required": [
-        "version",
         "displayName",
         "durationMinutes",
         "icon",
@@ -216,6 +217,41 @@
           "examples": [
             10
           ]
+        },
+        "type": {
+          "$id": "#/properties/spec/properties/type",
+          "type": "object",
+          "description": "Used to distinguish between quick start types, an additional tile is shown on the quick start card",
+          "examples": [
+            {
+              "text": "Documentation",
+              "color": "blue"
+            }
+          ],
+          "required": [
+            "text"
+          ],
+          "properties": {
+            "text": {
+              "$id": "#/properties/spec/properties/type/properties/text",
+              "type": "string",
+              "description": "Text to display in the tile on the quick start card",
+              "examples": [
+                "Documentation",
+                "Quick start"
+              ]
+            },
+            "color": {
+              "$id": "#/properties/spec/properties/type/properties/color",
+              "type": "string",
+              "description": "Color of the tile on the quick start card",
+              "examples": [
+                "green",
+                "blue"
+              ]
+            }
+          },
+          "additionalProperties": false
         },
         "icon": {
           "$id": "#/properties/spec/properties/icon",

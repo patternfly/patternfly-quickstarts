@@ -1,11 +1,11 @@
-apiVersion: console.openshift.io/v1
-kind: QuickStarts
 metadata:
   name: mas-quarkus-kafka
 spec:
-  version: 0.1
   displayName: !snippet/title README.adoc#chap-kafka-bin-scripts
   durationMinutes: 10
+  type: 
+    text: AsciiDoc
+    color: purple
   icon: ''
   description: !snippet README.adoc#description
   prerequisites:
