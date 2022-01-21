@@ -46,9 +46,10 @@ PercyScript.run(async (page, percySnapshot) => {
 
   // quick starts
   const quickStarts = [
+    'getting-started-with-quick-starts',
+    'mas-alert-note-prereq',
     'add-healthchecks',
     'install-app-and-associate-pipeline',
-    'copy-execute-snippets',
     'serverless-application',
     'node-with-s2i',
     'spring-with-s2i',
