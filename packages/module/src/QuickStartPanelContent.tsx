@@ -106,10 +106,14 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
             >
               {quickStart?.spec.displayName}{' '}
               <small className="pfext-quick-start-panel-content__duration">
-                {getResource(
-                  'Quick start • {{duration, number}} minutes',
-                  quickStart?.spec.durationMinutes,
-                ).replace('{{duration, number}}', quickStart?.spec.durationMinutes)}
+                {quickStart?.spec.durationMinutes
+                  ? getResource(
+                      '{{type}} • {{duration, number}} minutes',
+                      quickStart?.spec.durationMinutes,
+                    )
+                      .replace('{{duration, number}}', quickStart?.spec.durationMinutes)
+                      .replace('{{type}}', getResource('Type'))
+                  : getResource('Type')}
               </small>
             </Title>
           </div>

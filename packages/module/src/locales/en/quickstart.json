@@ -41,5 +41,6 @@
   "Not available": "Not available",
   "Copy to clipboard": "Copy to clipboard",
   "Successfully copied to clipboard!": "Successfully copied to clipboard!",
-  "Quick start • {{duration, number}} minutes": "Quick start • {{duration, number}} minutes"
+  "Type": "Quick start",
+  "{{type}} • {{duration, number}} minutes": "{{type}} • {{duration, number}} minutes"
 }
