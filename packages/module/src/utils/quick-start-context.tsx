@@ -103,7 +103,7 @@ export const QuickStartContextDefaults = {
   useLegacyHeaderColors: false,
   markdown: null,
   loading: false,
-  alwaysShowTaskReview: false,
+  alwaysShowTaskReview: true,
 };
 export const QuickStartContext = createContext<QuickStartContextValues>(QuickStartContextDefaults);
 
