@@ -18,6 +18,7 @@ type QuickStartTaskHeaderProps = {
   size?: 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
   isActiveTask?: boolean;
   onTaskSelect: (index: number) => void;
+  chidlren?: React.ReactNode;
 };
 
 const TaskIcon: React.FC<{
@@ -60,6 +61,7 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   size,
   isActiveTask,
   onTaskSelect,
+  children,
 }) => {
   const classNames = css('pfext-quick-start-task-header__title', {
     'pfext-quick-start-task-header__title-success': taskStatus === QuickStartTaskStatus.SUCCESS,
@@ -103,7 +105,9 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
       onNavItemClick={() => onTaskSelect(taskIndex - 1)}
       navItemComponent="button"
       isCurrent={isActiveTask}
-    />
+    >
+      {children}
+    </WizardNavItem>
   );
 };
 
