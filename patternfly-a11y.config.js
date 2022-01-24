@@ -12,7 +12,6 @@ module.exports = {
   waitFor,
   crawl: false,
   urls: [
-    '/custom-catalog',
     '/quickstarts-props',
     '?quickstart=add-healthchecks',
     '?quickstart=install-app-and-associate-pipeline',

@@ -22,4 +22,4 @@ jobs:
     - name: Build
       run: yarn build
     - name: Start server and run a11y tests
-      run: yarn start && yarn test:a11y
+      run: npx start-server-and-test start http://localhost:3000 test:a11y
