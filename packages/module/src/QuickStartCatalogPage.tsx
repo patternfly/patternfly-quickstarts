@@ -17,7 +17,7 @@ import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-
 import { QuickStart } from './utils/quick-start-types';
 import { filterQuickStarts } from './utils/quick-start-utils';
 
-type QuickStartCatalogPageProps = {
+export type QuickStartCatalogPageProps = {
   quickStarts?: QuickStart[];
   showFilter?: boolean;
   sortFnc?: (q1: QuickStart, q2: QuickStart) => number;
