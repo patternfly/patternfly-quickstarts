@@ -35,6 +35,52 @@ IMPORTANT: I am an Alert (aka IMPORTANT in asciidoc) rendered by Patternfly Reac
 . Do you see a note section?
 . Do you see an alert section and task-level prerequisites?.
 
+
+[id="proc-description-with-admonition-blocks_{context}"]
+== Note, important, warning, etc sections in description
+
+After you create a service accounts for applications to connect to a {registry} instance, you must also set the appropriate level of access for the new account in the *Access* tab of the {registry} instance. {registry} uses role-based access to enable you to manage how other user accounts and service accounts can interact with the {registry} instance that you create.
+
+Note:
+
+NOTE: If you want to use a service account that already has the required role, you  can skip this section.
+
+Tip:
+
+TIP: If you want to use a service account that already has the required role, you can skip this section.
+
+Important:
+
+IMPORTANT: If you want to use a service account that already has the required role, you can skip this section.
+
+Caution:
+
+CAUTION: If you want to use a service account that already has the required role, you can skip this section.
+
+Warning:
+
+WARNING: If you want to use a service account that already has the required role, you can skip this section.
+
+.Prerequisites
+* You've created a {registry} instance and the instance is in *Ready* state.
+* You've created a service account that you want to allow to access the running {registry} instance.
+
+.Procedure
+. In the *{registry} Instances* page of the web console, click the name of the {registry} instance that you want the service account to access.
+. Click the *Access* tab to view the accounts and roles already assigned for this instance.
+. Click *Grant access* to assign a role to the service account.
+. In the *Account* field, select or enter the service account name that you want to assign the role to.
+. Select the *Role* that you want to assign to the account, for example, *Manager* for write access to this instance.
+. Click *Save* to finish.
+
+.Verification
+ifdef::qs[]
+* Is the new role for the service account listed in the *Access* page of the {registry} instance?
+endif::[]
+ifndef::qs[]
+* Verify that the new role for the service account is listed in the *Access* page of the {registry} instance.
+endif::[]
+
 [#conclusion]
 Congratulations! You successfully completed the example quick start, and are now aware of the new features.
 

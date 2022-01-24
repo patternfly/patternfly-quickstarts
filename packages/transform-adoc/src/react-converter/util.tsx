@@ -10,6 +10,9 @@ const PREREQUISITES = 'Prerequisites';
 const PROCEDURE = 'Procedure';
 const IMPORTANT = 'IMPORTANT';
 const NOTE = 'NOTE';
+const WARNING = 'WARNING';
+const TIP = 'TIP';
+const CAUTION = 'CAUTION';
 
 export const getModuleType = (node: Asciidoctor.AbstractNode) => {
   if (node.getAttributes()[MODULE_TYPE_ATTRIBUTE]) {
@@ -52,21 +55,60 @@ export const isNoteBlock = (node: Asciidoctor.AbstractBlock) => {
   return node.getAttribute('style') === NOTE;
 };
 
+export const isWarningBlock = (node: Asciidoctor.AbstractBlock) => {
+  return node.getAttribute('style') === WARNING;
+};
+
+export const isTipBlock = (node: Asciidoctor.AbstractBlock) => {
+  return node.getAttribute('style') === TIP;
+};
+
+export const isCautionBlock = (node: Asciidoctor.AbstractBlock) => {
+  return node.getAttribute('style') === CAUTION;
+};
+
 export const renderMarkup = (component: React.ReactElement) => {
   return ReactDOMServer.renderToStaticMarkup(component);
 };
 
-export const renderPFImportant = (node: Asciidoctor.AbstractBlock) => {
-  const inlineWarningAlert = <Alert variant="warning" isInline title={node.getContent()} />;
+export const renderPFImportant = (node: Asciidoctor.AbstractBlock, inList: boolean) => {
+  const inlineWarningAlert = (
+    <Alert
+      variant="warning"
+      isInline
+      title={node.getContent()}
+      className={css(!inList && 'description-important')}
+    />
+  );
   // Don't render to markup yet, will be passed through by parent
   return ReactDOMServer.renderToString(inlineWarningAlert);
 };
 
-export const renderPFNote = (node: Asciidoctor.AbstractBlock) => {
+export const renderPFNote = (node: Asciidoctor.AbstractBlock, inList: boolean = false) => {
   const noteTitle = (node.getAttribute && node.getAttribute('textlabel')) || 'Note';
+  const classNames = {
+    inList: {
+      card: 'task-pflist-list__item__content__note',
+      cardBody: 'task-pflist-list__item__content__note__body',
+    },
+    inDescription: {
+      card: 'description-note',
+      cardBody: 'description-note__body',
+    },
+  };
   const note = (
-    <Card isPlain isFlat isCompact className="task-pflist-list__item__content__note">
-      <CardBody className="task-pflist-list__item__content__note__body">
+    <Card
+      isPlain
+      isFlat
+      isCompact
+      className={css(inList && classNames.inList.card, !inList && classNames.inDescription.card)}
+    >
+      <CardBody
+        className={css(
+          inList && classNames.inList.cardBody,
+          !inList && classNames.inDescription.cardBody,
+        )}
+      >
         <strong>{noteTitle}:</strong> {node.getContent()}
       </CardBody>
     </Card>
@@ -85,11 +127,11 @@ export const getListTexts = (list: Asciidoctor.List) => {
       return isNoteBlock(block);
     });
     if (importantBlock) {
-      const importantRendered = renderPFImportant(importantBlock);
+      const importantRendered = renderPFImportant(importantBlock, true);
       return listItem.setText(listItem.getText() + importantRendered);
     }
     if (noteBlock) {
-      const noteRendered = renderPFNote(noteBlock);
+      const noteRendered = renderPFNote(noteBlock, true);
       return listItem.setText(listItem.getText() + noteRendered);
     }
     return listItem.getText();
