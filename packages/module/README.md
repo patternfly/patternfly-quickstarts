@@ -166,38 +166,17 @@ See above usage of `useLegacyHeaderColors` boolean to opt-out of update. Should 
 
 ## Quick starts format
 
-Quick starts are parsed as markdown. To write your own quick start, if you use Typescript you can [check out the type definition here](https://github.com/patternfly/patternfly-quickstarts/blob/d52b194119f1ff16e69bf589d49a14931a19ac4b/packages/module/src/utils/quick-start-types.ts#L6).
+Quick starts are parsed as markdown. To write your own quick start, if you use Typescript you can [check out the type definition here](https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/module/src/utils/quick-start-types.ts).
 
-A basic quick start has this structure:
-```yaml
-metadata:
-  name: id-of-this-quick-start
-spec:
-  displayName: Get started with Node
-  durationMinutes: 10
-  description: 'Import a Node Application from git, build, and deploy it onto OpenShift.'
-  introduction: >-
-    **Node.js** is based on the V8 JavaScript engine and allows you to write
-    server-side JavaScript applications. It provides an I/O model based on
-    events and non-blocking operations that enables you to write efficient
-    applications.
-  tasks:
-    - title: Create a Node application
-      description: First task description
-      review:
-        failedTaskHelp: This task isn’t verified yet. Try the task again.
-        instructions: >-
-          The application is represented by the light grey area with the white border. The deployment is a white circle. Verify that the application was successfully created.
-    - title: View the build status
-      description: Second task description
-      review:
-        failedTaskHelp: This task isn’t verified yet. Try the task again.
-        instructions: >-
-          This build may take a few minutes. When it's finished, a **Complete** badge will surface on the page header beside build name **nodejsrest-http-redhat-1**. Did this badge appear?
-  conclusion: Your Node application is deployed and ready.
-```
+Here's a [yaml template](https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/dev/src/quickstarts-data/yaml/template.yaml) to get you started on writing your own quick starts.
 
-For more examples of quick starts, [you can go here](https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/dev/src/quickstarts-data/yaml).
+## Writing quick starts
+
+Quick starts are typically written in yaml, but we've also seen projects use asciidoc and json. As long as you can pass in an [array of quick starts](https://github.com/patternfly/patternfly-quickstarts/blob/b086faefb0699e4259ca23d058ed330df1d87f8a/packages/module/src/QuickStartDrawer.tsx#L18) it doesn't really matter in what format your content is sourced.
+- We have a [yaml starter template here](https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/dev/src/quickstarts-data/yaml/template.yaml)
+- The easiest way to preview the content as you're writing it, is to use Visual Studio code with our [quickstarts-preview extension](https://marketplace.visualstudio.com/items?itemName=PatternFly.quickstarts-preview).
+  - Alternatively, you can use [github.dev](https://github.dev/) which is basically VS Code on the web, and install the extension there, then edit your yaml content!
+- For guidelines on writing a quick start, the fine folks at OpenShift have created [this guide](https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html)
 
 ### Highlighting elements
 
@@ -250,6 +229,4 @@ return (
 Use this [file](https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/module/src/locales/en/quickstart.json) as a base for your translations.
 Each language is different, especially when it comes to plurals. Try [this utility](https://jsfiddle.net/6bpxsgd4) sourced from [i18next](https://www.i18next.com/translation-function/plurals#how-to-find-the-correct-plural-suffix) to determine the suffixes for the right plural format.
 
-For localizing the content of quick starts files, we provide the option to include `language` and `countryCode` key to your translated file. Based on these keys you can filter out quick starts. We have a demo of this behaviour in our [demo app](https://quickstarts.netlify.app/). You can have a look at the code [here](https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/dev/src/App3.tsx).
-
-#### 
+For localizing the content of quick starts files, we provide the option to include `language` and `countryCode` key to your translated file. Based on these keys you can filter out quick starts. We have a demo of this behaviour in our [demo app](https://quickstarts.netlify.app/quickstarts-localized). You can have a look at the code [here](https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/dev/src/AppLocalized.tsx).
