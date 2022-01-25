@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { Asciidoctor } from 'asciidoctor/types';
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
@@ -5,16 +6,57 @@ import { Alert, Card, CardBody, List, ListItem, Title } from '@patternfly/react-
 import { css } from '@patternfly/react-styles';
 import './util.scss';
 
+// private CONST = 'string' + maps
 const MODULE_TYPE_ATTRIBUTE = 'module-type';
 const PREREQUISITES = 'Prerequisites';
 const PROCEDURE = 'Procedure';
-const IMPORTANT = 'IMPORTANT';
-const NOTE = 'NOTE';
-const WARNING = 'WARNING';
-const TIP = 'TIP';
-const CAUTION = 'CAUTION';
 
-export const getModuleType = (node: Asciidoctor.AbstractNode) => {
+enum AdmonitionType {
+  TIP = 'TIP',
+  NOTE = 'NOTE',
+  IMPORTANT = 'IMPORTANT',
+  WARNING = 'WARNING',
+  CAUTION = 'CAUTION',
+}
+
+const admonitionToAlertVariantMap = {
+  [AdmonitionType.IMPORTANT]: 'info',
+  [AdmonitionType.CAUTION]: 'warning',
+  [AdmonitionType.WARNING]: 'danger',
+};
+// end private CONST = 'string' + maps
+
+// private utils
+const getListTexts = (list: Asciidoctor.List) => {
+  let admonitionBlock: Asciidoctor.AbstractBlock;
+  return list.getItems().map((listItem: Asciidoctor.ListItem) => {
+    admonitionBlock = listItem.getBlocks().find((block) => {
+      return isAdmonitionBlock(block);
+    });
+    if (admonitionBlock) {
+      const admonitionRendered = renderAdmonitionBlock(admonitionBlock, true);
+      return listItem.setText(listItem.getText() + admonitionRendered);
+    }
+    return listItem.getText();
+  });
+};
+
+const withAdocWrapper = (Component: React.ReactNode, nodeName: string, title: string) => {
+  return (
+    <div className={nodeName}>
+      <div className="title">{title}</div>
+      {Component}
+    </div>
+  );
+};
+
+const renderMarkup = (component: React.ReactElement) => {
+  return ReactDOMServer.renderToStaticMarkup(component);
+};
+// end private utils
+
+// private block identifying helpers
+const getModuleType = (node: Asciidoctor.AbstractNode) => {
   if (node.getAttributes()[MODULE_TYPE_ATTRIBUTE]) {
     return node.getAttributes()[MODULE_TYPE_ATTRIBUTE];
   }
@@ -35,56 +77,39 @@ export const getModuleType = (node: Asciidoctor.AbstractNode) => {
   return 'unknown'; // punt, we don't know
 };
 
-export const isProcedure = (node: Asciidoctor.AbstractNode) => {
+const isProcedure = (node: Asciidoctor.AbstractNode) => {
   return getModuleType(node) === 'proc';
 };
 
-export const isPrerequisites = (node: Asciidoctor.AbstractBlock) => {
+const isPrerequisites = (node: Asciidoctor.AbstractBlock) => {
   return node.getTitle && node.getTitle() === PREREQUISITES;
 };
 
-export const isListBlock = (node: Asciidoctor.AbstractBlock) => {
+const isListBlock = (node: Asciidoctor.AbstractBlock) => {
   return node.getNodeName() === 'olist' || node.getNodeName() === 'ulist';
 };
 
-export const isImportantBlock = (node: Asciidoctor.AbstractBlock) => {
-  return node.getAttribute('style') === IMPORTANT;
+const isProcedureListBlock = (node: Asciidoctor.AbstractBlock) => {
+  return node.getTitle && node.getTitle() === PROCEDURE && isListBlock(node);
+};
+// end private block identifying helpers
+
+// public block identifying helpers
+export const isAdmonitionBlock = (node: Asciidoctor.AbstractBlock) => {
+  return node.getNodeName() === 'admonition';
 };
 
-export const isNoteBlock = (node: Asciidoctor.AbstractBlock) => {
-  return node.getAttribute('style') === NOTE;
+export const isTaskLevelPrereqs = (node: Asciidoctor.AbstractBlock) => {
+  return isPrerequisites(node) && isListBlock(node) && isProcedure(node.getParent());
 };
 
-export const isWarningBlock = (node: Asciidoctor.AbstractBlock) => {
-  return node.getAttribute('style') === WARNING;
+export const isTaskLevelProcedure = (node: Asciidoctor.AbstractBlock) => {
+  return isProcedureListBlock(node) && isProcedure(node.getParent());
 };
+// end public block identifying helpers
 
-export const isTipBlock = (node: Asciidoctor.AbstractBlock) => {
-  return node.getAttribute('style') === TIP;
-};
-
-export const isCautionBlock = (node: Asciidoctor.AbstractBlock) => {
-  return node.getAttribute('style') === CAUTION;
-};
-
-export const renderMarkup = (component: React.ReactElement) => {
-  return ReactDOMServer.renderToStaticMarkup(component);
-};
-
-export const renderPFImportant = (node: Asciidoctor.AbstractBlock, inList: boolean) => {
-  const inlineWarningAlert = (
-    <Alert
-      variant="warning"
-      isInline
-      title={node.getContent()}
-      className={css(!inList && 'description-important')}
-    />
-  );
-  // Don't render to markup yet, will be passed through by parent
-  return ReactDOMServer.renderToString(inlineWarningAlert);
-};
-
-export const renderPFNote = (node: Asciidoctor.AbstractBlock, inList: boolean = false) => {
+// private renderers
+const renderPFNote = (node: Asciidoctor.AbstractBlock, inList: boolean = false) => {
   const noteTitle = (node.getAttribute && node.getAttribute('textlabel')) || 'Note';
   const classNames = {
     inList: {
@@ -116,47 +141,24 @@ export const renderPFNote = (node: Asciidoctor.AbstractBlock, inList: boolean = 
   // Don't render to markup yet, will be passed through by parent
   return ReactDOMServer.renderToString(note);
 };
+// end private renderers
 
-export const getListTexts = (list: Asciidoctor.List) => {
-  let importantBlock: Asciidoctor.AbstractBlock, noteBlock: Asciidoctor.AbstractBlock;
-  return list.getItems().map((listItem: Asciidoctor.ListItem) => {
-    importantBlock = listItem.getBlocks().find((block) => {
-      return isImportantBlock(block);
-    });
-    noteBlock = listItem.getBlocks().find((block) => {
-      return isNoteBlock(block);
-    });
-    if (importantBlock) {
-      const importantRendered = renderPFImportant(importantBlock, true);
-      return listItem.setText(listItem.getText() + importantRendered);
-    }
-    if (noteBlock) {
-      const noteRendered = renderPFNote(noteBlock, true);
-      return listItem.setText(listItem.getText() + noteRendered);
-    }
-    return listItem.getText();
-  });
-};
-
-export const isTaskLevelPrereqs = (node: Asciidoctor.AbstractBlock) => {
-  return isPrerequisites(node) && isListBlock(node) && isProcedure(node.getParent());
-};
-
-export const isProcedureListBlock = (node: Asciidoctor.AbstractBlock) => {
-  return node.getTitle && node.getTitle() === PROCEDURE && isListBlock(node);
-};
-
-export const isTaskLevelProcedure = (node: Asciidoctor.AbstractBlock) => {
-  return isProcedureListBlock(node) && isProcedure(node.getParent());
-};
-
-export const withAdocWrapper = (Component: React.ReactNode, nodeName: string, title: string) => {
-  return (
-    <div className={nodeName}>
-      <div className="title">{title}</div>
-      {Component}
-    </div>
+// public renderers
+export const renderAdmonitionBlock = (node: Asciidoctor.AbstractBlock, inList: boolean) => {
+  const admonitionType = node.getAttribute('style');
+  const pfAlertVariant = admonitionToAlertVariantMap[admonitionType];
+  if ([AdmonitionType.NOTE, AdmonitionType.TIP].includes(admonitionType)) {
+    return renderPFNote(node, inList);
+  }
+  const pfAlert = (
+    <Alert
+      variant={pfAlertVariant}
+      isInline
+      title={node.getContent()}
+      className={css(!inList && 'description-important')}
+    />
   );
+  return ReactDOMServer.renderToString(pfAlert);
 };
 
 export const renderPFList = (list: Asciidoctor.List) => {
@@ -205,3 +207,4 @@ export const renderPFList = (list: Asciidoctor.List) => {
   const preReqReact = withAdocWrapper(PFList, listType, listTitle);
   return renderMarkup(preReqReact);
 };
+// end public renderers
