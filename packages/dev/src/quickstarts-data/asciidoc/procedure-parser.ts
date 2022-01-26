@@ -29,7 +29,7 @@ export const ProcQuickStartParser = (
       delete task.proc;
     }
 
-    let description,
+    let description = '',
       procedure,
       verification,
       title,
@@ -59,8 +59,8 @@ export const ProcQuickStartParser = (
           /**
           child typically looks like:
 
-          <div class="paragraph|olist|ulist">
-             <div class="title">Procedure|Prerequisites|Verification</div>
+          <div class="paragraph|olist|ulist|admonitionblock">
+             <div class="title">Procedure|Prerequisites|Verification|Note|Warning</div>
              <ol|ul class="arabic">
                <li>
                <li>...
@@ -74,8 +74,13 @@ export const ProcQuickStartParser = (
           const child = sectionBody.children.item(i);
           // find the title
           const sectionTitle = child?.querySelector('.heading,.title');
-          if (sectionTitle) {
-            switch (sectionTitle?.textContent?.trim()) {
+          // should this section be assigned to a specific section
+          const sectionTitleText = sectionTitle?.textContent?.trim();
+          const isKnownSection = ['Procedure', 'Verification', 'Prerequisites'].includes(
+            sectionTitle?.textContent?.trim(),
+          );
+          if (isKnownSection) {
+            switch (sectionTitleText) {
               case 'Procedure':
                 procedure = child?.querySelector(':not(.heading):not(.title)')?.outerHTML.trim();
                 break;
@@ -90,7 +95,7 @@ export const ProcQuickStartParser = (
             }
           } else if (!procedure) {
             // Otherwise if it comes before a procedure it's part of the description
-            description = child?.innerHTML.trim();
+            description = description + child?.outerHTML.trim();
           }
         }
       }

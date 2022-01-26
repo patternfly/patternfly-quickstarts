@@ -1,5 +1,5 @@
 [id="chap-alert-note-prereq"]
-= Alert, note, and prerequisites example quickstart
+= Note/Tip card, 3 alert variants and prerequisites example quickstart
 
 .Prerequisites
 * You want to see some new features condensed into one example quickstart.
@@ -13,27 +13,75 @@ Welcome to this example quickstart making it easy to see some new features, whic
 endif::[]
 
 [id="task-1_{context}",module-type="proc"]
-== Look at the new features
+== Prerequisites expanded, note, tip, and 3 alert variants in procedure
 
 In this Quick Start you will preview some design changes.
 
 .Prerequisites
 * Take a look at the new design changes, including this prerequisites section.
-* Also take a look at the note and alert sections.
+* Also take a look at the note, tip, and 3 types of alerts renderd by PF React.
 
 .Procedure
-. Note section
+. Note
 +
-NOTE: I am a Note rendered by Patternfly React Components.
+NOTE: I am a note card (triggerd by NOTE admonition in asciidoc) rendered by Patternfly React Components.
 +
 
-. Alert section
+. Tip
 +
-IMPORTANT: I am an Alert (aka IMPORTANT in asciidoc) rendered by Patternfly React Components.
+TIP: I am a tip card (triggerd by TIP admonition in asciidoc) rendered by Patternfly React Components.
++
+
+. Info
++
+IMPORTANT: I am an info alert (triggerd by IMPORTANT admonition in asciidoc) rendered by Patternfly React Components.
++
+
+. Warning
++
+CAUTION: I am a warning alert (triggerd by CAUTION admonition in asciidoc) rendered by Patternfly React Components.
++
+
+. Danger
++
+WARNING: I am a danger alert (triggerd by WARNING admonition in asciidoc) rendered by Patternfly React Components.
 
 .Verification
-. Do you see a note section?
-. Do you see an alert section and task-level prerequisites?.
+. Do you see a note and info card?
+. Do you see 3 types of alerts and task-level prerequisites?
+
+
+[id="proc-description-with-admonition-blocks_{context}"]
+== Note, tip and 3 alert variants in task description
+
+Note:
+
+NOTE: If you'd like to use a service account that already has the required role, you  can skip this section.
+
+Tip:
+
+TIP: If you want to use a service account that already has the required role, you can skip this section.
+
+Important:
+
+IMPORTANT: If you want to use a service account that already has the required role, you can skip this section.
+
+Caution:
+
+CAUTION: If you want to use a service account that already has the required role, you can skip this section.
+
+Warning:
+
+WARNING: If you want to use a service account that already has the required role, you can skip this section.
+
+.Prerequisites
+* Review at description above
+
+.Procedure
+. No steps for this task
+
+.Verification
+* Did you see the sections above?
 
 [#conclusion]
 Congratulations! You successfully completed the example quick start, and are now aware of the new features.

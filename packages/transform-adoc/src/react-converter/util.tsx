@@ -1,17 +1,68 @@
-import { Asciidoctor } from 'asciidoctor/types';
-import ReactDOMServer from 'react-dom/server';
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import React from 'react';
-import { Alert, Card, CardBody, List, ListItem, Title } from '@patternfly/react-core';
+import ReactDOMServer from 'react-dom/server';
+import { Asciidoctor } from 'asciidoctor/types';
+import {AllHtmlEntities} from 'html-entities';
+
+import { Alert, List, ListItem, Title } from '@patternfly/react-core';
+import LightbulbIcon from '@patternfly/react-icons/dist/js/icons/lightbulb-icon';
+import FireIcon from '@patternfly/react-icons/dist/js/icons/fire-icon';
 import { css } from '@patternfly/react-styles';
 import './util.scss';
 
+// private CONST = 'string' + maps
 const MODULE_TYPE_ATTRIBUTE = 'module-type';
 const PREREQUISITES = 'Prerequisites';
 const PROCEDURE = 'Procedure';
-const IMPORTANT = 'IMPORTANT';
-const NOTE = 'NOTE';
 
-export const getModuleType = (node: Asciidoctor.AbstractNode) => {
+enum AdmonitionType {
+  TIP = 'TIP',
+  NOTE = 'NOTE',
+  IMPORTANT = 'IMPORTANT',
+  WARNING = 'WARNING',
+  CAUTION = 'CAUTION',
+}
+
+const admonitionToAlertVariantMap = {
+  [AdmonitionType.NOTE]: { variant: 'info' },
+  [AdmonitionType.TIP]: { variant: 'default', customIcon: <LightbulbIcon /> },
+  [AdmonitionType.IMPORTANT]: { variant: 'danger' },
+  [AdmonitionType.CAUTION]: { variant: 'warning', customIcon: <FireIcon /> },
+  [AdmonitionType.WARNING]: { variant: 'warning' },
+};
+// end private CONST = 'string' + maps
+
+// private utils
+const getListTexts = (list: Asciidoctor.List) => {
+  let admonitionBlock: Asciidoctor.AbstractBlock;
+  return list.getItems().map((listItem: Asciidoctor.ListItem) => {
+    admonitionBlock = listItem.getBlocks().find((block) => {
+      return isAdmonitionBlock(block);
+    });
+    if (admonitionBlock) {
+      const admonitionRendered = renderAdmonitionBlock(admonitionBlock, true);
+      return listItem.setText(listItem.getText() + admonitionRendered);
+    }
+    return listItem.getText();
+  });
+};
+
+const withAdocWrapper = (Component: React.ReactNode, nodeName: string, title: string) => {
+  return (
+    <div className={nodeName}>
+      <div className="title">{title}</div>
+      {Component}
+    </div>
+  );
+};
+
+const renderMarkup = (component: React.ReactElement) => {
+  return ReactDOMServer.renderToStaticMarkup(component);
+};
+// end private utils
+
+// private block identifying helpers
+const getModuleType = (node: Asciidoctor.AbstractNode) => {
   if (node.getAttributes()[MODULE_TYPE_ATTRIBUTE]) {
     return node.getAttributes()[MODULE_TYPE_ATTRIBUTE];
   }
@@ -32,89 +83,89 @@ export const getModuleType = (node: Asciidoctor.AbstractNode) => {
   return 'unknown'; // punt, we don't know
 };
 
-export const isProcedure = (node: Asciidoctor.AbstractNode) => {
+const isProcedure = (node: Asciidoctor.AbstractNode) => {
   return getModuleType(node) === 'proc';
 };
 
-export const isPrerequisites = (node: Asciidoctor.AbstractBlock) => {
+const isPrerequisites = (node: Asciidoctor.AbstractBlock) => {
   return node.getTitle && node.getTitle() === PREREQUISITES;
 };
 
-export const isListBlock = (node: Asciidoctor.AbstractBlock) => {
+const isListBlock = (node: Asciidoctor.AbstractBlock) => {
   return node.getNodeName() === 'olist' || node.getNodeName() === 'ulist';
 };
 
-export const isImportantBlock = (node: Asciidoctor.AbstractBlock) => {
-  return node.getAttribute('style') === IMPORTANT;
+const isProcedureListBlock = (node: Asciidoctor.AbstractBlock) => {
+  return node.getTitle && node.getTitle() === PROCEDURE && isListBlock(node);
 };
+// end private block identifying helpers
 
-export const isNoteBlock = (node: Asciidoctor.AbstractBlock) => {
-  return node.getAttribute('style') === NOTE;
-};
-
-export const renderMarkup = (component: React.ReactElement) => {
-  return ReactDOMServer.renderToStaticMarkup(component);
-};
-
-export const renderPFImportant = (node: Asciidoctor.AbstractBlock) => {
-  const inlineWarningAlert = <Alert variant="warning" isInline title={node.getContent()} />;
-  // Don't render to markup yet, will be passed through by parent
-  return ReactDOMServer.renderToString(inlineWarningAlert);
-};
-
-export const renderPFNote = (node: Asciidoctor.AbstractBlock) => {
-  const noteTitle = (node.getAttribute && node.getAttribute('textlabel')) || 'Note';
-  const note = (
-    <Card isPlain isFlat isCompact className="task-pflist-list__item__content__note">
-      <CardBody className="task-pflist-list__item__content__note__body">
-        <strong>{noteTitle}:</strong> {node.getContent()}
-      </CardBody>
-    </Card>
-  );
-  // Don't render to markup yet, will be passed through by parent
-  return ReactDOMServer.renderToString(note);
-};
-
-export const getListTexts = (list: Asciidoctor.List) => {
-  let importantBlock: Asciidoctor.AbstractBlock, noteBlock: Asciidoctor.AbstractBlock;
-  return list.getItems().map((listItem: Asciidoctor.ListItem) => {
-    importantBlock = listItem.getBlocks().find((block) => {
-      return isImportantBlock(block);
-    });
-    noteBlock = listItem.getBlocks().find((block) => {
-      return isNoteBlock(block);
-    });
-    if (importantBlock) {
-      const importantRendered = renderPFImportant(importantBlock);
-      return listItem.setText(listItem.getText() + importantRendered);
-    }
-    if (noteBlock) {
-      const noteRendered = renderPFNote(noteBlock);
-      return listItem.setText(listItem.getText() + noteRendered);
-    }
-    return listItem.getText();
-  });
+// public block identifying helpers
+export const isAdmonitionBlock = (node: Asciidoctor.AbstractBlock) => {
+  return node.getNodeName() === 'admonition';
 };
 
 export const isTaskLevelPrereqs = (node: Asciidoctor.AbstractBlock) => {
   return isPrerequisites(node) && isListBlock(node) && isProcedure(node.getParent());
 };
 
-export const isProcedureListBlock = (node: Asciidoctor.AbstractBlock) => {
-  return node.getTitle && node.getTitle() === PROCEDURE && isListBlock(node);
-};
-
 export const isTaskLevelProcedure = (node: Asciidoctor.AbstractBlock) => {
   return isProcedureListBlock(node) && isProcedure(node.getParent());
 };
+// end public block identifying helpers
+// leaving here for now if design wants to revert to using card
+// const renderPFNote = (node: Asciidoctor.AbstractBlock, inList: boolean = false) => {
+//   const noteTitle = (node.getAttribute && node.getAttribute('textlabel')) || 'Note';
+//   const classNames = {
+//     inList: {
+//       card: 'task-pflist-list__item__content__note',
+//       cardBody: 'task-pflist-list__item__content__note__body',
+//     },
+//     inDescription: {
+//       card: 'description-note',
+//       cardBody: 'description-note__body',
+//     },
+//   };
+//   const note = (
+//     <Card
+//       isPlain
+//       isFlat
+//       isCompact
+//       className={css(inList && classNames.inList.card, !inList && classNames.inDescription.card)}
+//     >
+//       <CardBody
+//         className={css(
+//           inList && classNames.inList.cardBody,
+//           !inList && classNames.inDescription.cardBody,
+//         )}
+//       >
+//         <strong>{noteTitle}:</strong> {node.getContent()}
+//       </CardBody>
+//     </Card>
+//   );
+//   // Don't render to markup yet, will be passed through by parent
+//   return ReactDOMServer.renderToString(note);
+// };
 
-export const withAdocWrapper = (Component: React.ReactNode, nodeName: string, title: string) => {
-  return (
-    <div className={nodeName}>
-      <div className="title">{title}</div>
-      {Component}
-    </div>
+// public renderers
+export const renderAdmonitionBlock = (node: Asciidoctor.AbstractBlock, inList: boolean) => {
+  const admonitionType = node.getAttribute('style');
+  const { variant, customIcon } = admonitionToAlertVariantMap[admonitionType];
+  const style = admonitionType === AdmonitionType.CAUTION ? { backgroundColor: '#ec7a0915' } : {};
+
+  const pfAlert = (
+    <Alert
+      variant={variant}
+      customIcon={customIcon && customIcon}
+      isInline
+      title={admonitionType}
+      className={css(!inList && 'description-important')}
+      style={style}
+    >
+      {AllHtmlEntities.decode(node.getContent())}
+    </Alert>
   );
+  return ReactDOMServer.renderToString(pfAlert);
 };
 
 export const renderPFList = (list: Asciidoctor.List) => {
@@ -163,3 +214,4 @@ export const renderPFList = (list: Asciidoctor.List) => {
   const preReqReact = withAdocWrapper(PFList, listType, listTitle);
   return renderMarkup(preReqReact);
 };
+// end public renderers
