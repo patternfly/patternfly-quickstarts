@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { Asciidoctor } from 'asciidoctor/types';
-import ReactDOMServer from 'react-dom/server';
 import React from 'react';
-import { Alert, Card, CardBody, List, ListItem, Title } from '@patternfly/react-core';
+import ReactDOMServer from 'react-dom/server';
+import { Asciidoctor } from 'asciidoctor/types';
+import {AllHtmlEntities} from 'html-entities';
+
+import { Alert, List, ListItem, Title } from '@patternfly/react-core';
+import LightbulbIcon from '@patternfly/react-icons/dist/js/icons/lightbulb-icon';
+import FireIcon from '@patternfly/react-icons/dist/js/icons/fire-icon';
 import { css } from '@patternfly/react-styles';
 import './util.scss';
 
@@ -20,9 +24,11 @@ enum AdmonitionType {
 }
 
 const admonitionToAlertVariantMap = {
-  [AdmonitionType.IMPORTANT]: 'info',
-  [AdmonitionType.CAUTION]: 'warning',
-  [AdmonitionType.WARNING]: 'danger',
+  [AdmonitionType.NOTE]: { variant: 'info' },
+  [AdmonitionType.TIP]: { variant: 'default', customIcon: <LightbulbIcon /> },
+  [AdmonitionType.IMPORTANT]: { variant: 'danger' },
+  [AdmonitionType.CAUTION]: { variant: 'warning', customIcon: <FireIcon /> },
+  [AdmonitionType.WARNING]: { variant: 'warning' },
 };
 // end private CONST = 'string' + maps
 
@@ -107,56 +113,57 @@ export const isTaskLevelProcedure = (node: Asciidoctor.AbstractBlock) => {
   return isProcedureListBlock(node) && isProcedure(node.getParent());
 };
 // end public block identifying helpers
-
-// private renderers
-const renderPFNote = (node: Asciidoctor.AbstractBlock, inList: boolean = false) => {
-  const noteTitle = (node.getAttribute && node.getAttribute('textlabel')) || 'Note';
-  const classNames = {
-    inList: {
-      card: 'task-pflist-list__item__content__note',
-      cardBody: 'task-pflist-list__item__content__note__body',
-    },
-    inDescription: {
-      card: 'description-note',
-      cardBody: 'description-note__body',
-    },
-  };
-  const note = (
-    <Card
-      isPlain
-      isFlat
-      isCompact
-      className={css(inList && classNames.inList.card, !inList && classNames.inDescription.card)}
-    >
-      <CardBody
-        className={css(
-          inList && classNames.inList.cardBody,
-          !inList && classNames.inDescription.cardBody,
-        )}
-      >
-        <strong>{noteTitle}:</strong> {node.getContent()}
-      </CardBody>
-    </Card>
-  );
-  // Don't render to markup yet, will be passed through by parent
-  return ReactDOMServer.renderToString(note);
-};
-// end private renderers
+// leaving here for now if design wants to revert to using card
+// const renderPFNote = (node: Asciidoctor.AbstractBlock, inList: boolean = false) => {
+//   const noteTitle = (node.getAttribute && node.getAttribute('textlabel')) || 'Note';
+//   const classNames = {
+//     inList: {
+//       card: 'task-pflist-list__item__content__note',
+//       cardBody: 'task-pflist-list__item__content__note__body',
+//     },
+//     inDescription: {
+//       card: 'description-note',
+//       cardBody: 'description-note__body',
+//     },
+//   };
+//   const note = (
+//     <Card
+//       isPlain
+//       isFlat
+//       isCompact
+//       className={css(inList && classNames.inList.card, !inList && classNames.inDescription.card)}
+//     >
+//       <CardBody
+//         className={css(
+//           inList && classNames.inList.cardBody,
+//           !inList && classNames.inDescription.cardBody,
+//         )}
+//       >
+//         <strong>{noteTitle}:</strong> {node.getContent()}
+//       </CardBody>
+//     </Card>
+//   );
+//   // Don't render to markup yet, will be passed through by parent
+//   return ReactDOMServer.renderToString(note);
+// };
 
 // public renderers
 export const renderAdmonitionBlock = (node: Asciidoctor.AbstractBlock, inList: boolean) => {
   const admonitionType = node.getAttribute('style');
-  const pfAlertVariant = admonitionToAlertVariantMap[admonitionType];
-  if ([AdmonitionType.NOTE, AdmonitionType.TIP].includes(admonitionType)) {
-    return renderPFNote(node, inList);
-  }
+  const { variant, customIcon } = admonitionToAlertVariantMap[admonitionType];
+  const style = admonitionType === AdmonitionType.CAUTION ? { backgroundColor: '#ec7a0915' } : {};
+
   const pfAlert = (
     <Alert
-      variant={pfAlertVariant}
+      variant={variant}
+      customIcon={customIcon && customIcon}
       isInline
-      title={node.getContent()}
+      title={admonitionType}
       className={css(!inList && 'description-important')}
-    />
+      style={style}
+    >
+      {AllHtmlEntities.decode(node.getContent())}
+    </Alert>
   );
   return ReactDOMServer.renderToString(pfAlert);
 };

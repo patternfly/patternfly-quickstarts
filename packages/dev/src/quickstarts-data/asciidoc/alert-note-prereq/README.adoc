@@ -56,7 +56,7 @@ WARNING: I am a danger alert (triggerd by WARNING admonition in asciidoc) render
 
 Note:
 
-NOTE: If you want to use a service account that already has the required role, you  can skip this section.
+NOTE: If you'd like to use a service account that already has the required role, you  can skip this section.
 
 Tip:
 
