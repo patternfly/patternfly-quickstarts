@@ -28,43 +28,46 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
   );
   return (
     <div className="pfext-quick-start-tasks__list">
-      {tasks
-        .filter((_, index) => allTaskStatuses[index] !== QuickStartTaskStatus.INIT)
-        .map((task, index) => {
-          const { title, description, review } = task;
-          const isActiveTask = index === taskNumber;
-          const taskStatus = allTaskStatuses[index];
-          const shouldShowTaskReview =
-            (!QUICKSTART_TASKS_INITIAL_STATES.includes(taskStatus) || alwaysShowTaskReview) &&
-            review;
-          return (
-            <React.Fragment key={title}>
-              <TaskHeader
-                taskIndex={index + 1}
-                title={title}
-                size="md"
-                subtitle={getResource('{{index, number}} of {{tasks, number}}')
-                  .replace('{{index, number}}', index + 1)
-                  .replace('{{tasks, number}}', tasks.length)}
-                taskStatus={taskStatus}
-                isActiveTask={isActiveTask}
-                onTaskSelect={onTaskSelect}
-              />
-              {isActiveTask && (
-                <div className="pfext-quick-start-task__content">
-                  <QuickStartMarkdownView content={description} />
-                  {shouldShowTaskReview && (
-                    <QuickStartTaskReview
-                      review={review}
-                      taskStatus={taskStatus}
-                      onTaskReview={onTaskReview}
-                    />
+      <ul>
+        {tasks
+          .filter((_, index) => allTaskStatuses[index] !== QuickStartTaskStatus.INIT)
+          .map((task, index) => {
+            const { title, description, review } = task;
+            const isActiveTask = index === taskNumber;
+            const taskStatus = allTaskStatuses[index];
+            const shouldShowTaskReview =
+              (!QUICKSTART_TASKS_INITIAL_STATES.includes(taskStatus) || alwaysShowTaskReview) &&
+              review;
+            return (
+              <React.Fragment key={title}>
+                <TaskHeader
+                  taskIndex={index + 1}
+                  title={title}
+                  size="md"
+                  subtitle={getResource('{{index, number}} of {{tasks, number}}')
+                    .replace('{{index, number}}', index + 1)
+                    .replace('{{tasks, number}}', tasks.length)}
+                  taskStatus={taskStatus}
+                  isActiveTask={isActiveTask}
+                  onTaskSelect={onTaskSelect}
+                >
+                  {isActiveTask && (
+                    <div className="pfext-quick-start-task__content">
+                      <QuickStartMarkdownView content={description} />
+                      {shouldShowTaskReview && (
+                        <QuickStartTaskReview
+                          review={review}
+                          taskStatus={taskStatus}
+                          onTaskReview={onTaskReview}
+                        />
+                      )}
+                    </div>
                   )}
-                </div>
-              )}
-            </React.Fragment>
-          );
-        })}
+                </TaskHeader>
+              </React.Fragment>
+            );
+          })}
+      </ul>
     </div>
   );
 };

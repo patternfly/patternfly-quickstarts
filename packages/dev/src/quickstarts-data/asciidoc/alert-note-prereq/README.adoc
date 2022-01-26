@@ -5,7 +5,7 @@
 * You want to see some new features condensed into one example quickstart.
 
 ifdef::qs[]
-[#description]
+[#description-alert-note]
 Preview newly added features: Alert, note, and prerequisite sections rendered using Patternfly React Components.
 
 [#introduction]

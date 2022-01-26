@@ -10,7 +10,7 @@
 = Using Kafka Bin Scripts with {Product}
 
 ifdef::qs[]
-[#description]
+[#description-kafka]
 Learn how to use Kafka Bin Scripts to interact with a {Product} Kafka instance.
 
 [#introduction]

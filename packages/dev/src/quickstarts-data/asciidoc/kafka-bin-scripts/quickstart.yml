@@ -7,7 +7,7 @@ spec:
     text: AsciiDoc
     color: purple
   icon: ''
-  description: !snippet README.adoc#description
+  description: !snippet README.adoc#description-kafka
   prerequisites:
     - A running Kafka instance (see the Getting Started Guide)
     - A command line/terminal

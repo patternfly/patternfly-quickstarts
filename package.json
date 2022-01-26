@@ -21,9 +21,11 @@
     "lint": "yarn lint:module && yarn lint:dev",
     "lint:module": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/module",
     "lint:dev": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/dev",
-    "visual": "npx percy exec -- node snapshots.js"
+    "visual": "npx percy exec -- node snapshots.js",
+    "test:a11y": "patternfly-a11y --config patternfly-a11y.config"
   },
   "devDependencies": {
+    "@patternfly/patternfly-a11y": "4.2.1",
     "@percy/script": "^1.1.0",
     "@types/jest": "^26.0.14",
     "@typescript-eslint/eslint-plugin": "2.11.0",
@@ -52,6 +54,7 @@
     "jest-resolve": "^26.4.0",
     "jsdom": "^16.6.0",
     "mock-socket": "^9.0.3",
+    "start-server-and-test": "^1.14.0",
     "ts-jest": "21.x",
     "typescript": "3.8.3",
     "url-search-params-polyfill": "2.x"

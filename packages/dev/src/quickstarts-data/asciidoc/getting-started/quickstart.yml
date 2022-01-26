@@ -7,7 +7,7 @@ spec:
     text: AsciiDoc
     color: purple
   icon: ''
-  description: !snippet README.adoc#description
+  description: !snippet README.adoc#description-getting-started
   prerequisites:
     - A Red Hat identity
     - Access to the Red Hat OpenShift Streams for Apache Kafka environment at https://cloud.redhat.com

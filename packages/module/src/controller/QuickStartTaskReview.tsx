@@ -48,6 +48,7 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
       variant={getAlertVariant(taskStatus)}
       title={title}
       isInline
+      role="alert"
     >
       <QuickStartMarkdownView content={instructions} />
       <span className="pfext-quick-start-task-review__actions">
