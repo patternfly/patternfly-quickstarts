@@ -17,6 +17,7 @@ spec:
   tasks:
     - !snippet/proc README.adoc#task-1
     - !snippet/proc README.adoc#proc-description-with-admonition-blocks
+    - !snippet/proc README.adoc#task-3
   conclusion: !snippet README.adoc#conclusion
   nextQuickStart:
     - 'kafka-bin-scripts'

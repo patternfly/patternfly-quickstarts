@@ -83,6 +83,29 @@ WARNING: If you want to use a service account that already has the required role
 .Verification
 * Did you see the sections above?
 
+[id="task-3_{context}",module-type="proc"]
+== Long procedure step with multiple paragraphs and admonitions
+
+.Prerequisites
+* None
+
+.Procedure
+. For the *Authentication method*, copy the OAuth *Token endpoint URL* to a secure location. This is the endpoint that you’ll use with your service account credentials to authenticate the connection to this {registry} instance.
++
+NOTE: HTTP Basic authentication is also available for tools and libraries that don't support OAuth, but OAuth is recommended whenever possible. With HTTP Basic, you use only the service account credentials to authenticate the connection to the {registry} instance.
++
+You’ll use the service account information that you saved to configure your applications to connect to your {registry} instances later when you're ready.
++
+IMPORTANT: This is an important alert to test multiple amonition blocks in one list item
++
+For example, if you plan to use https://github.com/edenhill/kafkacat[Kafkacat^] to interact with your Kafka instance and deserialize Avro messages using {registry}, you'll use this information to set your {registry} URL in the client environment variables.
++
+To review your service account information, reset your credentials, or delete the service account, use the left navigation menu to go to the *Service Accounts* page.
+
+.Verification
+. Do you see a note section?
+. Do you see an alert section and task-level prerequisites?.
+
 [#conclusion]
 Congratulations! You successfully completed the example quick start, and are now aware of the new features.
 
