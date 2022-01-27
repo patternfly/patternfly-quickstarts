@@ -90,17 +90,25 @@ WARNING: If you want to use a service account that already has the required role
 * None
 
 .Procedure
-. For the *Authentication method*, copy the OAuth *Token endpoint URL* to a secure location. This is the endpoint that you’ll use with your service account credentials to authenticate the connection to this {registry} instance.
+--
+First paragraph before procedure steps.
+
+Second paragraph before procedure steps.
+
+. Procedure step 1
 +
-NOTE: HTTP Basic authentication is also available for tools and libraries that don't support OAuth, but OAuth is recommended whenever possible. With HTTP Basic, you use only the service account credentials to authenticate the connection to the {registry} instance.
+TIP: I am a tip card (triggerd by TIP admonition in asciidoc) rendered by Patternfly React Components.
 +
-You’ll use the service account information that you saved to configure your applications to connect to your {registry} instances later when you're ready.
+. Procedure step 2
 +
-IMPORTANT: This is an important alert to test multiple amonition blocks in one list item
-+
-For example, if you plan to use https://github.com/edenhill/kafkacat[Kafkacat^] to interact with your Kafka instance and deserialize Avro messages using {registry}, you'll use this information to set your {registry} URL in the client environment variables.
-+
-To review your service account information, reset your credentials, or delete the service account, use the left navigation menu to go to the *Service Accounts* page.
+In the web console left menu, go to *Service Accounts*, and click *Create service account* to generate the credentials that you can use to connect to {registry} and Kafka instances.
+
+. Procedure step 3
+
+First paragraph after procedure steps.
+
+Second paragraph after procedure steps.
+--
 
 .Verification
 . Do you see a note section?
