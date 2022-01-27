@@ -83,6 +83,37 @@ WARNING: If you want to use a service account that already has the required role
 .Verification
 * Did you see the sections above?
 
+[id="task-3_{context}",module-type="proc"]
+== Long procedure step with multiple paragraphs and admonitions
+
+.Prerequisites
+* None
+
+.Procedure
+--
+First paragraph before procedure steps.
+
+Second paragraph before procedure steps.
+
+. Procedure step 1
++
+TIP: I am a tip card (triggerd by TIP admonition in asciidoc) rendered by Patternfly React Components.
++
+. Procedure step 2
++
+In the web console left menu, go to *Service Accounts*, and click *Create service account* to generate the credentials that you can use to connect to {registry} and Kafka instances.
+
+. Procedure step 3
+
+First paragraph after procedure steps.
+
+Second paragraph after procedure steps.
+--
+
+.Verification
+. Do you see a note section?
+. Do you see an alert section and task-level prerequisites?.
+
 [#conclusion]
 Congratulations! You successfully completed the example quick start, and are now aware of the new features.
 

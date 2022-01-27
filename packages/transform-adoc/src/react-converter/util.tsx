@@ -2,7 +2,8 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Asciidoctor } from 'asciidoctor/types';
-import {AllHtmlEntities} from 'html-entities';
+import asciidoctor from 'asciidoctor';
+import { AllHtmlEntities } from 'html-entities';
 
 import { Alert, List, ListItem, Title } from '@patternfly/react-core';
 import LightbulbIcon from '@patternfly/react-icons/dist/js/icons/lightbulb-icon';
@@ -10,10 +11,20 @@ import FireIcon from '@patternfly/react-icons/dist/js/icons/fire-icon';
 import { css } from '@patternfly/react-styles';
 import './util.scss';
 
+const adoc = asciidoctor();
+
 // private CONST = 'string' + maps
 const MODULE_TYPE_ATTRIBUTE = 'module-type';
+
+// known block titles
 const PREREQUISITES = 'Prerequisites';
 const PROCEDURE = 'Procedure';
+
+// node names
+const OPEN = 'open';
+const ADMONITION = 'admonition';
+const OLIST = 'olist';
+const ULIST = 'ulist';
 
 enum AdmonitionType {
   TIP = 'TIP',
@@ -34,16 +45,16 @@ const admonitionToAlertVariantMap = {
 
 // private utils
 const getListTexts = (list: Asciidoctor.List) => {
-  let admonitionBlock: Asciidoctor.AbstractBlock;
   return list.getItems().map((listItem: Asciidoctor.ListItem) => {
-    admonitionBlock = listItem.getBlocks().find((block) => {
-      return isAdmonitionBlock(block);
+    listItem.getBlocks().map((block) => {
+      if (isAdmonitionBlock(block)) {
+        const admonitionRendered = renderAdmonitionBlock(block, true);
+        return adoc.Block.create(listItem, 'pass', {
+          source: admonitionRendered,
+        });
+      }
     });
-    if (admonitionBlock) {
-      const admonitionRendered = renderAdmonitionBlock(admonitionBlock, true);
-      return listItem.setText(listItem.getText() + admonitionRendered);
-    }
-    return listItem.getText();
+    return listItem.getText() + listItem.getContent();
   });
 };
 
@@ -58,6 +69,24 @@ const withAdocWrapper = (Component: React.ReactNode, nodeName: string, title: st
 
 const renderMarkup = (component: React.ReactElement) => {
   return ReactDOMServer.renderToStaticMarkup(component);
+};
+
+const getFirstListAndIndex = (n) => {
+  let procedureListIndex;
+  const list = n.getBlocks().find((block, index) => {
+    if (isListBlock(block)) {
+      procedureListIndex = index;
+      return true;
+    }
+  });
+  return [list, procedureListIndex];
+};
+const convertAndConcat = (blockArr) => {
+  let html = '';
+  blockArr.forEach((block) => {
+    html = html + block.convert();
+  });
+  return html;
 };
 // end private utils
 
@@ -92,7 +121,7 @@ const isPrerequisites = (node: Asciidoctor.AbstractBlock) => {
 };
 
 const isListBlock = (node: Asciidoctor.AbstractBlock) => {
-  return node.getNodeName() === 'olist' || node.getNodeName() === 'ulist';
+  return node.getNodeName() === OLIST || node.getNodeName() === ULIST;
 };
 
 const isProcedureListBlock = (node: Asciidoctor.AbstractBlock) => {
@@ -102,7 +131,7 @@ const isProcedureListBlock = (node: Asciidoctor.AbstractBlock) => {
 
 // public block identifying helpers
 export const isAdmonitionBlock = (node: Asciidoctor.AbstractBlock) => {
-  return node.getNodeName() === 'admonition';
+  return node.getNodeName() === ADMONITION;
 };
 
 export const isTaskLevelPrereqs = (node: Asciidoctor.AbstractBlock) => {
@@ -111,6 +140,14 @@ export const isTaskLevelPrereqs = (node: Asciidoctor.AbstractBlock) => {
 
 export const isTaskLevelProcedure = (node: Asciidoctor.AbstractBlock) => {
   return isProcedureListBlock(node) && isProcedure(node.getParent());
+};
+
+export const isOpenBlockProcedure = (n: Asciidoctor.AbstractBlock) => {
+  const isOpenBlock = n.getNodeName && n.getNodeName() === OPEN;
+  const isProcedureTitled = n.getTitle && n.getTitle() === PROCEDURE;
+  if (isOpenBlock && isProcedureTitled) {
+    return true;
+  }
 };
 // end public block identifying helpers
 // leaving here for now if design wants to revert to using card
@@ -168,13 +205,24 @@ export const renderAdmonitionBlock = (node: Asciidoctor.AbstractBlock, inList: b
   return ReactDOMServer.renderToString(pfAlert);
 };
 
-export const renderPFList = (list: Asciidoctor.List) => {
-  const listTitle = list.getTitle();
+export const renderPFList = (
+  list: Asciidoctor.List,
+  title?: string,
+  blocksBefore?: string,
+  blocksAfter?: string,
+) => {
+  const listTitle = title || list.getTitle();
   const listType = list.getNodeName();
   const isPrereqList = listTitle === PREREQUISITES;
   const isProcList = listTitle === PROCEDURE;
   const listComponentType = listType === 'olist' ? 'ol' : 'ul';
-  const prereqTexts: string[] = getListTexts(list);
+  const listTexts: string[] = getListTexts(list);
+  const blocksBeforeComponent = blocksBefore && (
+    <div dangerouslySetInnerHTML={{ __html: blocksBefore }} />
+  );
+  const blocksAfterComponent = blocksAfter && (
+    <div dangerouslySetInnerHTML={{ __html: blocksAfter }} />
+  );
   const PFList = (
     <div className="task-pflist">
       <Title headingLevel="h6" className="task-pflist-title">
@@ -185,6 +233,7 @@ export const renderPFList = (list: Asciidoctor.List) => {
           In addtion to the prerequisites for this Quick Start, this step requires:
         </p>
       )}
+      {blocksBeforeComponent}
       <List
         component={listComponentType}
         className={css(
@@ -193,7 +242,7 @@ export const renderPFList = (list: Asciidoctor.List) => {
           isProcList && 'task-pflist-list--proc',
         )}
       >
-        {prereqTexts.map((text) => (
+        {listTexts.map((text) => (
           <ListItem
             className={css(
               isPrereqList && 'task-pflist-list__item--prereq',
@@ -209,9 +258,22 @@ export const renderPFList = (list: Asciidoctor.List) => {
           </ListItem>
         ))}
       </List>
+      {blocksAfterComponent}
     </div>
   );
-  const preReqReact = withAdocWrapper(PFList, listType, listTitle);
-  return renderMarkup(preReqReact);
+  const reactList = withAdocWrapper(PFList, listType, listTitle);
+  return renderMarkup(reactList);
+};
+
+export const renderOpenBlockPFList = (node: Asciidoctor.AbstractBlock) => {
+  const [procedure, index] = getFirstListAndIndex(node);
+  const blocksBefore = node.getBlocks().slice(0, index);
+  const blocksAfter = node.getBlocks().slice(index + 1);
+  return renderPFList(
+    procedure as Asciidoctor.List,
+    'Procedure',
+    convertAndConcat(blocksBefore),
+    convertAndConcat(blocksAfter),
+  );
 };
 // end public renderers
