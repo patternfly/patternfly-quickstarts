@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/transform-adoc",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Transforms asciidoc content by mapping known structures to PatternFly components",
   "files": [
     "dist"
