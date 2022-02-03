@@ -7,7 +7,7 @@ spec:
   displayName: Getting started with quick starts
   durationMinutes: 10
   # Optional type section, will display as a tile on the card
-  type: 
+  type:
     text: Type
     # 'blue' | 'cyan' | 'green' | 'orange' | 'purple' | 'red' | 'grey'
     color: grey
@@ -70,6 +70,20 @@ spec:
         ```{{copy}}  
 
         - Clicking the _Next_ button will display the **Check your work** module.
+
+        ### Admonition blocks
+
+        The syntax for rendering "Admonition Blocks" to Patternfly React Alerts:
+        - Bracketed alert text contents
+        - The admonition keyword, followed by the alert variant you want
+        - Variants are: note, tip, important, caution, and warning
+
+        **Examples**
+        [This is the note contents]{{admonition note}}
+        [This is the tip contents]{{admonition tip}}
+        [This is the important contents]{{admonition important}}
+        [This is the caution contents]{{admonition caution}}
+        [This is the warning contents]{{admonition warning}}
 
       # optional - the task's Check your work module
       review:

@@ -31,4 +31,22 @@
       }
     }
   }
+
+  .pfext-markdown-admonition {
+    &.pf-c-alert {
+      // add margins to match design
+      margin: var(--pf-global--spacer--md) 0;
+      .pf-c-alert__title {
+        // remove margins from markdown css
+        margin-top: 0;
+        margin-bottom: 0;
+        // lift PF style specificity to override markdown css
+        font-weight: var(--pf-c-alert__title--FontWeight);
+        font-family: inherit;
+        line-height: inherit;
+        color: var(--pf-c-alert__title--Color);
+        word-break: break-word;
+      }
+    }
+  }
 }
