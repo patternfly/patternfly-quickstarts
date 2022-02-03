@@ -32,7 +32,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
         {tasks
           .filter((_, index) => allTaskStatuses[index] !== QuickStartTaskStatus.INIT)
           .map((task, index) => {
-            const { title, description, review } = task;
+            const { title, description, review, summary } = task;
             const isActiveTask = index === taskNumber;
             const taskStatus = allTaskStatuses[index];
             const shouldShowTaskReview =
@@ -43,6 +43,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
                 <TaskHeader
                   taskIndex={index + 1}
                   title={title}
+                  summary={summary}
                   size="md"
                   subtitle={getResource('{{index, number}} of {{tasks, number}}')
                     .replace('{{index, number}}', index + 1)

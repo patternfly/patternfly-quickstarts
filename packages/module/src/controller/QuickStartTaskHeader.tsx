@@ -6,12 +6,13 @@ import { css } from '@patternfly/react-styles';
 import { markdownConvert } from '../ConsoleInternal/components/markdown-view';
 import { removeParagraphWrap } from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
-import { QuickStartTaskStatus } from '../utils/quick-start-types';
+import { QuickStartTaskStatus, QuickStartTaskSummary } from '../utils/quick-start-types';
 
 import './QuickStartTaskHeader.scss';
 
 type QuickStartTaskHeaderProps = {
   title: string;
+  summary?: QuickStartTaskSummary;
   taskIndex: number;
   subtitle?: string;
   taskStatus?: QuickStartTaskStatus;
@@ -53,8 +54,28 @@ const TaskIcon: React.FC<{
   return <span className={classNames}>{content}</span>;
 };
 
+const TaskSummaryMessage: React.FC<{
+  shouldShowSuccessMessage: boolean;
+  summary?: QuickStartTaskSummary;
+}> = ({ shouldShowSuccessMessage, summary }) => {
+  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+
+  const successMessage = summary?.success || getResource('You have completed this task!');
+  const failedMessage = summary?.failed || getResource('Try the steps again.');
+
+  return (
+    <>
+      <div />
+      <div className="pfext-quick-start-task-header__tryagain">
+        {shouldShowSuccessMessage ? successMessage : failedMessage}
+      </div>
+    </>
+  );
+};
+
 const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   title,
+  summary,
   taskIndex,
   subtitle,
   taskStatus,
@@ -68,16 +89,12 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
     'pfext-quick-start-task-header__title-failed':
       taskStatus === (QuickStartTaskStatus.FAILED || QuickStartTaskStatus.VISITED),
   });
-  const notCompleted = taskStatus === QuickStartTaskStatus.VISITED;
-  const skippedReviewOrFailed =
-    taskStatus === QuickStartTaskStatus.REVIEW || taskStatus === QuickStartTaskStatus.FAILED;
 
-  const tryAgain = !isActiveTask && (skippedReviewOrFailed || notCompleted) && (
-    <>
-      <div />
-      <div className="pfext-quick-start-task-header__tryagain">Try the steps again.</div>
-    </>
-  );
+  const shouldShowFailedMessage =
+    taskStatus === QuickStartTaskStatus.REVIEW ||
+    taskStatus === QuickStartTaskStatus.FAILED ||
+    taskStatus === QuickStartTaskStatus.VISITED;
+  const shouldShowSuccessMessage = taskStatus === QuickStartTaskStatus.SUCCESS;
 
   const content = (
     <div className="pfext-quick-start-task-header">
@@ -94,7 +111,9 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
           </span>
         )}
       </Title>
-      {tryAgain}
+      {!isActiveTask && (shouldShowSuccessMessage || shouldShowFailedMessage) && (
+        <TaskSummaryMessage shouldShowSuccessMessage={shouldShowSuccessMessage} summary={summary} />
+      )}
     </div>
   );
 

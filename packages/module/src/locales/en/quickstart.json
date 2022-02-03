@@ -42,5 +42,7 @@
   "Copy to clipboard": "Copy to clipboard",
   "Successfully copied to clipboard!": "Successfully copied to clipboard!",
   "Type": "Quick start",
-  "{{type}} • {{duration, number}} minutes": "{{type}} • {{duration, number}} minutes"
+  "{{type}} • {{duration, number}} minutes": "{{type}} • {{duration, number}} minutes",
+  "Try the steps again.": "Try the steps again.",
+  "You have completed this task!": "You have completed this task!"
 }
