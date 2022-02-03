@@ -22,6 +22,7 @@ const QuickStartTaskHeaderList: React.FC<QuickStartTaskHeaderListProps> = ({
         <TaskHeader
           key={task.title}
           title={task.title}
+          summary={task.summary}
           taskIndex={index + 1}
           size="md"
           taskStatus={allTaskStatuses[index]}
