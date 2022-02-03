@@ -7,7 +7,7 @@ spec:
   displayName: Getting started with quick starts
   durationMinutes: 10
   # Optional type section, will display as a tile on the card
-  type: 
+  type:
     text: Type
     # 'blue' | 'cyan' | 'green' | 'orange' | 'purple' | 'red' | 'grey'
     color: grey
@@ -35,11 +35,11 @@ spec:
 
         1. The main body of the task. You can use markdown syntax here to create list items and more.
 
-          This is a paragraph.  
+          This is a paragraph.
           This is another paragraph. Add an empty line between paragraphs for line breaks or two spaces at the end.
         1. For more information on markdown syntax you can visit [this resource](https://www.markdownguide.org/basic-syntax/).
         1. A <small>limited set</small> of <strong>HTML tags</strong> [are also supported](https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html#supported-tags-for-quick-starts_creating-quick-start-tutorials)
-        
+
         ## Highlighting
 
         To enable highlighting, the markdown syntax should contain:
@@ -52,7 +52,7 @@ spec:
         [Quick starts nav item]{{highlight quickstarts}}
         </pre>
         will highlight an element with the `data-quickstart-id="quickstarts"` attribute
-        
+
         ### Code snippets
 
         The syntax for an inline code snippet contains:
@@ -67,9 +67,23 @@ spec:
         oc new-app ruby~https://github.com/sclorg/ruby-ex.git
         echo "Expose route using oc expose svc/ruby-ex"
         oc expose svc/ruby-ex
-        ```{{copy}}  
+        ```{{copy}}
 
         - Clicking the _Next_ button will display the **Check your work** module.
+
+        ### Admonition blocks
+
+        The syntax for rendering "Admonition Blocks" to Patternfly React Alerts:
+        - Bracketed alert text contents
+        - The admonition keyword, followed by the alert variant you want
+        - Variants are: note, tip, important, caution, and warning
+
+        **Examples**
+        [This is the note contents]{{admonition note}}
+        [This is the tip contents]{{admonition tip}}
+        [This is the important contents]{{admonition important}}
+        [This is the caution contents]{{admonition caution}}
+        [This is the warning contents]{{admonition warning}}
 
       # optional - the task's Check your work module
       review:
