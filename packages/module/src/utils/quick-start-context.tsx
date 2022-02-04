@@ -296,15 +296,21 @@ export const useValuesForQuickStartContext = (
         return;
       }
 
-      setAllQuickStartStates((qs) => {
-        const quickStart = qs[activeQuickStartID];
-        const status = quickStart?.status;
-        const taskNumber = quickStart?.taskNumber as number;
-        const taskStatus = quickStart[getTaskStatusKey(taskNumber)];
+      setAllQuickStartStates((quickStartStates) => {
+        const quickStartState: QuickStartState = quickStartStates[activeQuickStartID];
+        const status = quickStartState?.status;
+        const taskNumber = quickStartState?.taskNumber as number;
+        const taskStatus = quickStartState[getTaskStatusKey(taskNumber)];
 
         let updatedStatus;
         let updatedTaskNumber;
         let updatedTaskStatus;
+
+        const quickStart: QuickStart = allQuickStarts.find((qs) => {
+          return qs.metadata.name === activeQuickStartID;
+        });
+
+        const task = quickStart.spec.tasks[taskNumber];
 
         if (status === QuickStartStatus.NOT_STARTED) {
           updatedStatus = QuickStartStatus.IN_PROGRESS;
@@ -317,7 +323,14 @@ export const useValuesForQuickStartContext = (
         }
 
         if (taskStatus === QuickStartTaskStatus.VISITED) {
-          updatedTaskStatus = QuickStartTaskStatus.REVIEW;
+          if (task.review) {
+            updatedTaskStatus = QuickStartTaskStatus.REVIEW;
+          } else {
+            updatedTaskStatus = QuickStartTaskStatus.SUCCESS;
+            if (taskNumber < totalTasks) {
+              updatedTaskNumber = taskNumber + 1;
+            }
+          }
         }
 
         if (taskNumber < totalTasks && !updatedTaskStatus) {
@@ -326,13 +339,13 @@ export const useValuesForQuickStartContext = (
 
         const markInitialStepVisitedOrReview =
           updatedTaskNumber > -1 &&
-          quickStart[getTaskStatusKey(updatedTaskNumber)] === QuickStartTaskStatus.INIT
+          quickStartState[getTaskStatusKey(updatedTaskNumber)] === QuickStartTaskStatus.INIT
             ? stepAfterInitial
-            : quickStart[getTaskStatusKey(updatedTaskNumber)];
+            : quickStartState[getTaskStatusKey(updatedTaskNumber)];
         const newState = {
-          ...qs,
+          ...quickStartStates,
           [activeQuickStartID]: {
-            ...quickStart,
+            ...quickStartState,
             ...(updatedStatus ? { status: updatedStatus } : {}),
             ...(updatedTaskNumber > -1
               ? {
@@ -346,7 +359,7 @@ export const useValuesForQuickStartContext = (
         return newState;
       });
     },
-    [activeQuickStartID, setAllQuickStartStates, stepAfterInitial],
+    [activeQuickStartID, allQuickStarts, setAllQuickStartStates, stepAfterInitial],
   );
 
   const previousStep = useCallback(() => {

@@ -7,7 +7,7 @@ spec:
   displayName: Getting started with quick starts
   durationMinutes: 10
   # Optional type section, will display as a tile on the card
-  type: 
+  type:
     text: Type
     # 'blue' | 'cyan' | 'green' | 'orange' | 'purple' | 'red' | 'grey'
     color: grey
@@ -88,10 +88,11 @@ spec:
         Also, don't forget to [check out the source](https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/dev/src/quickstarts-data/yaml/template.yaml) for this quick start for more information!
 
         Happy writing!
-      review:
-        instructions: |-
-          - Thanks for checking out this quick start!
-        failedTaskHelp: This task isn’t verified yet. Try the task again.
+      # review commented out here to show interaction when review is not defined
+      # review:
+      #   instructions: |-
+      #     - Thanks for checking out this quick start!
+      #   failedTaskHelp: This task isn’t verified yet. Try the task again.
   conclusion: |-
     The conclusion appears in the last section of the quick start.
   # you can link to the next quick start(s) here
