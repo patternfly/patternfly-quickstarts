@@ -54,7 +54,8 @@ const getListTexts = (list: Asciidoctor.List) => {
         });
       }
     });
-    return listItem.getText() + listItem.getContent();
+    // title of task's step needs to be wrapped in <p> to pick up spacing styles
+    return `<p>${listItem.getText()}</p> ${listItem.getContent()}`;
   });
 };
 
@@ -199,10 +200,13 @@ export const renderAdmonitionBlock = (node: Asciidoctor.AbstractBlock, inList: b
       className={css(!inList && 'description-important')}
       style={style}
     >
-      {AllHtmlEntities.decode(node.getContent())}
+      {/* use html-entities decode to remove special encoding done by asciidoctor
+      dangerouslySetInnerHTML so tags like <code> are passed as HTML instead of html encoded string */}
+      <span dangerouslySetInnerHTML={{ __html: AllHtmlEntities.decode(node.getContent()) }} />
     </Alert>
   );
-  return ReactDOMServer.renderToString(pfAlert);
+  // needs an extra wrapper as procedure-parser looks for innerhtml in guides
+  return ReactDOMServer.renderToString(<div>{pfAlert}</div>);
 };
 
 export const renderPFList = (
