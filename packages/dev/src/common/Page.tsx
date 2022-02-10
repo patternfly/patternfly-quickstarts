@@ -10,6 +10,7 @@ import {
   NavItem,
   PageSidebar,
   ButtonVariant,
+  Switch,
 } from '@patternfly/react-core';
 import LightbulbIcon from '@patternfly/react-icons/dist/js/icons/lightbulb-icon';
 import { QuickStartContext } from '@patternfly/quickstarts';
@@ -20,13 +21,32 @@ import imgBrand from '../assets/images/imgBrand.svg';
 
 const AppToolbar = () => {
   const [isModalOpen, setModalOpen] = React.useState(false);
+  const [isDarkTheme, setDarkTheme] = React.useState(false);
   const onModalClose = () => setModalOpen(!isModalOpen);
 
   const qsContext = React.useContext(QuickStartContext);
   const qsId = 'getting-started-with-quick-starts';
 
+  const handleDarkThemeChange = (isChecked: boolean) => {
+    setDarkTheme(isChecked);
+    if (isChecked) {
+      document.documentElement.classList.add('pf-theme-dark');
+    } else {
+      document.documentElement.classList.remove('pf-theme-dark');
+    }
+  }
+
   return (
     <PageHeaderTools>
+      <PageHeaderToolsItem>
+        <Switch
+          id="dark-theme-switch"
+          aria-label="Toggle dark theme"
+          label="Dark theme"
+          isChecked={isDarkTheme}
+          onChange={handleDarkThemeChange}
+        />
+      </PageHeaderToolsItem>
       <PageHeaderToolsItem>
         <Button
           aria-label="Toggle quick start"

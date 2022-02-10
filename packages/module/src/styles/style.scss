@@ -2,6 +2,7 @@
 @import './legacy-bootstrap/variables';
 
 @import './base';
+@import './dark'; // @patternfly/patternfly/patternfly-theme-dark after PF dark theme release
 
 // React Components
 @import '../ConsoleInternal/**/*.scss';
