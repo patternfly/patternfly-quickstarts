@@ -3,7 +3,8 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Asciidoctor } from 'asciidoctor/types';
 import asciidoctor from 'asciidoctor';
-import { AllHtmlEntities } from 'html-entities';
+import { JSDOM } from 'jsdom';
+import createDOMPurify from 'dompurify';
 
 import { Alert, List, ListItem, Title } from '@patternfly/react-core';
 import LightbulbIcon from '@patternfly/react-icons/dist/js/icons/lightbulb-icon';
@@ -12,6 +13,12 @@ import { css } from '@patternfly/react-styles';
 import './util.scss';
 
 const adoc = asciidoctor();
+
+const window = new JSDOM('').window;
+const DOMPurify = createDOMPurify(window);
+const sanitizeHTMLSVG = (content: string) => {
+  return DOMPurify.sanitize(content, { USE_PROFILES: { html: true, svg: true } });
+};
 
 // private CONST = 'string' + maps
 const MODULE_TYPE_ATTRIBUTE = 'module-type';
@@ -200,9 +207,13 @@ export const renderAdmonitionBlock = (node: Asciidoctor.AbstractBlock, inList: b
       className={css(!inList && 'description-important')}
       style={style}
     >
-      {/* use html-entities decode to remove special encoding done by asciidoctor
+      {/* use DOMPurify to remove special encoding done by asciidoctor
       dangerouslySetInnerHTML so tags like <code> are passed as HTML instead of html encoded string */}
-      <span dangerouslySetInnerHTML={{ __html: AllHtmlEntities.decode(node.getContent()) }} />
+      <span
+        dangerouslySetInnerHTML={{
+          __html: sanitizeHTMLSVG(node.getContent()),
+        }}
+      />
     </Alert>
   );
   // needs an extra wrapper as procedure-parser looks for innerhtml in guides
@@ -222,10 +233,10 @@ export const renderPFList = (
   const listComponentType = listType === 'olist' ? 'ol' : 'ul';
   const listTexts: string[] = getListTexts(list);
   const blocksBeforeComponent = blocksBefore && (
-    <div dangerouslySetInnerHTML={{ __html: blocksBefore }} />
+    <div dangerouslySetInnerHTML={{ __html: sanitizeHTMLSVG(blocksBefore) }} />
   );
   const blocksAfterComponent = blocksAfter && (
-    <div dangerouslySetInnerHTML={{ __html: blocksAfter }} />
+    <div dangerouslySetInnerHTML={{ __html: sanitizeHTMLSVG(blocksBefore) }} />
   );
   const PFList = (
     <div className="task-pflist">
@@ -257,7 +268,7 @@ export const renderPFList = (
           >
             <span
               className="task-pflist-list__item__content"
-              dangerouslySetInnerHTML={{ __html: text }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHTMLSVG(text) }}
             />
           </ListItem>
         ))}
