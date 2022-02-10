@@ -3,6 +3,7 @@
 
 @import './base';
 @import './dark'; // @patternfly/patternfly/patternfly-theme-dark after PF dark theme release
+@import './dark-custom-override';
 
 // React Components
 @import '../ConsoleInternal/**/*.scss';
