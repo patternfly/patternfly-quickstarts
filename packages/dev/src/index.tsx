@@ -21,6 +21,8 @@ import AppLocalized from './AppLocalized';
 import { DefaultCatalog } from './DefaultCatalog';
 import { CustomCatalog } from './CustomCatalog';
 
+import './patternfly-theme-dark.css'; // @patternfly/patternfly/patternfly-theme-dark.css after PF dark theme release
+
 ReactDOM.render(
   <Router>
     <Switch>
