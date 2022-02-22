@@ -1,13 +1,20 @@
 import './QuickStartPanelContent.scss';
 import * as React from 'react';
 import {
+  Divider,
   DrawerActions,
   DrawerCloseButton,
   DrawerHead,
   DrawerPanelBody,
   DrawerPanelContent,
+  OptionsMenu,
+  OptionsMenuItem,
+  OptionsMenuToggle,
+  Stack,
+  StackItem,
   Title,
 } from '@patternfly/react-core';
+import BarsIcon from '@patternfly/react-icons/dist/js/icons/bars-icon';
 import { css } from '@patternfly/react-styles';
 import * as ReactDOM from 'react-dom';
 import { Shadows, useScrollShadows } from '@console/shared';
@@ -15,6 +22,7 @@ import QuickStartController from './QuickStartController';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import { QuickStart } from './utils/quick-start-types';
 import { camelize } from './utils/quick-start-utils';
+import QuickStartMarkdownView from './QuickStartMarkdownView';
 
 type HandleClose = () => void;
 
@@ -53,7 +61,12 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   headerVariant = '',
   ...props
 }) => {
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const {
+    getResource,
+    activeHelpTopic,
+    filteredHelpTopics,
+    setActiveHelpTopicByName,
+  } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const [contentRef, setContentRef] = React.useState<HTMLDivElement>();
   const shadows = useScrollShadows(contentRef);
   const quickStart = quickStarts.find((qs) => qs.metadata.name === activeQuickStartID);
@@ -143,10 +156,77 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
     </DrawerPanelContent>
   ) : null;
 
+  const [isHelpTopicMenuOpen, setIsHelpTopicMenuOpen] = React.useState(false);
+
+  const toggleHelpTopicMenu = () => {
+    setIsHelpTopicMenuOpen(!isHelpTopicMenuOpen);
+  };
+
+  const onSelectHelpTopic = (event) => {
+    const topicName = event.currentTarget.id;
+    setActiveHelpTopicByName(topicName);
+    toggleHelpTopicMenu();
+  };
+
+  const menuItems = filteredHelpTopics.map((topic) => {
+    return (
+      <OptionsMenuItem key={topic.name} onSelect={onSelectHelpTopic} id={topic.name}>
+        {topic.name}
+      </OptionsMenuItem>
+    );
+  });
+
+  const helpTopicContent = (
+    <DrawerPanelContent isResizable={isResizable} className="pfext-quick-start__base" {...props}>
+      <div>
+        <DrawerHead>
+          <div className="pfext-quick-start-panel-content__title">
+            <OptionsMenu
+              id={'helptopics'}
+              isPlain
+              isOpen={isHelpTopicMenuOpen}
+              toggle={
+                <OptionsMenuToggle onToggle={toggleHelpTopicMenu} toggleTemplate={<BarsIcon />} />
+              }
+              menuItems={menuItems}
+            />
+
+            <Title
+              headingLevel="h1"
+              size="xl"
+              className="pfext-quick-start-panel-content__name"
+              style={{ marginRight: 'var(--pf-global--spacer--md)' }}
+            >
+              {activeHelpTopic?.title}
+            </Title>
+          </div>
+        </DrawerHead>
+        <Divider />
+        <DrawerPanelBody
+          hasNoPadding
+          className="pfext-quick-start-panel-content__body"
+          data-test="content"
+        >
+          <Stack hasGutter>
+            <StackItem style={{ padding: '20px' }}>
+              <QuickStartMarkdownView content={activeHelpTopic?.content} />
+            </StackItem>
+            <Divider />
+            <StackItem style={{ padding: '20px' }}>
+              {activeHelpTopic?.links.map((link) => {
+                return <QuickStartMarkdownView key={link} content={link} />;
+              })}
+            </StackItem>
+          </Stack>
+        </DrawerPanelBody>
+      </div>
+    </DrawerPanelContent>
+  );
+
   if (appendTo) {
     return ReactDOM.createPortal(content, getElement(appendTo));
   }
-  return content;
+  return activeHelpTopic ? helpTopicContent : content;
 };
 
 export default QuickStartPanelContent;

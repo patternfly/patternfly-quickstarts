@@ -10,6 +10,7 @@ import {
 import PluralResolver from './PluralResolver';
 import {
   AllQuickStartStates,
+  InContextHelpTopic,
   QuickStart,
   QuickStartState,
   QuickStartStatus,
@@ -79,6 +80,11 @@ export type QuickStartContextValues = {
   setLoading?: any;
   alwaysShowTaskReview?: boolean;
   setAlwaysShowTaskReview?: any;
+  inContextHelpTopics?: InContextHelpTopic[];
+  activeHelpTopic?: InContextHelpTopic;
+  setActiveHelpTopicByName?: (helpTopicName: string) => void;
+  filteredHelpTopics?: InContextHelpTopic[];
+  setFilteredHelpTopics?: React.Dispatch<React.SetStateAction<InContextHelpTopic[]>>;
 };
 
 export const QuickStartContextDefaults = {
@@ -104,6 +110,11 @@ export const QuickStartContextDefaults = {
   markdown: null,
   loading: false,
   alwaysShowTaskReview: true,
+  inContextHelpTopics: [],
+  activeHelpTopic: null,
+  setActiveHelpTopicByName: () => {},
+  filteredHelpTopics: [],
+  setFilteredHelpTopics: () => {},
 };
 export const QuickStartContext = createContext<QuickStartContextValues>(QuickStartContextDefaults);
 
@@ -424,6 +435,28 @@ export const useValuesForQuickStartContext = (
     allQuickStartStates,
   ]);
 
+  const [inContextHelpTopics, setInContextHelpTopics] = React.useState(
+    combinedValue.inContextHelpTopics || [],
+  );
+
+  const [activeHelpTopic, setActiveHelpTopic] = React.useState(
+    combinedValue.activeHelpTopic || null,
+  );
+
+  const setActiveHelpTopicByName = useCallback(
+    (helpTopicName: string) => {
+      const topic = inContextHelpTopics.find((t) => {
+        return t.name === helpTopicName;
+      });
+      setActiveHelpTopic(topic);
+    },
+    [inContextHelpTopics],
+  );
+
+  const [filteredHelpTopics, setFilteredHelpTopics] = React.useState(
+    combinedValue.filteredHelpTopics || [],
+  );
+
   return {
     allQuickStarts: quickStarts,
     setAllQuickStarts: updateAllQuickStarts, // revisit if this should be in public context API
@@ -462,6 +495,11 @@ export const useValuesForQuickStartContext = (
     setLoading,
     alwaysShowTaskReview,
     setAlwaysShowTaskReview,
+    inContextHelpTopics,
+    activeHelpTopic,
+    setActiveHelpTopicByName,
+    filteredHelpTopics,
+    setFilteredHelpTopics,
   };
 };
 

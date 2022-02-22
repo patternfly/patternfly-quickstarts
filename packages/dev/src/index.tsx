@@ -18,8 +18,10 @@ import './i18n/i18n';
 import AppContext from './AppContext';
 import AppProps from './AppProps';
 import AppLocalized from './AppLocalized';
+import AppDemoInContextHelp from './AppDemoInContextHelp';
 import { DefaultCatalog } from './DefaultCatalog';
 import { CustomCatalog } from './CustomCatalog';
+import { MockConsole } from './MockConsole';
 
 ReactDOM.render(
   <Router>
@@ -43,6 +45,11 @@ ReactDOM.render(
         <AppContext showCardFooters={false}>
           <DefaultCatalog hint="This catalog is for testing the context based quick starts approach by utilizing the QuickStartContextProvider" />
         </AppContext>
+      </Route>
+      <Route exact path="/in-context-help">
+        <AppDemoInContextHelp showCardFooters={false}>
+          <MockConsole />
+        </AppDemoInContextHelp>
       </Route>
     </Switch>
   </Router>,

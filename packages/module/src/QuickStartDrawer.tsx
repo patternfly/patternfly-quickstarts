@@ -10,7 +10,12 @@ import {
   useValuesForQuickStartContext,
 } from './utils/quick-start-context';
 import { QUICKSTART_ID_FILTER_KEY } from './utils/const';
-import { QuickStart, QuickStartStatus, AllQuickStartStates } from './utils/quick-start-types';
+import {
+  QuickStart,
+  QuickStartStatus,
+  AllQuickStartStates,
+  InContextHelpTopic,
+} from './utils/quick-start-types';
 import { getQuickStartByName } from './utils/quick-start-utils';
 
 export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement> {
@@ -59,6 +64,7 @@ export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement
   };
   /* additional quick start context props */
   contextProps?: QuickStartContextValues;
+  inContextHelpTopics?: InContextHelpTopic[];
 }
 
 export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
@@ -81,6 +87,7 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
   markdown,
   contextProps,
   alwaysShowTaskReview = true,
+  inContextHelpTopics,
   ...props
 }) => {
   const valuesForQuickstartContext: QuickStartContextValues = useValuesForQuickStartContext({
@@ -104,6 +111,7 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
     useQueryParams,
     markdown,
     alwaysShowTaskReview,
+    inContextHelpTopics,
     ...contextProps,
   });
 
@@ -144,6 +152,7 @@ export interface QuickStartDrawerProps extends React.HTMLProps<HTMLDivElement> {
   fullWidth?: boolean;
   onCloseInProgress?: any;
   onCloseNotInProgress?: any;
+  inContextHelpTopics?: InContextHelpTopic[];
 }
 
 export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
@@ -153,6 +162,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
   fullWidth,
   onCloseInProgress,
   onCloseNotInProgress,
+  inContextHelpTopics,
   ...props
 }) => {
   const {
@@ -163,6 +173,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
     allQuickStartStates,
     setAllQuickStartStates,
     useLegacyHeaderColors,
+    setActiveHelpTopicByName,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const combinedQuickStarts = allQuickStarts.concat(quickStarts);
   React.useEffect(() => {
@@ -178,6 +189,16 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
       }
     }
   }, [activeQuickStartID, combinedQuickStarts, setActiveQuickStart]);
+
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    // if there is a quick start param, but the quick start is not active, set it
+    // this can happen if a new browser session is opened or an incognito window for example
+    const helpTopicNameFromParam = params.get('topic') || '';
+    if (helpTopicNameFromParam) {
+      setActiveHelpTopicByName(helpTopicNameFromParam);
+    }
+  }, [inContextHelpTopics, setActiveHelpTopicByName]);
 
   React.useEffect(() => {
     // If activeQuickStartID was changed through prop from QuickStartContainer, need to init the state if it does not exist yet
