@@ -47,7 +47,7 @@ ReactDOM.render(
         </AppContext>
       </Route>
       <Route exact path="/in-context-help">
-        <AppDemoInContextHelp showCardFooters={false}>
+        <AppDemoInContextHelp>
           <MockConsole />
         </AppDemoInContextHelp>
       </Route>

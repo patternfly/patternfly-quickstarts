@@ -171,7 +171,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   const menuItems = filteredHelpTopics.map((topic) => {
     return (
       <OptionsMenuItem key={topic.name} onSelect={onSelectHelpTopic} id={topic.name}>
-        {topic.name}
+        {topic.title}
       </OptionsMenuItem>
     );
   });
@@ -200,6 +200,15 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
               {activeHelpTopic?.title}
             </Title>
           </div>
+          {showClose && (
+            <DrawerActions>
+              <DrawerCloseButton
+                onClick={handleClose}
+                className="pfext-quick-start-panel-content__close-button"
+                data-testid="qs-drawer-close"
+              />
+            </DrawerActions>
+          )}
         </DrawerHead>
         <Divider />
         <DrawerPanelBody

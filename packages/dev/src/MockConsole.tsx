@@ -5,21 +5,27 @@ import {
   Form,
   FormGroup,
   PageSection,
+  Popover,
   Split,
   SplitItem,
   TextInput,
   Title,
 } from '@patternfly/react-core';
 import { QuickStartContext, QuickStartContextValues } from '@patternfly/quickstarts';
+import HelpIcon from '@patternfly/react-icons/dist/js/icons/help-icon';
 
 export const MockConsole: React.FC = () => {
-  const { inContextHelpTopics, setFilteredHelpTopics } = React.useContext<QuickStartContextValues>(
-    QuickStartContext,
-  );
+  const {
+    inContextHelpTopics,
+    setFilteredHelpTopics,
+    filteredHelpTopics,
+    setActiveHelpTopicByName,
+  } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
   const [consolePageState, setConsolePageState] = React.useState(1);
 
   const handleClickNext = () => {
+    setActiveHelpTopicByName('');
     if (consolePageState === 3) {
       setConsolePageState(1);
       return;
@@ -28,6 +34,7 @@ export const MockConsole: React.FC = () => {
   };
 
   const handleClickBack = () => {
+    setActiveHelpTopicByName('');
     if (consolePageState === 1) {
       setConsolePageState(3);
       return;
@@ -37,13 +44,48 @@ export const MockConsole: React.FC = () => {
 
   React.useEffect(() => {
     const topics = inContextHelpTopics.filter((topic) => {
-      const pageTagNumbers = topic.tags.map((tag) => {
+      const pageTagNumbers = topic.tags.map((tag: string) => {
         return Number(tag.slice(-1));
       });
       return pageTagNumbers.includes(consolePageState);
     });
     setFilteredHelpTopics(topics);
   }, [consolePageState, inContextHelpTopics, setFilteredHelpTopics]);
+
+  const formGroups = filteredHelpTopics.map((topic) => {
+    return (
+      <FormGroup
+        label={topic.title}
+        isRequired
+        fieldId={topic.name}
+        key={topic.name}
+        labelIcon={
+          <Popover
+            bodyContent={(hide) => (
+              <div>
+                {topic.title} is quite amaizing{' '}
+                <Button
+                  variant="link"
+                  onClick={() => {
+                    setActiveHelpTopicByName(topic.name);
+                    hide();
+                  }}
+                >
+                  Learn more
+                </Button>
+              </div>
+            )}
+          >
+            <Button variant="plain">
+              <HelpIcon noVerticalAlign />
+            </Button>
+          </Popover>
+        }
+      >
+        <TextInput isRequired type="text" id={topic.name} />
+      </FormGroup>
+    );
+  });
 
   return (
     <>
@@ -57,14 +99,7 @@ export const MockConsole: React.FC = () => {
         <Title headingLevel="h6">Enter an application name</Title>
       </PageSection>
       <PageSection>
-        <Form>
-          <FormGroup label="Workspace" isRequired fieldId="ws">
-            <TextInput isRequired type="text" />
-          </FormGroup>
-          <FormGroup label="Application Name" isRequired fieldId="appName">
-            <TextInput isRequired type="text" />
-          </FormGroup>
-        </Form>
+        <Form>{formGroups}</Form>
       </PageSection>
       <PageSection>
         <Split hasGutter>

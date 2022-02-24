@@ -9,7 +9,7 @@ import {
   QuickStartContextValues,
   useValuesForQuickStartContext,
 } from './utils/quick-start-context';
-import { QUICKSTART_ID_FILTER_KEY } from './utils/const';
+import { HELP_TOPIC_NAME_KEY, QUICKSTART_ID_FILTER_KEY } from './utils/const';
 import {
   QuickStart,
   QuickStartStatus,
@@ -174,6 +174,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
     setAllQuickStartStates,
     useLegacyHeaderColors,
     setActiveHelpTopicByName,
+    activeHelpTopic,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const combinedQuickStarts = allQuickStarts.concat(quickStarts);
   React.useEffect(() => {
@@ -194,7 +195,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
     const params = new URLSearchParams(window.location.search);
     // if there is a quick start param, but the quick start is not active, set it
     // this can happen if a new browser session is opened or an incognito window for example
-    const helpTopicNameFromParam = params.get('topic') || '';
+    const helpTopicNameFromParam = params.get(HELP_TOPIC_NAME_KEY) || '';
     if (helpTopicNameFromParam) {
       setActiveHelpTopicByName(helpTopicNameFromParam);
     }
@@ -212,7 +213,10 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
 
   const [modalOpen, setModalOpen] = React.useState<boolean>(false);
   const activeQuickStartStatus = activeQuickStartState?.status;
-  const onClose = () => setActiveQuickStart('');
+  const onClose = () => {
+    setActiveQuickStart('');
+    setActiveHelpTopicByName('');
+  };
   const handleClose = () => {
     if (activeQuickStartStatus === QuickStartStatus.IN_PROGRESS) {
       if (onCloseInProgress) {
@@ -264,7 +268,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
 
   return (
     <>
-      <Drawer isExpanded={!!activeQuickStartID} isInline {...props}>
+      <Drawer isExpanded={!!activeQuickStartID || !!activeHelpTopic} isInline {...props}>
         {children ? (
           <DrawerContent panelContent={panelContent} {...fullWidthBodyStyle}>
             <DrawerContentBody className="pfext-quick-start-drawer__body">

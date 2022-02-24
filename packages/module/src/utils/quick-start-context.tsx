@@ -6,6 +6,7 @@ import {
   QUICKSTART_SEARCH_FILTER_KEY,
   QUICKSTART_STATUS_FILTER_KEY,
   QUICKSTART_TASKS_INITIAL_STATES,
+  HELP_TOPIC_NAME_KEY,
 } from './const';
 import PluralResolver from './PluralResolver';
 import {
@@ -435,6 +436,7 @@ export const useValuesForQuickStartContext = (
     allQuickStartStates,
   ]);
 
+  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
   const [inContextHelpTopics, setInContextHelpTopics] = React.useState(
     combinedValue.inContextHelpTopics || [],
   );
@@ -448,9 +450,15 @@ export const useValuesForQuickStartContext = (
       const topic = inContextHelpTopics.find((t) => {
         return t.name === helpTopicName;
       });
+      if (!helpTopicName) {
+        useQueryParams && removeQueryArgument(HELP_TOPIC_NAME_KEY);
+        setActiveHelpTopic(null);
+        return;
+      }
+      useQueryParams && setQueryArgument(HELP_TOPIC_NAME_KEY, helpTopicName);
       setActiveHelpTopic(topic);
     },
-    [inContextHelpTopics],
+    [inContextHelpTopics, useQueryParams],
   );
 
   const [filteredHelpTopics, setFilteredHelpTopics] = React.useState(
