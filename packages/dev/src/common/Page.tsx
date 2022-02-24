@@ -34,7 +34,7 @@ const AppToolbar = () => {
     } else {
       document.documentElement.classList.remove('pf-theme-dark');
     }
-  }
+  };
 
   return (
     <PageHeaderTools>
