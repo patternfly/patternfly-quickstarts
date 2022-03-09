@@ -38,7 +38,10 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
     }
 
     // add PF class to ul and ol lists
-    if (node.nodeType === 1 && (node.nodeName.toLowerCase() === 'ul' || node.nodeName.toLowerCase() === 'ol')) {
+    if (
+      node.nodeType === 1 &&
+      (node.nodeName.toLowerCase() === 'ul' || node.nodeName.toLowerCase() === 'ol')
+    ) {
       node.setAttribute('class', 'pf-c-list');
       return node;
     }
