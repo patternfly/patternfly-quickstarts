@@ -28,11 +28,18 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
     converter.addExtension(extensions);
   }
 
-  // add hook to transform anchor tags
   DOMPurify.addHook('beforeSanitizeElements', function(node) {
     // nodeType 1 = element type
+
+    // transform anchor tags
     if (node.nodeType === 1 && node.nodeName.toLowerCase() === 'a') {
       node.setAttribute('rel', 'noopener noreferrer');
+      return node;
+    }
+
+    // add PF class to ul and ol lists
+    if (node.nodeType === 1 && (node.nodeName.toLowerCase() === 'ul' || node.nodeName.toLowerCase() === 'ol')) {
+      node.setAttribute('class', 'pf-c-list');
       return node;
     }
   });
