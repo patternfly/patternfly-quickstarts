@@ -68,11 +68,13 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
     'pfext-quick-start-task-header__title-failed':
       taskStatus === (QuickStartTaskStatus.FAILED || QuickStartTaskStatus.VISITED),
   });
-  const notCompleted = taskStatus === QuickStartTaskStatus.VISITED;
-  const skippedReviewOrFailed =
-    taskStatus === QuickStartTaskStatus.REVIEW || taskStatus === QuickStartTaskStatus.FAILED;
+  // const notCompleted = taskStatus === QuickStartTaskStatus.VISITED;
+  // const skippedReview = taskStatus === QuickStartTaskStatus.REVIEW;
+  const failedReview = taskStatus === QuickStartTaskStatus.FAILED;
 
-  const tryAgain = !isActiveTask && (skippedReviewOrFailed || notCompleted) && (
+  // TODO: toned down when this is shown, investigate further when we should display it
+  // related: https://github.com/patternfly/patternfly-quickstarts/issues/104
+  const tryAgain = failedReview && (
     <>
       <div />
       <div className="pfext-quick-start-task-header__tryagain">Try the steps again.</div>

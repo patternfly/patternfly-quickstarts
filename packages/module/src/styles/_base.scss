@@ -27,6 +27,10 @@
   input[type="radio"] {
     margin-right: 7px;
   }
+
+  .pf-c-list {
+    --pf-c-list--PaddingLeft: 20px;
+  }
 }
 
 // drawer

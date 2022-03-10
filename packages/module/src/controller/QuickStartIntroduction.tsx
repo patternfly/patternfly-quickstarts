@@ -38,7 +38,9 @@ const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
         {prereqs.map((pr) => {
           return (
             <ListItem key={pr} className="pfext-quick-start-intro__prereq-list__item">
-              <span className="pfext-quick-start-intro__prereq-list__item-content">{pr}</span>
+              <span className="pfext-quick-start-intro__prereq-list__item-content">
+                <QuickStartMarkdownView content={pr} />
+              </span>
             </ListItem>
           );
         })}

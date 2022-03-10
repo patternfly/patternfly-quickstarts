@@ -90,6 +90,8 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
           />
         }
         onClick={handleClick}
+        // https://github.com/patternfly/patternfly-react/issues/7039
+        href="#"
         data-test={`tile ${id}`}
         description={
           <QuickStartTileDescription description={description} prerequisites={prerequisites} />
