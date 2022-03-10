@@ -61,7 +61,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     language,
     loading,
     useQueryParams: withQueryParams,
-    alwaysShowTaskReview: false,
+    alwaysShowTaskReview: true,
   };
 
   const toggleQuickStart = (quickStartId: string) => {

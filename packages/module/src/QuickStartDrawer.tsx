@@ -80,7 +80,7 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
   useQueryParams = true,
   markdown,
   contextProps,
-  alwaysShowTaskReview = false,
+  alwaysShowTaskReview = true,
   ...props
 }) => {
   const valuesForQuickstartContext: QuickStartContextValues = useValuesForQuickStartContext({
