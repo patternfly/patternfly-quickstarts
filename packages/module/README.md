@@ -207,6 +207,30 @@ You can have inline or block copyable text.
     ```{{copy}}
 ```
 
+## Markdown extensions
+If your source material content is defined in markdown (yaml + markdown / json + markdown), then you can add your own markdown extensions, example:
+```
+const drawerProps: QuickStartContainerProps = {
+  markdown: {
+    extensions: [
+      // variable substitution example
+      // this replaces the strings [APPLICATION] and [PRODUCT]
+      {
+        type: 'output',
+        filter: function(html: string) {
+          html = html.replace(/\[APPLICATION\]/g, 'Mercury');
+          html = html.replace(/\[PRODUCT\]/g, 'Lightning');
+
+          return html;
+        },
+      },
+    ],
+  },
+};
+
+return <QuickStartContainer {...drawerProps}>My page content</QuickStartContainer>
+```
+
 ## Localization
 We use English as the default language. You can override the default by providing your own key/value pairs to the `QuickStartContainer` or `QuickStartContextProvider` resourceBundle prop.
 

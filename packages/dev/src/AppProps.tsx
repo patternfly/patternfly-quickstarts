@@ -62,6 +62,20 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     loading,
     useQueryParams: withQueryParams,
     alwaysShowTaskReview: true,
+    markdown: {
+      extensions: [
+        // variable substitution
+        {
+          type: 'output',
+          filter: function(html: string) {
+            html = html.replace(/\[APPLICATION\]/g, 'Mercury');
+            html = html.replace(/\[PRODUCT\]/g, 'Lightning');
+
+            return html;
+          },
+        },
+      ],
+    },
   };
 
   const toggleQuickStart = (quickStartId: string) => {
