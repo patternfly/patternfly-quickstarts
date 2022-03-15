@@ -11,7 +11,7 @@ import {
   TextInput,
   Title,
 } from '@patternfly/react-core';
-import { QuickStartContext, QuickStartContextValues } from '@patternfly/quickstarts';
+import { HelpTopicContext, HelpTopicContextValues } from '@patternfly/quickstarts';
 import HelpIcon from '@patternfly/react-icons/dist/js/icons/help-icon';
 
 export const MockConsole: React.FC = () => {
@@ -20,7 +20,7 @@ export const MockConsole: React.FC = () => {
     setFilteredHelpTopics,
     filteredHelpTopics,
     setActiveHelpTopicByName,
-  } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  } = React.useContext<HelpTopicContextValues>(HelpTopicContext);
 
   const [consolePageState, setConsolePageState] = React.useState(1);
 
