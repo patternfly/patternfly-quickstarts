@@ -28,7 +28,12 @@
 
   .pfext-markdown-view code {
     color: var(--pf-global--Color--100);
-    background-color: var(--pf-global--BackgroundColor--100);
+    background-color: var(--pf-global--palette--black-500);
+  }
+
+  .pfext-markdown-view .pf-c-code-block code {
+    // color: var(--pf-global--Color--100);
+    background-color: var(--pf-global--BackgroundColor--200);
   }
 
   // Alerts currently has the wrong background in the PF dark stylesheet. This can be removed once that is fixed.
