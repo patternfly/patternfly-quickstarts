@@ -7,3 +7,4 @@ export const QUICKSTART_TASKS_INITIAL_STATES = [
   QuickStartTaskStatus.INIT,
   QuickStartTaskStatus.VISITED,
 ];
+export const HELP_TOPIC_NAME_KEY = 'topic';
