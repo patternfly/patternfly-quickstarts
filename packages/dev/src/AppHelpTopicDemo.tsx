@@ -25,7 +25,7 @@ const AppHelpTopicDemo: React.FC<AppProps> = ({ children }) => {
     }, 500);
   }, []);
 
-  const inContextHelpProps: HelpTopicContainerProps = {
+  const helpTopicContainerProps: HelpTopicContainerProps = {
     helpTopics,
     resourceBundle,
     language,
@@ -34,7 +34,7 @@ const AppHelpTopicDemo: React.FC<AppProps> = ({ children }) => {
 
   return (
     <React.Suspense fallback={<LoadingBox />}>
-      <HelpTopicContainer {...inContextHelpProps}>
+      <HelpTopicContainer {...helpTopicContainerProps}>
         <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>
           {children}
         </Page>
