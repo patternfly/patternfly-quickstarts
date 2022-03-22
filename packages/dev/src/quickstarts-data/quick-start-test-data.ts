@@ -42,4 +42,4 @@ export const allQuickStarts: QuickStart[] = [
 
 export const localizedQuickStarts: QuickStart[] = [csDemo, enDemo];
 
-export const inContextHelpTopics = exampleHelpTopics;
+export const helpTopics = exampleHelpTopics;

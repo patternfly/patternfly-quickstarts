@@ -1,19 +1,19 @@
 import './QuickStartDrawer.scss';
 import * as React from 'react';
 import { Drawer, DrawerContent, DrawerContentBody } from '@patternfly/react-core';
-// import QuickStartPanelContent from './QuickStartPanelContent';
+import HelpTopicPanelContent from './HelpTopicPanelContent';
 import {
   HelpTopicContext,
   HelpTopicContextValues,
   useValuesForHelpTopicContext,
 } from './utils/help-topic-context';
 import { QuickStartContextValues } from './utils/quick-start-context';
-import { HELP_TOPIC_NAME_KEY } from './utils/const';
-import { InContextHelpTopic } from './utils/quick-start-types';
+// import { HELP_TOPIC_NAME_KEY } from './utils/const';
+import { HelpTopic } from './utils/help-topic-types';
 
-export interface InContextHelpContainerProps extends React.HTMLProps<HTMLDivElement> {
-  /* array of InContextHelpTopics */
-  inContextHelpTopics: InContextHelpTopic[];
+export interface HelpTopicContainerProps extends React.HTMLProps<HTMLDivElement> {
+  /* array of HelpTopics */
+  helpTopics: HelpTopic[];
   /* text resources object */
   resourceBundle?: any;
   /* language of the current resource bundle */
@@ -33,8 +33,8 @@ export interface InContextHelpContainerProps extends React.HTMLProps<HTMLDivElem
   contextProps?: QuickStartContextValues;
 }
 
-export const InContextHelpContainer: React.FC<InContextHelpContainerProps> = ({
-  inContextHelpTopics,
+export const HelpTopicContainer: React.FC<HelpTopicContainerProps> = ({
+  helpTopics,
   children,
   resourceBundle,
   language,
@@ -44,7 +44,7 @@ export const InContextHelpContainer: React.FC<InContextHelpContainerProps> = ({
   ...props
 }) => {
   const valuesForHelpTopicContext: HelpTopicContextValues = useValuesForHelpTopicContext({
-    inContextHelpTopics,
+    helpTopics,
     language,
     resourceBundle: {
       ...resourceBundle,
@@ -76,48 +76,36 @@ export const InContextHelpContainer: React.FC<InContextHelpContainerProps> = ({
 };
 
 export interface HelpTopicDrawerProps extends React.HTMLProps<HTMLDivElement> {
-  inContextHelpTopics?: InContextHelpTopic[];
+  helpTopics?: HelpTopic[];
   children?: React.ReactNode;
 }
 
 export const HelpTopicDrawer: React.FC<HelpTopicDrawerProps> = ({
-  inContextHelpTopics,
+  // helpTopics,
   children,
   ...props
 }) => {
-  const { setActiveHelpTopicByName, activeHelpTopic } = React.useContext<HelpTopicContextValues>(
+  const { activeHelpTopic, filteredHelpTopics } = React.useContext<HelpTopicContextValues>(
     HelpTopicContext,
   );
 
-  React.useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    // if there is a quick start param, but the quick start is not active, set it
-    // this can happen if a new browser session is opened or an incognito window for example
-    const helpTopicNameFromParam = params.get(HELP_TOPIC_NAME_KEY) || '';
-    if (helpTopicNameFromParam) {
-      setActiveHelpTopicByName(helpTopicNameFromParam);
-    }
-  }, [inContextHelpTopics, setActiveHelpTopicByName]);
+  // Leave here if query param is desired for help topics later
+  // React.useEffect(() => {
+  //   const params = new URLSearchParams(window.location.search);
+  //   // if there is a quick start param, but the quick start is not active, set it
+  //   // this can happen if a new browser session is opened or an incognito window for example
+  //   const helpTopicNameFromParam = params.get(HELP_TOPIC_NAME_KEY) || '';
+  //   if (helpTopicNameFromParam) {
+  //     setActiveHelpTopicByName(helpTopicNameFromParam);
+  //   }
+  // }, [inContextHelpTopics, setActiveHelpTopicByName]);
 
-  // TODO: handle full width variable. is it fixed? check req doc
-
-  // const fullWidthPanelStyle = fullWidth
-  //   ? {
-  //       style: {
-  //         flex: 1,
-  //       },
-  //     }
-  //   : {};
-
-  // const fullWidthBodyStyle = fullWidth
-  //   ? {
-  //       style: {
-  //         display: activeQuickStartID ? 'none' : 'flex',
-  //       },
-  //     }
-  //   : {};
-
-  const panelContent = <div>I'm the help topics</div>;
+  const panelContent = (
+    <HelpTopicPanelContent
+      activeHelpTopic={activeHelpTopic}
+      filteredHelpTopics={filteredHelpTopics}
+    />
+  );
 
   return (
     <>

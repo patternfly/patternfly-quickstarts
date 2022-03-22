@@ -4,7 +4,7 @@ export * from './QuickStartCatalogPage';
 export * from './catalog';
 export * from './ConsoleInternal/components/utils';
 export * from './QuickStartDrawer';
-export * from './InContextHelpDrawer';
+export * from './HelpTopicDrawer';
 export * from './utils/const';
 export * from './utils/quick-start-context';
 export * from './utils/help-topic-context';

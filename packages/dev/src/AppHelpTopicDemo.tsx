@@ -1,11 +1,7 @@
 import './App.css';
 import { Page } from '@patternfly/react-core';
-import {
-  LoadingBox,
-  InContextHelpContainerProps,
-  InContextHelpContainer,
-} from '@patternfly/quickstarts';
-import { inContextHelpTopics } from './quickstarts-data/quick-start-test-data';
+import { LoadingBox, HelpTopicContainerProps, HelpTopicContainer } from '@patternfly/quickstarts';
+import { helpTopics } from './quickstarts-data/quick-start-test-data';
 import React from 'react';
 import i18n from './i18n/i18n';
 import { AppHeader, AppSidebar } from './common/Page';
@@ -15,7 +11,7 @@ type AppProps = {
   showCardFooters?: boolean;
 };
 
-const AppDemoInContextHelp: React.FC<AppProps> = ({ children }) => {
+const AppHelpTopicDemo: React.FC<AppProps> = ({ children }) => {
   const language = localStorage.getItem('bridge/language') || 'en';
   const resourceBundle = i18n.getResourceBundle(language, 'quickstart');
 
@@ -29,8 +25,8 @@ const AppDemoInContextHelp: React.FC<AppProps> = ({ children }) => {
     }, 500);
   }, []);
 
-  const inContextHelpProps: InContextHelpContainerProps = {
-    inContextHelpTopics,
+  const inContextHelpProps: HelpTopicContainerProps = {
+    helpTopics,
     resourceBundle,
     language,
     loading,
@@ -38,13 +34,13 @@ const AppDemoInContextHelp: React.FC<AppProps> = ({ children }) => {
 
   return (
     <React.Suspense fallback={<LoadingBox />}>
-      <InContextHelpContainer {...inContextHelpProps}>
+      <HelpTopicContainer {...inContextHelpProps}>
         <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>
           {children}
         </Page>
-      </InContextHelpContainer>
+      </HelpTopicContainer>
     </React.Suspense>
   );
 };
 
-export default AppDemoInContextHelp;
+export default AppHelpTopicDemo;

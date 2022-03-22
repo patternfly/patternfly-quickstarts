@@ -10,12 +10,7 @@ import {
   useValuesForQuickStartContext,
 } from './utils/quick-start-context';
 import { QUICKSTART_ID_FILTER_KEY } from './utils/const';
-import {
-  QuickStart,
-  QuickStartStatus,
-  AllQuickStartStates,
-  InContextHelpTopic,
-} from './utils/quick-start-types';
+import { QuickStart, QuickStartStatus, AllQuickStartStates } from './utils/quick-start-types';
 import { getQuickStartByName } from './utils/quick-start-utils';
 
 export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement> {
@@ -64,7 +59,6 @@ export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement
   };
   /* additional quick start context props */
   contextProps?: QuickStartContextValues;
-  inContextHelpTopics?: InContextHelpTopic[];
 }
 
 export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
@@ -150,7 +144,6 @@ export interface QuickStartDrawerProps extends React.HTMLProps<HTMLDivElement> {
   fullWidth?: boolean;
   onCloseInProgress?: any;
   onCloseNotInProgress?: any;
-  inContextHelpTopics?: InContextHelpTopic[];
 }
 
 export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({

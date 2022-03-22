@@ -12,6 +12,8 @@
 - name: workspace
   tags:
     - page-1
+    - page-2
+    - page-3
   title: Workspace
   content: |-
     **A Workspace** is...
@@ -38,6 +40,7 @@
 - name: manual-deployment
   tags:
     - page-2
+    - page-1
   title: Manual Deployment
   content: |-
     **A Manual Deployment** is...

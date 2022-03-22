@@ -1,20 +1,18 @@
 import React from 'react';
-import { InContextHelpTopic } from './quick-start-types';
-import { removeQueryArgument, setQueryArgument } from '../ConsoleInternal/components/utils/router';
-import { HELP_TOPIC_NAME_KEY } from './const';
+import { HelpTopic } from './help-topic-types';
 
 export type HelpTopicContextValues = {
-  inContextHelpTopics?: InContextHelpTopic[];
-  activeHelpTopic?: InContextHelpTopic;
+  helpTopics?: HelpTopic[];
+  activeHelpTopic?: HelpTopic;
   setActiveHelpTopicByName?: (helpTopicName: string) => void;
-  filteredHelpTopics?: InContextHelpTopic[];
-  setFilteredHelpTopics?: React.Dispatch<React.SetStateAction<InContextHelpTopic[]>>;
+  filteredHelpTopics?: HelpTopic[];
+  setFilteredHelpTopics?: React.Dispatch<React.SetStateAction<HelpTopic[]>>;
   loading?: boolean;
   setLoading?: any;
 };
 
 export const HelpTopicContextDefaults = {
-  inContextHelpTopics: [],
+  helpTopics: [],
   activeHelpTopic: null,
   setActiveHelpTopicByName: () => {},
   filteredHelpTopics: [],
@@ -37,9 +35,7 @@ export const useValuesForHelpTopicContext = (
   const [loading, setLoading] = React.useState(combinedValue.loading);
 
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  const [inContextHelpTopics, setInContextHelpTopics] = React.useState(
-    combinedValue.inContextHelpTopics || [],
-  );
+  const [helpTopics, setHelpTopics] = React.useState(combinedValue.helpTopics || []);
 
   const [activeHelpTopic, setActiveHelpTopic] = React.useState(
     combinedValue.activeHelpTopic || null,
@@ -47,18 +43,16 @@ export const useValuesForHelpTopicContext = (
 
   const setActiveHelpTopicByName = React.useCallback(
     (helpTopicName: string) => {
-      const topic = inContextHelpTopics.find((t) => {
+      const topic = helpTopics.find((t) => {
         return t.name === helpTopicName;
       });
       if (!helpTopicName) {
-        removeQueryArgument(HELP_TOPIC_NAME_KEY);
         setActiveHelpTopic(null);
         return;
       }
-      setQueryArgument(HELP_TOPIC_NAME_KEY, helpTopicName);
       setActiveHelpTopic(topic);
     },
-    [inContextHelpTopics],
+    [helpTopics],
   );
 
   const [filteredHelpTopics, setFilteredHelpTopics] = React.useState(
@@ -66,7 +60,7 @@ export const useValuesForHelpTopicContext = (
   );
 
   return {
-    inContextHelpTopics,
+    helpTopics,
     activeHelpTopic,
     setActiveHelpTopicByName,
     filteredHelpTopics,

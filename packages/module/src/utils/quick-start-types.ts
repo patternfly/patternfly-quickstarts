@@ -70,11 +70,3 @@ export type QuickStartType = {
   text: string;
   color?: 'blue' | 'cyan' | 'green' | 'orange' | 'purple' | 'red' | 'grey';
 };
-
-export type InContextHelpTopic = {
-  name: string;
-  title: string;
-  tags: string[];
-  content: string;
-  links: string[];
-};

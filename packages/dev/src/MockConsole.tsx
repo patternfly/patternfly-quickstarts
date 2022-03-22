@@ -16,7 +16,7 @@ import HelpIcon from '@patternfly/react-icons/dist/js/icons/help-icon';
 
 export const MockConsole: React.FC = () => {
   const {
-    inContextHelpTopics,
+    helpTopics,
     setFilteredHelpTopics,
     filteredHelpTopics,
     setActiveHelpTopicByName,
@@ -43,14 +43,14 @@ export const MockConsole: React.FC = () => {
   };
 
   React.useEffect(() => {
-    const topics = inContextHelpTopics.filter((topic) => {
+    const topics = helpTopics.filter((topic) => {
       const pageTagNumbers = topic.tags.map((tag: string) => {
         return Number(tag.slice(-1));
       });
       return pageTagNumbers.includes(consolePageState);
     });
     setFilteredHelpTopics(topics);
-  }, [consolePageState, inContextHelpTopics, setFilteredHelpTopics]);
+  }, [consolePageState, helpTopics, setFilteredHelpTopics]);
 
   const formGroups = filteredHelpTopics.map((topic) => {
     return (
@@ -91,7 +91,7 @@ export const MockConsole: React.FC = () => {
     <>
       <PageSection>
         <Banner variant="info">
-          <Title headingLevel="h1">Console page: {consolePageState}</Title>
+          <Title headingLevel="h1">Console Page {consolePageState}</Title>
         </Banner>
       </PageSection>
       <PageSection>

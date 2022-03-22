@@ -18,7 +18,7 @@ import './i18n/i18n';
 import AppContext from './AppContext';
 import AppProps from './AppProps';
 import AppLocalized from './AppLocalized';
-import AppDemoInContextHelp from './AppDemoInContextHelp';
+import AppHelpTopicDemo from './AppHelpTopicDemo';
 import { DefaultCatalog } from './DefaultCatalog';
 import { CustomCatalog } from './CustomCatalog';
 import { MockConsole } from './MockConsole';
@@ -47,9 +47,9 @@ ReactDOM.render(
         </AppContext>
       </Route>
       <Route exact path="/in-context-help">
-        <AppDemoInContextHelp>
+        <AppHelpTopicDemo>
           <MockConsole />
-        </AppDemoInContextHelp>
+        </AppHelpTopicDemo>
       </Route>
     </Switch>
   </Router>,
