@@ -153,7 +153,6 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
   fullWidth,
   onCloseInProgress,
   onCloseNotInProgress,
-
   ...props
 }) => {
   const {
@@ -192,9 +191,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
 
   const [modalOpen, setModalOpen] = React.useState<boolean>(false);
   const activeQuickStartStatus = activeQuickStartState?.status;
-  const onClose = () => {
-    setActiveQuickStart('');
-  };
+  const onClose = () => setActiveQuickStart('');
   const handleClose = () => {
     if (activeQuickStartStatus === QuickStartStatus.IN_PROGRESS) {
       if (onCloseInProgress) {
