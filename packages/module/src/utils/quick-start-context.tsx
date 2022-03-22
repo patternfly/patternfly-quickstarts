@@ -10,7 +10,6 @@ import {
 import PluralResolver from './PluralResolver';
 import {
   AllQuickStartStates,
-  // InContextHelpTopic,
   QuickStart,
   QuickStartState,
   QuickStartStatus,
@@ -463,11 +462,6 @@ export const useValuesForQuickStartContext = (
     setLoading,
     alwaysShowTaskReview,
     setAlwaysShowTaskReview,
-    // inContextHelpTopics,
-    // activeHelpTopic,
-    // setActiveHelpTopicByName,
-    // filteredHelpTopics,
-    // setFilteredHelpTopics,
   };
 };
 

@@ -194,7 +194,6 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
   const activeQuickStartStatus = activeQuickStartState?.status;
   const onClose = () => {
     setActiveQuickStart('');
-    // setActiveHelpTopicByName('');
   };
   const handleClose = () => {
     if (activeQuickStartStatus === QuickStartStatus.IN_PROGRESS) {
