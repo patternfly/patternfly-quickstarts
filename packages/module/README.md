@@ -308,7 +308,7 @@ See the [HelpTopicDemo](https://github.com/patternfly/patternfly-quickstarts/blo
 - Load yaml defined `HelpTopic` array
 - Pass `HelpTopicContainerProps`, including loaded `HelpTopics` to the `<HelpTopicContainer/>`
 
-```ts
+```tsx
 import './App.css';
 import { Page } from '@patternfly/react-core';
 import { LoadingBox, HelpTopicContainerProps, HelpTopicContainer } from '@patternfly/quickstarts';
@@ -359,7 +359,7 @@ In the example above `<HelpTopicContainer />` wraps the `<Page/>` element as wel
 
 Live [preview](https://deploy-preview-140--quickstarts.netlify.app/in-context-help) of code below:
 
-```ts
+```tsx
 import * as React from 'react';
 import {
   Banner,
