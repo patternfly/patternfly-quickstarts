@@ -54,7 +54,7 @@ const FormGroupWithHelpTopicPopover: React.FC<FormGroupWithHelpTopicPopoverProps
                     hide();
                   }}
                 >
-                  Learn more
+                  Learn more!
                 </Button>
               </div>
             )}
