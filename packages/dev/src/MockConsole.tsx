@@ -9,6 +9,7 @@ import {
   Popover,
   Split,
   SplitItem,
+  Switch,
   TextInput,
   Title,
 } from '@patternfly/react-core';
@@ -41,26 +42,32 @@ const FormGroupWithHelpTopicPopover: React.FC<FormGroupWithHelpTopicPopoverProps
       fieldId={topic.name}
       key={topic.name}
       labelIcon={
-        <Popover
-          bodyContent={(hide) => (
-            <div>
-              {topic.title} is quite amaizing{' '}
-              <Button
-                variant="link"
-                onClick={() => {
-                  setActiveHelpTopicByName(topic.name);
-                  hide();
-                }}
-              >
-                Learn more
-              </Button>
-            </div>
-          )}
-        >
-          <Button variant="plain">
-            <HelpIcon noVerticalAlign />
-          </Button>
-        </Popover>
+        <>
+          <Popover
+            bodyContent={(hide) => (
+              <div>
+                {topic.title} is quite amaizing{' '}
+                <Button
+                  variant="link"
+                  onClick={() => {
+                    setActiveHelpTopicByName(topic.name);
+                    hide();
+                  }}
+                >
+                  Learn more!
+                </Button>
+              </div>
+            )}
+          >
+            <Button variant="plain">
+              <HelpIcon noVerticalAlign />
+            </Button>
+          </Popover>
+          <Button
+            variant="link"
+            onClick={() => setActiveHelpTopicByName(topic.name)}
+          >{`Learn more about ${topic.title}`}</Button>
+        </>
       }
     >
       <TextInput isRequired type="text" id={topic.name} />
@@ -76,12 +83,14 @@ export const MockConsole: React.FC = () => {
     setActiveHelpTopicByName,
   } = React.useContext<HelpTopicContextValues>(HelpTopicContext);
 
+  const [closeDrawerOnPageChange, setCloseDrawerOnPageChange] = React.useState(true);
+
   // mock console page identifiers: 1 - 6
   // click handlers to change page
   const [consolePageState, setConsolePageState] = React.useState(1);
 
   const handleClickNext = () => {
-    setActiveHelpTopicByName('');
+    closeDrawerOnPageChange && setActiveHelpTopicByName('');
     if (consolePageState === 6) {
       setConsolePageState(1);
       return;
@@ -90,14 +99,13 @@ export const MockConsole: React.FC = () => {
   };
 
   const handleClickBack = () => {
-    setActiveHelpTopicByName('');
+    closeDrawerOnPageChange && setActiveHelpTopicByName('');
     if (consolePageState === 6) {
       setConsolePageState(4);
       return;
     }
     setConsolePageState(consolePageState - 1);
   };
-
   // Example usage setFilteredHelpTopics()
   // After rendering the console, set the filtered help topics
   React.useEffect(() => {
@@ -147,14 +155,16 @@ export const MockConsole: React.FC = () => {
       </PageSection>
       <PageSection>
         <Title headingLevel="h3">
-          Example usage of help topics opened via popover{' '}
-          <b>
-            {consolePageState < 4
-              ? 'using tags that match the Console Page number'
-              : 'by defining which help topics should be present on each page'}
-          </b>
+          Example usage of help topics opened via popover and directly from a link{' '}
+          <div>
+            <b>
+              {consolePageState < 4
+                ? 'Using tags that match the Console Page number'
+                : 'By defining which help topics should be present on each page'}
+            </b>
+          </div>
         </Title>
-        <Divider />
+        <Divider style={{ padding: '20px 0px' }} />
         <Form>
           {consolePageState < 4
             ? formGroupsFromTags
@@ -170,6 +180,14 @@ export const MockConsole: React.FC = () => {
           </SplitItem>
           <SplitItem>
             <Button onClick={handleClickNext}>Next</Button>
+          </SplitItem>
+          <SplitItem>
+            <Switch
+              label="Close drawer on page change"
+              labelOff="DON'T close drawer on page change"
+              isChecked={closeDrawerOnPageChange}
+              onChange={() => setCloseDrawerOnPageChange(!closeDrawerOnPageChange)}
+            />
           </SplitItem>
         </Split>
       </PageSection>

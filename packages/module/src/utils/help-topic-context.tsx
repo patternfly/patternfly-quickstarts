@@ -3,6 +3,7 @@ import { HelpTopic } from './help-topic-types';
 
 export type HelpTopicContextValues = {
   helpTopics?: HelpTopic[];
+  setHelpTopics?: React.Dispatch<React.SetStateAction<HelpTopic[]>>;
   activeHelpTopic?: HelpTopic;
   setActiveHelpTopicByName?: (helpTopicName: string) => void;
   filteredHelpTopics?: HelpTopic[];
@@ -13,6 +14,7 @@ export type HelpTopicContextValues = {
 
 export const HelpTopicContextDefaults = {
   helpTopics: [],
+  setHelpTopics: () => {},
   activeHelpTopic: null,
   setActiveHelpTopicByName: () => {},
   filteredHelpTopics: [],
@@ -35,7 +37,7 @@ export const useValuesForHelpTopicContext = (
   const [loading, setLoading] = React.useState(combinedValue.loading);
 
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  const [helpTopics, setHelpTopics] = React.useState(combinedValue.helpTopics || []);
+  const [helpTopics, setHelpTopics] = React.useState<HelpTopic[]>(combinedValue.helpTopics || []);
 
   const [activeHelpTopic, setActiveHelpTopic] = React.useState(
     combinedValue.activeHelpTopic || null,
@@ -61,6 +63,7 @@ export const useValuesForHelpTopicContext = (
 
   return {
     helpTopics,
+    setHelpTopics,
     activeHelpTopic,
     setActiveHelpTopicByName,
     filteredHelpTopics,

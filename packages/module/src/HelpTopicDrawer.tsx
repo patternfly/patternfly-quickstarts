@@ -63,6 +63,15 @@ export const HelpTopicContainer: React.FC<HelpTopicContainerProps> = ({
     }
   }, [loading, valuesForHelpTopicContext]);
 
+  React.useEffect(() => {
+    if (
+      helpTopics &&
+      JSON.stringify(helpTopics) !== JSON.stringify(valuesForHelpTopicContext.helpTopics)
+    ) {
+      valuesForHelpTopicContext.setHelpTopics(helpTopics);
+    }
+  }, [helpTopics, valuesForHelpTopicContext]);
+
   const drawerProps = {
     //TODO add extras here?
     ...props,
@@ -85,9 +94,9 @@ export const HelpTopicDrawer: React.FC<HelpTopicDrawerProps> = ({
   children,
   ...props
 }) => {
-  const { activeHelpTopic, filteredHelpTopics } = React.useContext<HelpTopicContextValues>(
-    HelpTopicContext,
-  );
+  const { activeHelpTopic, filteredHelpTopics, setActiveHelpTopicByName } = React.useContext<
+    HelpTopicContextValues
+  >(HelpTopicContext);
 
   // Leave here if query param is desired for help topics later
   // React.useEffect(() => {
@@ -100,10 +109,15 @@ export const HelpTopicDrawer: React.FC<HelpTopicDrawerProps> = ({
   //   }
   // }, [inContextHelpTopics, setActiveHelpTopicByName]);
 
+  const onClose = () => {
+    setActiveHelpTopicByName('');
+  };
+
   const panelContent = (
     <HelpTopicPanelContent
       activeHelpTopic={activeHelpTopic}
       filteredHelpTopics={filteredHelpTopics}
+      onClose={onClose}
     />
   );
 

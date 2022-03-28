@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {
   Divider,
+  DrawerActions,
+  DrawerCloseButton,
   // DrawerActions,
   // DrawerCloseButton,
   DrawerHead,
@@ -9,8 +11,6 @@ import {
   OptionsMenu,
   OptionsMenuItem,
   OptionsMenuToggle,
-  Stack,
-  StackItem,
   Title,
 } from '@patternfly/react-core';
 // import { css } from '@patternfly/react-styles';
@@ -25,12 +25,14 @@ type HelpTopicPanelContentProps = {
   activeHelpTopic: HelpTopic;
   filteredHelpTopics?: HelpTopic[];
   isResizable?: boolean;
+  onClose: () => void;
 };
 
 const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
   activeHelpTopic = null,
   filteredHelpTopics = [],
   isResizable = true,
+  onClose,
   ...props
 }) => {
   const { setActiveHelpTopicByName } = React.useContext<HelpTopicContextValues>(HelpTopicContext);
@@ -47,28 +49,50 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
     toggleHelpTopicMenu();
   };
 
-  const menuItems = filteredHelpTopics.map((topic) => {
-    return (
-      <OptionsMenuItem key={topic.name} onSelect={onSelectHelpTopic} id={topic.name}>
-        {topic.title}
-      </OptionsMenuItem>
-    );
-  });
+  const menuItems =
+    filteredHelpTopics.length > 0 &&
+    filteredHelpTopics.map((topic) => {
+      return (
+        <OptionsMenuItem key={topic.name} onSelect={onSelectHelpTopic} id={topic.name}>
+          {topic.title}
+        </OptionsMenuItem>
+      );
+    });
+
+  const paddingContainer = (children) => <div style={{ padding: '24px' }}>{children}</div>;
+
+  const panelBodyItems = (
+    <>
+      {paddingContainer(<QuickStartMarkdownView content={activeHelpTopic?.content} />)}
+      <Divider />
+      {paddingContainer(
+        activeHelpTopic?.links.map((link) => {
+          return <QuickStartMarkdownView key={link} content={link} />;
+        }),
+      )}
+    </>
+  );
 
   const content = (
     <DrawerPanelContent isResizable={isResizable} className="pfext-quick-start__base" {...props}>
       <div>
         <DrawerHead>
           <div className="pfext-quick-start-panel-content__title">
-            <OptionsMenu
-              id={'helptopics'}
-              isPlain
-              isOpen={isHelpTopicMenuOpen}
-              toggle={
-                <OptionsMenuToggle onToggle={toggleHelpTopicMenu} toggleTemplate={<BarsIcon />} />
-              }
-              menuItems={menuItems}
-            />
+            {menuItems && (
+              <OptionsMenu
+                id={'helptopics'}
+                isPlain
+                isOpen={isHelpTopicMenuOpen}
+                toggle={
+                  <OptionsMenuToggle
+                    style={{ paddingLeft: '0px' }}
+                    onToggle={toggleHelpTopicMenu}
+                    toggleTemplate={<BarsIcon />}
+                  />
+                }
+                menuItems={menuItems}
+              />
+            )}
 
             <Title
               headingLevel="h1"
@@ -79,15 +103,15 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
               {activeHelpTopic?.title}
             </Title>
           </div>
-          {/* {showClose && (
+          {
             <DrawerActions>
               <DrawerCloseButton
-                onClick={handleClose}
+                onClick={onClose}
                 className="pfext-quick-start-panel-content__close-button"
                 data-testid="qs-drawer-close"
               />
             </DrawerActions>
-          )} */}
+          }
         </DrawerHead>
         <Divider />
         <DrawerPanelBody
@@ -95,17 +119,7 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
           className="pfext-quick-start-panel-content__body"
           data-test="content"
         >
-          <Stack hasGutter>
-            <StackItem style={{ padding: '20px' }}>
-              <QuickStartMarkdownView content={activeHelpTopic?.content} />
-            </StackItem>
-            <Divider />
-            <StackItem style={{ padding: '20px' }}>
-              {activeHelpTopic?.links.map((link) => {
-                return <QuickStartMarkdownView key={link} content={link} />;
-              })}
-            </StackItem>
-          </Stack>
+          {panelBodyItems}
         </DrawerPanelBody>
       </div>
     </DrawerPanelContent>
