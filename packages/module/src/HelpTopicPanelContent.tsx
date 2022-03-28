@@ -49,13 +49,15 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
     toggleHelpTopicMenu();
   };
 
-  const menuItems = filteredHelpTopics.map((topic) => {
-    return (
-      <OptionsMenuItem key={topic.name} onSelect={onSelectHelpTopic} id={topic.name}>
-        {topic.title}
-      </OptionsMenuItem>
-    );
-  });
+  const menuItems =
+    filteredHelpTopics.length > 0 &&
+    filteredHelpTopics.map((topic) => {
+      return (
+        <OptionsMenuItem key={topic.name} onSelect={onSelectHelpTopic} id={topic.name}>
+          {topic.title}
+        </OptionsMenuItem>
+      );
+    });
 
   const paddingContainer = (children) => <div style={{ padding: '24px' }}>{children}</div>;
 
@@ -76,19 +78,21 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
       <div>
         <DrawerHead>
           <div className="pfext-quick-start-panel-content__title">
-            <OptionsMenu
-              id={'helptopics'}
-              isPlain
-              isOpen={isHelpTopicMenuOpen}
-              toggle={
-                <OptionsMenuToggle
-                  style={{ paddingLeft: '0px' }}
-                  onToggle={toggleHelpTopicMenu}
-                  toggleTemplate={<BarsIcon />}
-                />
-              }
-              menuItems={menuItems}
-            />
+            {menuItems && (
+              <OptionsMenu
+                id={'helptopics'}
+                isPlain
+                isOpen={isHelpTopicMenuOpen}
+                toggle={
+                  <OptionsMenuToggle
+                    style={{ paddingLeft: '0px' }}
+                    onToggle={toggleHelpTopicMenu}
+                    toggleTemplate={<BarsIcon />}
+                  />
+                }
+                menuItems={menuItems}
+              />
+            )}
 
             <Title
               headingLevel="h1"
