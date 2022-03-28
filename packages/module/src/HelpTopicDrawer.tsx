@@ -63,6 +63,15 @@ export const HelpTopicContainer: React.FC<HelpTopicContainerProps> = ({
     }
   }, [loading, valuesForHelpTopicContext]);
 
+  React.useEffect(() => {
+    if (
+      helpTopics &&
+      JSON.stringify(helpTopics) !== JSON.stringify(valuesForHelpTopicContext.helpTopics)
+    ) {
+      valuesForHelpTopicContext.setHelpTopics(helpTopics);
+    }
+  }, [helpTopics, valuesForHelpTopicContext]);
+
   const drawerProps = {
     //TODO add extras here?
     ...props,
