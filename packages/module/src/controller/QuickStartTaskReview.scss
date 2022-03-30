@@ -21,7 +21,7 @@
   }
 
   &--success {
-    color: var(--pf-global--palette--green-500);
+    color: var(--pf-global--success-color--100) !important;
   }
 
   &--failed {

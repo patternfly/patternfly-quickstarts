@@ -24,16 +24,30 @@
 
   .pfext-markdown-view pre {
     background-color: var(--pf-global--BackgroundColor--100);
+    border-color: var(--pf-global--BorderColor--100);
   }
 
   .pfext-markdown-view code {
     color: var(--pf-global--Color--100);
-    background-color: var(--pf-global--palette--black-500);
+    background-color: var(--pf-global--palette--black-600);
   }
 
+  .pfext-markdown-view .pf-c-code-block,
   .pfext-markdown-view .pf-c-code-block code {
-    // color: var(--pf-global--Color--100);
+    background-color: var(--pf-global--BackgroundColor--400);
+  }
+
+  :where(.pfext-markdown-view) .pf-c-clipboard-copy.pf-m-inline {
+    --pf-c-clipboard-copy--m-inline--BackgroundColor: var(--pf-global--BackgroundColor--400);
+  }
+
+  // Make the cards light on dark background. It would be better to use pf-c-page__main-section variable but we aren't using a page section here.
+  .pfext-page-layout__content {
     background-color: var(--pf-global--BackgroundColor--200);
+  }
+
+  .pfext-quick-start-catalog__gallery-item .pf-c-card {
+    --pf-c-card--BackgroundColor: var(--pf-global--BackgroundColor--100);
   }
 
   // Alerts currently has the wrong background in the PF dark stylesheet. This can be removed once that is fixed.

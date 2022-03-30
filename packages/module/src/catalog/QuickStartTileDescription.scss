@@ -22,14 +22,6 @@
       line-height: 1.1;
     }
 
-    &__icon {
-      color: var(--pf-global--info-color--100) !important;
-
-      &:hover {
-        color: var(--pf-global--info-color--200) !important;
-      }
-    }
-
     &-list {
       padding-left: 20px;
     }
