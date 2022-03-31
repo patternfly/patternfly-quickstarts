@@ -76,7 +76,7 @@ const App3: React.FC<AppProps> = ({ children, showCardFooters }) => {
     language,
     loading,
     useQueryParams: withQueryParams,
-    alwaysShowTaskReview: false,
+    alwaysShowTaskReview: true,
   };
 
   return (

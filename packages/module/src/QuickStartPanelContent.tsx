@@ -53,11 +53,12 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   headerVariant = '',
   ...props
 }) => {
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource, activeQuickStartState } = React.useContext<QuickStartContextValues>(
+    QuickStartContext,
+  );
   const [contentRef, setContentRef] = React.useState<HTMLDivElement>();
   const shadows = useScrollShadows(contentRef);
   const quickStart = quickStarts.find((qs) => qs.metadata.name === activeQuickStartID);
-  const { activeQuickStartState } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const taskNumber = activeQuickStartState?.taskNumber;
   useScrollTopOnTaskNumberChange(contentRef, taskNumber as number);
   const nextQuickStarts: QuickStart[] = quickStarts.filter((qs: QuickStart) =>

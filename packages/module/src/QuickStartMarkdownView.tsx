@@ -63,7 +63,9 @@ const QuickStartMarkdownView: React.FC<QuickStartMarkdownViewProps> = ({
         <>
           <MarkdownHighlightExtension docContext={docContext} rootSelector={rootSelector} />
           <MarkdownCopyClipboard docContext={docContext} rootSelector={rootSelector} />
-          {markdown && markdown.renderExtension(docContext, rootSelector)}
+          {markdown &&
+            markdown.renderExtension &&
+            markdown.renderExtension(docContext, rootSelector)}
         </>
       )}
       className={className}

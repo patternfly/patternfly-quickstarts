@@ -89,7 +89,7 @@ spec:
       review:
         instructions: |-
           - Did you complete the task successfully?
-        failedTaskHelp: This task isn’t verified yet. Try the task again.
+        failedTaskHelp: This task isn't verified yet. Try the task again.
       # optional - the task's success and failure messages
       summary:
         success: Shows a success message in the task header
@@ -105,7 +105,7 @@ spec:
       review:
         instructions: |-
           - Thanks for checking out this quick start!
-        failedTaskHelp: This task isn’t verified yet. Try the task again.
+        failedTaskHelp: This task isn't verified yet. Try the task again.
   conclusion: |-
     The conclusion appears in the last section of the quick start.
   # you can link to the next quick start(s) here

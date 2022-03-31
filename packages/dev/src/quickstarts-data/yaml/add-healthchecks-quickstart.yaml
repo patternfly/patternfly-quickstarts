@@ -6,7 +6,7 @@ spec:
   description: |-
     You just created a sample application. Now, let’s add health checks
     to it.
-  prerequisites: [You completed the "Getting started with a sample" quick start.]
+  prerequisites: ["A Red Hat user account to access the [Red Hat Hybrid Cloud Console](https://console.redhat.com/).", "An instance of OpenShift Container Platform (OCP) 4.9 or higher running on Red Hat OpenShift Dedicated (OSD), or Red Hat OpenShift Service on AWS (ROSA). When using OSD or ROSA, an Amazon Web Services (AWS) account and credentials are required.", "Access to the OpenShift Cluster Manager (OCM) console.", "A service account with either the [MongoDB Atlas](https://www.mongodb.com/atlas/database), or [Crunchy Data Bridge](https://www.crunchydata.com), or [CockroachDB](https://www.cockroachlabs.com) cloud database provider.", "An existing database instance running on one of these cloud database providers: MongoDB Atlas, Crunchy Data Bridge, or CockroachDB."]
   introduction: |-
     ### This quick start shows you how to add health checks to your sample application.
     You should have previously created the **sample-app** application and **nodejs-sample** deployment using the **Get started with a sample** quick start. If you haven't, you may be able to follow these tasks with any existing deployment without configured health checks.

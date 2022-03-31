@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@patternfly/patternfly": "4.183.1",
-    "@patternfly/quickstarts": "2.0.1",
+    "@patternfly/quickstarts": "2.2.1",
     "@patternfly/transform-adoc": "*",
     "@patternfly/react-core": "^4.135.0",
     "asciidoctor": "^2.2.1",
