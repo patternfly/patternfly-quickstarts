@@ -24,7 +24,7 @@
   }
 
   &__title-success {
-    color: var(--pf-global--palette--green-500) !important;
+    color: var(--pf-global--success-color--100) !important;
   }
 
   &__title-failed {
@@ -33,7 +33,7 @@
 
   &__task-icon {
     &-init {
-      background-color: var(--pf-global--palette--blue-400);
+      background-color: var(--pf-global--primary-color--100);
       border-radius: var(--pf-global--BorderRadius--lg);
       color: var(--pf-global--Color--light-100);
       display: inline-flex;
@@ -48,7 +48,7 @@
     }
 
     &-success {
-      color: var(--pf-global--palette--green-500) !important;
+      color: var(--pf-global--success-color--100) !important;
     }
 
     &-failed {

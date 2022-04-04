@@ -23,6 +23,8 @@ import { DefaultCatalog } from './DefaultCatalog';
 import { CustomCatalog } from './CustomCatalog';
 import { MockConsole } from './MockConsole';
 
+import '@patternfly/patternfly/patternfly-theme-dark.css';
+
 ReactDOM.render(
   <Router>
     <Switch>

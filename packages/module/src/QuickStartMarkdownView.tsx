@@ -6,6 +6,7 @@ import {
   useInlineCopyClipboardShowdownExtension,
   useMultilineCopyClipboardShowdownExtension,
   useAdmonitionShowdownExtension,
+  useCodeShowdownExtension,
 } from '@console/shared';
 import { HIGHLIGHT_REGEXP } from '@console/shared/src/components/markdown-highlight-extension/highlight-consts';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
@@ -27,6 +28,7 @@ const QuickStartMarkdownView: React.FC<QuickStartMarkdownViewProps> = ({
   const inlineCopyClipboardShowdownExtension = useInlineCopyClipboardShowdownExtension();
   const multilineCopyClipboardShowdownExtension = useMultilineCopyClipboardShowdownExtension();
   const admonitionShowdownExtension = useAdmonitionShowdownExtension();
+  const codeShowdownExtension = useCodeShowdownExtension();
   return (
     <SyncMarkdownView
       inline
@@ -54,6 +56,7 @@ const QuickStartMarkdownView: React.FC<QuickStartMarkdownViewProps> = ({
         inlineCopyClipboardShowdownExtension,
         multilineCopyClipboardShowdownExtension,
         admonitionShowdownExtension,
+        codeShowdownExtension,
         ...(markdown ? markdown.extensions : []),
       ]}
       renderExtension={(docContext, rootSelector) => (

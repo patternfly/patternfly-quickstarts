@@ -5,5 +5,5 @@ export type QuickStartCatalogSectionProps = {
 };
 
 export const QuickStartCatalogSection: React.FC<QuickStartCatalogSectionProps> = ({ children }) => (
-  <div className="pfext-page-layout__content pfext-is-dark">{children}</div>
+  <div className="pfext-page-layout__content">{children}</div>
 );

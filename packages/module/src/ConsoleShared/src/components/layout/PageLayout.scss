@@ -2,10 +2,6 @@
   &__content {
     padding: var(--pf-global--spacer--lg);
     flex: 1;
-
-    &.pfext-is-dark {
-      background: var(--pf-global--palette--black-150);
-    }
   }
 
   &__header {
