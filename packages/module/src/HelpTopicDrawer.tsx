@@ -8,7 +8,6 @@ import {
   useValuesForHelpTopicContext,
 } from './utils/help-topic-context';
 import { QuickStartContextValues } from './utils/quick-start-context';
-// import { HELP_TOPIC_NAME_KEY } from './utils/const';
 import { HelpTopic } from './utils/help-topic-types';
 
 export interface HelpTopicContainerProps extends React.HTMLProps<HTMLDivElement> {
@@ -89,25 +88,10 @@ export interface HelpTopicDrawerProps extends React.HTMLProps<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-export const HelpTopicDrawer: React.FC<HelpTopicDrawerProps> = ({
-  // helpTopics,
-  children,
-  ...props
-}) => {
+export const HelpTopicDrawer: React.FC<HelpTopicDrawerProps> = ({ children, ...props }) => {
   const { activeHelpTopic, filteredHelpTopics, setActiveHelpTopicByName } = React.useContext<
     HelpTopicContextValues
   >(HelpTopicContext);
-
-  // Leave here if query param is desired for help topics later
-  // React.useEffect(() => {
-  //   const params = new URLSearchParams(window.location.search);
-  //   // if there is a quick start param, but the quick start is not active, set it
-  //   // this can happen if a new browser session is opened or an incognito window for example
-  //   const helpTopicNameFromParam = params.get(HELP_TOPIC_NAME_KEY) || '';
-  //   if (helpTopicNameFromParam) {
-  //     setActiveHelpTopicByName(helpTopicNameFromParam);
-  //   }
-  // }, [inContextHelpTopics, setActiveHelpTopicByName]);
 
   const onClose = () => {
     setActiveHelpTopicByName('');

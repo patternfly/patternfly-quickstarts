@@ -262,12 +262,21 @@ The quickstarts package is being extended to support a side panel that displays 
 ### Help Topic type definition
 
 ```ts
+type HelpTopicLink = {
+  href: string;
+  text?: string;
+  // open link in new tab
+  newTab?: boolean;
+  // add PF icon indicating link is external
+  isExternal?: boolean;
+};
+
 type HelpTopic = {
-  name: string; // unique identifier
-  title: string; // displayed in header of side panel
-  tags: string[]; // metadata to filter/add relationships between HelpTopics and some piece of data in your application
-  content: string; // main content of topic, supports markdown
-  links: string[]; // list of related information, use markdown link syntax
+  name: string;
+  title: string;
+  tags: string[];
+  content: string;
+  links: HelpTopicLink[];
 };
 ```
 
@@ -283,21 +292,12 @@ type HelpTopic = {
 
     Etiam viverra et tortor et maximus. Aliquam quis scelerisque metus. Proin luctus pretium sodales. Mauris nibh nibh, auctor eu scelerisque et, hendrerit a metus. Vivamus pharetra bibendum finibus. Sed a pulvinar ipsum. Fusce pharetra venenatis porttitor. Praesent justo metus, consectetur quis erat id, congue varius metus. Suspendisse dui est, tempor nec diam quis, facilisis sodales erat. Curabitur viverra convallis ex. Ut egestas condimentum augue, id euismod leo volutpat vitae. Quisque aliquet ac dolor quis pretium. Nunc at nibh quis arcu maximus elementum vel a mi.
   links:
-    - '[Creating quick starts](https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html)'
-    - '[Redhat Console](https://console.redhat.com/)'
-- name: workspace
-  tags:
-    - page-1
-    - page-2
-    - page-3
-  title: Workspace
-  content: |-
-    **A Workspace** is...
-
-    Fusce nunc risus, vehicula feugiat pellentesque sit amet, pretium non urna. Phasellus nibh mi, ornare quis euismod a, iaculis et eros. Vivamus auctor nunc odio, quis porttitor diam pellentesque nec. In et varius tellus, eget porta urna. Etiam bibendum, est eget mollis lobortis, velit risus efficitur lacus, sed pulvinar sem est vel libero. In sodales placerat tincidunt. Proin vitae risus elit. Ut lobortis ligula est, cursus rhoncus enim scelerisque ac. Donec lacus nisl, tempor porta hendrerit nec, volutpat vitae arcu. Curabitur ornare ullamcorper mi in tincidunt. Aenean efficitur posuere auctor. Pellentesque accumsan mauris vel arcu congue, nec sagittis nisl condimentum. Suspendisse mauris nulla, dignissim at viverra sed, fringilla eu purus.
-  links:
-    - '[Creating quick starts](https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html)'
-    - '[Redhat Console](https://console.redhat.com/)'
+    - text: 'Creating quick starts (external)'
+      href: 'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html'
+      isExternal: true
+    - text: 'Redhat Console (opens in new tab)'
+      href: 'https://console.redhat.com'
+      newTab: true
 ```
 
 ### Usage Example
