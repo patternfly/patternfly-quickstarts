@@ -1,22 +1,24 @@
 import * as React from 'react';
 import {
+  Button,
   Divider,
   DrawerActions,
   DrawerCloseButton,
-  // DrawerActions,
-  // DrawerCloseButton,
   DrawerHead,
   DrawerPanelBody,
   DrawerPanelContent,
   OptionsMenu,
   OptionsMenuItem,
   OptionsMenuToggle,
+  Stack,
+  StackItem,
   Title,
 } from '@patternfly/react-core';
-// import { css } from '@patternfly/react-styles';
+
 import QuickStartMarkdownView from './QuickStartMarkdownView';
 import { HelpTopic } from './utils/help-topic-types';
 import BarsIcon from '@patternfly/react-icons/dist/js/icons/bars-icon';
+import ExternalLinkAltIcon from '@patternfly/react-icons/dist/js/icons/external-link-alt-icon';
 
 import './QuickStartPanelContent.scss';
 import { HelpTopicContext, HelpTopicContextValues } from './utils/help-topic-context';
@@ -66,9 +68,28 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
       {paddingContainer(<QuickStartMarkdownView content={activeHelpTopic?.content} />)}
       <Divider />
       {paddingContainer(
-        activeHelpTopic?.links.map((link) => {
-          return <QuickStartMarkdownView key={link} content={link} />;
-        }),
+        <Stack hasGutter>
+          {activeHelpTopic?.links.map(({ href, text, newTab, isExternal }) => {
+            return (
+              <StackItem>
+                <Button
+                  component="a"
+                  href={href}
+                  target={newTab ? '_blank' : ''}
+                  rel="noopener noreferrer"
+                  variant="link"
+                  aria-label={`Open documentation in new window`}
+                  isInline
+                  icon={isExternal ? <ExternalLinkAltIcon /> : null}
+                  iconPosition="right"
+                  style={{ fontSize: 'inherit' }}
+                >
+                  {text || href}
+                </Button>
+              </StackItem>
+            );
+          })}
+        </Stack>,
       )}
     </>
   );
