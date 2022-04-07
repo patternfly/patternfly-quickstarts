@@ -63,34 +63,65 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
 
   const paddingContainer = (children) => <div style={{ padding: '24px' }}>{children}</div>;
 
-  const panelBodyItems = (
+  const HelpTopicLink: React.FC<{ href: string; text?: string; newTab?: boolean }> = ({
+    href,
+    text = '',
+    newTab = false,
+  }) => {
+    const isExternalLink = (url) => {
+      const tmp = document.createElement('a');
+      tmp.href = url;
+      return tmp.host !== window.location.host;
+    };
+
+    const isExternal = isExternalLink(href);
+
+    const onClick = (e) => {
+      if (!isExternal && !newTab) {
+        e.preventDefault();
+        window.history.pushState({}, '', href);
+      }
+    };
+
+    return (
+      <Button
+        component="a"
+        href={href}
+        target={isExternal || newTab ? '_blank' : ''}
+        rel="noopener noreferrer"
+        variant="link"
+        isInline
+        icon={isExternal && <ExternalLinkAltIcon />}
+        iconPosition="right"
+        style={{ fontSize: 'inherit' }}
+        onClick={onClick}
+      >
+        {text || href}
+      </Button>
+    );
+  };
+
+  const linkSection = activeHelpTopic?.links && (
     <>
-      {paddingContainer(<QuickStartMarkdownView content={activeHelpTopic?.content} />)}
       <Divider />
       {paddingContainer(
         <Stack hasGutter>
-          {activeHelpTopic?.links.map(({ href, text, newTab, isExternal }) => {
+          {activeHelpTopic.links.map(({ href, text, newTab }, index) => {
             return (
-              <StackItem>
-                <Button
-                  component="a"
-                  href={href}
-                  target={newTab ? '_blank' : ''}
-                  rel="noopener noreferrer"
-                  variant="link"
-                  aria-label={`Open documentation in new window`}
-                  isInline
-                  icon={isExternal ? <ExternalLinkAltIcon /> : null}
-                  iconPosition="right"
-                  style={{ fontSize: 'inherit' }}
-                >
-                  {text || href}
-                </Button>
+              <StackItem key={index}>
+                <HelpTopicLink href={href} text={text} newTab={newTab} />
               </StackItem>
             );
           })}
         </Stack>,
       )}
+    </>
+  );
+
+  const panelBodyItems = (
+    <>
+      {paddingContainer(<QuickStartMarkdownView content={activeHelpTopic?.content} />)}
+      {linkSection}
     </>
   );
 
