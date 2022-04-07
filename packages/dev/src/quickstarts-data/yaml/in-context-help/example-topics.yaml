@@ -9,9 +9,10 @@
   links:
     - text: "Creating quick starts (external)"
       href: "https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html"
-      isExternal: true
-    - text: "Redhat Console (opens in new tab)"
-      href: "https://console.redhat.com"
+    - text: "Internal link"
+      href: "/quickstarts-props"
+    - text: "Internal link (opens in new tab)"
+      href: "/quickstarts-props"
       newTab: true
 - name: workspace
   tags:
