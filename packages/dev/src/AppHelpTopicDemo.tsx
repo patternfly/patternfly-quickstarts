@@ -27,6 +27,8 @@ const AppHelpTopicDemo: React.FC<AppProps> = ({ children }) => {
 
   const helpTopicContainerProps: HelpTopicContainerProps = {
     helpTopics,
+    showHelpTopicSelector: false,
+    useFilteredSelectorList: false,
     resourceBundle,
     language,
     loading,

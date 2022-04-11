@@ -25,14 +25,14 @@ import { HelpTopicContext, HelpTopicContextValues } from './utils/help-topic-con
 
 type HelpTopicPanelContentProps = {
   activeHelpTopic: HelpTopic;
-  filteredHelpTopics?: HelpTopic[];
+  dropDownHelpTopics?: HelpTopic[];
   isResizable?: boolean;
   onClose: () => void;
 };
 
 const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
   activeHelpTopic = null,
-  filteredHelpTopics = [],
+  dropDownHelpTopics = [],
   isResizable = true,
   onClose,
   ...props
@@ -52,8 +52,8 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
   };
 
   const menuItems =
-    filteredHelpTopics.length > 0 &&
-    filteredHelpTopics.map((topic) => {
+    dropDownHelpTopics.length > 0 &&
+    dropDownHelpTopics.map((topic) => {
       return (
         <OptionsMenuItem key={topic.name} onSelect={onSelectHelpTopic} id={topic.name}>
           {topic.title}

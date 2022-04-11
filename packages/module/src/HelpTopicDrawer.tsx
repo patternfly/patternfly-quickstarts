@@ -13,6 +13,17 @@ import { HelpTopic } from './utils/help-topic-types';
 export interface HelpTopicContainerProps extends React.HTMLProps<HTMLDivElement> {
   /* array of HelpTopics */
   helpTopics: HelpTopic[];
+  /**
+   * show drop down selector of available HelpTopics
+   * if false (default) drop down selector will never show
+   * not shown if helpTopics length <= 1
+   */
+  showHelpTopicSelector: boolean;
+  /**
+   * if false (default), all helpTopics will be displayed in dropdowndrop down selector
+   * if true, filteredHelpTopics (user controlled from context) will be displayed in
+   */
+  useFilteredSelectorList: boolean;
   /* text resources object */
   resourceBundle?: any;
   /* language of the current resource bundle */
@@ -34,6 +45,8 @@ export interface HelpTopicContainerProps extends React.HTMLProps<HTMLDivElement>
 
 export const HelpTopicContainer: React.FC<HelpTopicContainerProps> = ({
   helpTopics,
+  showHelpTopicSelector = false,
+  useFilteredSelectorList = false,
   children,
   resourceBundle,
   language,
@@ -72,7 +85,8 @@ export const HelpTopicContainer: React.FC<HelpTopicContainerProps> = ({
   }, [helpTopics, valuesForHelpTopicContext]);
 
   const drawerProps = {
-    //TODO add extras here?
+    showHelpTopicSelector,
+    useFilteredSelectorList,
     ...props,
   };
 
@@ -85,22 +99,29 @@ export const HelpTopicContainer: React.FC<HelpTopicContainerProps> = ({
 
 export interface HelpTopicDrawerProps extends React.HTMLProps<HTMLDivElement> {
   helpTopics?: HelpTopic[];
+  showHelpTopicSelector: boolean;
+  useFilteredSelectorList: boolean;
   children?: React.ReactNode;
 }
 
 export const HelpTopicDrawer: React.FC<HelpTopicDrawerProps> = ({ children, ...props }) => {
-  const { activeHelpTopic, filteredHelpTopics, setActiveHelpTopicByName } = React.useContext<
-    HelpTopicContextValues
-  >(HelpTopicContext);
+  const {
+    helpTopics,
+    activeHelpTopic,
+    filteredHelpTopics,
+    setActiveHelpTopicByName,
+  } = React.useContext<HelpTopicContextValues>(HelpTopicContext);
 
   const onClose = () => {
     setActiveHelpTopicByName('');
   };
 
+  const dropDownHelpTopics = props.useFilteredSelectorList ? filteredHelpTopics : helpTopics;
+
   const panelContent = (
     <HelpTopicPanelContent
       activeHelpTopic={activeHelpTopic}
-      filteredHelpTopics={filteredHelpTopics}
+      dropDownHelpTopics={props.showHelpTopicSelector && dropDownHelpTopics}
       onClose={onClose}
     />
   );
