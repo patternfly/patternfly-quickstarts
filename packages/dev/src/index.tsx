@@ -49,7 +49,7 @@ ReactDOM.render(
         </AppContext>
       </Route>
       <Route exact path="/in-context-help">
-        <AppHelpTopicDemo>
+        <AppHelpTopicDemo showHelpTopicSelector={true} useFilteredSelectorList={true}>
           <MockConsole />
         </AppHelpTopicDemo>
       </Route>

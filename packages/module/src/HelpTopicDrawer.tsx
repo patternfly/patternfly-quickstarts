@@ -18,12 +18,12 @@ export interface HelpTopicContainerProps extends React.HTMLProps<HTMLDivElement>
    * if false (default) drop down selector will never show
    * not shown if helpTopics length <= 1
    */
-  showHelpTopicSelector: boolean;
+  showHelpTopicSelector?: boolean;
   /**
    * if false (default), all helpTopics will be displayed in dropdowndrop down selector
    * if true, filteredHelpTopics (user controlled from context) will be displayed in
    */
-  useFilteredSelectorList: boolean;
+  useFilteredSelectorList?: boolean;
   /* text resources object */
   resourceBundle?: any;
   /* language of the current resource bundle */
@@ -104,7 +104,12 @@ export interface HelpTopicDrawerProps extends React.HTMLProps<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-export const HelpTopicDrawer: React.FC<HelpTopicDrawerProps> = ({ children, ...props }) => {
+export const HelpTopicDrawer: React.FC<HelpTopicDrawerProps> = ({
+  children,
+  useFilteredSelectorList,
+  showHelpTopicSelector,
+  ...props
+}) => {
   const {
     helpTopics,
     activeHelpTopic,
@@ -116,12 +121,12 @@ export const HelpTopicDrawer: React.FC<HelpTopicDrawerProps> = ({ children, ...p
     setActiveHelpTopicByName('');
   };
 
-  const dropDownHelpTopics = props.useFilteredSelectorList ? filteredHelpTopics : helpTopics;
+  const dropDownHelpTopics = useFilteredSelectorList ? filteredHelpTopics : helpTopics;
 
   const panelContent = (
     <HelpTopicPanelContent
       activeHelpTopic={activeHelpTopic}
-      dropDownHelpTopics={props.showHelpTopicSelector && dropDownHelpTopics}
+      dropDownHelpTopics={showHelpTopicSelector && dropDownHelpTopics}
       onClose={onClose}
     />
   );
