@@ -1,0 +1,1 @@
+{"ast":null,"code":"module.exports = {\n  getTitle: function getTitle(title) {\n    return \"PatternFly 4\" + (title ? \" \\u2022 \" + title : '');\n  }\n};","map":null,"metadata":{},"sourceType":"module"}

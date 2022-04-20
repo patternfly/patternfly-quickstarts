@@ -1,0 +1,1 @@
+{"ast":null,"code":"function capitalize(input) {\n  return input[0].toUpperCase() + input.substring(1);\n}\n\nmodule.exports = {\n  capitalize: capitalize\n};","map":null,"metadata":{},"sourceType":"module"}

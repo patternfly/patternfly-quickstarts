@@ -1,0 +1,1 @@
+{"ast":null,"code":"module.exports = {\n  getId: function getId(text) {\n    return text.toLowerCase().replace(/ /g, '-').replace(/[\\u2000-\\u206F\\u2E00-\\u2E7F\\\\'!\"#$%&()*+,./:;<=>?@[\\]^`{|}~]/g, '');\n  }\n};","map":null,"metadata":{},"sourceType":"module"}
