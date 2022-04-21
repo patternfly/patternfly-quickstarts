@@ -1,10 +1,101 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// UNUSED EXPORTS: initialize
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/errors.js
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "initialize", function() { return /* binding */ initialize; });
+
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/errors.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -80,7 +171,7 @@ function canceled() {
     error.name = error.message;
     return error;
 }
-function errors_illegalArgument(name) {
+function illegalArgument(name) {
     if (name) {
         return new Error(`Illegal argument: ${name}`);
     }
@@ -97,7 +188,7 @@ function illegalState(name) {
     }
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/iterator.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/iterator.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -178,7 +269,7 @@ var Iterable;
     Iterable.consume = consume;
 })(Iterable || (Iterable = {}));
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/lifecycle.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/lifecycle.js
 
 /**
  * Enables logging of potentially leaked disposables.
@@ -193,7 +284,7 @@ function markTracked(x) {
     if (!TRACK_DISPOSABLES) {
         return;
     }
-    if (x && x !== lifecycle_Disposable.None) {
+    if (x && x !== Disposable.None) {
         try {
             x[__is_disposable_tracked__] = true;
         }
@@ -313,7 +404,7 @@ class DisposableStore {
     }
 }
 DisposableStore.DISABLE_DISPOSED_WARNING = false;
-class lifecycle_Disposable {
+class Disposable {
     constructor() {
         this._store = new DisposableStore();
         trackDisposable(this);
@@ -329,7 +420,7 @@ class lifecycle_Disposable {
         return this._store.add(t);
     }
 }
-lifecycle_Disposable.None = Object.freeze({ dispose() { } });
+Disposable.None = Object.freeze({ dispose() { } });
 /**
  * Manages the lifecycle of a disposable value that may be changed.
  *
@@ -375,7 +466,7 @@ class ImmortalReference {
     dispose() { }
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/platform.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/platform.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -388,8 +479,8 @@ let _isNative = false;
 let _isWeb = false;
 let _isIOS = false;
 let _locale = undefined;
-let _language = (/* unused pure expression or super */ null && (LANGUAGE_DEFAULT));
-let _translationsConfigFile = (/* unused pure expression or super */ null && (undefined));
+let _language = LANGUAGE_DEFAULT;
+let _translationsConfigFile = undefined;
 let _userAgent = undefined;
 const isElectronRenderer = (typeof process !== 'undefined' && typeof process.versions !== 'undefined' && typeof process.versions.electron !== 'undefined' && process.type === 'renderer');
 // OS detection
@@ -436,10 +527,10 @@ else if (_isLinux) {
 }
 const isWindows = _isWindows;
 const isMacintosh = _isMacintosh;
-const isLinux = (/* unused pure expression or super */ null && (_isLinux));
-const isNative = (/* unused pure expression or super */ null && (_isNative));
-const platform_isWeb = (/* unused pure expression or super */ null && (_isWeb));
-const isIOS = (/* unused pure expression or super */ null && (_isIOS));
+const isLinux = _isLinux;
+const isNative = _isNative;
+const isWeb = _isWeb;
+const isIOS = _isIOS;
 const _globals = (typeof self === 'object' ? self : typeof global === 'object' ? global : {});
 const globals = _globals;
 const setImmediate = (function defineSetImmediate() {
@@ -491,7 +582,7 @@ function isLittleEndian() {
     return _isLittleEndian;
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/types.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/types.js
 /**
  * @returns whether the provided parameter is a JavaScript Array or not.
  */
@@ -632,7 +723,7 @@ function withNullAsUndefined(x) {
     return x === null ? undefined : x;
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/worker/simpleWorker.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/worker/simpleWorker.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -654,7 +745,7 @@ function logOnceWebWorkerWarning(err) {
     }
     console.warn(err.message);
 }
-class SimpleWorkerProtocol {
+class simpleWorker_SimpleWorkerProtocol {
     constructor(handler) {
         this._workerId = -1;
         this._handler = handler;
@@ -756,7 +847,7 @@ class SimpleWorkerProtocol {
 /**
  * Main thread side
  */
-class SimpleWorkerClient extends (/* unused pure expression or super */ null && (Disposable)) {
+class simpleWorker_SimpleWorkerClient extends Disposable {
     constructor(workerFactory, moduleId, host) {
         super();
         let lazyProxyReject = null;
@@ -769,7 +860,7 @@ class SimpleWorkerClient extends (/* unused pure expression or super */ null && 
                 lazyProxyReject(err);
             }
         }));
-        this._protocol = new SimpleWorkerProtocol({
+        this._protocol = new simpleWorker_SimpleWorkerProtocol({
             sendMessage: (msg, transfer) => {
                 this._worker.postMessage(msg, transfer);
             },
@@ -796,7 +887,7 @@ class SimpleWorkerClient extends (/* unused pure expression or super */ null && 
             // Get the configuration from requirejs
             loaderConfiguration = self.requirejs.s.contexts._.config;
         }
-        const hostMethods = types.getAllMethodNames(host);
+        const hostMethods = getAllMethodNames(host);
         // Send initialize message
         this._onModuleLoaded = this._protocol.sendMessage(INITIALIZE, [
             this._worker.getId(),
@@ -811,7 +902,7 @@ class SimpleWorkerClient extends (/* unused pure expression or super */ null && 
         this._lazyProxy = new Promise((resolve, reject) => {
             lazyProxyReject = reject;
             this._onModuleLoaded.then((availableMethods) => {
-                resolve(types.createProxyObject(availableMethods, proxyMethodRequest));
+                resolve(createProxyObject(availableMethods, proxyMethodRequest));
             }, (e) => {
                 reject(e);
                 this._onError('Worker failed to load ' + moduleId, e);
@@ -836,11 +927,11 @@ class SimpleWorkerClient extends (/* unused pure expression or super */ null && 
 /**
  * Worker side
  */
-class SimpleWorkerServer {
+class simpleWorker_SimpleWorkerServer {
     constructor(postMessage, requestHandlerFactory) {
         this._requestHandlerFactory = requestHandlerFactory;
         this._requestHandler = null;
-        this._protocol = new SimpleWorkerProtocol({
+        this._protocol = new simpleWorker_SimpleWorkerProtocol({
             sendMessage: (msg, transfer) => {
                 postMessage(msg, transfer);
             },
@@ -906,10 +997,10 @@ class SimpleWorkerServer {
  * Called on the worker side
  */
 function create(postMessage) {
-    return new SimpleWorkerServer(postMessage, null);
+    return new simpleWorker_SimpleWorkerServer(postMessage, null);
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/arrays.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/arrays.js
 /**
  * Returns the last element of an array.
  * @param array The array.
@@ -1107,7 +1198,7 @@ function firstOrDefault(array, notFoundValue) {
 function flatten(arr) {
     return [].concat(...arr);
 }
-function range(arg, to) {
+function arrays_range(arg, to) {
     let from = typeof to === 'number' ? arg : 0;
     if (typeof to === 'number') {
         from = arg;
@@ -1162,7 +1253,7 @@ function asArray(x) {
     return Array.isArray(x) ? x : [x];
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/diff/diffChange.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/diff/diffChange.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -1196,7 +1287,7 @@ class DiffChange {
     }
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/strings.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/strings.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -1947,7 +2038,7 @@ function getGraphemeBreakRawData() {
 }
 //#endregion
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/hash.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/hash.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -2030,7 +2121,7 @@ function toHexString(value, bitsize = 32) {
 /**
  * A SHA1 implementation that works with strings and does not allocate.
  */
-class StringSHA1 {
+class hash_StringSHA1 {
     constructor() {
         this._h0 = 0x67452301;
         this._h1 = 0xEFCDAB89;
@@ -2156,7 +2247,7 @@ class StringSHA1 {
         this._step();
     }
     _step() {
-        const bigBlock32 = StringSHA1._bigBlock32;
+        const bigBlock32 = hash_StringSHA1._bigBlock32;
         const data = this._buffDV;
         for (let j = 0; j < 64 /* 16*4 */; j += 4) {
             bigBlock32.setUint32(j, data.getUint32(j, false), false);
@@ -2202,9 +2293,9 @@ class StringSHA1 {
         this._h4 = (this._h4 + e) & 0xffffffff;
     }
 }
-StringSHA1._bigBlock32 = new DataView(new ArrayBuffer(320)); // 80 * 4 = 320
+hash_StringSHA1._bigBlock32 = new DataView(new ArrayBuffer(320)); // 80 * 4 = 320
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/diff/diff.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/diff/diff.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -2225,7 +2316,7 @@ class StringDiffSequence {
     }
 }
 function stringDiff(original, modified, pretty) {
-    return new LcsDiff(new StringDiffSequence(original), new StringDiffSequence(modified)).ComputeDiff(pretty).changes;
+    return new diff_LcsDiff(new StringDiffSequence(original), new StringDiffSequence(modified)).ComputeDiff(pretty).changes;
 }
 //
 // The code below has been ported from a C# implementation in VS
@@ -2272,7 +2363,7 @@ class MyArray {
  * distinct changes. At the end, the Changes property can be called to retrieve
  * the constructed changes.
  */
-class DiffChangeHelper {
+class diff_DiffChangeHelper {
     /**
      * Constructs a new DiffChangeHelper for the given DiffSequences.
      */
@@ -2350,14 +2441,14 @@ class DiffChangeHelper {
  * An implementation of the difference algorithm described in
  * "An O(ND) Difference Algorithm and its variations" by Eugene W. Myers
  */
-class LcsDiff {
+class diff_LcsDiff {
     /**
      * Constructs the DiffFinder
      */
     constructor(originalSequence, modifiedSequence, continueProcessingPredicate = null) {
         this.ContinueProcessingPredicate = continueProcessingPredicate;
-        const [originalStringElements, originalElementsOrHash, originalHasStrings] = LcsDiff._getElements(originalSequence);
-        const [modifiedStringElements, modifiedElementsOrHash, modifiedHasStrings] = LcsDiff._getElements(modifiedSequence);
+        const [originalStringElements, originalElementsOrHash, originalHasStrings] = diff_LcsDiff._getElements(originalSequence);
+        const [modifiedStringElements, modifiedElementsOrHash, modifiedHasStrings] = diff_LcsDiff._getElements(modifiedSequence);
         this._hasStrings = (originalHasStrings && modifiedHasStrings);
         this._originalStringElements = originalStringElements;
         this._originalElementsOrHash = originalElementsOrHash;
@@ -2371,7 +2462,7 @@ class LcsDiff {
     }
     static _getElements(sequence) {
         const elements = sequence.getElements();
-        if (LcsDiff._isStringArray(elements)) {
+        if (diff_LcsDiff._isStringArray(elements)) {
             const hashes = new Int32Array(elements.length);
             for (let i = 0, len = elements.length; i < len; i++) {
                 hashes[i] = stringHash(elements[i], 0);
@@ -2504,7 +2595,7 @@ class LcsDiff {
         let forwardChanges = null;
         let reverseChanges = null;
         // First, walk backward through the forward diagonals history
-        let changeHelper = new DiffChangeHelper();
+        let changeHelper = new diff_DiffChangeHelper();
         let diagonalMin = diagonalForwardStart;
         let diagonalMax = diagonalForwardEnd;
         let diagonalRelative = (midOriginalArr[0] - midModifiedArr[0]) - diagonalForwardOffset;
@@ -2562,7 +2653,7 @@ class LcsDiff {
         }
         else {
             // Now walk backward through the reverse diagonals history
-            changeHelper = new DiffChangeHelper();
+            changeHelper = new diff_DiffChangeHelper();
             diagonalMin = diagonalReverseStart;
             diagonalMax = diagonalReverseEnd;
             diagonalRelative = (midOriginalArr[0] - midModifiedArr[0]) - diagonalReverseOffset;
@@ -3013,7 +3104,7 @@ class LcsDiff {
     }
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/process.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/process.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -3029,7 +3120,7 @@ const cwd = safeProcess.cwd;
 const env = safeProcess.env;
 const platform = safeProcess.platform;
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/path.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/path.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -4403,14 +4494,14 @@ const posix = {
 posix.win32 = win32.win32 = win32;
 posix.posix = win32.posix = posix;
 const normalize = (platform === 'win32' ? win32.normalize : posix.normalize);
-const resolve = (platform === 'win32' ? win32.resolve : posix.resolve);
+const path_resolve = (platform === 'win32' ? win32.resolve : posix.resolve);
 const relative = (platform === 'win32' ? win32.relative : posix.relative);
 const dirname = (platform === 'win32' ? win32.dirname : posix.dirname);
 const basename = (platform === 'win32' ? win32.basename : posix.basename);
 const extname = (platform === 'win32' ? win32.extname : posix.extname);
 const sep = (platform === 'win32' ? win32.sep : posix.sep);
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/uri.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/uri.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -4497,7 +4588,7 @@ const _regexp = /^(([^:/?#]+?):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?/;
  *       urn:example:animal:ferret:nose
  * ```
  */
-class URI {
+class uri_URI {
     /**
      * @internal
      */
@@ -4522,7 +4613,7 @@ class URI {
         }
     }
     static isUri(thing) {
-        if (thing instanceof URI) {
+        if (thing instanceof uri_URI) {
             return true;
         }
         if (!thing) {
@@ -4687,7 +4778,7 @@ class URI {
         }
         let newPath;
         if (isWindows && uri.scheme === 'file') {
-            newPath = URI.file(win32.join(uriToFsPath(uri, true), ...pathFragment)).path;
+            newPath = uri_URI.file(win32.join(uriToFsPath(uri, true), ...pathFragment)).path;
         }
         else {
             newPath = posix.join(uri.path, ...pathFragment);
@@ -4716,7 +4807,7 @@ class URI {
         if (!data) {
             return data;
         }
-        else if (data instanceof URI) {
+        else if (data instanceof uri_URI) {
             return data;
         }
         else {
@@ -4729,7 +4820,7 @@ class URI {
 }
 const _pathSepMarker = isWindows ? 1 : undefined;
 // This class exists so that URI is compatibile with vscode.Uri (API).
-class Uri extends URI {
+class Uri extends uri_URI {
     constructor() {
         super(...arguments);
         this._formatted = null;
@@ -4999,7 +5090,7 @@ function percentDecode(str) {
     return str.replace(_rEncodedAsHex, (match) => decodeURIComponentGraceful(match));
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/editor/common/core/position.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/editor/common/core/position.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -5135,7 +5226,7 @@ class Position {
     }
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/editor/common/core/range.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/editor/common/core/range.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -5144,7 +5235,7 @@ class Position {
 /**
  * A range in the editor. (startLineNumber,startColumn) is <= (endLineNumber,endColumn)
  */
-class Range {
+class range_Range {
     constructor(startLineNumber, startColumn, endLineNumber, endColumn) {
         if ((startLineNumber > endLineNumber) || (startLineNumber === endLineNumber && startColumn > endColumn)) {
             this.startLineNumber = endLineNumber;
@@ -5163,7 +5254,7 @@ class Range {
      * Test if this range is empty.
      */
     isEmpty() {
-        return Range.isEmpty(this);
+        return range_Range.isEmpty(this);
     }
     /**
      * Test if `range` is empty.
@@ -5175,7 +5266,7 @@ class Range {
      * Test if position is in this range. If the position is at the edges, will return true.
      */
     containsPosition(position) {
-        return Range.containsPosition(this, position);
+        return range_Range.containsPosition(this, position);
     }
     /**
      * Test if `position` is in `range`. If the position is at the edges, will return true.
@@ -5196,7 +5287,7 @@ class Range {
      * Test if range is in this range. If the range is equal to this range, will return true.
      */
     containsRange(range) {
-        return Range.containsRange(this, range);
+        return range_Range.containsRange(this, range);
     }
     /**
      * Test if `otherRange` is in `range`. If the ranges are equal, will return true.
@@ -5220,7 +5311,7 @@ class Range {
      * Test if `range` is strictly in this range. `range` must start after and end before this range for the result to be true.
      */
     strictContainsRange(range) {
-        return Range.strictContainsRange(this, range);
+        return range_Range.strictContainsRange(this, range);
     }
     /**
      * Test if `otherRange` is strinctly in `range` (must start after, and end before). If the ranges are equal, will return false.
@@ -5245,7 +5336,7 @@ class Range {
      * The smallest position will be used as the start point, and the largest one as the end point.
      */
     plusRange(range) {
-        return Range.plusRange(this, range);
+        return range_Range.plusRange(this, range);
     }
     /**
      * A reunion of the two ranges.
@@ -5280,13 +5371,13 @@ class Range {
             endLineNumber = a.endLineNumber;
             endColumn = a.endColumn;
         }
-        return new Range(startLineNumber, startColumn, endLineNumber, endColumn);
+        return new range_Range(startLineNumber, startColumn, endLineNumber, endColumn);
     }
     /**
      * A intersection of the two ranges.
      */
     intersectRanges(range) {
-        return Range.intersectRanges(this, range);
+        return range_Range.intersectRanges(this, range);
     }
     /**
      * A intersection of the two ranges.
@@ -5321,13 +5412,13 @@ class Range {
         if (resultStartLineNumber === resultEndLineNumber && resultStartColumn > resultEndColumn) {
             return null;
         }
-        return new Range(resultStartLineNumber, resultStartColumn, resultEndLineNumber, resultEndColumn);
+        return new range_Range(resultStartLineNumber, resultStartColumn, resultEndLineNumber, resultEndColumn);
     }
     /**
      * Test if this range equals other.
      */
     equalsRange(other) {
-        return Range.equalsRange(this, other);
+        return range_Range.equalsRange(this, other);
     }
     /**
      * Test if range `a` equals `b`.
@@ -5344,7 +5435,7 @@ class Range {
      * Return the end position (which will be after or equal to the start position)
      */
     getEndPosition() {
-        return Range.getEndPosition(this);
+        return range_Range.getEndPosition(this);
     }
     /**
      * Return the end position (which will be after or equal to the start position)
@@ -5356,7 +5447,7 @@ class Range {
      * Return the start position (which will be before or equal to the end position)
      */
     getStartPosition() {
-        return Range.getStartPosition(this);
+        return range_Range.getStartPosition(this);
     }
     /**
      * Return the start position (which will be before or equal to the end position)
@@ -5374,35 +5465,35 @@ class Range {
      * Create a new range using this range's start position, and using endLineNumber and endColumn as the end position.
      */
     setEndPosition(endLineNumber, endColumn) {
-        return new Range(this.startLineNumber, this.startColumn, endLineNumber, endColumn);
+        return new range_Range(this.startLineNumber, this.startColumn, endLineNumber, endColumn);
     }
     /**
      * Create a new range using this range's end position, and using startLineNumber and startColumn as the start position.
      */
     setStartPosition(startLineNumber, startColumn) {
-        return new Range(startLineNumber, startColumn, this.endLineNumber, this.endColumn);
+        return new range_Range(startLineNumber, startColumn, this.endLineNumber, this.endColumn);
     }
     /**
      * Create a new empty range using this range's start position.
      */
     collapseToStart() {
-        return Range.collapseToStart(this);
+        return range_Range.collapseToStart(this);
     }
     /**
      * Create a new empty range using this range's start position.
      */
     static collapseToStart(range) {
-        return new Range(range.startLineNumber, range.startColumn, range.startLineNumber, range.startColumn);
+        return new range_Range(range.startLineNumber, range.startColumn, range.startLineNumber, range.startColumn);
     }
     // ---
     static fromPositions(start, end = start) {
-        return new Range(start.lineNumber, start.column, end.lineNumber, end.column);
+        return new range_Range(start.lineNumber, start.column, end.lineNumber, end.column);
     }
     static lift(range) {
         if (!range) {
             return null;
         }
-        return new Range(range.startLineNumber, range.startColumn, range.endLineNumber, range.endColumn);
+        return new range_Range(range.startLineNumber, range.startColumn, range.endLineNumber, range.endColumn);
     }
     /**
      * Test if `obj` is an `IRange`.
@@ -5497,7 +5588,7 @@ class Range {
     }
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/editor/common/diff/diffComputer.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/editor/common/diff/diffComputer.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -5506,7 +5597,7 @@ class Range {
 
 const MINIMUM_MATCHING_CHARACTER_LENGTH = 3;
 function computeDiff(originalSequence, modifiedSequence, continueProcessingPredicate, pretty) {
-    const diffAlgo = new LcsDiff(originalSequence, modifiedSequence, continueProcessingPredicate);
+    const diffAlgo = new diff_LcsDiff(originalSequence, modifiedSequence, continueProcessingPredicate);
     return diffAlgo.ComputeDiff(pretty);
 }
 class LineSequence {
@@ -5888,7 +5979,7 @@ function createContinueProcessingPredicate(maximumRuntime) {
     };
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/uint.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/uint.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -5912,7 +6003,7 @@ function toUint32(v) {
     return v | 0;
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/editor/common/viewModel/prefixSumComputer.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/editor/common/viewModel/prefixSumComputer.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -5924,7 +6015,7 @@ class PrefixSumIndexOfResult {
         this.remainder = remainder;
     }
 }
-class PrefixSumComputer {
+class prefixSumComputer_PrefixSumComputer {
     constructor(values) {
         this.values = values;
         this.prefixSum = new Uint32Array(values.length);
@@ -6049,14 +6140,14 @@ class PrefixSumComputer {
     }
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/editor/common/model/mirrorTextModel.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/editor/common/model/mirrorTextModel.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 
-class MirrorTextModel {
+class mirrorTextModel_MirrorTextModel {
     constructor(uri, lines, eol, versionId) {
         this._uri = uri;
         this._lines = lines;
@@ -6096,7 +6187,7 @@ class MirrorTextModel {
             for (let i = 0; i < linesLength; i++) {
                 lineStartValues[i] = this._lines[i].length + eolLength;
             }
-            this._lineStarts = new PrefixSumComputer(lineStartValues);
+            this._lineStarts = new prefixSumComputer_PrefixSumComputer(lineStartValues);
         }
     }
     /**
@@ -6161,7 +6252,7 @@ class MirrorTextModel {
     }
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/editor/common/model/wordHelper.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/editor/common/model/wordHelper.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -6280,7 +6371,7 @@ function _findRegexMatchEnclosingPosition(wordDefinition, text, pos, stopPos) {
     return null;
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/editor/common/core/characterClassifier.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/editor/common/core/characterClassifier.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -6289,11 +6380,11 @@ function _findRegexMatchEnclosingPosition(wordDefinition, text, pos, stopPos) {
 /**
  * A fast character classifier that uses a compact array for ASCII values.
  */
-class CharacterClassifier {
+class characterClassifier_CharacterClassifier {
     constructor(_defaultValue) {
         let defaultValue = toUint8(_defaultValue);
         this._defaultValue = defaultValue;
-        this._asciiMap = CharacterClassifier._createAsciiMap(defaultValue);
+        this._asciiMap = characterClassifier_CharacterClassifier._createAsciiMap(defaultValue);
         this._map = new Map();
     }
     static _createAsciiMap(defaultValue) {
@@ -6323,7 +6414,7 @@ class CharacterClassifier {
 }
 class CharacterSet {
     constructor() {
-        this._actual = new CharacterClassifier(0 /* False */);
+        this._actual = new characterClassifier_CharacterClassifier(0 /* False */);
     }
     add(charCode) {
         this._actual.set(charCode, 1 /* True */);
@@ -6333,7 +6424,7 @@ class CharacterSet {
     }
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/editor/common/modes/linkComputer.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/editor/common/modes/linkComputer.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -6423,7 +6514,7 @@ function getStateMachine() {
 let _classifier = null;
 function getClassifier() {
     if (_classifier === null) {
-        _classifier = new CharacterClassifier(0 /* None */);
+        _classifier = new characterClassifier_CharacterClassifier(0 /* None */);
         const FORCE_TERMINATION_CHARACTERS = ' \t<>\'\"、。｡､，．：；‘“〈《「『【〔（［｛｢｣｝］）〕】』」》〉”’｀～…';
         for (let i = 0; i < FORCE_TERMINATION_CHARACTERS.length; i++) {
             _classifier.set(FORCE_TERMINATION_CHARACTERS.charCodeAt(i), 1 /* ForceTermination */);
@@ -6599,7 +6690,7 @@ function computeLinks(model) {
     return LinkComputer.computeLinks(model);
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/editor/common/modes/supports/inplaceReplaceSupport.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/editor/common/modes/supports/inplaceReplaceSupport.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -6686,7 +6777,7 @@ class BasicInplaceReplace {
 }
 BasicInplaceReplace.INSTANCE = new BasicInplaceReplace();
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/linkedList.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/linkedList.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -6699,7 +6790,7 @@ class Node {
     }
 }
 Node.Undefined = new Node(undefined);
-class linkedList_LinkedList {
+class LinkedList {
     constructor() {
         this._first = Node.Undefined;
         this._last = Node.Undefined;
@@ -6812,7 +6903,7 @@ class linkedList_LinkedList {
     }
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/event.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/event.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -6820,9 +6911,9 @@ class linkedList_LinkedList {
 
 
 
-var Event;
+var event_Event;
 (function (Event) {
-    Event.None = () => lifecycle_Disposable.None;
+    Event.None = () => Disposable.None;
     /**
      * Given an event, returns another event which only fires once.
      */
@@ -6900,7 +6991,7 @@ var Event;
      */
     function snapshot(event) {
         let listener;
-        const emitter = new Emitter({
+        const emitter = new event_Emitter({
             onFirstListenerAdd() {
                 listener = event(emitter.fire, emitter);
             },
@@ -6916,7 +7007,7 @@ var Event;
         let output = undefined;
         let handle = undefined;
         let numDebouncedCalls = 0;
-        const emitter = new Emitter({
+        const emitter = new event_Emitter({
             leakWarningThreshold,
             onFirstListenerAdd() {
                 subscription = event(cur => {
@@ -7008,7 +7099,7 @@ var Event;
             }
             buffer = null;
         };
-        const emitter = new Emitter({
+        const emitter = new event_Emitter({
             onFirstListenerAdd() {
                 if (!listener) {
                     listener = event(e => emitter.fire(e));
@@ -7071,7 +7162,7 @@ var Event;
         const fn = (...args) => result.fire(map(...args));
         const onFirstListenerAdd = () => emitter.on(eventName, fn);
         const onLastListenerRemove = () => emitter.removeListener(eventName, fn);
-        const result = new Emitter({ onFirstListenerAdd, onLastListenerRemove });
+        const result = new event_Emitter({ onFirstListenerAdd, onLastListenerRemove });
         return result.event;
     }
     Event.fromNodeEventEmitter = fromNodeEventEmitter;
@@ -7079,12 +7170,12 @@ var Event;
         const fn = (...args) => result.fire(map(...args));
         const onFirstListenerAdd = () => emitter.addEventListener(eventName, fn);
         const onLastListenerRemove = () => emitter.removeEventListener(eventName, fn);
-        const result = new Emitter({ onFirstListenerAdd, onLastListenerRemove });
+        const result = new event_Emitter({ onFirstListenerAdd, onLastListenerRemove });
         return result.event;
     }
     Event.fromDOMEventEmitter = fromDOMEventEmitter;
     function fromPromise(promise) {
-        const emitter = new Emitter();
+        const emitter = new event_Emitter();
         let shouldEmit = false;
         promise
             .then(undefined, () => null)
@@ -7104,7 +7195,7 @@ var Event;
         return new Promise(c => once(event)(c));
     }
     Event.toPromise = toPromise;
-})(Event || (Event = {}));
+})(event_Event || (event_Event = {}));
 let _globalLeakWarningThreshold = -1;
 class LeakageMonitor {
     constructor(customThreshold, name = Math.random().toString(18).slice(2, 5)) {
@@ -7175,7 +7266,7 @@ class LeakageMonitor {
         }
     }
  */
-class Emitter {
+class event_Emitter {
     constructor(options) {
         this._disposed = false;
         this._options = options;
@@ -7191,7 +7282,7 @@ class Emitter {
         if (!this._event) {
             this._event = (listener, thisArgs, disposables) => {
                 if (!this._listeners) {
-                    this._listeners = new linkedList_LinkedList();
+                    this._listeners = new LinkedList();
                 }
                 const firstListener = this._listeners.isEmpty();
                 if (firstListener && this._options && this._options.onFirstListenerAdd) {
@@ -7215,7 +7306,7 @@ class Emitter {
                         if (removeMonitor) {
                             removeMonitor();
                         }
-                        result.dispose = Emitter._noop;
+                        result.dispose = event_Emitter._noop;
                         if (!this._disposed) {
                             remove();
                             if (this._options && this._options.onLastListenerRemove) {
@@ -7248,7 +7339,7 @@ class Emitter {
             // then emit all event. an inner/nested event might be
             // the driver of this
             if (!this._deliveryQueue) {
-                this._deliveryQueue = new linkedList_LinkedList();
+                this._deliveryQueue = new LinkedList();
             }
             for (let listener of this._listeners) {
                 this._deliveryQueue.push([listener, event]);
@@ -7282,8 +7373,8 @@ class Emitter {
         this._disposed = true;
     }
 }
-Emitter._noop = function () { };
-class PauseableEmitter extends (/* unused pure expression or super */ null && (Emitter)) {
+event_Emitter._noop = function () { };
+class event_PauseableEmitter extends event_Emitter {
     constructor(options) {
         super(options);
         this._isPaused = 0;
@@ -7374,12 +7465,12 @@ class EventBufferer {
  * events from that input event through its own `event` property. The `input`
  * can be changed at any point in time.
  */
-class Relay {
+class event_Relay {
     constructor() {
         this.listening = false;
-        this.inputEvent = Event.None;
+        this.inputEvent = event_Event.None;
         this.inputEventListener = Disposable.None;
-        this.emitter = new Emitter({
+        this.emitter = new event_Emitter({
             onFirstListenerDidAdd: () => {
                 this.listening = true;
                 this.inputEventListener = this.inputEvent(this.emitter.fire, this.emitter);
@@ -7404,7 +7495,7 @@ class Relay {
     }
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/cancellation.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/cancellation.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -7414,13 +7505,13 @@ const shortcutEvent = Object.freeze(function (callback, context) {
     const handle = setTimeout(callback.bind(context), 0);
     return { dispose() { clearTimeout(handle); } };
 });
-var CancellationToken;
+var cancellation_CancellationToken;
 (function (CancellationToken) {
     function isCancellationToken(thing) {
         if (thing === CancellationToken.None || thing === CancellationToken.Cancelled) {
             return true;
         }
-        if (thing instanceof MutableToken) {
+        if (thing instanceof cancellation_MutableToken) {
             return true;
         }
         if (!thing || typeof thing !== 'object') {
@@ -7432,14 +7523,14 @@ var CancellationToken;
     CancellationToken.isCancellationToken = isCancellationToken;
     CancellationToken.None = Object.freeze({
         isCancellationRequested: false,
-        onCancellationRequested: Event.None
+        onCancellationRequested: event_Event.None
     });
     CancellationToken.Cancelled = Object.freeze({
         isCancellationRequested: true,
         onCancellationRequested: shortcutEvent
     });
-})(CancellationToken || (CancellationToken = {}));
-class MutableToken {
+})(cancellation_CancellationToken || (cancellation_CancellationToken = {}));
+class cancellation_MutableToken {
     constructor() {
         this._isCancelled = false;
         this._emitter = null;
@@ -7461,7 +7552,7 @@ class MutableToken {
             return shortcutEvent;
         }
         if (!this._emitter) {
-            this._emitter = new Emitter();
+            this._emitter = new event_Emitter();
         }
         return this._emitter.event;
     }
@@ -7482,7 +7573,7 @@ class CancellationTokenSource {
         if (!this._token) {
             // be lazy and create the token only when
             // actually needed
-            this._token = new MutableToken();
+            this._token = new cancellation_MutableToken();
         }
         return this._token;
     }
@@ -7491,9 +7582,9 @@ class CancellationTokenSource {
             // save an object by returning the default
             // cancelled token when cancellation happens
             // before someone asks for the token
-            this._token = CancellationToken.Cancelled;
+            this._token = cancellation_CancellationToken.Cancelled;
         }
-        else if (this._token instanceof MutableToken) {
+        else if (this._token instanceof cancellation_MutableToken) {
             // actually cancel
             this._token.cancel();
         }
@@ -7507,16 +7598,16 @@ class CancellationTokenSource {
         }
         if (!this._token) {
             // ensure to initialize with an empty token if we had none
-            this._token = CancellationToken.None;
+            this._token = cancellation_CancellationToken.None;
         }
-        else if (this._token instanceof MutableToken) {
+        else if (this._token instanceof cancellation_MutableToken) {
             // actually dispose
             this._token.dispose();
         }
     }
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/base/common/keyCodes.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/base/common/keyCodes.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -7693,12 +7784,12 @@ function createKeybinding(keybinding, OS) {
     const firstPart = (keybinding & 0x0000FFFF) >>> 0;
     const chordPart = (keybinding & 0xFFFF0000) >>> 16;
     if (chordPart !== 0) {
-        return new ChordKeybinding([
+        return new keyCodes_ChordKeybinding([
             createSimpleKeybinding(firstPart, OS),
             createSimpleKeybinding(chordPart, OS)
         ]);
     }
-    return new ChordKeybinding([createSimpleKeybinding(firstPart, OS)]);
+    return new keyCodes_ChordKeybinding([createSimpleKeybinding(firstPart, OS)]);
 }
 function createSimpleKeybinding(keybinding, OS) {
     const ctrlCmd = (keybinding & 2048 /* CtrlCmd */ ? true : false);
@@ -7733,7 +7824,7 @@ class SimpleKeybinding {
             || this.keyCode === 4 /* Shift */);
     }
     toChord() {
-        return new ChordKeybinding([this]);
+        return new keyCodes_ChordKeybinding([this]);
     }
     /**
      * Does this keybinding refer to the key code of a modifier and it also has the modifier flag?
@@ -7745,7 +7836,7 @@ class SimpleKeybinding {
             || (this.metaKey && this.keyCode === 57 /* Meta */));
     }
 }
-class ChordKeybinding {
+class keyCodes_ChordKeybinding {
     constructor(parts) {
         if (parts.length === 0) {
             throw illegalArgument(`parts`);
@@ -7769,7 +7860,7 @@ class ResolvedKeybindingPart {
 class ResolvedKeybinding {
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/editor/common/core/selection.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/editor/common/core/selection.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -7780,7 +7871,7 @@ class ResolvedKeybinding {
  * A selection in the editor.
  * The selection is a range that has an orientation.
  */
-class Selection extends Range {
+class selection_Selection extends range_Range {
     constructor(selectionStartLineNumber, selectionStartColumn, positionLineNumber, positionColumn) {
         super(selectionStartLineNumber, selectionStartColumn, positionLineNumber, positionColumn);
         this.selectionStartLineNumber = selectionStartLineNumber;
@@ -7798,7 +7889,7 @@ class Selection extends Range {
      * Test if equals other selection.
      */
     equalsSelection(other) {
-        return (Selection.selectionsEqual(this, other));
+        return (selection_Selection.selectionsEqual(this, other));
     }
     /**
      * Test if the two selections are equal.
@@ -7823,9 +7914,9 @@ class Selection extends Range {
      */
     setEndPosition(endLineNumber, endColumn) {
         if (this.getDirection() === 0 /* LTR */) {
-            return new Selection(this.startLineNumber, this.startColumn, endLineNumber, endColumn);
+            return new selection_Selection(this.startLineNumber, this.startColumn, endLineNumber, endColumn);
         }
-        return new Selection(endLineNumber, endColumn, this.startLineNumber, this.startColumn);
+        return new selection_Selection(endLineNumber, endColumn, this.startLineNumber, this.startColumn);
     }
     /**
      * Get the position at `positionLineNumber` and `positionColumn`.
@@ -7838,22 +7929,22 @@ class Selection extends Range {
      */
     setStartPosition(startLineNumber, startColumn) {
         if (this.getDirection() === 0 /* LTR */) {
-            return new Selection(startLineNumber, startColumn, this.endLineNumber, this.endColumn);
+            return new selection_Selection(startLineNumber, startColumn, this.endLineNumber, this.endColumn);
         }
-        return new Selection(this.endLineNumber, this.endColumn, startLineNumber, startColumn);
+        return new selection_Selection(this.endLineNumber, this.endColumn, startLineNumber, startColumn);
     }
     // ----
     /**
      * Create a `Selection` from one or two positions
      */
     static fromPositions(start, end = start) {
-        return new Selection(start.lineNumber, start.column, end.lineNumber, end.column);
+        return new selection_Selection(start.lineNumber, start.column, end.lineNumber, end.column);
     }
     /**
      * Create a `Selection` from an `ISelection`.
      */
     static liftSelection(sel) {
-        return new Selection(sel.selectionStartLineNumber, sel.selectionStartColumn, sel.positionLineNumber, sel.positionColumn);
+        return new selection_Selection(sel.selectionStartLineNumber, sel.selectionStartColumn, sel.positionLineNumber, sel.positionColumn);
     }
     /**
      * `a` equals `b`.
@@ -7890,13 +7981,13 @@ class Selection extends Range {
      */
     static createWithDirection(startLineNumber, startColumn, endLineNumber, endColumn, direction) {
         if (direction === 0 /* LTR */) {
-            return new Selection(startLineNumber, startColumn, endLineNumber, endColumn);
+            return new selection_Selection(startLineNumber, startColumn, endLineNumber, endColumn);
         }
-        return new Selection(endLineNumber, endColumn, startLineNumber, startColumn);
+        return new selection_Selection(endLineNumber, endColumn, startLineNumber, startColumn);
     }
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/editor/common/core/token.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/editor/common/core/token.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -7924,7 +8015,7 @@ class TokenizationResult2 {
     }
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/editor/common/standalone/standaloneEnums.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/editor/common/standalone/standaloneEnums.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -8734,7 +8825,7 @@ var WrappingIndent;
     WrappingIndent[WrappingIndent["DeepIndent"] = 3] = "DeepIndent";
 })(WrappingIndent || (WrappingIndent = {}));
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/editor/common/standalone/standaloneBase.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/editor/common/standalone/standaloneBase.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -8748,35 +8839,35 @@ var WrappingIndent;
 
 
 
-class KeyMod {
+class standaloneBase_KeyMod {
     static chord(firstPart, secondPart) {
         return KeyChord(firstPart, secondPart);
     }
 }
-KeyMod.CtrlCmd = 2048 /* CtrlCmd */;
-KeyMod.Shift = 1024 /* Shift */;
-KeyMod.Alt = 512 /* Alt */;
-KeyMod.WinCtrl = 256 /* WinCtrl */;
+standaloneBase_KeyMod.CtrlCmd = 2048 /* CtrlCmd */;
+standaloneBase_KeyMod.Shift = 1024 /* Shift */;
+standaloneBase_KeyMod.Alt = 512 /* Alt */;
+standaloneBase_KeyMod.WinCtrl = 256 /* WinCtrl */;
 function createMonacoBaseAPI() {
     return {
         editor: undefined,
         languages: undefined,
         CancellationTokenSource: CancellationTokenSource,
-        Emitter: Emitter,
+        Emitter: event_Emitter,
         KeyCode: KeyCode,
-        KeyMod: KeyMod,
+        KeyMod: standaloneBase_KeyMod,
         Position: Position,
-        Range: Range,
-        Selection: Selection,
+        Range: range_Range,
+        Selection: selection_Selection,
         SelectionDirection: SelectionDirection,
         MarkerSeverity: MarkerSeverity,
         MarkerTag: MarkerTag,
-        Uri: URI,
+        Uri: uri_URI,
         Token: Token
     };
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/editor/common/services/editorSimpleWorker.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/editor/common/services/editorSimpleWorker.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -8806,7 +8897,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 /**
  * @internal
  */
-class MirrorModel extends MirrorTextModel {
+class editorSimpleWorker_MirrorModel extends mirrorTextModel_MirrorTextModel {
     get uri() {
         return this._uri;
     }
@@ -8831,7 +8922,7 @@ class MirrorModel extends MirrorTextModel {
     getWordAtPosition(position, wordDefinition) {
         let wordAtText = getWordAtText(position.column, ensureValidWordDefinition(wordDefinition), this._lines[position.lineNumber - 1], 0);
         if (wordAtText) {
-            return new Range(position.lineNumber, wordAtText.startColumn, position.lineNumber, wordAtText.endColumn);
+            return new range_Range(position.lineNumber, wordAtText.startColumn, position.lineNumber, wordAtText.endColumn);
         }
         return null;
     }
@@ -8978,7 +9069,7 @@ class MirrorModel extends MirrorTextModel {
 /**
  * @internal
  */
-class EditorSimpleWorker {
+class editorSimpleWorker_EditorSimpleWorker {
     constructor(host, foreignModuleFactory) {
         this._host = host;
         this._models = Object.create(null);
@@ -8997,7 +9088,7 @@ class EditorSimpleWorker {
         return all;
     }
     acceptNewModel(data) {
-        this._models[data.url] = new MirrorModel(URI.parse(data.url), data.lines, data.EOL, data.versionId);
+        this._models[data.url] = new editorSimpleWorker_MirrorModel(uri_URI.parse(data.url), data.lines, data.EOL, data.versionId);
     }
     acceptModelChanged(strURL, e) {
         if (!this._models[strURL]) {
@@ -9063,7 +9154,7 @@ class EditorSimpleWorker {
             let lastEol = undefined;
             edits = mergeSort(edits, (a, b) => {
                 if (a.range && b.range) {
-                    return Range.compareRangesUsingStarts(a.range, b.range);
+                    return range_Range.compareRangesUsingStarts(a.range, b.range);
                 }
                 // eol only changes should go to the end
                 let aRng = a.range ? 0 : 1;
@@ -9074,7 +9165,7 @@ class EditorSimpleWorker {
                 if (typeof eol === 'number') {
                     lastEol = eol;
                 }
-                if (Range.isEmpty(range) && !text) {
+                if (range_Range.isEmpty(range) && !text) {
                     // empty change
                     continue;
                 }
@@ -9085,13 +9176,13 @@ class EditorSimpleWorker {
                     continue;
                 }
                 // make sure diff won't take too long
-                if (Math.max(text.length, original.length) > EditorSimpleWorker._diffLimit) {
+                if (Math.max(text.length, original.length) > editorSimpleWorker_EditorSimpleWorker._diffLimit) {
                     result.push({ range, text });
                     continue;
                 }
                 // compute diff between original and edit.text
                 const changes = stringDiff(original, text, false);
-                const editOffset = model.offsetAt(Range.lift(range).getStartPosition());
+                const editOffset = model.offsetAt(range_Range.lift(range).getStartPosition());
                 for (const change of changes) {
                     const start = model.positionAt(editOffset + change.originalStart);
                     const end = model.positionAt(editOffset + change.originalStart + change.originalLength);
@@ -9142,7 +9233,7 @@ class EditorSimpleWorker {
                     continue;
                 }
                 words.push(word);
-                if (seen.size > EditorSimpleWorker._suggestionsLimit) {
+                if (seen.size > editorSimpleWorker_EditorSimpleWorker._suggestionsLimit) {
                     break;
                 }
             }
@@ -9253,22 +9344,22 @@ class EditorSimpleWorker {
 }
 // ---- END diff --------------------------------------------------------------------------
 // ---- BEGIN minimal edits ---------------------------------------------------------------
-EditorSimpleWorker._diffLimit = 100000;
+editorSimpleWorker_EditorSimpleWorker._diffLimit = 100000;
 // ---- BEGIN suggest --------------------------------------------------------------------------
-EditorSimpleWorker._suggestionsLimit = 10000;
+editorSimpleWorker_EditorSimpleWorker._suggestionsLimit = 10000;
 /**
  * Called on the worker side
  * @internal
  */
 function editorSimpleWorker_create(host) {
-    return new EditorSimpleWorker(host, null);
+    return new editorSimpleWorker_EditorSimpleWorker(host, null);
 }
 if (typeof importScripts === 'function') {
     // Running in a web worker
     globals.monaco = createMonacoBaseAPI();
 }
 
-;// CONCATENATED MODULE: ../../node_modules/monaco-editor/esm/vs/editor/editor.worker.js
+// CONCATENATED MODULE: /Users/ctrowbri/dev/patternfly-quickstarts/node_modules/monaco-editor/esm/vs/editor/editor.worker.js
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -9281,9 +9372,9 @@ function initialize(foreignModule) {
         return;
     }
     initialized = true;
-    const simpleWorker = new SimpleWorkerServer((msg) => {
+    const simpleWorker = new simpleWorker_SimpleWorkerServer((msg) => {
         self.postMessage(msg);
-    }, (host) => new EditorSimpleWorker(host, foreignModule));
+    }, (host) => new editorSimpleWorker_EditorSimpleWorker(host, foreignModule));
     self.onmessage = (e) => {
         simpleWorker.onmessage(e.data);
     };
@@ -9295,5 +9386,6 @@ self.onmessage = (e) => {
     }
 };
 
-/******/ })()
-;
+
+/***/ })
+/******/ ]);

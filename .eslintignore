@@ -7,3 +7,6 @@ node_modules
 public
 bin
 build
+patternfly-docs.*
+packages/module/src/pages
+packages/module/src/generated

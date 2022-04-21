@@ -22,7 +22,10 @@
     "lint:module": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/module",
     "lint:dev": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/dev",
     "visual": "npx percy exec -- node snapshots.js",
-    "test:a11y": "patternfly-a11y --config patternfly-a11y.config"
+    "test:a11y": "patternfly-a11y --config patternfly-a11y.config",
+    "build:docs": "yarn workspace @patternfly/quickstarts build:docs",
+    "serve:docs": "yarn workspace @patternfly/quickstarts serve:docs",
+    "dev:docs": "yarn workspace @patternfly/quickstarts develop:docs"
   },
   "devDependencies": {
     "@patternfly/patternfly-a11y": "4.2.1",
@@ -58,6 +61,15 @@
     "ts-jest": "21.x",
     "typescript": "3.8.3",
     "url-search-params-polyfill": "2.x"
+  },
+  "resolutions": {
+    "webpack": "^5.40.0",
+    "terser-webpack-plugin": "^1.4.3",
+    "monaco-editor-webpack-plugin": "^2.1.0",
+    "monaco-editor": "~0.21.0",
+    "react-monaco-editor": "^0.41.2",
+    "react-ssr-prepass": "^1.2.1",
+    "html-webpack-plugin": "^4.4.1"
   },
   "jest": {
     "moduleFileExtensions": [

@@ -32,7 +32,10 @@
     "post-css": "yarn purge-css && yarn min-css && yarn min-css-standalone",
     "purge-css": "purgecss --config ./purgecss.config.js",
     "min-css": "cleancss dist/quickstarts.css -o dist/quickstarts.min.css",
-    "min-css-standalone": "cleancss -o dist/quickstarts-standalone.min.css dist/patternfly-nested.css dist/quickstarts-standalone.css"
+    "min-css-standalone": "cleancss -o dist/quickstarts-standalone.min.css dist/patternfly-nested.css dist/quickstarts-standalone.css",
+    "build:docs": "theme-patternfly-org build all",
+    "develop:docs": "theme-patternfly-org start",
+    "serve:docs": "theme-patternfly-org serve public"
   },
   "peerDependencies": {
     "@patternfly/react-core": ">=4.115.2",
@@ -48,10 +51,13 @@
   },
   "devDependencies": {
     "@patternfly/patternfly": "4.122.2",
+    "@patternfly/react-code-editor": "^4.43.16",
     "@patternfly/react-core": "4.135.15",
     "@patternfly/react-icons": "4.11.4",
     "@patternfly/react-styles": "4.11.4",
+    "@patternfly/react-table": "^4.71.16",
     "@patternfly/react-tokens": "4.12.5",
+    "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
@@ -86,6 +92,7 @@
     "rollup-plugin-typescript2": "^0.29.0",
     "rollup-plugin-visualizer": "^5.5.0",
     "sass": "^1.35.2",
+    "theme-patternfly-org": "^0.11.23",
     "tslib": "^2.0.3"
   }
 }
