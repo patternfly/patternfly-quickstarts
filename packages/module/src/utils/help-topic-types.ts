@@ -12,5 +12,5 @@ export type HelpTopic = {
   title: string;
   tags: string[];
   content: string;
-  links: HelpTopicLink[];
+  links?: HelpTopicLink[];
 };

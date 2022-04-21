@@ -66,12 +66,12 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
   const panelBodyItems = (
     <>
       {paddingContainer(<QuickStartMarkdownView content={activeHelpTopic?.content} />)}
-      <Divider />
+      {activeHelpTopic?.links?.length && <Divider />}
       {paddingContainer(
         <Stack hasGutter>
-          {activeHelpTopic?.links?.map(({ href, text, newTab, isExternal }) => {
+          {activeHelpTopic?.links?.map(({ href, text, newTab, isExternal }, index) => {
             return (
-              <StackItem>
+              <StackItem key={index}>
                 <Button
                   component="a"
                   href={href}
