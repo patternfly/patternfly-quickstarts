@@ -69,7 +69,7 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
       <Divider />
       {paddingContainer(
         <Stack hasGutter>
-          {activeHelpTopic?.links.map(({ href, text, newTab, isExternal }) => {
+          {activeHelpTopic?.links?.map(({ href, text, newTab, isExternal }) => {
             return (
               <StackItem>
                 <Button
