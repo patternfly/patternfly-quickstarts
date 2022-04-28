@@ -12,5 +12,6 @@ export * from './utils/help-topic-context';
 export * from './utils/help-topic-types';
 export * from './utils/quick-start-utils';
 export * from './utils/useLocalStorage';
+export * from './utils/asciidoc-procedure-parser';
 export { default as QuickStartPanelContent } from './QuickStartPanelContent';
 export { default as QuickStartCloseModal } from './QuickStartCloseModal';
