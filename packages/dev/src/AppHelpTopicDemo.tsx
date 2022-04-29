@@ -8,10 +8,15 @@ import { AppHeader, AppSidebar } from './common/Page';
 
 type AppProps = {
   children?: React.ReactNode;
-  showCardFooters?: boolean;
+  showHelpTopicSelector?: boolean;
+  useFilteredSelectorList?: boolean;
 };
 
-const AppHelpTopicDemo: React.FC<AppProps> = ({ children }) => {
+const AppHelpTopicDemo: React.FC<AppProps> = ({
+  showHelpTopicSelector,
+  useFilteredSelectorList,
+  children,
+}) => {
   const language = localStorage.getItem('bridge/language') || 'en';
   const resourceBundle = i18n.getResourceBundle(language, 'quickstart');
 
@@ -27,6 +32,8 @@ const AppHelpTopicDemo: React.FC<AppProps> = ({ children }) => {
 
   const helpTopicContainerProps: HelpTopicContainerProps = {
     helpTopics,
+    showHelpTopicSelector,
+    useFilteredSelectorList,
     resourceBundle,
     language,
     loading,
