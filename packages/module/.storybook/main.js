@@ -21,9 +21,6 @@ module.exports = {
     checkOptions: {},
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
-      // shouldExtractLiteralValuesFromEnum: true,
-      // propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
-      // propFilter: (prop) => ( prop.parent ? !/node_modules\/(?!@patternfly).*/.test(prop.parent.fileName) : true),
       compilerOptions: {
         allowSyntheticDefaultImports: false,
         esModuleInterop: false,
