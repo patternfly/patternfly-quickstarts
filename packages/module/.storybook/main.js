@@ -27,4 +27,7 @@ module.exports = {
       },
     },
   },
+  features: {
+    buildStoriesJson: true,
+  }
 }
