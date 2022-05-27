@@ -8,9 +8,10 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "yarn workspace @patternfly/quickstarts build && yarn build:adoc",
+    "build": "yarn workspace @patternfly/quickstarts build && yarn build:sb",
     "build:quick": "yarn workspace @patternfly/quickstarts quick",
     "build:adoc": "yarn workspace @patternfly/transform-adoc build",
+    "build:sb": "yarn workspace @patternfly/quickstarts build-storybook",
     "start": "yarn workspace @patternfly/quickstarts-dev start",
     "watch": "yarn build && concurrently --kill-others \"yarn workspace @patternfly/quickstarts watch\" \"yarn start\"",
     "watch:quick": "yarn build:quick && concurrently --kill-others \"yarn workspace @patternfly/quickstarts watch\" \"yarn start\"",
