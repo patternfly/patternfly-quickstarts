@@ -10,7 +10,7 @@
     "build": "theme-patternfly-org build all",
     "build:server": "theme-patternfly-org build server",
     "build:client": "theme-patternfly-org build client",
-    "clean": "rm -rf .cache public size-plugin.json src/generated/**/*.js",
+    "clean": "rm -rf .cache public size-plugin.json src/generated",
     "develop": "theme-patternfly-org start",
     "generate": "theme-patternfly-org generate",
     "test:a11y": "patternfly-a11y --file .cache/fullscreenPages.json --prefix http://localhost:9000/v4",
@@ -45,13 +45,13 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.0.9"
   },
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "loose": true,
-        "shippedProposals": true
-      }
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      ["@babel/plugin-proposal-private-methods", { "loose": false }],
+      ["@babel/plugin-proposal-private-property-in-object", { "loose": false }]
     ]
-  ]
+  }
 }

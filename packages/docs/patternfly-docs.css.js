@@ -4,5 +4,6 @@ import '@patternfly/patternfly/patternfly.css';
 import '@patternfly/patternfly/patternfly-addons.css';
 // Global theme CSS
 import 'theme-patternfly-org/global.css';
-// QuickStarts CSS
+
+// Extensions: QuickStarts CSS
 import '@patternfly/quickstarts/dist/quickstarts.css';
