@@ -5,7 +5,7 @@
   "description": "This library provides the quickstarts module",
   "license": "MIT",
   "workspaces": [
-    "packages/*"
+    "packages/!(@patternfly/quickstarts-docs)/**"
   ],
   "scripts": {
     "build": "yarn workspace @patternfly/quickstarts build && yarn build:adoc",
@@ -106,6 +106,9 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!**/node_modules/**"
     ],
-    "resolver": "./jest-resolver.js"
+    "resolver": "./jest-resolver.js",
+    "resolutions": {
+      "theme-patternfly-org/**/typescript": "4.3.5"
+    }
   }
 }
