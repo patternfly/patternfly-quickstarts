@@ -132,7 +132,7 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
 
   return (
     <QuickStartContext.Provider value={valuesForQuickstartContext}>
-      <QuickStartDrawer {...drawerProps}>{children}</QuickStartDrawer>
+      <QuickStartDrawer {...drawerProps}>testtesttest{children}</QuickStartDrawer>
     </QuickStartContext.Provider>
   );
 };

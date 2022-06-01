@@ -5,7 +5,11 @@
   "description": "This library provides the quickstarts module",
   "license": "MIT",
   "workspaces": [
-    "packages/*"
+    "packages/dev",
+    "packages/module",
+    "packages/transform-adoc",
+    "packages/vscode",
+    "packages/docs"
   ],
   "scripts": {
     "build": "yarn workspace @patternfly/quickstarts build && yarn build:adoc",
@@ -58,6 +62,12 @@
     "ts-jest": "21.x",
     "typescript": "3.8.3",
     "url-search-params-polyfill": "2.x"
+  },
+  "resolutions": {
+    "monaco-editor": "0.21.3",
+    "monaco-editor-webpack-plugin": "2.1.0",
+    "sharp": "0.30.6",
+    "chromedriver": "101.0.0"
   },
   "jest": {
     "moduleFileExtensions": [
