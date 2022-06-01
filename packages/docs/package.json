@@ -1,0 +1,35 @@
+{
+  "name": "@patternfly/docs",
+  "description": "Documentation for PatternFly extensions",
+  "private": false,
+  "version": "1.0.0",
+  "author": "Red Hat",
+  "license": "MIT",
+  "scripts": {
+    "analyze": "theme-patternfly-org build all --analyze",
+    "build": "theme-patternfly-org build all",
+    "build:server": "theme-patternfly-org build server",
+    "build:client": "theme-patternfly-org build client",
+    "clean": "rm -rf .cache public size-plugin.json src/generated",
+    "develop": "theme-patternfly-org start",
+    "generate": "theme-patternfly-org generate",
+    "test:a11y": "patternfly-a11y --file .cache/fullscreenPages.json --prefix http://localhost:9000/v4",
+    "screenshots": "theme-patternfly-org screenshots"
+  },
+  "dependencies": {
+    "@breakaway/theme-patternfly-org": "^1.0.0",
+    "@patternfly/quickstarts": "2.2.3",
+    "@patternfly/react-docs": "5.67.3"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0"
+  },
+  "resolutions": {
+    "webpack": "4.44.1",
+    "monaco-editor": "0.21.3",
+    "monaco-editor-webpack-plugin": "2.1.0",
+    "sharp": "0.30.6",
+    "chromedriver": "101.0.0"
+  }
+}
