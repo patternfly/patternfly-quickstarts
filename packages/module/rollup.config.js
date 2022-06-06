@@ -81,6 +81,7 @@ const esBuildWithDeps = {
     file: 'dist/quickstarts-full.es.js',
     format: 'es',
     sourcemap: true,
+    inlineDynamicImports: true,
   },
   external: ['react', 'react-dom'],
   plugins: [

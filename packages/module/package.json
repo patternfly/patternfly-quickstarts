@@ -20,7 +20,8 @@
   "scripts": {
     "clean": "rm -rf dist",
     "prebuild": "yarn clean",
-    "build": "rollup -c && yarn purge-css && yarn combine && yarn min-css && yarn min-css-standalone",
+    "build": "rollup -c && yarn purge-css && yarn combine && yarn min-css && yarn min-css-standalone && yarn copy:docs",
+    "copy:docs": "cp -R ../docs/src/content dist/docs",
     "watch": "rollup -w --config rollup-quick.config.js",
     "quick": "rollup --config rollup-quick.config.js",
     "combine": "node ./combineCss.js",
@@ -87,5 +88,11 @@
     "rollup-plugin-visualizer": "^5.5.0",
     "sass": "^1.35.2",
     "tslib": "^2.0.3"
+  },
+  "resolutions": {
+    "@types/react": "^16.8.0",
+    "@types/react-dom": "^16.8.0",
+    "react": "16.8.0",
+    "react-dom": "16.8.0"
   }
 }

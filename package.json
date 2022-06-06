@@ -5,7 +5,7 @@
   "description": "This library provides the quickstarts module",
   "license": "MIT",
   "workspaces": [
-    "packages/!(@patternfly/quickstarts-docs)/**"
+    "packages/*"
   ],
   "scripts": {
     "build": "yarn workspace @patternfly/quickstarts build && yarn build:adoc",
