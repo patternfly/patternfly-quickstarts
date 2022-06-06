@@ -110,5 +110,11 @@
     "resolutions": {
       "theme-patternfly-org/**/typescript": "4.3.5"
     }
+  },
+  "resolutions": {
+    "@types/react": "^16.8.0",
+    "@types/react-dom": "^16.8.0",
+    "react": "16.8.0",
+    "react-dom": "16.8.0"
   }
 }
