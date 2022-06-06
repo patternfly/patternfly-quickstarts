@@ -36,7 +36,7 @@ const cjsBuild = {
     file: packageJson.main,
     format: 'cjs',
     sourcemap: true,
-    inlineDynamicImports: true
+    inlineDynamicImports: true,
   },
   external: ['react', 'react-dom'],
   plugins: [
