@@ -17,7 +17,7 @@ const commonPlugins = [
     tsconfig: 'tsconfig.json',
     sourceMap: true,
     inlineSources: true,
-  })
+  }),
 ];
 
 const commonScssOptions = {
@@ -35,7 +35,6 @@ const cjsBuild = {
     file: packageJson.main,
     format: 'cjs',
     // sourcemap: true,
-    inlineDynamicImports: true
   },
   external: ['react', 'react-dom'],
   plugins: [
