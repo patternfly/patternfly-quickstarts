@@ -957,10 +957,10 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@breakaway/theme-patternfly-org@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@breakaway/theme-patternfly-org/-/theme-patternfly-org-1.0.3.tgz#33ed4af913f1498b817ac61075f36a9bec8ba1d1"
-  integrity sha512-DroohlumGuJFWFvn3CbkIhyRAvVFfujke0gOpQRNFjpqpiSw7Lk/1C/5m0CbJUqYgnqd515FxYtXOfuctld8WQ==
+"@breakaway/theme-patternfly-org@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@breakaway/theme-patternfly-org/-/theme-patternfly-org-1.0.4.tgz#831af401e26d3b9c1627d5ec4f463ff280f7cf33"
+  integrity sha512-G4/0uZuzCsrZRmwZZZx8dPZbIbAx+PHud+h4Hws3gvzEflCtxYOJcd68iGs7kkBiVZEbSNZxgXFVwtmYgr0g0w==
   dependencies:
     "@babel/core" "7.18.2"
     "@babel/plugin-proposal-class-properties" "7.17.12"
