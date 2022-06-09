@@ -14,12 +14,12 @@ import {
 } from '@patternfly/react-core';
 import ArrowRightIcon from '@patternfly/react-icons/dist/esm/icons/arrow-right-icon';
 import GithubIcon from '@patternfly/react-icons/dist/esm/icons/github-icon';
-import orb from '../images/pf4-logo.svg';
-import accessible from '../images/accessible.svg';
-import modular from '../images/modular.svg';
-import scale from '../images/scale.svg';
-import consistent from '../images/consistent.svg';
-import open from '../images/open.svg';
+import orb from './images/pf4-logo.svg';
+import accessible from './images/accessible.svg';
+import modular from './images/modular.svg';
+import scale from './images/scale.svg';
+import consistent from './images/consistent.svg';
+import open from './images/open.svg';
 import { AutoLinkHeader } from '@breakaway/theme-patternfly-org/components/autoLinkHeader/autoLinkHeader';
 import './home.css';
 

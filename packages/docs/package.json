@@ -1,7 +1,7 @@
 {
   "name": "@patternfly/docs",
   "description": "Documentation for PatternFly extensions",
-  "private": false,
+  "private": true,
   "version": "1.0.0",
   "author": "Red Hat",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "screenshots": "theme-patternfly-org screenshots --urlPrefix http://localhost:5000"
   },
   "dependencies": {
-    "@breakaway/theme-patternfly-org": "^1.0.3",
+    "@breakaway/theme-patternfly-org": "^1.0.4",
     "@patternfly/quickstarts": "2.2.3"
   },
   "devDependencies": {
