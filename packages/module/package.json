@@ -3,6 +3,7 @@
   "version": "2.2.3",
   "description": "PatternFly quick starts",
   "files": [
+    "src",
     "dist"
   ],
   "main": "dist/index.js",
@@ -79,7 +80,7 @@
     "react-dom": "^16.8.0",
     "regenerator-runtime": "^0.13.7",
     "rimraf": "^3.0.2",
-    "rollup": "^2.37.0",
+    "rollup": "2.53.0",
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-node-externals": "^2.2.0",
@@ -88,11 +89,5 @@
     "rollup-plugin-visualizer": "^5.5.0",
     "sass": "^1.35.2",
     "tslib": "^2.0.3"
-  },
-  "resolutions": {
-    "@types/react": "^16.8.0",
-    "@types/react-dom": "^16.8.0",
-    "react": "16.8.0",
-    "react-dom": "16.8.0"
   }
 }

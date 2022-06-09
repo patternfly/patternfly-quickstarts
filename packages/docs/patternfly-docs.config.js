@@ -4,5 +4,5 @@ module.exports = {
     { section: 'extensions' },
   ],
   topNavItems: [],
-  port: 8003,
+  port: 8003
 };

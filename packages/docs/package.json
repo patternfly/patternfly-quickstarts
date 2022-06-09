@@ -1,56 +1,40 @@
 {
-  "name": "@patternfly/quickstarts-docs",
-  "description": "Documentation for QuickStarts.",
-  "private": true,
+  "name": "@patternfly/docs",
+  "description": "Documentation for PatternFly extensions",
+  "private": false,
   "version": "1.0.0",
   "author": "Red Hat",
   "license": "MIT",
   "scripts": {
     "analyze": "theme-patternfly-org build all --analyze",
     "build": "theme-patternfly-org build all",
+    "serve": "theme-patternfly-org serve public",
     "build:server": "theme-patternfly-org build server",
     "build:client": "theme-patternfly-org build client",
     "clean": "rm -rf .cache public size-plugin.json src/generated",
     "develop": "theme-patternfly-org start",
     "generate": "theme-patternfly-org generate",
     "test:a11y": "patternfly-a11y --file .cache/fullscreenPages.json --prefix http://localhost:9000/v4",
-    "screenshots": "theme-patternfly-org screenshots"
+    "screenshots": "theme-patternfly-org screenshots --urlPrefix http://localhost:5000"
   },
   "dependencies": {
-    "@babel/plugin-proposal-private-methods": "^7.17.12",
-    "@patternfly/quickstarts": "2.2.3",
-    "@patternfly/react-docs": "5.67.3",
-    "react": "^16.8.0 || ^17.0.0",
-    "react-dom": "^16.8.0 || ^17.0.0",
-    "theme-patternfly-org": "^0.11.39"
+    "@breakaway/theme-patternfly-org": "^1.0.3",
+    "@patternfly/quickstarts": "2.2.3"
   },
   "devDependencies": {
-    "fs-extra": "^9.0.0",
-    "glob": "^7.1.6",
-    "typescript": "4.3.5",
-    "webpack": "^4.43.0",
-    "webpack-bundle-analyzer": "^3.8.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.0.9"
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0"
   },
   "resolutions": {
-    "typescript": "4.3.5",
-    "theme-patternfly-org/**/typescript": "4.3.5",
-    "@patternfly/quickstarts-docs/**/typescript": "4.3.5",
-    "webpack": "^4.43.0",
-    "webpack-bundle-analyzer": "^3.8.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.0.9"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ],
-    "plugins": [
-      ["@babel/plugin-proposal-private-methods", { "loose": false }],
-      ["@babel/plugin-proposal-private-property-in-object", { "loose": false }]
-    ]
+    "webpack": "4.44.1",
+    "monaco-editor": "0.21.3",
+    "monaco-editor-webpack-plugin": "2.1.0",
+    "sharp": "0.30.6",
+    "chromedriver": "101.0.0",
+    "node-sass": "7.0.1"
   }
 }

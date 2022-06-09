@@ -106,15 +106,14 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!**/node_modules/**"
     ],
-    "resolver": "./jest-resolver.js",
-    "resolutions": {
-      "theme-patternfly-org/**/typescript": "4.3.5"
-    }
+    "resolver": "./jest-resolver.js"
   },
   "resolutions": {
     "@types/react": "^16.8.0",
     "@types/react-dom": "^16.8.0",
     "react": "16.8.0",
-    "react-dom": "16.8.0"
+    "react-dom": "16.8.0",
+    "chromedriver": "102.0.0",
+    "node-sass": "7.0.1"
   }
 }

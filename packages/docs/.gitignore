@@ -1,3 +1,5 @@
 # Files from theme-patternfly-org
 .cache
 src/generated
+public
+node_modules

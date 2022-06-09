@@ -7,6 +7,7 @@ section: Extensions
 id: Quick Starts
 # Tab
 source: Basic-Quick-Starts
+propComponents: ['QuickStartContainer']
 ---
 
 import { quickStarts as exampleQuickStarts } from './example-data';
@@ -18,7 +19,7 @@ import {
 } from '@patternfly/quickstarts';
 import '@patternfly/quickstarts/dist/quickstarts.css';
 
-## Basic Quick Starts Usage
+## Basic Quick Starts Usage EDIT
 
 ### Catalog Page
 ```js file="./AppProps.jsx"
