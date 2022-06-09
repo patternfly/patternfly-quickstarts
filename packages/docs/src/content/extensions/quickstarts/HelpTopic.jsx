@@ -24,10 +24,10 @@ const TinyMockConsole = () => {
 }
 
 const AppHelpTopicDemo = () => {
-  
   const language = localStorage.getItem('bridge/language') || 'en';
 
   const [loading, setLoading] = React.useState(true);
+
   React.useEffect(() => {
     const load = async () => {
       setLoading(false);
@@ -43,8 +43,6 @@ const AppHelpTopicDemo = () => {
     loading,
   };
 
-
-
   return (
     <React.Suspense fallback={<LoadingBox />}>
       <HelpTopicContainer {...inContextHelpProps}>
@@ -53,5 +51,3 @@ const AppHelpTopicDemo = () => {
     </React.Suspense>
   );
 };
-
-export default AppHelpTopicDemo;

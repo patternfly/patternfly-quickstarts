@@ -59,31 +59,14 @@ const App = ({ showCardFooters }) => {
     },
   };
 
-  // const toggleQuickStart = (quickStartId) => {
-  //   if (activeQuickStartID !== quickStartId) {
-  //     // activate
-  //     setActiveQuickStartID(quickStartId);
-  //     // optionally add the query param
-  //     withQueryParams && setQueryArgument(QUICKSTART_ID_FILTER_KEY, quickStartId);
-  //   } else {
-  //     // deactivate
-  //     setActiveQuickStartID('');
-  //     // optionally remove the query param
-  //     withQueryParams && removeQueryArgument(QUICKSTART_ID_FILTER_KEY);
-  //   }
-  // };
-
   return (
     <React.Suspense fallback={<LoadingBox />}>
       <QuickStartContainer {...drawerProps}>
-
         <QuickStartCatalogPage
           title="Quick starts"
           hint={'Learn how to create, import, and run applications with step-by-step instructions and tasks.'}
         />
-
       </QuickStartContainer>
     </React.Suspense>
   );
 };
-export default App;

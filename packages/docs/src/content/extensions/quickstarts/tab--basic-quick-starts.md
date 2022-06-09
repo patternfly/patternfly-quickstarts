@@ -19,7 +19,7 @@ import {
 } from '@patternfly/quickstarts';
 import '@patternfly/quickstarts/dist/quickstarts.css';
 
-## Basic Quick Starts Usage EDIT
+## Basic Quick Starts Usage
 
 ### Catalog Page
 ```js file="./AppProps.jsx"
