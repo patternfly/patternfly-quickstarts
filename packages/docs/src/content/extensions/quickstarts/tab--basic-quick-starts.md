@@ -7,6 +7,7 @@ section: Extensions
 id: Quick Starts
 # Tab
 source: Basic-Quick-Starts
+propComponents: ['QuickStartContainer']
 ---
 
 import { quickStarts as exampleQuickStarts } from './example-data';

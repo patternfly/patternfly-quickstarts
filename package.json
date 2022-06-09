@@ -16,6 +16,7 @@
     "watch:quick": "yarn build:quick && concurrently --kill-others \"yarn workspace @patternfly/quickstarts watch\" \"yarn start\"",
     "dev:build": "yarn workspace @patternfly/quickstarts-dev build",
     "dev:serve": "yarn workspace @patternfly/quickstarts-dev serve",
+    "dev:docs": "cd packages/docs && yarn develop",
     "test": "LANG=en_US.UTF-8 jest",
     "eslint": "eslint --ext .js,.jsx,.ts,.tsx --color",
     "lint": "yarn lint:module && yarn lint:dev",
@@ -106,15 +107,14 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!**/node_modules/**"
     ],
-    "resolver": "./jest-resolver.js",
-    "resolutions": {
-      "theme-patternfly-org/**/typescript": "4.3.5"
-    }
+    "resolver": "./jest-resolver.js"
   },
   "resolutions": {
     "@types/react": "^16.8.0",
     "@types/react-dom": "^16.8.0",
     "react": "16.8.0",
-    "react-dom": "16.8.0"
+    "react-dom": "16.8.0",
+    "chromedriver": "102.0.0",
+    "node-sass": "7.0.1"
   }
 }

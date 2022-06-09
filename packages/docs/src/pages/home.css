@@ -14,14 +14,14 @@
 @media (min-width: 576px) {
   .pf4-c-background-image {
     background-position: 50%, 100%;
-    background-image: url("../images/aboutPF4Lines.svg"), linear-gradient(to bottom, #004080, #0066cc);
+    background-image: url("./images/aboutPF4Lines.svg"), linear-gradient(to bottom, #004080, #0066cc);
     background-size: contain;
   }
 }
 
 @media (min-width: 992px) {
   .pf4-c-background-image {
-    background-image: url("../images/homeHeroLines.svg"), linear-gradient(to bottom, #004080, #0066cc);
+    background-image: url("./images/homeHeroLines.svg"), linear-gradient(to bottom, #004080, #0066cc);
     background-position: top, right;
     background-size: cover;
   }
@@ -105,7 +105,7 @@
   width: 100%;
   background-repeat: no-repeat;
   background-position: 50%;
-  background-image: url("../images/laptop.svg");
+  background-image: url("./images/laptop.svg");
 }
 
 .pf4-c-image__phone {
@@ -115,7 +115,7 @@
   width: 100%;
   background-repeat: no-repeat;
   background-position: 32%;
-  background-image: url("../images/phone.svg");
+  background-image: url("./images/phone.svg");
 }
 
 .pf4-c-image__screen {
@@ -126,7 +126,7 @@
   background-repeat: no-repeat;
   background-position: 60%;
   z-index: 2;
-  background-image: url("../images/screen.svg");
+  background-image: url("./images/screen.svg");
 }
 
 .pf4-c-image__desktop {
@@ -136,7 +136,7 @@
   width: 100%;
   background-repeat: no-repeat;
   background-position: 42%;
-  background-image: url("../images/desktop.svg");
+  background-image: url("./images/desktop.svg");
 }
 
 .pf4-c-background-image-principles {
