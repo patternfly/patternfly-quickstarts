@@ -25,4 +25,10 @@ yarn install
 
 # npm
 npm install --legacy-peer-deps
+
+# Generate screenshots for full screen examples (requires two terminal instances)
+## In one terminal instance
+yarn prepscreenshots
+## In another terminal instance (after /public directory successfully built and served in first instance)
+yarn screenshots
 ```

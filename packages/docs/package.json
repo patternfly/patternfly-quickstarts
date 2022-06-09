@@ -15,6 +15,7 @@
     "develop": "theme-patternfly-org start",
     "generate": "theme-patternfly-org generate",
     "test:a11y": "patternfly-a11y --file .cache/fullscreenPages.json --prefix http://localhost:9000/v4",
+    "prepscreenshots": "yarn build && yarn serve",
     "screenshots": "theme-patternfly-org screenshots --urlPrefix http://localhost:5000"
   },
   "dependencies": {
