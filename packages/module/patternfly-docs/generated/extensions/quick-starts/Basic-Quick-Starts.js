@@ -1,5 +1,5 @@
 import React from 'react';
-import { AutoLinkHeader, Example, Link as PatternflyThemeLink } from '@breakaway/theme-patternfly-org/components';
+import { AutoLinkHeader, Example, Link as PatternflyThemeLink } from '@patternfly/documentation-framework/components';
 import { quickStarts as exampleQuickStarts } from '../../../content/extensions/quickstarts/./example-data';
 import {
   LoadingBox,
@@ -14,7 +14,30 @@ const pageData = {
   "section": "Extensions",
   "source": "Basic-Quick-Starts",
   "slug": "/extensions/quick-starts/Basic-Quick-Starts",
-  "sourceLink": "https://github.com/patternfly/patternfly-org/blob/main/packages/docs/src/content/extensions/quickstarts/tab--basic-quick-starts.md",
+  "sourceLink": "https://github.com/patternfly/patternfly-org/blob/main/packages/module/patternfly-docs/content/extensions/quickstarts/tab--basic-quick-starts.md",
+  "propComponents": [
+    {
+      "name": "QuickStartContainer",
+      "description": "",
+      "props": [
+        {
+          "name": "alwaysShowTaskReview",
+          "type": "No type info",
+          "defaultValue": "true"
+        },
+        {
+          "name": "loading",
+          "type": "No type info",
+          "defaultValue": "false"
+        },
+        {
+          "name": "useQueryParams",
+          "type": "No type info",
+          "defaultValue": "true"
+        }
+      ]
+    }
+  ],
   "examples": [
     "Catalog Page"
   ],

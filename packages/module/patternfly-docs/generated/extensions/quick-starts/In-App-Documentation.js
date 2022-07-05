@@ -1,5 +1,5 @@
 import React from 'react';
-import { AutoLinkHeader, Example, Link as PatternflyThemeLink } from '@breakaway/theme-patternfly-org/components';
+import { AutoLinkHeader, Example, Link as PatternflyThemeLink } from '@patternfly/documentation-framework/components';
 import { LoadingBox, HelpTopicContainer, HelpTopicContext } from '@patternfly/quickstarts';
 import { helpTopics as exampleHelpTopics } from '../../../content/extensions/quickstarts/./example-data';
 import '@patternfly/quickstarts/dist/quickstarts.css';
@@ -9,7 +9,7 @@ const pageData = {
   "section": "Extensions",
   "source": "In-App-Documentation",
   "slug": "/extensions/quick-starts/In-App-Documentation",
-  "sourceLink": "https://github.com/patternfly/patternfly-org/blob/main/packages/docs/src/content/extensions/quickstarts/tab--in-app-documentation.md",
+  "sourceLink": "https://github.com/patternfly/patternfly-org/blob/main/packages/module/patternfly-docs/content/extensions/quickstarts/tab--in-app-documentation.md",
   "fullscreenExamples": [
     "Basic Example"
   ]
