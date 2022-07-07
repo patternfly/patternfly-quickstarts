@@ -1,0 +1,4 @@
+# Docs
+.cache
+**/generated/**/*.js
+public

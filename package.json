@@ -22,7 +22,11 @@
     "lint:module": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/module",
     "lint:dev": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/dev",
     "visual": "npx percy exec -- node snapshots.js",
-    "test:a11y": "patternfly-a11y --config patternfly-a11y.config"
+    "test:a11y": "patternfly-a11y --config patternfly-a11y.config",
+    "docs:develop": "pf-docs-framework start",
+    "docs:build": "pf-docs-framework build all --output public",
+    "docs:serve": "pf-docs-framework serve public --port 5000",
+    "docs:screenshots": "pf-docs-framework screenshots --urlPrefix http://localhost:5000"
   },
   "devDependencies": {
     "@patternfly/patternfly-a11y": "4.2.1",

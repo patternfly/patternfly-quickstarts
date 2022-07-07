@@ -14,39 +14,39 @@ import { QuickStart, QuickStartStatus, AllQuickStartStates } from './utils/quick
 import { getQuickStartByName } from './utils/quick-start-utils';
 
 export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement> {
-  /* array of quick starts */
+  /** array of quick starts */
   quickStarts: QuickStart[];
-  /* id of the currently active quick start */
+  /** id of the currently active quick start */
   activeQuickStartID: string;
-  /* setter for the active quick starts */
+  /** setter for the active quick starts */
   setActiveQuickStartID: React.Dispatch<React.SetStateAction<string>>;
-  /* quick starts state object */
+  /** quick starts state object */
   allQuickStartStates: AllQuickStartStates;
-  /* setter for the quick starts state object */
+  /** setter for the quick starts state object */
   setAllQuickStartStates: React.Dispatch<React.SetStateAction<AllQuickStartStates>>;
-  /* content to render within the container */
+  /** content to render within the container */
   children?: React.ReactNode;
-  /* element to render the drawer panel into */
+  /** element to render the drawer panel into */
   appendTo?: HTMLElement | (() => HTMLElement);
-  /* if true, the panel will take up the full browser width */
+  /** if true, the panel will take up the full browser width */
   fullWidth?: boolean;
-  /* callback when an in-progress quick start is closed */
+  /** callback when an in-progress quick start is closed */
   onCloseInProgress?: any;
-  /* callback when a not-in-progress quick start is closed */
+  /** callback when a not-in-progress quick start is closed */
   onCloseNotInProgress?: any;
-  /* true to show footer buttons in the catalog tiles (default true) */
+  /** true to show footer buttons in the catalog tiles (default true) */
   showCardFooters?: boolean;
-  /* true to use legacy drawer header variant colors */
+  /** true to use legacy drawer header variant colors */
   useLegacyHeaderColors?: boolean;
-  /* text resources object */
+  /** text resources object */
   resourceBundle?: any;
-  /* language of the current resource bundle */
+  /** language of the current resource bundle */
   language?: string;
-  /* if true, will show a loading spinner on the catalog page (default false) */
+  /** if true, will show a loading spinner on the catalog page (default false) */
   loading?: boolean;
-  /* if true, will update the browser URL with ?quickstart={ID} (default true) */
+  /** if true, will update the browser URL with ?quickstart={ID} (default true) */
   useQueryParams?: boolean;
-  /* if true, the TaskReview component, aka "Check your work", will be shown regardless of task status */
+  /** if true, the TaskReview component, aka "Check your work", will be shown regardless of task status */
   alwaysShowTaskReview?: boolean;
   /**
    * Additional markdown extensions and renderers to use
@@ -57,7 +57,7 @@ export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement
     extensions?: any[];
     renderExtension?: (docContext: HTMLDocument, rootSelector: string) => React.ReactNode;
   };
-  /* additional quick start context props */
+  /** additional quick start context props */
   contextProps?: QuickStartContextValues;
 }
 
@@ -82,7 +82,7 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
   contextProps,
   alwaysShowTaskReview = true,
   ...props
-}) => {
+}: QuickStartContainerProps) => {
   const valuesForQuickstartContext: QuickStartContextValues = useValuesForQuickStartContext({
     allQuickStarts: quickStarts,
     activeQuickStartID,

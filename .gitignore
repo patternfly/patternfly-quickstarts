@@ -8,3 +8,5 @@ storybook-static
 .idea
 .env
 stats.html
+
+.cache

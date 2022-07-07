@@ -32,7 +32,11 @@
     "post-css": "yarn purge-css && yarn min-css && yarn min-css-standalone",
     "purge-css": "purgecss --config ./purgecss.config.js",
     "min-css": "cleancss dist/quickstarts.css -o dist/quickstarts.min.css",
-    "min-css-standalone": "cleancss -o dist/quickstarts-standalone.min.css dist/patternfly-nested.css dist/quickstarts-standalone.css"
+    "min-css-standalone": "cleancss -o dist/quickstarts-standalone.min.css dist/patternfly-nested.css dist/quickstarts-standalone.css",
+    "docs:develop": "pf-docs-framework start",
+    "docs:build": "pf-docs-framework build all --output public",
+    "docs:serve": "pf-docs-framework serve public --port 5000",
+    "docs:screenshots": "pf-docs-framework screenshots --urlPrefix http://localhost:5000"
   },
   "peerDependencies": {
     "@patternfly/react-core": ">=4.115.2",
@@ -86,6 +90,7 @@
     "rollup-plugin-typescript2": "^0.29.0",
     "rollup-plugin-visualizer": "^5.5.0",
     "sass": "^1.35.2",
-    "tslib": "^2.0.3"
+    "tslib": "^2.0.3",
+    "@patternfly/documentation-framework": "1.0.2"
   }
 }
