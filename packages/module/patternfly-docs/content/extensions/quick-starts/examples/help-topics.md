@@ -20,6 +20,6 @@ import '@patternfly/quickstarts/dist/quickstarts.css';
 ```js file="./HelpTopic.jsx"
 ```
 
-### Basic Example
+### Basic Example Fullscreen
 ```js file="./HelpTopic.jsx" isFullscreen
 ```
