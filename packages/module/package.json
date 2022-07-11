@@ -3,6 +3,7 @@
   "version": "2.2.3",
   "description": "PatternFly quick starts",
   "files": [
+    "src",
     "dist"
   ],
   "main": "dist/index.js",
@@ -20,7 +21,7 @@
   "scripts": {
     "clean": "rm -rf dist",
     "prebuild": "yarn clean",
-    "build": "rollup -c && yarn purge-css && yarn combine && yarn min-css && yarn min-css-standalone",
+    "build": "rollup -c && yarn purge-css && yarn combine && yarn min-css && yarn min-css-standalone && yarn docs:copy",
     "watch": "rollup -w --config rollup-quick.config.js",
     "quick": "rollup --config rollup-quick.config.js",
     "combine": "node ./combineCss.js",
@@ -36,7 +37,8 @@
     "docs:develop": "pf-docs-framework start",
     "docs:build": "pf-docs-framework build all --output public",
     "docs:serve": "pf-docs-framework serve public --port 5000",
-    "docs:screenshots": "pf-docs-framework screenshots --urlPrefix http://localhost:5000"
+    "docs:screenshots": "pf-docs-framework screenshots --urlPrefix http://localhost:5000",
+    "docs:copy": "mkdir -p dist/patternfly-docs && cp -R patternfly-docs/content/extensions/quick-starts dist/patternfly-docs"
   },
   "peerDependencies": {
     "@patternfly/react-core": ">=4.115.2",

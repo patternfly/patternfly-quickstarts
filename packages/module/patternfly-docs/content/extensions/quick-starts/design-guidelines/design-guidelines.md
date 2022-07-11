@@ -6,15 +6,11 @@ section: extensions
 # should be the same for all markdown files for each extension
 id: Quick Starts
 # Tab
-source: Design-Guidelines
+source: design-guidelines
 ---
 
-A **quick start** is a set of step-by-step instructions and tasks presented in a side panel embedded in a product’s UI. Quick starts can help users get started with a product, and they often provide guidance around installation and setup.
-
-Each task in a quick start has multiple steps, and each quick start has multiple tasks. The outcome of the quick start includes the artifacts or state needed to successfully use the product, specific features, or add-ons.
-
+# Quickstarts
 ## Elements
-
 ### Card
 
 Quick starts are usually surfaced within a [catalog](https://www.patternfly.org/v4/components/card/design-guidelines/#cards-in-catalog-views) as clickable cards.

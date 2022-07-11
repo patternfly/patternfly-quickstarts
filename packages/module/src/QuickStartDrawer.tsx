@@ -40,7 +40,9 @@ export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement
   useLegacyHeaderColors?: boolean;
   /** text resources object */
   resourceBundle?: any;
-  /** language of the current resource bundle */
+  /** language of the current resource bundle
+   * Add custom strings: https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/module#localization
+   */
   language?: string;
   /** if true, will show a loading spinner on the catalog page (default false) */
   loading?: boolean;
@@ -50,8 +52,7 @@ export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement
   alwaysShowTaskReview?: boolean;
   /**
    * Additional markdown extensions and renderers to use
-   * TODO: example usage - In the meantime you can take a look at:
-   * https://github.com/openshift/console/blob/master/frontend/packages/console-app/src/components/quick-starts/utils/quick-start-context.tsx#L235
+   * Example usage: https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/module#markdown-extensions
    */
   markdown?: {
     extensions?: any[];

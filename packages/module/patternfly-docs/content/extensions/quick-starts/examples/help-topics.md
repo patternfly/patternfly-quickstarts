@@ -7,6 +7,7 @@ section: extensions
 id: Quick Starts
 # Tab
 source: In-App-Documentation
+propComponents: ['HelpTopicContainer']
 ---
 
 import { LoadingBox, HelpTopicContainer, HelpTopicContext } from '@patternfly/quickstarts';
