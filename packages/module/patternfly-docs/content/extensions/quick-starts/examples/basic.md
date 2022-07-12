@@ -8,7 +8,7 @@ id: Quick Starts
 # Tab (react | react-demos | html | html-demos | design-guidelines | accessibility)
 source: Basic-Quick-Starts
 # If you use typescript, the name of the interface to display props for
-# These are found through the sourceProps function provdided in patternfly-docs.source.js
+# These are found through the sourceProps function provided in patternfly-docs.source.js
 propComponents: ['QuickStartContainer']
 ---
 
