@@ -9,7 +9,7 @@ id: Quick Starts
 source: design-guidelines
 ---
 
-# Quickstarts
+# Quick starts
 ## Elements
 ### Card
 
