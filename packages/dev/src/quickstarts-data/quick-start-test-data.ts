@@ -21,8 +21,8 @@ import sampleApplicationQuickstart from './yaml/sample-application-quickstart.ya
 import serverlessApplicationQuickstart from './yaml/serverless-application-quickstart.yaml';
 import springWithS2i from './yaml/spring-with-s2i.yaml';
 
-// in-context help examples
-import exampleHelpTopics from './yaml/in-context-help/example-topics.yaml';
+// In-app Documentation examples
+import exampleHelpTopics from './yaml/in-app-documentation/example-topics.yaml';
 
 export const allQuickStarts: QuickStart[] = [
   template,

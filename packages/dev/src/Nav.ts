@@ -31,9 +31,9 @@ export const Nav: NavInterface[] = [
     to: '/quickstarts-context',
   },
   {
-    id: 'in-context-help',
-    name: 'In Context Help',
-    to: '/in-context-help',
+    id: 'in-app-documentation',
+    name: 'In-app Documentation',
+    to: '/in-app-documentation',
   },
 ];
 

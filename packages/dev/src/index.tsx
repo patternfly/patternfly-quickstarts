@@ -48,7 +48,7 @@ ReactDOM.render(
           <DefaultCatalog hint="This catalog is for testing the context based quick starts approach by utilizing the QuickStartContextProvider" />
         </AppContext>
       </Route>
-      <Route exact path="/in-context-help">
+      <Route exact path="/in-app-documentation">
         <AppHelpTopicDemo>
           <MockConsole />
         </AppHelpTopicDemo>

@@ -50,7 +50,7 @@ By providing a set of quick starts to the `QuickStartContainer`, a full page cat
 
 <img src="./img/catalog.png" alt="Quick start catalog" width="1680"/>
 
-## In App Documentation
+## In-app Documentation
 In App Documentation is used to provide definitions for a set of topics relevant to your product. A single unit of In App Documentation can be called a `HelpTopic`, which is also the name used in code. `HelpTopic`'s essential sections are a **content** section that contains a definition of the term or topic, and an optional list of **links** to provide the user with other relevant information.
 
 `HelpTopics` are displayed in a side panel just like `Quick starts`:

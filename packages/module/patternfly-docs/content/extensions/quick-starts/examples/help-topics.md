@@ -14,7 +14,7 @@ import { LoadingBox, HelpTopicContainer, HelpTopicContext } from '@patternfly/qu
 import { helpTopics as exampleHelpTopics } from './example-data';
 import '@patternfly/quickstarts/dist/quickstarts.css';
 
-## In App Documentation
+## In-app Documentation
 
 ### Basic Example
 ```js file="./HelpTopic.jsx"
