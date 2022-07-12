@@ -32,7 +32,7 @@ export const Nav: NavInterface[] = [
   },
   {
     id: 'in-app-documentation',
-    name: 'In-app Documentation',
+    name: 'In-app documentation',
     to: '/in-app-documentation',
   },
 ];
