@@ -11,24 +11,25 @@ import { QuickStartContextValues } from './utils/quick-start-context';
 import { HelpTopic } from './utils/help-topic-types';
 
 export interface HelpTopicContainerProps extends React.HTMLProps<HTMLDivElement> {
-  /* array of HelpTopics */
+  /** array of HelpTopics */
   helpTopics: HelpTopic[];
-  /* text resources object */
+  /** text resources object
+   * Add custom strings: https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/module#localization
+   */
   resourceBundle?: any;
-  /* language of the current resource bundle */
+  /** language of the current resource bundle */
   language?: string;
-  /* if true, will show a loading spinner on the catalog page (default false) */
+  /** if true, will show a loading spinner on the catalog page (default false) */
   loading?: boolean;
   /**
    * Additional markdown extensions and renderers to use
-   * TODO: example usage - In the meantime you can take a look at:
-   * https://github.com/openshift/console/blob/master/frontend/packages/console-app/src/components/quick-starts/utils/quick-start-context.tsx#L235
+   * Example usage: https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/module#markdown-extensions
    */
   markdown?: {
     extensions?: any[];
     renderExtension?: (docContext: HTMLDocument, rootSelector: string) => React.ReactNode;
   };
-  /* additional quick start context props */
+  /** additional quick start context props */
   contextProps?: QuickStartContextValues;
 }
 
@@ -41,7 +42,7 @@ export const HelpTopicContainer: React.FC<HelpTopicContainerProps> = ({
   markdown,
   contextProps,
   ...props
-}) => {
+}: HelpTopicContainerProps) => {
   const valuesForHelpTopicContext: HelpTopicContextValues = useValuesForHelpTopicContext({
     helpTopics,
     language,

@@ -7,3 +7,6 @@ node_modules
 public
 bin
 build
+
+# paternfly-docs
+**/generated/**/*.js

@@ -5,7 +5,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-    
+
 env:
   PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
 
@@ -16,10 +16,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Use Node.js 15
+    - name: Use Node.js 16
       uses: actions/setup-node@v2
       with:
-        node-version: 15
+        node-version: 16
     - name: Install
       run: yarn install
     - name: Build
@@ -29,4 +29,4 @@ jobs:
         yarn start &
         sleep 60 &&
         yarn visual
-      
+
