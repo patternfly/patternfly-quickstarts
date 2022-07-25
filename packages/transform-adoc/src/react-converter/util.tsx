@@ -230,7 +230,7 @@ export const renderPFList = (
       </Title>
       {isPrereqList && (
         <p className="task-pflist-subtitle">
-          In addtion to the prerequisites for this Quick Start, this step requires:
+          In addition to the prerequisites for this Quick Start, this step requires:
         </p>
       )}
       {blocksBeforeComponent}

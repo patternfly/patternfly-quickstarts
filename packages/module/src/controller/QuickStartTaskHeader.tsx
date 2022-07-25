@@ -18,7 +18,7 @@ type QuickStartTaskHeaderProps = {
   size?: 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
   isActiveTask?: boolean;
   onTaskSelect: (index: number) => void;
-  chidlren?: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const TaskIcon: React.FC<{
