@@ -9,15 +9,15 @@ id: Quick Starts
 source: about
 ---
 # About
-The **@patternfly/quickstarts** extension is made up of two parts: `Quick starts` and `In App Documentation` product documentation tools.
+The **@patternfly/quickstarts** extension is made up of two parts: `Quick starts` and `in-app documentation` product documentation tools.
 
 ## Full live demo application
-A live demo of **Quick starts and In App Documentation** can be found [here](https://quickstarts.netlify.app/), or view the [demo code](https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/dev).
+A live demo of **quick starts and in-app Documentation** can be found [here](https://quickstarts.netlify.app/), or view the [demo code](https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/dev).
 
 A few key concepts are outlined below.
 
 ## Quick starts
-A `Quick start` is a set of step-by-step instructions and tasks presented in a side panel embedded in a product’s UI. Quick starts can help users get started with a product, and they often provide guidance around installation and setup.
+A `Quick start` is a set of step-by-step instructions and tasks presented in a side panel embedded in a product’s UI. Quick starts can help users get started with a product, and they often guide installation and setup.
 
 Each task in a quick start has multiple steps, and each quick start has multiple tasks. The outcome of the quick start includes the artifacts or state needed to successfully use the product, specific features, or add-ons.
 
@@ -46,16 +46,16 @@ const { setActiveQuickStart } = React.useContext<QuickStartContextValues>(
 ```
 
 #### Quick start catalog
-By providing a set of quick starts to the `QuickStartContainer`, a full page catalog view will be generated. Clicking on a catalog card will open its respective `Quick start` in the side panel. 
+By providing a set of quick starts to the `QuickStartContainer`, a full-page catalog view will be generated. Clicking on a catalog card will open its respective `quick start` in the side panel. 
 
 <img src="./img/catalog.png" alt="Quick start catalog" width="1680"/>
 
 ## In-app documentation
-In App Documentation is used to provide definitions for a set of topics relevant to your product. A single unit of In App Documentation can be called a `HelpTopic`, which is also the name used in code. `HelpTopic`'s essential sections are a **content** section that contains a definition of the term or topic, and an optional list of **links** to provide the user with other relevant information.
+In-app documentation is used to provide definitions for a set of topics relevant to your product. A single unit of in-app documentation can be called a `HelpTopic`, which is also the name used in code. `HelpTopic`'s essential sections are a **content** section that contains a definition of the term or topic, and an optional list of **links** to provide the user with other relevant information.
 
-`HelpTopics` are displayed in a side panel just like `Quick starts`:
+`HelpTopics` are displayed in a side panel just like `quick starts`:
 
-<img src="./img/help-topic.png" alt="Quick start catalog" width="449"/>
+<img src="./img/help-topic.png" alt="quick start catalog" width="449"/>
 
 ### Help Topic format
 
@@ -74,4 +74,4 @@ Open the side panel by calling `setActiveHelpTopicByName` (available from `HelpT
 const { setActiveHelpTopicByName } = React.useContext<HelpTopicContextValues>(HelpTopicContext);
 ```
 
-Close it by calling `setActiveHelpTopicByName` with an empty string. There is no prebuilt `HelpTopic` catalog. simply attach a handler with `setActiveHelpTopicByName` to the appropriate DOM element. See the [basic example](/extensions/quick-starts/In-App-Documentation), or [live demo code](https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/dev) for more details.
+Close it by calling `setActiveHelpTopicByName` with an empty string. There is no prebuilt `HelpTopic` catalog. simply attach a handler with `setActiveHelpTopicByName` to the appropriate DOM element. See the [basic example](/extensions/quick-starts/In-App-Documentation) or [live demo code](https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/dev) for more details.
