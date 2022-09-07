@@ -40,6 +40,15 @@ spec:
         1. For more information on markdown syntax you can visit [this resource](https://www.markdownguide.org/basic-syntax/).
         1. A <small>limited set</small> of <strong>HTML tags</strong> [are also supported](https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html#supported-tags-for-quick-starts_creating-quick-start-tutorials)
         
+        ## Images
+
+        HTML img tag: <img alt="Ellipsis" src="images/fa-ellipsis-v.svg" style="height: 14px;">
+        > Markdown would work as well but cannot add height/width style
+
+        Ellipsis icon (visible if font-awesome is installed): <i class="fas fa-ellipsis-v"></i>
+
+        PF icon: <i class="pf-icon pf-icon-add-circle-o"></i>
+
         ## Highlighting
 
         To enable highlighting, the markdown syntax should contain:
