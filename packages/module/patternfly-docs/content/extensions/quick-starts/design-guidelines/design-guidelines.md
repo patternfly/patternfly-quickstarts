@@ -21,14 +21,14 @@ Quick starts are usually surfaced within a [catalog](https://www.patternfly.org/
 2. **Title:** The title briefly communicates what the quick start covers.
 3. **Labels:** [Filled labels](https://www.patternfly.org/v4/components/label) communicate the estimated completion time and status. If the quick start is presented in a mixed catalog of resources, a label can indicate the type of resource.
 4. **Description:** The description summarizes the quick start outcome in four lines or fewer.
-5. **Prerequisites (optional):** Prerequisites communicate user requirements prior to starting the quick start. They’re displayed in a popover, and they’re organized into a bulleted list. The total number of prerequisites is listed in parentheses on the quick start card.
+5. **Prerequisites (optional):** Prerequisites communicate user requirements before starting the quick start. They’re displayed in a popover, and they’re organized into a bulleted list. The total number of prerequisites is listed in parentheses on the quick start card.
 
 <img src="./img/prerequisites.png" alt="Example of prerequisites" width="395"/>
 
 ### Catalog
 Multiple quick starts are often presented to users in a catalog.
 
-<img src="./img/catalog-elements.png" alt="Quick start catalog" width="1680"/>
+<img src="./img/catalog-elements.png" alt="quick start catalog" width="1680"/>
 
 Catalogs with 14 or fewer quick starts should  include a simple toolbar with the following elements:
 1. Keyword filter
@@ -76,7 +76,7 @@ Tasks consist of 2-10 steps, which walk the user through the UI to complete the 
 <img src="./img/task.png" alt="Example task" width="449"/>
 
 #### Check your work
-The check your work module is shown at the bottom of the side panel for each task and helps the user validate that they have successfully completed the task. You can choose to make the check your work module required or optional. Validation questions should be yes/no questions, allowing the user to select the radio button with the appropriate response.
+The check your work module is shown at the bottom of the side panel for each task and helps the user validate that they have completed the task. You can choose to make the check your work module required or optional. Validation questions should be yes/no questions, allowing the user to select the radio button with the appropriate response.
 
 <img src="./img/check-your-work.png" alt="Check your work module" width="431"/>
 
@@ -98,7 +98,7 @@ Here are some general guidelines to follow when authoring quick start content:
   * Provide links at the end of quick starts if the user is likely to need or want additional technical  information upon completion.
   * Provide links in the check your work module when a user answers **No** if more robust information can help the user understand what actions they must take to complete the task.  
 
-For more specific quick start content guidelines, refer to the [Red Hat OpenShift documentation](https://docs.openshift.com/container-platform/4.7/web_console/creating-quick-start-tutorials.html). While these guidelines are geared towards Red Hat OpenShift, they can apply to quick starts in any products.
+For more specific quick start content guidelines, refer to the [Red Hat OpenShift documentation](https://docs.openshift.com/container-platform/4.7/web_console/creating-quick-start-tutorials.html). While these guidelines are geared toward Red Hat OpenShift, they can apply to quick starts in any product.
 
 ## Quick starts in context
 
