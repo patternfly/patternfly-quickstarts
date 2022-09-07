@@ -11,15 +11,9 @@ const useMultilineCopyClipboardShowdownExtension = () => {
   return React.useMemo(
     () => ({
       type: 'lang',
-      regex: /```[\n]((.*?\n)+)```{{copy}}/g,
-      replace: (
-        text: string,
-        group: string,
-        subgroup: string,
-        groupType: string,
-        groupId: string,
-      ): string => {
-        if (!group || !subgroup || !groupType || !groupId) {
+      regex: /```[\n]\s*((((?!```).)*?\n)+)\s*```{{copy}}/g,
+      replace: (text: string, group: string, _1: string, _2: string, groupId: number): string => {
+        if (!group || isNaN(groupId)) {
           return text;
         }
         return `<div class="pf-c-code-block">
@@ -28,7 +22,7 @@ const useMultilineCopyClipboardShowdownExtension = () => {
                   <div class="pf-c-code-block__actions-item">
                     <button class="pf-c-button pf-m-plain" type="button" aria-label="${getResource(
                       'Copy to clipboard',
-                    )}" ${MARKDOWN_COPY_BUTTON_ID}="${groupType}">
+                    )}" ${MARKDOWN_COPY_BUTTON_ID}="${groupId}">
                       ${renderToStaticMarkup(<CopyIcon />)}
                     </button>
                   </div>
@@ -37,7 +31,7 @@ const useMultilineCopyClipboardShowdownExtension = () => {
               <div class="pf-c-code-block__content">
                 <pre class="pf-c-code-block__pre pfext-code-block__pre">
                   <code class="pf-c-code-block__code" 
-                    ${MARKDOWN_SNIPPET_ID}="${groupType}">${group}</code>
+                    ${MARKDOWN_SNIPPET_ID}="${groupId}">${group.trim()}</code>
                 </pre>
               </div>
             </div>`;
