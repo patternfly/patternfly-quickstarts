@@ -21,6 +21,9 @@ import sampleApplicationQuickstart from './yaml/sample-application-quickstart.ya
 import serverlessApplicationQuickstart from './yaml/serverless-application-quickstart.yaml';
 import springWithS2i from './yaml/spring-with-s2i.yaml';
 
+// bug-fix examples
+import openShiftTabbedQuickStart from './yaml/openshift-tabbed-copy.yaml';
+
 // In-app documentation examples
 import exampleHelpTopics from './yaml/in-app-documentation/example-topics.yaml';
 
@@ -38,6 +41,8 @@ export const allQuickStarts: QuickStart[] = [
   sampleApplicationQuickstart,
   serverlessApplicationQuickstart,
   springWithS2i,
+
+  openShiftTabbedQuickStart,
 ];
 
 export const localizedQuickStarts: QuickStart[] = [csDemo, enDemo];

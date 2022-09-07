@@ -11,7 +11,7 @@ const useInlineCopyClipboardShowdownExtension = () => {
   return React.useMemo(
     () => ({
       type: 'lang',
-      regex: /`([^`](.*?)[^`])`{{copy}}/g,
+      regex: /```[\n]\s*((((?!```).)*?\n)+)\s*```{{copy}}/g,
       replace: (
         text: string,
         group: string,
