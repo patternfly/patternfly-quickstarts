@@ -33,6 +33,15 @@ spec:
       description: |-
         ## Text
 
+        Test
+        <img alt="Mountains" src="fa-ellipsis-v.svg" style="height: 14px;">
+
+        Ellipsis icon: <i class="fas fa-ellipsis-v"></i>
+
+        PF icon: <i class="pf-icon pf-icon-add-circle-o"></i>
+
+        View more ![Mountains](fa-ellipsis-v.svg)
+
         1. The main body of the task. You can use markdown syntax here to create list items and more.
 
           This is a paragraph.  

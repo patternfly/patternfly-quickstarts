@@ -113,7 +113,7 @@ module.exports = (_env, argv) => {
         patterns: [{ from: 'src/quickstarts-data/asciidoc/getting-started/images', to: '' }],
       }),
       new AssetsPlugin({
-        keepInMemory: _env === 'development',
+        keepInMemory: false, // _env === 'development',
         removeFullPathAutoPrefix: true,
       }),
       new CopyPlugin({
