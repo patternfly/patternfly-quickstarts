@@ -110,7 +110,7 @@ module.exports = (_env, argv) => {
         patterns: [{ from: path.resolve(__dirname, '_redirects'), to: '' }],
       }),
       new CopyPlugin({
-        patterns: [{ from: 'src/quickstarts-data/asciidoc/getting-started/images', to: '' }],
+        patterns: [{ from: 'src/quickstarts-data/**/images/*', to: 'images/[name].[ext]' }],
       }),
       new AssetsPlugin({
         keepInMemory: false, // _env === 'development',
