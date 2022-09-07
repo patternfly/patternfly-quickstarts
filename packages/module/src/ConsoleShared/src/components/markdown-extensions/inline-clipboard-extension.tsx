@@ -11,25 +11,19 @@ const useInlineCopyClipboardShowdownExtension = () => {
   return React.useMemo(
     () => ({
       type: 'lang',
-      regex: /```[\n]\s*((((?!```).)*?\n)+)\s*```{{copy}}/g,
-      replace: (
-        text: string,
-        group: string,
-        subGroup: string,
-        groupType: string,
-        groupId: string,
-      ): string => {
-        if (!group || !subGroup || !groupType || !groupId) {
+      regex: /`([^`](.*?)[^`])`{{copy}}/g,
+      replace: (text: string, group: string, _: string, groupId: number): string => {
+        if (!group || isNaN(groupId)) {
           return text;
         }
         return removeTemplateWhitespace(
           `<span class="pf-c-clipboard-copy pf-m-inline">
-              <span class="pf-c-clipboard-copy__text" ${MARKDOWN_SNIPPET_ID}="${groupType}">${group}</span>
+              <span class="pf-c-clipboard-copy__text" ${MARKDOWN_SNIPPET_ID}="${groupId}">${group}</span>
               <span class="pf-c-clipboard-copy__actions">
                 <span class="pf-c-clipboard-copy__actions-item">
                   <button class="pf-c-button pf-m-plain" aria-label="${getResource(
                     'Copy to clipboard',
-                  )}" ${MARKDOWN_COPY_BUTTON_ID}="${groupType}">
+                  )}" ${MARKDOWN_COPY_BUTTON_ID}="${groupId}">
                     ${renderToStaticMarkup(<CopyIcon />)}
                   </button>
                 </span>

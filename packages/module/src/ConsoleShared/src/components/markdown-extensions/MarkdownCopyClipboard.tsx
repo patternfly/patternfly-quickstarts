@@ -21,7 +21,7 @@ export const CopyClipboard: React.FC<CopyClipboardProps> = ({
     const copyTextId = element.getAttribute(MARKDOWN_COPY_BUTTON_ID);
     return (docContext.querySelector(
       `${rootSelector} [${MARKDOWN_SNIPPET_ID}="${copyTextId}"]`,
-    ) as HTMLElement).innerText;
+    ) as HTMLElement)?.innerText;
   }, [element, docContext, rootSelector]);
 
   useEventListener(
@@ -29,7 +29,7 @@ export const CopyClipboard: React.FC<CopyClipboardProps> = ({
     'click',
     React.useCallback(() => {
       navigator.clipboard
-        .writeText(textToCopy)
+        .writeText(textToCopy.trim())
         .then(() => {
           setShowSuccessContent(true);
         })

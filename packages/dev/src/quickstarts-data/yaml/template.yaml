@@ -67,15 +67,30 @@ spec:
         The syntax for an inline code snippet contains:
         - Text between back quotes, followed by `{{copy}}`
 
+        #### Example 1
+
         The following text demonstates an inline-copy element `https://github.com/sclorg/ruby-ex.git`{{copy}}
+
+        #### Example 2
+
+        And another one `https://patternfly.org`{{copy}} here!
 
         The syntax for multi-line code snippets:
         - Text between triple back quotes, followed by `{{copy}}`
+
+        #### Example 1
 
         ```
         oc new-app ruby~https://github.com/sclorg/ruby-ex.git
         echo "Expose route using oc expose svc/ruby-ex"
         oc expose svc/ruby-ex
+        ```{{copy}}
+
+        #### Example 2
+
+        ```
+        Hello
+        world
         ```{{copy}}  
 
         - Clicking the _Next_ button will display the **Check your work** module.
