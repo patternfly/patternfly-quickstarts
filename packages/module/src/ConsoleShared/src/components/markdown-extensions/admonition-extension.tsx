@@ -27,7 +27,7 @@ const useAdmonitionShowdownExtension = () => {
   return React.useMemo(
     () => ({
       type: 'lang',
-      regex: /\[([\d\w\s-()$!]+)]{{(admonition) ([\w-]+)}}/g,
+      regex: /\[(.+)]{{(admonition) ([\w-]+)}}/g,
       replace: (
         text: string,
         content: string,
