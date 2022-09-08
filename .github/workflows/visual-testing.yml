@@ -29,4 +29,6 @@ jobs:
         yarn start &
         sleep 60 &&
         yarn visual
+      env:
+        PERCY_TOKEN: ${{secrets.PERCY_TOKEN}}
 
