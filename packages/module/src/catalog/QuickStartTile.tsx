@@ -90,6 +90,12 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
           />
         }
         onClick={handleClick}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            setActiveQuickStart(id, tasks?.length);
+            onClick();
+          }
+        }}
         // https://github.com/patternfly/patternfly-react/issues/7039
         href="#"
         data-test={`tile ${id}`}
@@ -97,6 +103,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
           <QuickStartTileDescription description={description} prerequisites={prerequisites} />
         }
         footer={footerComponent}
+        tabIndex={0}
       />
     </div>
   );
