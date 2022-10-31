@@ -66,6 +66,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const titleRef = React.useRef(null);
   const { getResource, activeQuickStartState } = React.useContext<QuickStartContextValues>(
     QuickStartContext,
   );
@@ -100,6 +101,12 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
     return Number.parseInt(taskNumber as string, 10) + 1;
   };
 
+  React.useEffect(() => {
+    if (quickStart) {
+      titleRef.current.focus();
+    }
+  }, [quickStart]);
+
   const content = quickStart ? (
     <DrawerPanelContent
       isResizable={isResizable}
@@ -111,7 +118,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
     >
       <div className={headerClasses}>
         <DrawerHead>
-          <div className="pfext-quick-start-panel-content__title">
+          <div className="pfext-quick-start-panel-content__title" tabIndex={-1} ref={titleRef}>
             <Title
               headingLevel="h1"
               size="xl"
