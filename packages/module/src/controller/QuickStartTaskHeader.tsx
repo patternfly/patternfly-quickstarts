@@ -63,6 +63,13 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   onTaskSelect,
   children,
 }) => {
+  const titleRef = React.useRef(null);
+  React.useEffect(() => {
+    if (isActiveTask) {
+      // Focus the WizardNavItem button element that contains the title
+      titleRef.current.parentNode.focus();
+    }
+  }, [isActiveTask]);
   const classNames = css('pfext-quick-start-task-header__title', {
     'pfext-quick-start-task-header__title-success': taskStatus === QuickStartTaskStatus.SUCCESS,
     'pfext-quick-start-task-header__title-failed':
@@ -82,7 +89,7 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   );
 
   const content = (
-    <div className="pfext-quick-start-task-header">
+    <div className="pfext-quick-start-task-header" ref={titleRef}>
       <TaskIcon taskIndex={taskIndex} taskStatus={taskStatus} />
       <Title headingLevel="h3" size={size} className={classNames}>
         <span dangerouslySetInnerHTML={{ __html: removeParagraphWrap(markdownConvert(title)) }} />
