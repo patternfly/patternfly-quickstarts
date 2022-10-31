@@ -53,6 +53,19 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   headerVariant = '',
   ...props
 }) => {
+  React.useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.keyCode === 27) {
+        handleClose();
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const { getResource, activeQuickStartState } = React.useContext<QuickStartContextValues>(
     QuickStartContext,
   );
