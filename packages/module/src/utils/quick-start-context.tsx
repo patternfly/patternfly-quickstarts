@@ -88,7 +88,7 @@ export const QuickStartContextDefaults = {
   activeQuickStartState: {},
   setAllQuickStarts: () => {},
   resourceBundle: en,
-  getResource: () => '',
+  getResource: (resource: string) => resource,
   language: 'en',
   useQueryParams: true,
   filter: {
@@ -115,7 +115,7 @@ export const getResource = (resource: string, options: any, resourceBundle: any,
       return resourceBundle[`${resource}_${suffix}`];
     }
   }
-  return (resourceBundle && resourceBundle[resource]) || '';
+  return (resourceBundle && resourceBundle[resource]) || resource;
 };
 
 export const useValuesForQuickStartContext = (
