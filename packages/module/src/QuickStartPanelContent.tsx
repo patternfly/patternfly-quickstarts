@@ -102,10 +102,12 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   };
 
   React.useEffect(() => {
-    if (quickStart) {
+    console.log(taskNumber);
+    const isIntro = Number.parseInt(taskNumber as string, 10) === -1;
+    if (quickStart && isIntro) {
       titleRef.current.focus();
     }
-  }, [quickStart]);
+  }, [quickStart, taskNumber]);
 
   const content = quickStart ? (
     <DrawerPanelContent
