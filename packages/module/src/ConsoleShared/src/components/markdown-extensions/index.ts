@@ -3,3 +3,4 @@ export { default as useInlineCopyClipboardShowdownExtension } from './inline-cli
 export { default as useMultilineCopyClipboardShowdownExtension } from './multiline-clipboard-extension';
 export { default as useAdmonitionShowdownExtension } from './admonition-extension';
 export { default as useCodeShowdownExtension } from './code-extension';
+export { default as useAccordionShowdownExtension } from './accordion-extension';

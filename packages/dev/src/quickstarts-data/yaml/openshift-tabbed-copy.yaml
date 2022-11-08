@@ -26,6 +26,7 @@ spec:
         This can be copied.
         ```{{copy}}
 
+
         1. Enter the developer perspective: In the main navigation menu, click
         the [dropdown menu]{{highlight tour-perspective-dropdown}} and select
         **Developer**.
@@ -35,6 +36,9 @@ spec:
           ```{{copy}}
 
         2. In the main navigation menu, click **Add.**
+
+          
+          [This can be an accordion input, followed by another]{{accordion "testing with more text"}}
 
         3. Using the project dropdown menu, select the project you would like to
         deploy the image in.
