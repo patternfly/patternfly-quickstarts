@@ -7,7 +7,7 @@ import {
   useMultilineCopyClipboardShowdownExtension,
   useAdmonitionShowdownExtension,
   useCodeShowdownExtension,
-  useAccordionShowdownExtension
+  useAccordionShowdownExtension,
 } from '@console/shared';
 import { HIGHLIGHT_REGEXP } from '@console/shared/src/components/markdown-highlight-extension/highlight-consts';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
