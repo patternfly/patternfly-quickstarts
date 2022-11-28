@@ -5,6 +5,7 @@ import { Alert } from '@patternfly/react-core';
 import LightbulbIcon from '@patternfly/react-icons/dist/js/icons/lightbulb-icon';
 import FireIcon from '@patternfly/react-icons/dist/js/icons/fire-icon';
 import './showdown-extension.scss';
+import QuickStartMarkdownView from '../../../../QuickStartMarkdownView';
 
 enum AdmonitionType {
   TIP = 'TIP',
@@ -43,7 +44,7 @@ const useAdmonitionShowdownExtension = () => {
         const { variant, customIcon } = admonitionToAlertVariantMap[admonitionType];
         const style =
           admonitionType === AdmonitionType.CAUTION ? { backgroundColor: '#ec7a0915' } : {};
-
+        const mdContent = <QuickStartMarkdownView content={content} />;
         const pfAlert = (
           <Alert
             variant={variant}
@@ -53,7 +54,7 @@ const useAdmonitionShowdownExtension = () => {
             className="pfext-markdown-admonition"
             style={style}
           >
-            {content}
+            {mdContent}
           </Alert>
         );
         return removeTemplateWhitespace(renderToStaticMarkup(pfAlert));

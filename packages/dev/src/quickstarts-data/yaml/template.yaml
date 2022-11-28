@@ -103,7 +103,7 @@ spec:
         - Variants are: note, tip, important, caution, and warning
 
         **Examples**
-        [This is the note contents]{{admonition note}}
+        [This is the note contents with **some bold** text]{{admonition note}}
         [This is the tip contents]{{admonition tip}}
         [This is the important contents]{{admonition important}}
         [This is the caution contents]{{admonition caution}}
