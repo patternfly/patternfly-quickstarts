@@ -24,7 +24,7 @@ In this Quick Start you will preview some design changes.
 .Procedure
 . Note
 +
-NOTE: I am a note card (triggerd by NOTE admonition in asciidoc) rendered by Patternfly React Components.
+NOTE: I am a *note* _card_ (triggerd by NOTE admonition in asciidoc) rendered by Patternfly React Components.
 +
 
 . Tip

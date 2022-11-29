@@ -4,7 +4,7 @@ import ReactDOMServer from 'react-dom/server';
 import { Asciidoctor } from 'asciidoctor/types';
 import asciidoctor from 'asciidoctor';
 import { AllHtmlEntities } from 'html-entities';
-
+import { sanitize } from './sanitize';
 import { Alert, List, ListItem, Title } from '@patternfly/react-core';
 import LightbulbIcon from '@patternfly/react-icons/dist/js/icons/lightbulb-icon';
 import FireIcon from '@patternfly/react-icons/dist/js/icons/fire-icon';
@@ -199,10 +199,12 @@ export const renderAdmonitionBlock = (node: Asciidoctor.AbstractBlock, inList: b
       className={css(!inList && 'description-important')}
       style={style}
     >
-      {AllHtmlEntities.decode(node.getContent())}
+      <span
+        dangerouslySetInnerHTML={{ __html: sanitize(AllHtmlEntities.decode(node.getContent())) }}
+      />
     </Alert>
   );
-  return ReactDOMServer.renderToString(pfAlert);
+  return ReactDOMServer.renderToStaticMarkup(pfAlert);
 };
 
 export const renderPFList = (
@@ -218,10 +220,10 @@ export const renderPFList = (
   const listComponentType = listType === 'olist' ? 'ol' : 'ul';
   const listTexts: string[] = getListTexts(list);
   const blocksBeforeComponent = blocksBefore && (
-    <div dangerouslySetInnerHTML={{ __html: blocksBefore }} />
+    <div dangerouslySetInnerHTML={{ __html: sanitize(blocksBefore) }} />
   );
   const blocksAfterComponent = blocksAfter && (
-    <div dangerouslySetInnerHTML={{ __html: blocksAfter }} />
+    <div dangerouslySetInnerHTML={{ __html: sanitize(blocksAfter) }} />
   );
   const PFList = (
     <div className="task-pflist">
@@ -254,7 +256,7 @@ export const renderPFList = (
           >
             <span
               className="task-pflist-list__item__content"
-              dangerouslySetInnerHTML={{ __html: text }}
+              dangerouslySetInnerHTML={{ __html: sanitize(text) }}
             />
           </ListItem>
         ))}

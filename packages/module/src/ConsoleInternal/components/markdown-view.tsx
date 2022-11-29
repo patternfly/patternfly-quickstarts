@@ -3,12 +3,8 @@ import { css } from '@patternfly/react-styles';
 import { Converter } from 'showdown';
 import { useForceRender } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
+import { sanitize } from './sanitize';
 import './_markdown-view.scss';
-
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const DOMPurify = require('dompurify');
-
-// const tableTags = ['table', 'thead', 'tbody', 'tr', 'th', 'td'];
 
 type ShowdownExtension = {
   type: string;
@@ -28,74 +24,7 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
     converter.addExtension(extensions);
   }
 
-  DOMPurify.addHook('beforeSanitizeElements', function(node) {
-    // nodeType 1 = element type
-
-    // transform anchor tags
-    if (node.nodeType === 1 && node.nodeName.toLowerCase() === 'a') {
-      node.setAttribute('rel', 'noopener noreferrer');
-      return node;
-    }
-
-    // add PF class to ul and ol lists
-    if (
-      node.nodeType === 1 &&
-      (node.nodeName.toLowerCase() === 'ul' || node.nodeName.toLowerCase() === 'ol')
-    ) {
-      node.setAttribute('class', 'pf-c-list');
-      return node;
-    }
-  });
-
-  // Add a hook to make all links open a new window
-  DOMPurify.addHook('afterSanitizeAttributes', function(node) {
-    // set all elements owning target to target=_blank
-    if ('target' in node) {
-      node.setAttribute('target', '_blank');
-    }
-    // set non-HTML/MathML links to xlink:show=new
-    if (
-      !node.hasAttribute('target') &&
-      (node.hasAttribute('xlink:href') || node.hasAttribute('href'))
-    ) {
-      node.setAttribute('xlink:show', 'new');
-    }
-  });
-
-  return DOMPurify.sanitize(converter.makeHtml(markdown), {
-    USE_PROFILES: {
-      html: true,
-      svg: true,
-    },
-    // ALLOWED_TAGS: [
-    //   'b',
-    //   'i',
-    //   'strike',
-    //   's',
-    //   'del',
-    //   'em',
-    //   'strong',
-    //   'a',
-    //   'p',
-    //   'h1',
-    //   'h2',
-    //   'h3',
-    //   'h4',
-    //   'ul',
-    //   'ol',
-    //   'li',
-    //   'code',
-    //   'pre',
-    //   'button',
-    //   ...tableTags,
-    //   'div',
-    //   'img',
-    //   'span',
-    //   'svg',
-    // ],
-    // ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'src', 'alt', 'id'],
-    // ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto|didact):|[^a-z]|[a-z+.-]+(?:[^a-z+.\-:]|$))/i,
-  });
+  return sanitize(converter.makeHtml(markdown));
 };
 
 type SyncMarkdownProps = {
@@ -139,9 +68,9 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
   return inline ? <InlineMarkdownView {...innerProps} /> : <IFrameMarkdownView {...innerProps} />;
 };
 
-const uniqueId = (function() {
+const uniqueId = (function () {
   let num = 0;
-  return function(prefix) {
+  return function (prefix) {
     const prefixStr = String(prefix) || '';
     num += 1;
     return prefixStr + num;
@@ -228,8 +157,9 @@ const IFrameMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
         frame.style.height = `${frame.contentWindow.document.body.firstElementChild.scrollHeight}px`;
       } else {
         // Increase by 15px for the case where a horizontal scrollbar might appear
-        frame.style.height = `${frame.contentWindow.document.body.firstElementChild.scrollHeight +
-          15}px`;
+        frame.style.height = `${
+          frame.contentWindow.document.body.firstElementChild.scrollHeight + 15
+        }px`;
       }
     });
   }, [frame, exactHeight]);
