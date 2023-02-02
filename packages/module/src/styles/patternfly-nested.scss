@@ -5,14 +5,116 @@
 @import '@patternfly/patternfly/sass-utilities/all';
 
 .pfext-quick-start__base {
-    $pf-global--enable-reset: false;
-    @import '@patternfly/patternfly/base/common';
-    @import '@patternfly/patternfly/utilities/Accessibility/accessibility.scss';
+  $pf-global--enable-reset: false;
+  @import '@patternfly/patternfly/base/common';
+  @import '@patternfly/patternfly/utilities/Accessibility/accessibility.scss';
 
-    // it's okay that we include everything since we'll purge the unused styles
-    @import '@patternfly/patternfly/components/all';
-    @import '@patternfly/patternfly/layouts/all';
+  // it's okay that we include everything since we'll purge the unused styles
+  @import '@patternfly/patternfly/components/all.scss';
+  // adding the imports directly since the file above excludes extensions, which node-sass needs 
+  // otherwise it throws an error since there are both .css and .scss files
+//   @import '@patternfly/patternfly/components/AboutModalBox/about-modal-box.scss';
+//   @import '@patternfly/patternfly/components/Accordion/accordion.scss';
+//   @import '@patternfly/patternfly/components/ActionList/action-list.scss';
+//   @import '@patternfly/patternfly/components/Alert/alert.scss';
+//   @import '@patternfly/patternfly/components/AlertGroup/alert-group.scss';
+//   @import '@patternfly/patternfly/components/AppLauncher/app-launcher.scss';
+//   @import '@patternfly/patternfly/components/Avatar/avatar.scss';
+//   @import '@patternfly/patternfly/components/Backdrop/backdrop.scss';
+//   @import '@patternfly/patternfly/components/BackgroundImage/background-image.scss';
+//   @import '@patternfly/patternfly/components/BackToTop/back-to-top.scss';
+//   @import '@patternfly/patternfly/components/Badge/badge.scss';
+//   @import '@patternfly/patternfly/components/Banner/banner.scss';
+//   @import '@patternfly/patternfly/components/Brand/brand.scss';
+//   @import '@patternfly/patternfly/components/Breadcrumb/breadcrumb.scss';
+//   @import '@patternfly/patternfly/components/Button/button.scss';
+//   @import '@patternfly/patternfly/components/CalendarMonth/calendar-month.scss';
+//   @import '@patternfly/patternfly/components/Card/card.scss';
+//   @import '@patternfly/patternfly/components/Check/check.scss';
+//   @import '@patternfly/patternfly/components/Chip/chip.scss';
+//   @import '@patternfly/patternfly/components/ChipGroup/chip-group.scss';
+//   @import '@patternfly/patternfly/components/ClipboardCopy/clipboard-copy.scss';
+//   @import '@patternfly/patternfly/components/CodeBlock/code-block.scss';
+//   @import '@patternfly/patternfly/components/CodeEditor/code-editor.scss';
+//   @import '@patternfly/patternfly/components/Content/content.scss';
+//   @import '@patternfly/patternfly/components/ContextSelector/context-selector.scss';
+//   @import '@patternfly/patternfly/components/DataList/data-list.scss';
+//   @import '@patternfly/patternfly/components/DescriptionList/description-list.scss';
+//   @import '@patternfly/patternfly/components/DragDrop/drag-drop.scss';
+//   @import '@patternfly/patternfly/components/DualListSelector/dual-list-selector.scss';
+//   @import '@patternfly/patternfly/components/Toolbar/toolbar.scss';
+//   @import '@patternfly/patternfly/components/DatePicker/date-picker.scss';
+//   @import '@patternfly/patternfly/components/Divider/divider.scss';
+//   @import '@patternfly/patternfly/components/Drawer/drawer.scss';
+//   @import '@patternfly/patternfly/components/Dropdown/dropdown.scss';
+//   @import '@patternfly/patternfly/components/EmptyState/empty-state.scss';
+//   @import '@patternfly/patternfly/components/ExpandableSection/expandable-section.scss';
+//   @import '@patternfly/patternfly/components/FileUpload/file-upload.scss';
+//   @import '@patternfly/patternfly/components/Form/form.scss';
+//   @import '@patternfly/patternfly/components/FormControl/form-control.scss';
+//   @import '@patternfly/patternfly/components/Hint/hint.scss';
+//   @import '@patternfly/patternfly/components/HelperText/helper-text.scss';
+//   @import '@patternfly/patternfly/components/Icon/icon.scss';
+//   @import '@patternfly/patternfly/components/InlineEdit/inline-edit.scss';
+//   @import '@patternfly/patternfly/components/InputGroup/input-group.scss';
+//   @import '@patternfly/patternfly/components/JumpLinks/jump-links.scss';
+//   @import '@patternfly/patternfly/components/Label/label.scss';
+//   @import '@patternfly/patternfly/components/LabelGroup/label-group.scss';
+//   @import '@patternfly/patternfly/components/List/list.scss';
+//   @import '@patternfly/patternfly/components/LogViewer/log-viewer.scss';
+//   @import '@patternfly/patternfly/components/Login/login.scss';
+//   @import '@patternfly/patternfly/components/Masthead/masthead.scss';
+//   @import '@patternfly/patternfly/components/Menu/menu.scss';
+//   @import '@patternfly/patternfly/components/MenuToggle/menu-toggle.scss';
+//   @import '@patternfly/patternfly/components/ModalBox/modal-box.scss';
+//   @import '@patternfly/patternfly/components/MultipleFileUpload/multiple-file-upload.scss';
+//   @import '@patternfly/patternfly/components/Nav/nav.scss';
+//   @import '@patternfly/patternfly/components/NotificationBadge/notification-badge.scss';
+//   @import '@patternfly/patternfly/components/NotificationDrawer/notification-drawer.scss';
+//   @import '@patternfly/patternfly/components/OptionsMenu/options-menu.scss';
+//   @import '@patternfly/patternfly/components/OverflowMenu/overflow-menu.scss';
+//   @import '@patternfly/patternfly/components/Page/page.scss';
+//   @import '@patternfly/patternfly/components/Pagination/pagination.scss';
+//   @import '@patternfly/patternfly/components/Panel/panel.scss';
+//   @import '@patternfly/patternfly/components/Popover/popover.scss';
+//   @import '@patternfly/patternfly/components/Progress/progress.scss';
+//   @import '@patternfly/patternfly/components/ProgressStepper/progress-stepper.scss';
+//   @import '@patternfly/patternfly/components/Radio/radio.scss';
+//   @import '@patternfly/patternfly/components/SearchInput/search-input.scss';
+//   @import '@patternfly/patternfly/components/Select/select.scss';
+//   @import '@patternfly/patternfly/components/Sidebar/sidebar.scss';
+//   @import '@patternfly/patternfly/components/SimpleList/simple-list.scss';
+//   @import '@patternfly/patternfly/components/Skeleton/skeleton.scss';
+//   @import '@patternfly/patternfly/components/SkipToContent/skip-to-content.scss';
+//   @import '@patternfly/patternfly/components/Slider/slider.scss';
+//   @import '@patternfly/patternfly/components/Spinner/spinner.scss';
+//   @import '@patternfly/patternfly/components/Switch/switch.scss';
+//   @import '@patternfly/patternfly/components/TabContent/tab-content.scss';
+//   @import '@patternfly/patternfly/components/Table/table-grid.scss';
+//   @import '@patternfly/patternfly/components/Table/table.scss';
+//   @import '@patternfly/patternfly/components/Table/table-scrollable.scss';
+//   @import '@patternfly/patternfly/components/Table/table-tree-view.scss';
+//   @import '@patternfly/patternfly/components/Tabs/tabs.scss';
+//   @import '@patternfly/patternfly/components/TextInputGroup/text-input-group.scss';
+//   @import '@patternfly/patternfly/components/Tile/tile.scss';
+//   @import '@patternfly/patternfly/components/Timestamp/timestamp.scss';
+//   @import '@patternfly/patternfly/components/Title/title.scss';
+//   @import '@patternfly/patternfly/components/ToggleGroup/toggle-group.scss';
+//   @import '@patternfly/patternfly/components/Tooltip/tooltip.scss';
+//   @import '@patternfly/patternfly/components/Truncate/truncate.scss';
+//   @import '@patternfly/patternfly/components/NumberInput/number-input.scss';
+//   @import '@patternfly/patternfly/components/TreeView/tree-view.scss';
+//   @import '@patternfly/patternfly/components/Wizard/wizard.scss';
 
-    // some apps globally set text-align: center
-    text-align: left;
+    @import '@patternfly/patternfly/layouts/all.scss';
+//   @import '@patternfly/patternfly/layouts/Bullseye/bullseye.scss';
+//   @import '@patternfly/patternfly/layouts/Flex/flex.scss';
+//   @import '@patternfly/patternfly/layouts/Gallery/gallery.scss';
+//   @import '@patternfly/patternfly/layouts/Grid/grid.scss';
+//   @import '@patternfly/patternfly/layouts/Level/level.scss';
+//   @import '@patternfly/patternfly/layouts/Split/split.scss';
+//   @import '@patternfly/patternfly/layouts/Stack/stack.scss';
+
+  // some apps globally set text-align: center
+  text-align: left;
 }

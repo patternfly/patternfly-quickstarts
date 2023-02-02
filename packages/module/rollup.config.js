@@ -25,7 +25,7 @@ const commonPlugins = [
 const includePaths = ['node_modules/', '../../node_modules/'];
 const commonScssOptions = {
   includePaths,
-  sass: require('node-sass'),
+  sass: require('sass'),
   importer: globImporter(),
 };
 
