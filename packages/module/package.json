@@ -47,17 +47,14 @@
     "showdown": ">=1.8.6"
   },
   "dependencies": {
-    "@patternfly/react-catalog-view-extension": "4.12.15",
+    "@patternfly/react-catalog-view-extension": "^4.93.15",
     "dompurify": "^2.2.6",
     "history": "^5.0.0",
     "showdown": "1.8.6"
   },
   "devDependencies": {
-    "@patternfly/patternfly": "4.122.2",
-    "@patternfly/react-core": "4.135.15",
-    "@patternfly/react-icons": "4.11.4",
-    "@patternfly/react-styles": "4.11.4",
-    "@patternfly/react-tokens": "4.12.5",
+    "@patternfly/patternfly": "^4.222.4",
+    "@patternfly/react-core": "^4.267.6",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
