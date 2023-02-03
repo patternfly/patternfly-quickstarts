@@ -15,7 +15,8 @@ import QuickStartController from './QuickStartController';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import { QuickStart } from './utils/quick-start-types';
 import { camelize } from './utils/quick-start-utils';
-import QuickStartMarkdownView from './QuickStartMarkdownView';
+import QuickStartMarkdownView, { removeParagraphWrap } from './QuickStartMarkdownView';
+import { markdownConvert } from './ConsoleInternal/components/markdown-view';
 
 type HandleClose = () => void;
 
@@ -55,9 +56,8 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   ...props
 }) => {
   const titleRef = React.useRef(null);
-  const { getResource, activeQuickStartState } = React.useContext<QuickStartContextValues>(
-    QuickStartContext,
-  );
+  const { getResource, activeQuickStartState } =
+    React.useContext<QuickStartContextValues>(QuickStartContext);
   const [contentRef, setContentRef] = React.useState<HTMLDivElement>();
   const shadows = useScrollShadows(contentRef);
   const quickStart = quickStarts.find((qs) => qs.metadata.name === activeQuickStartID);
@@ -113,7 +113,11 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
               className="pfext-quick-start-panel-content__name"
               style={{ marginRight: 'var(--pf-global--spacer--md)' }}
             >
-              <QuickStartMarkdownView content={quickStart?.spec.displayName} />{' '}
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: removeParagraphWrap(markdownConvert(quickStart?.spec.displayName)),
+                }}
+              />{' '}
               <small className="pfext-quick-start-panel-content__duration">
                 {quickStart?.spec.durationMinutes
                   ? getResource(
