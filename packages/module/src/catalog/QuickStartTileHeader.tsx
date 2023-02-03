@@ -5,6 +5,7 @@ import OutlinedClockIcon from '@patternfly/react-icons/dist/js/icons/outlined-cl
 import { StatusIcon } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartStatus, QuickStartType } from '../utils/quick-start-types';
+import QuickStartMarkdownView from '../QuickStartMarkdownView';
 
 type QuickStartTileHeaderProps = {
   status: string;
@@ -38,7 +39,7 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
   return (
     <div className="pfext-quick-start-tile-header">
       <Title headingLevel="h3" data-test="title" id={quickStartId}>
-        {name}
+        <QuickStartMarkdownView content={name} />
       </Title>
       <div className="pfext-quick-start-tile-header__status">
         {type && (

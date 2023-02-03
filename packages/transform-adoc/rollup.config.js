@@ -25,7 +25,7 @@ const commonScssOptions = {
   importer(path) {
     return { file: path[0] !== '~' ? path : path.slice(1) };
   },
-  sass: require('node-sass'),
+  sass: require('sass'),
 };
 
 // CommonJS build

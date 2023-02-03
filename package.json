@@ -5,7 +5,9 @@
   "description": "This library provides the quickstarts module",
   "license": "MIT",
   "workspaces": [
-    "packages/*"
+    "packages/dev",
+    "packages/module",
+    "packages/transform-adoc"
   ],
   "scripts": {
     "build": "yarn workspace @patternfly/quickstarts build && yarn build:adoc",
@@ -25,7 +27,7 @@
     "test:a11y": "patternfly-a11y --config patternfly-a11y.config"
   },
   "devDependencies": {
-    "@patternfly/patternfly-a11y": "4.2.1",
+    "@patternfly/patternfly-a11y": "^4.3.1",
     "@percy/script": "^1.1.0",
     "@types/jest": "^26.0.14",
     "@typescript-eslint/eslint-plugin": "2.11.0",

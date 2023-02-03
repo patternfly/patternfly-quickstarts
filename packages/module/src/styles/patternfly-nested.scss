@@ -5,14 +5,14 @@
 @import '@patternfly/patternfly/sass-utilities/all';
 
 .pfext-quick-start__base {
-    $pf-global--enable-reset: false;
-    @import '@patternfly/patternfly/base/common';
-    @import '@patternfly/patternfly/utilities/Accessibility/accessibility.scss';
+  $pf-global--enable-reset: false;
+  @import '@patternfly/patternfly/base/common';
+  @import '@patternfly/patternfly/utilities/Accessibility/accessibility';
 
-    // it's okay that we include everything since we'll purge the unused styles
-    @import '@patternfly/patternfly/components/all';
-    @import '@patternfly/patternfly/layouts/all';
+  // it's okay that we include everything since we'll purge the unused styles
+  @import '@patternfly/patternfly/components/all';
+  @import '@patternfly/patternfly/layouts/all';
 
-    // some apps globally set text-align: center
-    text-align: left;
+  // some apps globally set text-align: center
+  text-align: left;
 }

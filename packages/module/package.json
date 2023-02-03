@@ -47,17 +47,18 @@
     "showdown": ">=1.8.6"
   },
   "dependencies": {
-    "@patternfly/react-catalog-view-extension": "4.12.15",
+    "@patternfly/react-catalog-view-extension": "^4.93.15",
     "dompurify": "^2.2.6",
     "history": "^5.0.0",
     "showdown": "1.8.6"
   },
   "devDependencies": {
-    "@patternfly/patternfly": "4.122.2",
-    "@patternfly/react-core": "4.135.15",
-    "@patternfly/react-icons": "4.11.4",
-    "@patternfly/react-styles": "4.11.4",
-    "@patternfly/react-tokens": "4.12.5",
+    "@patternfly/documentation-framework": "1.0.2",
+    "@patternfly/patternfly": "^4.222.4",
+    "@patternfly/react-core": "^4.267.6",
+    "@patternfly/react-icons": "4.93.6",
+    "@patternfly/react-styles": "4.92.6",
+    "@patternfly/react-tokens": "4.94.6",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
@@ -71,10 +72,10 @@
     "@types/react-dom": "^16.8.0",
     "clean-css-cli": "^4.3.0",
     "concat-files": "^0.1.1",
+    "dart-sass": "^1.25.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.15.5",
     "enzyme-to-json": "^3.6.1",
-    "node-sass": "^6.0.1",
     "node-sass-glob-importer": "^5.3.2",
     "prettier": "^2.1.2",
     "purgecss": "^4.0.0",
@@ -92,7 +93,6 @@
     "rollup-plugin-typescript2": "^0.29.0",
     "rollup-plugin-visualizer": "^5.5.0",
     "sass": "^1.35.2",
-    "tslib": "^2.0.3",
-    "@patternfly/documentation-framework": "1.0.2"
+    "tslib": "^2.0.3"
   }
 }
