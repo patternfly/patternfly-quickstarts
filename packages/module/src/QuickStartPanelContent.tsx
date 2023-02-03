@@ -15,7 +15,7 @@ import QuickStartController from './QuickStartController';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import { QuickStart } from './utils/quick-start-types';
 import { camelize } from './utils/quick-start-utils';
-import QuickStartMarkdownView, { removeParagraphWrap } from './QuickStartMarkdownView';
+import { removeParagraphWrap } from './QuickStartMarkdownView';
 import { markdownConvert } from './ConsoleInternal/components/markdown-view';
 
 type HandleClose = () => void;
@@ -56,8 +56,9 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   ...props
 }) => {
   const titleRef = React.useRef(null);
-  const { getResource, activeQuickStartState } =
-    React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource, activeQuickStartState } = React.useContext<QuickStartContextValues>(
+    QuickStartContext,
+  );
   const [contentRef, setContentRef] = React.useState<HTMLDivElement>();
   const shadows = useScrollShadows(contentRef);
   const quickStart = quickStarts.find((qs) => qs.metadata.name === activeQuickStartID);
