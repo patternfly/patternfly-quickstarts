@@ -4,3 +4,4 @@ export { default as useMultilineCopyClipboardShowdownExtension } from './multili
 export { default as useAdmonitionShowdownExtension } from './admonition-extension';
 export { default as useCodeShowdownExtension } from './code-extension';
 export { default as useAccordionShowdownExtension } from './accordion-extension';
+export { default as AccordionRenderExtension } from './accordion-render-extension';

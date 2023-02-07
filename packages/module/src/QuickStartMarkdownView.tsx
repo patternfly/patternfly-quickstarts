@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { SyncMarkdownView } from '@console/internal/components/markdown-view';
 import {
+  AccordionRenderExtension,
   MarkdownCopyClipboard,
   MarkdownHighlightExtension,
   useInlineCopyClipboardShowdownExtension,
@@ -64,6 +65,7 @@ const QuickStartMarkdownView: React.FC<QuickStartMarkdownViewProps> = ({
       ]}
       renderExtension={(docContext, rootSelector) => (
         <>
+          <AccordionRenderExtension docContext={docContext} />
           <MarkdownHighlightExtension docContext={docContext} rootSelector={rootSelector} />
           <MarkdownCopyClipboard docContext={docContext} rootSelector={rootSelector} />
           {markdown &&

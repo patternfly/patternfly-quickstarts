@@ -7,49 +7,8 @@ import {
 } from '@patternfly/react-core';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { removeTemplateWhitespace } from './utils';
-import { useEventListener } from '../../hooks';
+import { ACCORDION_MARKDOWN_BUTTON_ID, ACCORDION_MARKDOWN_CONTENT_ID } from './const';
 import './showdown-extension.scss';
-
-type accordionShowdownComponentProps = {
-  elementId: string;
-};
-
-export const accordionShowdownComponent: React.FunctionComponent<accordionShowdownComponentProps> = ({
-  elementId,
-}) => {
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleClick = () => {
-    const newExpanded = !expanded;
-    setExpanded(newExpanded);
-  };
-
-  React.useEffect(() => {
-    const element = document.getElementById(elementId);
-    if (element) {
-      element.addEventListener('click', handleClick);
-      return () => {
-        element.removeEventListener('click', handleClick);
-      };
-    }
-  }, []);
-
-  return (
-    <Accordion asDefinitionList>
-      <AccordionItem>
-        <AccordionToggle isExpanded={expanded} id={elementId}>
-          Item one
-        </AccordionToggle>
-        <AccordionContent id="def-list-expand1" isHidden={!expanded}>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua.
-          </p>
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
-  );
-};
 
 const useAccordionShowdownExtension = () => {
   return React.useMemo(
@@ -62,8 +21,32 @@ const useAccordionShowdownExtension = () => {
         _command: string,
         accordionHeading: string,
       ): string => {
-        const accordion = accordionShowdownComponent({ elementId: accordionHeading });
-        return removeTemplateWhitespace(renderToStaticMarkup(accordion));
+        const accordionId = new String(accordionHeading).replace(/\s/g, "-");
+        console.log(accordionId);
+        console.log(accordionHeading);
+        return removeTemplateWhitespace(
+          renderToStaticMarkup(
+            <Accordion asDefinitionList>
+              <AccordionItem>
+                <AccordionToggle
+                  isExpanded={false}
+                  id={`${ACCORDION_MARKDOWN_BUTTON_ID}-${accordionId}`}
+                >
+                  {accordionHeading}
+                </AccordionToggle>
+                <AccordionContent
+                  id={`${ACCORDION_MARKDOWN_CONTENT_ID}-${accordionId}`}
+                  isHidden={!false}
+                >
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>,
+          ),
+        );
       },
     }),
     [],
