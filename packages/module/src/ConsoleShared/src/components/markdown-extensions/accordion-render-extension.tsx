@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { stringify } from 'querystring';
 import * as React from 'react';
 import { useEventListener } from '../../hooks';
 import { ACCORDION_MARKDOWN_BUTTON_ID, ACCORDION_MARKDOWN_CONTENT_ID } from './const';
@@ -19,13 +17,11 @@ const AccordionShowdownHandler: React.FC<AccordionShowdownComponentProps> = ({
     const expandedModifier = 'pf-m-expanded';
 
     buttonElement.className = `pf-c-accordion__toggle ${!expanded ? expandedModifier : ''}`;
-    contentElement.hidden = !expanded;
+    contentElement.hidden = expanded;
     contentElement.className = `pf-c-accordion__expanded-content ${
       !expanded ? expandedModifier : ''
     }`;
-    setExpanded((newExpanded) => {
-      return !newExpanded;
-    });
+    setExpanded(!expanded);
   };
 
   useEventListener(buttonElement, 'click', handleClick);

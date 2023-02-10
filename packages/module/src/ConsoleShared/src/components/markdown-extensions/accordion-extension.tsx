@@ -17,13 +17,12 @@ const useAccordionShowdownExtension = () => {
       regex: /\[(.+)]{{(accordion) ("(.*?)")}}/g,
       replace: (
         _text: string,
-        _accordionContent: string,
+        accordionContent: string,
         _command: string,
         accordionHeading: string,
       ): string => {
-        const accordionId = new String(accordionHeading).replace(/\s/g, "-");
-        console.log(accordionId);
-        console.log(accordionHeading);
+        const accordionId = new String(accordionHeading).replace(/\s/g, '-');
+
         return removeTemplateWhitespace(
           renderToStaticMarkup(
             <Accordion asDefinitionList>
@@ -38,10 +37,7 @@ const useAccordionShowdownExtension = () => {
                   id={`${ACCORDION_MARKDOWN_CONTENT_ID}-${accordionId}`}
                   isHidden={!false}
                 >
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua.
-                  </p>
+                  {accordionContent}
                 </AccordionContent>
               </AccordionItem>
             </Accordion>,
