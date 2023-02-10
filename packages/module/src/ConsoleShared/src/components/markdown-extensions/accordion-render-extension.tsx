@@ -16,17 +16,16 @@ const AccordionShowdownHandler: React.FC<AccordionShowdownComponentProps> = ({
   const [expanded, setExpanded] = React.useState<boolean>(false);
 
   const handleClick = () => {
-
     const expandedModifier = 'pf-m-expanded';
 
     buttonElement.className = `pf-c-accordion__toggle ${!expanded ? expandedModifier : ''}`;
     contentElement.hidden = !expanded;
-    contentElement.className = `pf-c-accordion__expanded-content ${!expanded ? expandedModifier : ''
-
+    contentElement.className = `pf-c-accordion__expanded-content ${
+      !expanded ? expandedModifier : ''
+    }`;
     setExpanded((newExpanded) => {
       return !newExpanded;
     });
-  }`;
   };
 
   useEventListener(buttonElement, 'click', handleClick);
@@ -39,8 +38,8 @@ type accordionRenderExtensionProps = {
 };
 
 const AccordionRenderExtension: React.FC<accordionRenderExtensionProps> = ({ docContext }) => {
-  const buttonElements = docContext.querySelectorAll(`[id ^= ${ ACCORDION_MARKDOWN_BUTTON_ID }]`);
-  const contentElements = docContext.querySelectorAll(`[id ^= ${ ACCORDION_MARKDOWN_CONTENT_ID }]`);
+  const buttonElements = docContext.querySelectorAll(`[id ^= ${ACCORDION_MARKDOWN_BUTTON_ID}]`);
+  const contentElements = docContext.querySelectorAll(`[id ^= ${ACCORDION_MARKDOWN_CONTENT_ID}]`);
 
   return buttonElements.length > 0 ? (
     <>
