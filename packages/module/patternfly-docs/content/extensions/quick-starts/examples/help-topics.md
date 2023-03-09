@@ -6,7 +6,7 @@ section: extensions
 # should be the same for all markdown files for each extension
 id: Quick starts
 # Tab
-source: In\-app-documentation
+tabName: In-app documentation
 propComponents: ['HelpTopicContainer']
 ---
 
