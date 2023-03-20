@@ -3,11 +3,7 @@
   "version": "0.0.0",
   "description": "This library provides the quickstarts module",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "tag": "prerelease",
-    "access": "public"
-  },
+  "private": true,
   "workspaces": [
     "packages/dev",
     "packages/module",
