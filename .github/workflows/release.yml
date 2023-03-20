@@ -37,4 +37,4 @@ jobs:
         run: yarn build
         if: steps.dist.outputs.cache-hit != 'true'
       - name: Release to NPM
-        run: npx semantic-release@19.0.5 --dry-run
+        run: cd packages/module && npx semantic-release@19.0.5 --dry-run
