@@ -1,9 +1,13 @@
 {
   "name": "@patternfly/quickstarts-root",
-  "private": true,
   "version": "0.0.0",
   "description": "This library provides the quickstarts module",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "tag": "prerelease",
+    "access": "public"
+  }
   "workspaces": [
     "packages/dev",
     "packages/module",
