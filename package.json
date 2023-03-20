@@ -7,7 +7,7 @@
     "registry": "https://registry.npmjs.org/",
     "tag": "prerelease",
     "access": "public"
-  }
+  },
   "workspaces": [
     "packages/dev",
     "packages/module",
