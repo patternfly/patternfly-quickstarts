@@ -4,9 +4,10 @@
 section: extensions
 # Sidenav secondary level section
 # should be the same for all markdown files for each extension
-id: Quick Starts
+id: Quick starts
 # Tab
-source: In-App-Documentation
+source: In-app-documentation
+tabName: In-app documentation
 propComponents: ['HelpTopicContainer']
 ---
 
@@ -14,12 +15,13 @@ import { LoadingBox, HelpTopicContainer, HelpTopicContext } from '@patternfly/qu
 import { helpTopics as exampleHelpTopics } from './example-data';
 import '@patternfly/quickstarts/dist/quickstarts.css';
 
-## In-app documentation
+## In-app documentation examples
 
-### Basic Example
+### Basic help topic
 ```js file="./HelpTopic.jsx"
 ```
 
-### Basic Example Fullscreen
+### Fullscreen help topic
+To view a fullscreen example, click the image below.
 ```js file="./HelpTopic.jsx" isFullscreen
 ```
