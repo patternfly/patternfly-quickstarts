@@ -52,7 +52,7 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
   };
 
   const menuItems =
-    filteredHelpTopics.length > 0 &&
+    filteredHelpTopics.length > 1 &&
     filteredHelpTopics.map((topic) => {
       return (
         <OptionsMenuItem key={topic.name} onSelect={onSelectHelpTopic} id={topic.name}>
