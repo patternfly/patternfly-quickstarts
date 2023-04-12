@@ -72,7 +72,7 @@ interface QuickStartCatalogFilterSearchWrapperProps {
   onSearchInputChange: any;
 }
 export const QuickStartCatalogFilterSearchWrapper: React.FC<QuickStartCatalogFilterSearchWrapperProps> = ({
-  onSearchInputChange = () => {},
+  onSearchInputChange = (val?:string) => {},
 }) => {
   const { useQueryParams, filter, setFilter } = React.useContext<QuickStartContextValues>(
     QuickStartContext,
@@ -91,7 +91,7 @@ export const QuickStartCatalogFilterSearchWrapper: React.FC<QuickStartCatalogFil
       unlisten();
     };
   }, [onSearchInputChange, setFilter]);
-  const handleTextChange = (val: string) => {
+  const handleTextChange = (ev: unknown, val: string) => {
     if (val.length > 0) {
       useQueryParams && setQueryArgument(QUICKSTART_SEARCH_FILTER_KEY, val);
     } else {
