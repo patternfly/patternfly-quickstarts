@@ -9,6 +9,7 @@ id: Quick starts
 source: In-app-documentation
 tabName: In-app documentation
 propComponents: ['HelpTopicContainer']
+sourceLink: https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/module/patternfly-docs/content/extensions/quick-starts/examples/help-topics.md
 ---
 
 import { LoadingBox, HelpTopicContainer, HelpTopicContext } from '@patternfly/quickstarts';

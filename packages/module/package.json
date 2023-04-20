@@ -57,7 +57,7 @@
     "showdown": "1.8.6"
   },
   "devDependencies": {
-    "@patternfly/documentation-framework": "1.0.2",
+    "@patternfly/documentation-framework": "^1.8.0",
     "@patternfly/patternfly": "^4.222.4",
     "@patternfly/react-core": "^4.267.6",
     "@patternfly/react-icons": "4.93.6",
