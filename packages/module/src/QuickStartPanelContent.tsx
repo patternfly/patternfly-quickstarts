@@ -109,7 +109,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
         <DrawerHead>
           <div className="pfext-quick-start-panel-content__title" tabIndex={-1} ref={titleRef}>
             <Title
-              headingLevel="h1"
+              headingLevel="h2"
               size="xl"
               className="pfext-quick-start-panel-content__name"
               style={{ marginRight: 'var(--pf-global--spacer--md)' }}
