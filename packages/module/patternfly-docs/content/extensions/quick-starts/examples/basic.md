@@ -10,6 +10,7 @@ source: Basic-quick-starts
 # If you use typescript, the name of the interface to display props for
 # These are found through the sourceProps function provided in patternfly-docs.source.js
 propComponents: ['QuickStartContainer']
+sourceLink: https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/module/patternfly-docs/content/extensions/quick-starts/examples/basic.md
 ---
 
 import { quickStarts as exampleQuickStarts } from './example-data';

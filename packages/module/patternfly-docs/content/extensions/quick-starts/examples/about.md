@@ -7,6 +7,7 @@ section: extensions
 id: Quick starts
 # Tab
 source: about
+sourceLink: https://github.com/patternfly/patternfly-quickstarts/tree/main/packages/module/patternfly-docs/content/extensions/quick-starts/examples/about.md
 ---
 # About
 The **@patternfly/quickstarts** extension is made up of two product documentation tools: **quick starts** and **in-app documentation**.
