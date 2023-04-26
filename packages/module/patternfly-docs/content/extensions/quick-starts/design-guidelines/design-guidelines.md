@@ -4,7 +4,7 @@
 section: extensions
 # Sidenav secondary level section
 # should be the same for all markdown files for each extension
-id: Quick Starts
+id: Quick starts
 # Tab
 source: design-guidelines
 ---
