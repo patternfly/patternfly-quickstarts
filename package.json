@@ -26,9 +26,6 @@
     "visual": "npx percy exec -- node snapshots.js",
     "test:a11y": "patternfly-a11y --config patternfly-a11y.config"
   },
-  "dependencies": {
-    "@patternfly/react-core": "^4.276.8"
-  },
   "devDependencies": {
     "@patternfly/patternfly-a11y": "^4.3.1",
     "@percy/script": "^1.1.0",
