@@ -2,9 +2,9 @@ name: Percy
 
 on:
   push:
-    branches: [ main ]
+    branches: [ v4 ]
   pull_request:
-    branches: [ main ]
+    branches: [ v4 ]
 
 env:
   PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
