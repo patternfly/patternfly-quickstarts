@@ -13,7 +13,7 @@ module.exports = {
         preset: 'angular',
         releaseRules: [
           { type: 'chore', scope: 'CI-release', release: 'patch' },
-          { type: 'chore', scope: 'CI-breaking', release: 'breaking' },
+          { type: 'chore', scope: 'CI-breaking', release: 'major' },
         ],
       },
     ],
