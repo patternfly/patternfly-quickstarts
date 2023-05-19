@@ -2,9 +2,9 @@ name: A11y CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ v4 ]
   pull_request:
-    branches: [ main ]
+    branches: [ v4 ]
 
 jobs:
   a11y:
