@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/quickstarts",
-  "version": "2.3.3",
+  "version": "5.0.0",
   "description": "PatternFly quick starts",
   "files": [
     "src",
@@ -11,7 +11,7 @@
   "types": "dist/index.d.ts",
   "publishConfig": {
     "access": "public",
-    "tag": "prerelease"
+    "tag": "alpha"
   },
   "repository": {
     "type": "git",
