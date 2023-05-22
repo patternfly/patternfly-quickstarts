@@ -5,18 +5,17 @@ import TaskHeader from './QuickStartTaskHeader';
 
 import './QuickStartTaskHeaderList.scss';
 
-type QuickStartTaskHeaderListProps = {
+interface QuickStartTaskHeaderListProps {
   tasks: QuickStartTask[];
   allTaskStatuses: QuickStartTaskStatus[];
   onTaskSelect: (selectedTaskNumber: number) => void;
-};
+}
 
 const QuickStartTaskHeaderList: React.FC<QuickStartTaskHeaderListProps> = ({
   tasks,
   allTaskStatuses,
   onTaskSelect,
-}) => {
-  return tasks.length > 0 ? (
+}) => tasks.length > 0 ? (
     <List className="pfext-quick-start-task-header__list">
       {tasks.map((task, index) => (
         <TaskHeader
@@ -30,6 +29,5 @@ const QuickStartTaskHeaderList: React.FC<QuickStartTaskHeaderListProps> = ({
       ))}
     </List>
   ) : null;
-};
 
 export default QuickStartTaskHeaderList;

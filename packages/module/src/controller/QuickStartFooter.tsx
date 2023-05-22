@@ -6,7 +6,7 @@ import { camelize } from '../utils/quick-start-utils';
 
 import './QuickStartFooter.scss';
 
-export type QuickStartFooterProps = {
+export interface QuickStartFooterProps {
   status: QuickStartStatus;
   footerClass: string;
   taskNumber: number;
@@ -14,7 +14,7 @@ export type QuickStartFooterProps = {
   onNext: () => void;
   onBack: () => void;
   quickStartId: string;
-};
+}
 
 const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   status,
@@ -29,21 +29,17 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
     QuickStartContext,
   );
 
-  const PrimaryButtonText = React.useMemo(() => {
-    return {
+  const PrimaryButtonText = React.useMemo(() => ({
       START: getResource('Start'),
       CONTINUE: getResource('Continue'),
       NEXT: getResource('Next'),
       CLOSE: getResource('Close'),
-    };
-  }, [getResource]);
+    }), [getResource]);
 
-  const SecondaryButtonText = React.useMemo(() => {
-    return {
+  const SecondaryButtonText = React.useMemo(() => ({
       BACK: getResource('Back'),
       RESTART: getResource('Restart'),
-    };
-  }, [getResource]);
+    }), [getResource]);
 
   const onRestart = React.useCallback(
     (e: React.SyntheticEvent) => {

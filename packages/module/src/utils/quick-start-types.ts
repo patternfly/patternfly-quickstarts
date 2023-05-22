@@ -3,14 +3,14 @@ import {
   ObjectMetadata,
 } from '../ConsoleInternal/module/k8s/types';
 
-export type QuickStart = {
+export interface QuickStart {
   apiVersion?: string;
   kind?: string;
   metadata: ObjectMetadata;
   spec: QuickStartSpec;
-};
+}
 
-export type QuickStartSpec = {
+export interface QuickStartSpec {
   version?: number;
   displayName: string;
   durationMinutes?: number;
@@ -24,24 +24,25 @@ export type QuickStartSpec = {
   accessReviewResources?: AccessReviewResourceAttributes[];
   link?: QuickStartExternal;
   type?: QuickStartType;
-};
+}
 
-export type QuickStartTask = {
+export interface QuickStartTask {
   title?: string;
   description?: string;
   review?: QuickStartTaskReview;
   summary?: QuickStartTaskSummary;
-};
+  proc?: string;
+}
 
-export type QuickStartTaskReview = {
+export interface QuickStartTaskReview {
   instructions?: string;
   failedTaskHelp?: string;
-};
+}
 
-export type QuickStartTaskSummary = {
+export interface QuickStartTaskSummary {
   success?: string;
   failed?: string;
-};
+}
 
 export type AllQuickStartStates = Record<string, QuickStartState>;
 
@@ -61,12 +62,12 @@ export enum QuickStartTaskStatus {
   FAILED = 'Failed',
 }
 
-export type QuickStartExternal = {
+export interface QuickStartExternal {
   href: string;
   text?: string;
-};
+}
 
-export type QuickStartType = {
+export interface QuickStartType {
   text: string;
   color?: 'blue' | 'cyan' | 'green' | 'orange' | 'purple' | 'red' | 'grey';
-};
+}

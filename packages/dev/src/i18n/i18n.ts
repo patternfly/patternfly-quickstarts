@@ -54,7 +54,7 @@ i18n
     keySeparator: false,
     postProcess: ['pseudo'],
     interpolation: {
-      format: function(value, format, lng, options) {
+      format(value, format, lng, options) {
         if (format === 'number') {
           // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat#Browser_compatibility
           return new Intl.NumberFormat(lng).format(value);
@@ -74,7 +74,7 @@ i18n
       wait: true,
     },
     saveMissing: true,
-    missingKeyHandler: function(lng, ns, key) {
+    missingKeyHandler(lng, ns, key) {
       window.windowError = `Missing i18n key "${key}" in namespace "${ns}" and language "${lng}."`;
       // eslint-disable-next-line no-console
       console.error(window.windowError); // we use these in OpenShift to break tests

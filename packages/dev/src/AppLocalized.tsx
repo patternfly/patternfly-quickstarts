@@ -12,10 +12,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { AppHeader, AppSidebar } from './common/Page';
 
-type AppProps = {
+interface AppProps {
   children?: React.ReactNode;
   showCardFooters?: boolean;
-};
+}
 
 // filter quickStarts by language (there is also an option to filter by country code)
 const filterByLanguage = (quickStarts: QuickStart[], currentLanguage: string) => {

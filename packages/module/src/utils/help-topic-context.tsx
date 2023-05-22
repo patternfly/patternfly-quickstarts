@@ -1,7 +1,7 @@
 import React from 'react';
 import { HelpTopic } from './help-topic-types';
 
-export type HelpTopicContextValues = {
+export interface HelpTopicContextValues {
   helpTopics?: HelpTopic[];
   setHelpTopics?: React.Dispatch<React.SetStateAction<HelpTopic[]>>;
   activeHelpTopic?: HelpTopic;
@@ -10,7 +10,7 @@ export type HelpTopicContextValues = {
   setFilteredHelpTopics?: React.Dispatch<React.SetStateAction<HelpTopic[]>>;
   loading?: boolean;
   setLoading?: any;
-};
+}
 
 export const HelpTopicContextDefaults = {
   helpTopics: [],
@@ -45,9 +45,7 @@ export const useValuesForHelpTopicContext = (
 
   const setActiveHelpTopicByName = React.useCallback(
     (helpTopicName: string) => {
-      const topic = helpTopics.find((t) => {
-        return t.name === helpTopicName;
-      });
+      const topic = helpTopics.find((t) => t.name === helpTopicName);
       if (!helpTopicName) {
         setActiveHelpTopic(null);
         return;

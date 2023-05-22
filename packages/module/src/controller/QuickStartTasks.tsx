@@ -8,13 +8,13 @@ import QuickStartTaskReview from './QuickStartTaskReview';
 
 import './QuickStartTasks.scss';
 
-type QuickStartTaskProps = {
+interface QuickStartTaskProps {
   tasks: QuickStartTask[];
   taskNumber: number;
   allTaskStatuses: QuickStartTaskStatus[];
   onTaskReview: (reviewState: QuickStartTaskStatus) => void;
   onTaskSelect: (activeQuickStartId) => void;
-};
+}
 
 const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
   tasks,

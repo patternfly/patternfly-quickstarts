@@ -37,58 +37,20 @@ export const EmptyBox: React.FC<EmptyBoxProps> = ({ label }) => {
 };
 EmptyBox.displayName = 'EmptyBox';
 
-type BoxProps = {
+interface BoxProps {
   children: React.ReactNode;
   className?: string;
-};
+}
 
-type LoadErrorProps = {
-  label: string;
+interface LoadingProps {
+  className?: string;
+}
+
+interface LoadingBoxProps {
   className?: string;
   message?: string;
-  canRetry?: boolean;
-};
+}
 
-type LoadingProps = {
-  className?: string;
-};
-
-type LoadingBoxProps = {
-  className?: string;
-  message?: string;
-};
-
-type EmptyBoxProps = {
+interface EmptyBoxProps {
   label?: string;
-};
-
-type MsgBoxProps = {
-  title?: string;
-  detail?: React.ReactNode;
-  className?: string;
-};
-
-type AccessDeniedProps = {
-  message?: string;
-};
-
-type DataProps = {
-  NoDataEmptyMsg?: React.ComponentType;
-  EmptyMsg?: React.ComponentType;
-  label?: string;
-  unfilteredData?: any;
-  data?: any;
-  children?: React.ReactNode;
-};
-
-type StatusBoxProps = {
-  label?: string;
-  loadError?: any;
-  loaded?: boolean;
-  data?: any;
-  unfilteredData?: any;
-  skeleton?: React.ReactNode;
-  NoDataEmptyMsg?: React.ComponentType;
-  EmptyMsg?: React.ComponentType;
-  children?: React.ReactNode;
-};
+}

@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-type FallbackImgProps = {
+interface FallbackImgProps {
   src: string;
   alt?: string;
   className?: string;
   fallback?: React.ReactNode;
-};
+}
 
 const FallbackImg: React.FC<FallbackImgProps> = ({ src, alt, className, fallback }) => {
   const [isSrcValid, setIsSrcValid] = React.useState<boolean>(true);

@@ -19,9 +19,9 @@ import { getQuickStartStatusCount, getTaskStatusKey } from './quick-start-utils'
 
 const pluralResolver = new PluralResolver({ simplifyPluralSuffix: true });
 
-export type FooterProps = {
+export interface FooterProps {
   show?: boolean;
-};
+}
 
 export const getDefaultQuickStartState = (
   totalTasks?: number,
@@ -39,7 +39,7 @@ export const getDefaultQuickStartState = (
   return defaultQuickStartState;
 };
 
-export type QuickStartContextValues = {
+export interface QuickStartContextValues {
   allQuickStarts?: QuickStart[];
   setAllQuickStarts?: React.Dispatch<React.SetStateAction<QuickStart[]>>;
   activeQuickStartID?: string;
@@ -60,7 +60,7 @@ export type QuickStartContextValues = {
   useQueryParams?: boolean;
   markdown?: {
     extensions?: any[];
-    renderExtension?: (docContext: HTMLDocument, rootSelector: string) => React.ReactNode;
+    renderExtension?: (docContext: Document, rootSelector: string) => React.ReactNode;
   };
   resourceBundle?: any;
   getResource?: any;
@@ -79,7 +79,7 @@ export type QuickStartContextValues = {
   setLoading?: any;
   alwaysShowTaskReview?: boolean;
   setAlwaysShowTaskReview?: any;
-};
+}
 
 export const QuickStartContextDefaults = {
   allQuickStarts: [],
@@ -150,14 +150,12 @@ export const useValuesForQuickStartContext = (
     });
   };
   const findResource = useCallback(
-    (resource: string, count?: number) => {
-      return getResource(
+    (resource: string, count?: number) => getResource(
         resource,
         count !== undefined ? { count } : null,
         resourceBundle,
         language,
-      );
-    },
+      ),
     [resourceBundle, language],
   );
   const [loading, setLoading] = React.useState(combinedValue.loading);
@@ -468,10 +466,8 @@ export const useValuesForQuickStartContext = (
 export const QuickStartContextProvider: React.FC<{
   children: React.ReactNode;
   value: QuickStartContextValues;
-}> = ({ children, value }) => {
-  return (
+}> = ({ children, value }) => (
     <QuickStartContext.Provider value={useValuesForQuickStartContext(value)}>
       {children}
     </QuickStartContext.Provider>
   );
-};

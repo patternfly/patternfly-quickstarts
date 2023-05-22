@@ -3,10 +3,10 @@ import { Button, Flex, FlexItem } from '@patternfly/react-core';
 import ExternalLinkAltIcon from '@patternfly/react-icons/dist/js/icons/external-link-alt-icon';
 import { QuickStartExternal } from '../utils/quick-start-types';
 
-type QuickStartTileFooterProps = {
+interface QuickStartTileFooterProps {
   link: QuickStartExternal;
   quickStartId?: string;
-};
+}
 
 const QuickStartTileFooterExternal: React.FC<QuickStartTileFooterProps> = ({
   link,

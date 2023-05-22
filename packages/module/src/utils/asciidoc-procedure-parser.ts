@@ -24,10 +24,8 @@ export const ProcQuickStartParser = (
       proc = task;
       answer = {};
     } else {
-      // @ts-ignore
       proc = task.proc;
       answer = task;
-      // @ts-ignore
       delete task.proc;
     }
 
@@ -116,8 +114,8 @@ export const ProcQuickStartParser = (
     );
     answer.review.failedTaskHelp = replaceEnvironmentVariables(
       answer.review.failedTaskHelp ||
-      reviewFailed ||
-      'This task isn’t verified yet. Try the task again.',
+        reviewFailed ||
+        'This task isn’t verified yet. Try the task again.',
     );
     answer.summary = answer.summary || {};
     answer.summary.success = replaceEnvironmentVariables(

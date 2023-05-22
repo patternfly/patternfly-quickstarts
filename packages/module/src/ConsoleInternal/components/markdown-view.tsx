@@ -10,11 +10,11 @@ const DOMPurify = require('dompurify');
 
 // const tableTags = ['table', 'thead', 'tbody', 'tr', 'th', 'td'];
 
-type ShowdownExtension = {
+interface ShowdownExtension {
   type: string;
   regex?: RegExp;
   replace?: (...args: any[]) => string;
-};
+}
 
 export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
   const converter = new Converter({
@@ -28,7 +28,7 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
     converter.addExtension(extensions);
   }
 
-  DOMPurify.addHook('beforeSanitizeElements', function(node) {
+  DOMPurify.addHook('beforeSanitizeElements', function (node) {
     // nodeType 1 = element type
 
     // transform anchor tags
@@ -48,7 +48,7 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
   });
 
   // Add a hook to make all links open a new window
-  DOMPurify.addHook('afterSanitizeAttributes', function(node) {
+  DOMPurify.addHook('afterSanitizeAttributes', function (node) {
     // set all elements owning target to target=_blank
     if ('target' in node) {
       node.setAttribute('target', '_blank');
@@ -67,47 +67,18 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
       html: true,
       svg: true,
     },
-    // ALLOWED_TAGS: [
-    //   'b',
-    //   'i',
-    //   'strike',
-    //   's',
-    //   'del',
-    //   'em',
-    //   'strong',
-    //   'a',
-    //   'p',
-    //   'h1',
-    //   'h2',
-    //   'h3',
-    //   'h4',
-    //   'ul',
-    //   'ol',
-    //   'li',
-    //   'code',
-    //   'pre',
-    //   'button',
-    //   ...tableTags,
-    //   'div',
-    //   'img',
-    //   'span',
-    //   'svg',
-    // ],
-    // ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'src', 'alt', 'id'],
-    // ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto|didact):|[^a-z]|[a-z+.-]+(?:[^a-z+.\-:]|$))/i,
   });
 };
 
-type SyncMarkdownProps = {
+interface SyncMarkdownProps {
   content?: string;
   emptyMsg?: string;
   exactHeight?: boolean;
-  /* truncateContent?: boolean; */
   extensions?: ShowdownExtension[];
-  renderExtension?: (contentDocument: HTMLDocument, rootSelector: string) => React.ReactNode;
+  renderExtension?: (contentDocument: Document, rootSelector: string) => React.ReactNode;
   inline?: boolean;
   className?: string;
-};
+}
 
 type InnerSyncMarkdownProps = Pick<SyncMarkdownProps, 'renderExtension' | 'exactHeight'> & {
   markup: string;
@@ -116,7 +87,6 @@ type InnerSyncMarkdownProps = Pick<SyncMarkdownProps, 'renderExtension' | 'exact
 };
 
 export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
-  // truncateContent,
   content,
   emptyMsg,
   extensions,
@@ -126,9 +96,10 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
   className,
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
-  const markup = React.useMemo(() => {
-    return markdownConvert(content || emptyMsg || getResource('Not available'), extensions);
-  }, [content, emptyMsg, extensions, getResource]);
+  const markup = React.useMemo(
+    () => markdownConvert(content || emptyMsg || getResource('Not available'), extensions),
+    [content, emptyMsg, extensions, getResource],
+  );
   const innerProps: InnerSyncMarkdownProps = {
     renderExtension: extensions?.length > 0 ? renderExtension : undefined,
     exactHeight,
@@ -139,21 +110,21 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
   return inline ? <InlineMarkdownView {...innerProps} /> : <IFrameMarkdownView {...innerProps} />;
 };
 
-const uniqueId = (function() {
+const uniqueId = (function () {
   let num = 0;
-  return function(prefix) {
+  return function (prefix) {
     const prefixStr = String(prefix) || '';
     num += 1;
     return prefixStr + num;
   };
 })();
 
-type RenderExtensionProps = {
-  renderExtension: (contentDocument: HTMLDocument, rootSelector: string) => React.ReactNode;
+interface RenderExtensionProps {
+  renderExtension: (contentDocument: Document, rootSelector: string) => React.ReactNode;
   selector: string;
   markup: string;
-  docContext?: HTMLDocument;
-};
+  docContext?: Document;
+}
 
 const RenderExtension: React.FC<RenderExtensionProps> = ({
   renderExtension,
@@ -213,7 +184,7 @@ const IFrameMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
 }) => {
   const [frame, setFrame] = React.useState<HTMLIFrameElement>();
   const [loaded, setLoaded] = React.useState(false);
-  const updateTimeoutHandle = React.useRef<number>();
+  const updateTimeoutHandle = React.useRef<NodeJS.Timeout>();
 
   const updateDimensions = React.useCallback(() => {
     if (!frame?.contentWindow?.document.body.firstChild) {
@@ -222,14 +193,14 @@ const IFrameMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
     frame.style.height = `${frame.contentWindow.document.body.firstElementChild.scrollHeight}px`;
 
     // Let the new height take effect, then reset again once we recompute
-    // @ts-ignore
     updateTimeoutHandle.current = setTimeout(() => {
       if (exactHeight) {
         frame.style.height = `${frame.contentWindow.document.body.firstElementChild.scrollHeight}px`;
       } else {
         // Increase by 15px for the case where a horizontal scrollbar might appear
-        frame.style.height = `${frame.contentWindow.document.body.firstElementChild.scrollHeight +
-          15}px`;
+        frame.style.height = `${
+          frame.contentWindow.document.body.firstElementChild.scrollHeight + 15
+        }px`;
       }
     });
   }, [frame, exactHeight]);

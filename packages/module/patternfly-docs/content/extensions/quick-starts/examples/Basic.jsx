@@ -47,7 +47,7 @@ export const App = ({ showCardFooters }) => {
         // variable substitution
         {
           type: 'output',
-          filter: function(html) {
+          filter(html) {
             html = html.replace(/\[APPLICATION\]/g, 'Mercury');
             html = html.replace(/\[PRODUCT\]/g, 'Lightning');
 

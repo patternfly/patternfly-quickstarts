@@ -7,9 +7,9 @@ import QuickStartTile from './QuickStartTile';
 
 import './QuickStartCatalog.scss';
 
-type QuickStartCatalogProps = {
+interface QuickStartCatalogProps {
   quickStarts: QuickStart[];
-};
+}
 
 const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts }) => {
   const { activeQuickStartID, allQuickStartStates } = React.useContext<QuickStartContextValues>(

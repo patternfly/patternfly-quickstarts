@@ -1,7 +1,11 @@
 import * as React from 'react';
 import Portal from './Portal';
 
-const SimplePopper: React.FC = ({ children }) => {
+interface SimplePopperProps {
+  children: React.ReactNode;
+}
+
+const SimplePopper = ({ children }: SimplePopperProps) => {
   const openProp = true;
   const nodeRef = React.useRef<Element>();
   const popperRef = React.useRef(null);
@@ -62,11 +66,9 @@ const SimplePopper: React.FC = ({ children }) => {
     initialize();
   }, [initialize]);
 
-  React.useEffect(() => {
-    return () => {
+  React.useEffect(() => () => {
       destroy();
-    };
-  }, [destroy]);
+    }, [destroy]);
 
   React.useEffect(() => {
     if (!isOpen) {

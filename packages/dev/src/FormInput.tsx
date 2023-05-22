@@ -7,8 +7,7 @@ export const FormInput = ({
 }: {
   inputValue: string;
   setInputValue: any;
-}) => {
-  return (
+}) => (
     <Form isWidthLimited>
       <FormGroup label="Substitution for 'CENTRAL'" isRequired fieldId="central-name">
         <TextInput
@@ -21,4 +20,3 @@ export const FormInput = ({
       </FormGroup>
     </Form>
   );
-};

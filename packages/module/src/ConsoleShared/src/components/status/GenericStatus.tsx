@@ -26,6 +26,7 @@ const GenericStatus: React.FC<GenericStatusProps> = (props) => {
 
 type GenericStatusProps = StatusComponentProps & {
   Icon: React.ComponentType<{ title?: string }>;
+  children?: React.ReactNode;
   popoverTitle?: string;
   noTooltip?: boolean;
 };

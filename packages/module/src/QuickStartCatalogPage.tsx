@@ -17,14 +17,14 @@ import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-
 import { QuickStart } from './utils/quick-start-types';
 import { filterQuickStarts } from './utils/quick-start-utils';
 
-export type QuickStartCatalogPageProps = {
+export interface QuickStartCatalogPageProps {
   quickStarts?: QuickStart[];
   showFilter?: boolean;
   sortFnc?: (q1: QuickStart, q2: QuickStart) => number;
   title?: string;
   hint?: string;
   showTitle?: boolean;
-};
+}
 
 export const QuickStartCatalogEmptyState = ({ clearFilters }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
@@ -56,7 +56,7 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
   hint,
   showTitle = true,
 }) => {
-  const sortFncCallback = React.useCallback(sortFnc, []);
+  const sortFncCallback = React.useCallback(sortFnc, [sortFnc]);
   const {
     allQuickStarts = [],
     setAllQuickStarts,

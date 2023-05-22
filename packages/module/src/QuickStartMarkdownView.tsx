@@ -15,11 +15,11 @@ import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-
 
 export const removeParagraphWrap = (markdown: string) => markdown.replace(/^<p>|<\/p>$/g, '');
 
-type QuickStartMarkdownViewProps = {
+interface QuickStartMarkdownViewProps {
   content: string;
   exactHeight?: boolean;
   className?: string;
-};
+}
 
 const QuickStartMarkdownView: React.FC<QuickStartMarkdownViewProps> = ({
   content,
@@ -50,7 +50,7 @@ const QuickStartMarkdownView: React.FC<QuickStartMarkdownViewProps> = ({
         },
         {
           type: 'output',
-          filter: function(text) {
+          filter(text) {
             // check HTML for patterns like: <em>Status: unknown</em>{#extension-requirement-status}
             // and replace with <em id="extension-requirement-status">Status: unknown</em>
             return text.replace(/<em>(.*)<\/em>{#(.*)}/g, '<em id="$2">$1</em>');

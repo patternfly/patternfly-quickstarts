@@ -1,10 +1,9 @@
-// @ts-nocheck
 import _isNaN from 'lodash-es/isNaN';
 import _isFinite from 'lodash-es/isFinite';
 import _each from 'lodash-es/each';
 import _trim from 'lodash-es/trim';
 import _sumBy from 'lodash-es/sumBy';
-import i18n from 'i18next';
+import i18n, { InterpolationOptions } from 'i18next';
 
 const getLocale = () => localStorage.getItem('bridge/language');
 
@@ -79,7 +78,11 @@ export const getDuration = (ms: number) => {
   return { days, hours, minutes, seconds };
 };
 
-export const fromNow = (dateTime: string | Date, now?: Date, options?) => {
+export const fromNow = (
+  dateTime: string | Date,
+  now?: Date,
+  options?: InterpolationOptions & { omitSuffix?: boolean },
+) => {
   // Check for null. If dateTime is null, it returns incorrect date Jan 1 1970.
   if (!dateTime) {
     return '-';
@@ -172,7 +175,9 @@ export const parsePrometheusDuration = (duration: string): number => {
       .trim()
       .split(/\s+/)
       .map((p) => p.match(/^(\d+)([wdhms])$/));
-    return _sumBy(parts, (p) => parseInt(p[1], 10) * units[p[2]]);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return _sumBy(parts, (p) => parseInt(p[1]) * units[p[2]]);
   } catch (ignored) {
     // Invalid duration format
     return 0;

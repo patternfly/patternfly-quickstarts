@@ -1,3 +1,1 @@
-export const removeTemplateWhitespace = (template: string): string => {
-  return template.replace(/>(?:\s|\n)+</g, '><');
-};
+export const removeTemplateWhitespace = (template: string): string => template.replace(/>(?:\s|\n)+</g, '><');

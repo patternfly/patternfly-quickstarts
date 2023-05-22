@@ -23,12 +23,12 @@ import ExternalLinkAltIcon from '@patternfly/react-icons/dist/js/icons/external-
 import './QuickStartPanelContent.scss';
 import { HelpTopicContext, HelpTopicContextValues } from './utils/help-topic-context';
 
-type HelpTopicPanelContentProps = {
+interface HelpTopicPanelContentProps {
   activeHelpTopic: HelpTopic;
   filteredHelpTopics?: HelpTopic[];
   isResizable?: boolean;
   onClose: () => void;
-};
+}
 
 const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
   activeHelpTopic = null,
@@ -53,13 +53,11 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
 
   const menuItems =
     filteredHelpTopics.length > 1 &&
-    filteredHelpTopics.map((topic) => {
-      return (
+    filteredHelpTopics.map((topic) => (
         <OptionsMenuItem key={topic.name} onSelect={onSelectHelpTopic} id={topic.name}>
           {topic.title}
         </OptionsMenuItem>
-      );
-    });
+      ));
 
   const paddingContainer = (children) => <div style={{ padding: '24px' }}>{children}</div>;
 
@@ -69,8 +67,7 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
       {!!activeHelpTopic?.links?.length && <Divider />}
       {paddingContainer(
         <Stack hasGutter>
-          {activeHelpTopic?.links?.map(({ href, text, newTab, isExternal }, index) => {
-            return (
+          {activeHelpTopic?.links?.map(({ href, text, newTab, isExternal }, index) => (
               <StackItem key={index}>
                 <Button
                   component="a"
@@ -87,8 +84,7 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
                   {text || href}
                 </Button>
               </StackItem>
-            );
-          })}
+            ))}
         </Stack>,
       )}
     </>

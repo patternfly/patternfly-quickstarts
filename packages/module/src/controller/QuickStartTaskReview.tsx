@@ -10,11 +10,11 @@ import {
 
 import './QuickStartTaskReview.scss';
 
-type QuickStartTaskReviewProps = {
+interface QuickStartTaskReviewProps {
   review: QuickStartTaskReviewType;
   taskStatus: QuickStartTaskStatus;
   onTaskReview: (status: QuickStartTaskStatus) => void;
-};
+}
 
 const getAlertVariant = (status) => {
   switch (status) {

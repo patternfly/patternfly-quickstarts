@@ -10,8 +10,8 @@ import { removeTemplateWhitespace } from './utils';
 import { ACCORDION_MARKDOWN_BUTTON_ID, ACCORDION_MARKDOWN_CONTENT_ID } from './const';
 import './showdown-extension.scss';
 
-const useAccordionShowdownExtension = () => {
-  return React.useMemo(
+const useAccordionShowdownExtension = () =>
+  React.useMemo(
     () => ({
       type: 'lang',
       regex: /\[(.+)]{{(accordion) ("(.*?)")}}/g,
@@ -21,7 +21,7 @@ const useAccordionShowdownExtension = () => {
         _command: string,
         accordionHeading: string,
       ): string => {
-        const accordionId = new String(accordionHeading).replace(/\s/g, '-');
+        const accordionId = String(accordionHeading).replace(/\s/g, '-');
 
         return removeTemplateWhitespace(
           renderToStaticMarkup(
@@ -47,6 +47,5 @@ const useAccordionShowdownExtension = () => {
     }),
     [],
   );
-};
 
 export default useAccordionShowdownExtension;

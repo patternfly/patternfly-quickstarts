@@ -28,8 +28,12 @@ module.exports = (_env, argv) => {
       hot: true,
       historyApiFallback: true,
       port: 3000,
-      clientLogLevel: 'info',
-      stats: 'minimal',
+      client: {
+        logging: 'info',
+      },
+      devMiddleware: {
+        stats: 'minimal',
+      },
     },
     amd: false, // We don't use any AMD modules, helps performance
     mode: isProd ? 'production' : 'development',
@@ -45,35 +49,16 @@ module.exports = (_env, argv) => {
           test: /\.css$/,
           use: cssLoaders,
         },
-        // here for testing with quickstarts-standalone.css (see src/index.tsx)
-        // {
-        //   test: /\.css$/,
-        //   include: (stylesheet) => stylesheet.includes('@patternfly/react-styles/css/'),
-        //   use: ['null-loader'],
-        // },
         {
           test: /\.(png|jpe?g|webp|gif|svg)$/,
-          use: {
-            loader: 'url-loader',
-            options: {
-              limit: 1024,
-              fallback: 'file-loader',
-              name: '[name].[contenthash].[ext]',
-              outputPath: 'images/',
-            },
+          type: 'asset/resource',
+          generator: {
+            filename: 'images/[name][contenthash][ext]',
           },
         },
         {
           test: /.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                name: '[name].[hash:8].[ext]',
-                outputPath: 'fonts/',
-              },
-            },
-          ],
+          type: 'asset/inline',
         },
         {
           test: /\.ya?ml$/,
@@ -81,6 +66,9 @@ module.exports = (_env, argv) => {
           use: 'yaml-loader',
         },
       ],
+    },
+    performance: {
+      hints: false,
     },
     resolve: {
       extensions: ['.ts', '.tsx', '.js'],
@@ -110,10 +98,16 @@ module.exports = (_env, argv) => {
         patterns: [{ from: path.resolve(__dirname, '_redirects'), to: '' }],
       }),
       new CopyPlugin({
-        patterns: [{ from: 'src/quickstarts-data/**/images/*', to: 'images/[name].[ext]' }],
+        patterns: [
+          {
+            from: 'src/quickstarts-data/**/images/*',
+            to: 'images/[name][ext]',
+          },
+        ],
       }),
       new AssetsPlugin({
-        keepInMemory: false, // _env === 'development',
+        useCompilerPath: true,
+        keepInMemory: false,
         removeFullPathAutoPrefix: true,
       }),
       new CopyPlugin({
@@ -137,6 +131,5 @@ module.exports = (_env, argv) => {
         ],
       }),
     ],
-    stats: 'minimal',
   };
 };

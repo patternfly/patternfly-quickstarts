@@ -10,8 +10,7 @@ const PopoverStatus: React.FC<PopoverStatusProps> = ({
   title,
   onHide,
   onShow,
-}) => {
-  return (
+}) => (
     <Popover
       position={PopoverPosition.right}
       headerContent={hideHeader ? null : title}
@@ -27,9 +26,9 @@ const PopoverStatus: React.FC<PopoverStatusProps> = ({
       </Button>
     </Popover>
   );
-};
 
-type PopoverStatusProps = {
+interface PopoverStatusProps {
+  children: React.ReactNode;
   statusBody: React.ReactNode;
   onHide?: () => void;
   onShow?: () => void;
@@ -37,6 +36,6 @@ type PopoverStatusProps = {
   hideHeader?: boolean;
   isVisible?: boolean;
   shouldClose?: (hideFunction: any) => void;
-};
+}
 
 export default PopoverStatus;
