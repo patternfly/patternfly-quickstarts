@@ -105,7 +105,7 @@
     "patternfly-react/import-tokens-icons": "error",
     "patternfly-react/no-anonymous-functions": "off",
     "prefer-const": "error",
-    "prettier/prettier": "off",
+    "prettier/prettier": 1,
     "radix": ["error", "as-needed"],
     "react/prop-types": 0,
     "react/display-name": 0,
