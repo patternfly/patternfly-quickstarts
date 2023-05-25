@@ -10,10 +10,10 @@ import {
 import { QuickStartContext } from '@patternfly/quickstarts';
 import i18n from './i18n/i18n';
 
-type SettingsModalProps = {
+interface SettingsModalProps {
   isOpen: boolean;
   onClose: () => void;
-};
+}
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
   const { setResourceBundle, language: currentLanguage } = React.useContext(QuickStartContext);

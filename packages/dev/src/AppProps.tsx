@@ -16,10 +16,10 @@ import React from 'react';
 import i18n from './i18n/i18n';
 import { AppHeader, AppSidebar } from './common/Page';
 
-type AppProps = {
+interface AppProps {
   children?: React.ReactNode;
   showCardFooters?: boolean;
-};
+}
 
 const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage('quickstartId', '');
@@ -67,7 +67,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
         // variable substitution
         {
           type: 'output',
-          filter: function(html: string) {
+          filter(html: string) {
             html = html.replace(/\[APPLICATION\]/g, 'Mercury');
             html = html.replace(/\[PRODUCT\]/g, 'Lightning');
 

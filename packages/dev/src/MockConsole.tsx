@@ -112,39 +112,29 @@ export const MockConsole: React.FC = () => {
     // set filtered topics using tags, matching to the consolePageState
     if (consolePageState < 4) {
       const topics = helpTopics.filter((topic: HelpTopic) => {
-        const pageTagNumbers = topic.tags.map((tag: string) => {
-          return Number(tag.slice(-1));
-        });
+        const pageTagNumbers = topic.tags.map((tag: string) => Number(tag.slice(-1)));
         return pageTagNumbers.includes(consolePageState);
       });
       setFilteredHelpTopics(topics);
     } else {
       // set filtered topics using the appropriate helpTopicNamesByPage array above
       setFilteredHelpTopics(
-        helpTopics.filter((topic) => {
-          return helpTopicNamesByPage[consolePageState - 4].includes(topic.name);
-        }),
+        helpTopics.filter((topic) => helpTopicNamesByPage[consolePageState - 4].includes(topic.name)),
       );
     }
   }, [consolePageState, helpTopics, setFilteredHelpTopics]);
 
   // Render filteredHelpTopics in a <FormGroupWithHelpTopicPopover />
-  const formGroupsFromTags = filteredHelpTopics.map((topic: HelpTopic, index) => {
-    return <FormGroupWithHelpTopicPopover topic={topic} key={index} />;
-  });
+  const formGroupsFromTags = filteredHelpTopics.map((topic: HelpTopic, index) => <FormGroupWithHelpTopicPopover topic={topic} key={index} />);
 
   // From an array of topic names, render all topics in a <FormGroupWithHelpTopicPopover />
-  const formGroupsFromTopicNames = (helpTopicNames: string[]) => {
-    return helpTopicNames.map((topicName: string, index) => {
-      const topicToRender = helpTopics.find((topic) => {
-        return topicName === topic.name;
-      });
+  const formGroupsFromTopicNames = (helpTopicNames: string[]) => helpTopicNames.map((topicName: string, index) => {
+      const topicToRender = helpTopics.find((topic) => topicName === topic.name);
 
       if (topicToRender) {
         return <FormGroupWithHelpTopicPopover topic={topicToRender} key={index} />;
       }
     });
-  };
 
   return (
     <>

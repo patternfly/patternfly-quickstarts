@@ -7,13 +7,13 @@ import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start
 import { QuickStartStatus, QuickStartType } from '../utils/quick-start-types';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 
-type QuickStartTileHeaderProps = {
+interface QuickStartTileHeaderProps {
   status: string;
   duration: number;
   name: string;
   type?: QuickStartType;
   quickStartId?: string;
-};
+}
 
 const statusColorMap = {
   [QuickStartStatus.COMPLETE]: 'green',

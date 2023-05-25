@@ -7,8 +7,6 @@
     "target": "es2015",
     "lib": ["es2015", "dom"],
     "sourceMap": true,
-    "declaration": true,
-    "declarationDir": "./dist",
     "jsx": "react",
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
@@ -32,5 +30,5 @@
     "typeRoots": ["node_modules/@types", "@types"]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/__tests__"]
+  "exclude": ["node_modules", "**/__tests__", "dist"]
 }

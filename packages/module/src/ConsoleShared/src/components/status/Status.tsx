@@ -29,9 +29,9 @@ export const StatusIcon: React.FC<StatusIconProps> = ({ status }) => (
   <Status status={status} iconOnly />
 );
 
-type StatusIconProps = {
+interface StatusIconProps {
   status: string;
-};
+}
 
 type StatusProps = StatusComponentProps & {
   status: string;

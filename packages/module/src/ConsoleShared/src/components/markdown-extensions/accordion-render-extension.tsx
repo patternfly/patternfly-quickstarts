@@ -2,10 +2,10 @@ import * as React from 'react';
 import { useEventListener } from '../../hooks';
 import { ACCORDION_MARKDOWN_BUTTON_ID, ACCORDION_MARKDOWN_CONTENT_ID } from './const';
 
-type AccordionShowdownComponentProps = {
+interface AccordionShowdownComponentProps {
   buttonElement: HTMLElement;
   contentElement: HTMLElement;
-};
+}
 
 const AccordionShowdownHandler: React.FC<AccordionShowdownComponentProps> = ({
   buttonElement,
@@ -29,9 +29,9 @@ const AccordionShowdownHandler: React.FC<AccordionShowdownComponentProps> = ({
   return <></>;
 };
 
-type accordionRenderExtensionProps = {
-  docContext: HTMLDocument;
-};
+interface accordionRenderExtensionProps {
+  docContext: Document;
+}
 
 const AccordionRenderExtension: React.FC<accordionRenderExtensionProps> = ({ docContext }) => {
   const buttonElements = docContext.querySelectorAll(`[id ^= ${ACCORDION_MARKDOWN_BUTTON_ID}]`);

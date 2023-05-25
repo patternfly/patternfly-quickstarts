@@ -3,9 +3,9 @@ import * as React from 'react';
 import { useBoundingClientRect } from '../../hooks';
 import Portal from '../popper/Portal';
 
-type StaticSpotlightProps = {
+interface StaticSpotlightProps {
   element: Element;
-};
+}
 
 const StaticSpotlight: React.FC<StaticSpotlightProps> = ({ element }) => {
   const clientRect = useBoundingClientRect(element as HTMLElement);

@@ -2,10 +2,10 @@ import * as React from 'react';
 import InteractiveSpotlight from './InteractiveSpotlight';
 import StaticSpotlight from './StaticSpotlight';
 
-type SpotlightProps = {
+interface SpotlightProps {
   selector: string;
   interactive?: boolean;
-};
+}
 
 const Spotlight: React.FC<SpotlightProps> = ({ selector, interactive }) => {
   // if target element is a hidden one return null

@@ -12,12 +12,12 @@ import QuickStartTileHeader from './QuickStartTileHeader';
 
 import './QuickStartTile.scss';
 
-type QuickStartTileProps = {
+interface QuickStartTileProps {
   quickStart: QuickStart;
   status: QuickStartStatus;
   isActive: boolean;
   onClick?: () => void;
-};
+}
 
 const QuickStartTile: React.FC<QuickStartTileProps> = ({
   quickStart,
@@ -30,9 +30,8 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
     spec: { icon, tasks, displayName, description, durationMinutes, prerequisites, link, type },
   } = quickStart;
 
-  const { setActiveQuickStart, footer } = React.useContext<QuickStartContextValues>(
-    QuickStartContext,
-  );
+  const { setActiveQuickStart, footer } =
+    React.useContext<QuickStartContextValues>(QuickStartContext);
 
   const ref = React.useRef<HTMLDivElement>(null);
 
@@ -50,12 +49,17 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
     );
   }
 
-  const footerComponent =
-    footer && footer.show === false ? null : link ? (
-      <QuickStartTileFooterExternal link={link} quickStartId={id} />
-    ) : (
-      <QuickStartTileFooter quickStartId={id} status={status} totalTasks={tasks?.length} />
-    );
+  const footerComponent = React.useMemo(() => {
+    if (footer && footer.show === false) {
+      return null;
+    }
+
+    if (link) {
+      return <QuickStartTileFooterExternal link={link} quickStartId={id} />;
+    }
+
+    return <QuickStartTileFooter quickStartId={id} status={status} totalTasks={tasks?.length} />;
+  }, [footer, id, link, status, tasks?.length]);
 
   const handleClick = (e: React.SyntheticEvent<HTMLElement, Event>) => {
     if (ref.current?.contains(e.target as Node)) {
@@ -71,8 +75,6 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
   return (
     <div ref={ref}>
       <CatalogTile
-        // @ts-ignore
-        component="div"
         style={{
           cursor: 'pointer',
         }}

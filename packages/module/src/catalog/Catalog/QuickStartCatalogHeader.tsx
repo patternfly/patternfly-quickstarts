@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-export type QuickStartCatalogHeaderProps = {
+export interface QuickStartCatalogHeaderProps {
   title: string;
   hint?: string;
-};
+}
 
 export const QuickStartCatalogHeader: React.FC<QuickStartCatalogHeaderProps> = ({
   title,

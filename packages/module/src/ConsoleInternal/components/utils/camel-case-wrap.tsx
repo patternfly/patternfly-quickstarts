@@ -2,7 +2,7 @@ import * as React from 'react';
 
 const MEMO = {};
 
-export const CamelCaseWrap: React.SFC<CamelCaseWrapProps> = ({ value, dataTest }) => {
+export const CamelCaseWrap: React.FC<CamelCaseWrapProps> = ({ value, dataTest }) => {
   if (!value) {
     return '-';
   }
@@ -27,7 +27,7 @@ export const CamelCaseWrap: React.SFC<CamelCaseWrapProps> = ({ value, dataTest }
   return rendered;
 };
 
-export type CamelCaseWrapProps = {
+export interface CamelCaseWrapProps {
   value: string;
   dataTest?: string;
-};
+}

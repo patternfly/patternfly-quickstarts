@@ -1,19 +1,21 @@
+import { useIsomorphicLayoutEffect } from '@patternfly/react-core';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 type GetContainer = Element | null | undefined | (() => Element);
 
-type PortalProps = {
+interface PortalProps {
+  children: React.ReactNode;
   container?: GetContainer;
-};
+}
 
 const getContainer = (container: GetContainer): Element | null | undefined =>
   typeof container === 'function' ? container() : container;
 
-const Portal: React.FC<PortalProps> = ({ children, container }) => {
+const Portal = ({ children, container }: PortalProps) => {
   const [containerNode, setContainerNode] = React.useState<Element>();
 
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     setContainerNode(getContainer(container) || document.body);
   }, [container]);
 

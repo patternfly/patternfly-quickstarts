@@ -27,14 +27,8 @@ import {
 } from '@patternfly/react-core';
 
 export const CustomCatalog: React.FC = () => {
-  const {
-    activeQuickStartID,
-    allQuickStartStates,
-    allQuickStarts,
-    filter,
-    setFilter,
-    loading,
-  } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { activeQuickStartID, allQuickStartStates, allQuickStarts, filter, setFilter, loading } =
+    React.useContext<QuickStartContextValues>(QuickStartContext);
 
   const sortFnc = (q1: QuickStart, q2: QuickStart) =>
     q1.spec.displayName.localeCompare(q2.spec.displayName);
@@ -86,69 +80,72 @@ export const CustomCatalog: React.FC = () => {
     setFilteredQuickStarts(result);
   };
 
-  const CatalogWithSections = (
-    <>
-      <QuickStartCatalogSection>
-        <TextContent>
-          <Text component="h2">Instructional</Text>
-          <Text component="p" className="catalog-sub">
-            Instructional examples
-          </Text>
-        </TextContent>
-        <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
-          {allQuickStarts
-            .filter((quickStart: QuickStart) => quickStart.metadata.instructional)
-            .map((quickStart: QuickStart) => {
-              const {
-                metadata: { name: id },
-              } = quickStart;
+  const CatalogWithSections = React.useMemo(
+    () => (
+      <>
+        <QuickStartCatalogSection>
+          <TextContent>
+            <Text component="h2">Instructional</Text>
+            <Text component="p" className="catalog-sub">
+              Instructional examples
+            </Text>
+          </TextContent>
+          <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
+            {allQuickStarts
+              .filter((quickStart: QuickStart) => quickStart.metadata.instructional)
+              .map((quickStart: QuickStart) => {
+                const {
+                  metadata: { name: id },
+                } = quickStart;
 
-              return (
-                <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
-                  <QuickStartTile
-                    quickStart={quickStart}
-                    isActive={id === activeQuickStartID}
-                    status={getQuickStartStatus(allQuickStartStates, id)}
-                  />
-                </GalleryItem>
-              );
-            })}
-        </Gallery>
-      </QuickStartCatalogSection>
-      <QuickStartCatalogSection>
-        <TextContent>
-          <Text component="h2">Real-world examples</Text>
-          <Text component="p" className="catalog-sub">
-            Additional examples
-          </Text>
-        </TextContent>
-        <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
-          {allQuickStarts
-            .filter((quickStart: QuickStart) => !quickStart.metadata.instructional)
-            .map((quickStart: QuickStart) => {
-              const {
-                metadata: { name: id },
-              } = quickStart;
+                return (
+                  <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
+                    <QuickStartTile
+                      quickStart={quickStart}
+                      isActive={id === activeQuickStartID}
+                      status={getQuickStartStatus(allQuickStartStates, id)}
+                    />
+                  </GalleryItem>
+                );
+              })}
+          </Gallery>
+        </QuickStartCatalogSection>
+        <QuickStartCatalogSection>
+          <TextContent>
+            <Text component="h2">Real-world examples</Text>
+            <Text component="p" className="catalog-sub">
+              Additional examples
+            </Text>
+          </TextContent>
+          <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
+            {allQuickStarts
+              .filter((quickStart: QuickStart) => !quickStart.metadata.instructional)
+              .map((quickStart: QuickStart) => {
+                const {
+                  metadata: { name: id },
+                } = quickStart;
 
-              return (
-                <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
-                  <QuickStartTile
-                    quickStart={quickStart}
-                    isActive={id === activeQuickStartID}
-                    status={getQuickStartStatus(allQuickStartStates, id)}
-                  />
-                </GalleryItem>
-              );
-            })}
-        </Gallery>
-      </QuickStartCatalogSection>
-      <QuickStartCatalogSection>
-        <Divider />
-      </QuickStartCatalogSection>
-    </>
+                return (
+                  <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
+                    <QuickStartTile
+                      quickStart={quickStart}
+                      isActive={id === activeQuickStartID}
+                      status={getQuickStartStatus(allQuickStartStates, id)}
+                    />
+                  </GalleryItem>
+                );
+              })}
+          </Gallery>
+        </QuickStartCatalogSection>
+        <QuickStartCatalogSection>
+          <Divider />
+        </QuickStartCatalogSection>
+      </>
+    ),
+    [activeQuickStartID, allQuickStartStates, allQuickStarts],
   );
 
-  const clearFilters = () => {
+  const clearFilters = React.useCallback(() => {
     setFilter('keyword', '');
     setFilter('status', []);
     clearFilterParams();
@@ -157,7 +154,19 @@ export const CustomCatalog: React.FC = () => {
         q1.spec.displayName.localeCompare(q2.spec.displayName),
       ),
     );
-  };
+  }, [allQuickStarts, setFilter]);
+
+  const quickStartCatalog = React.useMemo(() => {
+    if (filteredQuickStarts.length === 0) {
+      return <QuickStartCatalogEmptyState clearFilters={clearFilters} />;
+    }
+
+    if (filteredQuickStarts.length !== allQuickStarts.length) {
+      return <QuickStartCatalog quickStarts={filteredQuickStarts} />;
+    }
+
+    return CatalogWithSections;
+  }, [CatalogWithSections, allQuickStarts.length, clearFilters, filteredQuickStarts]);
 
   if (loading) {
     return <LoadingBox />;
@@ -175,13 +184,7 @@ export const CustomCatalog: React.FC = () => {
         </ToolbarContent>
       </QuickStartCatalogToolbar>
       <Divider component="div" />
-      {filteredQuickStarts.length === 0 ? (
-        <QuickStartCatalogEmptyState clearFilters={clearFilters} />
-      ) : filteredQuickStarts.length !== allQuickStarts.length ? (
-        <QuickStartCatalog quickStarts={filteredQuickStarts} />
-      ) : (
-        CatalogWithSections
-      )}
+      {quickStartCatalog}
     </>
   );
 };

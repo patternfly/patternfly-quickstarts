@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Spotlight } from '../spotlight';
 
-type MarkdownHighlightExtensionProps = {
-  docContext: HTMLDocument;
+interface MarkdownHighlightExtensionProps {
+  docContext: Document;
   rootSelector: string;
-};
+}
 const MarkdownHighlightExtension: React.FC<MarkdownHighlightExtensionProps> = ({
   docContext,
   rootSelector,
@@ -36,9 +36,10 @@ const MarkdownHighlightExtension: React.FC<MarkdownHighlightExtensionProps> = ({
       e.preventDefault();
       const classes = e.target.getAttribute('class').split(' ');
       let highlightId;
-      for (let i = 0; i < classes.length; i++) {
-        if (classes[0].startsWith('data-highlight__')) {
-          highlightId = classes[0].split('__')[1];
+
+      for (const className of classes) {
+        if (className.startsWith('data-highlight__')) {
+          highlightId = className.split('__')[1];
           break;
         }
       }

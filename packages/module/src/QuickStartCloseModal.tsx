@@ -3,11 +3,11 @@ import { Button, Flex, FlexItem, ModalVariant } from '@patternfly/react-core';
 import { Modal } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 
-type QuickStartCloseModalProps = {
+interface QuickStartCloseModalProps {
   isOpen: boolean;
   onConfirm: () => void;
   onCancel: () => void;
-};
+}
 
 const QuickStartCloseModal: React.FC<QuickStartCloseModalProps> = ({
   isOpen,

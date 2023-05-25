@@ -11,8 +11,10 @@ const loadJSONQuickStartsFilesFromAssets = async (basePath: string): Promise<str
 export const loadJSONQuickStarts = async (basePath: string) => {
   const files = await loadJSONQuickStartsFilesFromAssets(basePath);
   const result = [] as any[];
-  for (let i = 0; i < files.length; i++) {
-    await fetch(files[i]).then((response) => response.json().then((data) => result.push(data)));
+
+  for (const file of files) {
+    await fetch(file).then((response) => response.json().then((data) => result.push(data)));
   }
+
   return result.map((content) => ProcQuickStartParser(content));
 };

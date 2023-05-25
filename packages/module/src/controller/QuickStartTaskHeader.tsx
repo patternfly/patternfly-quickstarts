@@ -10,7 +10,7 @@ import { QuickStartTaskStatus } from '../utils/quick-start-types';
 
 import './QuickStartTaskHeader.scss';
 
-type QuickStartTaskHeaderProps = {
+interface QuickStartTaskHeaderProps {
   title: string;
   taskIndex: number;
   subtitle?: string;
@@ -19,7 +19,7 @@ type QuickStartTaskHeaderProps = {
   isActiveTask?: boolean;
   onTaskSelect: (index: number) => void;
   children?: React.ReactNode;
-};
+}
 
 const TaskIcon: React.FC<{
   taskIndex: number;
@@ -32,7 +32,8 @@ const TaskIcon: React.FC<{
   const classNames = css('pfext-icon-and-text__icon', {
     'pfext-quick-start-task-header__task-icon-init': !failed && !success,
   });
-  let content: {};
+  let content: React.ReactNode;
+
   if (success) {
     content = (
       <CheckCircleIcon size="md" className="pfext-quick-start-task-header__task-icon-success" />

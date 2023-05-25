@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Asciidoctor } from 'asciidoctor/types';
 import asciidoctor from 'asciidoctor';
-import { AllHtmlEntities } from 'html-entities';
+import { decode } from 'html-entities';
 
 import { Alert, List, ListItem, Title } from '@patternfly/react-core';
 import LightbulbIcon from '@patternfly/react-icons/dist/js/icons/lightbulb-icon';
@@ -199,7 +199,7 @@ export const renderAdmonitionBlock = (node: Asciidoctor.AbstractBlock, inList: b
       className={css(!inList && 'description-important')}
       style={style}
     >
-      {AllHtmlEntities.decode(node.getContent())}
+      {decode(node.getContent())}
     </Alert>
   );
   return ReactDOMServer.renderToString(pfAlert);

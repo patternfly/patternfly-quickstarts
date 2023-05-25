@@ -71,12 +71,11 @@ export const QuickStartCatalogFilterCount = ({ quickStartsCount }) => {
 interface QuickStartCatalogFilterSearchWrapperProps {
   onSearchInputChange: any;
 }
-export const QuickStartCatalogFilterSearchWrapper: React.FC<QuickStartCatalogFilterSearchWrapperProps> = ({
-  onSearchInputChange = () => {},
-}) => {
-  const { useQueryParams, filter, setFilter } = React.useContext<QuickStartContextValues>(
-    QuickStartContext,
-  );
+export const QuickStartCatalogFilterSearchWrapper: React.FC<
+  QuickStartCatalogFilterSearchWrapperProps
+> = ({ onSearchInputChange = () => {} }) => {
+  const { useQueryParams, filter, setFilter } =
+    React.useContext<QuickStartContextValues>(QuickStartContext);
   React.useEffect(() => {
     //   use this effect to clear the search when a `clear all` action is performed higher up
     const unlisten = history.listen(({ location }) => {
@@ -130,12 +129,11 @@ export const equalsIgnoreOrder = (a: any[], b: any[]) => {
 interface QuickStartCatalogFilterStatusWrapperProps {
   onStatusChange: any;
 }
-export const QuickStartCatalogFilterStatusWrapper: React.FC<QuickStartCatalogFilterStatusWrapperProps> = ({
-  onStatusChange = () => {},
-}) => {
-  const { useQueryParams, filter, setFilter } = React.useContext<QuickStartContextValues>(
-    QuickStartContext,
-  );
+export const QuickStartCatalogFilterStatusWrapper: React.FC<
+  QuickStartCatalogFilterStatusWrapperProps
+> = ({ onStatusChange = () => {} }) => {
+  const { useQueryParams, filter, setFilter } =
+    React.useContext<QuickStartContextValues>(QuickStartContext);
   React.useEffect(() => {
     //   use this effect to clear the status when a `clear all` action is performed higher up
     const unlisten = history.listen(({ location }) => {
@@ -174,7 +172,7 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<QuickStartCatalogFil
 
   const dropdownItems = Object.entries(filter.status.statusTypes).map(([key, val]) => (
     <SelectOption key={key} data-key={key} value={key}>
-      {val}
+      <>{val}</>
     </SelectOption>
   ));
 
@@ -192,8 +190,6 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<QuickStartCatalogFil
 interface QuickStartCatalogFilterCountWrapperProps {
   quickStartsCount: number;
 }
-export const QuickStartCatalogFilterCountWrapper: React.FC<QuickStartCatalogFilterCountWrapperProps> = ({
-  quickStartsCount,
-}) => {
-  return <QuickStartCatalogFilterCount quickStartsCount={quickStartsCount} />;
-};
+export const QuickStartCatalogFilterCountWrapper: React.FC<
+  QuickStartCatalogFilterCountWrapperProps
+> = ({ quickStartsCount }) => <QuickStartCatalogFilterCount quickStartsCount={quickStartsCount} />;

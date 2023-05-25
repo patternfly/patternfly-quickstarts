@@ -4,11 +4,11 @@ import { QuickStartContext, QuickStartContextValues } from '@quickstarts/utils/q
 import { useEventListener } from '../../hooks';
 import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
 
-type CopyClipboardProps = {
+interface CopyClipboardProps {
   element: HTMLElement;
   rootSelector: string;
-  docContext: HTMLDocument;
-};
+  docContext: Document;
+}
 
 export const CopyClipboard: React.FC<CopyClipboardProps> = ({
   element,
@@ -63,10 +63,10 @@ export const CopyClipboard: React.FC<CopyClipboardProps> = ({
   );
 };
 
-type MarkdownCopyClipboardProps = {
-  docContext: HTMLDocument;
+interface MarkdownCopyClipboardProps {
+  docContext: Document;
   rootSelector: string;
-};
+}
 
 const MarkdownCopyClipboard: React.FC<MarkdownCopyClipboardProps> = ({
   docContext,

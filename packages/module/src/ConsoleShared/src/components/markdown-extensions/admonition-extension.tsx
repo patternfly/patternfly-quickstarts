@@ -23,9 +23,9 @@ const admonitionToAlertVariantMap = {
   [AdmonitionType.WARNING]: { variant: 'warning' },
 };
 
-const useAdmonitionShowdownExtension = () => {
+const useAdmonitionShowdownExtension = () => 
   // const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
-  return React.useMemo(
+   React.useMemo(
     () => ({
       type: 'lang',
       regex: /\[(.+)]{{(admonition) ([\w-]+)}}/g,
@@ -61,7 +61,7 @@ const useAdmonitionShowdownExtension = () => {
       },
     }),
     [],
-  );
-};
+  )
+;
 
 export default useAdmonitionShowdownExtension;

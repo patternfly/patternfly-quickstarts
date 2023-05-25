@@ -14,10 +14,10 @@ import React from 'react';
 import i18n from './i18n/i18n';
 import { AppHeader, AppSidebar } from './common/Page';
 
-type AppProps = {
+interface AppProps {
   children?: React.ReactNode;
   showCardFooters?: boolean;
-};
+}
 
 const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage('quickstartId', '');

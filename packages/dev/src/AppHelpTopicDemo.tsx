@@ -6,10 +6,10 @@ import React from 'react';
 import i18n from './i18n/i18n';
 import { AppHeader, AppSidebar } from './common/Page';
 
-type AppProps = {
+interface AppProps {
   children?: React.ReactNode;
   showCardFooters?: boolean;
-};
+}
 
 const AppHelpTopicDemo: React.FC<AppProps> = ({ children }) => {
   const language = localStorage.getItem('bridge/language') || 'en';

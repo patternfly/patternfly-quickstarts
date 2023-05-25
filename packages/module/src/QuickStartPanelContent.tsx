@@ -20,7 +20,7 @@ import { markdownConvert } from './ConsoleInternal/components/markdown-view';
 
 type HandleClose = () => void;
 
-type QuickStartPanelContentProps = {
+interface QuickStartPanelContentProps {
   quickStarts: QuickStart[];
   activeQuickStartID: string;
   handleClose: HandleClose;
@@ -28,7 +28,7 @@ type QuickStartPanelContentProps = {
   isResizable?: boolean;
   showClose?: boolean;
   headerVariant?: '' | 'blue-white';
-};
+}
 
 const getElement = (appendTo: HTMLElement | (() => HTMLElement)) => {
   if (typeof appendTo === 'function') {
@@ -56,9 +56,8 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   ...props
 }) => {
   const titleRef = React.useRef(null);
-  const { getResource, activeQuickStartState } = React.useContext<QuickStartContextValues>(
-    QuickStartContext,
-  );
+  const { getResource, activeQuickStartState } =
+    React.useContext<QuickStartContextValues>(QuickStartContext);
   const [contentRef, setContentRef] = React.useState<HTMLDivElement>();
   const shadows = useScrollShadows(contentRef);
   const quickStart = quickStarts.find((qs) => qs.metadata.name === activeQuickStartID);
@@ -81,13 +80,13 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
 
   const getStep = () => {
     const tasks = quickStart.spec.tasks.length;
-    if (Number.parseInt(taskNumber as string, 10) === -1) {
+    if (Number.parseInt(taskNumber as string) === -1) {
       return 'intro';
     }
-    if (Number.parseInt(taskNumber as string, 10) === tasks) {
+    if (Number.parseInt(taskNumber as string) === tasks) {
       return 'conclusion';
     }
-    return Number.parseInt(taskNumber as string, 10) + 1;
+    return Number.parseInt(taskNumber as string) + 1;
   };
 
   React.useEffect(() => {
