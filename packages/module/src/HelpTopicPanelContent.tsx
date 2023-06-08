@@ -7,9 +7,10 @@ import {
   DrawerHead,
   DrawerPanelBody,
   DrawerPanelContent,
-  OptionsMenu,
-  OptionsMenuItem,
-  OptionsMenuToggle,
+  MenuToggle,
+  Select,
+  SelectList,
+  SelectOption,
   Stack,
   StackItem,
   Title,
@@ -45,19 +46,22 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
     setIsHelpTopicMenuOpen(!isHelpTopicMenuOpen);
   };
 
-  const onSelectHelpTopic = (event) => {
+  const onSelectHelpTopic = (
+    event?: React.MouseEvent<Element, MouseEvent>,
+    _value?: string | number,
+  ) => {
     const topicName = event.currentTarget.id;
     setActiveHelpTopicByName(topicName);
     toggleHelpTopicMenu();
   };
 
-  const menuItems =
+  const helpTopicOptions =
     filteredHelpTopics.length > 1 &&
     filteredHelpTopics.map((topic) => (
-        <OptionsMenuItem key={topic.name} onSelect={onSelectHelpTopic} id={topic.name}>
-          {topic.title}
-        </OptionsMenuItem>
-      ));
+      <SelectOption key={topic.name} value={topic.name}>
+        {topic.title}
+      </SelectOption>
+    ));
 
   const paddingContainer = (children) => <div style={{ padding: '24px' }}>{children}</div>;
 
@@ -68,23 +72,23 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
       {paddingContainer(
         <Stack hasGutter>
           {activeHelpTopic?.links?.map(({ href, text, newTab, isExternal }, index) => (
-              <StackItem key={index}>
-                <Button
-                  component="a"
-                  href={href}
-                  target={newTab ? '_blank' : ''}
-                  rel="noopener noreferrer"
-                  variant="link"
-                  aria-label={`Open documentation in new window`}
-                  isInline
-                  icon={isExternal ? <ExternalLinkAltIcon /> : null}
-                  iconPosition="right"
-                  style={{ fontSize: 'inherit' }}
-                >
-                  {text || href}
-                </Button>
-              </StackItem>
-            ))}
+            <StackItem key={index}>
+              <Button
+                component="a"
+                href={href}
+                target={newTab ? '_blank' : ''}
+                rel="noopener noreferrer"
+                variant="link"
+                aria-label={`Open documentation in new window`}
+                isInline
+                icon={isExternal ? <ExternalLinkAltIcon /> : null}
+                iconPosition="right"
+                style={{ fontSize: 'inherit' }}
+              >
+                {text || href}
+              </Button>
+            </StackItem>
+          ))}
         </Stack>,
       )}
     </>
@@ -95,20 +99,28 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
       <div>
         <DrawerHead>
           <div className="pfext-quick-start-panel-content__title">
-            {menuItems && (
-              <OptionsMenu
-                id={'helptopics'}
+            {helpTopicOptions && (
+              <Select
                 isPlain
+                id="help-topics-select"
+                selected={activeHelpTopic}
                 isOpen={isHelpTopicMenuOpen}
-                toggle={
-                  <OptionsMenuToggle
-                    style={{ paddingLeft: '0px' }}
-                    onToggle={toggleHelpTopicMenu}
-                    toggleTemplate={<BarsIcon />}
-                  />
-                }
-                menuItems={menuItems}
-              />
+                onSelect={onSelectHelpTopic}
+                onOpenChange={(isOpen: boolean) => setIsHelpTopicMenuOpen(isOpen)}
+                toggle={(toggleRef) => (
+                  <MenuToggle
+                    isFullWidth
+                    ref={toggleRef}
+                    icon={<BarsIcon />}
+                    onClick={toggleHelpTopicMenu}
+                    isExpanded={isHelpTopicMenuOpen}
+                  >
+                    {activeHelpTopic.title}
+                  </MenuToggle>
+                )}
+              >
+                <SelectList>{helpTopicOptions}</SelectList>
+              </Select>
             )}
 
             <Title

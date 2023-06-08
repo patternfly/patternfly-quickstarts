@@ -12,6 +12,7 @@ yarn add @patternfly/quickstarts
 ### Peer dependencies
 
 If your project doesn't already have these installed, you'll need:
+
 ```bash
 yarn add @patternfly/react-core showdown
 ```
@@ -28,13 +29,15 @@ import '@patternfly/quickstarts/dist/quickstarts.min.css';
 ```
 
 ### Stylesheets if you use an older version of PatternFly
+
 If you use an older version of @patternfly/react-core (older than "4.115.2"), and you can't upgrade yet, you can pull in the necessary PatternFly styles that @patternfly/quickstarts depends upon.
 
 Ideally @patternfly/quickstarts will use the consumer provided PatternFly styles, only use these stylesheets if really needed.
 
-`quickstarts-standalone.min.css` nests the css classes within a **.pfext-quick-start__base** parent, so that they have higher specificity. `patternfly-global.css` includes component styles that we cannot nest with more specificity (for example Drawer since it can include consumer components that depend on an older PF version).
+`quickstarts-standalone.min.css` nests the css classes within a **.pfext-quick-start\_\_base** parent, so that they have higher specificity. `patternfly-global.css` includes component styles that we cannot nest with more specificity (for example Drawer since it can include consumer components that depend on an older PF version).
 
 > Note: Only use these stylesheets if necessary!
+
 ```js
 // import base from PatternFly to get the font
 import '@patternfly/react-core/dist/styles/base.css';
@@ -49,14 +52,14 @@ import '@patternfly/quickstarts/dist/quickstarts-standalone.min.css';
 Note: You can also view this example on [codesandbox](https://codesandbox.io/s/patternfly-quickstarts-finished-cnv53)!
 
 ```js
-import "./styles.css";
+import './styles.css';
 
 // base styles/variables for PatternFly-react
-import "@patternfly/react-core/dist/styles/base.css";
+import '@patternfly/react-core/dist/styles/base.css';
 // quick starts styles
-import "@patternfly/quickstarts/dist/quickstarts.min.css";
+import '@patternfly/quickstarts/dist/quickstarts.min.css';
 
-import * as React from "react";
+import * as React from 'react';
 import {
   QuickStartContainer,
   QuickStartCatalogPage,
@@ -64,15 +67,15 @@ import {
   useLocalStorage,
   setQueryArgument,
   removeQueryArgument,
-  QUICKSTART_ID_FILTER_KEY
-} from "@patternfly/quickstarts";
-import { Button } from "@patternfly/react-core";
-import jsYaml from "js-yaml";
+  QUICKSTART_ID_FILTER_KEY,
+} from '@patternfly/quickstarts';
+import { Button } from '@patternfly/react-core';
+import jsYaml from 'js-yaml';
 // quick start files could be yaml files or js files, or really anything,
 // as long as they get parsed out to the expected JSON format
-import quickstartOne from "./quick-starts/quickstart-one.yaml";
-import quickstartTwo from "./quick-starts/quickstart-two.yaml";
-import quickstartThree from "./quick-starts/quickstart-three";
+import quickstartOne from './quick-starts/quickstart-one.yaml';
+import quickstartTwo from './quick-starts/quickstart-two.yaml';
+import quickstartThree from './quick-starts/quickstart-three';
 
 const App = () => {
   const [quickStarts, setQuickStarts] = React.useState([]);
@@ -80,8 +83,8 @@ const App = () => {
 
   // You can use the useLocalStorage hook if you want to store user progress in local storage
   // Otherwise you can use React.useState here or another means (backend) to store the active quick start ID and state
-  const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage("quickstartId", "");
-  const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage("quickstarts", {});
+  const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage('quickstartId', '');
+  const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage('quickstarts', {});
   // or
   // const [activeQuickStartID, setActiveQuickStartID] = React.useState("");
   // const [allQuickStartStates, setAllQuickStartStates] = React.useState({});
@@ -91,7 +94,7 @@ const App = () => {
       const loadedQuickStarts = [
         jsYaml.load(quickstartOne),
         jsYaml.load(quickstartTwo),
-        quickstartThree
+        quickstartThree,
       ];
       setQuickStarts(loadedQuickStarts);
       setLoading(false);
@@ -134,7 +137,7 @@ const App = () => {
 
   return (
     <QuickStartContainer {...drawerProps}>
-      <Button onClick={() => toggleQuickStart("node-with-s2i")}>
+      <Button onClick={() => toggleQuickStart('node-with-s2i')}>
         Toggle quick start through prop
       </Button>
       <SomeNestedComponent />
@@ -151,7 +154,7 @@ const SomeNestedComponent = () => {
   const qsContext = React.useContext(QuickStartContext);
   // the quick start ID is defined in the quick start object's metadata.name field
   return (
-    <button onClick={() => qsContext.setActiveQuickStart("monitor-sampleapp")}>
+    <button onClick={() => qsContext.setActiveQuickStart('monitor-sampleapp')}>
       Toggle quick start through context
     </button>
   );
@@ -173,6 +176,7 @@ Here's a [yaml template](https://github.com/patternfly/patternfly-quickstarts/bl
 ## Writing quick starts
 
 Quick starts are typically written in yaml, but we've also seen projects use asciidoc and json. As long as you can pass in an [array of quick starts](https://github.com/patternfly/patternfly-quickstarts/blob/b086faefb0699e4259ca23d058ed330df1d87f8a/packages/module/src/QuickStartDrawer.tsx#L18) it doesn't really matter in what format your content is sourced.
+
 - We have a [yaml starter template here](https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/dev/src/quickstarts-data/yaml/template.yaml)
 - The easiest way to preview the content as you're writing it, is to use Visual Studio code with our [quickstarts-preview extension](https://marketplace.visualstudio.com/items?itemName=PatternFly.quickstarts-preview).
   - Alternatively, you can use [github.dev](https://github.dev/) which is basically VS Code on the web, and install the extension there, then edit your yaml content!
@@ -181,11 +185,13 @@ Quick starts are typically written in yaml, but we've also seen projects use asc
 ### Highlighting elements
 
 You can highlight an element on the page from within a quick start. The element that should be highlightable needs a data-quickstart-id attribute. Example:
+
 ```
 <button data-quickstart-id="special-btn">Click me</button>
 ```
 
 In the quick start task description, you can add this type of markdown to target this element:
+
 ```
 Highlight [special button]{{highlight special-btn}}
 ```
@@ -195,20 +201,24 @@ Highlight [special button]{{highlight special-btn}}
 You can have inline or block copyable text.
 
 #### Inline copyable text example
+
 ```
 `echo "Donec id est ante"`{{copy}}
 ```
 
 #### Multiline copyable text example
-```
+
+````
     ```
       First line of text.
       Second line of text.
     ```{{copy}}
-```
+````
 
 ## Markdown extensions
+
 If your source material content is defined in markdown (yaml + markdown / json + markdown), then you can add your own markdown extensions, example:
+
 ```
 const drawerProps: QuickStartContainerProps = {
   markdown: {
@@ -232,9 +242,11 @@ return <QuickStartContainer {...drawerProps}>My page content</QuickStartContaine
 ```
 
 ## Localization
+
 We use English as the default language. You can override the default by providing your own key/value pairs to the `QuickStartContainer` or `QuickStartContextProvider` resourceBundle prop.
 
 Example:
+
 ```js
 // load my own resource Czech translations resource bundle using i18next
 const resourceBundle = i18n.getResourceBundle('cs', 'quickstart');
@@ -244,10 +256,7 @@ const resources = {
   Continue: 'Resume',
   Restart: 'Start over',
 };
-return (
-  <QuickStartContainer resourceBundle={resources}>
-  </QuickStartContainer>
-)
+return <QuickStartContainer resourceBundle={resources}></QuickStartContainer>;
 ```
 
 Use this [file](https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/module/src/locales/en/quickstart.json) as a base for your translations.

@@ -1,9 +1,12 @@
 import * as React from 'react';
 import {
+  Badge,
+  MenuToggle,
+  MenuToggleElement,
   SearchInput,
   Select,
+  SelectList,
   SelectOption,
-  SelectVariant,
   ToolbarItem,
 } from '@patternfly/react-core';
 import { removeQueryArgument, setQueryArgument } from '@console/internal/components/utils';
@@ -35,19 +38,31 @@ export const QuickStartCatalogFilterSelect = ({
   ...props
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+
+  const toggle = (toggleRef: React.Ref<MenuToggleElement>) => (
+    <MenuToggle
+      isFullWidth
+      ref={toggleRef}
+      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+      isExpanded={isDropdownOpen}
+    >
+      {getResource('Status')}
+      {selectedFilters.length > 0 && <Badge isRead>{selectedFilters.length}</Badge>}
+    </MenuToggle>
+  );
+
   return (
     <ToolbarItem>
       <Select
-        variant={SelectVariant.checkbox}
         aria-label={getResource('Select filter')}
         isOpen={isDropdownOpen}
-        onToggle={(isEnabled) => setIsDropdownOpen(isEnabled)}
-        placeholderText={getResource('Status')}
+        selected={selectedFilters}
         onSelect={onRowfilterSelect}
-        selections={selectedFilters}
+        onOpenChange={(isOpen) => setIsDropdownOpen(isOpen)}
+        toggle={toggle}
         {...props}
       >
-        {dropdownItems}
+        <SelectList>{dropdownItems}</SelectList>
       </Select>
     </ToolbarItem>
   );
@@ -58,7 +73,7 @@ export const QuickStartCatalogFilterCount = ({ quickStartsCount }) => {
   return (
     <ToolbarItem
       className="pfext-quick-start-catalog-filter__count"
-      alignment={{ default: 'alignRight' }}
+      align={{ default: 'alignRight' }}
     >
       {getResource('{{count, number}} item', quickStartsCount).replace(
         '{{count, number}}',
@@ -170,9 +185,9 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<
     [filter.status.statusFilters, onStatusChange, setFilter, useQueryParams],
   );
 
-  const dropdownItems = Object.entries(filter.status.statusTypes).map(([key, val]) => (
-    <SelectOption key={key} data-key={key} value={key}>
-      <>{val}</>
+  const dropdownItems = Object.entries(filter.status.statusTypes).map(([key, value]) => (
+    <SelectOption key={key} data-key={key} value={value}>
+      <>{value}</>
     </SelectOption>
   ));
 
