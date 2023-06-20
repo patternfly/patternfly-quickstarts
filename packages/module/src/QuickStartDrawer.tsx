@@ -252,7 +252,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
             </DrawerContentBody>
           </DrawerContent>
         ) : (
-          <div className="pf-c-drawer__main">{panelContent}</div>
+          <div className="pf-v5-c-drawer__main">{panelContent}</div>
         )}
       </Drawer>
       <QuickStartCloseModal

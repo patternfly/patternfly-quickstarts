@@ -140,7 +140,7 @@ export const MockConsole: React.FC = () => {
   return (
     <>
       <PageSection>
-        <Banner variant="info">
+        <Banner variant="blue">
           <Title headingLevel="h1">Console Page {consolePageState}</Title>
         </Banner>
       </PageSection>

@@ -47,11 +47,11 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
   };
 
   const onSelectHelpTopic = (
-    event?: React.MouseEvent<Element, MouseEvent>,
-    _value?: string | number,
+    _event?: React.MouseEvent<Element, MouseEvent>,
+    value?: string | number,
   ) => {
-    const topicName = event.currentTarget.id;
-    setActiveHelpTopicByName(topicName);
+    const topicName = value;
+    setActiveHelpTopicByName(topicName.toString());
     toggleHelpTopicMenu();
   };
 
@@ -115,7 +115,7 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
                     onClick={toggleHelpTopicMenu}
                     isExpanded={isHelpTopicMenuOpen}
                   >
-                    {activeHelpTopic.title}
+                    {activeHelpTopic?.title}
                   </MenuToggle>
                 )}
               >
@@ -127,7 +127,7 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
               headingLevel="h1"
               size="xl"
               className="pfext-quick-start-panel-content__name"
-              style={{ marginRight: 'var(--pf-global--spacer--md)' }}
+              style={{ marginRight: 'var(--pf-v5-global--spacer--md)' }}
             >
               {activeHelpTopic?.title}
             </Title>

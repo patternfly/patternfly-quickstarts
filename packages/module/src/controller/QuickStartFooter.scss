@@ -1,10 +1,10 @@
 .pfext-quick-start-footer {
-  background-color: var(--pf-global--BackgroundColor--100);   // this is an example about how we should use PF variables
+  background-color: var(--pf-v5-global--BackgroundColor--100);   // this is an example about how we should use PF variables
   flex: 0 0 auto;
-  padding: var(--pf-global--spacer--md) var(--pf-global--spacer--lg);
+  padding: var(--pf-v5-global--spacer--md) var(--pf-v5-global--spacer--lg);
 
   &__actionbtn {
-    margin-right: var(--pf-global--spacer--md);
+    margin-right: var(--pf-v5-global--spacer--md);
   }
 
   &__restartbtn {

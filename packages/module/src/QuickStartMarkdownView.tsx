@@ -45,7 +45,7 @@ const QuickStartMarkdownView: React.FC<QuickStartMarkdownViewProps> = ({
             if (!linkLabel || !linkType || !linkId) {
               return text;
             }
-            return `<button class="pf-c-button pf-m-inline pf-m-link" data-highlight="${linkId}">${linkLabel}</button>`;
+            return `<button class="pf-v5-c-button pf-m-inline pf-m-link" data-highlight="${linkId}">${linkLabel}</button>`;
           },
         },
         {

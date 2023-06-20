@@ -21,7 +21,7 @@ export const QuickStartCatalogFilterSearch = ({ searchInputText, handleTextChang
       <SearchInput
         placeholder={getResource('Filter by keyword...')}
         value={searchInputText}
-        onChange={handleTextChange}
+        onChange={(_ev, value) => handleTextChange(value)}
         onClear={() => handleTextChange('')}
         {...props}
       />
@@ -166,9 +166,11 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 
   const onRowfilterSelect = React.useCallback(
-    (e) => {
+    (_e, selectedValue) => {
       setIsDropdownOpen(false);
-      const selection = e.target.parentElement.getAttribute('data-key');
+      const selection = Object.entries(filter.status.statusTypes).find(
+        ([_key, value]) => value === selectedValue,
+      )[0];
       const selectedFiltersList = filter.status.statusFilters.includes(selection)
         ? filter.status.statusFilters.filter((status) => status !== selection)
         : [...filter.status.statusFilters, selection];
@@ -186,7 +188,13 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<
   );
 
   const dropdownItems = Object.entries(filter.status.statusTypes).map(([key, value]) => (
-    <SelectOption key={key} data-key={key} value={value}>
+    <SelectOption
+      key={key}
+      data-key={key}
+      value={value}
+      hasCheckbox
+      isSelected={filter.status.statusFilters.includes(key)}
+    >
       <>{value}</>
     </SelectOption>
   ));

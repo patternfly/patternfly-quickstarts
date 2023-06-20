@@ -8,7 +8,7 @@ const runThroughQuickStart = async (id, page, percySnapshot) => {
   };
   await page.goto(`http://localhost:3000?quickstart=${id}`);
   // ensure the page has loaded before capturing a snapshot
-  await page.waitFor('.pf-c-drawer__panel');
+  await page.waitFor('.pf-v5-c-drawer__panel');
   withSnapshots && (await percySnapshot(`${id}__intro`, snapshotOptions));
 
   await page.click('[data-test="Start button"]');

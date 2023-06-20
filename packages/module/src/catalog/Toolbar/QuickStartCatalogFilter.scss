@@ -5,21 +5,21 @@
   }
 
   &__count {
-    font-weight: var(--pf-global--FontWeight--bold);
+    font-weight: var(--pf-v5-global--FontWeight--bold);
   }
 }
 
-.pf-c-toolbar.pf-m-page-insets.pfext-quick-start-catalog-filter__flex {
-  --pf-c-toolbar--PaddingBottom: var(--pf-global--spacer--sm);
-  --pf-c-toolbar--PaddingTop: var(--pf-global--spacer--sm);
-  --pf-c-toolbar--RowGap: 0;
+.pf-v5-c-toolbar.pf-m-page-insets.pfext-quick-start-catalog-filter__flex {
+  --pf-v5-c-toolbar--PaddingBottom: var(--pf-v5-global--spacer--sm);
+  --pf-v5-c-toolbar--PaddingTop: var(--pf-v5-global--spacer--sm);
+  --pf-v5-c-toolbar--RowGap: 0;
   font-size: 14px;
 
-  .pf-c-select {
-    --pf-c-select__toggle--FontSize: 14px;
+  .pf-v5-c-select {
+    --pf-v5-c-select__toggle--FontSize: 14px;
   }
 
-  .pf-c-check {
-    --pf-c-check__label--FontSize: 14px;
+  .pf-v5-c-check {
+    --pf-v5-c-check__label--FontSize: 14px;
   }
 }

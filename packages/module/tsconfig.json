@@ -27,7 +27,8 @@
     },
     "importHelpers": true,
     "skipLibCheck": true,
-    "typeRoots": ["node_modules/@types", "@types"]
+    "typeRoots": ["node_modules/@types", "@types"],
+    "declaration": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/__tests__", "dist"]
