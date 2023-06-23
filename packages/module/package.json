@@ -11,7 +11,7 @@
   "types": "dist/index.d.ts",
   "publishConfig": {
     "access": "public",
-    "tag": "alpha"
+    "tag": "prerelease"
   },
   "repository": {
     "type": "git",
@@ -57,14 +57,14 @@
     "showdown": "1.8.6"
   },
   "devDependencies": {
-    "@patternfly/documentation-framework": "^2.0.0-alpha.57",
-    "@patternfly/patternfly": "5.0.0-prerelease.10",
-    "@patternfly/react-core": "5.0.0-prerelease.13",
-    "@patternfly/react-icons": "5.0.0-prerelease.7",
-    "@patternfly/react-styles": "5.0.0-prerelease.5",
-    "@patternfly/react-tokens": "5.0.0-prerelease.5",
-    "@patternfly/react-table": "5.0.0-prerelease.13",
-    "@patternfly/react-code-editor": "5.0.0-prerelease.13",
+    "@patternfly/documentation-framework": "^2.0.0-alpha.73",
+    "@patternfly/patternfly": "^5.0.0-prerelease.10",
+    "@patternfly/react-core": "^5.0.0-prerelease.13",
+    "@patternfly/react-icons": "^5.0.0-prerelease.7",
+    "@patternfly/react-styles": "^5.0.0-prerelease.5",
+    "@patternfly/react-tokens": "^5.0.0-prerelease.5",
+    "@patternfly/react-table": "^5.0.0-prerelease.13",
+    "@patternfly/react-code-editor": "^5.0.0-prerelease.13",
     "react-monaco-editor": "0.51.0",
     "monaco-editor": "0.34.1",
     "@rollup/plugin-commonjs": "^17.0.0",
