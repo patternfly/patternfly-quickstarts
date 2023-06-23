@@ -1,41 +1,41 @@
 .pfext-quick-start-task-header {
-  margin-bottom: var(--pf-global--spacer--sm);
+  margin-bottom: var(--pf-v5-global--spacer--sm);
   display: grid;
   grid-template-columns: min-content auto;
-  font-size: var(--pf-global--FontSize--md);
+  font-size: var(--pf-v5-global--FontSize--md);
   button::before {
     content: none;
   }
 
   &__title {
-    color: var(--pf-global--primary-color--100) !important;
-    margin-right: var(--pf-global--spacer--md) !important;
+    color: var(--pf-v5-global--primary-color--100) !important;
+    margin-right: var(--pf-v5-global--spacer--md) !important;
   }
 
   &__subtitle {
-    font-size: var(--pf-global--FontSize--sm);
-    color: var(--pf-global--Color--dark-200) !important;
+    font-size: var(--pf-v5-global--FontSize--sm);
+    color: var(--pf-v5-global--Color--dark-200) !important;
   }
 
   &__tryagain {
     display: block;
-    font-size: var(--pf-global--FontSize--md);
-    color: var(--pf-global--Color--300) !important;
+    font-size: var(--pf-v5-global--FontSize--md);
+    color: var(--pf-v5-global--Color--300) !important;
   }
 
   &__title-success {
-    color: var(--pf-global--success-color--100) !important;
+    color: var(--pf-v5-global--success-color--100) !important;
   }
 
   &__title-failed {
-    color: var(--pf-global--danger-color--100) !important;
+    color: var(--pf-v5-global--danger-color--100) !important;
   }
 
   &__task-icon {
     &-init {
-      background-color: var(--pf-global--primary-color--100);
-      border-radius: var(--pf-global--BorderRadius--lg);
-      color: var(--pf-global--Color--light-100);
+      background-color: var(--pf-v5-global--primary-color--100);
+      border-radius: var(--pf-v5-global--BorderRadius--lg);
+      color: var(--pf-v5-global--Color--light-100);
       display: inline-flex;
       justify-content: center;
       height: 1.5em;
@@ -48,11 +48,11 @@
     }
 
     &-success {
-      color: var(--pf-global--success-color--100) !important;
+      color: var(--pf-v5-global--success-color--100) !important;
     }
 
     &-failed {
-      color: var(--pf-global--danger-color--100) !important;
+      color: var(--pf-v5-global--danger-color--100) !important;
     }
   }
 }

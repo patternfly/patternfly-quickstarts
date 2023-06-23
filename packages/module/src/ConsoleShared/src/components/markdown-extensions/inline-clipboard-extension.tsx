@@ -17,11 +17,11 @@ const useInlineCopyClipboardShowdownExtension = () => {
           return text;
         }
         return removeTemplateWhitespace(
-          `<span class="pf-c-clipboard-copy pf-m-inline">
-              <span class="pf-c-clipboard-copy__text" ${MARKDOWN_SNIPPET_ID}="${groupId}">${group}</span>
-              <span class="pf-c-clipboard-copy__actions">
-                <span class="pf-c-clipboard-copy__actions-item">
-                  <button class="pf-c-button pf-m-plain" aria-label="${getResource(
+          `<span class="pf-v5-c-clipboard-copy pf-m-inline">
+              <span class="pf-v5-c-clipboard-copy__text" ${MARKDOWN_SNIPPET_ID}="${groupId}">${group}</span>
+              <span class="pf-v5-c-clipboard-copy__actions">
+                <span class="pf-v5-c-clipboard-copy__actions-item">
+                  <button class="pf-v5-c-button pf-m-plain" aria-label="${getResource(
                     'Copy to clipboard',
                   )}" ${MARKDOWN_COPY_BUTTON_ID}="${groupId}">
                     ${renderToStaticMarkup(<CopyIcon />)}

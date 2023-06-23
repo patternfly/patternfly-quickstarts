@@ -1,9 +1,12 @@
 import * as React from 'react';
 import {
+  Badge,
+  MenuToggle,
+  MenuToggleElement,
   SearchInput,
   Select,
+  SelectList,
   SelectOption,
-  SelectVariant,
   ToolbarItem,
 } from '@patternfly/react-core';
 import { removeQueryArgument, setQueryArgument } from '@console/internal/components/utils';
@@ -18,7 +21,7 @@ export const QuickStartCatalogFilterSearch = ({ searchInputText, handleTextChang
       <SearchInput
         placeholder={getResource('Filter by keyword...')}
         value={searchInputText}
-        onChange={handleTextChange}
+        onChange={(_ev, value) => handleTextChange(value)}
         onClear={() => handleTextChange('')}
         {...props}
       />
@@ -35,19 +38,31 @@ export const QuickStartCatalogFilterSelect = ({
   ...props
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+
+  const toggle = (toggleRef: React.Ref<MenuToggleElement>) => (
+    <MenuToggle
+      isFullWidth
+      ref={toggleRef}
+      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+      isExpanded={isDropdownOpen}
+    >
+      {getResource('Status')}
+      {selectedFilters.length > 0 && <Badge isRead>{selectedFilters.length}</Badge>}
+    </MenuToggle>
+  );
+
   return (
     <ToolbarItem>
       <Select
-        variant={SelectVariant.checkbox}
         aria-label={getResource('Select filter')}
         isOpen={isDropdownOpen}
-        onToggle={(isEnabled) => setIsDropdownOpen(isEnabled)}
-        placeholderText={getResource('Status')}
+        selected={selectedFilters}
         onSelect={onRowfilterSelect}
-        selections={selectedFilters}
+        onOpenChange={(isOpen) => setIsDropdownOpen(isOpen)}
+        toggle={toggle}
         {...props}
       >
-        {dropdownItems}
+        <SelectList>{dropdownItems}</SelectList>
       </Select>
     </ToolbarItem>
   );
@@ -58,7 +73,7 @@ export const QuickStartCatalogFilterCount = ({ quickStartsCount }) => {
   return (
     <ToolbarItem
       className="pfext-quick-start-catalog-filter__count"
-      alignment={{ default: 'alignRight' }}
+      align={{ default: 'alignRight' }}
     >
       {getResource('{{count, number}} item', quickStartsCount).replace(
         '{{count, number}}',
@@ -151,9 +166,11 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 
   const onRowfilterSelect = React.useCallback(
-    (e) => {
+    (_e, selectedValue) => {
       setIsDropdownOpen(false);
-      const selection = e.target.parentElement.getAttribute('data-key');
+      const selection = Object.entries(filter.status.statusTypes).find(
+        ([_key, value]) => value === selectedValue,
+      )[0];
       const selectedFiltersList = filter.status.statusFilters.includes(selection)
         ? filter.status.statusFilters.filter((status) => status !== selection)
         : [...filter.status.statusFilters, selection];
@@ -170,9 +187,15 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<
     [filter.status.statusFilters, onStatusChange, setFilter, useQueryParams],
   );
 
-  const dropdownItems = Object.entries(filter.status.statusTypes).map(([key, val]) => (
-    <SelectOption key={key} data-key={key} value={key}>
-      <>{val}</>
+  const dropdownItems = Object.entries(filter.status.statusTypes).map(([key, value]) => (
+    <SelectOption
+      key={key}
+      data-key={key}
+      value={value}
+      hasCheckbox
+      isSelected={filter.status.statusFilters.includes(key)}
+    >
+      <>{value}</>
     </SelectOption>
   ));
 

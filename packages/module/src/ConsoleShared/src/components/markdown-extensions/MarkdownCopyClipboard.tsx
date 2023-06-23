@@ -19,9 +19,11 @@ export const CopyClipboard: React.FC<CopyClipboardProps> = ({
   const [showSuccessContent, setShowSuccessContent] = React.useState<boolean>(false);
   const textToCopy = React.useMemo(() => {
     const copyTextId = element.getAttribute(MARKDOWN_COPY_BUTTON_ID);
-    return (docContext.querySelector(
-      `${rootSelector} [${MARKDOWN_SNIPPET_ID}="${copyTextId}"]`,
-    ) as HTMLElement)?.innerText;
+    return (
+      docContext.querySelector(
+        `${rootSelector} [${MARKDOWN_SNIPPET_ID}="${copyTextId}"]`,
+      ) as HTMLElement
+    )?.innerText;
   }, [element, docContext, rootSelector]);
 
   useEventListener(
@@ -49,14 +51,14 @@ export const CopyClipboard: React.FC<CopyClipboardProps> = ({
     <Tooltip
       key="after-copy"
       isVisible
-      reference={() => element as HTMLElement}
+      triggerRef={() => element as HTMLElement}
       content={getResource('Successfully copied to clipboard!')}
       className="pfext-quick-start__base"
     />
   ) : (
     <Tooltip
       key="before-copy"
-      reference={() => element as HTMLElement}
+      triggerRef={() => element as HTMLElement}
       content={getResource('Copy to clipboard')}
       className="pfext-quick-start__base"
     />

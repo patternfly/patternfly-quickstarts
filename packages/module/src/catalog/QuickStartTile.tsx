@@ -61,7 +61,9 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
     return <QuickStartTileFooter quickStartId={id} status={status} totalTasks={tasks?.length} />;
   }, [footer, id, link, status, tasks?.length]);
 
-  const handleClick = (e: React.SyntheticEvent<HTMLElement, Event>) => {
+  const handleClick = (
+    e: React.FormEvent<HTMLInputElement> | React.MouseEvent<Element, MouseEvent>,
+  ) => {
     if (ref.current?.contains(e.target as Node)) {
       if (link) {
         window.open(link.href);
@@ -75,6 +77,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
   return (
     <div ref={ref}>
       <CatalogTile
+        id={id + '-catalog-tile'}
         style={{
           cursor: 'pointer',
         }}
@@ -99,7 +102,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
           }
         }}
         // https://github.com/patternfly/patternfly-react/issues/7039
-        href="#"
+        href={link?.href}
         data-test={`tile ${id}`}
         description={
           <QuickStartTileDescription description={description} prerequisites={prerequisites} />

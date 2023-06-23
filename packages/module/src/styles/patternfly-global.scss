@@ -5,12 +5,12 @@
 // TODO: Investigate if we can remove and/or nest these within patternfly-nested.css
 // what do we really need to expose globally?
 // here are the classes that exist outside the scope of .pfext-quick-start__base:
-// class="pf-c-popover pfext-quick-start__base pf-m-right"
-// class="pf-c-modal-box pfext-modal pfext-quick-start-drawer__modal pfext-quick-start__base pf-m-sm"
-// class="pf-c-backdrop__open"
-// class="pf-c-backdrop"
-// class="pf-l-bullseye"
-// class="pf-c-tooltip pf-m-top pfext-quick-start__base"
+// class="pf-v5-c-popover pfext-quick-start__base pf-m-right"
+// class="pf-v5-c-modal-box pfext-modal pfext-quick-start-drawer__modal pfext-quick-start__base pf-m-sm"
+// class="pf-v5-c-backdrop__open"
+// class="pf-v5-c-backdrop"
+// class="pf-v5-l-bullseye"
+// class="pf-v5-c-tooltip pf-m-top pfext-quick-start__base"
 
 @import '@patternfly/patternfly/sass-utilities/all';
 // gets added globally to :root

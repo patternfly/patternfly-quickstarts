@@ -1,17 +1,19 @@
 import React from 'react';
 import {
-  PageHeaderTools,
-  PageHeaderToolsItem,
-  Button,
-  PageHeader,
-  Brand,
-  Nav as PfNav,
-  NavList,
-  NavItem,
-  PageSidebar,
-  ButtonVariant,
-  Switch,
+	Button,
+	Brand,
+	Nav as PfNav,
+	NavList,
+	NavItem,
+	PageSidebar,
+	ButtonVariant,
+	Switch, PageSidebarBody
 } from '@patternfly/react-core';
+import {
+	PageHeaderTools,
+	PageHeaderToolsItem,
+	PageHeader
+} from '@patternfly/react-core/deprecated';
 import LightbulbIcon from '@patternfly/react-icons/dist/js/icons/lightbulb-icon';
 import { QuickStartContext } from '@patternfly/quickstarts';
 import { Link } from 'react-router-dom';
@@ -30,9 +32,9 @@ const AppToolbar = () => {
   const handleDarkThemeChange = (isChecked: boolean) => {
     setDarkTheme(isChecked);
     if (isChecked) {
-      document.documentElement.classList.add('pf-theme-dark');
+      document.documentElement.classList.add('pf-v5-theme-dark');
     } else {
-      document.documentElement.classList.remove('pf-theme-dark');
+      document.documentElement.classList.remove('pf-v5-theme-dark');
     }
   };
 
@@ -44,7 +46,7 @@ const AppToolbar = () => {
           aria-label="Toggle dark theme"
           label="Dark theme"
           isChecked={isDarkTheme}
-          onChange={handleDarkThemeChange}
+          onChange={(_event, isChecked: boolean) => handleDarkThemeChange(isChecked)}
         />
       </PageHeaderToolsItem>
       <PageHeaderToolsItem>
@@ -95,4 +97,8 @@ const AppNav = (
   </PfNav>
 );
 
-export const AppSidebar = <PageSidebar isNavOpen nav={AppNav} />;
+export const AppSidebar = <PageSidebar isSidebarOpen >
+<PageSidebarBody>
+{AppNav}
+</PageSidebarBody>
+</PageSidebar>;

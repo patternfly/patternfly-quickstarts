@@ -1,19 +1,19 @@
 .pfext-quick-start-intro {
   &__prereq {
-    margin-bottom: var(--pf-global--spacer--md);
-    .pf-c-expandable-section__content {
-      margin-top: var(--pf-global--spacer--sm);
+    margin-bottom: var(--pf-v5-global--spacer--md);
+    .pf-v5-c-expandable-section__content {
+      margin-top: var(--pf-v5-global--spacer--sm);
     }
-    .pf-c-expandable-section__toggle {
+    .pf-v5-c-expandable-section__toggle {
       padding-top: 0;
       padding-bottom: 0;
       &-text {
-        margin-left: var(--pf-global--spacer--sm);
+        margin-left: var(--pf-v5-global--spacer--sm);
       }
       &-icon {
-        color: var(--pf-c-expandable-section__toggle--Color);
+        color: var(--pf-v5-c-expandable-section__toggle--Color);
         &:focus, &:hover {
-          --pf-c-expandable-section__toggle--Color: var(--pf-c-expandable-section__toggle--focus--Color);
+          --pf-v5-c-expandable-section__toggle--Color: var(--pf-v5-c-expandable-section__toggle--focus--Color);
         }
       }
     }

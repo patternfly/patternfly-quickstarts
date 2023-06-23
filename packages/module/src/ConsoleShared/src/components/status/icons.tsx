@@ -5,15 +5,17 @@ import InfoCircleIcon from '@patternfly/react-icons/dist/js/icons/info-circle-ic
 import dangerColor from '@patternfly/react-tokens/dist/esm/global_danger_color_100';
 import blueInfoColor from '@patternfly/react-tokens/dist/esm/global_palette_blue_300';
 import okColor from '@patternfly/react-tokens/dist/esm/global_palette_green_500';
+import { Icon } from '@patternfly/react-core';
 
 export const GreenCheckCircleIcon: React.FC<ColoredIconProps> = ({ className, title, size }) => (
-  <CheckCircleIcon
-    data-test="success-icon"
-    size={size}
-    color={okColor.value}
-    className={className}
-    title={title}
-  />
+  <Icon size={size}>
+    <CheckCircleIcon
+      data-test="success-icon"
+      color={okColor.value}
+      className={className}
+      title={title}
+    />
+  </Icon>
 );
 
 export const RedExclamationCircleIcon: React.FC<ColoredIconProps> = ({
@@ -21,12 +23,9 @@ export const RedExclamationCircleIcon: React.FC<ColoredIconProps> = ({
   title,
   size,
 }) => (
-  <ExclamationCircleIcon
-    size={size}
-    color={dangerColor.value}
-    className={className}
-    title={title}
-  />
+  <Icon size={size}>
+    <ExclamationCircleIcon color={dangerColor.value} className={className} title={title} />
+  </Icon>
 );
 
 export const BlueInfoCircleIcon: React.FC<ColoredIconProps> = ({ className, title }) => (

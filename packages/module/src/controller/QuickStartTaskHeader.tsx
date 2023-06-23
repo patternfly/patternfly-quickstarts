@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Title, WizardNavItem } from '@patternfly/react-core';
+import { Icon, Title, WizardNavItem } from '@patternfly/react-core';
 import CheckCircleIcon from '@patternfly/react-icons/dist/js/icons/check-circle-icon';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/js/icons/exclamation-circle-icon';
 import { css } from '@patternfly/react-styles';
@@ -36,14 +36,15 @@ const TaskIcon: React.FC<{
 
   if (success) {
     content = (
-      <CheckCircleIcon size="md" className="pfext-quick-start-task-header__task-icon-success" />
+      <Icon size="md">
+        <CheckCircleIcon className="pfext-quick-start-task-header__task-icon-success" />{' '}
+      </Icon>
     );
   } else if (failed) {
     content = (
-      <ExclamationCircleIcon
-        size="md"
-        className="pfext-quick-start-task-header__task-icon-failed"
-      />
+      <Icon size="md">
+        <ExclamationCircleIcon className="pfext-quick-start-task-header__task-icon-failed" />
+      </Icon>
     );
   } else {
     content = getResource('{{taskIndex, number}}', taskIndex).replace(
@@ -111,9 +112,9 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   return (
     <WizardNavItem
       content={content}
-      step={taskIndex}
-      onNavItemClick={() => onTaskSelect(taskIndex - 1)}
-      navItemComponent="button"
+      stepIndex={taskIndex}
+      onClick={() => onTaskSelect(taskIndex - 1)}
+      component="button"
       isCurrent={isActiveTask}
     >
       {children}

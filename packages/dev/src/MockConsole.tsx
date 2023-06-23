@@ -60,7 +60,7 @@ const FormGroupWithHelpTopicPopover: React.FC<FormGroupWithHelpTopicPopoverProps
             )}
           >
             <Button variant="plain">
-              <HelpIcon noVerticalAlign />
+              <HelpIcon />
             </Button>
           </Popover>
           <Button
@@ -76,12 +76,8 @@ const FormGroupWithHelpTopicPopover: React.FC<FormGroupWithHelpTopicPopoverProps
 };
 
 export const MockConsole: React.FC = () => {
-  const {
-    helpTopics,
-    setFilteredHelpTopics,
-    filteredHelpTopics,
-    setActiveHelpTopicByName,
-  } = React.useContext<HelpTopicContextValues>(HelpTopicContext);
+  const { helpTopics, setFilteredHelpTopics, filteredHelpTopics, setActiveHelpTopicByName } =
+    React.useContext<HelpTopicContextValues>(HelpTopicContext);
 
   const [closeDrawerOnPageChange, setCloseDrawerOnPageChange] = React.useState(true);
 
@@ -119,16 +115,21 @@ export const MockConsole: React.FC = () => {
     } else {
       // set filtered topics using the appropriate helpTopicNamesByPage array above
       setFilteredHelpTopics(
-        helpTopics.filter((topic) => helpTopicNamesByPage[consolePageState - 4].includes(topic.name)),
+        helpTopics.filter((topic) =>
+          helpTopicNamesByPage[consolePageState - 4].includes(topic.name),
+        ),
       );
     }
   }, [consolePageState, helpTopics, setFilteredHelpTopics]);
 
   // Render filteredHelpTopics in a <FormGroupWithHelpTopicPopover />
-  const formGroupsFromTags = filteredHelpTopics.map((topic: HelpTopic, index) => <FormGroupWithHelpTopicPopover topic={topic} key={index} />);
+  const formGroupsFromTags = filteredHelpTopics.map((topic: HelpTopic, index) => (
+    <FormGroupWithHelpTopicPopover topic={topic} key={index} />
+  ));
 
   // From an array of topic names, render all topics in a <FormGroupWithHelpTopicPopover />
-  const formGroupsFromTopicNames = (helpTopicNames: string[]) => helpTopicNames.map((topicName: string, index) => {
+  const formGroupsFromTopicNames = (helpTopicNames: string[]) =>
+    helpTopicNames.map((topicName: string, index) => {
       const topicToRender = helpTopics.find((topic) => topicName === topic.name);
 
       if (topicToRender) {
@@ -139,7 +140,7 @@ export const MockConsole: React.FC = () => {
   return (
     <>
       <PageSection>
-        <Banner variant="info">
+        <Banner variant="blue">
           <Title headingLevel="h1">Console Page {consolePageState}</Title>
         </Banner>
       </PageSection>
