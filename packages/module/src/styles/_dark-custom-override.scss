@@ -22,7 +22,7 @@
     color: var(--pf-v5-global--palette--black-200) !important;
   }
 
-  .pfext-markdown-view pre {
+  .pfext-markdown-view pre:not(.pfext-code-block__pre) {
     background-color: var(--pf-v5-global--BackgroundColor--100);
     border-color: var(--pf-v5-global--BorderColor--100);
   }
