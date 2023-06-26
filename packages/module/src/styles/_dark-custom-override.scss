@@ -27,7 +27,7 @@
     border-color: var(--pf-v5-global--BorderColor--100);
   }
 
-  .pfext-markdown-view code {
+  .pfext-markdown-view .pf-v5-c-code-block__code {
     color: var(--pf-v5-global--Color--100);
     background-color: var(--pf-v5-global--palette--black-600);
   }
