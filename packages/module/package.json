@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/quickstarts",
-  "version": "5.0.0-prerelease.0",
+  "version": "0.0.0",
   "description": "PatternFly quick starts",
   "files": [
     "src",
@@ -51,20 +51,20 @@
     "showdown": ">=1.8.6"
   },
   "dependencies": {
-    "@patternfly/react-catalog-view-extension": "^5.0.0-prerelease.2",
+    "@patternfly/react-catalog-view-extension": "^5.0.0",
     "dompurify": "^2.2.6",
     "history": "^5.0.0",
     "showdown": "1.8.6"
   },
   "devDependencies": {
     "@patternfly/documentation-framework": "^5.0.15",
-    "@patternfly/patternfly": "^5.0.0-prerelease.16",
-    "@patternfly/react-core": "^5.0.0-prerelease.26",
-    "@patternfly/react-icons": "^5.0.0-prerelease.9",
-    "@patternfly/react-styles": "^5.0.0-prerelease.7",
-    "@patternfly/react-tokens": "^5.0.0-prerelease.9",
-    "@patternfly/react-table": "^5.0.0-prerelease.26",
-    "@patternfly/react-code-editor": "^5.0.0-prerelease.26",
+    "@patternfly/patternfly": "^5.0.0",
+    "@patternfly/react-core": "^5.0.0",
+    "@patternfly/react-icons": "^5.0.0",
+    "@patternfly/react-styles": "^5.0.0",
+    "@patternfly/react-tokens": "^5.0.0",
+    "@patternfly/react-table": "^5.0.0",
+    "@patternfly/react-code-editor": "^5.0.0",
     "react-monaco-editor": "0.51.0",
     "monaco-editor": "0.34.1",
     "@rollup/plugin-commonjs": "^17.0.0",
