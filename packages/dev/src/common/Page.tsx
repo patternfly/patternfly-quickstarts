@@ -1,19 +1,26 @@
 import React from 'react';
 import {
-	Button,
-	Brand,
-	Nav as PfNav,
-	NavList,
-	NavItem,
-	PageSidebar,
-	ButtonVariant,
-	Switch, PageSidebarBody
+  Button,
+  Brand,
+  Nav as PfNav,
+  NavList,
+  NavItem,
+  PageSidebar,
+  ButtonVariant,
+  Switch,
+  PageSidebarBody,
+  Masthead,
+  MastheadBrand,
+  MastheadContent,
+  MastheadMain,
+  MastheadToggle,
+  PageToggleButton,
+  Toolbar,
+  ToolbarContent,
+  ToolbarGroup,
+  ToolbarItem,
 } from '@patternfly/react-core';
-import {
-	PageHeaderTools,
-	PageHeaderToolsItem,
-	PageHeader
-} from '@patternfly/react-core/deprecated';
+import BarsIcon from '@patternfly/react-icons/dist/js/icons/bars-icon';
 import LightbulbIcon from '@patternfly/react-icons/dist/js/icons/lightbulb-icon';
 import { QuickStartContext } from '@patternfly/quickstarts';
 import { Link } from 'react-router-dom';
@@ -39,48 +46,68 @@ const AppToolbar = () => {
   };
 
   return (
-    <PageHeaderTools>
-      <PageHeaderToolsItem>
-        <Switch
-          id="dark-theme-switch"
-          aria-label="Toggle dark theme"
-          label="Dark theme"
-          isChecked={isDarkTheme}
-          onChange={(_event, isChecked: boolean) => handleDarkThemeChange(isChecked)}
-        />
-      </PageHeaderToolsItem>
-      <PageHeaderToolsItem>
-        <Button
-          aria-label="Toggle quick start"
-          variant={ButtonVariant.plain}
-          onClick={() => qsContext.setActiveQuickStart(qsId)}
+    <Toolbar id="toolbar" isFullHeight isStatic>
+      <ToolbarContent>
+        <ToolbarGroup
+          variant="icon-button-group"
+          align={{ default: 'alignRight' }}
+          spacer={{ default: 'spacerNone', md: 'spacerMd' }}
         >
-          <LightbulbIcon
-            color={qsContext.activeQuickStartID === qsId ? 'yellow' : 'currentColor'}
-          />
-        </Button>
-      </PageHeaderToolsItem>
-      <PageHeaderToolsItem>
-        <Button
-          variant="primary"
-          onClick={() => setModalOpen(!isModalOpen)}
-          data-quickstart-id="settings"
-        >
-          Settings
-        </Button>
-        <SettingsModal isOpen={isModalOpen} onClose={onModalClose} />
-      </PageHeaderToolsItem>
-    </PageHeaderTools>
+          <ToolbarItem>
+            <Switch
+              id="dark-theme-switch"
+              aria-label="Toggle dark theme"
+              label="Dark theme"
+              isChecked={isDarkTheme}
+              onChange={(_event, isChecked: boolean) => handleDarkThemeChange(isChecked)}
+            />
+          </ToolbarItem>
+          <ToolbarItem>
+            <Button
+              aria-label="Toggle quick start"
+              variant={ButtonVariant.plain}
+              onClick={() => qsContext.setActiveQuickStart(qsId)}
+            >
+              <LightbulbIcon
+                color={qsContext.activeQuickStartID === qsId ? 'yellow' : 'currentColor'}
+              />
+            </Button>
+          </ToolbarItem>
+          <ToolbarItem>
+            <Button
+              variant="primary"
+              onClick={() => setModalOpen(!isModalOpen)}
+              data-quickstart-id="settings"
+            >
+              Settings
+            </Button>
+            <SettingsModal isOpen={isModalOpen} onClose={onModalClose} />
+          </ToolbarItem>
+        </ToolbarGroup>
+      </ToolbarContent>
+    </Toolbar>
   );
 };
 
 export const AppHeader = (
-  <PageHeader
-    logo={<Brand src={imgBrand} alt="Patternfly Logo" data-quickstart-id="logo" />}
-    headerTools={<AppToolbar />}
-    showNavToggle
-    isNavOpen
-  />
+  <Masthead>
+    <MastheadToggle>
+      <PageToggleButton variant="plain" aria-label="Global navigation">
+        <BarsIcon />
+      </PageToggleButton>
+    </MastheadToggle>
+    <MastheadMain>
+      <MastheadBrand>
+        <Brand
+          src={imgBrand}
+          alt="PatternFly logo"
+          heights={{ default: '36px' }}
+          data-quickstart-id="logo"
+        />
+      </MastheadBrand>
+    </MastheadMain>
+    <MastheadContent>{<AppToolbar />}</MastheadContent>
+  </Masthead>
 );
 
 const AppNav = (
@@ -97,8 +124,8 @@ const AppNav = (
   </PfNav>
 );
 
-export const AppSidebar = <PageSidebar isSidebarOpen >
-<PageSidebarBody>
-{AppNav}
-</PageSidebarBody>
-</PageSidebar>;
+export const AppSidebar = (
+  <PageSidebar isSidebarOpen>
+    <PageSidebarBody>{AppNav}</PageSidebarBody>
+  </PageSidebar>
+);
