@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@patternfly/patternfly": "^5.0.0",
-    "@patternfly/quickstarts": "^5.0.0-prerelease.2",
+    "@patternfly/quickstarts": "0.0.0",
     "@patternfly/transform-adoc": "*",
     "@patternfly/react-core": "^5.0.0",
     "asciidoctor": "^2.2.1",
@@ -22,7 +22,7 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^11.7.3",
     "react-router-dom": "^6.11.2",
-    "showdown": "1.8.6",
+    "showdown": "2.1.0",
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
