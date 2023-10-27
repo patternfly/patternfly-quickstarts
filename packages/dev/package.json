@@ -22,7 +22,7 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^11.7.3",
     "react-router-dom": "^6.11.2",
-    "showdown": "1.8.6",
+    "showdown": "1.9.1",
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {

@@ -54,7 +54,7 @@
     "@patternfly/react-catalog-view-extension": "^5.0.0",
     "dompurify": "^2.2.6",
     "history": "^5.0.0",
-    "showdown": "1.8.6"
+    "showdown": "1.9.1"
   },
   "devDependencies": {
     "@patternfly/documentation-framework": "^5.0.15",
