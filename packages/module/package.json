@@ -48,13 +48,12 @@
     "@patternfly/react-core": ">=4.115.2",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0",
-    "showdown": ">=1.8.6"
+    "showdown": ">=2.1.0"
   },
   "dependencies": {
     "@patternfly/react-catalog-view-extension": "^4.93.15",
     "dompurify": "^2.2.6",
-    "history": "^5.0.0",
-    "showdown": "1.8.6"
+    "history": "^5.0.0"
   },
   "devDependencies": {
     "@patternfly/documentation-framework": "^1.8.0",
