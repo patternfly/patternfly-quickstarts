@@ -73,7 +73,7 @@ export const esBuild = {
 };
 
 // Build out the full version of quick starts including the dependencies
-// (showdown, PatternFly, ...)
+// (PatternFly, ...)
 // This is useful also for evaluating the CSS against so we can remove unused styles
 const esBuildWithDeps = {
   input: 'src/index.ts',
