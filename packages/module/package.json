@@ -45,7 +45,7 @@
     "docs:copy": "mkdir -p dist/patternfly-docs && cp -R patternfly-docs/content/extensions/quick-starts dist/patternfly-docs"
   },
   "peerDependencies": {
-    "@patternfly/react-core": ">=4.115.2",
+    "@patternfly/react-core": ">=5.0.0",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0",
     "showdown": ">=1.8.6"
