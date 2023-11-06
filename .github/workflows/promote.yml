@@ -2,8 +2,8 @@ name: promote
 on:
   push:
     # Sequence of patterns matched against refs/tags
-    tags:        
-      - v5.*
+    tags:
+      - v6.*
 jobs:
   build-and-promote:
     runs-on: ubuntu-latest
@@ -28,4 +28,4 @@ jobs:
         run: |
           cd packages/module
           npm version ${{ github.ref_name }} --git-tag-version false
-          npm publish --tag=latest 
+          npm publish --tag=latest
