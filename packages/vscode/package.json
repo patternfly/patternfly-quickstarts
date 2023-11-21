@@ -61,7 +61,7 @@
     "webpack-cli": "^5.1.1"
   },
   "dependencies": {
-    "@cloudmosaic/quickstarts": "0.0.6",
+    "@cloudmosaic/quickstarts": "0.0.24",
     "@patternfly/patternfly": "^5.0.0",
     "@patternfly/react-catalog-view-extension": "^5.0.0",
     "asciidoctor": "^2.2.1",
