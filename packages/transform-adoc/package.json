@@ -35,7 +35,7 @@
     "@rollup/plugin-node-resolve": "^11.1.0",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
-    "asciidoctor": "^2.2.1",
+    "asciidoctor": "^2.2.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^2.37.0",
@@ -47,7 +47,7 @@
     "rollup-plugin-visualizer": "^5.5.0"
   },
   "peerDependencies": {
-    "asciidoctor": ">=2.2.1",
+    "asciidoctor": ">=2.2.6",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   }

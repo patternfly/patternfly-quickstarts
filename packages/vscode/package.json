@@ -61,13 +61,17 @@
     "webpack-cli": "^5.1.1"
   },
   "dependencies": {
-    "@cloudmosaic/quickstarts": "0.0.6",
+    "@cloudmosaic/quickstarts": "^0.0.24",
     "@patternfly/patternfly": "^5.0.0",
     "@patternfly/react-catalog-view-extension": "^5.0.0",
-    "asciidoctor": "^2.2.1",
+    "asciidoctor": "^2.2.6",
+    "i18next-parser": "^8.9.0",
     "js-base64": "^3.6.0",
     "js-yaml": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "resolutions": {
+    "i18next-parser": "^8.9.0"
   }
 }
