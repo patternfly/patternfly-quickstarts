@@ -1,11 +1,11 @@
-export type AccessReviewResourceAttributes = {
+export interface AccessReviewResourceAttributes {
   group?: string;
   resource?: string;
   subresource?: string;
   verb?: K8sVerb;
   name?: string;
   namespace?: string;
-};
+}
 
 export type K8sVerb =
   | 'create'
@@ -17,16 +17,16 @@ export type K8sVerb =
   | 'deletecollection'
   | 'watch';
 
-export type OwnerReference = {
+export interface OwnerReference {
   name: string;
   kind: string;
   uid: string;
   apiVersion: string;
   controller?: boolean;
   blockOwnerDeletion?: boolean;
-};
+}
 
-export type ObjectMetadata = {
+export interface ObjectMetadata {
   name: string;
   annotations?: { [key: string]: string };
   clusterName?: string;
@@ -50,4 +50,4 @@ export type ObjectMetadata = {
   locale?: string;
   // anything else to custom define
   [key: string]: any;
-};
+}

@@ -6,14 +6,14 @@ import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start
 import { QuickStart, QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
 import TaskHeaderList from './QuickStartTaskHeaderList';
 
-type QuickStartConclusionProps = {
+interface QuickStartConclusionProps {
   tasks: QuickStartTask[];
   conclusion: string;
   allTaskStatuses: QuickStartTaskStatus[];
   nextQuickStarts?: QuickStart[];
   onQuickStartChange: (quickStartid: string) => void;
   onTaskSelect: (selectedTaskNumber: number) => void;
-};
+}
 
 const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
   tasks,
@@ -53,7 +53,7 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
               nextQuickStart?.spec?.displayName,
             )}{' '}
             <ArrowRightIcon
-              style={{ marginLeft: 'var(--pf-global--spacer--xs)', verticalAlign: 'middle' }}
+              style={{ marginLeft: 'var(--pf-v5-global--spacer--xs)', verticalAlign: 'middle' }}
             />
           </Button>
         ))}

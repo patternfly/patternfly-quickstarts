@@ -13,10 +13,10 @@ import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start
 
 import './QuickStartTileDescription.scss';
 
-type QuickStartTileDescriptionProps = {
+interface QuickStartTileDescriptionProps {
   description: string;
   prerequisites?: string[];
-};
+}
 const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
   description,
   prerequisites,

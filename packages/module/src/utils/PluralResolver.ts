@@ -1,5 +1,4 @@
 /* eslint-disable */
-// @ts-nocheck
 // https://github.com/i18next/i18next/blob/master/src/PluralResolver.js
 
 const sets = [
@@ -153,16 +152,16 @@ const sets = [
 ];
 
 const _rulesPluralsTypes = {
-  1: function(n) {
+  1: function (n) {
     return Number(n > 1);
   },
-  2: function(n) {
+  2: function (n) {
     return Number(n != 1);
   },
-  3: function(n) {
+  3: function (n) {
     return 0;
   },
-  4: function(n) {
+  4: function (n) {
     return Number(
       n % 10 == 1 && n % 100 != 11
         ? 0
@@ -171,7 +170,7 @@ const _rulesPluralsTypes = {
         : 2,
     );
   },
-  5: function(n) {
+  5: function (n) {
     return Number(
       n == 0
         ? 0
@@ -186,50 +185,50 @@ const _rulesPluralsTypes = {
         : 5,
     );
   },
-  6: function(n) {
+  6: function (n) {
     return Number(n == 1 ? 0 : n >= 2 && n <= 4 ? 1 : 2);
   },
-  7: function(n) {
+  7: function (n) {
     return Number(
       n == 1 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2,
     );
   },
-  8: function(n) {
+  8: function (n) {
     return Number(n == 1 ? 0 : n == 2 ? 1 : n != 8 && n != 11 ? 2 : 3);
   },
-  9: function(n) {
+  9: function (n) {
     return Number(n >= 2);
   },
-  10: function(n) {
+  10: function (n) {
     return Number(n == 1 ? 0 : n == 2 ? 1 : n < 7 ? 2 : n < 11 ? 3 : 4);
   },
-  11: function(n) {
+  11: function (n) {
     return Number(n == 1 || n == 11 ? 0 : n == 2 || n == 12 ? 1 : n > 2 && n < 20 ? 2 : 3);
   },
-  12: function(n) {
+  12: function (n) {
     return Number(n % 10 != 1 || n % 100 == 11);
   },
-  13: function(n) {
+  13: function (n) {
     return Number(n !== 0);
   },
-  14: function(n) {
+  14: function (n) {
     return Number(n == 1 ? 0 : n == 2 ? 1 : n == 3 ? 2 : 3);
   },
-  15: function(n) {
+  15: function (n) {
     return Number(
       n % 10 == 1 && n % 100 != 11 ? 0 : n % 10 >= 2 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2,
     );
   },
-  16: function(n) {
+  16: function (n) {
     return Number(n % 10 == 1 && n % 100 != 11 ? 0 : n !== 0 ? 1 : 2);
   },
-  17: function(n) {
+  17: function (n) {
     return Number(n == 1 || (n % 10 == 1 && n % 100 != 11) ? 0 : 1);
   },
-  18: function(n) {
+  18: function (n) {
     return Number(n == 0 ? 0 : n == 1 ? 1 : 2);
   },
-  19: function(n) {
+  19: function (n) {
     return Number(
       n == 1
         ? 0
@@ -240,13 +239,13 @@ const _rulesPluralsTypes = {
         : 3,
     );
   },
-  20: function(n) {
+  20: function (n) {
     return Number(n == 1 ? 0 : n == 0 || (n % 100 > 0 && n % 100 < 20) ? 1 : 2);
   },
-  21: function(n) {
+  21: function (n) {
     return Number(n % 100 == 1 ? 1 : n % 100 == 2 ? 2 : n % 100 == 3 || n % 100 == 4 ? 3 : 0);
   },
-  22: function(n) {
+  22: function (n) {
     return Number(n == 1 ? 0 : n == 2 ? 1 : (n < 0 || n > 10) && n % 10 == 0 ? 2 : 3);
   },
 };
@@ -265,6 +264,13 @@ function createRules() {
 }
 
 class PluralResolver {
+  options: {
+    simplifyPluralSuffix?: string;
+    compatibilityJSON?: string;
+    prepend?: boolean;
+  };
+  rules: {};
+
   constructor(options = {}) {
     this.options = options;
 

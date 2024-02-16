@@ -3,11 +3,11 @@ import { Button, Flex, FlexItem } from '@patternfly/react-core';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartStatus } from '../utils/quick-start-types';
 
-type QuickStartTileFooterProps = {
+interface QuickStartTileFooterProps {
   quickStartId: string;
   status: string;
   totalTasks?: number;
-};
+}
 
 const QuickStartTileFooter: React.FC<QuickStartTileFooterProps> = ({
   quickStartId,

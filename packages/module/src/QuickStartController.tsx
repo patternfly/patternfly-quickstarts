@@ -4,12 +4,12 @@ import QuickStartFooter from './controller/QuickStartFooter';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import { QuickStart, QuickStartStatus, QuickStartTaskStatus } from './utils/quick-start-types';
 
-type QuickStartControllerProps = {
+interface QuickStartControllerProps {
   quickStart: QuickStart;
   nextQuickStarts?: QuickStart[];
   footerClass: string;
   contentRef: React.Ref<HTMLDivElement>;
-};
+}
 
 const QuickStartController: React.FC<QuickStartControllerProps> = ({
   quickStart,
@@ -50,7 +50,7 @@ const QuickStartController: React.FC<QuickStartControllerProps> = ({
     let activeTaskNumber = 0;
     while (
       activeTaskNumber !== totalTasks &&
-      activeQuickStartState[`taskStatus${activeTaskNumber}`] !== QuickStartTaskStatus.INIT
+      activeQuickStartState[`taskStatus${activeTaskNumber}`] === QuickStartTaskStatus.SUCCESS
     ) {
       activeTaskNumber++;
     }
@@ -74,9 +74,7 @@ const QuickStartController: React.FC<QuickStartControllerProps> = ({
     return nextStep(totalTasks);
   }, [handleQuickStartChange, nextStep, status, taskNumber, totalTasks, handleQuickStartContinue]);
 
-  const handleBack = React.useCallback(() => {
-    return previousStep();
-  }, [previousStep]);
+  const handleBack = React.useCallback(() => previousStep(), [previousStep]);
 
   const handleTaskSelect = React.useCallback(
     (selectedTaskNumber: number) => {

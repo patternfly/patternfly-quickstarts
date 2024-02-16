@@ -2,10 +2,10 @@ import * as React from 'react';
 import { useEventListener } from '../../hooks';
 import { ACCORDION_MARKDOWN_BUTTON_ID, ACCORDION_MARKDOWN_CONTENT_ID } from './const';
 
-type AccordionShowdownComponentProps = {
+interface AccordionShowdownComponentProps {
   buttonElement: HTMLElement;
   contentElement: HTMLElement;
-};
+}
 
 const AccordionShowdownHandler: React.FC<AccordionShowdownComponentProps> = ({
   buttonElement,
@@ -16,9 +16,9 @@ const AccordionShowdownHandler: React.FC<AccordionShowdownComponentProps> = ({
   const handleClick = () => {
     const expandedModifier = 'pf-m-expanded';
 
-    buttonElement.className = `pf-c-accordion__toggle ${!expanded ? expandedModifier : ''}`;
+    buttonElement.className = `pf-v5-c-accordion__toggle ${!expanded ? expandedModifier : ''}`;
     contentElement.hidden = expanded;
-    contentElement.className = `pf-c-accordion__expanded-content ${
+    contentElement.className = `pf-v5-c-accordion__expanded-content ${
       !expanded ? expandedModifier : ''
     }`;
     setExpanded(!expanded);
@@ -29,9 +29,9 @@ const AccordionShowdownHandler: React.FC<AccordionShowdownComponentProps> = ({
   return <></>;
 };
 
-type accordionRenderExtensionProps = {
-  docContext: HTMLDocument;
-};
+interface accordionRenderExtensionProps {
+  docContext: Document;
+}
 
 const AccordionRenderExtension: React.FC<accordionRenderExtensionProps> = ({ docContext }) => {
   const buttonElements = docContext.querySelectorAll(`[id ^= ${ACCORDION_MARKDOWN_BUTTON_ID}]`);

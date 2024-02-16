@@ -56,7 +56,7 @@ export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement
    */
   markdown?: {
     extensions?: any[];
-    renderExtension?: (docContext: HTMLDocument, rootSelector: string) => React.ReactNode;
+    renderExtension?: (docContext: Document, rootSelector: string) => React.ReactNode;
   };
   /** additional quick start context props */
   contextProps?: QuickStartContextValues;
@@ -252,7 +252,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
             </DrawerContentBody>
           </DrawerContent>
         ) : (
-          <div className="pf-c-drawer__main">{panelContent}</div>
+          <div className="pf-v5-c-drawer__main">{panelContent}</div>
         )}
       </Drawer>
       <QuickStartCloseModal

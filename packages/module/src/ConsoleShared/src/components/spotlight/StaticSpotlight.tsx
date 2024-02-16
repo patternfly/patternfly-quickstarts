@@ -3,9 +3,9 @@ import * as React from 'react';
 import { useBoundingClientRect } from '../../hooks';
 import Portal from '../popper/Portal';
 
-type StaticSpotlightProps = {
+interface StaticSpotlightProps {
   element: Element;
-};
+}
 
 const StaticSpotlight: React.FC<StaticSpotlightProps> = ({ element }) => {
   const clientRect = useBoundingClientRect(element as HTMLElement);
@@ -19,7 +19,7 @@ const StaticSpotlight: React.FC<StaticSpotlightProps> = ({ element }) => {
     : {};
   return clientRect ? (
     <Portal>
-      <div className="pf-c-backdrop pfext-spotlight__with-backdrop">
+      <div className="pf-v5-c-backdrop pfext-spotlight__with-backdrop">
         <div
           className="pfext-spotlight pfext-spotlight__element-highlight-noanimate"
           style={style}

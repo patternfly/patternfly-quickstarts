@@ -5,9 +5,10 @@ import {
   EmptyState,
   EmptyStateBody,
   EmptyStateIcon,
-  EmptyStatePrimary,
   Text,
-  Title,
+  EmptyStateFooter,
+  EmptyStateActions,
+  EmptyStateHeader,
 } from '@patternfly/react-core';
 import SearchIcon from '@patternfly/react-icons/dist/js/icons/search-icon';
 import { EmptyBox, LoadingBox, clearFilterParams } from '@console/internal/components/utils';
@@ -17,33 +18,37 @@ import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-
 import { QuickStart } from './utils/quick-start-types';
 import { filterQuickStarts } from './utils/quick-start-utils';
 
-export type QuickStartCatalogPageProps = {
+export interface QuickStartCatalogPageProps {
   quickStarts?: QuickStart[];
   showFilter?: boolean;
   sortFnc?: (q1: QuickStart, q2: QuickStart) => number;
   title?: string;
   hint?: string;
   showTitle?: boolean;
-};
+}
 
 export const QuickStartCatalogEmptyState = ({ clearFilters }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <EmptyState>
-      <EmptyStateIcon icon={SearchIcon} />
-      <Title size="lg" headingLevel="h4">
-        {getResource('No results found')}
-      </Title>
+      <EmptyStateHeader
+        titleText={<>{getResource('No results found')}</>}
+        icon={<EmptyStateIcon icon={SearchIcon} />}
+        headingLevel="h4"
+      />
       <EmptyStateBody>
         {getResource(
           'No results match the filter criteria. Remove filters or clear all filters to show results.',
         )}
       </EmptyStateBody>
-      <EmptyStatePrimary>
-        <Button variant="link" onClick={clearFilters} data-test="clear-filter button">
-          {getResource('Clear all filters')}
-        </Button>
-      </EmptyStatePrimary>
+
+      <EmptyStateFooter>
+        <EmptyStateActions>
+          <Button variant="link" onClick={clearFilters} data-test="clear-filter button">
+            {getResource('Clear all filters')}
+          </Button>
+        </EmptyStateActions>
+      </EmptyStateFooter>
     </EmptyState>
   );
 };
@@ -56,7 +61,7 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
   hint,
   showTitle = true,
 }) => {
-  const sortFncCallback = React.useCallback(sortFnc, []);
+  const sortFncCallback = React.useCallback(sortFnc, [sortFnc]);
   const {
     allQuickStarts = [],
     setAllQuickStarts,

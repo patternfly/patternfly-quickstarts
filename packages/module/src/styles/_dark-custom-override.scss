@@ -1,4 +1,4 @@
-.pf-theme-dark {
+.pf-v5-theme-dark {
   .pfext-catalog-item-icon__img--large {
     // Not perfect, but gives a better result for colors than just inverting
     // by inverts to switch b/w, then rotates to get colors approximately back
@@ -7,56 +7,56 @@
 
   // duration color was gray on white but on the blue header, only white text works
   .pfext-quick-start-panel-content__header--blue-white .pfext-quick-start-panel-content__duration {
-    color: var(--pf-global--Color--light-100);
+    color: var(--pf-v5-global--Color--light-100);
   }
 
   .pfext-quick-start-task-header__subtitle {
-    color: var(--pf-global--palette--black-200) !important;
+    color: var(--pf-v5-global--palette--black-200) !important;
   }
 
   .pfext-quick-start-task-header__task-icon-init {
-    background-color: var(--pf-global--primary-color--300);
+    background-color: var(--pf-v5-global--primary-color--300);
   }
 
   .pfext-quick-start-task-header__tryagain {
-    color: var(--pf-global--palette--black-200) !important;
+    color: var(--pf-v5-global--palette--black-200) !important;
   }
 
-  .pfext-markdown-view pre {
-    background-color: var(--pf-global--BackgroundColor--100);
-    border-color: var(--pf-global--BorderColor--100);
+  .pfext-markdown-view pre:not(.pfext-code-block__pre) {
+    background-color: var(--pf-v5-global--BackgroundColor--100);
+    border-color: var(--pf-v5-global--BorderColor--100);
   }
 
-  .pfext-markdown-view code {
-    color: var(--pf-global--Color--100);
-    background-color: var(--pf-global--palette--black-600);
+  .pfext-markdown-view .pf-v5-c-code-block__code {
+    color: var(--pf-v5-global--Color--100);
+    background-color: var(--pf-v5-global--palette--black-600);
   }
 
-  .pfext-markdown-view .pf-c-code-block,
-  .pfext-markdown-view .pf-c-code-block code {
-    background-color: var(--pf-global--BackgroundColor--400);
+  .pfext-markdown-view .pf-v5-c-code-block,
+  .pfext-markdown-view .pf-v5-c-code-block code {
+    background-color: var(--pf-v5-global--BackgroundColor--400);
   }
 
-  :where(.pfext-markdown-view) .pf-c-clipboard-copy.pf-m-inline {
-    --pf-c-clipboard-copy--m-inline--BackgroundColor: var(--pf-global--BackgroundColor--400);
+  :where(.pfext-markdown-view) .pf-v5-c-clipboard-copy.pf-m-inline {
+    --pf-v5-c-clipboard-copy--m-inline--BackgroundColor: var(--pf-v5-global--BackgroundColor--400);
   }
 
-  // Make the cards light on dark background. It would be better to use pf-c-page__main-section variable but we aren't using a page section here.
+  // Make the cards light on dark background. It would be better to use pf-v5-c-page__main-section variable but we aren't using a page section here.
   .pfext-page-layout__content {
-    background-color: var(--pf-global--BackgroundColor--200);
+    background-color: var(--pf-v5-global--BackgroundColor--200);
   }
 
-  .pfext-quick-start-catalog__gallery-item .pf-c-card {
-    --pf-c-card--BackgroundColor: var(--pf-global--BackgroundColor--100);
+  .pfext-quick-start-catalog__gallery-item .pf-v5-c-card {
+    --pf-v5-c-card--BackgroundColor: var(--pf-v5-global--BackgroundColor--100);
   }
 
   // Alerts currently has the wrong background in the PF dark stylesheet. This can be removed once that is fixed.
-  .pf-c-alert {
-    --pf-c-alert--BackgroundColor: var(--pf-global--palette--black-700);
-    --pf-c-alert--m-inline--BackgroundColor: var(--pf-global--palette--black-700);
-    --pf-c-alert--m-inline--m-success--BackgroundColor: var(--pf-global--palette--black-700);
-    --pf-c-alert--m-inline--m-danger--BackgroundColor: var(--pf-global--palette--black-700);
-    --pf-c-alert--m-inline--m-warning--BackgroundColor: var(--pf-global--palette--black-700);
-    --pf-c-alert--m-inline--m-info--BackgroundColor: var(--pf-global--palette--black-700);
+  .pf-v5-c-alert {
+    --pf-v5-c-alert--BackgroundColor: var(--pf-v5-global--palette--black-700);
+    --pf-v5-c-alert--m-inline--BackgroundColor: var(--pf-v5-global--palette--black-700);
+    --pf-v5-c-alert--m-inline--m-success--BackgroundColor: var(--pf-v5-global--palette--black-700);
+    --pf-v5-c-alert--m-inline--m-danger--BackgroundColor: var(--pf-v5-global--palette--black-700);
+    --pf-v5-c-alert--m-inline--m-warning--BackgroundColor: var(--pf-v5-global--palette--black-700);
+    --pf-v5-c-alert--m-inline--m-info--BackgroundColor: var(--pf-v5-global--palette--black-700);
   }
 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const useCombineRefs = <RefType extends any>(...refs: (React.Ref<RefType> | undefined)[]) =>
+export const useCombineRefs = <RefType>(...refs: (React.Ref<RefType> | undefined)[]) =>
   React.useCallback(
     (element: RefType | null): void =>
       refs.forEach((ref) => {
@@ -12,6 +12,5 @@ export const useCombineRefs = <RefType extends any>(...refs: (React.Ref<RefType>
           }
         }
       }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    refs,
+    [refs],
   );

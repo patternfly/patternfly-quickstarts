@@ -7,13 +7,13 @@ import TaskHeaderList from './QuickStartTaskHeaderList';
 
 import './QuickStartIntroduction.scss';
 
-type QuickStartIntroductionProps = {
+interface QuickStartIntroductionProps {
   introduction: string;
   tasks: QuickStartTask[];
   allTaskStatuses: QuickStartTaskStatus[];
   prerequisites?: string[];
   onTaskSelect: (selectedTaskNumber: number) => void;
-};
+}
 
 const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
   tasks,
@@ -35,15 +35,13 @@ const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
       className="pfext-quick-start-intro__prereq"
     >
       <List className="pfext-quick-start-intro__prereq-list">
-        {prereqs.map((pr) => {
-          return (
+        {prereqs.map((pr) => (
             <ListItem key={pr} className="pfext-quick-start-intro__prereq-list__item">
               <span className="pfext-quick-start-intro__prereq-list__item-content">
                 <QuickStartMarkdownView content={pr} />
               </span>
             </ListItem>
-          );
-        })}
+          ))}
       </List>
     </ExpandableSection>
   );
@@ -51,7 +49,7 @@ const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
     <>
       <QuickStartMarkdownView content={introduction} />
       {prereqList}
-      <p style={{ marginBottom: 'var(--pf-global--spacer--md)' }}>
+      <p style={{ marginBottom: 'var(--pf-v5-global--spacer--md)' }}>
         {getResource(
           'In this quick start, you will complete {{count, number}} task',
           tasks.length,

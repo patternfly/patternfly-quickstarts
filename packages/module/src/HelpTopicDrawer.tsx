@@ -27,10 +27,11 @@ export interface HelpTopicContainerProps extends React.HTMLProps<HTMLDivElement>
    */
   markdown?: {
     extensions?: any[];
-    renderExtension?: (docContext: HTMLDocument, rootSelector: string) => React.ReactNode;
+    renderExtension?: (docContext: Document, rootSelector: string) => React.ReactNode;
   };
   /** additional quick start context props */
   contextProps?: QuickStartContextValues;
+  children?: React.ReactNode;
 }
 
 export const HelpTopicContainer: React.FC<HelpTopicContainerProps> = ({
@@ -48,9 +49,6 @@ export const HelpTopicContainer: React.FC<HelpTopicContainerProps> = ({
     language,
     resourceBundle: {
       ...resourceBundle,
-      // Start: "Let's go!",
-      // Continue: 'Resume',
-      // Restart: 'Start over',
     },
     loading,
     markdown,
@@ -72,14 +70,9 @@ export const HelpTopicContainer: React.FC<HelpTopicContainerProps> = ({
     }
   }, [helpTopics, valuesForHelpTopicContext]);
 
-  const drawerProps = {
-    //TODO add extras here?
-    ...props,
-  };
-
   return (
     <HelpTopicContext.Provider value={valuesForHelpTopicContext}>
-      <HelpTopicDrawer {...drawerProps}>{children}</HelpTopicDrawer>
+      <HelpTopicDrawer {...props}>{children}</HelpTopicDrawer>
     </HelpTopicContext.Provider>
   );
 };
@@ -90,9 +83,8 @@ export interface HelpTopicDrawerProps extends React.HTMLProps<HTMLDivElement> {
 }
 
 export const HelpTopicDrawer: React.FC<HelpTopicDrawerProps> = ({ children, ...props }) => {
-  const { activeHelpTopic, filteredHelpTopics, setActiveHelpTopicByName } = React.useContext<
-    HelpTopicContextValues
-  >(HelpTopicContext);
+  const { activeHelpTopic, filteredHelpTopics, setActiveHelpTopicByName } =
+    React.useContext<HelpTopicContextValues>(HelpTopicContext);
 
   const onClose = () => {
     setActiveHelpTopicByName('');
@@ -116,7 +108,7 @@ export const HelpTopicDrawer: React.FC<HelpTopicDrawerProps> = ({ children, ...p
             </DrawerContentBody>
           </DrawerContent>
         ) : (
-          <div className="pf-c-drawer__main">{panelContent}</div>
+          <div className="pf-v5-c-drawer__main">{panelContent}</div>
         )}
       </Drawer>
     </>

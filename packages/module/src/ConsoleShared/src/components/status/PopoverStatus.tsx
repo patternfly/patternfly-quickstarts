@@ -5,38 +5,35 @@ const PopoverStatus: React.FC<PopoverStatusProps> = ({
   hideHeader,
   children,
   isVisible = null,
-  shouldClose = null,
   statusBody,
   title,
   onHide,
   onShow,
-}) => {
-  return (
-    <Popover
-      position={PopoverPosition.right}
-      headerContent={hideHeader ? null : title}
-      bodyContent={children}
-      aria-label={title}
-      onHide={onHide}
-      onShow={onShow}
-      isVisible={isVisible}
-      shouldClose={shouldClose}
-    >
-      <Button variant="link" isInline>
-        {statusBody}
-      </Button>
-    </Popover>
-  );
-};
+}) => (
+  <Popover
+    position={PopoverPosition.right}
+    headerContent={hideHeader ? null : title}
+    bodyContent={children}
+    aria-label={title}
+    onHide={onHide}
+    onShow={onShow}
+    isVisible={isVisible}
+  >
+    <Button variant="link" isInline>
+      {statusBody}
+    </Button>
+  </Popover>
+);
 
-type PopoverStatusProps = {
+interface PopoverStatusProps {
+  children: React.ReactNode;
   statusBody: React.ReactNode;
-  onHide?: () => void;
-  onShow?: () => void;
+  onHide?: (event: MouseEvent | KeyboardEvent) => void;
+  onShow?: (event: MouseEvent | KeyboardEvent) => void;
   title?: string;
   hideHeader?: boolean;
   isVisible?: boolean;
   shouldClose?: (hideFunction: any) => void;
-};
+}
 
 export default PopoverStatus;

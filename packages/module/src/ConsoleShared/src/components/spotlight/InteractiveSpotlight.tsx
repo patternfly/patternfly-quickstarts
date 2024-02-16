@@ -2,9 +2,9 @@ import './spotlight.scss';
 import * as React from 'react';
 import { Portal, SimplePopper } from '../popper';
 
-type InteractiveSpotlightProps = {
+interface InteractiveSpotlightProps {
   element: Element;
-};
+}
 
 const isInViewport = (elementToCheck: Element) => {
   const rect = elementToCheck.getBoundingClientRect();

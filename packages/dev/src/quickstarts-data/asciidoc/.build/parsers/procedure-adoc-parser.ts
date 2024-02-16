@@ -46,7 +46,7 @@ const elementWithoutTitle = (html: string) => {
 const addClasses = (html: string) => {
   const span = document.createElement('span');
   span.innerHTML = html;
-  span.querySelectorAll('div.title').forEach((el) => el.classList.add('pf-c-title', 'pf-m-md'));
+  span.querySelectorAll('div.title').forEach((el) => el.classList.add('pf-v5-c-title', 'pf-m-md'));
   return span;
 };
 

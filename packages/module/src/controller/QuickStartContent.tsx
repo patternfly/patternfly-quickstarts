@@ -6,7 +6,7 @@ import QuickStartTasks from './QuickStartTasks';
 
 import './QuickStartContent.scss';
 
-type QuickStartContentProps = {
+interface QuickStartContentProps {
   quickStart: QuickStart;
   nextQuickStarts?: QuickStart[];
   taskNumber: number;
@@ -14,7 +14,7 @@ type QuickStartContentProps = {
   onTaskSelect: (selectedTaskNumber: number) => void;
   onTaskReview: (taskStatus: QuickStartTaskStatus) => void;
   onQuickStartChange?: (quickStartId: string) => void;
-};
+}
 
 const QuickStartContent = React.forwardRef<HTMLDivElement, QuickStartContentProps>(
   (

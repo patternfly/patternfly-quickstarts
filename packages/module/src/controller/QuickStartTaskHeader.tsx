@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Title, WizardNavItem } from '@patternfly/react-core';
+import { Icon, Title, WizardNavItem } from '@patternfly/react-core';
 import CheckCircleIcon from '@patternfly/react-icons/dist/js/icons/check-circle-icon';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/js/icons/exclamation-circle-icon';
 import { css } from '@patternfly/react-styles';
@@ -10,7 +10,7 @@ import { QuickStartTaskStatus } from '../utils/quick-start-types';
 
 import './QuickStartTaskHeader.scss';
 
-type QuickStartTaskHeaderProps = {
+interface QuickStartTaskHeaderProps {
   title: string;
   taskIndex: number;
   subtitle?: string;
@@ -19,7 +19,7 @@ type QuickStartTaskHeaderProps = {
   isActiveTask?: boolean;
   onTaskSelect: (index: number) => void;
   children?: React.ReactNode;
-};
+}
 
 const TaskIcon: React.FC<{
   taskIndex: number;
@@ -32,17 +32,19 @@ const TaskIcon: React.FC<{
   const classNames = css('pfext-icon-and-text__icon', {
     'pfext-quick-start-task-header__task-icon-init': !failed && !success,
   });
-  let content: {};
+  let content: React.ReactNode;
+
   if (success) {
     content = (
-      <CheckCircleIcon size="md" className="pfext-quick-start-task-header__task-icon-success" />
+      <Icon size="md">
+        <CheckCircleIcon className="pfext-quick-start-task-header__task-icon-success" />{' '}
+      </Icon>
     );
   } else if (failed) {
     content = (
-      <ExclamationCircleIcon
-        size="md"
-        className="pfext-quick-start-task-header__task-icon-failed"
-      />
+      <Icon size="md">
+        <ExclamationCircleIcon className="pfext-quick-start-task-header__task-icon-failed" />
+      </Icon>
     );
   } else {
     content = getResource('{{taskIndex, number}}', taskIndex).replace(
@@ -110,9 +112,9 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   return (
     <WizardNavItem
       content={content}
-      step={taskIndex}
-      onNavItemClick={() => onTaskSelect(taskIndex - 1)}
-      navItemComponent="button"
+      stepIndex={taskIndex}
+      onClick={() => onTaskSelect(taskIndex - 1)}
+      component="button"
       isCurrent={isActiveTask}
     >
       {children}

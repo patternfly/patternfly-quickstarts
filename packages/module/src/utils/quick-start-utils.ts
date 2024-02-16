@@ -16,8 +16,7 @@ export const getTaskStatusKey = (taskNumber: number): string => `taskStatus${tas
 export const getQuickStartStatusCount = (
   allQuickStartStates: AllQuickStartStates,
   quickStarts: QuickStart[],
-): Record<QuickStartStatus, number> => {
-  return quickStarts.reduce(
+): Record<QuickStartStatus, number> => quickStarts.reduce(
     (totals, item) => {
       totals[getQuickStartStatus(allQuickStartStates, item.metadata.name)]++;
       return totals;
@@ -28,7 +27,6 @@ export const getQuickStartStatusCount = (
       [QuickStartStatus.NOT_STARTED]: 0,
     },
   );
-};
 
 declare const window: Window & {
   SERVER_FLAGS: {
@@ -82,11 +80,9 @@ export const filterQuickStarts = (
   );
 };
 
-export const camelize = (str: string) => {
-  return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+export const camelize = (str: string) => str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
     if (+match === 0) {
       return '';
     } // or if (/\s+/.test(match)) for white spaces
     return index === 0 ? match.toLowerCase() : match.toUpperCase();
   });
-};
