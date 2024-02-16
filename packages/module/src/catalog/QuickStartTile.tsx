@@ -17,6 +17,7 @@ interface QuickStartTileProps {
   status: QuickStartStatus;
   isActive: boolean;
   onClick?: () => void;
+  action?: React.ReactNode;
 }
 
 const QuickStartTile: React.FC<QuickStartTileProps> = ({
@@ -24,6 +25,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
   status,
   isActive,
   onClick = () => {},
+  action
 }) => {
   const {
     metadata: { name: id },
@@ -92,6 +94,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
             duration={durationMinutes}
             type={type}
             quickStartId={id}
+            action={action}
           />
         }
         onClick={handleClick}
