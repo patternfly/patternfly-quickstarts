@@ -8,7 +8,7 @@ import { camelize } from '../utils/quick-start-utils';
 import QuickStartTileDescription from './QuickStartTileDescription';
 import QuickStartTileFooter from './QuickStartTileFooter';
 import QuickStartTileFooterExternal from './QuickStartTileFooterExternal';
-import QuickStartTileHeader from './QuickStartTileHeader';
+import QuickStartTileHeader, { QuickstartAction } from './QuickStartTileHeader';
 
 import './QuickStartTile.scss';
 
@@ -17,7 +17,8 @@ interface QuickStartTileProps {
   status: QuickStartStatus;
   isActive: boolean;
   onClick?: () => void;
-  action?: React.ReactNode;
+  /** Action config for button rendered next to title */
+  action?: QuickstartAction;
 }
 
 const QuickStartTile: React.FC<QuickStartTileProps> = ({
@@ -25,7 +26,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
   status,
   isActive,
   onClick = () => {},
-  action
+  action,
 }) => {
   const {
     metadata: { name: id },

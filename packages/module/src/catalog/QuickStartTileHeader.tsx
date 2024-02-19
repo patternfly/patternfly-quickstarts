@@ -1,11 +1,23 @@
 import './QuickStartTileHeader.scss';
 import * as React from 'react';
-import { Label, Title } from '@patternfly/react-core';
+import { Button, ButtonProps, Flex, Label, Title } from '@patternfly/react-core';
 import OutlinedClockIcon from '@patternfly/react-icons/dist/js/icons/outlined-clock-icon';
+import OutlinedBookmarkIcon from '@patternfly/react-icons/dist/js/icons/outlined-bookmark-icon';
 import { StatusIcon } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartStatus, QuickStartType } from '../utils/quick-start-types';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
+
+export interface QuickstartAction {
+  /** Screen reader aria label. */
+  'aria-label': string;
+  /** Icon to be rendered as a plain button, by default Bookmark outlined will be used. */
+  icon?: React.ComponentType<unknown>;
+  /** Callback with synthetic event parameter. */
+  onClick?: (e: React.SyntheticEvent) => void;
+  /** Additional button props to be rendered as extra props. */
+  buttonProps?: ButtonProps;
+}
 
 interface QuickStartTileHeaderProps {
   status: string;
@@ -13,7 +25,7 @@ interface QuickStartTileHeaderProps {
   name: string;
   type?: QuickStartType;
   quickStartId?: string;
-  action?: React.ReactNode;
+  action?: QuickstartAction;
 }
 
 const statusColorMap = {
@@ -28,7 +40,7 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
   name,
   type,
   quickStartId,
-  action
+  action,
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
@@ -38,14 +50,22 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
     [QuickStartStatus.NOT_STARTED]: getResource('Not started'),
   };
 
+  const ActionIcon = action.icon || OutlinedBookmarkIcon;
+
   return (
     <div className="pfext-quick-start-tile-header">
-      <div className="pfext-quick-start-title-header__display-name">
-        <Title headingLevel="h3" data-test="title" id={quickStartId}>
+      <Flex justifyContent={{ default: 'justifyContentCenter' }}>
+       <Title headingLevel="h3" data-test="title" id={quickStartId}>
           <QuickStartMarkdownView content={name} />
         </Title>
-        {action}
-      </div>
+        <Button
+          aria-label={action['aria-label']}
+          icon={<ActionIcon />}
+          variant='plain'
+          onClick={action.onClick}
+          {...action.buttonProps}
+        />
+      </Flex>
       <div className="pfext-quick-start-tile-header__status">
         {type && (
           <Label className="pfext-quick-start-tile-header--margin" color={type.color}>
