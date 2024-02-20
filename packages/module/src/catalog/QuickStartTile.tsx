@@ -29,10 +29,11 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
   action,
 }) => {
   const {
-    metadata: { name: id },
+    metadata: { name, id: metaId },
     spec: { icon, tasks, displayName, description, durationMinutes, prerequisites, link, type },
   } = quickStart;
 
+  const id = metaId || name;
   const { setActiveQuickStart, footer } =
     React.useContext<QuickStartContextValues>(QuickStartContext);
 
@@ -71,7 +72,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
       if (link) {
         window.open(link.href);
       } else {
-        setActiveQuickStart(id, tasks?.length);
+        setActiveQuickStart(name, tasks?.length);
       }
       onClick();
     }
