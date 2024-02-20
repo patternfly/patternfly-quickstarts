@@ -107,6 +107,7 @@ export const CustomCatalog: React.FC = () => {
                     <QuickStartTile
                       action={{
                         onClick: (e: React.SyntheticEvent) => {
+                          e.preventDefault();
                           e.stopPropagation();
                           setBookmarked((prev) => {
                             if (prev.includes(id)) {
@@ -187,7 +188,7 @@ export const CustomCatalog: React.FC = () => {
         </QuickStartCatalogSection>
       </>
     ),
-    [activeQuickStartID, allQuickStartStates, allQuickStarts],
+    [activeQuickStartID, allQuickStartStates, allQuickStarts, bookmarked],
   );
 
   const clearFilters = React.useCallback(() => {

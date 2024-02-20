@@ -50,21 +50,21 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
     [QuickStartStatus.NOT_STARTED]: getResource('Not started'),
   };
 
-  const ActionIcon = action.icon || OutlinedBookmarkIcon;
+  const ActionIcon = action?.icon || OutlinedBookmarkIcon;
 
   return (
     <div className="pfext-quick-start-tile-header">
-      <Flex justifyContent={{ default: 'justifyContentCenter' }}>
+      <Flex justifyContent={{ default: 'justifyContentCenter' }} flexWrap={{ default: 'nowrap' }}>
        <Title headingLevel="h3" data-test="title" id={quickStartId}>
           <QuickStartMarkdownView content={name} />
         </Title>
-        <Button
+        {action && <Button
           aria-label={action['aria-label']}
           icon={<ActionIcon />}
           variant='plain'
           onClick={action.onClick}
           {...action.buttonProps}
-        />
+        />}
       </Flex>
       <div className="pfext-quick-start-tile-header__status">
         {type && (
