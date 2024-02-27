@@ -2,7 +2,6 @@ import './App.css';
 import { Page } from '@patternfly/react-core';
 import {
   LoadingBox,
-  QuickStart,
   QuickStartContextProvider,
   QuickStartContextValues,
   QuickStartDrawer,
