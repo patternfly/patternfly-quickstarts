@@ -17,6 +17,8 @@ import {
   getQuickStartStatus,
   LoadingBox,
 } from '@patternfly/quickstarts';
+import BookmarkIcon from '@patternfly/react-icons/dist/esm/icons/bookmark-icon';
+import OutlinedBookmarkIcon from '@patternfly/react-icons/dist/esm/icons/outlined-bookmark-icon';
 import {
   Divider,
   Gallery,
@@ -80,9 +82,60 @@ export const CustomCatalog: React.FC = () => {
     setFilteredQuickStarts(result);
   };
 
+  const [bookmarked, setBookmarked] = React.useState<string[]>([])
+
   const CatalogWithSections = React.useMemo(
     () => (
       <>
+        <QuickStartCatalogSection>
+          <TextContent>
+            <Text component="h2">Bookmarkable</Text>
+            <Text component="p" className="catalog-sub">
+              Bookmarkable examples
+            </Text>
+          </TextContent>
+          <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
+            {allQuickStarts
+              .filter((quickStart: QuickStart) => quickStart.metadata.instructional)
+              .map((quickStart: QuickStart) => ({
+                ...quickStart,
+                metadata: {
+                  ...quickStart.metadata,
+                  id: `${quickStart.metadata.name}-bookmar`
+                }
+              }))
+              .map((quickStart: QuickStart) => {
+                const {
+                  metadata: { name: id },
+                } = quickStart;
+
+                return (
+                  <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
+                    <QuickStartTile
+                      action={{
+                        onClick: (e: React.SyntheticEvent) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setBookmarked((prev) => {
+                            if (prev.includes(id)) {
+                              return prev.filter((bookmark) => bookmark !== id)
+                            }
+
+                            return [...prev, id];
+                          });
+                        },
+                        icon: bookmarked.includes(id) ? BookmarkIcon : OutlinedBookmarkIcon,
+                        'aria-label': 'bookmark'
+                      }}
+                      quickStart={quickStart}
+                      isActive={id === activeQuickStartID}
+                      status={getQuickStartStatus(allQuickStartStates, id)}
+                    />
+                  </GalleryItem>
+                );
+              })}
+          </Gallery>
+        </QuickStartCatalogSection>
         <QuickStartCatalogSection>
           <TextContent>
             <Text component="h2">Instructional</Text>
@@ -142,7 +195,7 @@ export const CustomCatalog: React.FC = () => {
         </QuickStartCatalogSection>
       </>
     ),
-    [activeQuickStartID, allQuickStartStates, allQuickStarts],
+    [activeQuickStartID, allQuickStartStates, allQuickStarts, bookmarked],
   );
 
   const clearFilters = React.useCallback(() => {

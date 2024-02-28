@@ -8,7 +8,7 @@ import { camelize } from '../utils/quick-start-utils';
 import QuickStartTileDescription from './QuickStartTileDescription';
 import QuickStartTileFooter from './QuickStartTileFooter';
 import QuickStartTileFooterExternal from './QuickStartTileFooterExternal';
-import QuickStartTileHeader from './QuickStartTileHeader';
+import QuickStartTileHeader, { QuickstartAction } from './QuickStartTileHeader';
 import { Icon } from '@patternfly/react-core';
 
 import './QuickStartTile.scss';
@@ -18,6 +18,8 @@ interface QuickStartTileProps {
   status: QuickStartStatus;
   isActive: boolean;
   onClick?: () => void;
+  /** Action config for button rendered next to title */
+  action?: QuickstartAction;
 }
 
 const QuickStartTile: React.FC<QuickStartTileProps> = ({
@@ -25,12 +27,14 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
   status,
   isActive,
   onClick = () => {},
+  action,
 }) => {
   const {
-    metadata: { name: id },
+    metadata: { name, id: metaId },
     spec: { icon, tasks, displayName, description, durationMinutes, prerequisites, link, type },
   } = quickStart;
 
+  const id = metaId || name;
   const { setActiveQuickStart, footer } =
     React.useContext<QuickStartContextValues>(QuickStartContext);
 
@@ -71,7 +75,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
       if (link) {
         window.open(link.href);
       } else {
-        setActiveQuickStart(id, tasks?.length);
+        setActiveQuickStart(name, tasks?.length);
       }
       onClick();
     }
@@ -95,6 +99,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
             duration={durationMinutes}
             type={type}
             quickStartId={id}
+            action={action}
           />
         }
         onClick={handleClick}
