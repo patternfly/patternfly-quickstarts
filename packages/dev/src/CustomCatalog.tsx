@@ -97,13 +97,6 @@ export const CustomCatalog: React.FC = () => {
           <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
             {allQuickStarts
               .filter((quickStart: QuickStart) => quickStart.metadata.instructional)
-              .map((quickStart: QuickStart) => ({
-                ...quickStart,
-                metadata: {
-                  ...quickStart.metadata,
-                  id: `${quickStart.metadata.name}-bookmar`
-                }
-              }))
               .map((quickStart: QuickStart) => {
                 const {
                   metadata: { name: id },
