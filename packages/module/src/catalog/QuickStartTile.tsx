@@ -75,14 +75,14 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
       if (link) {
         window.open(link.href);
       } else {
-        setActiveQuickStart(name, tasks?.length);
+        setActiveQuickStart(id, tasks?.length);
       }
       onClick();
     }
   };
 
   return (
-    <div ref={ref}>
+    <div ref={ref} onClick={handleClick}>
       <CatalogTile
         id={id + '-catalog-tile'}
         style={{
@@ -102,7 +102,6 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
             action={action}
           />
         }
-        onClick={handleClick}
         onKeyDown={(event) => {
           if (event.key === 'Enter' || event.key === ' ') {
             setActiveQuickStart(id, tasks?.length);
