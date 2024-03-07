@@ -54,17 +54,19 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
 
   return (
     <div className="pfext-quick-start-tile-header">
-      <Flex justifyContent={{ default: 'justifyContentCenter' }} flexWrap={{ default: 'nowrap' }}>
-       <Title headingLevel="h3" data-test="title" id={quickStartId}>
+      <Flex flexWrap={{ default: 'nowrap' }}>
+        <Title headingLevel="h3" data-test="title" id={quickStartId}>
           <QuickStartMarkdownView content={name} />
         </Title>
-        {action && <Button
-          aria-label={action['aria-label']}
-          icon={<ActionIcon />}
-          variant='plain'
-          onClick={action.onClick}
-          {...action.buttonProps}
-        />}
+        {action && (
+          <Button
+            aria-label={action['aria-label']}
+            icon={<ActionIcon />}
+            variant="plain"
+            onClick={action.onClick}
+            {...action.buttonProps}
+          />
+        )}
       </Flex>
       <div className="pfext-quick-start-tile-header__status">
         {type && (
