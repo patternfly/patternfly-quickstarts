@@ -9,4 +9,8 @@
   & .pf-v6-c-badge:not(:last-of-type) {
     margin-right: var(--pf-t--global--spacer--sm);
   }
+
+  h3 {
+    flex: 1;
+  }
 }

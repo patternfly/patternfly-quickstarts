@@ -30,11 +30,10 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
   action,
 }) => {
   const {
-    metadata: { name, id: metaId },
+    metadata: { name: id },
     spec: { icon, tasks, displayName, description, durationMinutes, prerequisites, link, type },
   } = quickStart;
 
-  const id = metaId || name;
   const { setActiveQuickStart, footer } =
     React.useContext<QuickStartContextValues>(QuickStartContext);
 
@@ -72,14 +71,20 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
     e: React.FormEvent<HTMLInputElement> | React.MouseEvent<Element, MouseEvent>,
   ) => {
     if (ref.current?.contains(e.target as Node)) {
-      if (link) {
-        window.open(link.href);
-      } else {
+      if (!link) {
         setActiveQuickStart(id, tasks?.length);
       }
       onClick();
     }
   };
+
+  const linkProps = link
+    ? {
+        href: link.href,
+        target: '_blank',
+        rel: 'noreferrer',
+      }
+    : {};
 
   return (
     <div ref={ref} onClick={handleClick}>
@@ -109,13 +114,16 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
           }
         }}
         // https://github.com/patternfly/patternfly-react/issues/7039
-        href={link?.href}
+        {...linkProps}
         data-test={`tile ${id}`}
         description={
           <QuickStartTileDescription description={description} prerequisites={prerequisites} />
         }
         footer={footerComponent}
         tabIndex={0}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore-next-line
+        isSelectableRaised
       />
     </div>
   );
