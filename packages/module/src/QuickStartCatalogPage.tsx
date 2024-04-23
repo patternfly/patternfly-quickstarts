@@ -30,12 +30,7 @@ export interface QuickStartCatalogPageProps {
 export const QuickStartCatalogEmptyState = ({ clearFilters }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
-    <EmptyState>
-      <EmptyStateHeader
-        titleText={<>{getResource('No results found')}</>}
-        icon={<EmptyStateIcon icon={SearchIcon} />}
-        headingLevel="h4"
-      />
+    <EmptyState  headingLevel="h4" icon={SearchIcon}  titleText={<>{getResource('No results found')}</>}>
       <EmptyStateBody>
         {getResource(
           'No results match the filter criteria. Remove filters or clear all filters to show results.',
