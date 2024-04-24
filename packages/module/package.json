@@ -51,9 +51,9 @@
     "showdown": ">=2.1.0"
   },
   "dependencies": {
+    "@patternfly/react-catalog-view-extension": "file:../../../react-catalog-view/packages/module",
     "dompurify": "^2.4.9",
     "history": "^5.0.0"
-    "@patternfly/react-catalog-view-extension": "^5.0.0",
     "showdown": "1.8.6"
   },
   "devDependencies": {
@@ -75,7 +75,6 @@
     "@types/history": "^4.7.8",
     "@types/node": "^14.14.35",
     "@types/react": "^18.2.79",
-    "@types/react-dom": "^18.2.25",
     "clean-css-cli": "^4.3.0",
     "concat-files": "^0.1.1",
     "dart-sass": "^1.25.0",
