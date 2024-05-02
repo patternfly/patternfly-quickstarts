@@ -2,8 +2,8 @@
   align-items: baseline;
   display: flex;
 
-  // fix bug where concurrent .pf-v5-c-label are misaligned vertically
-  .pf-v5-c-label__icon & {
+  // fix bug where concurrent .pf-v6-c-label are misaligned vertically
+  .pf-v6-c-label__icon & {
     display: block;
   }
 }

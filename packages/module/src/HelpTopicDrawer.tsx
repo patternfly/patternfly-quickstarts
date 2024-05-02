@@ -108,7 +108,7 @@ export const HelpTopicDrawer: React.FC<HelpTopicDrawerProps> = ({ children, ...p
             </DrawerContentBody>
           </DrawerContent>
         ) : (
-          <div className="pf-v5-c-drawer__main">{panelContent}</div>
+          <div className="pf-v6-c-drawer__main">{panelContent}</div>
         )}
       </Drawer>
     </>

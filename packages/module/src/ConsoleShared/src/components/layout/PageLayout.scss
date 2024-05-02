@@ -1,29 +1,29 @@
 .pfext-page-layout {
   &__content {
-    padding: var(--pf-v5-global--spacer--lg);
+    padding: var(--pf-v6-global--spacer--lg);
     flex: 1;
   }
 
   &__header {
     padding-top: 1px;
-    background-color: var(--pf-v5-global--BackgroundColor--light-100);
+    background-color: var(--pf-v6-global--BackgroundColor--light-100);
   }
 
   &__hint {
-    padding-left: var(--pf-v5-global--spacer--lg);
-    padding-right: var(--pf-v5-global--spacer--lg);
-    padding-bottom: var(--pf-v5-global--spacer--md);
+    padding-left: var(--pf-v6-global--spacer--lg);
+    padding-right: var(--pf-v6-global--spacer--lg);
+    padding-bottom: var(--pf-v6-global--spacer--md);
     font-size: 14px;
   }
 
   &__title {
-    padding-left: var(--pf-v5-global--spacer--lg);
-    padding-right: var(--pf-v5-global--spacer--lg);
-    font-size: var(--pf-v5-global--FontSize--2xl);
+    padding-left: var(--pf-v6-global--spacer--lg);
+    padding-right: var(--pf-v6-global--spacer--lg);
+    font-size: var(--pf-v6-global--FontSize--2xl);
     margin-top: 23px;
     margin-bottom: 11.5px;
-    font-family: var(--pf-v5-global--FontFamily--heading--sans-serif);
-    font-weight: var(--pf-v5-global--FontWeight--normal);
+    font-family: var(--pf-v6-global--FontFamily--heading--sans-serif);
+    font-weight: var(--pf-v6-global--FontWeight--normal);
     line-height: 1.1;
   }
 }

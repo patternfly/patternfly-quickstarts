@@ -6,7 +6,7 @@
 
   // match pf4 styling / table col head styling
   dt {
-    font-weight: var(--pf-v5-global--FontWeight--bold); }
+    font-weight: var(--pf-v6-global--FontWeight--bold); }
 
   dd {
     margin-bottom: 20px; }
@@ -28,8 +28,8 @@
     margin-right: 7px;
   }
 
-  .pf-v5-c-list {
-    --pf-v5-c-list--PaddingLeft: 20px;
+  .pf-v6-c-list {
+    --pf-v6-c-list--PaddingLeft: 20px;
   }
 }
 
@@ -40,8 +40,8 @@
 .pfext-page-layout__content,
 // catalog item prereq popover
 .pfext-popover__base {
-  --pf-v5-global--FontSize--md: 14px;
-  --pf-v5-global--FontSize--sm: 13px;
+  --pf-v6-global--FontSize--md: 14px;
+  --pf-v6-global--FontSize--sm: 13px;
 
   ul {
       list-style-type: disc;

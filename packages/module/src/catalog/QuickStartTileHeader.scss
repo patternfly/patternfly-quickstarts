@@ -1,13 +1,13 @@
 .pfext-quick-start-tile-header {
   &__status {
-    margin: var(--pf-v5-global--spacer--sm) 0;
+    margin: var(--pf-v6-global--spacer--sm) 0;
   }
   &--margin {
-    margin-right: var(--pf-v5-global--spacer--sm);
-    margin-bottom: var(--pf-v5-global--spacer--sm);
+    margin-right: var(--pf-v6-global--spacer--sm);
+    margin-bottom: var(--pf-v6-global--spacer--sm);
   }
-  & .pf-v5-c-badge:not(:last-of-type) {
-    margin-right: var(--pf-v5-global--spacer--sm);
+  & .pf-v6-c-badge:not(:last-of-type) {
+    margin-right: var(--pf-v6-global--spacer--sm);
   }
 
   h3 {
