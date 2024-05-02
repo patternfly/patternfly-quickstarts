@@ -1,7 +1,7 @@
-html, body, #root, .pf-v5-c-drawer, .pf-v5-c-drawer__main, .pf-v5-c-drawer__content {
+html, body, #root, .pf-v6-c-drawer, .pf-v6-c-drawer__main, .pf-v6-c-drawer__content {
   height: 100%;
 }
 
-.pf-v5-c-drawer__panel.pfext-quick-start-panel-content {
+.pf-v6-c-drawer__panel.pfext-quick-start-panel-content {
   flex-basis: 450px !important;
 }

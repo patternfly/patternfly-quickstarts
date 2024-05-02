@@ -32,9 +32,9 @@ const AppToolbar = () => {
   const handleDarkThemeChange = (isChecked: boolean) => {
     setDarkTheme(isChecked);
     if (isChecked) {
-      document.documentElement.classList.add('pf-v5-theme-dark');
+      document.documentElement.classList.add('pf-v6-theme-dark');
     } else {
-      document.documentElement.classList.remove('pf-v5-theme-dark');
+      document.documentElement.classList.remove('pf-v6-theme-dark');
     }
   };
 
