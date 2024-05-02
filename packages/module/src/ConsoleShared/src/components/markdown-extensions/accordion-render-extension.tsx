@@ -16,9 +16,9 @@ const AccordionShowdownHandler: React.FC<AccordionShowdownComponentProps> = ({
   const handleClick = () => {
     const expandedModifier = 'pf-m-expanded';
 
-    buttonElement.className = `pf-v5-c-accordion__toggle ${!expanded ? expandedModifier : ''}`;
+    buttonElement.className = `pf-v6-c-accordion__toggle ${!expanded ? expandedModifier : ''}`;
     contentElement.hidden = expanded;
-    contentElement.className = `pf-v5-c-accordion__expanded-content ${
+    contentElement.className = `pf-v6-c-accordion__expanded-content ${
       !expanded ? expandedModifier : ''
     }`;
     setExpanded(!expanded);
