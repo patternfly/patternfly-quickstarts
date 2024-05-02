@@ -127,7 +127,7 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
               headingLevel="h1"
               size="xl"
               className="pfext-quick-start-panel-content__name"
-              style={{ marginRight: 'var(--pf-v5-global--spacer--md)' }}
+              style={{ marginRight: 'var(--pf-v6-global--spacer--md)' }}
             >
               {activeHelpTopic?.title}
             </Title>

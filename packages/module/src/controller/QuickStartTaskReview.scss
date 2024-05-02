@@ -1,15 +1,15 @@
 .pfext-quick-start-task-review-alert {
-  margin: var(--pf-v5-global--spacer--lg) 0;
+  margin: var(--pf-v6-global--spacer--lg) 0;
 }
 .pfext-quick-start-task-review {
-  font-size: var(--pf-v5-global--FontSize--md);
-  line-height: var(--pf-v5-global--FontSize--xl);
-  font-family: var(--pf-v5-global--FontFamily--heading--sans-serif);
+  font-size: var(--pf-v6-global--FontSize--md);
+  line-height: var(--pf-v6-global--FontSize--xl);
+  font-family: var(--pf-v6-global--FontFamily--heading--sans-serif);
 
   &__actions {
     display: flex;
     align-items: flex-start;
-    margin-bottom: var(--pf-v5-global--spacer--sm);
+    margin-bottom: var(--pf-v6-global--spacer--sm);
     input[type='radio'] {
       margin-top: 0;
       margin-right: 0;
@@ -17,11 +17,11 @@
   }
 
   &__radio {
-    margin-right: var(--pf-v5-global--spacer--xl) !important;
+    margin-right: var(--pf-v6-global--spacer--xl) !important;
   }
 
   &--success {
-    color: var(--pf-v5-global--success-color--100) !important;
+    color: var(--pf-v6-global--success-color--100) !important;
   }
 
   &--failed {
