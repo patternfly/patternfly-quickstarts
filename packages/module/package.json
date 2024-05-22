@@ -45,13 +45,13 @@
     "docs:copy": "mkdir -p dist/patternfly-docs && cp -R patternfly-docs/content/extensions/quick-starts dist/patternfly-docs"
   },
   "peerDependencies": {
-    "@patternfly/react-core": ">=5.0.0",
+    "@patternfly/react-core": "6.0.0-alpha.50",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
     "showdown": ">=2.1.0"
   },
   "dependencies": {
-    "@patternfly/react-catalog-view-extension": "file:.yalc/@patternfly/react-catalog-view-extension",
+    "@patternfly/react-catalog-view-extension": "^5.0.0",
     "dompurify": "^2.2.6",
     "history": "^5.0.0",
     "showdown": "1.8.6"
