@@ -37,16 +37,13 @@ const FormGroupWithHelpTopicPopover: React.FC<FormGroupWithHelpTopicPopoverProps
 
   return (
     <FormGroup
-      label={topic.title}
-      isRequired
-      fieldId={topic.name}
-      key={topic.name}
-      labelIcon={
+      label={
         <>
+          {topic.title}{' '}
           <Popover
             bodyContent={(hide) => (
               <div>
-                {topic.title} is quite amaizing{' '}
+                {topic.title} is quite amazing{' '}
                 <Button
                   variant="link"
                   onClick={() => {
@@ -54,7 +51,7 @@ const FormGroupWithHelpTopicPopover: React.FC<FormGroupWithHelpTopicPopoverProps
                     hide();
                   }}
                 >
-                  Learn more!
+                  {`Learn more about ${topic.title}`}
                 </Button>
               </div>
             )}
@@ -63,13 +60,12 @@ const FormGroupWithHelpTopicPopover: React.FC<FormGroupWithHelpTopicPopoverProps
               <HelpIcon />
             </Button>
           </Popover>
-          <Button
-            variant="link"
-            onClick={() => setActiveHelpTopicByName(topic.name)}
-          >{`Learn more about ${topic.title}`}</Button>
         </>
       }
-    >
+      isRequired
+      fieldId={topic.name}
+      key={topic.name}
+  >
       <TextInput isRequired type="text" id={topic.name} />
     </FormGroup>
   );
@@ -140,7 +136,7 @@ export const MockConsole: React.FC = () => {
   return (
     <>
       <PageSection>
-        <Banner variant="blue">
+        <Banner>
           <Title headingLevel="h1">Console Page {consolePageState}</Title>
         </Banner>
       </PageSection>
