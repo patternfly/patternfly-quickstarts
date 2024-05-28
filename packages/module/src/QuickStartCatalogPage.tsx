@@ -4,11 +4,9 @@ import {
   Divider,
   EmptyState,
   EmptyStateBody,
-  EmptyStateIcon,
   Text,
   EmptyStateFooter,
   EmptyStateActions,
-  EmptyStateHeader,
 } from '@patternfly/react-core';
 import SearchIcon from '@patternfly/react-icons/dist/js/icons/search-icon';
 import { EmptyBox, LoadingBox, clearFilterParams } from '@console/internal/components/utils';

@@ -51,9 +51,9 @@
     "showdown": ">=2.1.0"
   },
   "dependencies": {
-    "dompurify": "^2.4.9",
+    "@patternfly/react-catalog-view-extension": "^6.0.0-alpha.1",
     "history": "^5.0.0"
-    "@patternfly/react-catalog-view-extension": "^5.0.0",
+    "dompurify": "^2.4.9",
     "showdown": "1.8.6"
   },
   "devDependencies": {
