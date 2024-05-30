@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Button,
   Brand,
+  Icon,
   Nav as PfNav,
   NavList,
   NavItem,
@@ -68,9 +69,11 @@ const AppToolbar = () => {
               variant={ButtonVariant.plain}
               onClick={() => qsContext.setActiveQuickStart(qsId)}
             >
-              <LightbulbIcon
-                color={qsContext.activeQuickStartID === qsId ? 'yellow' : 'currentColor'}
-              />
+              <Icon size="lg">
+                <LightbulbIcon
+                  color={qsContext.activeQuickStartID === qsId ? 'yellow' : 'currentColor'}
+                />
+              </Icon>
             </Button>
           </ToolbarItem>
           <ToolbarItem>
@@ -93,7 +96,9 @@ export const AppHeader = (
   <Masthead>
     <MastheadToggle>
       <PageToggleButton variant="plain" aria-label="Global navigation">
-        <BarsIcon />
+        <Icon>
+          <BarsIcon />
+        </Icon>
       </PageToggleButton>
     </MastheadToggle>
     <MastheadMain>

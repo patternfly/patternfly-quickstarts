@@ -9,6 +9,7 @@ import QuickStartTileDescription from './QuickStartTileDescription';
 import QuickStartTileFooter from './QuickStartTileFooter';
 import QuickStartTileFooterExternal from './QuickStartTileFooterExternal';
 import QuickStartTileHeader, { QuickstartAction } from './QuickStartTileHeader';
+import { Icon } from '@patternfly/react-core';
 
 import './QuickStartTile.scss';
 
@@ -40,15 +41,17 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
 
   let quickStartIcon: React.ReactNode;
   if (typeof icon === 'object') {
-    quickStartIcon = icon;
+    quickStartIcon = <Icon size="xl">{icon}</Icon>
   } else {
     quickStartIcon = (
+      <Icon size="xl">
       <FallbackImg
         className="pfext-catalog-item-icon__img--large"
         src={icon as string}
         alt=""
         fallback={<RocketIcon />}
       />
+      </Icon>
     );
   }
 
