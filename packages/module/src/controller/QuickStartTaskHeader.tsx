@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Icon, Title, WizardNavItem } from '@patternfly/react-core';
+import { Icon, Text, TextVariants, Title, WizardNavItem } from '@patternfly/react-core';
 import CheckCircleIcon from '@patternfly/react-icons/dist/js/icons/check-circle-icon';
 import ExclamationCircleIcon from '@patternfly/react-icons/dist/js/icons/exclamation-circle-icon';
 import { css } from '@patternfly/react-styles';
@@ -93,22 +93,22 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   );
 
   const content = (
-    <div className="pfext-quick-start-task-header" ref={titleRef}>
-      <TaskIcon taskIndex={taskIndex} taskStatus={taskStatus} />
-      <Title headingLevel="h3" size={size} className={classNames}>
-        <span dangerouslySetInnerHTML={{ __html: removeParagraphWrap(markdownConvert(title)) }} />
-        {isActiveTask && subtitle && (
-          <span
-            className="pfext-quick-start-task-header__subtitle"
-            data-test-id="quick-start-task-subtitle"
-          >
-            {' '}
-            {subtitle}
-          </span>
-        )}
-      </Title>
-      {tryAgain}
-    </div>
+    <div ref={titleRef}>
+        <Title headingLevel="h3">
+          <span dangerouslySetInnerHTML={{ __html: removeParagraphWrap(markdownConvert(title)) }} />
+          {isActiveTask && subtitle && (
+            <span
+              data-test-id="quick-start-task-subtitle"
+            >
+              {' '}
+              <Text component={TextVariants.small}>
+                {subtitle}
+              </Text>
+            </span>
+          )}
+        {tryAgain}
+        </Title>
+    </div>    
   );
 
   return (
