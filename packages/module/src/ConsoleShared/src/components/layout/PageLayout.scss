@@ -6,7 +6,7 @@
 
   &__header {
     padding-top: 1px;
-    background-color: var(--pf-v6-global--BackgroundColor--light-100);
+    background-color: var(--pf-t--global--background--color--primary--default);
   }
 
   &__hint {
@@ -22,8 +22,8 @@
     font-size: var(--pf-v6-global--FontSize--2xl);
     margin-top: 23px;
     margin-bottom: 11.5px;
-    font-family: var(--pf-v6-global--FontFamily--heading--sans-serif);
-    font-weight: var(--pf-v6-global--FontWeight--normal);
+    font-family: var(--pf-t--global--font--family--heading);
+    font-weight: var(--pf-t--global--font--weight--heading);
     line-height: 1.1;
   }
 }

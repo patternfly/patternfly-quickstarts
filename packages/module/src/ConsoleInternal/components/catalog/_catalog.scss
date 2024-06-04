@@ -51,7 +51,7 @@ $catalog-tile-width: $pfext-m-catalog-tile-width;
   }
 
   &__kind-label {
-    font-weight: var(--pf-v6-global--FontWeight--bold);
+    font-weight: var(--pf-t--global--font--weight--body--bold);
   }
 
   &__name {
@@ -115,7 +115,7 @@ $catalog-tile-width: $pfext-m-catalog-tile-width;
 
   &__btn-group__group-by {
     display: inline;
-    margin-left: var(--pf-v6-global--spacer--md);
+    margin-left: var(--s/pf-v6-global--spacer/pf-t--global--spacer);
   }
 
   &__content {

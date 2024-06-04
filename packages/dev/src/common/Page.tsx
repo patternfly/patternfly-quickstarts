@@ -47,12 +47,10 @@ const AppToolbar = () => {
   };
 
   return (
-    <Toolbar id="toolbar" isFullHeight isStatic>
+    <Toolbar id="toolbar">
       <ToolbarContent>
         <ToolbarGroup
-          variant="icon-button-group"
           align={{ default: 'alignRight' }}
-          spacer={{ default: 'spacerNone', md: 'spacerMd' }}
         >
           <ToolbarItem>
             <Switch
