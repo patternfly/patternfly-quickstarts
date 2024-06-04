@@ -43,7 +43,7 @@
   &__element-highlight-animate {
     pointer-events: none;
     position: absolute;
-    box-shadow: inset 0px 0px 0px 4px var(--pf-v6-global--palette--blue-200);
+    box-shadow: inset 0px 0px 0px 4px var(--pf-t--global--color--brand--default);
     opacity: 0;
     animation: 0.4s pfext-spotlight-fade-in 0s ease-in-out, 5s pfext-spotlight-fade-out 12.8s ease-in-out;
     animation-fill-mode: forwards;
@@ -56,7 +56,7 @@
       bottom: 0;
       animation: 1.2s pfext-spotlight-expand 1.6s ease-out;
       animation-fill-mode: forwards;
-      outline: 4px solid var(--pf-v6-global--palette--blue-200);
+      outline: 4px solid var(--pf-t--global--color--brand--default);
       outline-offset: -4px;
     }
   }

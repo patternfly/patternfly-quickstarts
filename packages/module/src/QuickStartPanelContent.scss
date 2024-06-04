@@ -3,9 +3,9 @@
     position: sticky;
     top: 0px;
     background: inherit;
-    z-index: var(--pf-v6-global--ZIndex--xs);
+    z-index: var(--pf-t--global--z-index--xs);
     &__shadow {
-      box-shadow: var(--pf-v6-global--BoxShadow--sm-bottom);
+      box-shadow: var(--pf-t--global--box-shadow--sm--bottom);
     }
     &--blue-white {
       background-color: var(--pf-v6-global--palette--blue-400);
