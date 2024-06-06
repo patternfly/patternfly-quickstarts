@@ -73,7 +73,7 @@ export const QuickStartCatalogFilterCount = ({ quickStartsCount }) => {
   return (
     <ToolbarItem
       className="pfext-quick-start-catalog-filter__count"
-      align={{ default: 'alignRight' }}
+      align={{ default: 'alignEnd' }}
     >
       {getResource('{{count, number}} item', quickStartsCount).replace(
         '{{count, number}}',

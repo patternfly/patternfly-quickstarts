@@ -12,9 +12,9 @@
 // class="pf-v6-l-bullseye"
 // class="pf-v6-c-tooltip pf-m-top pfext-quick-start__base"
 
-@import '@patternfly/patternfly/sass-utilities/all';
+@import '@patternfly/patternfly/sass-utilities';
 // gets added globally to :root
-@import '@patternfly/patternfly/base/variables';
+@import '@patternfly/patternfly/base/patternfly-variables';
 
 @import '@patternfly/patternfly/components/Drawer/drawer.scss';
 @import '@patternfly/patternfly/components/Popover/popover.scss';
