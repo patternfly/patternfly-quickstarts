@@ -2,40 +2,40 @@
   margin-bottom: var(--pf-t--global--spacer--sm);
   display: grid;
   grid-template-columns: min-content auto;
-  font-size: var(--pf-v6--global--FontSize--md);
+  font-size: var(--pf-t--global--font--size--body--default);
   button::before {
     content: none;
   }
 
   &__title {
-    color: var(--pf-v6--global--primary-color--100) !important;
+    color: var(--pf-t--global--text--color--brand--default) !important;
     margin-right: var(--pf-t--global--spacer--md) !important;
   }
 
   &__subtitle {
-    font-size: var(--pf-v6--global--FontSize--sm);
-    color: var(--pf-v6--global--Color--dark-200) !important;
+    font-size: var(--pf-t--global--font--size--body--sm);
+    color: var(--pf-t--global--text--color--subtle) !important;
   }
 
   &__tryagain {
     display: block;
-    font-size: var(--pf-v6--global--FontSize--md);
-    color: var(--pf-v6--global--Color--300) !important;
+    font-size: var(--pf-t--global--font--size--body--default);
+    color: var(--pf-t--global--text--color--subtle) !important;
   }
 
   &__title-success {
-    color: var(--pf-v6--global--success-color--100) !important;
+    color: var(--pf-t--global--text--color--status--success--default) !important;
   }
 
   &__title-failed {
-    color: var(--pf-v6--global--danger-color--100) !important;
+    color: var(--pf-t--global--text--color--status--danger--default) !important;
   }
 
   &__task-icon {
     &-init {
-      background-color: var(--pf-v6--global--primary-color--100);
-      border-radius: var(--pf-v6--global--BorderRadius--lg);
-      color: var(--pf-v6--global--Color--light-100);
+      background-color: var(--pf-t--global--color--brand--default);
+      border-radius: var(--pf-t--global--border--radius--large);
+      color: var(--pf-t--global--text--color--on-brand--default);
       display: inline-flex;
       justify-content: center;
       height: 1.5em;
@@ -48,11 +48,11 @@
     }
 
     &-success {
-      color: var(--pf-v6--global--success-color--100) !important;
+      color: var(--pf-t--global--text--color--status--success--default) !important;
     }
 
     &-failed {
-      color: var(--pf-v6--global--danger-color--100) !important;
+      color: var(--pf-t--global--text--color--status--danger--default) !important;
     }
   }
 }

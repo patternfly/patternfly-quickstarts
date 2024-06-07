@@ -23,7 +23,7 @@
         margin-bottom: 6px;
       }
       &-subtitle {
-        color: var(--pf-v6--global--Color--200);
+        color: var(--pf-t--global--text--color--subtle);
         font-size: 16px;
       }
       &-list {
@@ -74,9 +74,10 @@
               word-break: break-word;
             }
             .task-pflist-list__item__content__note {
-              background-color: var(--pf-v6--global--palette--blue-50);
-              border-color: var(--pf-v6--global--active-color--200);
+              background-color: var(--pf-t--global--color--nonstatus--blue--default);
+              border-color: var(--pf-t--global--border--color--brand--default);
               margin: var(--pf-t--global--spacer--md) 0;
+              color: var(--pf-t--global--text--color--nonstatus--on-blue--default);
               &__body {
                 font-size: 14px;
               }
