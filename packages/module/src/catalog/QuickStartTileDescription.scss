@@ -13,12 +13,12 @@
   &-prerequisites {
     display: inline-flex;
     &__text {
-      margin-right: var(--pf-v6-global--spacer--sm);
-      font-size: var(--pf-v6-global--FontSize--md);
+      margin-right: var(--pf-t--global--spacer--sm);
+      font-size: var(--pf-v6--global--FontSize--md);
       margin-top: 11.5px;
       margin-bottom: 11.5px;
-      font-family: var(--pf-v6-global--FontFamily--heading--sans-serif);
-      font-weight: var(--pf-v6-global--FontWeight--normal);
+      font-family: var(--pf-v6--global--FontFamily--heading--sans-serif);
+      font-weight: var(--pf-v6--global--FontWeight--normal);
       line-height: 1.1;
     }
 
