@@ -6,7 +6,7 @@
 
   // match pf4 styling / table col head styling
   dt {
-    font-weight: var(--pf-v6--global--FontWeight--bold); }
+    font-weight: var(--pf-t--global--font--weight--body--bold); }
 
   dd {
     margin-bottom: 20px; }
@@ -40,9 +40,6 @@
 .pfext-page-layout__content,
 // catalog item prereq popover
 .pfext-popover__base {
-  --pf-v6--global--FontSize--md: 14px;
-  --pf-v6--global--FontSize--sm: 13px;
-
   ul {
       list-style-type: disc;
   }

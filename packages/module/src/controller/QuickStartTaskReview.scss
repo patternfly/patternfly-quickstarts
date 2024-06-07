@@ -2,9 +2,9 @@
   margin: var(--pf-t--global--spacer--lg) 0;
 }
 .pfext-quick-start-task-review {
-  font-size: var(--pf-v6--global--FontSize--md);
-  line-height: var(--pf-v6--global--FontSize--xl);
-  font-family: var(--pf-v6--global--FontFamily--heading--sans-serif);
+  font-size: var(--pf-t--global--font--size--md);
+  line-height: var(--pf-t--global--font--line-height--heading);
+  font-family: var(--pf-t--global--font--family--heading);
 
   &__actions {
     display: flex;
@@ -21,10 +21,10 @@
   }
 
   &--success {
-    color: var(--pf-v6--global--success-color--100) !important;
+    color: var(--pf-t--global--text--color--status--success--default) !important;
   }
 
   &--failed {
-    color: var(--pf-chart-global--danger--Color--100);
+    color: var(--pf-t--global--text--color--status--danger--default);
   }
 }

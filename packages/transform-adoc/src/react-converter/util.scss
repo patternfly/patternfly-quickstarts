@@ -5,7 +5,7 @@
       margin-bottom: 6px;
     }
     &-subtitle {
-      color: var(--pf-v6-global--Color--200);
+      color: var(--pf-t--global--text--color--subtle);
       font-size: 16px;
     }
     &-list {
@@ -14,7 +14,7 @@
         margin-top: 4px;
       }
       &--prereq {
-        padding-left: var(--pf-v6-global--spacer--lg);
+        padding-left: var(--pf-t--global--spacer--lg);
       }
       &--proc {
         padding-left: 10px;
@@ -39,7 +39,7 @@
         &__content {
           .pf-v6-c-alert {
             // add margins to match design
-            margin: var(--pf-v6-global--spacer--md) 0;
+            margin: var(--pf-t--global--spacer--md) 0;
           }
           .pf-v6-c-alert__title {
             // remove margins from markdown css
@@ -53,11 +53,12 @@
             word-break: break-word;
           }
           .task-pflist-list__item__content__note {
-            background-color: var(--pf-v6-global--palette--blue-50);
-            border-color: var(--pf-v6-global--active-color--200);
-            margin: var(--pf-v6-global--spacer--md) 0;
+            background-color: var(--pf-t--global--color--nonstatus--blue--default);
+            border-color: var(--pf-t--global--border--color--brand--default);
+            margin: var(--pf-t--global--spacer--md) 0;
+            color: var(--pf-t--global--text--color--nonstatus--on-blue--default);
             &__body {
-              font-size: 14px;
+              font-size: var(--pf-t--global--font--size--body--sm);
             }
           }
         }
@@ -65,17 +66,18 @@
     }
   }
   .description-note {
-    background-color: var(--pf-v6-global--palette--blue-50);
-    border-color: var(--pf-v6-global--active-color--200);
-    margin: var(--pf-v6-global--spacer--md) 0;
+    background-color: var(--pf-t--global--color--nonstatus--blue--default);
+    border-color: var(--pf-t--global--border--color--brand--default);
+    margin: var(--pf-t--global--spacer--md) 0;
+    color: var(--pf-t--global--text--color--nonstatus--on-blue--default);
     &__body {
-      font-size: 14px;
+      font-size: var(--pf-t--global--font--size--body--sm);
     }
   }
   .description-important {
     &.pf-v6-c-alert {
       // add margins to match design
-      margin: var(--pf-v6-global--spacer--md) 0;
+      margin: var(--pf-t--global--spacer--md) 0;
       .pf-v6-c-alert__title {
         // remove margins from markdown css
         margin-top: 0;

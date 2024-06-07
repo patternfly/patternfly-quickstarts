@@ -7,56 +7,41 @@
 
   // duration color was gray on white but on the blue header, only white text works
   .pfext-quick-start-panel-content__header--blue-white .pfext-quick-start-panel-content__duration {
-    color: var(--pf-v6-global--Color--light-100);
+    color: var(--pf-t--global--text--color--on-brand--default);
   }
 
   .pfext-quick-start-task-header__subtitle {
-    color: var(--pf-v6-global--palette--black-200) !important;
+    color: var(--pf-t--global--text--color--on-brand--default) !important;
   }
 
   .pfext-quick-start-task-header__task-icon-init {
-    background-color: var(--pf-v6-global--primary-color--300);
+    background-color: var(--pf-t--global--color--brand--default);
   }
 
   .pfext-quick-start-task-header__tryagain {
-    color: var(--pf-v6-global--palette--black-200) !important;
+    color: var(--pf-t--global--text--color--subtle) !important;
   }
 
   .pfext-markdown-view pre:not(.pfext-code-block__pre) {
-    background-color: var(--pf-v6-global--BackgroundColor--100);
-    border-color: var(--pf-v6-global--BorderColor--100);
+    background-color: var(--pf-t--global--background--color--primary--default);
+    border-color: var(--pf-t--global--border--color--default);
   }
 
   .pfext-markdown-view .pf-v6-c-code-block__code {
-    color: var(--pf-v6-global--Color--100);
-    background-color: var(--pf-v6-global--palette--black-600);
-  }
-
-  .pfext-markdown-view .pf-v6-c-code-block,
-  .pfext-markdown-view .pf-v6-c-code-block code {
-    background-color: var(--pf-v6-global--BackgroundColor--400);
+    color: var(--pf-t--global--text--color--regular);
+    background-color: var(--pf-t--global--background--color--secondary--default);
   }
 
   :where(.pfext-markdown-view) .pf-v6-c-clipboard-copy.pf-m-inline {
-    --pf-v6-c-clipboard-copy--m-inline--BackgroundColor: var(--pf-v6-global--BackgroundColor--400);
+    --pf-v6-c-clipboard-copy--m-inline--BackgroundColor: var(--pf-t--global--background--color--secondary--default);
   }
 
   // Make the cards light on dark background. It would be better to use pf-v6-c-page__main-section variable but we aren't using a page section here.
   .pfext-page-layout__content {
-    background-color: var(--pf-v6-global--BackgroundColor--200);
+    background-color: var(--pf-t--global--background--color--secondary--default);
   }
 
   .pfext-quick-start-catalog__gallery-item .pf-v6-c-card {
-    --pf-v6-c-card--BackgroundColor: var(--pf-v6-global--BackgroundColor--100);
-  }
-
-  // Alerts currently has the wrong background in the PF dark stylesheet. This can be removed once that is fixed.
-  .pf-v6-c-alert {
-    --pf-v6-c-alert--BackgroundColor: var(--pf-v6-global--palette--black-700);
-    --pf-v6-c-alert--m-inline--BackgroundColor: var(--pf-v6-global--palette--black-700);
-    --pf-v6-c-alert--m-inline--m-success--BackgroundColor: var(--pf-v6-global--palette--black-700);
-    --pf-v6-c-alert--m-inline--m-danger--BackgroundColor: var(--pf-v6-global--palette--black-700);
-    --pf-v6-c-alert--m-inline--m-warning--BackgroundColor: var(--pf-v6-global--palette--black-700);
-    --pf-v6-c-alert--m-inline--m-info--BackgroundColor: var(--pf-v6-global--palette--black-700);
+    --pf-v6-c-card--BackgroundColor: var(--pf-t--global--background--color--primary--default);
   }
 }
