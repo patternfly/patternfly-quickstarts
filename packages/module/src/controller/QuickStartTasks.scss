@@ -10,11 +10,11 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        margin-bottom: var(--pf-v6-global--spacer--xs);
+        margin-bottom: var(--pf-t--global--spacer--xs);
       }
     }
     .pfext-quick-start-task__content {
-      margin-bottom: var(--pf-v6-global--spacer--md);
+      margin-bottom: var(--pf-t--global--spacer--md);
     }
     // Custom styles on PF React List rendered in custom react renderer
     .task-pflist {
@@ -23,13 +23,13 @@
         margin-bottom: 6px;
       }
       &-subtitle {
-        color: var(--pf-v6-global--Color--200);
+        color: var(--pf-v6--global--Color--200);
         font-size: 16px;
       }
       &-list {
         font-size: 16px;
         &--prereq {
-          padding-left: var(--pf-v6-global--spacer--lg);
+          padding-left: var(--pf-t--global--spacer--lg);
           li + li {
             margin-top: 4px;
           }
@@ -60,7 +60,7 @@
           &__content {
             .pf-v6-c-alert {
               // add margins to match design
-              margin: var(--pf-v6-global--spacer--md) 0;
+              margin: var(--pf-t--global--spacer--md) 0;
             }
             .pf-v6-c-alert__title {
               // remove margins from markdown css
@@ -74,9 +74,9 @@
               word-break: break-word;
             }
             .task-pflist-list__item__content__note {
-              background-color: var(--pf-v6-global--palette--blue-50);
-              border-color: var(--pf-v6-global--active-color--200);
-              margin: var(--pf-v6-global--spacer--md) 0;
+              background-color: var(--pf-v6--global--palette--blue-50);
+              border-color: var(--pf-v6--global--active-color--200);
+              margin: var(--pf-t--global--spacer--md) 0;
               &__body {
                 font-size: 14px;
               }

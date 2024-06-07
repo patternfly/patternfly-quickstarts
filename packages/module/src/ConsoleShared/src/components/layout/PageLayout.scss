@@ -1,6 +1,6 @@
 .pfext-page-layout {
   &__content {
-    padding: var(--pf-v6-global--spacer--lg);
+    padding: var(--pf-t--global--spacer--lg);
     flex: 1;
   }
 
@@ -10,16 +10,16 @@
   }
 
   &__hint {
-    padding-left: var(--pf-v6-global--spacer--lg);
-    padding-right: var(--pf-v6-global--spacer--lg);
-    padding-bottom: var(--pf-v6-global--spacer--md);
+    padding-left: var(--pf-t--global--spacer--lg);
+    padding-right: var(--pf-t--global--spacer--lg);
+    padding-bottom: var(--pf-t--global--spacer--md);
     font-size: 14px;
   }
 
   &__title {
-    padding-left: var(--pf-v6-global--spacer--lg);
-    padding-right: var(--pf-v6-global--spacer--lg);
-    font-size: var(--pf-v6-global--FontSize--2xl);
+    padding-left: var(--pf-t--global--spacer--lg);
+    padding-right: var(--pf-t--global--spacer--lg);
+    font-size: var(--pf-t--global--font--size--heading--h1);
     margin-top: 23px;
     margin-bottom: 11.5px;
     font-family: var(--pf-t--global--font--family--heading);

@@ -35,7 +35,7 @@
   .pfext-markdown-admonition {
     &.pf-v6-c-alert {
       // add margins to match design
-      margin: var(--pf-v6-global--spacer--md) 0;
+      margin: var(--pf-t--global--spacer--md) 0;
       .pf-v6-c-alert__title {
         // remove margins from markdown css
         margin-top: 0;

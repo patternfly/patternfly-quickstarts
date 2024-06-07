@@ -49,7 +49,7 @@ const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
     <>
       <QuickStartMarkdownView content={introduction} />
       {prereqList}
-      <p style={{ marginBottom: 'var(--pf-v6-global--spacer--md)' }}>
+      <p style={{ marginBottom: 'var(--pf-t--global--spacer--md)' }}>
         {getResource(
           'In this quick start, you will complete {{count, number}} task',
           tasks.length,
