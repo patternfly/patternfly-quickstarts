@@ -1,12 +1,12 @@
-@import '@patternfly/patternfly/sass-utilities/all';
+@import '@patternfly/patternfly/sass-utilities';
 @import './legacy-bootstrap/variables';
 
-@import './base';
-@import './dark-custom-override';
+// @import './base';
+// @import './dark-custom-override';
 
-// React Components
-@import '../ConsoleInternal/**/*.scss';
-@import '../ConsoleShared/**/*.scss';
+// // React Components
+// @import '../ConsoleInternal/**/*.scss';
+// @import '../ConsoleShared/**/*.scss';
 
 // legacy bootstrap typography styles for markdown content
 @import './legacy-bootstrap.scss';

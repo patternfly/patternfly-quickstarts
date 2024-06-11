@@ -1,14 +1,14 @@
 // PF4 overrides
 $font-size-base: 14px;
-$font-size-h1: var(--pf-v5-global--FontSize--2xl);
-$font-size-h2: 20px; // must be literal value because of calculation in patternfly/dist/sass/patternfly/_list-view.scss
-$font-size-h3: var(--pf-v5-global--FontSize--lg);
-$font-size-h4: var(--pf-v5-global--FontSize--md);
-$font-size-h5: var(--pf-v5-global--FontSize--md);
-$font-size-h6: var(--pf-v5-global--FontSize--md);
+$font-size-h1: var(--pf-t--global--font--size--heading--h1);
+$font-size-h2: var(--pf-t--global--font--size--heading--h2);
+$font-size-h3: var(--pf-t--global--font--size--heading--h3);
+$font-size-h4: var(--pf-t--global--font--size--heading--h4);
+$font-size-h5: var(--pf-t--global--font--size--heading--h5);
+$font-size-h6: var(--pf-t--global--font--size--heading--h6);
 $grid-gutter-width: 30px;
-$headings-font-family: var(--pf-v5-global--FontFamily--heading--sans-serif);
-$headings-font-weight: var(--pf-v5-global--FontWeight--normal);
+$headings-font-family: var(--pf-t--global--font--family--heading);
+$headings-font-weight: var(--pf-t--global--font--weight--heading);
 
 // PF3 variables
 $color-pf-black:                 #030303 !default;

@@ -9,11 +9,11 @@
     "serve": "serve public"
   },
   "dependencies": {
-    "@patternfly/patternfly": "^5.0.0",
-    "@patternfly/quickstarts": "^5.0.0-prerelease.2",
+    "@patternfly/patternfly": "6.0.0-alpha.139",
+    "@patternfly/quickstarts": "^6.0.0-alpha.0",
     "@patternfly/transform-adoc": "*",
-    "@patternfly/react-core": "^5.0.0",
-    "asciidoctor": "^2.2.1",
+    "@patternfly/react-core": "6.0.0-alpha.61",
+    "asciidoctor": "^2.2.6",
     "i18next": "^19.8.3",
     "i18next-browser-languagedetector": "^6.0.1",
     "i18next-parser": "^3.3.0",
@@ -26,8 +26,7 @@
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
-    "@types/react": "^18.2.6",
-    "@types/react-dom": "^18.2.4",
+    "@types/react": "^18.2.79",
     "@types/react-router-dom": "^5.3.3",
     "ajv": "^7.2.3",
     "assets-webpack-plugin": "^7.1.1",

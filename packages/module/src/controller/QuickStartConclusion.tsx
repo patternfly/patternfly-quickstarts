@@ -53,7 +53,7 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
               nextQuickStart?.spec?.displayName,
             )}{' '}
             <ArrowRightIcon
-              style={{ marginLeft: 'var(--pf-v5-global--spacer--xs)', verticalAlign: 'middle' }}
+              style={{ marginLeft: 'var(--pf-t--global--spacer--xs)', verticalAlign: 'middle' }}
             />
           </Button>
         ))}

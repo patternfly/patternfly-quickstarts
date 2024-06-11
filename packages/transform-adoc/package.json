@@ -28,14 +28,13 @@
     "access": "public"
   },
   "dependencies": {
-    "@patternfly/react-core": "^5.0.0"
+    "@patternfly/react-core": "6.0.0-alpha.61"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
-    "@types/react": "^18.2.6",
-    "@types/react-dom": "^18.2.4",
-    "asciidoctor": "^2.2.1",
+    "@types/react": "^18.2.79",
+    "asciidoctor": "^2.2.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^2.37.0",
@@ -47,8 +46,8 @@
     "rollup-plugin-visualizer": "^5.5.0"
   },
   "peerDependencies": {
-    "asciidoctor": ">=2.2.1",
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "asciidoctor": ">=2.2.6",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   }
 }
