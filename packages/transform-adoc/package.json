@@ -28,7 +28,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@patternfly/react-core": "^5.0.0"
+    "@patternfly/react-core": "6.0.0-alpha.61"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",

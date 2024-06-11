@@ -50,7 +50,7 @@ const AppToolbar = () => {
     <Toolbar id="toolbar">
       <ToolbarContent>
         <ToolbarGroup
-          align={{ default: 'alignRight' }}
+          align={{ default: 'alignEnd' }}
         >
           <ToolbarItem>
             <Switch
