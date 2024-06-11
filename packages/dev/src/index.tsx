@@ -7,7 +7,6 @@ import '@patternfly/react-core/dist/styles/base.css';
 import '@patternfly/transform-adoc/dist/transform-adoc.css';
 
 import '@patternfly/quickstarts/dist/quickstarts.css';
-import '@patternfly/patternfly/patternfly-theme-dark.css';
 
 import './i18n/i18n';
 import AppContext from './AppContext';
