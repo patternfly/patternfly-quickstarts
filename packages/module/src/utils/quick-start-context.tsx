@@ -79,6 +79,7 @@ export interface QuickStartContextValues {
   setLoading?: any;
   alwaysShowTaskReview?: boolean;
   setAlwaysShowTaskReview?: any;
+  focusOnQuickStart?: boolean;
 }
 
 export const QuickStartContextDefaults = {
@@ -104,6 +105,7 @@ export const QuickStartContextDefaults = {
   markdown: null,
   loading: false,
   alwaysShowTaskReview: true,
+  focusOnQuickStart: true,
 };
 export const QuickStartContext = createContext<QuickStartContextValues>(QuickStartContextDefaults);
 
