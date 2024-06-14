@@ -14,12 +14,8 @@
     display: inline-flex;
     &__text {
       margin-right: var(--pf-t--global--spacer--sm);
-      font-size: var(--pf-t--global--font--size--md);
       margin-top: 11.5px;
       margin-bottom: 11.5px;
-      font-family: var(--pf-t--global--font--family--heading);
-      font-weight: var(--pf-t--global--font--weight--heading);
-      line-height: 1.1;
     }
 
     &-list {
