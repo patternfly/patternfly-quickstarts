@@ -98,7 +98,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   const content = quickStart ? (
     <DrawerPanelContent
       isResizable={isResizable}
-      className="pfext-quick-start__base"
+      className="pfext-quick-start__base pfext-quick-start-panel"
       data-testid={`qs-drawer-${camelize(quickStart.spec.displayName)}`}
       data-qs={`qs-step-${getStep()}`}
       data-test="quickstart drawer"
@@ -118,7 +118,8 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
                   __html: removeParagraphWrap(markdownConvert(quickStart?.spec.displayName)),
                 }}
               />{' '}
-              <small className="pfext-quick-start-panel-content__duration">
+            </Title>
+            <span className="pfext-quick-start-panel-content__duration">
                 {quickStart?.spec.durationMinutes
                   ? getResource(
                       '{{type}} • {{duration, number}} minutes',
@@ -127,8 +128,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
                       .replace('{{duration, number}}', quickStart?.spec.durationMinutes)
                       .replace('{{type}}', getResource('Type'))
                   : getResource('Type')}
-              </small>
-            </Title>
+            </span>
           </div>
           {showClose && (
             <DrawerActions>

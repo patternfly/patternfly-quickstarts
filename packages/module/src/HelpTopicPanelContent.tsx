@@ -95,7 +95,7 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
   );
 
   const content = (
-    <DrawerPanelContent isResizable={isResizable} className="pfext-quick-start__base" {...props}>
+    <DrawerPanelContent isResizable={isResizable} className="pfext-quick-start__base pfext-quick-start-panel" {...props}>
       <div>
         <DrawerHead>
           <div className="pfext-quick-start-panel-content__title">
