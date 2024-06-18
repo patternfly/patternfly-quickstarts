@@ -56,7 +56,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   ...props
 }) => {
   const titleRef = React.useRef(null);
-  const { getResource, activeQuickStartState } =
+  const { getResource, activeQuickStartState, focusOnQuickStart } =
     React.useContext<QuickStartContextValues>(QuickStartContext);
   const [contentRef, setContentRef] = React.useState<HTMLDivElement>();
   const shadows = useScrollShadows(contentRef);
@@ -90,10 +90,10 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   };
 
   React.useEffect(() => {
-    if (quickStart) {
+    if (focusOnQuickStart && quickStart) {
       titleRef.current.focus();
     }
-  }, [quickStart]);
+  }, [focusOnQuickStart, quickStart]);
 
   const content = quickStart ? (
     <DrawerPanelContent
