@@ -76,7 +76,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
       onClick();
     }
   };
-
+  
   return (
     <div ref={ref}>
       <CatalogTile
@@ -87,7 +87,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
         icon={quickStartIcon}
         className="pfext-quick-start-tile"
         data-testid={`qs-card-${camelize(displayName)}`}
-        featured={isActive}
+        isClicked={isActive}
         title={
           <QuickStartTileHeader
             name={displayName}

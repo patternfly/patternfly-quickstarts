@@ -31,29 +31,29 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
       />
       {prereqs?.length > 0 && (
         <div className="pfext-quick-start-tile-prerequisites">
-          <Text component={TextVariants.h5} className="pfext-quick-start-tile-prerequisites__text">
+          <h5 className="pfext-quick-start-tile-prerequisites__text">
             {getResource('Prerequisites ({{totalPrereqs}})').replace(
               '{{totalPrereqs}}',
               prereqs.length,
             )}{' '}
-          </Text>
+          </h5>
           <Popover
             aria-label={getResource('Prerequisites')}
             headerContent={getResource('Prerequisites')}
             className="pfext-quick-start__base"
             bodyContent={
               <div className="pfext-popover__base">
-                <TextList
+                <ul
                   aria-label={getResource('Prerequisites')}
                   className="pfext-quick-start-tile-prerequisites-list"
                 >
                   {prereqs.map((prerequisite, index) => (
                     // eslint-disable-next-line react/no-array-index-key
-                    <TextListItem key={index}>
+                    <li key={index}>
                       <QuickStartMarkdownView content={prerequisite} />
-                    </TextListItem>
+                    </li>
                   ))}
-                </TextList>
+                </ul>
               </div>
             }
           >
