@@ -80,8 +80,7 @@ export const CustomCatalog: React.FC = () => {
     setFilteredQuickStarts(result);
   };
 
-  const CatalogWithSections = React.useMemo(
-    () => (
+  const CatalogWithSections = (
       <>
         <QuickStartCatalogSection>
           <TextContent>
@@ -141,9 +140,7 @@ export const CustomCatalog: React.FC = () => {
           <Divider />
         </QuickStartCatalogSection>
       </>
-    ),
-    [activeQuickStartID, allQuickStartStates, allQuickStarts],
-  );
+    );
 
   const clearFilters = React.useCallback(() => {
     setFilter('keyword', '');
@@ -156,7 +153,7 @@ export const CustomCatalog: React.FC = () => {
     );
   }, [allQuickStarts, setFilter]);
 
-  const quickStartCatalog = React.useMemo(() => {
+  const quickStartCatalog = () => {
     if (filteredQuickStarts.length === 0) {
       return <QuickStartCatalogEmptyState clearFilters={clearFilters} />;
     }
@@ -166,7 +163,7 @@ export const CustomCatalog: React.FC = () => {
     }
 
     return CatalogWithSections;
-  }, [CatalogWithSections, allQuickStarts.length, clearFilters, filteredQuickStarts]);
+  };
 
   if (loading) {
     return <LoadingBox />;
@@ -184,7 +181,7 @@ export const CustomCatalog: React.FC = () => {
         </ToolbarContent>
       </QuickStartCatalogToolbar>
       <Divider component="div" />
-      {quickStartCatalog}
+      {quickStartCatalog()}
     </>
   );
 };
