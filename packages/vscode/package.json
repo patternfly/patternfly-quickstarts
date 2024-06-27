@@ -61,9 +61,9 @@
   },
   "dependencies": {
     "@cloudmosaic/quickstarts": "^0.0.24",
+    "asciidoctor": "^3.0.0",
     "@patternfly/patternfly": "6.0.0-alpha.139",
     "@patternfly/react-catalog-view-extension": "^6.0.0-alpha.2",
-    "asciidoctor": "^2.2.6",
     "i18next-parser": "^8.9.0",
     "js-base64": "^3.6.0",
     "js-yaml": "^4.0.0",
