@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@patternfly/react-catalog-view-extension": "^5.0.0",
-    "dompurify": "^2.2.6",
+    "dompurify": "^2.4.9",
     "history": "^5.0.0"
   },
   "devDependencies": {
@@ -70,7 +70,7 @@
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
     "@testing-library/react": "^11.2.2",
-    "@types/dompurify": "^2.2.2",
+    "@types/dompurify": "^2.4.0",
     "@types/enzyme": "^3.10.7",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/history": "^4.7.8",
