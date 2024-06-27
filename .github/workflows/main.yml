@@ -1,13 +1,13 @@
-name: A11Y CI
+name: CI
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
 jobs:
-  a11y:
-    name: A11y Testing
+  ci:
     runs-on: ubuntu-latest
+    name: Build, lint and test
     steps:
       - name: Check out project
         uses: actions/checkout@v4
@@ -27,5 +27,8 @@ jobs:
       - name: Run build
         run: yarn build
 
-      - name: Start server and run A11Y tests
-        run: yarn start-server-and-test start http://localhost:3000 test:a11y
+      - name: Run linter
+        run: yarn lint
+
+      - name: Run tests
+        run: yarn test

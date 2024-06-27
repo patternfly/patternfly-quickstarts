@@ -1,11 +1,12 @@
-name: promote
+name: Promote
 on:
   push:
     # Sequence of patterns matched against refs/tags
-    tags:        
+    tags:
       - v5.*
 jobs:
-  build-and-promote:
+  promote:
+    name: Promote to latest
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -13,19 +14,32 @@ jobs:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       NPM_CONFIG_LEGACY_PEER_DEPS: true
     steps:
-      - uses: actions/checkout@v2
-      - name: Build for promotion
-        run: yarn install --frozen-lockfile && yarn build
-      - uses: actions/setup-node@v3
+      - name: Check out project
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
-          registry-url: 'https://registry.npmjs.org'
-      - name: GitHub Tag Name example
+          node-version: 20
+          check-latest: true
+          registry-url: https://registry.npmjs.org
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Run build
+        run: yarn build
+
+      - name: Print tag name
         run: |
           echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
           echo "Tag name from github.ref_name: ${{  github.ref_name }}"
-      - name: Manual publish
+
+      - name: Publish package
         run: |
           cd packages/module
           npm version ${{ github.ref_name }} --git-tag-version false
-          npm publish --tag=latest 
+          npm publish --tag=latest

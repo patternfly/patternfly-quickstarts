@@ -1,6 +1,5 @@
 **/node_modules
 dist
-yarn-error.log
 stats.json
 coverage
 storybook-static
@@ -10,3 +9,12 @@ storybook-static
 stats.html
 
 .cache
+
+# Yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
