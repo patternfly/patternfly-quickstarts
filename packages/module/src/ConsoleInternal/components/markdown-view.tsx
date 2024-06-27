@@ -2,8 +2,8 @@ import * as React from 'react';
 import { css } from '@patternfly/react-styles';
 import { Converter } from 'showdown';
 import { useForceRender } from '@console/shared';
+import { TextContent } from '@patternfly/react-core';
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
-import './_markdown-view.scss';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const DOMPurify = require('dompurify');
@@ -42,7 +42,6 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
       node.nodeType === 1 &&
       (node.nodeName.toLowerCase() === 'ul' || node.nodeName.toLowerCase() === 'ol')
     ) {
-      node.setAttribute('class', 'pf-v6-c-list');
       return node;
     }
   });
@@ -166,12 +165,12 @@ const InlineMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
 }) => {
   const id = React.useMemo(() => uniqueId('markdown'), []);
   return (
-    <div className={css('pfext-markdown-view', { 'is-empty': isEmpty }, className)} id={id}>
+    <TextContent className={css({ 'is-empty': isEmpty } as any, className)} id={id}>
       <div dangerouslySetInnerHTML={{ __html: markup }} />
       {renderExtension && (
         <RenderExtension renderExtension={renderExtension} selector={`#${id}`} markup={markup} />
       )}
-    </div>
+    </TextContent>
   );
 };
 

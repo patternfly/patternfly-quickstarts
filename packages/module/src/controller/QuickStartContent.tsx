@@ -3,9 +3,6 @@ import { QuickStart, QuickStartTaskStatus } from '../utils/quick-start-types';
 import QuickStartConclusion from './QuickStartConclusion';
 import QuickStartIntroduction from './QuickStartIntroduction';
 import QuickStartTasks from './QuickStartTasks';
-
-import './QuickStartContent.scss';
-
 interface QuickStartContentProps {
   quickStart: QuickStart;
   nextQuickStarts?: QuickStart[];
@@ -35,7 +32,7 @@ const QuickStartContent = React.forwardRef<HTMLDivElement, QuickStartContentProp
     const totalTasks = tasks.length;
 
     return (
-      <div className="pfext-quick-start-content" ref={ref}>
+      <div ref={ref}>
         {taskNumber === -1 && (
           <QuickStartIntroduction
             tasks={tasks}

@@ -8,7 +8,6 @@ import {
 import { renderToStaticMarkup } from 'react-dom/server';
 import { removeTemplateWhitespace } from './utils';
 import { ACCORDION_MARKDOWN_BUTTON_ID, ACCORDION_MARKDOWN_CONTENT_ID } from './const';
-import './showdown-extension.scss';
 
 const useAccordionShowdownExtension = () =>
   React.useMemo(
@@ -29,14 +28,14 @@ const useAccordionShowdownExtension = () =>
             <Accordion asDefinitionList>
               <AccordionItem isExpanded={false}>
                 <AccordionToggle
-                  
+
                   id={`${ACCORDION_MARKDOWN_BUTTON_ID}-${accordionId}`}
                 >
                   {accordionHeading}
                 </AccordionToggle>
                 <AccordionContent
                   id={`${ACCORDION_MARKDOWN_CONTENT_ID}-${accordionId}`}
-                  
+
                 >
                   {accordionContent}
                 </AccordionContent>

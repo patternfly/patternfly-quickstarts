@@ -1,3 +1,10 @@
+button.pf-v6-c-wizard__nav-link {
+  margin-bottom: var(--pf-t--global--spacer--md);
+}
+button.pf-v6-c-wizard__nav-link.pf-m-current {
+  --pf-v6-c-wizard__nav-link-main--BackgroundColor: transparent;
+}
+
 .pfext-quick-start-task-header {
   margin-bottom: var(--pf-t--global--spacer--sm);
   display: grid;
@@ -24,35 +31,14 @@
   }
 
   &__title-success {
-    color: var(--pf-t--global--text--color--status--success--default) !important;
+    --pf-v6-c-wizard__nav-link--Color: var(--pf-t--global--text--color--status--success--default) !important;
+
+    button.pf-v6-c-wizard__nav-link::before {
+      content: '!';
+    }
   }
 
   &__title-failed {
-    color: var(--pf-t--global--text--color--status--danger--default) !important;
-  }
-
-  &__task-icon {
-    &-init {
-      background-color: var(--pf-t--global--color--brand--default);
-      border-radius: var(--pf-t--global--border--radius--large);
-      color: var(--pf-t--global--text--color--on-brand--default);
-      display: inline-flex;
-      justify-content: center;
-      height: 1.5em;
-      width: 1.5em;
-    }
-
-    &-success,
-    &-failed {
-      vertical-align: middle !important;
-    }
-
-    &-success {
-      color: var(--pf-t--global--text--color--status--success--default) !important;
-    }
-
-    &-failed {
-      color: var(--pf-t--global--text--color--status--danger--default) !important;
-    }
+    --pf-v6-c-wizard__nav-link--Color: var(--pf-t--global--text--color--status--danger--default) !important;
   }
 }

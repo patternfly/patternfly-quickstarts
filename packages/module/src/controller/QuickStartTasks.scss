@@ -1,21 +1,9 @@
 .pfext-quick-start-tasks {
   &__list {
-    button::before {
-      content: none;
+    .pf-v6-c-wizard__nav-item button {
+      --pf-v6-c-wizard__nav-link--m-current--BackgroundColor: transparent;
     }
 
-    li {
-      &.pf-v6-c-wizard__nav-item {
-        list-style-type: none;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        margin-bottom: var(--pf-t--global--spacer--xs);
-      }
-    }
-    .pfext-quick-start-task__content {
-      margin-bottom: var(--pf-t--global--spacer--md);
-    }
     // Custom styles on PF React List rendered in custom react renderer
     .task-pflist {
       &-title {

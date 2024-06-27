@@ -2,7 +2,6 @@ import * as React from 'react';
 import { removeTemplateWhitespace } from './utils';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { CodeBlock } from '@patternfly/react-core';
-import './showdown-extension.scss';
 
 const useCodeShowdownExtension = () => React.useMemo(
     () => ({

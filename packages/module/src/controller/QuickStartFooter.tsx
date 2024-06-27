@@ -3,8 +3,7 @@ import { Button } from '@patternfly/react-core';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartStatus } from '../utils/quick-start-types';
 import { camelize } from '../utils/quick-start-utils';
-
-import './QuickStartFooter.scss';
+import { ActionList, ActionListItem, ActionListGroup } from '@patternfly/react-core';
 
 export interface QuickStartFooterProps {
   status: QuickStartStatus;
@@ -25,21 +24,26 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   footerClass,
   quickStartId,
 }) => {
-  const { restartQuickStart, getResource } = React.useContext<QuickStartContextValues>(
-    QuickStartContext,
-  );
+  const { restartQuickStart, getResource } =
+    React.useContext<QuickStartContextValues>(QuickStartContext);
 
-  const PrimaryButtonText = React.useMemo(() => ({
+  const PrimaryButtonText = React.useMemo(
+    () => ({
       START: getResource('Start'),
       CONTINUE: getResource('Continue'),
       NEXT: getResource('Next'),
       CLOSE: getResource('Close'),
-    }), [getResource]);
+    }),
+    [getResource],
+  );
 
-  const SecondaryButtonText = React.useMemo(() => ({
+  const SecondaryButtonText = React.useMemo(
+    () => ({
       BACK: getResource('Back'),
       RESTART: getResource('Restart'),
-    }), [getResource]);
+    }),
+    [getResource],
+  );
 
   const onRestart = React.useCallback(
     (e: React.SyntheticEvent) => {
@@ -113,10 +117,16 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   );
 
   return (
-    <div className={`pfext-quick-start-footer ${footerClass}`}>
-      {getPrimaryButton}
-      {getSecondaryButton}
-      {getSideNoteAction}
+    <div className={footerClass}>
+      <ActionList>
+        <ActionListGroup>
+          <ActionListItem>{getPrimaryButton}</ActionListItem>
+          <ActionListItem>{getSecondaryButton}</ActionListItem>
+        </ActionListGroup>
+        <ActionListGroup>
+          <ActionListItem>{getSideNoteAction}</ActionListItem>
+        </ActionListGroup>
+      </ActionList>
     </div>
   );
 };

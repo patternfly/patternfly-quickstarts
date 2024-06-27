@@ -5,6 +5,7 @@ import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start
 import { QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
 import TaskHeader from './QuickStartTaskHeader';
 import QuickStartTaskReview from './QuickStartTaskReview';
+import { TextContent, Stack } from '@patternfly/react-core';
 
 import './QuickStartTasks.scss';
 
@@ -23,11 +24,10 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
   onTaskReview,
   onTaskSelect,
 }) => {
-  const { getResource, alwaysShowTaskReview } = React.useContext<QuickStartContextValues>(
-    QuickStartContext,
-  );
+  const { getResource, alwaysShowTaskReview } =
+    React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
-    <div className="pfext-quick-start-tasks__list">
+    <div className="pf-v6-c-wizard__nav-list" style={{ padding: '0 0 0 0' }}>
       <ul>
         {tasks
           .filter((_, index) => allTaskStatuses[index] !== QuickStartTaskStatus.INIT)
@@ -52,8 +52,10 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
                   onTaskSelect={onTaskSelect}
                 >
                   {isActiveTask && (
-                    <div className="pfext-quick-start-task__content">
-                      <QuickStartMarkdownView content={description} />
+                    <Stack hasGutter>
+                      <TextContent>
+                        <QuickStartMarkdownView content={description} />
+                      </TextContent>
                       {shouldShowTaskReview && (
                         <QuickStartTaskReview
                           review={review}
@@ -61,7 +63,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
                           onTaskReview={onTaskReview}
                         />
                       )}
-                    </div>
+                    </Stack>
                   )}
                 </TaskHeader>
               </React.Fragment>

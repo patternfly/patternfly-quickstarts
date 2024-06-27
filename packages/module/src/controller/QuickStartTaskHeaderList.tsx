@@ -1,9 +1,6 @@
 import * as React from 'react';
-import { List } from '@patternfly/react-core';
 import { QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
 import TaskHeader from './QuickStartTaskHeader';
-
-import './QuickStartTaskHeaderList.scss';
 
 interface QuickStartTaskHeaderListProps {
   tasks: QuickStartTask[];
@@ -16,7 +13,7 @@ const QuickStartTaskHeaderList: React.FC<QuickStartTaskHeaderListProps> = ({
   allTaskStatuses,
   onTaskSelect,
 }) => tasks.length > 0 ? (
-    <List className="pf-v6-c-wizard__nav-list">
+    <div className="pf-v6-c-wizard__nav-list">
       {tasks.map((task, index) => (
         <TaskHeader
           key={task.title}
@@ -27,7 +24,7 @@ const QuickStartTaskHeaderList: React.FC<QuickStartTaskHeaderListProps> = ({
           onTaskSelect={onTaskSelect}
         />
       ))}
-    </List>
+    </div>
   ) : null;
 
 export default QuickStartTaskHeaderList;

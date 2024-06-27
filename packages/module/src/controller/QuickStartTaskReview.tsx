@@ -8,8 +8,6 @@ import {
   QuickStartTaskStatus,
 } from '../utils/quick-start-types';
 
-import './QuickStartTaskReview.scss';
-
 interface QuickStartTaskReviewProps {
   review: QuickStartTaskReviewType;
   taskStatus: QuickStartTaskStatus;
@@ -44,11 +42,15 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
 
   return (
     <Alert
-      className="pfext-quick-start-task-review-alert"
       variant={getAlertVariant(taskStatus)}
       title={title}
       isInline
       role="alert"
+      style={
+        {
+          marginBottom: 'var(--pf-t--global--spacer--md)'
+        } as React.CSSProperties
+      }
     >
       <QuickStartMarkdownView content={instructions} />
       <span className="pfext-quick-start-task-review__actions">

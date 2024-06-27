@@ -142,8 +142,6 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
         </DrawerHead>
       </div>
       <DrawerPanelBody
-        hasNoPadding
-        className="pfext-quick-start-panel-content__body"
         data-test="content"
       >
         <QuickStartController

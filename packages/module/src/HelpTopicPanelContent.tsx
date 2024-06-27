@@ -144,8 +144,6 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
         </DrawerHead>
         <Divider />
         <DrawerPanelBody
-          hasNoPadding
-          className="pfext-quick-start-panel-content__body"
           data-test="content"
         >
           {panelBodyItems}

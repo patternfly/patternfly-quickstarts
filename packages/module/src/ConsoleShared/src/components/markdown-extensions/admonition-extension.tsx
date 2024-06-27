@@ -4,7 +4,6 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { Alert } from '@patternfly/react-core';
 import LightbulbIcon from '@patternfly/react-icons/dist/js/icons/lightbulb-icon';
 import FireIcon from '@patternfly/react-icons/dist/js/icons/fire-icon';
-import './showdown-extension.scss';
 import QuickStartMarkdownView from '../../../../QuickStartMarkdownView';
 
 enum AdmonitionType {
@@ -23,7 +22,7 @@ const admonitionToAlertVariantMap = {
   [AdmonitionType.WARNING]: { variant: 'warning' },
 };
 
-const useAdmonitionShowdownExtension = () => 
+const useAdmonitionShowdownExtension = () =>
   // const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
    React.useMemo(
     () => ({
