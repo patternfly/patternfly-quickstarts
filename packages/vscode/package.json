@@ -64,7 +64,7 @@
     "@patternfly/patternfly": "6.0.0-alpha.139",
     "@patternfly/react-catalog-view-extension": "^6.0.0-alpha.2",
     "asciidoctor": "^3.0.0",
-    "i18next-parser": "^8.9.0",
+    "i18next-parser": "^9.0.0",
     "js-base64": "^3.6.0",
     "js-yaml": "^4.0.0",
     "react": "^18.2.0",
