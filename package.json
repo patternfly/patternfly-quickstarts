@@ -6,13 +6,11 @@
   "private": true,
   "workspaces": [
     "packages/dev",
-    "packages/module",
-    "packages/transform-adoc"
+    "packages/module"
   ],
   "scripts": {
-    "build": "yarn workspace @patternfly/quickstarts build && yarn build:adoc",
+    "build": "yarn workspace @patternfly/quickstarts build",
     "build:quick": "yarn workspace @patternfly/quickstarts quick",
-    "build:adoc": "yarn workspace @patternfly/transform-adoc build",
     "build:docs": "yarn build && yarn workspace @patternfly/quickstarts docs:build",
     "start": "yarn workspace @patternfly/quickstarts-dev start",
     "start:docs": "yarn build && yarn workspace @patternfly/quickstarts docs:develop",
