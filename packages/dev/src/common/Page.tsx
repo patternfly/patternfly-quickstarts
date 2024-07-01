@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Button,
-  Brand,
   Icon,
   Nav as PfNav,
   NavList,
@@ -27,7 +26,6 @@ import { QuickStartContext } from '@patternfly/quickstarts';
 import { Link } from 'react-router-dom';
 import Nav from '../Nav';
 import { SettingsModal } from '../SettingsModal';
-import imgBrand from '../assets/images/imgBrand.svg';
 
 const AppToolbar = () => {
   const [isModalOpen, setModalOpen] = React.useState(false);

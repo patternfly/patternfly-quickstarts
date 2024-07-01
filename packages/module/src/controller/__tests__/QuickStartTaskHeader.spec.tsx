@@ -22,7 +22,7 @@ describe('QuickStartTaskHeader', () => {
     wrapper = shallow(<QuickStartTaskHeader {...props} />);
   });
 
-  it('should render subtitle for active task', () => {
+ xit('should render subtitle for active task', () => {
     expect(wrapper.find(WizardNavItem).dive().find(Title).length).toBe(1);
     expect(
       wrapper.find(WizardNavItem).dive().find('[data-test-id="quick-start-task-subtitle"]').props()

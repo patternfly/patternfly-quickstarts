@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@patternfly/react-catalog-view-extension": "^6.0.0-alpha.2",
-    "history": "^5.0.0"
+    "history": "^5.0.0",
     "dompurify": "^2.4.9",
     "showdown": "1.8.6"
   },

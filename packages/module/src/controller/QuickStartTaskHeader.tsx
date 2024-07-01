@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Icon, Text, TextVariants, Title, WizardNavItem } from '@patternfly/react-core';
-import CheckCircleIcon from '@patternfly/react-icons/dist/js/icons/check-circle-icon';
-import ExclamationCircleIcon from '@patternfly/react-icons/dist/js/icons/exclamation-circle-icon';
-import { css } from '@patternfly/react-styles';
+import {Text, TextVariants, Title, WizardNavItem } from '@patternfly/react-core';
+// import CheckCircleIcon from '@patternfly/react-icons/dist/js/icons/check-circle-icon';
+// import ExclamationCircleIcon from '@patternfly/react-icons/dist/js/icons/exclamation-circle-icon';
+// import { css } from '@patternfly/react-styles';
 import { markdownConvert } from '../ConsoleInternal/components/markdown-view';
 import { removeParagraphWrap } from '../QuickStartMarkdownView';
-import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
+import { QuickStartContext} from '../utils/quick-start-context';
 import { QuickStartTaskStatus } from '../utils/quick-start-types';
 
 import './QuickStartTaskHeader.scss';
@@ -21,46 +21,45 @@ interface QuickStartTaskHeaderProps {
   children?: React.ReactNode;
 }
 
-const TaskIcon: React.FC<{
-  taskIndex: number;
-  taskStatus: QuickStartTaskStatus;
-}> = ({ taskIndex, taskStatus }) => {
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
-  const success = taskStatus === QuickStartTaskStatus.SUCCESS;
-  const failed = taskStatus === QuickStartTaskStatus.FAILED;
+// const TaskIcon: React.FC<{
+//   taskIndex: number;
+//   taskStatus: QuickStartTaskStatus;
+// }> = ({ taskIndex, taskStatus }) => {
+//   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+//   const success = taskStatus === QuickStartTaskStatus.SUCCESS;
+//   const failed = taskStatus === QuickStartTaskStatus.FAILED;
 
-  const classNames = css('pfext-icon-and-text__icon', {
-    'pfext-quick-start-task-header__task-icon-init': !failed && !success,
-  });
-  let content: React.ReactNode;
+//   const classNames = css('pfext-icon-and-text__icon', {
+//     'pfext-quick-start-task-header__task-icon-init': !failed && !success,
+//   });
+//   let content: React.ReactNode;
 
-  if (success) {
-    content = (
-      <Icon size="md">
-        <CheckCircleIcon className="pfext-quick-start-task-header__task-icon-success" />{' '}
-      </Icon>
-    );
-  } else if (failed) {
-    content = (
-      <Icon size="md">
-        <ExclamationCircleIcon className="pfext-quick-start-task-header__task-icon-failed" />
-      </Icon>
-    );
-  } else {
-    content = getResource('{{taskIndex, number}}', taskIndex).replace(
-      '{{taskIndex, number}}',
-      taskIndex,
-    );
-  }
-  return <span className={classNames}>{content}</span>;
-};
+//   if (success) {
+//     content = (
+//       <Icon size="md">
+//         <CheckCircleIcon className="pfext-quick-start-task-header__task-icon-success" />{' '}
+//       </Icon>
+//     );
+//   } else if (failed) {
+//     content = (
+//       <Icon size="md">
+//         <ExclamationCircleIcon className="pfext-quick-start-task-header__task-icon-failed" />
+//       </Icon>
+//     );
+//   } else {
+//     content = getResource('{{taskIndex, number}}', taskIndex).replace(
+//       '{{taskIndex, number}}',
+//       taskIndex,
+//     );
+//   }
+//   return <span className={classNames}>{content}</span>;
+// };
 
 const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   title,
   taskIndex,
   subtitle,
   taskStatus,
-  size,
   isActiveTask,
   onTaskSelect,
   children,
@@ -74,11 +73,11 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
       titleRef.current.parentNode.focus();
     }
   }, [focusOnQuickStart, isActiveTask]);
-  const classNames = css('pfext-quick-start-task-header__title', {
-    'pfext-quick-start-task-header__title-success': taskStatus === QuickStartTaskStatus.SUCCESS,
-    'pfext-quick-start-task-header__title-failed':
-      taskStatus === (QuickStartTaskStatus.FAILED || QuickStartTaskStatus.VISITED),
-  });
+  // const classNames = css('pfext-quick-start-task-header__title', {
+  //   'pfext-quick-start-task-header__title-success': taskStatus === QuickStartTaskStatus.SUCCESS,
+  //   'pfext-quick-start-task-header__title-failed':
+  //     taskStatus === (QuickStartTaskStatus.FAILED || QuickStartTaskStatus.VISITED),
+  // });
   // const notCompleted = taskStatus === QuickStartTaskStatus.VISITED;
   // const skippedReview = taskStatus === QuickStartTaskStatus.REVIEW;
   const failedReview = taskStatus === QuickStartTaskStatus.FAILED;
