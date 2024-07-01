@@ -2,13 +2,11 @@ import './App.css';
 import { Page } from '@patternfly/react-core';
 import {
   LoadingBox,
-  QuickStart,
   QuickStartContextProvider,
   QuickStartContextValues,
   QuickStartDrawer,
   useLocalStorage,
 } from '@patternfly/quickstarts';
-import { loadJSONQuickStarts } from './quickstarts-data/asciidoc/quickstartLoader';
 import { allQuickStarts as yamlQuickStarts } from './quickstarts-data/quick-start-test-data';
 import React from 'react';
 import i18n from './i18n/i18n';
@@ -31,22 +29,12 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     console.log(allQuickStartStates);
   }, [allQuickStartStates]);
 
-  const [allQuickStarts, setAllQuickStarts] = React.useState<QuickStart[]>([]);
-  React.useEffect(() => {
-    const load = async () => {
-      const masGuidesQuickstarts = await loadJSONQuickStarts('');
-      setAllQuickStarts(yamlQuickStarts.concat(masGuidesQuickstarts));
-    };
-    setTimeout(() => {
-      load();
-    }, 500);
-  }, []);
 
   const language = localStorage.getItem('bridge/language') || 'en';
   const resourceBundle = i18n.getResourceBundle(language, 'quickstart');
 
   const valuesForQuickstartContext: QuickStartContextValues = {
-    allQuickStarts,
+    allQuickStarts: yamlQuickStarts,
     activeQuickStartID,
     setActiveQuickStartID,
     allQuickStartStates,
@@ -65,7 +53,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
 
   return (
     <React.Suspense fallback={<LoadingBox />}>
-      {allQuickStarts && allQuickStarts.length ? (
+      {yamlQuickStarts && yamlQuickStarts.length ? (
         <QuickStartContextProvider value={valuesForQuickstartContext}>
           <QuickStartDrawer>
             <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>

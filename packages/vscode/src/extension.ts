@@ -30,7 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(disposable);
 
   context.subscriptions.push(
-    vscode.workspace.onDidSaveTextDocument((document) => {
+    vscode.workspace.onDidSaveTextDocument((document: any) => {
       if (
         isQuickStartsFile(vscode.window.activeTextEditor?.document.fileName)
       ) {
@@ -52,5 +52,5 @@ export function isQuickStartsFile(file?: string) {
   if (!file) {
     return false;
   }
-  return file.endsWith(".yaml") || file.endsWith(".adoc");
+  return file.endsWith(".yaml");
 }

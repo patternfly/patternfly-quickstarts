@@ -2,7 +2,6 @@ import './App.css';
 import { Page, Button } from '@patternfly/react-core';
 import {
   LoadingBox,
-  QuickStart,
   QuickStartContainer,
   QuickStartContainerProps,
   useLocalStorage,
@@ -10,7 +9,6 @@ import {
   removeQueryArgument,
   QUICKSTART_ID_FILTER_KEY,
 } from '@patternfly/quickstarts';
-import { loadJSONQuickStarts } from './quickstarts-data/asciidoc/quickstartLoader';
 import { allQuickStarts as yamlQuickStarts } from './quickstarts-data/quick-start-test-data';
 import React from 'react';
 import i18n from './i18n/i18n';
@@ -35,23 +33,12 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     console.log(allQuickStartStates);
   }, [allQuickStartStates]);
 
-  const [loading, setLoading] = React.useState(true);
-  const [quickStarts, setQuickStarts] = React.useState<QuickStart[]>([]);
-  React.useEffect(() => {
-    const load = async () => {
-      const masGuidesQuickstarts = await loadJSONQuickStarts('');
-      setQuickStarts(yamlQuickStarts.concat(masGuidesQuickstarts));
-      setLoading(false);
-    };
-    setTimeout(() => {
-      load();
-    }, 500);
-  }, []);
+
 
   const withQueryParams = true;
 
   const drawerProps: QuickStartContainerProps = {
-    quickStarts,
+    quickStarts: yamlQuickStarts,
     activeQuickStartID,
     allQuickStartStates,
     setActiveQuickStartID,
@@ -59,7 +46,6 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     resourceBundle,
     showCardFooters,
     language,
-    loading,
     useQueryParams: withQueryParams,
     alwaysShowTaskReview: true,
     markdown: {

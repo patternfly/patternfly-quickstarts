@@ -6,13 +6,11 @@
   "private": true,
   "workspaces": [
     "packages/dev",
-    "packages/module",
-    "packages/transform-adoc"
+    "packages/module"
   ],
   "scripts": {
-    "build": "yarn workspace @patternfly/quickstarts build && yarn build:adoc",
+    "build": "yarn workspace @patternfly/quickstarts build",
     "build:quick": "yarn workspace @patternfly/quickstarts quick",
-    "build:adoc": "yarn workspace @patternfly/transform-adoc build",
     "build:docs": "yarn build && yarn workspace @patternfly/quickstarts docs:build",
     "start": "yarn workspace @patternfly/quickstarts-dev start",
     "start:docs": "yarn build && yarn workspace @patternfly/quickstarts docs:develop",
@@ -26,12 +24,10 @@
     "lint": "yarn lint:module && yarn lint:dev",
     "lint:module": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/module",
     "lint:dev": "NODE_OPTIONS=--max-old-space-size=4096 yarn eslint packages/dev",
-    "visual": "npx percy exec -- node snapshots.js",
     "test:a11y": "patternfly-a11y --config patternfly-a11y.config"
   },
   "devDependencies": {
     "@patternfly/patternfly-a11y": "^4.3.1",
-    "@percy/script": "^1.1.0",
     "@types/jest": "^26.0.14",
     "@types/lodash-es": "^4.17.7",
     "@typescript-eslint/eslint-plugin": "5.59.6",

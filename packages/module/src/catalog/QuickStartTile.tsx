@@ -8,7 +8,7 @@ import { camelize } from '../utils/quick-start-utils';
 import QuickStartTileDescription from './QuickStartTileDescription';
 import QuickStartTileFooter from './QuickStartTileFooter';
 import QuickStartTileFooterExternal from './QuickStartTileFooterExternal';
-import QuickStartTileHeader from './QuickStartTileHeader';
+import QuickStartTileHeader, { QuickstartAction } from './QuickStartTileHeader';
 import { Icon } from '@patternfly/react-core';
 
 import './QuickStartTile.scss';
@@ -18,6 +18,8 @@ interface QuickStartTileProps {
   status: QuickStartStatus;
   isActive: boolean;
   onClick?: () => void;
+  /** Action config for button rendered next to title */
+  action?: QuickstartAction;
 }
 
 const QuickStartTile: React.FC<QuickStartTileProps> = ({
@@ -25,6 +27,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
   status,
   isActive,
   onClick = () => {},
+  action,
 }) => {
   const {
     metadata: { name: id },
@@ -68,17 +71,23 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
     e: React.FormEvent<HTMLInputElement> | React.MouseEvent<Element, MouseEvent>,
   ) => {
     if (ref.current?.contains(e.target as Node)) {
-      if (link) {
-        window.open(link.href);
-      } else {
+      if (!link) {
         setActiveQuickStart(id, tasks?.length);
       }
       onClick();
     }
   };
 
+  const linkProps = link
+    ? {
+        href: link.href,
+        target: '_blank',
+        rel: 'noreferrer',
+      }
+    : {};
+
   return (
-    <div ref={ref}>
+    <div ref={ref} onClick={handleClick}>
       <CatalogTile
         id={id + '-catalog-tile'}
         style={{
@@ -95,9 +104,9 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
             duration={durationMinutes}
             type={type}
             quickStartId={id}
+            action={action}
           />
         }
-        onClick={handleClick}
         onKeyDown={(event) => {
           if (event.key === 'Enter' || event.key === ' ') {
             setActiveQuickStart(id, tasks?.length);
@@ -105,13 +114,16 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
           }
         }}
         // https://github.com/patternfly/patternfly-react/issues/7039
-        href={link?.href}
+        {...linkProps}
         data-test={`tile ${id}`}
         description={
           <QuickStartTileDescription description={description} prerequisites={prerequisites} />
         }
         footer={footerComponent}
         tabIndex={0}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore-next-line
+        isSelectableRaised
       />
     </div>
   );

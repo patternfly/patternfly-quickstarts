@@ -50,7 +50,7 @@ const QuickStartController: React.FC<QuickStartControllerProps> = ({
     let activeTaskNumber = 0;
     while (
       activeTaskNumber !== totalTasks &&
-      activeQuickStartState[`taskStatus${activeTaskNumber}`] !== QuickStartTaskStatus.INIT
+      activeQuickStartState[`taskStatus${activeTaskNumber}`] === QuickStartTaskStatus.SUCCESS
     ) {
       activeTaskNumber++;
     }

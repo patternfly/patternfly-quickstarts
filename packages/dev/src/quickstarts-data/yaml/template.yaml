@@ -12,7 +12,7 @@ spec:
     # 'blue' | 'cyan' | 'green' | 'orange' | 'purple' | 'red' | 'grey'
     color: grey
   # - The icon defined as a base64 value. Example flow:
-  # 1. Find an .svg you want to use, like from here: https://www.patternfly.org/v4/guidelines/icons/#all-icons
+  # 1. Find an .svg you want to use, like from here: https://www.patternfly.org/design-foundations/icons/#all-icons
   # 2. Upload the file here and encode it (output format - plain text): https://base64.guru/converter/encode/image
   # 3. compose - `icon: data:image/svg+xml;base64,<base64 string from step 2>`
   # - If empty string (icon: ''), will use a default rocket icon
