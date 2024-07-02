@@ -33,17 +33,10 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
   const { instructions, failedTaskHelp: taskHelp } = review;
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
-  const alertClassNames = css('pfext-quick-start-task-review', {
-    'pfext-quick-start-task-review--success': taskStatus === QuickStartTaskStatus.SUCCESS,
-    'pfext-quick-start-task-review--failed': taskStatus === QuickStartTaskStatus.FAILED,
-  });
-
-  const title = <span className={alertClassNames}>{getResource('Check your work')}</span>;
-
   return (
     <Alert
       variant={getAlertVariant(taskStatus)}
-      title={title}
+      title={getResource('Check your work')}
       isInline
       role="alert"
       style={

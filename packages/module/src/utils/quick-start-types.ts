@@ -69,5 +69,5 @@ export interface QuickStartExternal {
 
 export interface QuickStartType {
   text: string;
-  color?: 'blue' | 'cyan' | 'green' | 'orange' | 'purple' | 'red' | 'grey';
+  color?: 'green' | 'purple' | 'grey' | 'blue' | 'orange' | 'red' | 'teal' | 'orangered' | 'yellow';
 }

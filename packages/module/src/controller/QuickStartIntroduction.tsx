@@ -30,14 +30,11 @@ const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
         prereqs.length,
       )}
       onToggle={() => setIsPrereqsExpanded(!isPrereqsExpanded)}
-      className="pfext-quick-start-intro__prereq"
     >
-      <List className="pfext-quick-start-intro__prereq-list">
+      <List>
         {prereqs.map((pr) => (
-          <ListItem key={pr} className="pfext-quick-start-intro__prereq-list__item">
-            <span className="pfext-quick-start-intro__prereq-list__item-content">
-              <QuickStartMarkdownView content={pr} />
-            </span>
+          <ListItem key={pr}>
+            <QuickStartMarkdownView content={pr} />
           </ListItem>
         ))}
       </List>

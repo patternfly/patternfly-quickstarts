@@ -38,12 +38,6 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
       titleRef.current.parentNode.focus();
     }
   }, [focusOnQuickStart, isActiveTask]);
-  const classNames = css(
-    taskStatus === QuickStartTaskStatus.SUCCESS &&
-      ('pfext-quick-start-task-header__title-success' as any),
-    taskStatus === (QuickStartTaskStatus.FAILED || QuickStartTaskStatus.VISITED) &&
-      ('pfext-quick-start-task-header__title-failed' as any),
-  );
   const failedReview = taskStatus === QuickStartTaskStatus.FAILED;
 
   const tryAgain = failedReview && (
@@ -60,14 +54,9 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
         {isActiveTask && subtitle && (
           <span data-test-id="quick-start-task-subtitle">
             {' '}
-            <Text
-              style={{
-                color: 'var(--pf-t--global--text--color--subtle)',
-                fontSize: 'var(--pf-t--global--font--size--body--default)',
-              }}
-            >
+            <span className="pfext-quick-start-task-header__subtitle" >
               {subtitle}
-            </Text>
+            </span>
           </span>
         )}
         {tryAgain}
@@ -82,7 +71,7 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
       onClick={() => onTaskSelect(taskIndex - 1)}
       component="button"
       isCurrent={isActiveTask}
-      className={classNames}
+      status={taskStatus === QuickStartTaskStatus.FAILED ? 'error' : 'default'}
     >
       {children}
     </WizardNavItem>

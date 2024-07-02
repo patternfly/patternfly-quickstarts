@@ -7,8 +7,6 @@ import TaskHeader from './QuickStartTaskHeader';
 import QuickStartTaskReview from './QuickStartTaskReview';
 import { TextContent, Stack } from '@patternfly/react-core';
 
-import './QuickStartTasks.scss';
-
 interface QuickStartTaskProps {
   tasks: QuickStartTask[];
   taskNumber: number;
