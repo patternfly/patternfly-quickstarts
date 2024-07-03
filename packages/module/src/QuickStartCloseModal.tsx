@@ -17,7 +17,6 @@ const QuickStartCloseModal: React.FC<QuickStartCloseModalProps> = ({
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <Modal
-      className="pfext-quick-start-drawer__modal pfext-quick-start__base"
       isOpen={isOpen}
       variant={ModalVariant.small}
       showClose={false}

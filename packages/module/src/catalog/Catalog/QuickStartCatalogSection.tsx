@@ -5,5 +5,5 @@ export interface QuickStartCatalogSectionProps {
 }
 
 export const QuickStartCatalogSection: React.FC<QuickStartCatalogSectionProps> = ({ children }) => (
-  <div className="pfext-page-layout__content">{children}</div>
+  <div>{children}</div>
 );

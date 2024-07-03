@@ -56,7 +56,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
       {yamlQuickStarts && yamlQuickStarts.length ? (
         <QuickStartContextProvider value={valuesForQuickstartContext}>
           <QuickStartDrawer>
-            <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>
+            <Page masthead={AppHeader} sidebar={AppSidebar} isManagedSidebar>
               {children}
             </Page>
           </QuickStartDrawer>

@@ -1,4 +1,3 @@
-import './QuickStartDrawer.scss';
 import * as React from 'react';
 import { Drawer, DrawerContent, DrawerContentBody } from '@patternfly/react-core';
 import QuickStartCloseModal from './QuickStartCloseModal';
@@ -247,12 +246,12 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
       <Drawer isExpanded={!!activeQuickStartID} isInline {...props}>
         {children ? (
           <DrawerContent panelContent={panelContent} {...fullWidthBodyStyle}>
-            <DrawerContentBody className="pfext-quick-start-drawer__body">
+            <DrawerContentBody>
               {children}
             </DrawerContentBody>
           </DrawerContent>
         ) : (
-          <div className="pf-v6-c-drawer__main">{panelContent}</div>
+          <div>{panelContent}</div>
         )}
       </Drawer>
       <QuickStartCloseModal

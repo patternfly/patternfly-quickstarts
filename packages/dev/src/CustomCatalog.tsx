@@ -7,7 +7,6 @@ import {
   QuickStartCatalogFilterSearchWrapper,
   QuickStartCatalogFilterStatusWrapper,
   QuickStartCatalogHeader,
-  QuickStartCatalogSection,
   QuickStartCatalogToolbar,
   QuickStartContext,
   QuickStartContextValues,
@@ -23,6 +22,7 @@ import {
   Divider,
   Gallery,
   GalleryItem,
+  PageSection,
   Text,
   TextContent,
   ToolbarContent,
@@ -87,7 +87,7 @@ export const CustomCatalog: React.FC = () => {
   const CatalogWithSections = (
       <>
         {bookmarked.length > 0 && (
-          <QuickStartCatalogSection>
+          <div>
             <TextContent>
               <Text component="h2">Bookmarked</Text>
               <Text component="p" className="catalog-sub">
@@ -128,16 +128,16 @@ export const CustomCatalog: React.FC = () => {
                   );
                 })}
             </Gallery>
-          </QuickStartCatalogSection>
+          </div>
         )}
-        <QuickStartCatalogSection>
+        <div>
           <TextContent>
             <Text component="h2">Instructional</Text>
             <Text component="p" className="catalog-sub">
               Instructional examples
             </Text>
           </TextContent>
-          <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
+          <Gallery hasGutter>
             {allQuickStarts
               .filter((quickStart: QuickStart) => quickStart.metadata.instructional)
               .map((quickStart: QuickStart) => {
@@ -146,7 +146,6 @@ export const CustomCatalog: React.FC = () => {
                 } = quickStart;
 
                 return (
-                  <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
                     <QuickStartTile
                       action={{
                         onClick: (e: React.SyntheticEvent) => {
@@ -167,19 +166,18 @@ export const CustomCatalog: React.FC = () => {
                       isActive={id === activeQuickStartID}
                       status={getQuickStartStatus(allQuickStartStates, id)}
                     />
-                  </GalleryItem>
                 );
               })}
           </Gallery>
-        </QuickStartCatalogSection>
-        <QuickStartCatalogSection>
+        </div>
+        <div>
           <TextContent>
             <Text component="h2">Real-world examples</Text>
             <Text component="p" className="catalog-sub">
               Additional examples
             </Text>
           </TextContent>
-          <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
+          <Gallery hasGutter>
             {allQuickStarts
               .filter((quickStart: QuickStart) => !quickStart.metadata.instructional)
               .map((quickStart: QuickStart) => {
@@ -188,7 +186,6 @@ export const CustomCatalog: React.FC = () => {
                 } = quickStart;
 
                 return (
-                  <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
                     <QuickStartTile
                       action={{
                         onClick: (e: React.SyntheticEvent) => {
@@ -209,14 +206,13 @@ export const CustomCatalog: React.FC = () => {
                       isActive={id === activeQuickStartID}
                       status={getQuickStartStatus(allQuickStartStates, id)}
                     />
-                  </GalleryItem>
                 );
               })}
           </Gallery>
-        </QuickStartCatalogSection>
-        <QuickStartCatalogSection>
+        </div>
+        <div>
           <Divider />
-        </QuickStartCatalogSection>
+        </div>
       </>
     );
 
@@ -249,17 +245,21 @@ export const CustomCatalog: React.FC = () => {
 
   return (
     <>
-      <QuickStartCatalogHeader title="Resources" />
-      <Divider component="div" />
-      <QuickStartCatalogToolbar>
-        <ToolbarContent>
-          <QuickStartCatalogFilterSearchWrapper onSearchInputChange={onSearchInputChange} />
-          <QuickStartCatalogFilterStatusWrapper onStatusChange={onStatusChange} />
-          <QuickStartCatalogFilterCountWrapper quickStartsCount={filteredQuickStarts.length} />
-        </ToolbarContent>
-      </QuickStartCatalogToolbar>
-      <Divider component="div" />
-      {quickStartCatalog()}
+      <PageSection>
+        <QuickStartCatalogHeader title="Resources" />
+        <Divider component="div" />
+        <QuickStartCatalogToolbar>
+          <ToolbarContent>
+            <QuickStartCatalogFilterSearchWrapper onSearchInputChange={onSearchInputChange} />
+            <QuickStartCatalogFilterStatusWrapper onStatusChange={onStatusChange} />
+            <QuickStartCatalogFilterCountWrapper quickStartsCount={filteredQuickStarts.length} />
+          </ToolbarContent>
+        </QuickStartCatalogToolbar>
+        <Divider component="div" />
+      </PageSection>
+      <PageSection>
+        {quickStartCatalog()}
+      </PageSection>
     </>
   );
 };

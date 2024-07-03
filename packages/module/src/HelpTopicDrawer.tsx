@@ -1,4 +1,3 @@
-import './QuickStartDrawer.scss';
 import * as React from 'react';
 import { Drawer, DrawerContent, DrawerContentBody } from '@patternfly/react-core';
 import HelpTopicPanelContent from './HelpTopicPanelContent';
@@ -103,7 +102,7 @@ export const HelpTopicDrawer: React.FC<HelpTopicDrawerProps> = ({ children, ...p
       <Drawer isExpanded={!!activeHelpTopic} isInline {...props}>
         {children ? (
           <DrawerContent panelContent={panelContent}>
-            <DrawerContentBody className="pfext-quick-start-drawer__body">
+            <DrawerContentBody>
               {children}
             </DrawerContentBody>
           </DrawerContent>

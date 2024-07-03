@@ -3,10 +3,11 @@ import {
   Button,
   Divider,
   EmptyState,
-  EmptyStateBody,
-  Text,
-  EmptyStateFooter,
   EmptyStateActions,
+  EmptyStateBody,
+  EmptyStateFooter,
+  PageSection,
+  Text
 } from '@patternfly/react-core';
 import SearchIcon from '@patternfly/react-icons/dist/js/icons/search-icon';
 import { EmptyBox, LoadingBox, clearFilterParams } from '@console/internal/components/utils';
@@ -156,33 +157,37 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
   }
 
   return (
-    <div className="pfext-quick-start__base">
-      {showTitle && (
-        <div className="pfext-page-layout__header">
-          <Text component="h1" className="pfext-page-layout__title" data-test="page-title">
-            {title || getResource('Quick Starts')}
-          </Text>
-          {hint && <div className="pfext-page-layout__hint">{hint}</div>}
-        </div>
+    <>
+      {(showTitle || showFilter) && (
+        <PageSection>
+          {showTitle && (
+            <>
+              <Text component="h1" data-test="page-title">
+                {title || getResource('Quick Starts')}
+              </Text>
+              {hint && <div>{hint}</div>}
+            </>
+          )}
+          {showTitle && <Divider component="div" />}
+          {showFilter && (
+            <>
+              <QuickStartCatalogFilter
+                quickStartsCount={filteredQuickStarts.length}
+                onSearchInputChange={onSearchInputChange}
+                onStatusChange={onStatusChange}
+              />
+              <Divider component="div" />
+            </>
+          )}
+        </PageSection>
       )}
-      {showTitle && <Divider component="div" />}
-      {showFilter && (
-        <>
-          <QuickStartCatalogFilter
-            quickStartsCount={filteredQuickStarts.length}
-            onSearchInputChange={onSearchInputChange}
-            onStatusChange={onStatusChange}
-          />
-          <Divider component="div" />
-        </>
-      )}
-      <>
+      <PageSection>
         {filteredQuickStarts.length === 0 ? (
           <QuickStartCatalogEmptyState clearFilters={clearFilters} />
         ) : (
           <QuickStartCatalog quickStarts={filteredQuickStarts} />
         )}
-      </>
-    </div>
+      </PageSection>
+    </>
   );
 };

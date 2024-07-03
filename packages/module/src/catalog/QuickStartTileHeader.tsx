@@ -1,6 +1,5 @@
-import './QuickStartTileHeader.scss';
 import * as React from 'react';
-import { Button, ButtonProps, Flex, Label, Title } from '@patternfly/react-core';
+import { Button, ButtonProps, Flex, Stack, Label, Title } from '@patternfly/react-core';
 import OutlinedClockIcon from '@patternfly/react-icons/dist/js/icons/outlined-clock-icon';
 import OutlinedBookmarkIcon from '@patternfly/react-icons/dist/js/icons/outlined-bookmark-icon';
 import { StatusIcon } from '@console/shared';
@@ -53,7 +52,7 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
   const ActionIcon = action?.icon || OutlinedBookmarkIcon;
 
   return (
-    <div className="pfext-quick-start-tile-header">
+    <Stack hasGutter>
       <Flex flexWrap={{ default: 'nowrap' }}>
         <Title headingLevel="h3" data-test="title" id={quickStartId}>
           <QuickStartMarkdownView content={name} />
@@ -68,9 +67,9 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
           />
         )}
       </Flex>
-      <div className="pfext-quick-start-tile-header__status">
+      <Flex spaceItems={{ default: 'spaceItemsSm'}}>
         {type && (
-          <Label className="pfext-quick-start-tile-header--margin" color={type.color}>
+          <Label color={type.color}>
             {type.text}
           </Label>
         )}
@@ -79,7 +78,6 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
             variant="outline"
             data-test="duration"
             icon={<OutlinedClockIcon />}
-            className="pfext-quick-start-tile-header--margin"
           >
             {getResource('{{duration, number}} minutes', duration).replace(
               '{{duration, number}}',
@@ -97,8 +95,8 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
             {statusLocaleMap[status]}
           </Label>
         )}
-      </div>
-    </div>
+      </Flex>
+    </Stack>
   );
 };
 

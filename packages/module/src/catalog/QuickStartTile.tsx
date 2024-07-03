@@ -11,8 +11,6 @@ import QuickStartTileFooterExternal from './QuickStartTileFooterExternal';
 import QuickStartTileHeader, { QuickstartAction } from './QuickStartTileHeader';
 import { Icon } from '@patternfly/react-core';
 
-import './QuickStartTile.scss';
-
 interface QuickStartTileProps {
   quickStart: QuickStart;
   status: QuickStartStatus;
@@ -46,7 +44,6 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
     quickStartIcon = (
       <Icon size="xl">
       <FallbackImg
-        className="pfext-catalog-item-icon__img--large"
         src={icon as string}
         alt=""
         fallback={<RocketIcon />}
@@ -92,9 +89,9 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
         id={id + '-catalog-tile'}
         style={{
           cursor: 'pointer',
+          height: '100%'
         }}
         icon={quickStartIcon}
-        className="pfext-quick-start-tile"
         data-testid={`qs-card-${camelize(displayName)}`}
         isClicked={isActive}
         title={

@@ -64,13 +64,12 @@ const AppToolbar = () => {
           <ToolbarItem>
             <Button
               aria-label="Toggle quick start"
-              variant={ButtonVariant.plain}
+              variant={ButtonVariant.stateful}
+              state={qsContext.activeQuickStartID === qsId ? 'unread' : 'read'}
               onClick={() => qsContext.setActiveQuickStart(qsId)}
             >
               <Icon size="lg">
-                <LightbulbIcon
-                  color={qsContext.activeQuickStartID === qsId ? 'yellow' : 'currentColor'}
-                />
+                <LightbulbIcon />
               </Icon>
             </Button>
           </ToolbarItem>

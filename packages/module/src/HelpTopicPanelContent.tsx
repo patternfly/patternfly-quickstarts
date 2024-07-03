@@ -21,7 +21,6 @@ import { HelpTopic } from './utils/help-topic-types';
 import BarsIcon from '@patternfly/react-icons/dist/js/icons/bars-icon';
 import ExternalLinkAltIcon from '@patternfly/react-icons/dist/js/icons/external-link-alt-icon';
 
-import './QuickStartPanelContent.scss';
 import { HelpTopicContext, HelpTopicContextValues } from './utils/help-topic-context';
 
 interface HelpTopicPanelContentProps {
@@ -95,10 +94,10 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
   );
 
   const content = (
-    <DrawerPanelContent isResizable={isResizable} className="pfext-quick-start__base pfext-quick-start-panel" {...props}>
+    <DrawerPanelContent isResizable={isResizable} {...props}>
       <div>
         <DrawerHead>
-          <div className="pfext-quick-start-panel-content__title">
+          <div>
             {helpTopicOptions && (
               <Select
                 isPlain
@@ -126,7 +125,6 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
             <Title
               headingLevel="h1"
               size="xl"
-              className="pfext-quick-start-panel-content__name"
               style={{ marginRight: 'var(--pf-t--global--spacer--md)' }}
             >
               {activeHelpTopic?.title}
@@ -136,7 +134,6 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
             <DrawerActions>
               <DrawerCloseButton
                 onClick={onClose}
-                className="pfext-quick-start-panel-content__close-button"
                 data-testid="qs-drawer-close"
               />
             </DrawerActions>

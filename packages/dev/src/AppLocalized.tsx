@@ -82,7 +82,7 @@ const App3: React.FC<AppProps> = ({ children, showCardFooters }) => {
   return (
     <React.Suspense fallback={<LoadingBox />}>
       <QuickStartContainer {...drawerProps}>
-        <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>
+        <Page masthead={AppHeader} sidebar={AppSidebar} isManagedSidebar>
           {children}
         </Page>
       </QuickStartContainer>
