@@ -23,13 +23,11 @@ const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts }) =>
           } = quickStart;
 
           return (
-            <GalleryItem key={id}>
-              <QuickStartTile
-                quickStart={quickStart}
-                isActive={id === activeQuickStartID}
-                status={getQuickStartStatus(allQuickStartStates, id)}
-              />
-            </GalleryItem>
+            <QuickStartTile
+              quickStart={quickStart}
+              isActive={id === activeQuickStartID}
+              status={getQuickStartStatus(allQuickStartStates, id)}
+            />
           );
         })}
       </Gallery>

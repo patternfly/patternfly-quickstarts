@@ -23,6 +23,7 @@ import {
   Gallery,
   GalleryItem,
   PageSection,
+  Stack,
   Text,
   TextContent,
   ToolbarContent,
@@ -85,7 +86,7 @@ export const CustomCatalog: React.FC = () => {
   const [bookmarked, setBookmarked] = React.useState<string[]>([]);
 
   const CatalogWithSections = (
-      <>
+      <Stack hasGutter>
         {bookmarked.length > 0 && (
           <div>
             <TextContent>
@@ -210,10 +211,7 @@ export const CustomCatalog: React.FC = () => {
               })}
           </Gallery>
         </div>
-        <div>
-          <Divider />
-        </div>
-      </>
+      </Stack>
     );
 
   const clearFilters = React.useCallback(() => {
