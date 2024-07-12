@@ -101,7 +101,7 @@ const QuickStartController: React.FC<QuickStartControllerProps> = ({
         totalTasks={totalTasks}
         onNext={handleNext}
         onBack={handleBack}
-        footerClass={footerClass}
+        className={footerClass}
         quickStartId={quickStart.metadata.name}
       />
     </>

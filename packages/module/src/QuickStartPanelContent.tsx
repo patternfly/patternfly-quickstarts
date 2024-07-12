@@ -17,6 +17,8 @@ import { camelize } from './utils/quick-start-utils';
 import { removeParagraphWrap } from './QuickStartMarkdownView';
 import { markdownConvert } from './ConsoleInternal/components/markdown-view';
 
+import './QuickStartPanelContent.scss';
+
 type HandleClose = () => void;
 
 interface QuickStartPanelContentProps {
@@ -27,6 +29,7 @@ interface QuickStartPanelContentProps {
   isResizable?: boolean;
   showClose?: boolean;
   headerVariant?: '' | 'blue-white';
+  footerClass?: string;
 }
 
 const getElement = (appendTo: HTMLElement | (() => HTMLElement)) => {
@@ -52,6 +55,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   isResizable = true,
   showClose = true,
   headerVariant = '',
+  footerClass,
   ...props
 }) => {
   const titleRef = React.useRef(null);
@@ -65,17 +69,6 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   const nextQuickStarts: QuickStart[] = quickStarts.filter((qs: QuickStart) =>
     quickStart?.spec.nextQuickStart?.includes(qs.metadata.name),
   );
-
-  const headerClasses = css('pfext-quick-start-panel-content__header', {
-    'pfext-quick-start-panel-content__header__shadow':
-      shadows === Shadows.top || shadows === Shadows.both,
-    'pfext-quick-start-panel-content__header--blue-white': headerVariant === 'blue-white',
-  });
-
-  const footerClass = css({
-    'pfext-quick-start-panel-content__footer__shadow':
-      shadows === Shadows.bottom || shadows === Shadows.both,
-  });
 
   const getStep = () => {
     const tasks = quickStart.spec.tasks.length;
@@ -97,19 +90,21 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   const content = quickStart ? (
     <DrawerPanelContent
       isResizable={isResizable}
-      className="pfext-quick-start__base pfext-quick-start-panel"
       data-testid={`qs-drawer-${camelize(quickStart.spec.displayName)}`}
       data-qs={`qs-step-${getStep()}`}
       data-test="quickstart drawer"
+      style={{'--pf-v6-c-drawer__panel--PaddingBlockStart': '0'} as React.CSSProperties}
       {...props}
     >
-      <div className={headerClasses}>
+      <div style={{
+        backgroundColor: 'var(--pf-t--global--color--brand--default)',
+        color: 'var(--pf-t--global--text--color--inverse)',
+      }}>
         <DrawerHead>
-          <div className="pfext-quick-start-panel-content__title" tabIndex={-1} ref={titleRef}>
+          <div tabIndex={-1} ref={titleRef}>
             <Title
               headingLevel="h2"
               size="xl"
-              className="pfext-quick-start-panel-content__name"
               style={{ marginRight: 'var(--pf-t--global--spacer--md)' }}
             >
               <span
@@ -118,7 +113,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
                 }}
               />{' '}
             </Title>
-            <span className="pfext-quick-start-panel-content__duration">
+            <span>
                 {quickStart?.spec.durationMinutes
                   ? getResource(
                       '{{type}} • {{duration, number}} minutes',

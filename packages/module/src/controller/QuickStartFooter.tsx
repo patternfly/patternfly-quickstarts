@@ -7,12 +7,12 @@ import { ActionList, ActionListItem, ActionListGroup } from '@patternfly/react-c
 
 export interface QuickStartFooterProps {
   status: QuickStartStatus;
-  footerClass: string;
   taskNumber: number;
   totalTasks: number;
   onNext: () => void;
   onBack: () => void;
   quickStartId: string;
+  className?: string;
 }
 
 const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
@@ -21,8 +21,8 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   totalTasks,
   onNext,
   onBack,
-  footerClass,
   quickStartId,
+  className
 }) => {
   const { restartQuickStart, getResource } =
     React.useContext<QuickStartContextValues>(QuickStartContext);
@@ -115,7 +115,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   );
 
   return (
-    <div className={footerClass}>
+    <div className={className}>
       <ActionList>
         <ActionListGroup>
           <ActionListItem>{getPrimaryButton}</ActionListItem>
