@@ -43,12 +43,7 @@ describe('QuickStartConclusion', () => {
   });
 
   it('should render conclusion if there are no failed tasks', () => {
-    expect(
-      wrapper
-        .find(QuickStartMarkdownView)
-        .first()
-        .props().content,
-    ).toEqual('conclusion');
+    expect(wrapper.find(QuickStartMarkdownView).first().props().content).toEqual('conclusion');
   });
 
   it('should render link for next quick start if nextQuickStart prop is available and there are no failed tasks', () => {
@@ -58,12 +53,9 @@ describe('QuickStartConclusion', () => {
         nextQuickStarts={[getQuickStartByName('explore-pipelines', allQuickStarts)]}
       />,
     );
-    expect(
-      wrapper
-        .find(Button)
-        .at(0)
-        .props().children[0],
-    ).toEqual(`${i18nNS}~Start Installing the Pipelines Operator quick start`);
+    expect(wrapper.find(Button).at(0).props().children[0]).toEqual(
+      `${i18nNS}~Start Installing the Pipelines Operator quick start`,
+    );
   });
 
   it('should not render link for next quick start if nextQuickStart props is not available', () => {
@@ -82,12 +74,7 @@ describe('QuickStartConclusion', () => {
         ]}
       />,
     );
-    expect(
-      wrapper
-        .find(QuickStartMarkdownView)
-        .first()
-        .props().content,
-    ).toEqual(
+    expect(wrapper.find(QuickStartMarkdownView).first().props().content).toEqual(
       `${i18nNS}~One or more verifications did not pass during this quick start. Revisit the tasks or the help links, and then try again.`,
     );
     expect(wrapper.find(Button).length).toBe(0);

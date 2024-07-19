@@ -7,15 +7,11 @@ import {
   DrawerPanelContent,
   Title,
 } from '@patternfly/react-core';
-import { css } from '@patternfly/react-styles';
 import * as ReactDOM from 'react-dom';
-import { Shadows, useScrollShadows } from '@console/shared';
 import QuickStartController from './QuickStartController';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import { QuickStart } from './utils/quick-start-types';
 import { camelize } from './utils/quick-start-utils';
-import { removeParagraphWrap } from './QuickStartMarkdownView';
-import { markdownConvert } from './ConsoleInternal/components/markdown-view';
 
 import './QuickStartPanelContent.scss';
 
@@ -28,7 +24,6 @@ interface QuickStartPanelContentProps {
   appendTo?: HTMLElement | (() => HTMLElement);
   isResizable?: boolean;
   showClose?: boolean;
-  headerVariant?: '' | 'blue-white';
   footerClass?: string;
 }
 
@@ -54,7 +49,6 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   appendTo,
   isResizable = true,
   showClose = true,
-  headerVariant = '',
   footerClass,
   ...props
 }) => {
@@ -62,7 +56,6 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   const { getResource, activeQuickStartState, focusOnQuickStart } =
     React.useContext<QuickStartContextValues>(QuickStartContext);
   const [contentRef, setContentRef] = React.useState<HTMLDivElement>();
-  const shadows = useScrollShadows(contentRef);
   const quickStart = quickStarts.find((qs) => qs.metadata.name === activeQuickStartID);
   const taskNumber = activeQuickStartState?.taskNumber;
   useScrollTopOnTaskNumberChange(contentRef, taskNumber as number);
@@ -93,13 +86,10 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
       data-testid={`qs-drawer-${camelize(quickStart.spec.displayName)}`}
       data-qs={`qs-step-${getStep()}`}
       data-test="quickstart drawer"
-      style={{'--pf-v6-c-drawer__panel--PaddingBlockStart': '0'} as React.CSSProperties}
+      style={{ '--pf-v6-c-drawer__panel--PaddingBlockStart': '0' } as React.CSSProperties}
       {...props}
     >
-      <div style={{
-        backgroundColor: 'var(--pf-t--global--color--brand--default)',
-        color: 'var(--pf-t--global--text--color--inverse)',
-      }}>
+      <div className="pfext-quick-start-panel-content">
         <DrawerHead>
           <div tabIndex={-1} ref={titleRef}>
             <Title
@@ -107,21 +97,17 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
               size="xl"
               style={{ marginRight: 'var(--pf-t--global--spacer--md)' }}
             >
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: removeParagraphWrap(markdownConvert(quickStart?.spec.displayName)),
-                }}
-              />{' '}
+              <span>{quickStart?.spec.displayName}</span>{' '}
             </Title>
             <span>
-                {quickStart?.spec.durationMinutes
-                  ? getResource(
-                      '{{type}} • {{duration, number}} minutes',
-                      quickStart?.spec.durationMinutes,
-                    )
-                      .replace('{{duration, number}}', quickStart?.spec.durationMinutes)
-                      .replace('{{type}}', getResource('Type'))
-                  : getResource('Type')}
+              {quickStart?.spec.durationMinutes
+                ? getResource(
+                    '{{type}} • {{duration, number}} minutes',
+                    quickStart?.spec.durationMinutes,
+                  )
+                    .replace('{{duration, number}}', quickStart?.spec.durationMinutes)
+                    .replace('{{type}}', getResource('Type'))
+                : getResource('Type')}
             </span>
           </div>
           {showClose && (
@@ -135,9 +121,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
           )}
         </DrawerHead>
       </div>
-      <DrawerPanelBody
-        data-test="content"
-      >
+      <DrawerPanelBody className="pfext-quick-start-panel-content__body" data-test="content">
         <QuickStartController
           quickStart={quickStart}
           nextQuickStarts={nextQuickStarts}

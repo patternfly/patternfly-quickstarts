@@ -12,6 +12,7 @@ interface QuickStartContentProps {
   onTaskReview: (taskStatus: QuickStartTaskStatus) => void;
   onQuickStartChange?: (quickStartId: string) => void;
 }
+import './QuickStartContent.scss';
 
 const QuickStartContent = React.forwardRef<HTMLDivElement, QuickStartContentProps>(
   (
@@ -32,7 +33,7 @@ const QuickStartContent = React.forwardRef<HTMLDivElement, QuickStartContentProp
     const totalTasks = tasks.length;
 
     return (
-      <div ref={ref}>
+      <div className="pfext-quick-start-task" ref={ref}>
         {taskNumber === -1 && (
           <QuickStartIntroduction
             tasks={tasks}

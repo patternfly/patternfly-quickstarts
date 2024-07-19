@@ -65,7 +65,7 @@ const FormGroupWithHelpTopicPopover: React.FC<FormGroupWithHelpTopicPopoverProps
       isRequired
       fieldId={topic.name}
       key={topic.name}
-  >
+    >
       <TextInput isRequired type="text" id={topic.name} />
     </FormGroup>
   );

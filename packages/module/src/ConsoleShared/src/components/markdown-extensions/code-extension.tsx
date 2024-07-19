@@ -3,7 +3,8 @@ import { removeTemplateWhitespace } from './utils';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { CodeBlock } from '@patternfly/react-core';
 
-const useCodeShowdownExtension = () => React.useMemo(
+const useCodeShowdownExtension = () =>
+  React.useMemo(
     () => ({
       type: 'output',
       regex: /<pre><code>(.*?)\n?<\/code><\/pre>/g,

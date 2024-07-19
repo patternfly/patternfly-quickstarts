@@ -5,7 +5,7 @@ import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start
 import { QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
 import TaskHeader from './QuickStartTaskHeader';
 import QuickStartTaskReview from './QuickStartTaskReview';
-import { TextContent, Stack } from '@patternfly/react-core';
+import { Stack } from '@patternfly/react-core';
 
 interface QuickStartTaskProps {
   tasks: QuickStartTask[];
@@ -51,9 +51,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
                 >
                   {isActiveTask && (
                     <Stack hasGutter>
-                      <TextContent>
-                        <QuickStartMarkdownView content={description} />
-                      </TextContent>
+                      <QuickStartMarkdownView content={description} />
                       {shouldShowTaskReview && (
                         <QuickStartTaskReview
                           review={review}

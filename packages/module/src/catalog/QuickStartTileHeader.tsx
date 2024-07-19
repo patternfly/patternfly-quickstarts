@@ -67,18 +67,10 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
           />
         )}
       </Flex>
-      <Flex spaceItems={{ default: 'spaceItemsSm'}}>
-        {type && (
-          <Label color={type.color}>
-            {type.text}
-          </Label>
-        )}
+      <Flex spaceItems={{ default: 'spaceItemsSm' }}>
+        {type && <Label color={type.color}>{type.text}</Label>}
         {duration && (
-          <Label
-            variant="outline"
-            data-test="duration"
-            icon={<OutlinedClockIcon />}
-          >
+          <Label variant="outline" data-test="duration" icon={<OutlinedClockIcon />}>
             {getResource('{{duration, number}} minutes', duration).replace(
               '{{duration, number}}',
               duration,

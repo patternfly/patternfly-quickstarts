@@ -152,12 +152,8 @@ export const useValuesForQuickStartContext = (
     });
   };
   const findResource = useCallback(
-    (resource: string, count?: number) => getResource(
-        resource,
-        count !== undefined ? { count } : null,
-        resourceBundle,
-        language,
-      ),
+    (resource: string, count?: number) =>
+      getResource(resource, count !== undefined ? { count } : null, resourceBundle, language),
     [resourceBundle, language],
   );
   const [loading, setLoading] = React.useState(combinedValue.loading);
@@ -420,9 +416,10 @@ export const useValuesForQuickStartContext = (
 
   const activeQuickStartState = allQuickStartStates?.[activeQuickStartID] ?? {};
 
-  const getQuickStartForId = useCallback((id: string) => allQuickStartStates[id], [
-    allQuickStartStates,
-  ]);
+  const getQuickStartForId = useCallback(
+    (id: string) => allQuickStartStates[id],
+    [allQuickStartStates],
+  );
 
   return {
     allQuickStarts: quickStarts,
@@ -469,7 +466,7 @@ export const QuickStartContextProvider: React.FC<{
   children: React.ReactNode;
   value: QuickStartContextValues;
 }> = ({ children, value }) => (
-    <QuickStartContext.Provider value={useValuesForQuickStartContext(value)}>
-      {children}
-    </QuickStartContext.Provider>
-  );
+  <QuickStartContext.Provider value={useValuesForQuickStartContext(value)}>
+    {children}
+  </QuickStartContext.Provider>
+);

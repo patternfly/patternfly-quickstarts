@@ -132,19 +132,12 @@ const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
           </div>
           {
             <DrawerActions>
-              <DrawerCloseButton
-                onClick={onClose}
-                data-testid="qs-drawer-close"
-              />
+              <DrawerCloseButton onClick={onClose} data-testid="qs-drawer-close" />
             </DrawerActions>
           }
         </DrawerHead>
         <Divider />
-        <DrawerPanelBody
-          data-test="content"
-        >
-          {panelBodyItems}
-        </DrawerPanelBody>
+        <DrawerPanelBody data-test="content">{panelBodyItems}</DrawerPanelBody>
       </div>
     </DrawerPanelContent>
   );

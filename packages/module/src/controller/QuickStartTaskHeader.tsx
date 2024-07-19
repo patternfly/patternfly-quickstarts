@@ -1,9 +1,6 @@
 import * as React from 'react';
-import { Text, Title, WizardNavItem } from '@patternfly/react-core';
-import { css } from '@patternfly/react-styles';
-import { markdownConvert } from '../ConsoleInternal/components/markdown-view';
-import { removeParagraphWrap } from '../QuickStartMarkdownView';
-import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
+import { Title, WizardNavItem } from '@patternfly/react-core';
+import { QuickStartContext } from '../utils/quick-start-context';
 import { QuickStartTaskStatus } from '../utils/quick-start-types';
 
 import './QuickStartTaskHeader.scss';
@@ -50,13 +47,11 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   const content = (
     <div ref={titleRef}>
       <Title headingLevel="h3" size={size}>
-        <span dangerouslySetInnerHTML={{ __html: removeParagraphWrap(markdownConvert(title)) }} />
+        <span className="pfext-quick-start-task-header__title">{title}</span>
         {isActiveTask && subtitle && (
           <span data-test-id="quick-start-task-subtitle">
             {' '}
-            <span className="pfext-quick-start-task-header__subtitle" >
-              {subtitle}
-            </span>
+            <span className="pfext-quick-start-task-header__subtitle">{subtitle}</span>
           </span>
         )}
         {tryAgain}

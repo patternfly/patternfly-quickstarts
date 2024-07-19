@@ -33,8 +33,6 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     console.log(allQuickStartStates);
   }, [allQuickStartStates]);
 
-
-
   const withQueryParams = true;
 
   const drawerProps: QuickStartContainerProps = {

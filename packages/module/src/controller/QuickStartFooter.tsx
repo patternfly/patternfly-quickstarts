@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Button } from '@patternfly/react-core';
+import { css } from '@patternfly/react-styles';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartStatus } from '../utils/quick-start-types';
 import { camelize } from '../utils/quick-start-utils';
 import { ActionList, ActionListItem, ActionListGroup } from '@patternfly/react-core';
+import './QuickStartFooter.scss';
 
 export interface QuickStartFooterProps {
   status: QuickStartStatus;
@@ -22,7 +24,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   onNext,
   onBack,
   quickStartId,
-  className
+  className,
 }) => {
   const { restartQuickStart, getResource } =
     React.useContext<QuickStartContextValues>(QuickStartContext);
@@ -103,11 +105,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   const getSideNoteAction = React.useMemo(
     () =>
       taskNumber !== -1 && (
-        <Button
-          variant="link"
-          onClick={onRestart}
-          data-testid="qs-drawer-side-note-action"
-        >
+        <Button variant="link" onClick={onRestart} data-testid="qs-drawer-side-note-action">
           {SecondaryButtonText.RESTART}
         </Button>
       ),
@@ -115,7 +113,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   );
 
   return (
-    <div className={className}>
+    <div className={css('pfext-quick-start-footer', className)}>
       <ActionList>
         <ActionListGroup>
           <ActionListItem>{getPrimaryButton}</ActionListItem>

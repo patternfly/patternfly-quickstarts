@@ -29,7 +29,6 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     console.log(allQuickStartStates);
   }, [allQuickStartStates]);
 
-
   const language = localStorage.getItem('bridge/language') || 'en';
   const resourceBundle = i18n.getResourceBundle(language, 'quickstart');
 

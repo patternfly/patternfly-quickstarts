@@ -11,7 +11,7 @@ export const QuickStartCatalogHeader: React.FC<QuickStartCatalogHeaderProps> = (
   hint,
 }) => (
   <div>
-    <Title headingLevel='h1' data-pf-content="true">
+    <Title headingLevel="h1" data-pf-content="true">
       {title}
     </Title>
     {hint && <div>{hint}</div>}

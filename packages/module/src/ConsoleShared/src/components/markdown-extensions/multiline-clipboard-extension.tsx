@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import * as React from 'react';
 import { QuickStartContext, QuickStartContextValues } from '@quickstarts/utils/quick-start-context';
 import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
@@ -27,10 +28,7 @@ const useMultilineCopyClipboardShowdownExtension = () => {
                 </div>
               </div>
               <div class="pf-v6-c-code-block__content">
-                <pre class="pf-v6-c-code-block__pre pfext-code-block__pre">
-                  <code class="pf-v6-c-code-block__code"
-                    ${MARKDOWN_SNIPPET_ID}="${groupId}">${group.trim()}</code>
-                </pre>
+                <pre class="pf-v6-c-code-block__pre pfext-code-block__pre"><code class="pf-v6-c-code-block__code"${MARKDOWN_SNIPPET_ID}="${groupId}">${group.trim()}</code></pre>
               </div>
             </div>`;
       },

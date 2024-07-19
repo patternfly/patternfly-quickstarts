@@ -15,9 +15,8 @@ const QuickStartTileFooter: React.FC<QuickStartTileFooterProps> = ({
   totalTasks,
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
-  const { activeQuickStartID, startQuickStart, restartQuickStart } = React.useContext<
-    QuickStartContextValues
-  >(QuickStartContext);
+  const { activeQuickStartID, startQuickStart, restartQuickStart } =
+    React.useContext<QuickStartContextValues>(QuickStartContext);
 
   const start = React.useCallback(
     (e: React.SyntheticEvent) => {

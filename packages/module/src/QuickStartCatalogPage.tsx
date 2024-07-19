@@ -7,7 +7,7 @@ import {
   EmptyStateBody,
   EmptyStateFooter,
   PageSection,
-  Text
+  Text,
 } from '@patternfly/react-core';
 import SearchIcon from '@patternfly/react-icons/dist/js/icons/search-icon';
 import { EmptyBox, LoadingBox, clearFilterParams } from '@console/internal/components/utils';
@@ -29,7 +29,11 @@ export interface QuickStartCatalogPageProps {
 export const QuickStartCatalogEmptyState = ({ clearFilters }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
-    <EmptyState  headingLevel="h4" icon={SearchIcon}  titleText={<>{getResource('No results found')}</>}>
+    <EmptyState
+      headingLevel="h4"
+      icon={SearchIcon}
+      titleText={<>{getResource('No results found')}</>}
+    >
       <EmptyStateBody>
         {getResource(
           'No results match the filter criteria. Remove filters or clear all filters to show results.',

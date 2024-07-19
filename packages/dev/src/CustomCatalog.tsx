@@ -86,67 +86,25 @@ export const CustomCatalog: React.FC = () => {
   const [bookmarked, setBookmarked] = React.useState<string[]>([]);
 
   const CatalogWithSections = (
-      <Stack hasGutter>
-        {bookmarked.length > 0 && (
-          <div>
-            <TextContent>
-              <Text component="h2">Bookmarked</Text>
-              <Text component="p" className="catalog-sub">
-                Bookmarked examples
-              </Text>
-            </TextContent>
-            <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
-              {allQuickStarts
-                .filter((quickStart: QuickStart) => bookmarked.includes(quickStart.metadata.name))
-                .map((quickStart: QuickStart) => {
-                  const {
-                    metadata: { name: id },
-                  } = quickStart;
-
-                  return (
-                    <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
-                      <QuickStartTile
-                        action={{
-                          onClick: (e: React.SyntheticEvent) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setBookmarked((prev) => {
-                              if (prev.includes(id)) {
-                                return prev.filter((bookmark) => bookmark !== id);
-                              }
-
-                              return [...prev, id];
-                            });
-                          },
-                          icon: bookmarked.includes(id) ? BookmarkIcon : OutlinedBookmarkIcon,
-                          'aria-label': 'bookmark',
-                        }}
-                        quickStart={quickStart}
-                        isActive={id === activeQuickStartID}
-                        status={getQuickStartStatus(allQuickStartStates, id)}
-                      />
-                    </GalleryItem>
-                  );
-                })}
-            </Gallery>
-          </div>
-        )}
+    <Stack hasGutter>
+      {bookmarked.length > 0 && (
         <div>
           <TextContent>
-            <Text component="h2">Instructional</Text>
+            <Text component="h2">Bookmarked</Text>
             <Text component="p" className="catalog-sub">
-              Instructional examples
+              Bookmarked examples
             </Text>
           </TextContent>
-          <Gallery hasGutter>
+          <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
             {allQuickStarts
-              .filter((quickStart: QuickStart) => quickStart.metadata.instructional)
+              .filter((quickStart: QuickStart) => bookmarked.includes(quickStart.metadata.name))
               .map((quickStart: QuickStart) => {
                 const {
                   metadata: { name: id },
                 } = quickStart;
 
                 return (
+                  <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
                     <QuickStartTile
                       action={{
                         onClick: (e: React.SyntheticEvent) => {
@@ -167,52 +125,96 @@ export const CustomCatalog: React.FC = () => {
                       isActive={id === activeQuickStartID}
                       status={getQuickStartStatus(allQuickStartStates, id)}
                     />
+                  </GalleryItem>
                 );
               })}
           </Gallery>
         </div>
-        <div>
-          <TextContent>
-            <Text component="h2">Real-world examples</Text>
-            <Text component="p" className="catalog-sub">
-              Additional examples
-            </Text>
-          </TextContent>
-          <Gallery hasGutter>
-            {allQuickStarts
-              .filter((quickStart: QuickStart) => !quickStart.metadata.instructional)
-              .map((quickStart: QuickStart) => {
-                const {
-                  metadata: { name: id },
-                } = quickStart;
+      )}
+      <div>
+        <TextContent>
+          <Text component="h2">Instructional</Text>
+          <Text component="p" className="catalog-sub">
+            Instructional examples
+          </Text>
+        </TextContent>
+        <Gallery hasGutter>
+          {allQuickStarts
+            .filter((quickStart: QuickStart) => quickStart.metadata.instructional)
+            .map((quickStart: QuickStart, index: number) => {
+              const {
+                metadata: { name: id },
+              } = quickStart;
 
-                return (
-                    <QuickStartTile
-                      action={{
-                        onClick: (e: React.SyntheticEvent) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          setBookmarked((prev) => {
-                            if (prev.includes(id)) {
-                              return prev.filter((bookmark) => bookmark !== id);
-                            }
+              return (
+                <QuickStartTile
+                  key={index}
+                  action={{
+                    onClick: (e: React.SyntheticEvent) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setBookmarked((prev) => {
+                        if (prev.includes(id)) {
+                          return prev.filter((bookmark) => bookmark !== id);
+                        }
 
-                            return [...prev, id];
-                          });
-                        },
-                        icon: bookmarked.includes(id) ? BookmarkIcon : OutlinedBookmarkIcon,
-                        'aria-label': 'bookmark',
-                      }}
-                      quickStart={quickStart}
-                      isActive={id === activeQuickStartID}
-                      status={getQuickStartStatus(allQuickStartStates, id)}
-                    />
-                );
-              })}
-          </Gallery>
-        </div>
-      </Stack>
-    );
+                        return [...prev, id];
+                      });
+                    },
+                    icon: bookmarked.includes(id) ? BookmarkIcon : OutlinedBookmarkIcon,
+                    'aria-label': 'bookmark',
+                  }}
+                  quickStart={quickStart}
+                  isActive={id === activeQuickStartID}
+                  status={getQuickStartStatus(allQuickStartStates, id)}
+                />
+              );
+            })}
+        </Gallery>
+      </div>
+      <div>
+        <TextContent>
+          <Text component="h2">Real-world examples</Text>
+          <Text component="p" className="catalog-sub">
+            Additional examples
+          </Text>
+        </TextContent>
+        <Gallery hasGutter>
+          {allQuickStarts
+            .filter((quickStart: QuickStart) => !quickStart.metadata.instructional)
+            .map((quickStart: QuickStart, index: number) => {
+              const {
+                metadata: { name: id },
+              } = quickStart;
+
+              return (
+                <QuickStartTile
+                  key={index}
+                  action={{
+                    onClick: (e: React.SyntheticEvent) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setBookmarked((prev) => {
+                        if (prev.includes(id)) {
+                          return prev.filter((bookmark) => bookmark !== id);
+                        }
+
+                        return [...prev, id];
+                      });
+                    },
+                    icon: bookmarked.includes(id) ? BookmarkIcon : OutlinedBookmarkIcon,
+                    'aria-label': 'bookmark',
+                  }}
+                  quickStart={quickStart}
+                  isActive={id === activeQuickStartID}
+                  status={getQuickStartStatus(allQuickStartStates, id)}
+                />
+              );
+            })}
+        </Gallery>
+      </div>
+    </Stack>
+  );
 
   const clearFilters = React.useCallback(() => {
     setFilter('keyword', '');
@@ -255,9 +257,7 @@ export const CustomCatalog: React.FC = () => {
         </QuickStartCatalogToolbar>
         <Divider component="div" />
       </PageSection>
-      <PageSection>
-        {quickStartCatalog()}
-      </PageSection>
+      <PageSection>{quickStartCatalog()}</PageSection>
     </>
   );
 };

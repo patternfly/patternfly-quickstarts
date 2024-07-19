@@ -6,11 +6,7 @@ import { Icon } from '@patternfly/react-core';
 
 export const GreenCheckCircleIcon: React.FC<ColoredIconProps> = ({ className, title, size }) => (
   <Icon size={size} status="success">
-    <CheckCircleIcon
-      data-test="success-icon"
-      className={className}
-      title={title}
-    />
+    <CheckCircleIcon data-test="success-icon" className={className} title={title} />
   </Icon>
 );
 

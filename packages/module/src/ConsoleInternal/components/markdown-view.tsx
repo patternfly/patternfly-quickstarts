@@ -2,7 +2,6 @@ import * as React from 'react';
 import { css } from '@patternfly/react-styles';
 import { Converter } from 'showdown';
 import { useForceRender } from '@console/shared';
-import { TextContent } from '@patternfly/react-core';
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -37,12 +36,34 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
       return node;
     }
 
-    // add PF class to ul and ol lists
-    if (
-      node.nodeType === 1 &&
-      (node.nodeName.toLowerCase() === 'ul' || node.nodeName.toLowerCase() === 'ol')
-    ) {
-      return node;
+    // add PF content classes
+    if (node.nodeType === 1) {
+      const contentElements = [
+        'ul',
+        'ol',
+        'p',
+        'li',
+        'hr',
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'blockquote',
+        'pre',
+        'dl',
+        'dt',
+        'dd',
+        'table',
+      ];
+      if (contentElements.includes(node.nodeName.toLowerCase())) {
+        // don't overwrite elements already being styled by PatternFly
+        if (!node.getAttribute('class')?.includes('pf-v6-c-')) {
+          node.setAttribute('class', `pf-v6-c-content--${node.nodeName.toLowerCase()}`);
+          return node;
+        }
+      }
     }
   });
 
@@ -165,12 +186,12 @@ const InlineMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
 }) => {
   const id = React.useMemo(() => uniqueId('markdown'), []);
   return (
-    <TextContent className={css({ 'is-empty': isEmpty } as any, className)} id={id}>
+    <div className={css({ 'is-empty': isEmpty } as any, className)} id={id}>
       <div dangerouslySetInnerHTML={{ __html: markup }} />
       {renderExtension && (
         <RenderExtension renderExtension={renderExtension} selector={`#${id}`} markup={markup} />
       )}
-    </TextContent>
+    </div>
   );
 };
 

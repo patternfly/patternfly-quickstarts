@@ -1,3 +1,14 @@
-.pfext-quick-start-panel-content__close-button button.pf-v6-c-button {
-  --pf-v6-c-button--Color: var(--pf-t--global--text--color--inverse);
+.pfext-quick-start-panel-content {
+  background-color: var(--pf-t--global--color--brand--default);
+  color: var(--pf-t--global--text--color--inverse);
+  padding: var(--pf-t--global--spacer--md) var(--pf-t--global--spacer--lg);
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__close-button button.pf-v6-c-button {
+    --pf-v6-c-button--Color: var(--pf-t--global--text--color--inverse);
+  }
 }

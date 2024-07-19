@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Alert, Radio } from '@patternfly/react-core';
-import { css } from '@patternfly/react-styles';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import {
@@ -41,7 +40,7 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
       role="alert"
       style={
         {
-          marginBottom: 'var(--pf-t--global--spacer--md)'
+          marginBottom: 'var(--pf-t--global--spacer--md)',
         } as React.CSSProperties
       }
     >

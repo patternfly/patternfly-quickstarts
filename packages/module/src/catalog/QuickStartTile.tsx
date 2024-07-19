@@ -39,15 +39,11 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
 
   let quickStartIcon: React.ReactNode;
   if (typeof icon === 'object') {
-    quickStartIcon = <Icon size="xl">{icon}</Icon>
+    quickStartIcon = <Icon size="xl">{icon}</Icon>;
   } else {
     quickStartIcon = (
       <Icon size="xl">
-      <FallbackImg
-        src={icon as string}
-        alt=""
-        fallback={<RocketIcon />}
-      />
+        <FallbackImg src={icon as string} alt="" fallback={<RocketIcon />} />
       </Icon>
     );
   }
@@ -89,7 +85,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
         id={id + '-catalog-tile'}
         style={{
           cursor: 'pointer',
-          height: '100%'
+          height: '100%',
         }}
         icon={quickStartIcon}
         data-testid={`qs-card-${camelize(displayName)}`}

@@ -102,9 +102,7 @@ export const HelpTopicDrawer: React.FC<HelpTopicDrawerProps> = ({ children, ...p
       <Drawer isExpanded={!!activeHelpTopic} isInline {...props}>
         {children ? (
           <DrawerContent panelContent={panelContent}>
-            <DrawerContentBody>
-              {children}
-            </DrawerContentBody>
+            <DrawerContentBody>{children}</DrawerContentBody>
           </DrawerContent>
         ) : (
           <div className="pf-v6-c-drawer__main">{panelContent}</div>

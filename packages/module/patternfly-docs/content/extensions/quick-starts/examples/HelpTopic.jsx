@@ -13,10 +13,10 @@ const TinyMockConsole = () => {
   return (
     <Stack hasGutter>
       {helpTopics.map((topic) => (
-          <StackItem key={topic.name}>
-            <a onClick={() => handleSetTopic(topic.name)}>Open Help {topic.title}</a>
-          </StackItem>
-        ))}
+        <StackItem key={topic.name}>
+          <a onClick={() => handleSetTopic(topic.name)}>Open Help {topic.title}</a>
+        </StackItem>
+      ))}
     </Stack>
   );
 };

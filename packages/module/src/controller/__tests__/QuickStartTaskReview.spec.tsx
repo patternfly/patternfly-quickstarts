@@ -35,11 +35,8 @@ describe('QuickStartTaskReview', () => {
 
   it('should render task help in markdown when task status is failed', () => {
     wrapper = shallow(<QuickStartTaskReview {...props} />);
-    expect(
-      wrapper
-        .find(QuickStartMarkdownView)
-        .at(1)
-        .props().content,
-    ).toEqual(props.review.failedTaskHelp);
+    expect(wrapper.find(QuickStartMarkdownView).at(1).props().content).toEqual(
+      props.review.failedTaskHelp,
+    );
   });
 });

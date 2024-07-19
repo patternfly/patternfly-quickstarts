@@ -162,7 +162,6 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
     activeQuickStartState,
     allQuickStartStates,
     setAllQuickStartStates,
-    useLegacyHeaderColors,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const combinedQuickStarts = allQuickStarts.concat(quickStarts);
   React.useEffect(() => {
@@ -236,7 +235,6 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
       activeQuickStartID={activeQuickStartID}
       appendTo={appendTo}
       isResizable={!fullWidth}
-      headerVariant={useLegacyHeaderColors ? '' : 'blue-white'}
       {...fullWidthPanelStyle}
     />
   );
@@ -246,9 +244,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
       <Drawer isExpanded={!!activeQuickStartID} isInline {...props}>
         {children ? (
           <DrawerContent panelContent={panelContent} {...fullWidthBodyStyle}>
-            <DrawerContentBody>
-              {children}
-            </DrawerContentBody>
+            <DrawerContentBody>{children}</DrawerContentBody>
           </DrawerContent>
         ) : (
           <div>{panelContent}</div>

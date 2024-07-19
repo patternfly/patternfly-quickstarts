@@ -45,16 +45,16 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
             variant="link"
             onClick={() => onQuickStartChange(nextQuickStart.metadata.name)}
             isInline
+            icon={<ArrowRightIcon />}
+            iconPosition="end"
             isBlock
             key={index}
+            style={{ marginTop: 'var(--pf-t--global--spacer--md' }}
           >
             {getResource('Start {{nextQSDisplayName}} quick start').replace(
               '{{nextQSDisplayName}}',
               nextQuickStart?.spec?.displayName,
-            )}{' '}
-            <ArrowRightIcon
-              style={{ marginLeft: 'var(--pf-t--global--spacer--xs)', verticalAlign: 'middle' }}
-            />
+            )}
           </Button>
         ))}
     </>

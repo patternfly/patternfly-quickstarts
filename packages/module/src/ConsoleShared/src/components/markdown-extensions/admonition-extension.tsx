@@ -16,7 +16,7 @@ enum AdmonitionType {
 
 const admonitionToAlertVariantMap = {
   [AdmonitionType.NOTE]: { variant: 'info' },
-  [AdmonitionType.TIP]: { variant: 'default', customIcon: <LightbulbIcon /> },
+  [AdmonitionType.TIP]: { variant: 'custom', customIcon: <LightbulbIcon /> },
   [AdmonitionType.IMPORTANT]: { variant: 'danger' },
   [AdmonitionType.CAUTION]: { variant: 'warning', customIcon: <FireIcon /> },
   [AdmonitionType.WARNING]: { variant: 'warning' },
@@ -24,7 +24,7 @@ const admonitionToAlertVariantMap = {
 
 const useAdmonitionShowdownExtension = () =>
   // const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
-   React.useMemo(
+  React.useMemo(
     () => ({
       type: 'lang',
       regex: /\[(.+)]{{(admonition) ([\w-]+)}}/g,
@@ -41,17 +41,14 @@ const useAdmonitionShowdownExtension = () =>
         admonitionType = admonitionType.toUpperCase();
 
         const { variant, customIcon } = admonitionToAlertVariantMap[admonitionType];
-        const style =
-          admonitionType === AdmonitionType.CAUTION ? { backgroundColor: '#ec7a0915' } : {};
         const mdContent = <QuickStartMarkdownView content={content} />;
         const pfAlert = (
           <Alert
             variant={variant}
-            customIcon={customIcon && customIcon}
+            {...(customIcon && { customIcon })}
             isInline
             title={admonitionType}
             className="pfext-markdown-admonition"
-            style={style}
           >
             {mdContent}
           </Alert>
@@ -60,7 +57,5 @@ const useAdmonitionShowdownExtension = () =>
       },
     }),
     [],
-  )
-;
-
+  );
 export default useAdmonitionShowdownExtension;

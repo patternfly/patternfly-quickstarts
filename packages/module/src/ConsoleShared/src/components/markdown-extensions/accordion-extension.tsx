@@ -25,22 +25,16 @@ const useAccordionShowdownExtension = () =>
         return removeTemplateWhitespace(
           renderToStaticMarkup(
             <>
-            <Accordion asDefinitionList>
-              <AccordionItem isExpanded={false}>
-                <AccordionToggle
-
-                  id={`${ACCORDION_MARKDOWN_BUTTON_ID}-${accordionId}`}
-                >
-                  {accordionHeading}
-                </AccordionToggle>
-                <AccordionContent
-                  id={`${ACCORDION_MARKDOWN_CONTENT_ID}-${accordionId}`}
-
-                >
-                  {accordionContent}
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+              <Accordion asDefinitionList>
+                <AccordionItem isExpanded={false}>
+                  <AccordionToggle id={`${ACCORDION_MARKDOWN_BUTTON_ID}-${accordionId}`}>
+                    {accordionHeading}
+                  </AccordionToggle>
+                  <AccordionContent id={`${ACCORDION_MARKDOWN_CONTENT_ID}-${accordionId}`}>
+                    {accordionContent}
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </>,
           ),
         );
