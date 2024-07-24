@@ -47,8 +47,8 @@ const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
       <p>
         {getResource(
           'In this quick start, you will complete {{count, number}} task',
-          tasks.length,
-        ).replace('{{count, number}}', tasks.length)}
+          tasks?.length,
+        ).replace('{{count, number}}', tasks?.length || 0)}
         :
       </p>
       <TaskHeaderList tasks={tasks} allTaskStatuses={allTaskStatuses} onTaskSelect={onTaskSelect} />

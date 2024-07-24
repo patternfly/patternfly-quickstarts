@@ -9,7 +9,7 @@ const centerStyle = {
 };
 
 const IndexPage = () => (
-  <PageSection style={centerStyle}>
+  <PageSection hasBodyWrapper={false} style={centerStyle}>
     <div style={{ flex: 'none', textAlign: 'center' }}>
       <Title size="4xl" headingLevel="h1">
         My extension docs

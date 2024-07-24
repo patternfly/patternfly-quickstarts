@@ -56,9 +56,7 @@ const FormGroupWithHelpTopicPopover: React.FC<FormGroupWithHelpTopicPopoverProps
               </div>
             )}
           >
-            <Button variant="plain">
-              <HelpIcon />
-            </Button>
+            <Button icon={<HelpIcon />} variant="plain"></Button>
           </Popover>
         </>
       }
@@ -135,12 +133,12 @@ export const MockConsole: React.FC = () => {
 
   return (
     <>
-      <PageSection>
+      <PageSection hasBodyWrapper={false}>
         <Banner>
           <Title headingLevel="h1">Console Page {consolePageState}</Title>
         </Banner>
       </PageSection>
-      <PageSection>
+      <PageSection hasBodyWrapper={false}>
         <Title headingLevel="h3">
           Example usage of help topics opened via popover and directly from a link{' '}
           <div>
@@ -158,7 +156,7 @@ export const MockConsole: React.FC = () => {
             : formGroupsFromTopicNames(helpTopicNamesByPage[consolePageState - 4])}
         </Form>
       </PageSection>
-      <PageSection>
+      <PageSection hasBodyWrapper={false}>
         <Split hasGutter>
           <SplitItem>
             <Button onClick={handleClickBack} variant="tertiary">
@@ -171,7 +169,6 @@ export const MockConsole: React.FC = () => {
           <SplitItem>
             <Switch
               label="Close drawer on page change"
-              labelOff="DON'T close drawer on page change"
               isChecked={closeDrawerOnPageChange}
               onChange={() => setCloseDrawerOnPageChange(!closeDrawerOnPageChange)}
             />

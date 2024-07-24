@@ -64,7 +64,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   );
 
   const getStep = () => {
-    const tasks = quickStart.spec.tasks.length;
+    const tasks = quickStart.spec.tasks?.length || 0;
     if (Number.parseInt(taskNumber as string) === -1) {
       return 'intro';
     }

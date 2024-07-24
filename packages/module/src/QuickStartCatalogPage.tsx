@@ -7,7 +7,7 @@ import {
   EmptyStateBody,
   EmptyStateFooter,
   PageSection,
-  Text,
+  Content,
 } from '@patternfly/react-core';
 import SearchIcon from '@patternfly/react-icons/dist/js/icons/search-icon';
 import { EmptyBox, LoadingBox, clearFilterParams } from '@console/internal/components/utils';
@@ -163,12 +163,12 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
   return (
     <>
       {(showTitle || showFilter) && (
-        <PageSection>
+        <PageSection hasBodyWrapper={false}>
           {showTitle && (
             <>
-              <Text component="h1" data-test="page-title">
+              <Content component="h1" data-test="page-title">
                 {title || getResource('Quick Starts')}
-              </Text>
+              </Content>
               {hint && <div>{hint}</div>}
             </>
           )}
@@ -185,7 +185,7 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
           )}
         </PageSection>
       )}
-      <PageSection>
+      <PageSection hasBodyWrapper={false}>
         {filteredQuickStarts.length === 0 ? (
           <QuickStartCatalogEmptyState clearFilters={clearFilters} />
         ) : (

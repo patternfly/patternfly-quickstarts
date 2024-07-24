@@ -53,7 +53,7 @@ describe('QuickStartConclusion', () => {
         nextQuickStarts={[getQuickStartByName('explore-pipelines', allQuickStarts)]}
       />,
     );
-    expect(wrapper.find(Button).at(0).props().children[0]).toEqual(
+    expect(wrapper.find(Button).at(0).props().children).toEqual(
       `${i18nNS}~Start Installing the Pipelines Operator quick start`,
     );
   });
@@ -66,7 +66,7 @@ describe('QuickStartConclusion', () => {
     wrapper = shallow(
       <QuickStartConclusion
         {...props}
-        nextQuickStart={getQuickStartByName('explore-pipelines', allQuickStarts)}
+        nextQuickStarts={[getQuickStartByName('explore-pipelines', allQuickStarts)]}
         allTaskStatuses={[
           QuickStartTaskStatus.FAILED,
           QuickStartTaskStatus.SUCCESS,

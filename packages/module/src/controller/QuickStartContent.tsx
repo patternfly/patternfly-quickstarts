@@ -30,7 +30,7 @@ const QuickStartContent = React.forwardRef<HTMLDivElement, QuickStartContentProp
     const {
       spec: { introduction, tasks, conclusion, prerequisites },
     } = quickStart;
-    const totalTasks = tasks.length;
+    const totalTasks = tasks?.length;
 
     return (
       <div className="pfext-quick-start-task" ref={ref}>

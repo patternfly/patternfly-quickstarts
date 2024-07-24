@@ -6,5 +6,5 @@ export interface QuickStartCatalogToolbarProps {
 }
 
 export const QuickStartCatalogToolbar: React.FC<QuickStartCatalogToolbarProps> = ({ children }) => (
-  <Toolbar usePageInsets>{children}</Toolbar>
+  <Toolbar>{children}</Toolbar>
 );

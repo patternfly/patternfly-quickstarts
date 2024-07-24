@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Button, Flex, FlexItem, ModalVariant } from '@patternfly/react-core';
+import { Button, Flex, FlexItem } from '@patternfly/react-core';
+import { ModalVariant } from '@patternfly/react-core/deprecated';
 import { Modal } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 

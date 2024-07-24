@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { CatalogTile } from '@patternfly/react-catalog-view-extension';
 import RocketIcon from '@patternfly/react-icons/dist/js/icons/rocket-icon';
 import { FallbackImg } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
@@ -9,13 +8,26 @@ import QuickStartTileDescription from './QuickStartTileDescription';
 import QuickStartTileFooter from './QuickStartTileFooter';
 import QuickStartTileFooterExternal from './QuickStartTileFooterExternal';
 import QuickStartTileHeader, { QuickstartAction } from './QuickStartTileHeader';
-import { Icon } from '@patternfly/react-core';
+import OutlinedBookmarkIcon from '@patternfly/react-icons/dist/js/icons/outlined-bookmark-icon';
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  Icon,
+  Button,
+} from '@patternfly/react-core';
 import './QuickStartTile.scss';
 
 interface QuickStartTileProps {
+  /** The quickstart object triggered by this tile */
   quickStart: QuickStart;
+  /** Current status of the quickstart */
   status: QuickStartStatus;
+  /** Flag indicating whether the quickstart is active (drawer is open) */
   isActive: boolean;
+  /** Event handler attached to the tile */
   onClick?: () => void;
   /** Action config for button rendered next to title */
   action?: QuickstartAction;
@@ -36,8 +48,6 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
   const { setActiveQuickStart, footer } =
     React.useContext<QuickStartContextValues>(QuickStartContext);
 
-  const ref = React.useRef<HTMLDivElement>(null);
-
   let quickStartIcon: React.ReactNode;
   if (typeof icon === 'object') {
     quickStartIcon = <Icon size="2xl">{icon}</Icon>;
@@ -54,6 +64,15 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
     );
   }
 
+  const onSelect = () => {
+    if (!link) {
+      setActiveQuickStart(id, tasks?.length);
+    } else {
+      window.open(link.href, '_blank', 'noopener,noreferrer');
+    }
+    onClick();
+  };
+
   const footerComponent = React.useMemo(() => {
     if (footer && footer.show === false) {
       return null;
@@ -63,68 +82,70 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
       return <QuickStartTileFooterExternal link={link} quickStartId={id} />;
     }
 
-    return <QuickStartTileFooter quickStartId={id} status={status} totalTasks={tasks?.length} />;
+    return (
+      <QuickStartTileFooter
+        quickStartId={id}
+        status={status}
+        totalTasks={tasks?.length}
+        onClickContinue={onSelect}
+      />
+    );
   }, [footer, id, link, status, tasks?.length]);
 
-  const handleClick = (
-    e: React.FormEvent<HTMLInputElement> | React.MouseEvent<Element, MouseEvent>,
-  ) => {
-    if (ref.current?.contains(e.target as Node)) {
-      if (!link) {
-        setActiveQuickStart(id, tasks?.length);
-      }
-      onClick();
-    }
-  };
-
-  const linkProps = link
-    ? {
-        href: link.href,
-        target: '_blank',
-        rel: 'noreferrer',
-      }
-    : {};
+  const ActionIcon = action?.icon || OutlinedBookmarkIcon;
+  const additionalAction = action ? (
+    <Button
+      aria-label={action['aria-label']}
+      icon={<ActionIcon />}
+      variant="plain"
+      onClick={action.onClick}
+      {...action.buttonProps}
+    />
+  ) : undefined;
 
   return (
-    <div ref={ref} onClick={handleClick}>
-      <CatalogTile
-        id={id + '-catalog-tile'}
-        style={{
-          cursor: 'pointer',
-          height: '100%',
-        }}
-        icon={quickStartIcon}
-        data-testid={`qs-card-${camelize(displayName)}`}
-        isClicked={isActive}
-        title={
-          <QuickStartTileHeader
-            name={displayName}
-            status={status}
-            duration={durationMinutes}
-            type={type}
-            quickStartId={id}
-            action={action}
-          />
-        }
-        onKeyDown={(event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            setActiveQuickStart(id, tasks?.length);
-            onClick();
-          }
-        }}
-        // https://github.com/patternfly/patternfly-react/issues/7039
-        {...linkProps}
-        data-test={`tile ${id}`}
-        description={
-          <QuickStartTileDescription description={description} prerequisites={prerequisites} />
-        }
-        footer={footerComponent}
-        tabIndex={0}
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore-next-line
-        isSelectableRaised
-      />
-    </div>
+    <Card
+      id={`${id}-catalog-tile`}
+      style={{ height: '100%' }}
+      data-testid={`qs-card-${camelize(displayName)}`}
+      {...(!link && {
+        isClickable: true,
+        isSelectable: true,
+        isSelected: isActive,
+        isClicked: isActive,
+      })}
+    >
+      <CardHeader
+        {...(!link && {
+          selectableActions: {
+            selectableActionId: `${id}-catalog-tile-action`,
+            selectableActionAriaLabelledby: `${id}-catalog-tile`,
+            name: `${id}-catalog-tile-action`,
+            onChange: onSelect,
+          },
+        })}
+        {...(action && {
+          actions: { actions: additionalAction },
+        })}
+      >
+        {quickStartIcon}
+      </CardHeader>
+      <CardTitle>
+        <QuickStartTileHeader
+          name={displayName}
+          status={status}
+          duration={durationMinutes}
+          onSelect={onSelect}
+          type={type}
+          quickStartId={id}
+          action={action}
+        />
+      </CardTitle>
+      <CardBody>
+        <QuickStartTileDescription description={description} prerequisites={prerequisites} />
+      </CardBody>
+      <CardFooter>{footerComponent}</CardFooter>
+    </Card>
   );
 };
 

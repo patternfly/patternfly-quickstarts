@@ -49,15 +49,27 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
       <Title headingLevel="h3" size={size}>
         <span className="pfext-quick-start-task-header__title">{title}</span>
         {isActiveTask && subtitle && (
-          <span data-test-id="quick-start-task-subtitle">
+          <span>
             {' '}
-            <span className="pfext-quick-start-task-header__subtitle">{subtitle}</span>
+            <span
+              data-test-id="quick-start-task-subtitle"
+              className="pfext-quick-start-task-header__subtitle"
+            >
+              {subtitle}
+            </span>
           </span>
         )}
         {tryAgain}
       </Title>
     </div>
   );
+
+  let status: 'default' | 'error' | 'success' = 'default';
+  if (taskStatus === QuickStartTaskStatus.FAILED) {
+    status = 'error';
+  } else if (taskStatus === QuickStartTaskStatus.SUCCESS) {
+    status = 'success';
+  }
 
   return (
     <WizardNavItem
@@ -66,7 +78,7 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
       onClick={() => onTaskSelect(taskIndex - 1)}
       component="button"
       isCurrent={isActiveTask}
-      status={taskStatus === QuickStartTaskStatus.FAILED ? 'error' : 'default'}
+      status={status}
     >
       {children}
     </WizardNavItem>

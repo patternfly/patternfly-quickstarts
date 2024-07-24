@@ -24,8 +24,7 @@ import {
   GalleryItem,
   PageSection,
   Stack,
-  Text,
-  TextContent,
+  Content,
   ToolbarContent,
 } from '@patternfly/react-core';
 
@@ -89,12 +88,10 @@ export const CustomCatalog: React.FC = () => {
     <Stack hasGutter>
       {bookmarked.length > 0 && (
         <div>
-          <TextContent>
-            <Text component="h2">Bookmarked</Text>
-            <Text component="p" className="catalog-sub">
-              Bookmarked examples
-            </Text>
-          </TextContent>
+          <Content component="h2">Bookmarked</Content>
+          <Content component="p" className="catalog-sub">
+            Bookmarked examples
+          </Content>
           <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
             {allQuickStarts
               .filter((quickStart: QuickStart) => bookmarked.includes(quickStart.metadata.name))
@@ -132,12 +129,10 @@ export const CustomCatalog: React.FC = () => {
         </div>
       )}
       <div>
-        <TextContent>
-          <Text component="h2">Instructional</Text>
-          <Text component="p" className="catalog-sub">
-            Instructional examples
-          </Text>
-        </TextContent>
+        <Content component="h2">Instructional</Content>
+        <Content component="p" className="catalog-sub">
+          Instructional examples
+        </Content>
         <Gallery hasGutter>
           {allQuickStarts
             .filter((quickStart: QuickStart) => quickStart.metadata.instructional)
@@ -173,12 +168,10 @@ export const CustomCatalog: React.FC = () => {
         </Gallery>
       </div>
       <div>
-        <TextContent>
-          <Text component="h2">Real-world examples</Text>
-          <Text component="p" className="catalog-sub">
-            Additional examples
-          </Text>
-        </TextContent>
+        <Content component="h2">Real-world examples</Content>
+        <Content component="p" className="catalog-sub">
+          Additional examples
+        </Content>
         <Gallery hasGutter>
           {allQuickStarts
             .filter((quickStart: QuickStart) => !quickStart.metadata.instructional)
@@ -245,7 +238,7 @@ export const CustomCatalog: React.FC = () => {
 
   return (
     <>
-      <PageSection>
+      <PageSection hasBodyWrapper={false}>
         <QuickStartCatalogHeader title="Resources" />
         <Divider component="div" />
         <QuickStartCatalogToolbar>
@@ -257,7 +250,7 @@ export const CustomCatalog: React.FC = () => {
         </QuickStartCatalogToolbar>
         <Divider component="div" />
       </PageSection>
-      <PageSection>{quickStartCatalog()}</PageSection>
+      <PageSection hasBodyWrapper={false}>{quickStartCatalog()}</PageSection>
     </>
   );
 };

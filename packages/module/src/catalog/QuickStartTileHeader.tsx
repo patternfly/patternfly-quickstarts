@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Button, ButtonProps, Flex, Stack, Label, Title } from '@patternfly/react-core';
 import OutlinedClockIcon from '@patternfly/react-icons/dist/js/icons/outlined-clock-icon';
-import OutlinedBookmarkIcon from '@patternfly/react-icons/dist/js/icons/outlined-bookmark-icon';
 import { StatusIcon } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartStatus, QuickStartType } from '../utils/quick-start-types';
@@ -25,6 +24,7 @@ interface QuickStartTileHeaderProps {
   type?: QuickStartType;
   quickStartId?: string;
   action?: QuickstartAction;
+  onSelect: (e: React.FormEvent<HTMLInputElement> | React.MouseEvent<Element, MouseEvent>) => void;
 }
 
 const statusColorMap = {
@@ -39,7 +39,7 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
   name,
   type,
   quickStartId,
-  action,
+  onSelect,
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
@@ -49,23 +49,14 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
     [QuickStartStatus.NOT_STARTED]: getResource('Not started'),
   };
 
-  const ActionIcon = action?.icon || OutlinedBookmarkIcon;
-
   return (
     <Stack hasGutter>
       <Flex flexWrap={{ default: 'nowrap' }}>
         <Title headingLevel="h3" data-test="title" id={quickStartId}>
-          <QuickStartMarkdownView content={name} />
+          <Button variant="link" isInline onClick={onSelect}>
+            <QuickStartMarkdownView content={name} />
+          </Button>
         </Title>
-        {action && (
-          <Button
-            aria-label={action['aria-label']}
-            icon={<ActionIcon />}
-            variant="plain"
-            onClick={action.onClick}
-            {...action.buttonProps}
-          />
-        )}
       </Flex>
       <Flex spaceItems={{ default: 'spaceItemsSm' }}>
         {type && <Label color={type.color}>{type.text}</Label>}

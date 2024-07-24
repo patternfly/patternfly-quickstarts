@@ -1,12 +1,6 @@
 import React from 'react';
-import {
-  Modal,
-  ModalVariant,
-  Stack,
-  StackItem,
-  ToggleGroup,
-  ToggleGroupItem,
-} from '@patternfly/react-core';
+import { Stack, StackItem, ToggleGroup, ToggleGroupItem } from '@patternfly/react-core';
+import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { QuickStartContext } from '@patternfly/quickstarts';
 import i18n from './i18n/i18n';
 

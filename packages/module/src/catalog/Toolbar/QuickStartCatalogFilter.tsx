@@ -18,7 +18,7 @@ const QuickStartCatalogFilter: React.FC<QuickStartCatalogFilterProps> = ({
   onStatusChange = () => {},
   ...props
 }) => (
-  <Toolbar usePageInsets {...props}>
+  <Toolbar {...props}>
     <ToolbarContent>
       <QuickStartCatalogFilterSearchWrapper onSearchInputChange={onSearchInputChange} />
       <QuickStartCatalogFilterStatusWrapper onStatusChange={onStatusChange} />
