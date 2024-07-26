@@ -27,7 +27,7 @@ describe('QuickStartTaskHeader', () => {
     expect(
       wrapper.find(WizardNavItem).dive().find('[data-test-id="quick-start-task-subtitle"]').props()
         .children,
-    ).toEqual([' ', props.subtitle]);
+    ).toEqual(props.subtitle);
   });
   it('should not render subtitle if task is not active', () => {
     wrapper = shallow(<QuickStartTaskHeader {...props} isActiveTask={false} />);

@@ -4,7 +4,6 @@ import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
 import { removeTemplateWhitespace } from './utils';
 import { renderToStaticMarkup } from 'react-dom/server';
 import CopyIcon from '@patternfly/react-icons/dist/js/icons/copy-icon';
-import './showdown-extension.scss';
 
 const useInlineCopyClipboardShowdownExtension = () => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);

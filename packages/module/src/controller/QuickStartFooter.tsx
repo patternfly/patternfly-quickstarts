@@ -1,19 +1,20 @@
 import * as React from 'react';
 import { Button } from '@patternfly/react-core';
+import { css } from '@patternfly/react-styles';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartStatus } from '../utils/quick-start-types';
 import { camelize } from '../utils/quick-start-utils';
-
+import { ActionList, ActionListItem, ActionListGroup } from '@patternfly/react-core';
 import './QuickStartFooter.scss';
 
 export interface QuickStartFooterProps {
   status: QuickStartStatus;
-  footerClass: string;
   taskNumber: number;
   totalTasks: number;
   onNext: () => void;
   onBack: () => void;
   quickStartId: string;
+  className?: string;
 }
 
 const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
@@ -22,24 +23,29 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   totalTasks,
   onNext,
   onBack,
-  footerClass,
   quickStartId,
+  className,
 }) => {
-  const { restartQuickStart, getResource } = React.useContext<QuickStartContextValues>(
-    QuickStartContext,
-  );
+  const { restartQuickStart, getResource } =
+    React.useContext<QuickStartContextValues>(QuickStartContext);
 
-  const PrimaryButtonText = React.useMemo(() => ({
+  const PrimaryButtonText = React.useMemo(
+    () => ({
       START: getResource('Start'),
       CONTINUE: getResource('Continue'),
       NEXT: getResource('Next'),
       CLOSE: getResource('Close'),
-    }), [getResource]);
+    }),
+    [getResource],
+  );
 
-  const SecondaryButtonText = React.useMemo(() => ({
+  const SecondaryButtonText = React.useMemo(
+    () => ({
       BACK: getResource('Back'),
       RESTART: getResource('Restart'),
-    }), [getResource]);
+    }),
+    [getResource],
+  );
 
   const onRestart = React.useCallback(
     (e: React.SyntheticEvent) => {
@@ -70,7 +76,6 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
     () => (
       <Button
         variant="primary"
-        className="pfext-quick-start-footer__actionbtn"
         onClick={onNext}
         data-testid={`qs-drawer-${camelize(getPrimaryButtonText)}`}
         data-test={`${getPrimaryButtonText} button`}
@@ -100,12 +105,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   const getSideNoteAction = React.useMemo(
     () =>
       taskNumber !== -1 && (
-        <Button
-          variant="link"
-          className="pfext-quick-start-footer__restartbtn"
-          onClick={onRestart}
-          data-testid="qs-drawer-side-note-action"
-        >
+        <Button variant="link" onClick={onRestart} data-testid="qs-drawer-side-note-action">
           {SecondaryButtonText.RESTART}
         </Button>
       ),
@@ -113,10 +113,16 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   );
 
   return (
-    <div className={`pfext-quick-start-footer ${footerClass}`}>
-      {getPrimaryButton}
-      {getSecondaryButton}
-      {getSideNoteAction}
+    <div className={css('pfext-quick-start-footer', className)}>
+      <ActionList>
+        <ActionListGroup>
+          <ActionListItem>{getPrimaryButton}</ActionListItem>
+          <ActionListItem>{getSecondaryButton}</ActionListItem>
+        </ActionListGroup>
+        <ActionListGroup>
+          <ActionListItem>{getSideNoteAction}</ActionListItem>
+        </ActionListGroup>
+      </ActionList>
     </div>
   );
 };

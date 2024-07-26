@@ -3,10 +3,11 @@ import {
   Button,
   Divider,
   EmptyState,
-  EmptyStateBody,
-  Text,
-  EmptyStateFooter,
   EmptyStateActions,
+  EmptyStateBody,
+  EmptyStateFooter,
+  PageSection,
+  Content,
 } from '@patternfly/react-core';
 import SearchIcon from '@patternfly/react-icons/dist/js/icons/search-icon';
 import { EmptyBox, LoadingBox, clearFilterParams } from '@console/internal/components/utils';
@@ -28,7 +29,11 @@ export interface QuickStartCatalogPageProps {
 export const QuickStartCatalogEmptyState = ({ clearFilters }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
-    <EmptyState  headingLevel="h4" icon={SearchIcon}  titleText={<>{getResource('No results found')}</>}>
+    <EmptyState
+      headingLevel="h4"
+      icon={SearchIcon}
+      titleText={<>{getResource('No results found')}</>}
+    >
       <EmptyStateBody>
         {getResource(
           'No results match the filter criteria. Remove filters or clear all filters to show results.',
@@ -156,33 +161,37 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
   }
 
   return (
-    <div className="pfext-quick-start__base">
-      {showTitle && (
-        <div className="pfext-page-layout__header">
-          <Text component="h1" className="pfext-page-layout__title" data-test="page-title">
-            {title || getResource('Quick Starts')}
-          </Text>
-          {hint && <div className="pfext-page-layout__hint">{hint}</div>}
-        </div>
+    <>
+      {(showTitle || showFilter) && (
+        <PageSection hasBodyWrapper={false}>
+          {showTitle && (
+            <>
+              <Content component="h1" data-test="page-title">
+                {title || getResource('Quick Starts')}
+              </Content>
+              {hint && <div>{hint}</div>}
+            </>
+          )}
+          {showTitle && <Divider component="div" />}
+          {showFilter && (
+            <>
+              <QuickStartCatalogFilter
+                quickStartsCount={filteredQuickStarts.length}
+                onSearchInputChange={onSearchInputChange}
+                onStatusChange={onStatusChange}
+              />
+              <Divider component="div" />
+            </>
+          )}
+        </PageSection>
       )}
-      {showTitle && <Divider component="div" />}
-      {showFilter && (
-        <>
-          <QuickStartCatalogFilter
-            quickStartsCount={filteredQuickStarts.length}
-            onSearchInputChange={onSearchInputChange}
-            onStatusChange={onStatusChange}
-          />
-          <Divider component="div" />
-        </>
-      )}
-      <>
+      <PageSection hasBodyWrapper={false}>
         {filteredQuickStarts.length === 0 ? (
           <QuickStartCatalogEmptyState clearFilters={clearFilters} />
         ) : (
           <QuickStartCatalog quickStarts={filteredQuickStarts} />
         )}
-      </>
-    </div>
+      </PageSection>
+    </>
   );
 };

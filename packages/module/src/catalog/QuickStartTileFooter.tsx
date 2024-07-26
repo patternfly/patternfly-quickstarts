@@ -7,35 +7,28 @@ interface QuickStartTileFooterProps {
   quickStartId: string;
   status: string;
   totalTasks?: number;
+  onClickContinue: (
+    e: React.FormEvent<HTMLInputElement> | React.MouseEvent<Element, MouseEvent>,
+  ) => void;
 }
 
 const QuickStartTileFooter: React.FC<QuickStartTileFooterProps> = ({
   quickStartId,
   status,
   totalTasks,
+  onClickContinue,
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
-  const { activeQuickStartID, startQuickStart, restartQuickStart } = React.useContext<
-    QuickStartContextValues
-  >(QuickStartContext);
+  const { activeQuickStartID, startQuickStart, restartQuickStart } =
+    React.useContext<QuickStartContextValues>(QuickStartContext);
 
-  const start = React.useCallback(
-    (e: React.SyntheticEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      startQuickStart(quickStartId, totalTasks);
-    },
-    [quickStartId, startQuickStart, totalTasks],
-  );
+  const start = React.useCallback(() => {
+    startQuickStart(quickStartId, totalTasks);
+  }, [quickStartId, startQuickStart, totalTasks]);
 
-  const restart = React.useCallback(
-    (e: React.SyntheticEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      restartQuickStart(quickStartId, totalTasks);
-    },
-    [quickStartId, restartQuickStart, totalTasks],
-  );
+  const restart = React.useCallback(() => {
+    restartQuickStart(quickStartId, totalTasks);
+  }, [quickStartId, restartQuickStart, totalTasks]);
 
   return (
     <Flex justifyContent={{ default: 'justifyContentSpaceBetween' }}>
@@ -57,6 +50,7 @@ const QuickStartTileFooter: React.FC<QuickStartTileFooterProps> = ({
         <FlexItem>
           <Button
             variant="link"
+            onClick={onClickContinue}
             isInline
             data-testid="qs-card-inProgress-resume"
             id={`${quickStartId}-continue`}

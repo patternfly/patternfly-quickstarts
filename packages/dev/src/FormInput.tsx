@@ -8,15 +8,15 @@ export const FormInput = ({
   inputValue: string;
   setInputValue: any;
 }) => (
-    <Form isWidthLimited>
-      <FormGroup label="Substitution for 'CENTRAL'" isRequired fieldId="central-name">
-        <TextInput
-          value={inputValue}
-          type="text"
-          id="central-name"
-          name="horizontal-form-name"
-          onChange={setInputValue}
-        />
-      </FormGroup>
-    </Form>
-  );
+  <Form isWidthLimited>
+    <FormGroup label="Substitution for 'CENTRAL'" isRequired fieldId="central-name">
+      <TextInput
+        value={inputValue}
+        type="text"
+        id="central-name"
+        name="horizontal-form-name"
+        onChange={setInputValue}
+      />
+    </FormGroup>
+  </Form>
+);

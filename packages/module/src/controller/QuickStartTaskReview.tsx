@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { Alert, Radio } from '@patternfly/react-core';
-import { css } from '@patternfly/react-styles';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import {
   QuickStartTaskReview as QuickStartTaskReviewType,
   QuickStartTaskStatus,
 } from '../utils/quick-start-types';
-
-import './QuickStartTaskReview.scss';
 
 interface QuickStartTaskReviewProps {
   review: QuickStartTaskReviewType;
@@ -35,20 +32,17 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
   const { instructions, failedTaskHelp: taskHelp } = review;
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
 
-  const alertClassNames = css('pfext-quick-start-task-review', {
-    'pfext-quick-start-task-review--success': taskStatus === QuickStartTaskStatus.SUCCESS,
-    'pfext-quick-start-task-review--failed': taskStatus === QuickStartTaskStatus.FAILED,
-  });
-
-  const title = <span className={alertClassNames}>{getResource('Check your work')}</span>;
-
   return (
     <Alert
-      className="pfext-quick-start-task-review-alert"
       variant={getAlertVariant(taskStatus)}
-      title={title}
+      title={getResource('Check your work')}
       isInline
       role="alert"
+      style={
+        {
+          marginBottom: 'var(--pf-t--global--spacer--md)',
+        } as React.CSSProperties
+      }
     >
       <QuickStartMarkdownView content={instructions} />
       <span className="pfext-quick-start-task-review__actions">

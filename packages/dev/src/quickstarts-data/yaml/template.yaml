@@ -35,11 +35,11 @@ spec:
 
         1. The main body of the task. You can use markdown syntax here to create list items and more.
 
-          This is a paragraph.  
+          This is a paragraph.
           This is another paragraph. Add an empty line between paragraphs for line breaks or two spaces at the end.
         1. For more information on markdown syntax you can visit [this resource](https://www.markdownguide.org/basic-syntax/).
         1. A <small>limited set</small> of <strong>HTML tags</strong> [are also supported](https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html#supported-tags-for-quick-starts_creating-quick-start-tutorials)
-        
+
         ## Images
 
         HTML img tag: <img alt="Ellipsis" src="images/fa-ellipsis-v.svg" style="height: 14px;">
@@ -47,7 +47,7 @@ spec:
 
         Ellipsis icon (visible if font-awesome is installed): <i class="fas fa-ellipsis-v"></i>
 
-        PF icon: <i class="pf-icon pf-icon-add-circle-o"></i>
+        PF icon: <i class="pf-v6-pficon pf-v6-pficon-info"></i>
 
         ## Highlighting
 
@@ -61,7 +61,7 @@ spec:
         [Quick starts nav item]{{highlight quickstarts}}
         </pre>
         will highlight an element with the `data-quickstart-id="quickstarts"` attribute
-        
+
         ### Code snippets
 
         The syntax for an inline code snippet contains:
@@ -91,7 +91,7 @@ spec:
         ```
         Hello
         world
-        ```{{copy}}  
+        ```{{copy}}
 
         - Clicking the _Next_ button will display the **Check your work** module.
 

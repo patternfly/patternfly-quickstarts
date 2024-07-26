@@ -33,8 +33,6 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     console.log(allQuickStartStates);
   }, [allQuickStartStates]);
 
-
-
   const withQueryParams = true;
 
   const drawerProps: QuickStartContainerProps = {
@@ -81,7 +79,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   return (
     <React.Suspense fallback={<LoadingBox />}>
       <QuickStartContainer {...drawerProps}>
-        <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>
+        <Page masthead={AppHeader} sidebar={AppSidebar} isManagedSidebar>
           <Button
             variant="secondary"
             onClick={() => toggleQuickStart('getting-started-with-quick-starts')}

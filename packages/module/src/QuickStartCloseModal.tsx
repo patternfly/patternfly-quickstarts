@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Button, Flex, FlexItem, ModalVariant } from '@patternfly/react-core';
+import { Button, Flex, FlexItem } from '@patternfly/react-core';
+import { ModalVariant } from '@patternfly/react-core/deprecated';
 import { Modal } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 
@@ -17,7 +18,6 @@ const QuickStartCloseModal: React.FC<QuickStartCloseModalProps> = ({
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <Modal
-      className="pfext-quick-start-drawer__modal pfext-quick-start__base"
       isOpen={isOpen}
       variant={ModalVariant.small}
       showClose={false}

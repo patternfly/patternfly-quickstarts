@@ -1,17 +1,8 @@
 import * as React from 'react';
-import {
-  Button,
-  Popover,
-  Text,
-  TextList,
-  TextListItem,
-  TextVariants,
-} from '@patternfly/react-core';
+import { Button, Flex, Popover, Stack } from '@patternfly/react-core';
 import InfoCircleIcon from '@patternfly/react-icons/dist/js/icons/info-circle-icon';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
-
-import './QuickStartTileDescription.scss';
 
 interface QuickStartTileDescriptionProps {
   description: string;
@@ -23,57 +14,52 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const prereqs = prerequisites?.filter((p) => p);
+  const buttonRef = React.useRef<HTMLButtonElement>(null);
+
   return (
-    <>
-      <QuickStartMarkdownView
-        content={description}
-        className="pfext-quick-start-tile-description"
-      />
+    <Stack hasGutter>
+      <QuickStartMarkdownView content={description} />
       {prereqs?.length > 0 && (
-        <div className="pfext-quick-start-tile-prerequisites">
-          <Text component={TextVariants.h5} className="pfext-quick-start-tile-prerequisites__text">
+        <Flex spaceItems={{ default: 'spaceItemsSm' }}>
+          <h5>
             {getResource('Prerequisites ({{totalPrereqs}})').replace(
               '{{totalPrereqs}}',
               prereqs.length,
             )}{' '}
-          </Text>
+          </h5>
+          <Button
+            variant="link"
+            isInline
+            data-testid="qs-card-prereqs"
+            ref={buttonRef}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+            aria-label={getResource('Show prerequisites')}
+          >
+            <InfoCircleIcon />
+          </Button>
           <Popover
             aria-label={getResource('Prerequisites')}
             headerContent={getResource('Prerequisites')}
-            className="pfext-quick-start__base"
+            triggerRef={buttonRef}
             bodyContent={
-              <div className="pfext-popover__base">
-                <TextList
-                  aria-label={getResource('Prerequisites')}
-                  className="pfext-quick-start-tile-prerequisites-list"
-                >
+              <div>
+                <ul aria-label={getResource('Prerequisites')}>
                   {prereqs.map((prerequisite, index) => (
                     // eslint-disable-next-line react/no-array-index-key
-                    <TextListItem key={index}>
+                    <li key={index}>
                       <QuickStartMarkdownView content={prerequisite} />
-                    </TextListItem>
+                    </li>
                   ))}
-                </TextList>
+                </ul>
               </div>
             }
-          >
-            <Button
-              variant="link"
-              isInline
-              className="pfext-quick-start-tile-prerequisites__icon"
-              data-testid="qs-card-prereqs"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-              }}
-              aria-label={getResource('Show prerequisites')}
-            >
-              <InfoCircleIcon />
-            </Button>
-          </Popover>
-        </div>
+          />
+        </Flex>
       )}
-    </>
+    </Stack>
   );
 };
 export default QuickStartTileDescription;

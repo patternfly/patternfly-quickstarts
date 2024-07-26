@@ -22,9 +22,8 @@ export const HelpTopicContextDefaults = {
   loading: false,
 };
 
-export const HelpTopicContext = React.createContext<HelpTopicContextValues>(
-  HelpTopicContextDefaults,
-);
+export const HelpTopicContext =
+  React.createContext<HelpTopicContextValues>(HelpTopicContextDefaults);
 
 export const useValuesForHelpTopicContext = (
   value: HelpTopicContextValues = {},

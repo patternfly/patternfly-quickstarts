@@ -1,12 +1,8 @@
-.pfext-quick-start-content {
+.pfext-quick-start-task {
   flex: 1 1 0;
   overflow: auto;
-  padding: var(--pf-t--global--spacer--lg);
-  font-size: 16px;
 
-  .pf-v6-c-alert__description {
-    p {
-      font-size: 13px;
-    }
+  .pf-v6-c-code-block, .pf-v6-c-alert, .pf-v6-c-accordion {
+    margin-block-end: var(--pf-v6-c-content--MarginBlockEnd);
   }
 }

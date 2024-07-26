@@ -8,8 +8,7 @@ export const exampleHelpTopics = [
     links: [
       {
         text: 'Creating quick starts (external)',
-        href:
-          'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
+        href: 'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
         isExternal: true,
       },
       {
@@ -35,8 +34,7 @@ export const exampleHelpTopics = [
     links: [
       {
         text: 'Creating quick starts',
-        href:
-          'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
+        href: 'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
       },
       {
         text: 'Redhat Console',
@@ -53,8 +51,7 @@ export const exampleHelpTopics = [
     links: [
       {
         text: 'Creating quick starts',
-        href:
-          'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
+        href: 'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
       },
       {
         text: 'Redhat Console',
@@ -71,8 +68,7 @@ export const exampleHelpTopics = [
     links: [
       {
         text: 'Creating quick starts',
-        href:
-          'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
+        href: 'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
       },
       {
         text: 'Redhat Console',
@@ -89,8 +85,7 @@ export const exampleHelpTopics = [
     links: [
       {
         text: 'Creating quick starts',
-        href:
-          'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
+        href: 'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
       },
       {
         text: 'Redhat Console',
@@ -107,8 +102,7 @@ export const exampleHelpTopics = [
     links: [
       {
         text: 'Creating quick starts',
-        href:
-          'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
+        href: 'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
       },
       {
         text: 'Redhat Console',
@@ -125,8 +119,7 @@ export const exampleHelpTopics = [
     links: [
       {
         text: 'Creating quick starts',
-        href:
-          'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
+        href: 'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
       },
       {
         text: 'Redhat Console',
@@ -143,8 +136,7 @@ export const exampleHelpTopics = [
     links: [
       {
         text: 'Creating quick starts',
-        href:
-          'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
+        href: 'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
       },
       {
         text: 'Redhat Console',
@@ -161,8 +153,7 @@ export const exampleHelpTopics = [
     links: [
       {
         text: 'Creating quick starts',
-        href:
-          'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
+        href: 'https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html',
       },
       {
         text: 'Redhat Console',

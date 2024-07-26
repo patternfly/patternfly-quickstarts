@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { ExpandableSection, List, ListItem } from '@patternfly/react-core';
+import { ExpandableSection, List, ListItem, Stack } from '@patternfly/react-core';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
 import TaskHeaderList from './QuickStartTaskHeaderList';
-
-import './QuickStartIntroduction.scss';
 
 interface QuickStartIntroductionProps {
   introduction: string;
@@ -32,32 +30,29 @@ const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
         prereqs.length,
       )}
       onToggle={() => setIsPrereqsExpanded(!isPrereqsExpanded)}
-      className="pfext-quick-start-intro__prereq"
     >
-      <List className="pfext-quick-start-intro__prereq-list">
+      <List>
         {prereqs.map((pr) => (
-            <ListItem key={pr} className="pfext-quick-start-intro__prereq-list__item">
-              <span className="pfext-quick-start-intro__prereq-list__item-content">
-                <QuickStartMarkdownView content={pr} />
-              </span>
-            </ListItem>
-          ))}
+          <ListItem key={pr}>
+            <QuickStartMarkdownView content={pr} />
+          </ListItem>
+        ))}
       </List>
     </ExpandableSection>
   );
   return (
-    <>
+    <Stack hasGutter>
       <QuickStartMarkdownView content={introduction} />
       {prereqList}
-      <p style={{ marginBottom: 'var(--pf-t--global--spacer--md)' }}>
+      <p>
         {getResource(
           'In this quick start, you will complete {{count, number}} task',
-          tasks.length,
-        ).replace('{{count, number}}', tasks.length)}
+          tasks?.length,
+        ).replace('{{count, number}}', tasks?.length || 0)}
         :
       </p>
       <TaskHeaderList tasks={tasks} allTaskStatuses={allTaskStatuses} onTaskSelect={onTaskSelect} />
-    </>
+    </Stack>
   );
 };
 

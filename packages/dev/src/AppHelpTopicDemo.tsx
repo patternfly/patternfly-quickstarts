@@ -35,7 +35,7 @@ const AppHelpTopicDemo: React.FC<AppProps> = ({ children }) => {
   return (
     <React.Suspense fallback={<LoadingBox />}>
       <HelpTopicContainer {...helpTopicContainerProps}>
-        <Page header={AppHeader} sidebar={AppSidebar} isManagedSidebar>
+        <Page masthead={AppHeader} sidebar={AppSidebar} isManagedSidebar>
           {children}
         </Page>
       </HelpTopicContainer>

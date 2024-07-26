@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 
 // fonts, variables
-import '@patternfly/react-core/dist/styles/base.css';
+import '@patternfly/patternfly/patternfly.css';
 import '@patternfly/quickstarts/dist/quickstarts.css';
 
 import './i18n/i18n';

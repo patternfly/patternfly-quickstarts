@@ -1,4 +1,3 @@
-import './QuickStartDrawer.scss';
 import * as React from 'react';
 import { Drawer, DrawerContent, DrawerContentBody } from '@patternfly/react-core';
 import QuickStartCloseModal from './QuickStartCloseModal';
@@ -163,7 +162,6 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
     activeQuickStartState,
     allQuickStartStates,
     setAllQuickStartStates,
-    useLegacyHeaderColors,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const combinedQuickStarts = allQuickStarts.concat(quickStarts);
   React.useEffect(() => {
@@ -237,7 +235,6 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
       activeQuickStartID={activeQuickStartID}
       appendTo={appendTo}
       isResizable={!fullWidth}
-      headerVariant={useLegacyHeaderColors ? '' : 'blue-white'}
       {...fullWidthPanelStyle}
     />
   );
@@ -247,12 +244,10 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
       <Drawer isExpanded={!!activeQuickStartID} isInline {...props}>
         {children ? (
           <DrawerContent panelContent={panelContent} {...fullWidthBodyStyle}>
-            <DrawerContentBody className="pfext-quick-start-drawer__body">
-              {children}
-            </DrawerContentBody>
+            <DrawerContentBody>{children}</DrawerContentBody>
           </DrawerContent>
         ) : (
-          <div className="pf-v6-c-drawer__main">{panelContent}</div>
+          <div>{panelContent}</div>
         )}
       </Drawer>
       <QuickStartCloseModal

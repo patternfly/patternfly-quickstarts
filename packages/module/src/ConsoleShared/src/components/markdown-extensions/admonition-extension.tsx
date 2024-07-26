@@ -4,7 +4,6 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { Alert } from '@patternfly/react-core';
 import LightbulbIcon from '@patternfly/react-icons/dist/js/icons/lightbulb-icon';
 import FireIcon from '@patternfly/react-icons/dist/js/icons/fire-icon';
-import './showdown-extension.scss';
 import QuickStartMarkdownView from '../../../../QuickStartMarkdownView';
 
 enum AdmonitionType {
@@ -17,15 +16,15 @@ enum AdmonitionType {
 
 const admonitionToAlertVariantMap = {
   [AdmonitionType.NOTE]: { variant: 'info' },
-  [AdmonitionType.TIP]: { variant: 'default', customIcon: <LightbulbIcon /> },
+  [AdmonitionType.TIP]: { variant: 'custom', customIcon: <LightbulbIcon /> },
   [AdmonitionType.IMPORTANT]: { variant: 'danger' },
   [AdmonitionType.CAUTION]: { variant: 'warning', customIcon: <FireIcon /> },
   [AdmonitionType.WARNING]: { variant: 'warning' },
 };
 
-const useAdmonitionShowdownExtension = () => 
+const useAdmonitionShowdownExtension = () =>
   // const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
-   React.useMemo(
+  React.useMemo(
     () => ({
       type: 'lang',
       regex: /\[(.+)]{{(admonition) ([\w-]+)}}/g,
@@ -42,17 +41,14 @@ const useAdmonitionShowdownExtension = () =>
         admonitionType = admonitionType.toUpperCase();
 
         const { variant, customIcon } = admonitionToAlertVariantMap[admonitionType];
-        const style =
-          admonitionType === AdmonitionType.CAUTION ? { backgroundColor: '#ec7a0915' } : {};
         const mdContent = <QuickStartMarkdownView content={content} />;
         const pfAlert = (
           <Alert
             variant={variant}
-            customIcon={customIcon && customIcon}
+            {...(customIcon && { customIcon })}
             isInline
             title={admonitionType}
             className="pfext-markdown-admonition"
-            style={style}
           >
             {mdContent}
           </Alert>
@@ -61,7 +57,5 @@ const useAdmonitionShowdownExtension = () =>
       },
     }),
     [],
-  )
-;
-
+  );
 export default useAdmonitionShowdownExtension;

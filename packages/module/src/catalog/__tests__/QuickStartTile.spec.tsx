@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CatalogTile } from '@patternfly/react-catalog-view-extension';
+import { Card } from '@patternfly/react-core';
 import { shallow } from 'enzyme';
 import { getQuickStarts } from '../../data/test-utils';
 import { QuickStartStatus } from '../../utils/quick-start-types';
@@ -17,9 +17,9 @@ describe('QuickStartTile', () => {
         isActive={false}
       />,
     );
-    const catalogTile = wrapper.find(CatalogTile);
+    const catalogTile = wrapper.find(Card);
     expect(catalogTile.exists()).toBeTruthy();
-    expect(catalogTile.prop('featured')).toBe(false);
+    expect(catalogTile.prop('isSelected')).toBe(false);
   });
 
   it('should load proper catalog tile with featured property', () => {
@@ -31,8 +31,8 @@ describe('QuickStartTile', () => {
         isActive
       />,
     );
-    const catalogTile = wrapper.find(CatalogTile);
+    const catalogTile = wrapper.find(Card);
     expect(catalogTile.exists()).toBeTruthy();
-    expect(catalogTile.prop('featured')).toBe(true);
+    expect(catalogTile.prop('isSelected')).toBe(true);
   });
 });

@@ -57,12 +57,9 @@ describe('QuickStartTasks', () => {
         taskNumber={2}
       />,
     );
-    expect(
-      wrapper
-        .find(QuickStartMarkdownView)
-        .at(0)
-        .props().content,
-    ).toEqual(props.tasks[2].description);
+    expect(wrapper.find(QuickStartMarkdownView).at(0).props().content).toEqual(
+      props.tasks[2].description,
+    );
   });
 
   it('should render review when task is active and in Review state', () => {

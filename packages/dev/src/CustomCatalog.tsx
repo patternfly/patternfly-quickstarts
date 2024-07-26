@@ -7,7 +7,6 @@ import {
   QuickStartCatalogFilterSearchWrapper,
   QuickStartCatalogFilterStatusWrapper,
   QuickStartCatalogHeader,
-  QuickStartCatalogSection,
   QuickStartCatalogToolbar,
   QuickStartContext,
   QuickStartContextValues,
@@ -23,8 +22,9 @@ import {
   Divider,
   Gallery,
   GalleryItem,
-  Text,
-  TextContent,
+  PageSection,
+  Stack,
+  Content,
   ToolbarContent,
 } from '@patternfly/react-core';
 
@@ -84,63 +84,17 @@ export const CustomCatalog: React.FC = () => {
 
   const [bookmarked, setBookmarked] = React.useState<string[]>([]);
 
-  const CatalogWithSections = React.useMemo(
-    () => (
-      <>
-        {bookmarked.length > 0 && (
-          <QuickStartCatalogSection>
-            <TextContent>
-              <Text component="h2">Bookmarked</Text>
-              <Text component="p" className="catalog-sub">
-                Bookmarked examples
-              </Text>
-            </TextContent>
-            <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
-              {allQuickStarts
-                .filter((quickStart: QuickStart) => bookmarked.includes(quickStart.metadata.name))
-                .map((quickStart: QuickStart) => {
-                  const {
-                    metadata: { name: id },
-                  } = quickStart;
-
-                  return (
-                    <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
-                      <QuickStartTile
-                        action={{
-                          onClick: (e: React.SyntheticEvent) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setBookmarked((prev) => {
-                              if (prev.includes(id)) {
-                                return prev.filter((bookmark) => bookmark !== id);
-                              }
-
-                              return [...prev, id];
-                            });
-                          },
-                          icon: bookmarked.includes(id) ? BookmarkIcon : OutlinedBookmarkIcon,
-                          'aria-label': 'bookmark',
-                        }}
-                        quickStart={quickStart}
-                        isActive={id === activeQuickStartID}
-                        status={getQuickStartStatus(allQuickStartStates, id)}
-                      />
-                    </GalleryItem>
-                  );
-                })}
-            </Gallery>
-          </QuickStartCatalogSection>
-        )}
-        <QuickStartCatalogSection>
-          <TextContent>
-            <Text component="h2">Instructional</Text>
-            <Text component="p" className="catalog-sub">
-              Instructional examples
-            </Text>
-          </TextContent>
+  const CatalogWithSections = (
+    <Stack hasGutter>
+      {bookmarked.length > 0 && (
+        <div>
+          <Content component="h2">Bookmarked</Content>
+          <Content component="p" className="catalog-sub">
+            Bookmarked examples
+          </Content>
           <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
             {allQuickStarts
-              .filter((quickStart: QuickStart) => quickStart.metadata.instructional)
+              .filter((quickStart: QuickStart) => bookmarked.includes(quickStart.metadata.name))
               .map((quickStart: QuickStart) => {
                 const {
                   metadata: { name: id },
@@ -172,55 +126,87 @@ export const CustomCatalog: React.FC = () => {
                 );
               })}
           </Gallery>
-        </QuickStartCatalogSection>
-        <QuickStartCatalogSection>
-          <TextContent>
-            <Text component="h2">Real-world examples</Text>
-            <Text component="p" className="catalog-sub">
-              Additional examples
-            </Text>
-          </TextContent>
-          <Gallery className="pfext-quick-start-catalog__gallery" hasGutter>
-            {allQuickStarts
-              .filter((quickStart: QuickStart) => !quickStart.metadata.instructional)
-              .map((quickStart: QuickStart) => {
-                const {
-                  metadata: { name: id },
-                } = quickStart;
+        </div>
+      )}
+      <div>
+        <Content component="h2">Instructional</Content>
+        <Content component="p" className="catalog-sub">
+          Instructional examples
+        </Content>
+        <Gallery hasGutter>
+          {allQuickStarts
+            .filter((quickStart: QuickStart) => quickStart.metadata.instructional)
+            .map((quickStart: QuickStart, index: number) => {
+              const {
+                metadata: { name: id },
+              } = quickStart;
 
-                return (
-                  <GalleryItem key={id} className="pfext-quick-start-catalog__gallery-item">
-                    <QuickStartTile
-                      action={{
-                        onClick: (e: React.SyntheticEvent) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          setBookmarked((prev) => {
-                            if (prev.includes(id)) {
-                              return prev.filter((bookmark) => bookmark !== id);
-                            }
+              return (
+                <QuickStartTile
+                  key={index}
+                  action={{
+                    onClick: (e: React.SyntheticEvent) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setBookmarked((prev) => {
+                        if (prev.includes(id)) {
+                          return prev.filter((bookmark) => bookmark !== id);
+                        }
 
-                            return [...prev, id];
-                          });
-                        },
-                        icon: bookmarked.includes(id) ? BookmarkIcon : OutlinedBookmarkIcon,
-                        'aria-label': 'bookmark',
-                      }}
-                      quickStart={quickStart}
-                      isActive={id === activeQuickStartID}
-                      status={getQuickStartStatus(allQuickStartStates, id)}
-                    />
-                  </GalleryItem>
-                );
-              })}
-          </Gallery>
-        </QuickStartCatalogSection>
-        <QuickStartCatalogSection>
-          <Divider />
-        </QuickStartCatalogSection>
-      </>
-    ),
-    [activeQuickStartID, allQuickStartStates, allQuickStarts, bookmarked],
+                        return [...prev, id];
+                      });
+                    },
+                    icon: bookmarked.includes(id) ? BookmarkIcon : OutlinedBookmarkIcon,
+                    'aria-label': 'bookmark',
+                  }}
+                  quickStart={quickStart}
+                  isActive={id === activeQuickStartID}
+                  status={getQuickStartStatus(allQuickStartStates, id)}
+                />
+              );
+            })}
+        </Gallery>
+      </div>
+      <div>
+        <Content component="h2">Real-world examples</Content>
+        <Content component="p" className="catalog-sub">
+          Additional examples
+        </Content>
+        <Gallery hasGutter>
+          {allQuickStarts
+            .filter((quickStart: QuickStart) => !quickStart.metadata.instructional)
+            .map((quickStart: QuickStart, index: number) => {
+              const {
+                metadata: { name: id },
+              } = quickStart;
+
+              return (
+                <QuickStartTile
+                  key={index}
+                  action={{
+                    onClick: (e: React.SyntheticEvent) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setBookmarked((prev) => {
+                        if (prev.includes(id)) {
+                          return prev.filter((bookmark) => bookmark !== id);
+                        }
+
+                        return [...prev, id];
+                      });
+                    },
+                    icon: bookmarked.includes(id) ? BookmarkIcon : OutlinedBookmarkIcon,
+                    'aria-label': 'bookmark',
+                  }}
+                  quickStart={quickStart}
+                  isActive={id === activeQuickStartID}
+                  status={getQuickStartStatus(allQuickStartStates, id)}
+                />
+              );
+            })}
+        </Gallery>
+      </div>
+    </Stack>
   );
 
   const clearFilters = React.useCallback(() => {
@@ -234,7 +220,7 @@ export const CustomCatalog: React.FC = () => {
     );
   }, [allQuickStarts, setFilter]);
 
-  const quickStartCatalog = React.useMemo(() => {
+  const quickStartCatalog = () => {
     if (filteredQuickStarts.length === 0) {
       return <QuickStartCatalogEmptyState clearFilters={clearFilters} />;
     }
@@ -244,7 +230,7 @@ export const CustomCatalog: React.FC = () => {
     }
 
     return CatalogWithSections;
-  }, [CatalogWithSections, allQuickStarts.length, clearFilters, filteredQuickStarts]);
+  };
 
   if (loading) {
     return <LoadingBox />;
@@ -252,17 +238,19 @@ export const CustomCatalog: React.FC = () => {
 
   return (
     <>
-      <QuickStartCatalogHeader title="Resources" />
-      <Divider component="div" />
-      <QuickStartCatalogToolbar>
-        <ToolbarContent>
-          <QuickStartCatalogFilterSearchWrapper onSearchInputChange={onSearchInputChange} />
-          <QuickStartCatalogFilterStatusWrapper onStatusChange={onStatusChange} />
-          <QuickStartCatalogFilterCountWrapper quickStartsCount={filteredQuickStarts.length} />
-        </ToolbarContent>
-      </QuickStartCatalogToolbar>
-      <Divider component="div" />
-      {quickStartCatalog}
+      <PageSection hasBodyWrapper={false}>
+        <QuickStartCatalogHeader title="Resources" />
+        <Divider component="div" />
+        <QuickStartCatalogToolbar>
+          <ToolbarContent>
+            <QuickStartCatalogFilterSearchWrapper onSearchInputChange={onSearchInputChange} />
+            <QuickStartCatalogFilterStatusWrapper onStatusChange={onStatusChange} />
+            <QuickStartCatalogFilterCountWrapper quickStartsCount={filteredQuickStarts.length} />
+          </ToolbarContent>
+        </QuickStartCatalogToolbar>
+        <Divider component="div" />
+      </PageSection>
+      <PageSection hasBodyWrapper={false}>{quickStartCatalog()}</PageSection>
     </>
   );
 };

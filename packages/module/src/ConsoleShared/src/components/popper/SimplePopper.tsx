@@ -66,9 +66,12 @@ const SimplePopper = ({ children }: SimplePopperProps) => {
     initialize();
   }, [initialize]);
 
-  React.useEffect(() => () => {
+  React.useEffect(
+    () => () => {
       destroy();
-    }, [destroy]);
+    },
+    [destroy],
+  );
 
   React.useEffect(() => {
     if (!isOpen) {

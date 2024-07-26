@@ -16,7 +16,8 @@ export const getTaskStatusKey = (taskNumber: number): string => `taskStatus${tas
 export const getQuickStartStatusCount = (
   allQuickStartStates: AllQuickStartStates,
   quickStarts: QuickStart[],
-): Record<QuickStartStatus, number> => quickStarts.reduce(
+): Record<QuickStartStatus, number> =>
+  quickStarts.reduce(
     (totals, item) => {
       totals[getQuickStartStatus(allQuickStartStates, item.metadata.name)]++;
       return totals;
@@ -80,7 +81,8 @@ export const filterQuickStarts = (
   );
 };
 
-export const camelize = (str: string) => str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+export const camelize = (str: string) =>
+  str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function (match, index) {
     if (+match === 0) {
       return '';
     } // or if (/\s+/.test(match)) for white spaces
