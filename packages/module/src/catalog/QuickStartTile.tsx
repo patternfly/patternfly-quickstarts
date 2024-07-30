@@ -7,7 +7,7 @@ import { camelize } from '../utils/quick-start-utils';
 import QuickStartTileDescription from './QuickStartTileDescription';
 import QuickStartTileFooter from './QuickStartTileFooter';
 import QuickStartTileFooterExternal from './QuickStartTileFooterExternal';
-import QuickStartTileHeader, { QuickstartAction } from './QuickStartTileHeader';
+import QuickStartTileHeader from './QuickStartTileHeader';
 import OutlinedBookmarkIcon from '@patternfly/react-icons/dist/js/icons/outlined-bookmark-icon';
 import {
   Card,
@@ -17,10 +17,27 @@ import {
   CardTitle,
   Icon,
   Button,
+  ButtonProps,
+  Flex,
+  Stack,
+  Label
 } from '@patternfly/react-core';
+import OutlinedClockIcon from '@patternfly/react-icons/dist/js/icons/outlined-clock-icon';
+import { StatusIcon } from '@console/shared';
 import './QuickStartTile.scss';
 
-interface QuickStartTileProps {
+export interface QuickstartAction {
+  /** Screen reader aria label. */
+  'aria-label': string;
+  /** Icon to be rendered as a plain button, by default Bookmark outlined will be used. */
+  icon?: React.ComponentType<unknown>;
+  /** Callback with synthetic event parameter. */
+  onClick?: (e: React.SyntheticEvent) => void;
+  /** Additional button props to be rendered as extra props. */
+  buttonProps?: ButtonProps;
+}
+
+export interface QuickStartTileProps {
   /** The quickstart object triggered by this tile */
   quickStart: QuickStart;
   /** Current status of the quickstart */
@@ -45,8 +62,21 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
     spec: { icon, tasks, displayName, description, durationMinutes, prerequisites, link, type },
   } = quickStart;
 
-  const { setActiveQuickStart, footer } =
+  const { setActiveQuickStart, footer, getResource } =
     React.useContext<QuickStartContextValues>(QuickStartContext);
+
+
+  const statusColorMap = {
+    [QuickStartStatus.COMPLETE]: 'green',
+    [QuickStartStatus.IN_PROGRESS]: 'purple',
+    [QuickStartStatus.NOT_STARTED]: 'grey',
+  };
+
+  const statusLocaleMap = {
+    [QuickStartStatus.COMPLETE]: getResource('Complete'),
+    [QuickStartStatus.IN_PROGRESS]: getResource('In progress'),
+    [QuickStartStatus.NOT_STARTED]: getResource('Not started'),
+  };
 
   let quickStartIcon: React.ReactNode;
   if (typeof icon === 'object') {
@@ -108,22 +138,14 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
       id={`${id}-catalog-tile`}
       style={{ height: '100%' }}
       data-testid={`qs-card-${camelize(displayName)}`}
-      {...(!link && {
+      {...(isActive && {
         isClickable: true,
         isSelectable: true,
-        isSelected: isActive,
-        isClicked: isActive,
+        isSelected: true,
+        isClicked: true,
       })}
     >
       <CardHeader
-        {...(!link && {
-          selectableActions: {
-            selectableActionId: `${id}-catalog-tile-action`,
-            selectableActionAriaLabelledby: `${id}-catalog-tile`,
-            name: `${id}-catalog-tile-action`,
-            onChange: onSelect,
-          },
-        })}
         {...(action && {
           actions: { actions: additionalAction },
         })}
@@ -133,16 +155,35 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
       <CardTitle>
         <QuickStartTileHeader
           name={displayName}
-          status={status}
-          duration={durationMinutes}
           onSelect={onSelect}
-          type={type}
           quickStartId={id}
-          action={action}
         />
       </CardTitle>
       <CardBody>
-        <QuickStartTileDescription description={description} prerequisites={prerequisites} />
+        <Stack hasGutter>
+          <Flex spaceItems={{ default: 'spaceItemsSm' }}>
+            {type && <Label color={type.color}>{type.text}</Label>}
+            {durationMinutes && (
+              <Label variant="outline" data-test="duration" icon={<OutlinedClockIcon />}>
+                {getResource('{{duration, number}} minutes', durationMinutes).replace(
+                  '{{duration, number}}',
+                  durationMinutes,
+                )}
+              </Label>
+            )}
+            {status !== QuickStartStatus.NOT_STARTED && (
+              <Label
+                variant="outline"
+                color={statusColorMap[status] as "green" | "purple" | "grey"}
+                icon={<StatusIcon status={status} />}
+                data-test="status"
+              >
+                {statusLocaleMap[status]}
+              </Label>
+            )}
+          </Flex>
+          <QuickStartTileDescription description={description} prerequisites={prerequisites} />
+        </Stack>
       </CardBody>
       <CardFooter>{footerComponent}</CardFooter>
     </Card>

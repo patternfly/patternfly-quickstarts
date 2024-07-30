@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Flex, Popover, Stack } from '@patternfly/react-core';
+import { Button, Flex, Popover } from '@patternfly/react-core';
 import InfoCircleIcon from '@patternfly/react-icons/dist/js/icons/info-circle-icon';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
@@ -17,7 +17,7 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
   const buttonRef = React.useRef<HTMLButtonElement>(null);
 
   return (
-    <Stack hasGutter>
+    <>
       <QuickStartMarkdownView content={description} />
       {prereqs?.length > 0 && (
         <Flex spaceItems={{ default: 'spaceItemsSm' }}>
@@ -59,7 +59,7 @@ const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
           />
         </Flex>
       )}
-    </Stack>
+    </>
   );
 };
 export default QuickStartTileDescription;
