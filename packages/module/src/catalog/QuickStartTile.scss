@@ -7,3 +7,7 @@
 .pf-v6-c-card__header-main .pf-v6-c-icon__content, {
   display: contents;
 }
+
+.pf-v6-c-card.pf-m-selectable::before, .pf-v6-c-card.pf-m-clickable::before {
+  border: var(--pf-v6-c-card--BorderColor) var(--pf-v6-c-card--BorderStyle) var(--pf-v6-c-card--BorderWidth) !important;
+}
