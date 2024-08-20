@@ -120,8 +120,11 @@ spec:
         failed: Shows a failed message in the task header
     - title: Task 2 title
       description: |-
+        See _Best practices for writing quick starts_ on UXD Hub for style and structural guidelines, plus more info about writing content for sections in this template: 
+        [https://www.uxd-hub.com/entries/resource/best-practices-for-writing-quick-starts]
+        
         For more information, the folks at OpenShift wrote a nice guide here:
-        [Creating quick starts](https://docs.openshift.com/container-platform/4.9/web_console/creating-quick-start-tutorials.html)
+        [Creating quick starts](https://docs.openshift.com/container-platform/4.16/web_console/creating-quick-start-tutorials.html)
 
         Also, don't forget to [check out the source](https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/dev/src/quickstarts-data/yaml/template.yaml) for this quick start for more information!
 
