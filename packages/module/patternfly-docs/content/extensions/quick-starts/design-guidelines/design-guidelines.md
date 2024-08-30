@@ -98,7 +98,7 @@ Here are some general guidelines to follow when authoring quick start content:
   * Provide links at the end of quick starts if the user is likely to need or want additional technical  information upon completion.
   * Provide links in the check your work module when a user answers **No** if more robust information can help the user understand what actions they must take to complete the task.  
 
-For more specific quick start content guidelines, refer to the [Red Hat OpenShift documentation](https://docs.openshift.com/container-platform/4.7/web_console/creating-quick-start-tutorials.html). While these guidelines are geared toward Red Hat OpenShift, they can apply to quick starts in any product.
+For more specific quick start content guidelines, refer to _Best practices for writing quick starts_ on [UXD Hub](https://www.uxd-hub.com/entries/resource/best-practices-for-writing-quick-starts). The [Red Hat OpenShift documentation](https://docs.openshift.com/container-platform/4.16/web_console/creating-quick-start-tutorials.html) contains similar guidelines geared toward Red Hat OpenShift.
 
 ## Quick starts in context
 
