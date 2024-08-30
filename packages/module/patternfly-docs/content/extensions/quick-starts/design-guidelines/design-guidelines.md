@@ -7,6 +7,7 @@ section: extensions
 id: Quick starts
 # Tab
 source: design-guidelines
+sourceLink: https://github.com/patternfly/patternfly-quickstarts/blob/main/packages/module/patternfly-docs/content/extensions/quick-starts/design-guidelines/design-guidelines.md
 ---
 
 # Quick starts
