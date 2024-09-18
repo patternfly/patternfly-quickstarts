@@ -49,12 +49,12 @@ Quick starts are usually surfaced within a catalog as [clickable cards.](/compon
 
 1. **Icon:** An icon associated with the quick start topic. If no specific icon exists, use the rocket icon.
 1. **Title:** The title (or display name) that briefly identifies the function that the quick start accomplishes. Avoid using the phrase “how to,” and instead begin the title with a gerund (verbs that end in ‘ing’).
-Example: “Creating a Jupyter notebook”
+    - Example: “Creating a Jupyter notebook”
 1. **Labels:** [Filled labels](/components/label#filled-labels) communicate the estimated completion time and status of a quick start. If the quick start is presented in a mixed catalog of resources, a label can indicate the type of resource.
 1. **Description:** A description that summarizes the quick start outcome in 4 lines or fewer, without truncating. Begin the description with an action verb. 
-Example: “Connect to Red Hat OpenShift Streams for Apache Kafka from a Jupyter notebook.”
+    - Example: “Connect to Red Hat OpenShift Streams for Apache Kafka from a Jupyter notebook.”
 1. **Prerequisites (optional):** A bulleted list of prerequisites, displayed in a popover, which outlines permissions needed to complete the tasks, and anything that must be pre-configured before starting the quick start. Avoid phrasing prerequisites as questions. The total number of prerequisites is listed in parentheses on the quick start card.
-Example: “You have completed the "Getting started with Red Hat OpenShift Streams for Apache Kafka" quick start”
+    - Example: “You have completed the "Getting started with Red Hat OpenShift Streams for Apache Kafka" quick start”
 
 <img src="./img/prerequisites.png" alt="Example of prerequisites" width="395"/>
 
@@ -80,7 +80,7 @@ The drawer does not overlay the UI and instead pushes it to the left, including 
 ### Introduction screen
 The first screen of any quick start is the introductory screen, which includes most of the information from the quick start card.
 
- A quick start introduction provides a concise and informative description of what the quick start accomplishes. A long introduction can overwhelm the user. Keep the introduction to  a maximum of 4-5 sentences.
+A quick start introduction provides a concise and informative description of what the quick start accomplishes. A long introduction can overwhelm the user. Keep the introduction to  a maximum of 4-5 sentences.
 
 Write about what the user will do, not about the quick start itself.  For example, instead of “This quick start will teach you how to deploy an application”, write “You will complete an application deployment in this quick start”. 
 
@@ -95,54 +95,60 @@ Tasks are high-level objectives users complete to accomplish the quick start’s
 
 Each individual task must have a title. When naming a specific task, the title reflects what it accomplishes. Write the title as a statement (rather than a “how to” tutorial). Each title should begin with an action verb (such as connect, save, remove, create, launch, and so on) that indicates the specific action the task completes, followed by the title of the product it concerns. 
 
+Example: "View the details of your sample application"
+
 #### Task description
 
 In the task description, explain the importance of the task for the user. When writing a task description, begin with a call to action, or a statement that identifies a desired action or outcome. Then write a brief statement that explains how the user will accomplish the task and introduces the task’s steps. 
 
-**Example:** Notebooks and applications need the connection information for your {product-title} instance. Follow these steps to save the required information for later use… To obtain connection information to {product-title}:”
-
-Keep your product terminology capitalization consistent. 
+Example: "Notebooks and applications need the connection information for your {product-title} instance. Follow these steps to save the required information for later use… To obtain connection information to {product-title}:”
 
 #### Task steps
 
-Steps are a sequenced list of actions to guide the user through completing a larger task. Make the steps concise and easy to follow, beginning where the user is when they access the quick start in the user interface. For example, you don’t need to instruct the user to log into the tool, because they are already logged in and interacting with the quick start.
+Steps are a sequenced list of actions to guide the user through completing a larger task. Make the steps concise and easy to follow, beginning where the user is when they access the quick start in the user interface. 
 
 When writing individual steps, use the word “click” to refer to buttons and labels, and use “select” to refer to check-boxes, drop-down menus, and radio buttons. 
 
-**Example:** “Select an application from the options provided in the drop-down menu.” 
+Example: “Select an application from the options provided in the drop-down menu.” 
 
 #### Task instructions
 
-Instructions refers to a line in the  quick start template that allows the user to verify if they’ve completed the task successfully. 
+Instructions allow users to verify if they’ve completed the task successfully. 
 
 Remember to clearly distinguish between a user action and additional information on product functionality. Instructions are written as a question, and users should be given context to how it relates back to the task at hand. 
 
-**Example:** “To verify that you have launched the Jupyter notebook: Do you see a message in the page that says **The server is starting up**?“
+Example: “To verify that you have launched the Jupyter notebook: Do you see a message in the page that says **The server is starting up**?“
 
 #### Failed task help 
 
-Failed task help refers to a line in the quick start template where you can add a failed task message. The text you enter here alerts a user to an incomplete or failed portion of their task. A failed task notification can simply say, “This task is not verified yet. Try the task again.”, or it can include more context.
+Failed task help refers to a line in the quick start template where you can add a failed task message. The text you enter here alerts a user to an incomplete or failed portion of their task. 
+
+Example: “This task is not verified yet. Try the task again.”
+
+You can include more context as needed.
 
 #### Task summary
 
-Quick starts have 2 potential task summaries: success or failure. You can either congratulate the user on completing their task, or notify the user that something is impeding their completion and to try again.
+Quick starts have 2 potential task summaries: success or failure:
 
-**Success:** Write a short sentence that tells the user that they have finished their task. It is best to use the personal pronoun ‘you’ in these statements. For example, “Congratulations, you have launched JupyterHub.”
+- **Success:** Tell users that they have finished their task. Keep the sentence short and use the personal pronoun "you". 
+  - Example: “Congratulations, you have launched JupyterHub.”
 
-**Failure:** Notify the user that their task failed, and encourage them to try the task again. Avoid using the personal pronoun ‘you,’ because it places unnecessary blame on the user.  If possible, provide the user with a brief suggestion as to why their task may not have succeeded, or a suggestion as to what they can check if it continues to fail. For example, “Try these steps again.”
+- **Failure:** Notify the user that their task failed, and encourage them to try the task again. Avoid using the personal pronoun ‘you,’ because it places unnecessary blame on the user. If possible, provide the user with a brief suggestion as to why their task may have failed, or a suggestion as to what they can check if it continues to fail. 
+  - Example: “Try these steps again.”
 
 
 ### “Check your work” module
 
-The “check your work” module, which can be required or optional, helps users confirm that they’ve completed a task. The module is shown at the bottom of the side panel for each task. Validation questions should be yes/no questions, allowing the user to select the radio button with the appropriate response.
+The “check your work” module, which can be made required or optional, helps users confirm that they’ve completed a task. The module is shown at the bottom of the side panel for each task. You should ask yes/no questions, allowing the user to select the radio button with the appropriate response.
 
 <img src="./img/check-your-work.png" alt="Check your work module" width="431"/>
 
-If a user selects **Yes**, the module and associated task header turn green. The task header icon becomes a checkmark.
+If a user selects **Yes**, the module and associated task header turn green, and the header icon becomes a checkmark.
 
 <img src="./img/task-yes.png" alt="Check your work module with Yes selected" width="449"/>
 
-If a user selects **No**, the module and associated task header turn red. The task header icon becomes an **X**. When possible, explain what a user must do to complete the task, or link to relevant documentation.
+If a user selects **No**, the module and associated task header turn red, and the header icon becomes an **X**. When possible, explain what a user must do to complete the task, or link to relevant documentation.
 
 <img src="./img/task-no.png" alt="Check your work module with No selected" width="449"/>
 
@@ -153,7 +159,7 @@ Quick starts can use a more conversational, informal tone. Aim for a “fairly c
 To achieve a more conversational tone, try the following:
 
 - Use the second person (“you”).
-- Example: “In minutes, you can set dates, document your first user story, assign a task or two, and dive into the code.
+  - Example: “In minutes, you can set dates, document your first user story, assign a task or two, and dive into the code.
 - Write shorter, simpler sentences, and keep content minimal to support easy skimming and avoid overwhelming users. 
 - Avoid unnecessary technical jargon, and define terms and phrases that might be unfamiliar to new users. 
 - Use contractions (you’ll, can’t, you’ve) to strike an informal tone, and to save space.
@@ -165,8 +171,8 @@ In addition to being conversational, you should adhere to the following guidelin
 - Clearly state the outcome at the beginning of the quick start and provide brief context to explain why the user is completing the tasks.
 - Avoid screen captures. They require regular maintenance and can potentially lead to issues around accessibility and page loading.
 - (Optional) Help users stay in the quick start by including necessary information within the quickstart and avoiding outbound links. As needed, provide a carefully curated set of links at specific points in the quick start. You may want to provide links:
- - Within a quick start task, if users could benefit from additional conceptual or reference information.
- 	- At the end of quick starts, if users could benefit from additional technical information upon completion.
- - Within the [“check your work” module](#check-your-work-module), after a user answers **No**, if more robust information can help them understand the actions they must take to complete the task.
+  - Within a quick start task, if users could benefit from additional conceptual or reference information.
+  - At the end of quick starts, if users could benefit from additional technical information upon completion.
+  - Within the [“check your work” module](#check-your-work-module), after a user answers **No**, if more robust information can help them understand the actions they must take to complete the task.
 
 For more specific quick start content guidelines, refer to [“Best practices for writing quick starts” on UXD Hub](https://www.uxd-hub.com/entries/resource/best-practices-for-writing-quick-starts). The [Red Hat OpenShift documentation](https://docs.openshift.com/container-platform/4.16/web_console/creating-quick-start-tutorials.html) contains similar guidelines, specifically for Red Hat OpenShift.
