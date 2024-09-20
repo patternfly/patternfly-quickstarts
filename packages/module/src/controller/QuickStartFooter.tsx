@@ -76,6 +76,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
     () => (
       <Button
         variant="primary"
+        className="pfext-quick-start-footer__actionbtn"
         onClick={onNext}
         data-testid={`qs-drawer-${camelize(getPrimaryButtonText)}`}
         data-test={`${getPrimaryButtonText} button`}

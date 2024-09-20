@@ -15,7 +15,7 @@ const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts }) =>
 
   return (
     <div>
-      <Gallery hasGutter>
+      <Gallery hasGutter className="pfext-quick-start-catalog__gallery" >
         {quickStarts.map((quickStart, index) => {
           const {
             metadata: { name: id },

@@ -20,7 +20,7 @@ import {
   ButtonProps,
   Flex,
   Stack,
-  Label
+  Label,
 } from '@patternfly/react-core';
 import OutlinedClockIcon from '@patternfly/react-icons/dist/js/icons/outlined-clock-icon';
 import { StatusIcon } from '@console/shared';
@@ -64,7 +64,6 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
 
   const { setActiveQuickStart, footer, getResource } =
     React.useContext<QuickStartContextValues>(QuickStartContext);
-
 
   const statusColorMap = {
     [QuickStartStatus.COMPLETE]: 'green',
@@ -153,11 +152,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
         {quickStartIcon}
       </CardHeader>
       <CardTitle>
-        <QuickStartTileHeader
-          name={displayName}
-          onSelect={onSelect}
-          quickStartId={id}
-        />
+        <QuickStartTileHeader name={displayName} onSelect={onSelect} quickStartId={id} />
       </CardTitle>
       <CardBody>
         <Stack hasGutter>
@@ -174,7 +169,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
             {status !== QuickStartStatus.NOT_STARTED && (
               <Label
                 variant="outline"
-                color={statusColorMap[status] as "green" | "purple" | "grey"}
+                color={statusColorMap[status] as 'green' | 'purple' | 'grey'}
                 icon={<StatusIcon status={status} />}
                 data-test="status"
               >
