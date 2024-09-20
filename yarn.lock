@@ -1375,10 +1375,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@patternfly/ast-helpers@^1.4.0-alpha.53":
-  version "1.4.0-alpha.68"
-  resolved "https://registry.yarnpkg.com/@patternfly/ast-helpers/-/ast-helpers-1.4.0-alpha.68.tgz#1c72af9e85467a96f56bee5b2ef26be3a6127dbf"
-  integrity sha512-2AblXsXLVuLpYtbNUCozuwTmk3SRCaGNWn9MHcajV48r/ivlJpb25M6Rd3hH3tNs0XiQVxB9JMfzSbroq3Ojew==
+"@patternfly/ast-helpers@^1.4.0-alpha.68":
+  version "1.4.0-alpha.88"
+  resolved "https://registry.yarnpkg.com/@patternfly/ast-helpers/-/ast-helpers-1.4.0-alpha.88.tgz#8fa65d400b0cd6bd8cbee37cdb147091e2541a12"
+  integrity sha512-t7mLrMwYWGRWH41cX4nDcHp8Ki0uycjbEg60/nGbHliSlvd+mEtLqUTsKAwHwljBiAhqVg2wYt9gnFKFGOiwTg==
   dependencies:
     acorn "^8.4.1"
     acorn-class-fields "^1.0.0"
@@ -1386,16 +1386,16 @@
     acorn-static-class-features "^1.0.0"
     astring "^1.7.5"
 
-"@patternfly/documentation-framework@6.0.0-alpha.64":
-  version "6.0.0-alpha.64"
-  resolved "https://registry.yarnpkg.com/@patternfly/documentation-framework/-/documentation-framework-6.0.0-alpha.64.tgz#5c30de59c20971b4e9bbeb4b3638aaf38ac218d8"
-  integrity sha512-pXgdbC/bcqivt+AOkhklS+kzeANRXDa+cGjKAMyVj4SeAOqfBbyK80xugpyT+lGbhEKMOlfujxmuNr1OlGsBmA==
+"@patternfly/documentation-framework@6.0.0-alpha.79":
+  version "6.0.0-alpha.79"
+  resolved "https://registry.yarnpkg.com/@patternfly/documentation-framework/-/documentation-framework-6.0.0-alpha.79.tgz#799f53fbb1fbb530444838fadc62fc1a6a25ce51"
+  integrity sha512-akgy6DdSeAYyBG2k9wB4eSZqYdqrfmLs0s9cnGoPYle9bpGtc8Tvc8HX9+fXNEV3Di7gaiMYsKhHiQo319bcNA==
   dependencies:
     "@babel/core" "^7.24.3"
     "@babel/preset-env" "^7.24.3"
     "@babel/preset-react" "^7.24.1"
     "@mdx-js/util" "1.6.16"
-    "@patternfly/ast-helpers" "^1.4.0-alpha.53"
+    "@patternfly/ast-helpers" "^1.4.0-alpha.68"
     "@reach/router" "npm:@gatsbyjs/reach-router@1.3.9"
     autoprefixer "9.8.6"
     babel-loader "^9.1.3"
@@ -1472,14 +1472,6 @@
   version "6.0.0-alpha.205"
   resolved "https://registry.yarnpkg.com/@patternfly/patternfly/-/patternfly-6.0.0-alpha.205.tgz#9974f712ee69b28ec6851c6240e52c2d99969f9c"
   integrity sha512-rzatApP3YpiYOHamDm+RhQpnep2AAhVodVRr3lyg6X5naiSSbPXXGWm7ShhUfftzwW4G1le1Uy0ZlM05rtQHWg==
-
-"@patternfly/quickstarts@^6.0.0-alpha.4":
-  version "6.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@patternfly/quickstarts/-/quickstarts-6.0.0-alpha.4.tgz#000483770d31042bd1c476aba3d98eae0ad6a9e2"
-  integrity sha512-mG0H+AbzQ+2MOZ74Yckqi+UnpfO/9q2rKQ7I65zzbgkfRv/Nu56GeJ4EWSdT38zxAMSXr2x++sUGR2g31WDjLA==
-  dependencies:
-    dompurify "^2.4.9"
-    history "^5.0.0"
 
 "@patternfly/react-code-editor@6.0.0-alpha.100":
   version "6.0.0-alpha.100"
