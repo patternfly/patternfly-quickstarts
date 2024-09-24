@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/quickstarts",
-  "version": "6.0.0-alpha.0",
+  "version": "6.0.0-prerelease.0",
   "description": "PatternFly quick starts",
   "files": [
     "src",
@@ -11,7 +11,7 @@
   "types": "dist/index.d.ts",
   "publishConfig": {
     "access": "public",
-    "tag": "alpha"
+    "tag": "prerelease"
   },
   "repository": {
     "type": "git",
@@ -55,14 +55,14 @@
     "history": "^5.0.0"
   },
   "devDependencies": {
-    "@patternfly/documentation-framework": "6.0.0-alpha.79",
-    "@patternfly/patternfly": "6.0.0-alpha.205",
-    "@patternfly/react-icons": "6.0.0-alpha.35",
-    "@patternfly/react-styles": "6.0.0-alpha.34",
-    "@patternfly/react-tokens": "6.0.0-alpha.34",
-    "@patternfly/react-table": "6.0.0-alpha.101",
-    "@patternfly/react-code-editor": "6.0.0-alpha.100",
-    "@patternfly/react-core": "6.0.0-alpha.100",
+    "@patternfly/documentation-framework": "6.0.0-alpha.100",
+    "@patternfly/patternfly": "6.0.0-prerelease.13",
+    "@patternfly/react-icons": "6.0.0-prerelease.4",
+    "@patternfly/react-styles": "6.0.0-prerelease.3",
+    "@patternfly/react-tokens": "6.0.0-prerelease.4",
+    "@patternfly/react-table": "6.0.0-prerelease.15",
+    "@patternfly/react-code-editor": "6.0.0-prerelease.14",
+    "@patternfly/react-core": "6.0.0-prerelease.14",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
