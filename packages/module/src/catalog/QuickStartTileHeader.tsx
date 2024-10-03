@@ -16,7 +16,7 @@ const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
   <Flex flexWrap={{ default: 'nowrap' }}>
     <Title headingLevel="h3" data-test="title" id={quickStartId}>
       <Button variant="link" isInline onClick={onSelect}>
-        <QuickStartMarkdownView content={name} />
+        {name}
       </Button>
     </Title>
   </Flex>
