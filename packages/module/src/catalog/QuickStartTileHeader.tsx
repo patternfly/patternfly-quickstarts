@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Button, Flex, Title } from '@patternfly/react-core';
-import QuickStartMarkdownView from '../QuickStartMarkdownView';
 
 interface QuickStartTileHeaderProps {
   name: string;
