@@ -14,7 +14,7 @@ const QuickStartTaskHeaderList: React.FC<QuickStartTaskHeaderListProps> = ({
   onTaskSelect,
 }) =>
   tasks?.length > 0 ? (
-    <ul className="pf-v6-c-wizard__nav-list">
+    <ul className="pf-v6-c-wizard pf-v6-c-wizard__nav-list">
       {tasks.map((task, index) => (
         <TaskHeader
           key={task.title}

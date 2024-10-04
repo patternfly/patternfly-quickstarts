@@ -25,7 +25,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
   const { getResource, alwaysShowTaskReview } =
     React.useContext<QuickStartContextValues>(QuickStartContext);
   return (
-    <div className="pf-v6-c-wizard__nav-list" style={{ padding: '0 0 0 0' }}>
+    <div className="pf-v6-c-wizard pf-v6-c-wizard__nav-list" style={{ padding: '0 0 0 0' }}>
       <ul>
         {tasks
           .filter((_, index) => allTaskStatuses[index] !== QuickStartTaskStatus.INIT)

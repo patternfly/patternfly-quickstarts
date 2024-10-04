@@ -133,7 +133,7 @@ export const CustomCatalog: React.FC = () => {
         <Content component="p" className="catalog-sub">
           Instructional examples
         </Content>
-        <Gallery hasGutter className="pfext-quick-start-catalog__gallery" >
+        <Gallery hasGutter className="pfext-quick-start-catalog__gallery">
           {allQuickStarts
             .filter((quickStart: QuickStart) => quickStart.metadata.instructional)
             .map((quickStart: QuickStart, index: number) => {
@@ -172,7 +172,7 @@ export const CustomCatalog: React.FC = () => {
         <Content component="p" className="catalog-sub">
           Additional examples
         </Content>
-        <Gallery hasGutter className="pfext-quick-start-catalog__gallery" >
+        <Gallery hasGutter className="pfext-quick-start-catalog__gallery">
           {allQuickStarts
             .filter((quickStart: QuickStart) => !quickStart.metadata.instructional)
             .map((quickStart: QuickStart, index: number) => {
