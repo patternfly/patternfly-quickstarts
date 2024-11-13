@@ -361,10 +361,10 @@
   resolved "https://registry.yarnpkg.com/@patternfly/patternfly/-/patternfly-4.70.2.tgz#94b733f68f4f63040ab142eb2fa3c3ac5d08f2ae"
   integrity sha512-XKCHnOjx1JThY3s98AJhsApSsGHPvEdlY7r+b18OecqUnmThVGw3nslzYYrwfCGlJ/xQtV5so29SduH2/uhHzA==
 
-"@patternfly/patternfly@^6.0.0-prerelease.0":
-  version "6.0.0-prerelease.13"
-  resolved "https://registry.yarnpkg.com/@patternfly/patternfly/-/patternfly-6.0.0-prerelease.13.tgz#d7ab63727e8729b4681a56b6dcf1e8bad46e5bec"
-  integrity sha512-Rs5WuiIzt87pp2saJ2AtN1pU9qj7/VjU4vsKEprIf0S1hBANrGVuMWrDBxfsBQptWqc9TLpxJJcuPEUjz2w5aw==
+"@patternfly/patternfly@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@patternfly/patternfly/-/patternfly-6.0.0.tgz#c7c78db38ef1af6324cf742c282404cd71696d1e"
+  integrity sha512-Mn92Tt/4okSj1COGCJrgUgh390OOaFCWf0tL0WmigDNUecSHNn1D6Vhpd1hxHQBXvre9eWorzxV2b9yhSEl79Q==
 
 "@patternfly/react-catalog-view-extension@^4.8.126":
   version "4.96.1"
@@ -1262,9 +1262,9 @@ domhandler@^5.0.2, domhandler@^5.0.3:
     domelementtype "^2.3.0"
 
 dompurify@^2.2.6:
-  version "2.4.7"
-  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.4.7.tgz#277adeb40a2c84be2d42a8bcd45f582bfa4d0cfc"
-  integrity sha512-kxxKlPEDa6Nc5WJi+qRgPbOAbgTpSULL+vI3NUXsZMlkJxTqYI9wg5ZTay2sFrdZRWHPWNi+EdAhcJf81WtoMQ==
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.5.7.tgz#6e0d36b9177db5a99f18ade1f28579db5ab839d7"
+  integrity sha512-2q4bEI+coQM8f5ez7kt2xclg1XsecaV9ASJk/54vwlfRRNQfDqJz2pzQ8t0Ix/ToBpXlVjrRIx7pFC/o8itG2Q==
 
 domutils@^3.0.1, domutils@^3.1.0:
   version "3.1.0"
