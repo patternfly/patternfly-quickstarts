@@ -8,7 +8,18 @@ import {
   QuickStartCloseModal,
   QuickStartStatus,
 } from '@patternfly/quickstarts';
-import { Drawer } from '@patternfly/react-core';
+import {
+  Drawer,
+  DrawerContent,
+  DrawerPanelContent,
+  DrawerHead,
+  DrawerActions,
+  DrawerCloseButton,
+  DrawerPanelDescription,
+  DrawerPanelBody,
+  DrawerContentBody,
+  Button,
+} from '@patternfly/react-core';
 import { quickStarts as exampleQuickStarts } from './example-data';
 
 export const App = ({ showCardFooters }) => {
@@ -62,8 +73,6 @@ export const App = ({ showCardFooters }) => {
     },
   };
 
-  // The above code is identical to the current quickstarts setup
-  // Below is additional handling to support a custom drawer with an in-progress close confirm modal
   const [modalOpen, setModalOpen] = React.useState(false);
   const onClose = () => setActiveQuickStartID('');
   const handleClose = (activeQuickStartStatus) => {
@@ -79,18 +88,52 @@ export const App = ({ showCardFooters }) => {
   };
   const onModalCancel = () => setModalOpen(false);
 
+  const [otherDrawerOpen, setOtherDrawerOpen] = React.useState(false);
+
+  const otherDrawerPanelContent = (
+    <DrawerPanelContent>
+      <DrawerHead>
+        <span tabIndex={otherDrawerOpen ? 0 : -1}>Drawer panel header</span>
+        <DrawerActions>
+          <DrawerCloseButton onClick={() => setOtherDrawerOpen(false)} />
+        </DrawerActions>
+      </DrawerHead>
+      <DrawerPanelDescription>Drawer panel description</DrawerPanelDescription>
+      <DrawerPanelBody>Drawer panel body</DrawerPanelBody>
+    </DrawerPanelContent>
+  );
+
   return (
     <React.Suspense fallback={<LoadingBox />}>
       <QuickStartContainer {...drawerProps} isManagedDrawer={false}>
-        <Drawer isExpanded={activeQuickStartID !== ''} isInline>
-          <QuickStartDrawerContent handleDrawerClose={handleClose}>
-            <QuickStartCatalogPage
-              title="Quick starts"
-              hint={
-                'Learn how to create, import, and run applications with step-by-step instructions and tasks.'
-              }
-            />
-          </QuickStartDrawerContent>
+        <Drawer isExpanded={activeQuickStartID !== '' || otherDrawerOpen} isInline>
+          <DrawerContent
+            panelContent={
+              activeQuickStartID !== '' ? (
+                <QuickStartDrawerContent handleDrawerClose={handleClose} />
+              ) : (
+                otherDrawerPanelContent
+              )
+            }
+          >
+            <DrawerContentBody>
+              <Button
+                variant="secondary"
+                onClick={() => setActiveQuickStartID('explore-pipelines')}
+              >
+                Getting started with quick starts
+              </Button>
+              <Button variant="secondary" onClick={() => setOtherDrawerOpen(true)}>
+                Open a different drawer
+              </Button>
+              <QuickStartCatalogPage
+                title="Quick starts"
+                hint={
+                  'Learn how to create, import, and run applications with step-by-step instructions and tasks.'
+                }
+              />
+            </DrawerContentBody>
+          </DrawerContent>
         </Drawer>
         <QuickStartCloseModal
           isOpen={modalOpen}

@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { DrawerContent, DrawerContentBody } from '@patternfly/react-core';
 import QuickStartPanelContent from './QuickStartPanelContent';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import { QuickStart } from './utils/quick-start-types';
 
 export interface QuickStartDrawerContentProps extends React.HTMLProps<HTMLDivElement> {
   quickStarts?: QuickStart[];
-  children?: React.ReactNode;
   appendTo?: HTMLElement | (() => HTMLElement);
   fullWidth?: boolean;
   onCloseInProgress?: any;
@@ -16,7 +14,6 @@ export interface QuickStartDrawerContentProps extends React.HTMLProps<HTMLDivEle
 
 export const QuickStartDrawerContent: React.FC<QuickStartDrawerContentProps> = ({
   quickStarts = [],
-  children,
   appendTo,
   fullWidth,
   handleDrawerClose,
@@ -41,15 +38,7 @@ export const QuickStartDrawerContent: React.FC<QuickStartDrawerContentProps> = (
       }
     : {};
 
-  const fullWidthBodyStyle = fullWidth
-    ? {
-        style: {
-          display: activeQuickStartID ? 'none' : 'flex',
-        },
-      }
-    : {};
-
-  const panelContent = (
+  return (
     <QuickStartPanelContent
       quickStarts={combinedQuickStarts}
       handleClose={handleClose}
@@ -59,14 +48,6 @@ export const QuickStartDrawerContent: React.FC<QuickStartDrawerContentProps> = (
       {...fullWidthPanelStyle}
       {...props}
     />
-  );
-
-  return children ? (
-    <DrawerContent panelContent={panelContent} {...fullWidthBodyStyle}>
-      <DrawerContentBody>{children}</DrawerContentBody>
-    </DrawerContent>
-  ) : (
-    <div>{panelContent}</div>
   );
 };
 

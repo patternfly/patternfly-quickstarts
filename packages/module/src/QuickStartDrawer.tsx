@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Drawer } from '@patternfly/react-core';
+import { Drawer, DrawerContent, DrawerContentBody } from '@patternfly/react-core';
 import QuickStartCloseModal from './QuickStartCloseModal';
 import QuickStartDrawerContent from './QuickStartDrawerContent';
 import {
@@ -83,17 +83,30 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
 
   const onModalCancel = () => setModalOpen(false);
 
+  const fullWidthBodyStyle = fullWidth
+    ? {
+        style: {
+          display: activeQuickStartID ? 'none' : 'flex',
+        },
+      }
+    : {};
+
   return (
     <>
       <Drawer isExpanded={!!activeQuickStartID} isInline {...props}>
-        <QuickStartDrawerContent
-          quickStarts={combinedQuickStarts}
-          handleDrawerClose={handleClose}
-          appendTo={appendTo}
-          fullWidth={fullWidth}
+        <DrawerContent
+          panelContent={
+            <QuickStartDrawerContent
+              quickStarts={combinedQuickStarts}
+              handleDrawerClose={handleClose}
+              appendTo={appendTo}
+              fullWidth={fullWidth}
+            />
+          }
+          {...fullWidthBodyStyle}
         >
-          {children}
-        </QuickStartDrawerContent>
+          <DrawerContentBody>{children}</DrawerContentBody>
+        </DrawerContent>
       </Drawer>
       <QuickStartCloseModal
         isOpen={modalOpen}

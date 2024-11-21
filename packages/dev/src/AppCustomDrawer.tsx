@@ -1,5 +1,17 @@
 import './App.css';
-import { Page, Button, Drawer } from '@patternfly/react-core';
+import {
+  Page,
+  Button,
+  Drawer,
+  DrawerContent,
+  DrawerPanelContent,
+  DrawerHead,
+  DrawerActions,
+  DrawerCloseButton,
+  DrawerPanelDescription,
+  DrawerPanelBody,
+  DrawerContentBody,
+} from '@patternfly/react-core';
 import {
   LoadingBox,
   QuickStartContainer,
@@ -95,21 +107,49 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   };
   const onModalCancel = () => setModalOpen(false);
 
+  const [otherDrawerOpen, setOtherDrawerOpen] = React.useState(false);
+
+  const otherDrawerPanelContent = (
+    <DrawerPanelContent>
+      <DrawerHead>
+        <span tabIndex={otherDrawerOpen ? 0 : -1}>Drawer panel header</span>
+        <DrawerActions>
+          <DrawerCloseButton onClick={() => setOtherDrawerOpen(false)} />
+        </DrawerActions>
+      </DrawerHead>
+      <DrawerPanelDescription>Drawer panel description</DrawerPanelDescription>
+      <DrawerPanelBody>Drawer panel body</DrawerPanelBody>
+    </DrawerPanelContent>
+  );
+
   return (
     <React.Suspense fallback={<LoadingBox />}>
       <QuickStartContainer {...containerProps} isManagedDrawer={false}>
-        <Drawer isExpanded={activeQuickStartID !== ''} isInline>
-          <QuickStartDrawerContent handleDrawerClose={handleClose}>
-            <Page masthead={AppHeader} sidebar={AppSidebar} isManagedSidebar>
-              <Button
-                variant="secondary"
-                onClick={() => toggleQuickStart('getting-started-with-quick-starts')}
-              >
-                Getting started with quick starts
-              </Button>
-              {children}
-            </Page>
-          </QuickStartDrawerContent>
+        <Drawer isExpanded={activeQuickStartID !== '' || otherDrawerOpen} isInline>
+          <DrawerContent
+            panelContent={
+              activeQuickStartID !== '' ? (
+                <QuickStartDrawerContent handleDrawerClose={handleClose} />
+              ) : (
+                otherDrawerPanelContent
+              )
+            }
+          >
+            <DrawerContentBody>
+              <Page masthead={AppHeader} sidebar={AppSidebar} isManagedSidebar>
+                <Button
+                  variant="secondary"
+                  onClick={() => toggleQuickStart('getting-started-with-quick-starts')}
+                >
+                  Getting started with quick starts
+                </Button>
+                <Button variant="secondary" onClick={() => setOtherDrawerOpen(true)}>
+                  Open a different drawer
+                </Button>
+                {children}
+              </Page>
+            </DrawerContentBody>
+          </DrawerContent>
         </Drawer>
         <QuickStartCloseModal
           isOpen={modalOpen}
