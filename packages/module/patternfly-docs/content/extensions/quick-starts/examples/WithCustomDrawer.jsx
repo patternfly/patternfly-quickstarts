@@ -74,7 +74,10 @@ export const App = ({ showCardFooters }) => {
   };
 
   const [modalOpen, setModalOpen] = React.useState(false);
-  const onClose = () => setActiveQuickStartID('');
+  const onClose = () => {
+    setActiveQuickStartID('');
+    setDrawerContent('none');
+  };
   const handleClose = (activeQuickStartStatus) => {
     if (activeQuickStartStatus === QuickStartStatus.IN_PROGRESS) {
       setModalOpen(true);
@@ -88,14 +91,14 @@ export const App = ({ showCardFooters }) => {
   };
   const onModalCancel = () => setModalOpen(false);
 
-  const [otherDrawerOpen, setOtherDrawerOpen] = React.useState(false);
+  const [drawerContent, setDrawerContent] = React.useState('none');
 
   const otherDrawerPanelContent = (
     <DrawerPanelContent>
       <DrawerHead>
-        <span tabIndex={otherDrawerOpen ? 0 : -1}>Drawer panel header</span>
+        <span tabIndex={drawerContent === 'custom' ? 0 : -1}>Drawer panel header</span>
         <DrawerActions>
-          <DrawerCloseButton onClick={() => setOtherDrawerOpen(false)} />
+          <DrawerCloseButton onClick={() => setDrawerContent('none')} />
         </DrawerActions>
       </DrawerHead>
       <DrawerPanelDescription>Drawer panel description</DrawerPanelDescription>
@@ -106,10 +109,10 @@ export const App = ({ showCardFooters }) => {
   return (
     <React.Suspense fallback={<LoadingBox />}>
       <QuickStartContainer {...drawerProps} isManagedDrawer={false}>
-        <Drawer isExpanded={activeQuickStartID !== '' || otherDrawerOpen} isInline>
+        <Drawer isExpanded={drawerContent !== 'none'} isInline>
           <DrawerContent
             panelContent={
-              activeQuickStartID !== '' ? (
+              drawerContent === 'quickstart' || activeQuickStartID !== '' ? (
                 <QuickStartDrawerContent handleDrawerClose={handleClose} />
               ) : (
                 otherDrawerPanelContent
@@ -119,11 +122,20 @@ export const App = ({ showCardFooters }) => {
             <DrawerContentBody>
               <Button
                 variant="secondary"
-                onClick={() => setActiveQuickStartID('explore-pipelines')}
+                onClick={() => {
+                  setActiveQuickStartID('explore-pipelines');
+                  setDrawerContent('quickstart');
+                }}
               >
                 Getting started with quick starts
               </Button>
-              <Button variant="secondary" onClick={() => setOtherDrawerOpen(true)}>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setActiveQuickStartID('');
+                  setDrawerContent('custom');
+                }}
+              >
                 Open a different drawer
               </Button>
               <QuickStartCatalogPage

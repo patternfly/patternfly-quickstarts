@@ -92,7 +92,10 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   };
 
   const [modalOpen, setModalOpen] = React.useState<boolean>(false);
-  const onClose = () => setActiveQuickStartID('');
+  const onClose = () => {
+    setActiveQuickStartID('');
+    setDrawerContent('none');
+  };
   const handleClose = (activeQuickStartStatus: string | number) => {
     if (activeQuickStartStatus === QuickStartStatus.IN_PROGRESS) {
       setModalOpen(true);
@@ -107,14 +110,14 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   };
   const onModalCancel = () => setModalOpen(false);
 
-  const [otherDrawerOpen, setOtherDrawerOpen] = React.useState(false);
+  const [drawerContent, setDrawerContent] = React.useState('none');
 
   const otherDrawerPanelContent = (
     <DrawerPanelContent>
       <DrawerHead>
-        <span tabIndex={otherDrawerOpen ? 0 : -1}>Drawer panel header</span>
+        <span tabIndex={drawerContent === 'custom' ? 0 : -1}>Drawer panel header</span>
         <DrawerActions>
-          <DrawerCloseButton onClick={() => setOtherDrawerOpen(false)} />
+          <DrawerCloseButton onClick={() => setDrawerContent('none')} />
         </DrawerActions>
       </DrawerHead>
       <DrawerPanelDescription>Drawer panel description</DrawerPanelDescription>
@@ -125,10 +128,10 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   return (
     <React.Suspense fallback={<LoadingBox />}>
       <QuickStartContainer {...containerProps} isManagedDrawer={false}>
-        <Drawer isExpanded={activeQuickStartID !== '' || otherDrawerOpen} isInline>
+        <Drawer isExpanded={drawerContent !== 'none'} isInline>
           <DrawerContent
             panelContent={
-              activeQuickStartID !== '' ? (
+              drawerContent === 'quickstart' || activeQuickStartID !== '' ? (
                 <QuickStartDrawerContent handleDrawerClose={handleClose} />
               ) : (
                 otherDrawerPanelContent
@@ -139,11 +142,20 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
               <Page masthead={AppHeader} sidebar={AppSidebar} isManagedSidebar>
                 <Button
                   variant="secondary"
-                  onClick={() => toggleQuickStart('getting-started-with-quick-starts')}
+                  onClick={() => {
+                    toggleQuickStart('getting-started-with-quick-starts');
+                    setDrawerContent('quickstart');
+                  }}
                 >
                   Getting started with quick starts
                 </Button>
-                <Button variant="secondary" onClick={() => setOtherDrawerOpen(true)}>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    setActiveQuickStartID('');
+                    setDrawerContent('custom');
+                  }}
+                >
                   Open a different drawer
                 </Button>
                 {children}
