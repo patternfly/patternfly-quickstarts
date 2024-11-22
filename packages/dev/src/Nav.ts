@@ -35,6 +35,11 @@ export const Nav: NavInterface[] = [
     name: 'In-app documentation',
     to: '/in-app-documentation',
   },
+  {
+    id: 'custom-drawer',
+    name: 'With custom drawer',
+    to: '/quickstarts-drawer',
+  },
 ];
 
 export default Nav;

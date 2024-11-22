@@ -11,6 +11,7 @@ import AppContext from './AppContext';
 import AppProps from './AppProps';
 import AppLocalized from './AppLocalized';
 import AppHelpTopicDemo from './AppHelpTopicDemo';
+import AppCustomDrawer from './AppCustomDrawer';
 import { DefaultCatalog } from './DefaultCatalog';
 import { CustomCatalog } from './CustomCatalog';
 import { MockConsole } from './MockConsole';
@@ -59,6 +60,14 @@ root.render(
           <AppHelpTopicDemo>
             <MockConsole />
           </AppHelpTopicDemo>
+        }
+      />
+      <Route
+        path="/quickstarts-drawer"
+        element={
+          <AppCustomDrawer showCardFooters={false}>
+            <DefaultCatalog hint="This catalog is for testing the component props based quick starts approach by utilizing the QuickStartContainer component" />
+          </AppCustomDrawer>
         }
       />
     </Routes>
