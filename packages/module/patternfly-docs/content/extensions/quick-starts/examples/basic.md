@@ -14,16 +14,29 @@ sourceLink: https://github.com/patternfly/patternfly-quickstarts/tree/main/packa
 ---
 
 import { quickStarts as exampleQuickStarts } from './example-data';
-import { LoadingBox, QuickStartContainer, QuickStartCatalogPage, useLocalStorage, } from '@patternfly/quickstarts';
+import { LoadingBox, QuickStartContainer, QuickStartCatalogPage, useLocalStorage, QuickStartDrawerContent, QuickStartCloseModal, QuickStartStatus, } from '@patternfly/quickstarts';
 import '@patternfly/quickstarts/dist/quickstarts.css';
 
-## Basic quick starts examples 
+## Basic quick starts examples
 
-### Quick starts catalog 
+### Quick starts catalog
+
 ```js file="./Basic.jsx"
+
 ```
 
 ### Fullscreen catalog page
+
 To view a fullscreen example, click the image below.
+
 ```js file="./Basic.jsx" isFullscreen
+
+```
+
+### Quick starts with custom drawer
+
+Quick starts may be placed into a nonmanaged, custom drawer. To view a fullscreen example, click the image below.
+
+```js file="./WithCustomDrawer.jsx" isFullscreen
+
 ```

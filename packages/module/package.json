@@ -91,7 +91,7 @@
     "react-monaco-editor": "0.51.0",
     "regenerator-runtime": "^0.13.7",
     "rimraf": "^3.0.2",
-    "rollup": "^2.37.0",
+    "rollup": "^2.79.2",
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-node-externals": "^2.2.0",
