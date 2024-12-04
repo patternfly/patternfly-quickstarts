@@ -8,7 +8,7 @@
     flex-direction: column;
   }
 
-  &__close-button button.pf-v6-c-button {
-    --pf-v6-c-button--Color: var(--pf-t--global--text--color--inverse);
+  span.pf-v6-c-button__icon {
+    color: var(--pf-t--global--text--color--inverse);
   }
 }
