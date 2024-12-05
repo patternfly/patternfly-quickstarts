@@ -61,18 +61,7 @@
     "ts-jest": "21.x",
     "typescript": "5.0.4",
     "url-search-params-polyfill": "2.x",
-    "victory-core": "^37.1.1",
-    "victory-scatter": "^37.1.1",
-    "victory-pie": "^37.1.1",
-    "victory-stack": "^37.1.1",
-    "victory-legend": "^37.1.1",
-    "victory-line": "^37.1.1",
-    "victory-group": "^37.1.1",
-    "victory-voronoi-container": "^37.1.1",
-    "victory-create-container": "^37.1.1",
-    "victory-cursor-container": "^37.1.1",
-    "victory-tooltip": "^37.1.1",
-    "victory-bar": "^37.1.1"
+    "victory": "37.3.2"
   },
   "resolutions": {
     "chromedriver": "^104"
