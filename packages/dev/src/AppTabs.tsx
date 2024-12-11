@@ -24,12 +24,7 @@ import {
   QuickStartContainer,
   QuickStartContainerProps,
   QuickStartController,
-  QuickStartCloseModal,
-  QuickStartStatus,
   useLocalStorage,
-  setQueryArgument,
-  removeQueryArgument,
-  QUICKSTART_ID_FILTER_KEY,
 } from '@patternfly/quickstarts';
 import { allQuickStarts as yamlQuickStarts } from './quickstarts-data/quick-start-test-data';
 import React from 'react';
@@ -50,6 +45,9 @@ import ChatbotHeader, {
   ChatbotHeaderSelectorDropdown,
 } from '@patternfly/chatbot/dist/dynamic/ChatbotHeader';
 
+import userAvatar from './assets/images/user_avatar.svg';
+import pfAvatar from './assets/images/patternfly_avatar.svg';
+
 import { welcomePrompts, footnoteProps, initialMessages } from './AppTabsStrings';
 
 interface AppProps {
@@ -62,9 +60,18 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage('quickstarts', {});
   const language = localStorage.getItem('bridge/language') || 'en';
   const resourceBundle = i18n.getResourceBundle(language, 'quickstart');
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   // eslint-disable-next-line no-console
-  React.useEffect(() => console.log(activeQuickStartID), [activeQuickStartID]);
+  React.useEffect(() => {
+    if (!isDrawerOpen && activeQuickStartID !== '') {
+      setActiveTabKey(1);
+      setIsDrawerOpen(!isDrawerOpen);
+    }
+
+    console.log(activeQuickStartID);
+  }, [activeQuickStartID]);
+
   React.useEffect(() => {
     // callback on state change
     // eslint-disable-next-line no-console
@@ -100,43 +107,42 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     },
   };
 
-  const toggleQuickStart = (quickStartId: string) => {
-    if (activeQuickStartID !== quickStartId) {
-      // activate
-      setActiveQuickStartID(quickStartId);
-      setActiveTabKey(1);
-      // optionally add the query param
-      withQueryParams && setQueryArgument(QUICKSTART_ID_FILTER_KEY, quickStartId);
-    } else {
-      // deactivate
-      setActiveQuickStartID('');
-      // optionally remove the query param
-      withQueryParams && removeQueryArgument(QUICKSTART_ID_FILTER_KEY);
-    }
-  };
+  // const toggleQuickStart = (quickStartId: string) => {
+  //   if (activeQuickStartID !== quickStartId) {
+  //     // activate
+  //     setActiveQuickStartID(quickStartId);
+  //     setActiveTabKey(1);
+  //     // optionally add the query param
+  //     withQueryParams && setQueryArgument(QUICKSTART_ID_FILTER_KEY, quickStartId);
+  //   } else {
+  //     // deactivate
+  //     setActiveQuickStartID('');
+  //     // optionally remove the query param
+  //     withQueryParams && removeQueryArgument(QUICKSTART_ID_FILTER_KEY);
+  //   }
+  // };
 
-  const [modalOpen, setModalOpen] = React.useState<boolean>(false);
-  const onClose = () => {
-    setActiveQuickStartID('');
-    setIsDrawerOpen(false);
-  };
-  const handleClose = (activeQuickStartStatus: string | number) => {
-    // need to hook up to modal close button
-    if (activeQuickStartStatus === QuickStartStatus.IN_PROGRESS) {
-      setModalOpen(true);
-    } else {
-      onClose();
-    }
-    onClose();
-  };
-  const onModalConfirm = () => {
-    setModalOpen(false);
-    onClose();
-  };
-  const onModalCancel = () => setModalOpen(false);
+  // const [modalOpen, setModalOpen] = React.useState<boolean>(false);
+  // const onClose = () => {
+  //   setActiveQuickStartID('');
+  //   setIsDrawerOpen(false);
+  // };
+  // const handleClose = (activeQuickStartStatus: string | number) => {
+  //   // need to hook up to modal close button
+  //   if (activeQuickStartStatus === QuickStartStatus.IN_PROGRESS) {
+  //     setModalOpen(true);
+  //   } else {
+  //     onClose();
+  //   }
+  //   onClose();
+  // };
+  // const onModalConfirm = () => {
+  //   setModalOpen(false);
+  //   onClose();
+  // };
+  // const onModalCancel = () => setModalOpen(false);
 
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
-  const [activeTabKey, setActiveTabKey] = React.useState<string | number>(1);
+  const [activeTabKey, setActiveTabKey] = React.useState<string | number>(2);
   // Toggle currently active tab
   const handleTabClick = (
     event: React.MouseEvent<any> | React.KeyboardEvent | MouseEvent,
@@ -144,13 +150,6 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   ) => {
     setActiveTabKey(tabIndex);
   };
-
-  // needed for QuickStartController and metadata filling out
-  // we're basically rendering the QS on the user code opposed to QuickStartPanelContent
-  const quickStart = yamlQuickStarts.find((qs) => qs.metadata.name === activeQuickStartID);
-  const nextQuickStart = yamlQuickStarts.filter((qs) =>
-    quickStart?.spec.nextQuickStart?.includes(qs.metadata.name),
-  );
 
   // Chatbot
   const [messages, setMessages] = React.useState<MessageProps[]>(initialMessages);
@@ -195,7 +194,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
       role: 'user',
       content: message,
       name: 'User',
-      avatar: null,
+      avatar: userAvatar,
       timestamp: date.toLocaleString(),
       avatarProps: { isBordered: true },
     });
@@ -204,7 +203,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
       role: 'bot',
       content: 'API response goes here',
       name: 'Bot',
-      avatar: null,
+      avatar: pfAvatar,
       isLoading: true,
       timestamp: date.toLocaleString(),
     });
@@ -224,7 +223,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
         role: 'bot',
         content: 'API response goes here',
         name: 'Bot',
-        avatar: null,
+        avatar: pfAvatar,
         isLoading: false,
         actions: {
           // eslint-disable-next-line no-console
@@ -239,6 +238,13 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
           listen: { onClick: () => console.log('Listen') },
         },
         timestamp: date.toLocaleString(),
+        quickStarts: {
+          quickStart: yamlQuickStarts[0],
+          onFooterClick: (id: string) => {
+            setActiveQuickStartID(id);
+            setActiveTabKey(1);
+          },
+        },
       });
       setMessages(loadedMessages);
       // make announcement to assistive devices that new message has loaded
@@ -311,6 +317,13 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   const contentRef1 = React.createRef<HTMLElement>();
   const contentRef2 = React.createRef<HTMLElement>();
 
+  // needed for QuickStartController and metadata filling out
+  // we're basically rendering the QS on the user code opposed to QuickStartPanelContent
+  const quickStart = yamlQuickStarts.find((qs) => qs.metadata.name === activeQuickStartID);
+  const nextQuickStart = yamlQuickStarts.filter((qs) =>
+    quickStart?.spec.nextQuickStart?.includes(qs.metadata.name),
+  );
+
   const panelContent = (
     <DrawerPanelContent isResizable>
       <DrawerHead>
@@ -347,14 +360,14 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
           />
         </Tabs>
         <>
-          {activeTabKey === 1 && (
+          {activeTabKey === 1 && activeQuickStartID !== '' && (
             <TabContent
               eventKey={1}
               id="tab1SectionBodyPadding"
               ref={contentRef1}
               style={{ flex: '1 1', display: 'flex', flexDirection: 'column' }}
             >
-              <TabContentBody>
+              <TabContentBody style={{ flex: '1 1', display: 'flex', flexDirection: 'column' }}>
                 <QuickStartController quickStart={quickStart} nextQuickStarts={nextQuickStart} />
               </TabContentBody>
             </TabContent>
@@ -366,7 +379,9 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
               ref={contentRef2}
               style={{ flex: '1 1', display: 'flex', flexDirection: 'column' }}
             >
-              <TabContentBody>{chatbot}</TabContentBody>
+              <TabContentBody style={{ flex: '1 1', display: 'flex', flexDirection: 'column' }}>
+                {chatbot}
+              </TabContentBody>
             </TabContent>
           )}
         </>
@@ -384,29 +399,30 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
                 <Button
                   variant="secondary"
                   onClick={() => {
-                    setIsDrawerOpen(!isDrawerOpen);
+                    setIsDrawerOpen(true);
+                    setActiveTabKey(2);
                   }}
                 >
-                  Toggle Drawer
+                  Launch Chatbot
                 </Button>
-                <Button
+                {/* <Button
                   variant="secondary"
                   onClick={() => {
                     toggleQuickStart('getting-started-with-quick-starts');
                   }}
                 >
                   Toggle QS & set tab to QS
-                </Button>
+                </Button> */}
                 {children}
               </Page>
             </DrawerContentBody>
           </DrawerContent>
         </Drawer>
-        <QuickStartCloseModal
+        {/* <QuickStartCloseModal
           isOpen={modalOpen}
           onConfirm={onModalConfirm}
           onCancel={onModalCancel}
-        />
+        /> */}
       </QuickStartContainer>
     </React.Suspense>
   );

@@ -1,4 +1,6 @@
 import { MessageProps } from '@patternfly/chatbot/dist/dynamic/Message';
+import userAvatar from './assets/images/user_avatar.svg';
+import pfAvatar from './assets/images/patternfly_avatar.svg';
 
 export const footnoteProps = {
   label: 'Lightspeed uses AI. Check for mistakes.',
@@ -68,7 +70,7 @@ export const initialMessages: MessageProps[] = [
     role: 'user',
     content: 'Hello, can you give me an example of what you can do?',
     name: 'User',
-    avatar: null as any,
+    avatar: userAvatar,
     timestamp: date.toLocaleString(),
     avatarProps: { isBordered: true },
   },
@@ -77,7 +79,7 @@ export const initialMessages: MessageProps[] = [
     role: 'bot',
     content: markdown,
     name: 'Bot',
-    avatar: null as any,
+    avatar: pfAvatar,
     timestamp: date.toLocaleString(),
     actions: {
       // eslint-disable-next-line no-console
