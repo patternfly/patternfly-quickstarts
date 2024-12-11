@@ -1,17 +1,25 @@
 import * as React from 'react';
 import QuickStartContent from './controller/QuickStartContent';
 import QuickStartFooter from './controller/QuickStartFooter';
-import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
+import {
+  getDefaultQuickStartState,
+  QuickStartContext,
+  QuickStartContextValues,
+} from './utils/quick-start-context';
 import { QuickStart, QuickStartStatus, QuickStartTaskStatus } from './utils/quick-start-types';
 
 interface QuickStartControllerProps {
+  /** The current active quickstart  */
   quickStart: QuickStart;
+  /** The next quickstart */
   nextQuickStarts?: QuickStart[];
-  footerClass: string;
-  contentRef: React.Ref<HTMLDivElement>;
+  /** Additional footer classes */
+  footerClass?: string;
+  /** Ref for the quickstart content */
+  contentRef?: React.Ref<HTMLDivElement>;
 }
 
-const QuickStartController: React.FC<QuickStartControllerProps> = ({
+export const QuickStartController: React.FC<QuickStartControllerProps> = ({
   quickStart,
   nextQuickStarts,
   contentRef,
@@ -23,6 +31,9 @@ const QuickStartController: React.FC<QuickStartControllerProps> = ({
   } = quickStart;
   const totalTasks = tasks?.length;
   const {
+    activeQuickStartID,
+    allQuickStartStates,
+    setAllQuickStartStates,
     activeQuickStartState,
     setActiveQuickStart,
     setQuickStartTaskNumber,
@@ -30,6 +41,16 @@ const QuickStartController: React.FC<QuickStartControllerProps> = ({
     nextStep,
     previousStep,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  React.useEffect(() => {
+    // If activeQuickStartID was changed through prop from QuickStartContainer, need to init the state if it does not exist yet
+    if (activeQuickStartID && !allQuickStartStates[activeQuickStartID]) {
+      setAllQuickStartStates({
+        ...allQuickStartStates,
+        [activeQuickStartID]: getDefaultQuickStartState(),
+      });
+    }
+  }, [activeQuickStartID, allQuickStartStates, setAllQuickStartStates]);
+
   const status = activeQuickStartState?.status as QuickStartStatus;
   const taskNumber = activeQuickStartState?.taskNumber as number;
   const allTaskStatuses = tasks.map(
