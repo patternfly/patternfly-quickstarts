@@ -20,19 +20,11 @@ interface QuickStartControllerProps {
 }
 
 export const QuickStartController: React.FC<QuickStartControllerProps> = ({
-  quickStart, // : propQS, might be able to have default value of current active QS using context?
-  nextQuickStarts, // : propNextQS, might be same
+  quickStart,
+  nextQuickStarts,
   contentRef,
   footerClass,
 }) => {
-  // Should work?
-  // const { allQuickStarts, activeQuickStartID } =
-  //   React.useContext<QuickStartContextValues>(QuickStartContext);
-  // const quickStart = propQS || allQuickStarts.find((qs) => qs.metadata.name === activeQuickStartID);
-  // const nextQuickStarts =
-  //   propNextQS ||
-  //   allQuickStarts.filter((qs) => quickStart?.spec.nextQuickStart?.includes(qs.metadata.name));
-
   const {
     metadata: { name },
     spec: { tasks = [] },
