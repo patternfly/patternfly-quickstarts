@@ -5,18 +5,30 @@ import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-
 import { QuickStart, QuickStartStatus, QuickStartTaskStatus } from './utils/quick-start-types';
 
 interface QuickStartControllerProps {
+  /** The current active quickstart  */
   quickStart: QuickStart;
+  /** The next quickstart */
   nextQuickStarts?: QuickStart[];
-  footerClass: string;
-  contentRef: React.Ref<HTMLDivElement>;
+  /** Additional footer classes */
+  footerClass?: string;
+  /** Ref for the quickstart content */
+  contentRef?: React.Ref<HTMLDivElement>;
 }
 
-const QuickStartController: React.FC<QuickStartControllerProps> = ({
-  quickStart,
-  nextQuickStarts,
+export const QuickStartController: React.FC<QuickStartControllerProps> = ({
+  quickStart, // : propQS, might be able to have default value of current active QS using context?
+  nextQuickStarts, // : propNextQS, might be same
   contentRef,
   footerClass,
 }) => {
+  // Should work?
+  // const { allQuickStarts, activeQuickStartID } =
+  //   React.useContext<QuickStartContextValues>(QuickStartContext);
+  // const quickStart = propQS || allQuickStarts.find((qs) => qs.metadata.name === activeQuickStartID);
+  // const nextQuickStarts =
+  //   propNextQS ||
+  //   allQuickStarts.filter((qs) => quickStart?.spec.nextQuickStart?.includes(qs.metadata.name));
+
   const {
     metadata: { name },
     spec: { tasks = [] },
