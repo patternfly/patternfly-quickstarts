@@ -16,6 +16,8 @@ import {
   DrawerPanelBody,
   DropdownList,
   DropdownItem,
+  TabContent,
+  TabContentBody,
 } from '@patternfly/react-core';
 import {
   LoadingBox,
@@ -102,6 +104,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     if (activeQuickStartID !== quickStartId) {
       // activate
       setActiveQuickStartID(quickStartId);
+      setActiveTabKey(1);
       // optionally add the query param
       withQueryParams && setQueryArgument(QUICKSTART_ID_FILTER_KEY, quickStartId);
     } else {
@@ -133,7 +136,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   const onModalCancel = () => setModalOpen(false);
 
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
-  const [activeTabKey, setActiveTabKey] = React.useState<string | number>(0);
+  const [activeTabKey, setActiveTabKey] = React.useState<string | number>(1);
   // Toggle currently active tab
   const handleTabClick = (
     event: React.MouseEvent<any> | React.KeyboardEvent | MouseEvent,
@@ -305,6 +308,9 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   );
   // Chatbot
 
+  const contentRef1 = React.createRef<HTMLElement>();
+  const contentRef2 = React.createRef<HTMLElement>();
+
   const panelContent = (
     <DrawerPanelContent isResizable>
       <DrawerHead>
@@ -325,19 +331,45 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
         >
           {activeQuickStartID !== '' && (
             <Tab
-              eventKey={0}
+              eventKey={1}
               title={<TabTitleText>Quickstart</TabTitleText>}
               aria-label="Default content - users"
-              style={{ flex: '1 1', display: 'flex', flexDirection: 'column' }} // not currently spread to tab - react issue opened https://github.com/patternfly/patternfly-react/issues/11342
-            >
-              <QuickStartController quickStart={quickStart} nextQuickStarts={nextQuickStart} />
-            </Tab>
+              tabContentId="tab1SectionBodyPadding"
+              tabContentRef={contentRef1}
+            />
           )}
 
-          <Tab eventKey={1} title={<TabTitleText>Chatbot</TabTitleText>}>
-            {chatbot}
-          </Tab>
+          <Tab
+            eventKey={2}
+            title={<TabTitleText>Chatbot</TabTitleText>}
+            tabContentId="tab2SectionBodyPadding"
+            tabContentRef={contentRef2}
+          />
         </Tabs>
+        <>
+          {activeTabKey === 1 && (
+            <TabContent
+              eventKey={1}
+              id="tab1SectionBodyPadding"
+              ref={contentRef1}
+              style={{ flex: '1 1', display: 'flex', flexDirection: 'column' }}
+            >
+              <TabContentBody>
+                <QuickStartController quickStart={quickStart} nextQuickStarts={nextQuickStart} />
+              </TabContentBody>
+            </TabContent>
+          )}
+          {activeTabKey === 2 && (
+            <TabContent
+              eventKey={2}
+              id="tab2SectionBodyPadding"
+              ref={contentRef2}
+              style={{ flex: '1 1', display: 'flex', flexDirection: 'column' }}
+            >
+              <TabContentBody>{chatbot}</TabContentBody>
+            </TabContent>
+          )}
+        </>
       </DrawerPanelBody>
     </DrawerPanelContent>
   );
@@ -363,7 +395,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
                     toggleQuickStart('getting-started-with-quick-starts');
                   }}
                 >
-                  Toggle QS
+                  Toggle QS & set tab to QS
                 </Button>
                 {children}
               </Page>
