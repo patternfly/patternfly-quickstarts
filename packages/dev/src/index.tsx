@@ -5,6 +5,7 @@ import { Route, BrowserRouter, Routes } from 'react-router-dom';
 // fonts, variables
 import '@patternfly/patternfly/patternfly.css';
 import '@patternfly/quickstarts/dist/quickstarts.css';
+import '@patternfly/chatbot/dist/css/main.css';
 
 import './i18n/i18n';
 import AppContext from './AppContext';

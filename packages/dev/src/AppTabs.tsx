@@ -14,6 +14,8 @@ import {
   DrawerCloseButton,
   DrawerPanelDescription,
   DrawerPanelBody,
+  DropdownList,
+  DropdownItem,
 } from '@patternfly/react-core';
 import {
   LoadingBox,
@@ -31,6 +33,22 @@ import { allQuickStarts as yamlQuickStarts } from './quickstarts-data/quick-star
 import React from 'react';
 import i18n from './i18n/i18n';
 import { AppHeader, AppSidebar } from './common/Page';
+
+import Chatbot, { ChatbotDisplayMode } from '@patternfly/chatbot/dist/dynamic/Chatbot';
+import ChatbotContent from '@patternfly/chatbot/dist/dynamic/ChatbotContent';
+import ChatbotWelcomePrompt from '@patternfly/chatbot/dist/dynamic/ChatbotWelcomePrompt';
+import ChatbotFooter, { ChatbotFootnote } from '@patternfly/chatbot/dist/dynamic/ChatbotFooter';
+import MessageBar from '@patternfly/chatbot/dist/dynamic/MessageBar';
+import MessageBox from '@patternfly/chatbot/dist/dynamic/MessageBox';
+import Message, { MessageProps } from '@patternfly/chatbot/dist/dynamic/Message';
+import ChatbotHeader, {
+  ChatbotHeaderMain,
+  ChatbotHeaderTitle,
+  ChatbotHeaderActions,
+  ChatbotHeaderSelectorDropdown,
+} from '@patternfly/chatbot/dist/dynamic/ChatbotHeader';
+
+import { welcomePrompts, footnoteProps, initialMessages } from './AppTabsStrings';
 
 interface AppProps {
   children?: React.ReactNode;
@@ -130,6 +148,163 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
   const nextQuickStart = yamlQuickStarts.filter((qs) =>
     quickStart?.spec.nextQuickStart?.includes(qs.metadata.name),
   );
+
+  // Chatbot
+  const [messages, setMessages] = React.useState<MessageProps[]>(initialMessages);
+  const [selectedModel, setSelectedModel] = React.useState('Granite 7B');
+  const [isSendButtonDisabled, setIsSendButtonDisabled] = React.useState(false);
+  const [announcement, setAnnouncement] = React.useState<string>();
+  const scrollToBottomRef = React.useRef<HTMLDivElement>(null);
+
+  const displayMode = ChatbotDisplayMode.embedded;
+
+  React.useEffect(() => {
+    // don't scroll the first load - in this demo, we know we start with two messages
+    if (messages.length > 2) {
+      scrollToBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
+  const onSelectModel = (
+    _event: React.MouseEvent<Element, MouseEvent> | undefined,
+    value: string | number | undefined,
+  ) => {
+    setSelectedModel(value as string);
+  };
+
+  // you will likely want to come up with your own unique id function; this is for demo purposes only
+  const generateId = () => {
+    const id = Date.now() + Math.random();
+    return id.toString();
+  };
+
+  const handleSend = (message: string) => {
+    setIsSendButtonDisabled(true);
+    const newMessages: MessageProps[] = [];
+    // We can't use structuredClone since messages contains functions, but we can't mutate
+    // items that are going into state or the UI won't update correctly
+    messages.forEach((message) => newMessages.push(message));
+    // It's important to set a timestamp prop since the Message components re-render.
+    // The timestamps re-render with them.
+    const date = new Date();
+    newMessages.push({
+      id: generateId(),
+      role: 'user',
+      content: message,
+      name: 'User',
+      avatar: null,
+      timestamp: date.toLocaleString(),
+      avatarProps: { isBordered: true },
+    });
+    newMessages.push({
+      id: generateId(),
+      role: 'bot',
+      content: 'API response goes here',
+      name: 'Bot',
+      avatar: null,
+      isLoading: true,
+      timestamp: date.toLocaleString(),
+    });
+    setMessages(newMessages);
+    // make announcement to assistive devices that new messages have been added
+    setAnnouncement(`Message from User: ${message}. Message from Bot is loading.`);
+
+    // this is for demo purposes only; in a real situation, there would be an API response we would wait for
+    setTimeout(() => {
+      const loadedMessages: MessageProps[] = [];
+      // we can't use structuredClone since messages contains functions, but we can't mutate
+      // items that are going into state or the UI won't update correctly
+      newMessages.forEach((message) => loadedMessages.push(message));
+      loadedMessages.pop();
+      loadedMessages.push({
+        id: generateId(),
+        role: 'bot',
+        content: 'API response goes here',
+        name: 'Bot',
+        avatar: null,
+        isLoading: false,
+        actions: {
+          // eslint-disable-next-line no-console
+          positive: { onClick: () => console.log('Good response') },
+          // eslint-disable-next-line no-console
+          negative: { onClick: () => console.log('Bad response') },
+          // eslint-disable-next-line no-console
+          copy: { onClick: () => console.log('Copy') },
+          // eslint-disable-next-line no-console
+          share: { onClick: () => console.log('Share') },
+          // eslint-disable-next-line no-console
+          listen: { onClick: () => console.log('Listen') },
+        },
+        timestamp: date.toLocaleString(),
+      });
+      setMessages(loadedMessages);
+      // make announcement to assistive devices that new message has loaded
+      setAnnouncement(`Message from Bot: API response goes here`);
+      setIsSendButtonDisabled(false);
+    }, 5000);
+  };
+
+  const chatbot = (
+    <Chatbot displayMode={displayMode}>
+      <ChatbotHeader>
+        <ChatbotHeaderMain>
+          <ChatbotHeaderTitle>Title</ChatbotHeaderTitle>
+        </ChatbotHeaderMain>
+        <ChatbotHeaderActions>
+          <ChatbotHeaderSelectorDropdown value={selectedModel} onSelect={onSelectModel}>
+            <DropdownList>
+              <DropdownItem value="Granite 7B" key="granite">
+                Granite 7B
+              </DropdownItem>
+              <DropdownItem value="Llama 3.0" key="llama">
+                Llama 3.0
+              </DropdownItem>
+              <DropdownItem value="Mistral 3B" key="mistral">
+                Mistral 3B
+              </DropdownItem>
+            </DropdownList>
+          </ChatbotHeaderSelectorDropdown>
+        </ChatbotHeaderActions>
+      </ChatbotHeader>
+      <ChatbotContent>
+        {/* Update the announcement prop on MessageBox whenever a new message is sent
+                 so that users of assistive devices receive sufficient context  */}
+        <MessageBox announcement={announcement}>
+          <ChatbotWelcomePrompt
+            title="Hello, Chatbot User"
+            description="How may I help you today?"
+            prompts={welcomePrompts}
+          />
+          {/* This code block enables scrolling to the top of the last message.
+                  You can instead choose to move the div with scrollToBottomRef on it below 
+                  the map of messages, so that users are forced to scroll to the bottom.
+                  If you are using streaming, you will want to take a different approach; 
+                  see: https://github.com/patternfly/chatbot/issues/201#issuecomment-2400725173 */}
+          {messages.map((message, index) => {
+            if (index === messages.length - 1) {
+              return (
+                <>
+                  <div ref={scrollToBottomRef}></div>
+                  <Message key={message.id} {...message} />
+                </>
+              );
+            }
+            return <Message key={message.id} {...message} />;
+          })}
+        </MessageBox>
+      </ChatbotContent>
+      <ChatbotFooter>
+        <MessageBar
+          onSendMessage={handleSend}
+          hasMicrophoneButton
+          isSendButtonDisabled={isSendButtonDisabled}
+        />
+        <ChatbotFootnote {...footnoteProps} />
+      </ChatbotFooter>
+    </Chatbot>
+  );
+  // Chatbot
+
   const panelContent = (
     <DrawerPanelContent isResizable>
       <DrawerHead>
@@ -160,15 +335,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
           )}
 
           <Tab eventKey={1} title={<TabTitleText>Chatbot</TabTitleText>}>
-            Chatbot
-            <Button
-              variant="secondary"
-              onClick={() => {
-                toggleQuickStart('getting-started-with-quick-starts');
-              }}
-            >
-              Toggle QS
-            </Button>
+            {chatbot}
           </Tab>
         </Tabs>
       </DrawerPanelBody>
