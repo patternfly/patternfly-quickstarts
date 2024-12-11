@@ -40,11 +40,6 @@ export const Nav: NavInterface[] = [
     name: 'With custom drawer',
     to: '/quickstarts-drawer',
   },
-  {
-    id: 'chatbot-drawer',
-    name: 'With chatbot drawer',
-    to: '/chatbot-drawer',
-  },
 ];
 
 export default Nav;

@@ -12,7 +12,6 @@ import AppProps from './AppProps';
 import AppLocalized from './AppLocalized';
 import AppHelpTopicDemo from './AppHelpTopicDemo';
 import AppCustomDrawer from './AppCustomDrawer';
-import AppChatbotDrawer from './AppTabs';
 import { DefaultCatalog } from './DefaultCatalog';
 import { CustomCatalog } from './CustomCatalog';
 import { MockConsole } from './MockConsole';
@@ -69,14 +68,6 @@ root.render(
           <AppCustomDrawer showCardFooters={false}>
             <DefaultCatalog hint="This catalog is for testing the component props based quick starts approach by utilizing the QuickStartContainer component" />
           </AppCustomDrawer>
-        }
-      />
-      <Route
-        path="/chatbot-drawer"
-        element={
-          <AppChatbotDrawer showCardFooters={false}>
-            <DefaultCatalog hint="This catalog is for testing the component props based quick starts approach by utilizing the QuickStartContainer component" />
-          </AppChatbotDrawer>
         }
       />
     </Routes>
