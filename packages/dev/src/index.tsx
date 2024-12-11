@@ -5,6 +5,7 @@ import { Route, BrowserRouter, Routes } from 'react-router-dom';
 // fonts, variables
 import '@patternfly/patternfly/patternfly.css';
 import '@patternfly/quickstarts/dist/quickstarts.css';
+import '@patternfly/chatbot/dist/css/main.css';
 
 import './i18n/i18n';
 import AppContext from './AppContext';
@@ -12,6 +13,7 @@ import AppProps from './AppProps';
 import AppLocalized from './AppLocalized';
 import AppHelpTopicDemo from './AppHelpTopicDemo';
 import AppCustomDrawer from './AppCustomDrawer';
+import AppChatbotDrawer from './AppTabs';
 import { DefaultCatalog } from './DefaultCatalog';
 import { CustomCatalog } from './CustomCatalog';
 import { MockConsole } from './MockConsole';
@@ -68,6 +70,14 @@ root.render(
           <AppCustomDrawer showCardFooters={false}>
             <DefaultCatalog hint="This catalog is for testing the component props based quick starts approach by utilizing the QuickStartContainer component" />
           </AppCustomDrawer>
+        }
+      />
+      <Route
+        path="/chatbot-drawer"
+        element={
+          <AppChatbotDrawer showCardFooters={false}>
+            <DefaultCatalog hint="This catalog is for testing the component props based quick starts approach by utilizing the QuickStartContainer component" />
+          </AppChatbotDrawer>
         }
       />
     </Routes>

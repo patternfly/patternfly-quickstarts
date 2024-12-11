@@ -4,6 +4,7 @@ export * from './QuickStartCatalogPage';
 export * from './catalog';
 export * from './ConsoleInternal/components/utils';
 export * from './QuickStartContainer';
+export * from './QuickStartController';
 export * from './QuickStartDrawer';
 export * from './QuickStartDrawerContent';
 export * from './QuickStartCloseModal';
