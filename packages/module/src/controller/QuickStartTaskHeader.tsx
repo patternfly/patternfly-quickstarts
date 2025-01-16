@@ -79,6 +79,7 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
       component="button"
       isCurrent={isActiveTask}
       status={status}
+      className="pfext-quick-start-task-header"
     >
       {children}
     </WizardNavItem>
