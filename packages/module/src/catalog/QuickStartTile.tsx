@@ -137,6 +137,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
       id={`${id}-catalog-tile`}
       style={{ height: '100%' }}
       data-testid={`qs-card-${camelize(displayName)}`}
+      className="pfext-catalog-item"
       {...(isActive && {
         isClickable: true,
         isSelectable: true,
