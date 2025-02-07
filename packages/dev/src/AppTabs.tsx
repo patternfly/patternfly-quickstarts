@@ -240,7 +240,7 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
         timestamp: date.toLocaleString(),
         quickStarts: {
           quickStart: yamlQuickStarts[0],
-          onFooterClick: (id: string) => {
+          onSelectQuickStart: (id: string) => {
             setActiveQuickStartID(id);
             setActiveTabKey(1);
           },
