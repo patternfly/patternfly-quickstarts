@@ -67,6 +67,7 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
 }) => {
   const titleRef = React.useRef(null);
   const { focusOnQuickStart } = React.useContext(QuickStartContext);
+  const [parsedTitle, setParsedTitle] = React.useState<string>('');
 
   React.useEffect(() => {
     if (focusOnQuickStart && isActiveTask) {
@@ -74,6 +75,15 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
       titleRef.current.parentNode.focus();
     }
   }, [focusOnQuickStart, isActiveTask]);
+
+  React.useEffect(() => {
+    async function getParsedTitle() {
+      const convertedMdTitle = await markdownConvert(title);
+      setParsedTitle(removeParagraphWrap(convertedMdTitle));
+    }
+    getParsedTitle();
+  }, [title]);
+
   const classNames = css('pfext-quick-start-task-header__title', {
     'pfext-quick-start-task-header__title-success': taskStatus === QuickStartTaskStatus.SUCCESS,
     'pfext-quick-start-task-header__title-failed':
@@ -96,7 +106,7 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
     <div className="pfext-quick-start-task-header" ref={titleRef}>
       <TaskIcon taskIndex={taskIndex} taskStatus={taskStatus} />
       <Title headingLevel="h3" size={size} className={classNames}>
-        <span dangerouslySetInnerHTML={{ __html: removeParagraphWrap(markdownConvert(title)) }} />
+        <span dangerouslySetInnerHTML={{ __html: parsedTitle }} />
         {isActiveTask && subtitle && (
           <span
             className="pfext-quick-start-task-header__subtitle"

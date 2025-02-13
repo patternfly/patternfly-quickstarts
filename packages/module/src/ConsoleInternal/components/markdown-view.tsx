@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { css } from '@patternfly/react-styles';
-import { Converter } from 'showdown';
+import { marked } from 'marked';
 import { useForceRender } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 import './_markdown-view.scss';
@@ -16,18 +16,7 @@ interface ShowdownExtension {
   replace?: (...args: any[]) => string;
 }
 
-export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
-  const converter = new Converter({
-    tables: true,
-    openLinksInNewWindow: true,
-    strikethrough: true,
-    emoji: false,
-  });
-
-  if (extensions) {
-    converter.addExtension(extensions);
-  }
-
+export const markdownConvert = async (markdown: string, extensions?: ShowdownExtension[]) => {
   DOMPurify.addHook('beforeSanitizeElements', function (node) {
     // nodeType 1 = element type
 
@@ -62,12 +51,26 @@ export const markdownConvert = (markdown, extensions?: ShowdownExtension[]) => {
     }
   });
 
-  return DOMPurify.sanitize(converter.makeHtml(markdown), {
-    USE_PROFILES: {
-      html: true,
-      svg: true,
-    },
-  });
+  // Replace code fences with non markdown formatting relates tokens so that marked doesn't try to parse them as code spans
+  const markdownWithSubstitutedCodeFences = markdown.replace(/```/g, '@@@');
+  const parsedMarkdown = await marked.parse(markdownWithSubstitutedCodeFences);
+  // Swap the temporary tokens back to code fences before we run the extensions
+  let md = parsedMarkdown.replace(/@@@/g, '```');
+
+  if (extensions) {
+    // Convert code spans back to md format before we run the custom extension regexes
+    md = md.replace(/<code>(.*)<\/code>/g, '`$1`');
+
+    extensions.forEach(({ regex, replace }) => {
+      if (regex) {
+        md = md.replace(regex, replace);
+      }
+    });
+
+    // Convert any remaining backticks back into code spans
+    md = md.replace(/`(.*)`/g, '<code>$1</code>');
+  }
+  return DOMPurify.sanitize(md);
 };
 
 interface SyncMarkdownProps {
@@ -96,10 +99,18 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
   className,
 }) => {
   const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
-  const markup = React.useMemo(
-    () => markdownConvert(content || emptyMsg || getResource('Not available'), extensions),
-    [content, emptyMsg, extensions, getResource],
-  );
+  const [markup, setMarkup] = React.useState<string>('');
+
+  React.useEffect(() => {
+    async function getMd() {
+      const md = await markdownConvert(
+        content || emptyMsg || getResource('Not available'),
+        extensions,
+      );
+      setMarkup(md);
+    }
+    getMd();
+  }, [content, emptyMsg, getResource, extensions]);
   const innerProps: InnerSyncMarkdownProps = {
     renderExtension: extensions?.length > 0 ? renderExtension : undefined,
     exactHeight,

@@ -59,6 +59,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   const { getResource, activeQuickStartState, focusOnQuickStart } =
     React.useContext<QuickStartContextValues>(QuickStartContext);
   const [contentRef, setContentRef] = React.useState<HTMLDivElement>();
+  const [displayName, setDisplayName] = React.useState<string>('');
   const shadows = useScrollShadows(contentRef);
   const quickStart = quickStarts.find((qs) => qs.metadata.name === activeQuickStartID);
   const taskNumber = activeQuickStartState?.taskNumber;
@@ -95,6 +96,14 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
     }
   }, [focusOnQuickStart, quickStart]);
 
+  React.useEffect(() => {
+    async function getDisplayName() {
+      const convertedMdDisplayName = await markdownConvert(quickStart?.spec.displayName);
+      setDisplayName(removeParagraphWrap(convertedMdDisplayName));
+    }
+    getDisplayName();
+  }, [quickStart]);
+
   const content = quickStart ? (
     <DrawerPanelContent
       isResizable={isResizable}
@@ -115,7 +124,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
             >
               <span
                 dangerouslySetInnerHTML={{
-                  __html: removeParagraphWrap(markdownConvert(quickStart?.spec.displayName)),
+                  __html: displayName,
                 }}
               />{' '}
               <small className="pfext-quick-start-panel-content__duration">
