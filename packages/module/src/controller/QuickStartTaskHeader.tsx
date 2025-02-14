@@ -80,7 +80,7 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
     }
     getParsedTitle();
   }, [title]);
-  
+
   const classNames = css('pfext-quick-start-task-header__title', {
     'pfext-quick-start-task-header__title-success': taskStatus === QuickStartTaskStatus.SUCCESS,
     'pfext-quick-start-task-header__title-failed':

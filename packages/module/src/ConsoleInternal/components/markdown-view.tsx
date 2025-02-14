@@ -17,7 +17,7 @@ type ShowdownExtension = {
 };
 
 export const markdownConvert = async (markdown: string, extensions?: ShowdownExtension[]) => {
-  DOMPurify.addHook('beforeSanitizeElements', function (node) {
+  DOMPurify.addHook('beforeSanitizeElements', function(node) {
     // nodeType 1 = element type
 
     // transform anchor tags
