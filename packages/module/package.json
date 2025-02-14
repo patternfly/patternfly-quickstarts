@@ -47,7 +47,7 @@
     "@patternfly/react-core": ">=5.0.0",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0",
-    "showdown": ">=2.1.0"
+    "marked": "^15.0.6"
   },
   "dependencies": {
     "@patternfly/react-catalog-view-extension": "^5.0.0",
