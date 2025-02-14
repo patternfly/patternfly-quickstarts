@@ -22,7 +22,7 @@
     "react-dom": "^16.14.0",
     "react-i18next": "^11.7.3",
     "react-router-dom": "^5.2.0",
-    "marked": "^15.0.6",
+    "marked": "^3.0.0",
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {

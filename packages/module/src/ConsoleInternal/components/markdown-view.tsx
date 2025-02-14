@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { css } from '@patternfly/react-styles';
-import { marked } from 'marked';
+import { parse } from 'marked';
 import { useForceRender } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 import './_markdown-view.scss';
@@ -53,7 +53,7 @@ export const markdownConvert = async (markdown: string, extensions?: ShowdownExt
 
   // Replace code fences with non markdown formatting relates tokens so that marked doesn't try to parse them as code spans
   const markdownWithSubstitutedCodeFences = markdown.replace(/```/g, '@@@');
-  const parsedMarkdown = await marked.parse(markdownWithSubstitutedCodeFences);
+  const parsedMarkdown = await parse(markdownWithSubstitutedCodeFences);
   // Swap the temporary tokens back to code fences before we run the extensions
   let md = parsedMarkdown.replace(/@@@/g, '```');
 
