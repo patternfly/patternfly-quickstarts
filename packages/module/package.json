@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/quickstarts",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "PatternFly quick starts",
   "files": [
     "src",
