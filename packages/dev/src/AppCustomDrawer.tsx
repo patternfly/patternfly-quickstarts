@@ -1,6 +1,7 @@
 import './App.css';
 import {
   Page,
+  PageSection,
   Button,
   Drawer,
   DrawerContent,
@@ -11,6 +12,8 @@ import {
   DrawerPanelDescription,
   DrawerPanelBody,
   DrawerContentBody,
+  Stack,
+  StackItem,
 } from '@patternfly/react-core';
 import {
   LoadingBox,
@@ -140,24 +143,34 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
           >
             <DrawerContentBody>
               <Page masthead={AppHeader} sidebar={AppSidebar} isManagedSidebar>
-                <Button
-                  variant="secondary"
-                  onClick={() => {
-                    toggleQuickStart('getting-started-with-quick-starts');
-                    setDrawerContent('quickstart');
-                  }}
-                >
-                  Getting started with quick starts
-                </Button>
-                <Button
-                  variant="secondary"
-                  onClick={() => {
-                    setActiveQuickStartID('');
-                    setDrawerContent('custom');
-                  }}
-                >
-                  Open a different drawer
-                </Button>
+                <PageSection>
+                  <Stack hasGutter>
+                    <StackItem>
+                      <Button
+                        variant="secondary"
+                        isBlock
+                        onClick={() => {
+                          toggleQuickStart('getting-started-with-quick-starts');
+                          setDrawerContent('quickstart');
+                        }}
+                      >
+                        Getting started with quick starts
+                      </Button>
+                    </StackItem>
+                    <StackItem>
+                      <Button
+                        variant="secondary"
+                        isBlock
+                        onClick={() => {
+                          setActiveQuickStartID('');
+                          setDrawerContent('custom');
+                        }}
+                      >
+                        Open a different drawer
+                      </Button>
+                    </StackItem>
+                  </Stack>
+                </PageSection>
                 {children}
               </Page>
             </DrawerContentBody>
