@@ -1,5 +1,5 @@
 import './App.css';
-import { Page, Button } from '@patternfly/react-core';
+import { Page, Button, PageSection } from '@patternfly/react-core';
 import {
   LoadingBox,
   QuickStartContainer,
@@ -80,12 +80,15 @@ const App: React.FC<AppProps> = ({ children, showCardFooters }) => {
     <React.Suspense fallback={<LoadingBox />}>
       <QuickStartContainer {...drawerProps}>
         <Page masthead={AppHeader} sidebar={AppSidebar} isManagedSidebar>
-          <Button
-            variant="secondary"
-            onClick={() => toggleQuickStart('getting-started-with-quick-starts')}
-          >
-            Getting started with quick starts
-          </Button>
+          <PageSection>
+            <Button
+              variant="secondary"
+              isBlock
+              onClick={() => toggleQuickStart('getting-started-with-quick-starts')}
+            >
+              Getting started with quick starts
+            </Button>
+          </PageSection>
           {children}
         </Page>
       </QuickStartContainer>

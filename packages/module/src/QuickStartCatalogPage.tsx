@@ -181,7 +181,6 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
                 onSearchInputChange={onSearchInputChange}
                 onStatusChange={onStatusChange}
               />
-              <Divider component="div" />
             </>
           )}
         </PageSection>
