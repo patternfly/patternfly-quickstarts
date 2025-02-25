@@ -71,8 +71,20 @@ export const markdownConvert = async (markdown: string, extensions?: ShowdownExt
     }
   });
 
-  // Replace code fences with non markdown formatting relates tokens so that marked doesn't try to parse them as code spans
-  const markdownWithSubstitutedCodeFences = markdown.replace(/```/g, '@@@');
+  const reverseString = (str: string) => str.split('').reverse().join('');
+
+  // replace code fences that end in a double curly brace (which are used by our custom md extensions) with non
+  // markdown formatting related tokens so that marked doesn't try to parse them as code spans
+  //
+  // we want to reverse the string before we do the substitution so that we only match the opening code fence which
+  // corresponds to the closing code fence with the double curly brace
+  const reversedMarkdown = reverseString(markdown);
+  const reverseMarkdownWithSubstitutedCodeFences = reversedMarkdown.replace(
+    /{{```((.|\n)*?)```/g,
+    '{{@@@$1@@@',
+  );
+  const markdownWithSubstitutedCodeFences = reverseString(reverseMarkdownWithSubstitutedCodeFences);
+
   const parsedMarkdown = await marked.parse(markdownWithSubstitutedCodeFences);
   // Swap the temporary tokens back to code fences before we run the extensions
   let md = parsedMarkdown.replace(/@@@/g, '```');
