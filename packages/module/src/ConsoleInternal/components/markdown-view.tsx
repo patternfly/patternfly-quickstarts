@@ -51,7 +51,11 @@ export const markdownConvert = async (markdown: string, extensions?: ShowdownExt
     }
   });
 
-  const reverseString = (str: string) => str.split('').reverse().join('');
+  const reverseString = (str: string) =>
+    str
+      .split('')
+      .reverse()
+      .join('');
 
   // replace code fences that end in a double curly brace (which are used by our custom md extensions) with non
   // markdown formatting related tokens so that marked doesn't try to parse them as code spans
