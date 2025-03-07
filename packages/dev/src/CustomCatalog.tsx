@@ -238,9 +238,13 @@ export const CustomCatalog: React.FC = () => {
 
   return (
     <>
-      <PageSection hasBodyWrapper={false}>
+      <PageSection>
         <QuickStartCatalogHeader title="Resources" />
+      </PageSection>
+      <PageSection>
         <Divider component="div" />
+      </PageSection>
+      <PageSection>
         <QuickStartCatalogToolbar>
           <ToolbarContent>
             <QuickStartCatalogFilterSearchWrapper onSearchInputChange={onSearchInputChange} />
@@ -248,7 +252,6 @@ export const CustomCatalog: React.FC = () => {
             <QuickStartCatalogFilterCountWrapper quickStartsCount={filteredQuickStarts.length} />
           </ToolbarContent>
         </QuickStartCatalogToolbar>
-        <Divider component="div" />
       </PageSection>
       <PageSection hasBodyWrapper={false}>{quickStartCatalog()}</PageSection>
     </>
