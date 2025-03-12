@@ -101,7 +101,7 @@ Example: "View the details of your sample application"
 
 In the task description, explain the importance of the task for the user. When writing a task description, begin with a call to action, or a statement that identifies a desired action or outcome. Then write a brief statement that explains how the user will accomplish the task and introduces the task’s steps. 
 
-Example: "Notebooks and applications need the connection information for your {product-title} instance. Follow these steps to save the required information for later use… To obtain connection information to {product-title}:”
+Example: "Notebooks and applications need the connection information for your [product-title] instance. Follow these steps to save the required information for later use… To obtain connection information to [product-title]:”
 
 #### Task steps
 
