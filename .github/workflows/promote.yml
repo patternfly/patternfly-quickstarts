@@ -3,7 +3,7 @@ on:
   push:
     # Sequence of patterns matched against refs/tags
     tags:
-      - v6.*
+      - v6.2.*
 jobs:
   build-and-promote:
     runs-on: ubuntu-latest
@@ -28,4 +28,4 @@ jobs:
         run: |
           cd packages/module
           npm version ${{ github.ref_name }} --git-tag-version false
-          npm publish --tag=latest
+          npm publish --tag=patch

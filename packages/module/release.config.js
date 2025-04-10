@@ -3,6 +3,7 @@ module.exports = {
     'do-not-delete',
     { name: 'main', channel: 'prerelease', prerelease: 'prerelease' },
     { name: 'v5', channel: 'prerelease-v5', range: '5.4.x' },
+    { name: '6.2.x', channel: 'prerelease-bugfix', range: '6.2.x' },
   ],
   analyzeCommits: {
     preset: 'angular',
@@ -13,15 +14,15 @@ module.exports = {
       {
         preset: 'angular',
         releaseRules: [
-          { type: 'chore', scope: 'deps', release: 'patch' },
-          { type: 'chore', scope: 'ci-release', release: 'patch' },
+          { type: 'feat', release: 'patch' },
+          { type: 'fix', release: 'patch' },
         ],
       },
     ],
     '@semantic-release/release-notes-generator',
     '@semantic-release/github',
-    '@semantic-release/npm',
+    ['@semantic-release/npm', { pkgRoot: 'dist' }],
   ],
-  tagFormat: 'prerelease-v${version}',
-  dryRun: false,
+  tagFormat: 'patch-v${version}',
+  dryRun: true,
 };
