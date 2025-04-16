@@ -1,3 +1,4 @@
+import './spotlight.scss';
 import * as React from 'react';
 import { Portal, SimplePopper } from '../popper';
 
