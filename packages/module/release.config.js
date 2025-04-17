@@ -22,6 +22,6 @@ module.exports = {
     '@semantic-release/github',
     '@semantic-release/npm',
   ],
-  tagFormat: 'v${version}',
+  tagFormat: 'patch-v${version}',
   dryRun: true
 };
