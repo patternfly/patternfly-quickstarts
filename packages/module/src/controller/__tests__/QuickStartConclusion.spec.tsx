@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ComponentProps } from 'react';
 import { Button } from '@patternfly/react-core';
 import { ShallowWrapper, shallow } from 'enzyme';
 import { allQuickStarts } from '../../data/quick-start-test-data';
@@ -17,7 +17,7 @@ jest.mock('react', () => {
 
 const i18nNS = 'quickstart';
 
-type QuickStartConclusionProps = React.ComponentProps<typeof QuickStartConclusion>;
+type QuickStartConclusionProps = ComponentProps<typeof QuickStartConclusion>;
 let wrapper: ShallowWrapper<QuickStartConclusionProps>;
 const props: QuickStartConclusionProps = {
   tasks: getQuickStartByName('explore-pipelines', allQuickStarts).spec.tasks,

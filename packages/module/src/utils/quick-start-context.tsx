@@ -1,4 +1,4 @@
-import React, { createContext, useCallback } from 'react';
+import { createContext, FC, useCallback, useEffect, useState } from 'react';
 import { removeQueryArgument, setQueryArgument } from '../ConsoleInternal/components/utils/router';
 import en from '../locales/en/quickstart.json';
 import {
@@ -138,12 +138,12 @@ export const useValuesForQuickStartContext = (
     useLegacyHeaderColors,
     markdown,
   } = combinedValue;
-  const [quickStarts, setQuickStarts] = React.useState(combinedValue.allQuickStarts || []);
-  const [resourceBundle, setResourceBundle] = React.useState({
+  const [quickStarts, setQuickStarts] = useState(combinedValue.allQuickStarts || []);
+  const [resourceBundle, setResourceBundle] = useState({
     ...en,
     ...combinedValue.resourceBundle,
   });
-  const [language, setLanguage] = React.useState(combinedValue.language);
+  const [language, setLanguage] = useState(combinedValue.language);
   const changeResourceBundle = (bundle: any, lng?: string) => {
     lng && setLanguage(lng);
     setResourceBundle({
@@ -156,8 +156,8 @@ export const useValuesForQuickStartContext = (
       getResource(resource, count !== undefined ? { count } : null, resourceBundle, language),
     [resourceBundle, language],
   );
-  const [loading, setLoading] = React.useState(combinedValue.loading);
-  const [alwaysShowTaskReview, setAlwaysShowTaskReview] = React.useState(
+  const [loading, setLoading] = useState(combinedValue.loading);
+  const [alwaysShowTaskReview, setAlwaysShowTaskReview] = useState(
     combinedValue.alwaysShowTaskReview,
   );
 
@@ -167,7 +167,7 @@ export const useValuesForQuickStartContext = (
     initialSearchParams.get(QUICKSTART_STATUS_FILTER_KEY)?.split(',') || [];
 
   const quickStartStatusCount = getQuickStartStatusCount(allQuickStartStates, allQuickStarts);
-  const [statusTypes, setStatusTypes] = React.useState({
+  const [statusTypes, setStatusTypes] = useState({
     [QuickStartStatus.COMPLETE]: findResource('Complete ({{statusCount, number}})').replace(
       '{{statusCount, number}}',
       quickStartStatusCount[QuickStartStatus.COMPLETE],
@@ -181,9 +181,9 @@ export const useValuesForQuickStartContext = (
       quickStartStatusCount[QuickStartStatus.NOT_STARTED],
     ),
   });
-  const [statusFilters, setStatusFilters] = React.useState<string[]>(initialStatusFilters);
+  const [statusFilters, setStatusFilters] = useState<string[]>(initialStatusFilters);
 
-  const [filterKeyword, setFilterKeyword] = React.useState(initialSearchQuery);
+  const [filterKeyword, setFilterKeyword] = useState(initialSearchQuery);
 
   const setFilter = (type: 'keyword' | 'status', val: any) => {
     if (type === 'keyword') {
@@ -193,7 +193,7 @@ export const useValuesForQuickStartContext = (
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const updatedQuickStartStatusCount = getQuickStartStatusCount(allQuickStartStates, quickStarts);
     setStatusTypes({
       [QuickStartStatus.COMPLETE]: findResource('Complete ({{statusCount, number}})').replace(
@@ -462,7 +462,7 @@ export const useValuesForQuickStartContext = (
   };
 };
 
-export const QuickStartContextProvider: React.FC<{
+export const QuickStartContextProvider: FC<{
   children: React.ReactNode;
   value: QuickStartContextValues;
 }> = ({ children, value }) => (

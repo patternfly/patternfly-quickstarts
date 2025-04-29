@@ -1,7 +1,7 @@
-import * as React from 'react';
+import { FC, ReactNode } from 'react';
 import { Button, Popover, PopoverPosition } from '@patternfly/react-core';
 
-const PopoverStatus: React.FC<PopoverStatusProps> = ({
+const PopoverStatus: FC<PopoverStatusProps> = ({
   hideHeader,
   children,
   isVisible = null,
@@ -26,8 +26,8 @@ const PopoverStatus: React.FC<PopoverStatusProps> = ({
 );
 
 interface PopoverStatusProps {
-  children: React.ReactNode;
-  statusBody: React.ReactNode;
+  children: ReactNode;
+  statusBody: ReactNode;
   onHide?: (event: MouseEvent | KeyboardEvent) => void;
   onShow?: (event: MouseEvent | KeyboardEvent) => void;
   title?: string;

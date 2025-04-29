@@ -1,15 +1,12 @@
-import * as React from 'react';
+import { useEffect, useMemo } from 'react';
 
 export const useResizeObserver = (
   callback: ResizeObserverCallback,
   targetElement?: HTMLElement | null,
   observerOptions: ResizeObserverOptions = undefined,
 ): void => {
-  const element = React.useMemo(
-    () => targetElement ?? document.querySelector('body'),
-    [targetElement],
-  );
-  React.useEffect(() => {
+  const element = useMemo(() => targetElement ?? document.querySelector('body'), [targetElement]);
+  useEffect(() => {
     const observer = new ResizeObserver(callback);
     observer.observe(element, observerOptions);
     return () => {

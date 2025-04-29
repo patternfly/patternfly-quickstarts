@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useCallback, useContext, useMemo } from 'react';
 import { Button } from '@patternfly/react-core';
 import { css } from '@patternfly/react-styles';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
@@ -17,7 +17,7 @@ export interface QuickStartFooterProps {
   className?: string;
 }
 
-const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
+const QuickStartFooter: FC<QuickStartFooterProps> = ({
   status,
   taskNumber,
   totalTasks,
@@ -26,10 +26,9 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
   quickStartId,
   className,
 }) => {
-  const { restartQuickStart, getResource } =
-    React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { restartQuickStart, getResource } = useContext<QuickStartContextValues>(QuickStartContext);
 
-  const PrimaryButtonText = React.useMemo(
+  const PrimaryButtonText = useMemo(
     () => ({
       START: getResource('Start'),
       CONTINUE: getResource('Continue'),
@@ -39,7 +38,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
     [getResource],
   );
 
-  const SecondaryButtonText = React.useMemo(
+  const SecondaryButtonText = useMemo(
     () => ({
       BACK: getResource('Back'),
       RESTART: getResource('Restart'),
@@ -47,7 +46,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
     [getResource],
   );
 
-  const onRestart = React.useCallback(
+  const onRestart = useCallback(
     (e: React.SyntheticEvent) => {
       e.preventDefault();
       e.stopPropagation();
@@ -56,7 +55,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
     [quickStartId, restartQuickStart, totalTasks],
   );
 
-  const getPrimaryButtonText = React.useMemo(() => {
+  const getPrimaryButtonText = useMemo(() => {
     if (status === QuickStartStatus.NOT_STARTED) {
       return PrimaryButtonText.START;
     }
@@ -72,7 +71,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
     return PrimaryButtonText.CONTINUE;
   }, [taskNumber, totalTasks, PrimaryButtonText, status]);
 
-  const getPrimaryButton = React.useMemo(
+  const getPrimaryButton = useMemo(
     () => (
       <Button
         variant="primary"
@@ -87,7 +86,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
     [getPrimaryButtonText, onNext],
   );
 
-  const getSecondaryButton = React.useMemo(
+  const getSecondaryButton = useMemo(
     () =>
       taskNumber === -1 && status !== QuickStartStatus.NOT_STARTED ? (
         <Button variant="secondary" onClick={onRestart} data-testid="qs-drawer-restart">
@@ -103,7 +102,7 @@ const QuickStartFooter: React.FC<QuickStartFooterProps> = ({
     [onRestart, onBack, SecondaryButtonText, status, taskNumber],
   );
 
-  const getSideNoteAction = React.useMemo(
+  const getSideNoteAction = useMemo(
     () =>
       taskNumber !== -1 && (
         <Button variant="link" onClick={onRestart} data-testid="qs-drawer-side-note-action">

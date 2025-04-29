@@ -1,17 +1,11 @@
-import * as React from 'react';
+import { FC } from 'react';
 import SyncAltIcon from '@patternfly/react-icons/dist/js/icons/sync-alt-icon';
 import { DASH } from '../../constants';
 import { SuccessStatus } from './statuses';
 import StatusIconAndText from './StatusIconAndText';
 import { StatusComponentProps } from './types';
 
-export const Status: React.FC<StatusProps> = ({
-  status,
-  title,
-  iconOnly,
-  noTooltip,
-  className,
-}) => {
+export const Status: FC<StatusProps> = ({ status, title, iconOnly, noTooltip, className }) => {
   const statusProps = { title: title || status, iconOnly, noTooltip, className };
   switch (status) {
     case 'In Progress':
@@ -25,9 +19,7 @@ export const Status: React.FC<StatusProps> = ({
   }
 };
 
-export const StatusIcon: React.FC<StatusIconProps> = ({ status }) => (
-  <Status status={status} iconOnly />
-);
+export const StatusIcon: FC<StatusIconProps> = ({ status }) => <Status status={status} iconOnly />;
 
 interface StatusIconProps {
   status: string;

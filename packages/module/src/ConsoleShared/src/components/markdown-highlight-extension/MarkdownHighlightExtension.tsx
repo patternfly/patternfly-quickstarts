@@ -1,16 +1,16 @@
-import * as React from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Spotlight } from '../spotlight';
 
 interface MarkdownHighlightExtensionProps {
   docContext: Document;
   rootSelector: string;
 }
-const MarkdownHighlightExtension: React.FC<MarkdownHighlightExtensionProps> = ({
+const MarkdownHighlightExtension: FC<MarkdownHighlightExtensionProps> = ({
   docContext,
   rootSelector,
 }) => {
-  const [selector, setSelector] = React.useState<string>(null);
-  React.useEffect(() => {
+  const [selector, setSelector] = useState<string>(null);
+  useEffect(() => {
     const elements = docContext.querySelectorAll(`${rootSelector} [data-highlight]`);
     let timeoutId: NodeJS.Timeout;
     function startHighlight(e) {
@@ -29,7 +29,7 @@ const MarkdownHighlightExtension: React.FC<MarkdownHighlightExtensionProps> = ({
       elements && elements.forEach((elm) => elm.removeEventListener('click', startHighlight));
     };
   }, [docContext, rootSelector]);
-  React.useEffect(() => {
+  useEffect(() => {
     const elements = docContext.querySelectorAll(`${rootSelector} [class^=data-highlight__]`);
     let timeoutId: NodeJS.Timeout;
     function startHighlight(e) {

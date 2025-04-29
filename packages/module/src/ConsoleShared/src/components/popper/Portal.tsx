@@ -1,11 +1,11 @@
 import { useIsomorphicLayoutEffect } from '@patternfly/react-core';
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { useState, ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 
 type GetContainer = Element | null | undefined | (() => Element);
 
 interface PortalProps {
-  children: React.ReactNode;
+  children: ReactNode;
   container?: GetContainer;
 }
 
@@ -13,13 +13,13 @@ const getContainer = (container: GetContainer): Element | null | undefined =>
   typeof container === 'function' ? container() : container;
 
 const Portal = ({ children, container }: PortalProps) => {
-  const [containerNode, setContainerNode] = React.useState<Element>();
+  const [containerNode, setContainerNode] = useState<Element>();
 
   useIsomorphicLayoutEffect(() => {
     setContainerNode(getContainer(container) || document.body);
   }, [container]);
 
-  return containerNode ? ReactDOM.createPortal(children, containerNode) : null;
+  return containerNode ? createPortal(children, containerNode) : null;
 };
 
 export default Portal;

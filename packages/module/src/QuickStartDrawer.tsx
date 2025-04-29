@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { Drawer, DrawerContent, DrawerContentBody } from '@patternfly/react-core';
 import QuickStartCloseModal from './QuickStartCloseModal';
 import QuickStartDrawerContent from './QuickStartDrawerContent';
@@ -19,7 +19,7 @@ export interface QuickStartDrawerProps extends React.HTMLProps<HTMLDivElement> {
   onCloseNotInProgress?: any;
 }
 
-export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
+export const QuickStartDrawer: FC<QuickStartDrawerProps> = ({
   quickStarts = [],
   children,
   appendTo,
@@ -34,9 +34,9 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
     allQuickStarts = [],
     allQuickStartStates,
     setAllQuickStartStates,
-  } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  } = useContext<QuickStartContextValues>(QuickStartContext);
   const combinedQuickStarts = allQuickStarts.concat(quickStarts);
-  React.useEffect(() => {
+  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     // if there is a quick start param, but the quick start is not active, set it
     // this can happen if a new browser session is opened or an incognito window for example
@@ -50,7 +50,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
     }
   }, [activeQuickStartID, combinedQuickStarts, setActiveQuickStart]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // If activeQuickStartID was changed through prop from QuickStartContainer, need to init the state if it does not exist yet
     if (activeQuickStartID && !allQuickStartStates[activeQuickStartID]) {
       setAllQuickStartStates({
@@ -60,7 +60,7 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
     }
   }, [activeQuickStartID, allQuickStartStates, setAllQuickStartStates]);
 
-  const [modalOpen, setModalOpen] = React.useState<boolean>(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const onClose = () => setActiveQuickStart('');
   const handleClose = (activeQuickStartStatus: string | number) => {
     if (activeQuickStartStatus === QuickStartStatus.IN_PROGRESS) {

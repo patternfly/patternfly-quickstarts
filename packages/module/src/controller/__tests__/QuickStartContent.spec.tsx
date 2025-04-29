@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { ComponentProps } from 'react';
 import { ShallowWrapper, shallow } from 'enzyme';
 import { allQuickStarts } from '../../data/quick-start-test-data';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
@@ -8,7 +8,7 @@ import QuickStartContent from '../QuickStartContent';
 import QuickStartIntroduction from '../QuickStartIntroduction';
 import QuickStartTasks from '../QuickStartTasks';
 
-type QuickStartContentProps = React.ComponentProps<typeof QuickStartContent>;
+type QuickStartContentProps = ComponentProps<typeof QuickStartContent>;
 
 let wrapper: ShallowWrapper<QuickStartContentProps>;
 

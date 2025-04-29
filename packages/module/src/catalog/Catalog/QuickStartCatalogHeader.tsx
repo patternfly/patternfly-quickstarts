@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FunctionComponent } from 'react';
 import { Title } from '@patternfly/react-core';
 
 export interface QuickStartCatalogHeaderProps {
@@ -6,7 +6,7 @@ export interface QuickStartCatalogHeaderProps {
   hint?: string;
 }
 
-export const QuickStartCatalogHeader: React.FC<QuickStartCatalogHeaderProps> = ({
+export const QuickStartCatalogHeader: FunctionComponent<QuickStartCatalogHeaderProps> = ({
   title,
   hint,
 }) => (

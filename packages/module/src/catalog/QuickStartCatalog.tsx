@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FunctionComponent, useContext } from 'react';
 import { Gallery } from '@patternfly/react-core';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStart } from '../utils/quick-start-types';
@@ -9,9 +9,9 @@ interface QuickStartCatalogProps {
   quickStarts: QuickStart[];
 }
 
-const QuickStartCatalog: React.FC<QuickStartCatalogProps> = ({ quickStarts }) => {
+const QuickStartCatalog: FunctionComponent<QuickStartCatalogProps> = ({ quickStarts }) => {
   const { activeQuickStartID, allQuickStartStates } =
-    React.useContext<QuickStartContextValues>(QuickStartContext);
+    useContext<QuickStartContextValues>(QuickStartContext);
 
   return (
     <div>

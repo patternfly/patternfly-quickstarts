@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useMemo } from 'react';
 import {
   Accordion,
   AccordionItem,
@@ -10,7 +10,7 @@ import { removeTemplateWhitespace } from './utils';
 import { ACCORDION_MARKDOWN_BUTTON_ID, ACCORDION_MARKDOWN_CONTENT_ID } from './const';
 
 const useAccordionShowdownExtension = () =>
-  React.useMemo(
+  useMemo(
     () => ({
       type: 'lang',
       regex: /\[(.+)]{{(accordion) ("(.*?)")}}/g,

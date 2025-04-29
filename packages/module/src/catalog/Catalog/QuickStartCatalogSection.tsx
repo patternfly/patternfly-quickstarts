@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { FC } from 'react';
 
 export interface QuickStartCatalogSectionProps {
   children: React.ReactNode;
 }
 
-export const QuickStartCatalogSection: React.FC<QuickStartCatalogSectionProps> = ({ children }) => (
+export const QuickStartCatalogSection: FC<QuickStartCatalogSectionProps> = ({ children }) => (
   <div>{children}</div>
 );

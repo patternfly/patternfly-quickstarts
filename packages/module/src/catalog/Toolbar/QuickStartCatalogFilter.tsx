@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { Toolbar, ToolbarContent, ToolbarProps } from '@patternfly/react-core';
 import {
   QuickStartCatalogFilterCountWrapper,
@@ -12,7 +12,7 @@ interface QuickStartCatalogFilterProps extends Omit<ToolbarProps, 'ref'> {
   onStatusChange: any;
 }
 
-const QuickStartCatalogFilter: React.FC<QuickStartCatalogFilterProps> = ({
+const QuickStartCatalogFilter: FC<QuickStartCatalogFilterProps> = ({
   quickStartsCount,
   onSearchInputChange = () => {},
   onStatusChange = () => {},

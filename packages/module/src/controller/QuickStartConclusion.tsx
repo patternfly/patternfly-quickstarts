@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useContext } from 'react';
 import { Button } from '@patternfly/react-core';
 import ArrowRightIcon from '@patternfly/react-icons/dist/js/icons/arrow-right-icon';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
@@ -15,7 +15,7 @@ interface QuickStartConclusionProps {
   onTaskSelect: (selectedTaskNumber: number) => void;
 }
 
-const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
+const QuickStartConclusion: FC<QuickStartConclusionProps> = ({
   tasks,
   conclusion,
   allTaskStatuses,
@@ -24,7 +24,7 @@ const QuickStartConclusion: React.FC<QuickStartConclusionProps> = ({
   onTaskSelect,
 }) => {
   const hasFailedTask = allTaskStatuses.includes(QuickStartTaskStatus.FAILED);
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <>
       <TaskHeaderList tasks={tasks} allTaskStatuses={allTaskStatuses} onTaskSelect={onTaskSelect} />

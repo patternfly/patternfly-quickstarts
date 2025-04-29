@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useContext, useMemo } from 'react';
 import RocketIcon from '@patternfly/react-icons/dist/js/icons/rocket-icon';
 import { FallbackImg } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
@@ -50,7 +50,7 @@ export interface QuickStartTileProps {
   action?: QuickstartAction;
 }
 
-const QuickStartTile: React.FC<QuickStartTileProps> = ({
+const QuickStartTile: FC<QuickStartTileProps> = ({
   quickStart,
   status,
   isActive,
@@ -63,7 +63,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
   } = quickStart;
 
   const { setActiveQuickStart, footer, getResource } =
-    React.useContext<QuickStartContextValues>(QuickStartContext);
+    useContext<QuickStartContextValues>(QuickStartContext);
 
   const statusColorMap = {
     [QuickStartStatus.COMPLETE]: 'green',
@@ -102,7 +102,7 @@ const QuickStartTile: React.FC<QuickStartTileProps> = ({
     onClick();
   };
 
-  const footerComponent = React.useMemo(() => {
+  const footerComponent = useMemo(() => {
     if (footer && footer.show === false) {
       return null;
     }

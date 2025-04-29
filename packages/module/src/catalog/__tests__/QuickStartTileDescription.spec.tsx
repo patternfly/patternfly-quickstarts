@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Popover } from '@patternfly/react-core';
 import { shallow } from 'enzyme';
 import { getQuickStarts } from '../../data/test-utils';

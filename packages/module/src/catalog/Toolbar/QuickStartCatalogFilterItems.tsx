@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, Ref, useCallback, useContext, useEffect, useState } from 'react';
 import {
   Badge,
   MenuToggle,
@@ -15,7 +15,7 @@ import { QUICKSTART_SEARCH_FILTER_KEY, QUICKSTART_STATUS_FILTER_KEY } from '../.
 import { QuickStartContext, QuickStartContextValues } from '../../utils/quick-start-context';
 
 export const QuickStartCatalogFilterSearch = ({ searchInputText, handleTextChange, ...props }) => {
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <ToolbarItem>
       <SearchInput
@@ -37,9 +37,9 @@ export const QuickStartCatalogFilterSelect = ({
   dropdownItems,
   ...props
 }) => {
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
 
-  const toggle = (toggleRef: React.Ref<MenuToggleElement>) => (
+  const toggle = (toggleRef: Ref<MenuToggleElement>) => (
     <MenuToggle
       isFullWidth
       ref={toggleRef}
@@ -69,7 +69,7 @@ export const QuickStartCatalogFilterSelect = ({
 };
 
 export const QuickStartCatalogFilterCount = ({ quickStartsCount }) => {
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <ToolbarItem align={{ default: 'alignEnd' }}>
       {getResource('{{count, number}} item', quickStartsCount).replace(
@@ -83,12 +83,12 @@ export const QuickStartCatalogFilterCount = ({ quickStartsCount }) => {
 interface QuickStartCatalogFilterSearchWrapperProps {
   onSearchInputChange: any;
 }
-export const QuickStartCatalogFilterSearchWrapper: React.FC<
+export const QuickStartCatalogFilterSearchWrapper: FC<
   QuickStartCatalogFilterSearchWrapperProps
 > = ({ onSearchInputChange = () => {} }) => {
   const { useQueryParams, filter, setFilter } =
-    React.useContext<QuickStartContextValues>(QuickStartContext);
-  React.useEffect(() => {
+    useContext<QuickStartContextValues>(QuickStartContext);
+  useEffect(() => {
     //   use this effect to clear the search when a `clear all` action is performed higher up
     const unlisten = history.listen(({ location }) => {
       const searchParams = new URLSearchParams(location.search);
@@ -141,12 +141,12 @@ export const equalsIgnoreOrder = (a: any[], b: any[]) => {
 interface QuickStartCatalogFilterStatusWrapperProps {
   onStatusChange: any;
 }
-export const QuickStartCatalogFilterStatusWrapper: React.FC<
+export const QuickStartCatalogFilterStatusWrapper: FC<
   QuickStartCatalogFilterStatusWrapperProps
 > = ({ onStatusChange = () => {} }) => {
   const { useQueryParams, filter, setFilter } =
-    React.useContext<QuickStartContextValues>(QuickStartContext);
-  React.useEffect(() => {
+    useContext<QuickStartContextValues>(QuickStartContext);
+  useEffect(() => {
     //   use this effect to clear the status when a `clear all` action is performed higher up
     const unlisten = history.listen(({ location }) => {
       const searchParams = new URLSearchParams(location.search);
@@ -160,9 +160,9 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<
       unlisten();
     };
   });
-  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const onRowfilterSelect = React.useCallback(
+  const onRowfilterSelect = useCallback(
     (_e, selectedValue) => {
       setIsDropdownOpen(false);
       const selection = Object.entries(filter.status.statusTypes).find(
@@ -210,6 +210,6 @@ export const QuickStartCatalogFilterStatusWrapper: React.FC<
 interface QuickStartCatalogFilterCountWrapperProps {
   quickStartsCount: number;
 }
-export const QuickStartCatalogFilterCountWrapper: React.FC<
-  QuickStartCatalogFilterCountWrapperProps
-> = ({ quickStartsCount }) => <QuickStartCatalogFilterCount quickStartsCount={quickStartsCount} />;
+export const QuickStartCatalogFilterCountWrapper: FC<QuickStartCatalogFilterCountWrapperProps> = ({
+  quickStartsCount,
+}) => <QuickStartCatalogFilterCount quickStartsCount={quickStartsCount} />;

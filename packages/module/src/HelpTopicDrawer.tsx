@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useContext, useEffect } from 'react';
 import { Drawer, DrawerContent, DrawerContentBody } from '@patternfly/react-core';
 import HelpTopicPanelContent from './HelpTopicPanelContent';
 import {
@@ -33,7 +33,7 @@ export interface HelpTopicContainerProps extends React.HTMLProps<HTMLDivElement>
   children?: React.ReactNode;
 }
 
-export const HelpTopicContainer: React.FC<HelpTopicContainerProps> = ({
+export const HelpTopicContainer: FC<HelpTopicContainerProps> = ({
   helpTopics,
   children,
   resourceBundle,
@@ -54,13 +54,13 @@ export const HelpTopicContainer: React.FC<HelpTopicContainerProps> = ({
     ...contextProps,
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (loading !== valuesForHelpTopicContext.loading) {
       valuesForHelpTopicContext.setLoading(loading);
     }
   }, [loading, valuesForHelpTopicContext]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (
       helpTopics &&
       JSON.stringify(helpTopics) !== JSON.stringify(valuesForHelpTopicContext.helpTopics)
@@ -81,9 +81,9 @@ export interface HelpTopicDrawerProps extends React.HTMLProps<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-export const HelpTopicDrawer: React.FC<HelpTopicDrawerProps> = ({ children, ...props }) => {
+export const HelpTopicDrawer: FC<HelpTopicDrawerProps> = ({ children, ...props }) => {
   const { activeHelpTopic, filteredHelpTopics, setActiveHelpTopicByName } =
-    React.useContext<HelpTopicContextValues>(HelpTopicContext);
+    useContext<HelpTopicContextValues>(HelpTopicContext);
 
   const onClose = () => {
     setActiveHelpTopicByName('');

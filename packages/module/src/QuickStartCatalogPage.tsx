@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useCallback, useContext, useEffect, useState } from 'react';
 import {
   Button,
   Content,
@@ -28,11 +28,11 @@ export interface QuickStartCatalogPageProps {
 }
 
 export const QuickStartCatalogEmptyState = ({ clearFilters }) => {
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <EmptyState
       headingLevel="h4"
-      icon={SearchIcon}
+      icon={SearchIcon as any}
       titleText={<>{getResource('No results found')}</>}
     >
       <EmptyStateBody>
@@ -52,7 +52,7 @@ export const QuickStartCatalogEmptyState = ({ clearFilters }) => {
   );
 };
 
-export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
+export const QuickStartCatalogPage: FC<QuickStartCatalogPageProps> = ({
   quickStarts,
   showFilter,
   sortFnc = (q1, q2) => q1.spec.displayName.localeCompare(q2.spec.displayName),
@@ -60,7 +60,7 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
   hint,
   showTitle = true,
 }) => {
-  const sortFncCallback = React.useCallback(sortFnc, [sortFnc]);
+  const sortFncCallback = useCallback(sortFnc, [sortFnc]);
   const {
     allQuickStarts = [],
     setAllQuickStarts,
@@ -69,9 +69,9 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
     filter,
     setFilter,
     loading,
-  } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  } = useContext<QuickStartContextValues>(QuickStartContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // passed through prop, not context
     if (quickStarts && JSON.stringify(quickStarts) !== JSON.stringify(allQuickStarts)) {
       setAllQuickStarts(quickStarts);
@@ -87,8 +87,8 @@ export const QuickStartCatalogPage: React.FC<QuickStartCatalogPageProps> = ({
       ).sort(sortFncCallback)
     : allQuickStarts;
 
-  const [filteredQuickStarts, setFilteredQuickStarts] = React.useState(initialFilteredQuickStarts);
-  React.useEffect(() => {
+  const [filteredQuickStarts, setFilteredQuickStarts] = useState(initialFilteredQuickStarts);
+  useEffect(() => {
     const filteredQs = showFilter
       ? filterQuickStarts(
           allQuickStarts,

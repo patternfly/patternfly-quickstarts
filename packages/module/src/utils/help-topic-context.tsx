@@ -1,4 +1,4 @@
-import React from 'react';
+import { createContext, useCallback, useState } from 'react';
 import { HelpTopic } from './help-topic-types';
 
 export interface HelpTopicContextValues {
@@ -22,8 +22,7 @@ export const HelpTopicContextDefaults = {
   loading: false,
 };
 
-export const HelpTopicContext =
-  React.createContext<HelpTopicContextValues>(HelpTopicContextDefaults);
+export const HelpTopicContext = createContext<HelpTopicContextValues>(HelpTopicContextDefaults);
 
 export const useValuesForHelpTopicContext = (
   value: HelpTopicContextValues = {},
@@ -33,16 +32,14 @@ export const useValuesForHelpTopicContext = (
     ...value,
   };
 
-  const [loading, setLoading] = React.useState(combinedValue.loading);
+  const [loading, setLoading] = useState(combinedValue.loading);
 
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-  const [helpTopics, setHelpTopics] = React.useState<HelpTopic[]>(combinedValue.helpTopics || []);
+  const [helpTopics, setHelpTopics] = useState<HelpTopic[]>(combinedValue.helpTopics || []);
 
-  const [activeHelpTopic, setActiveHelpTopic] = React.useState(
-    combinedValue.activeHelpTopic || null,
-  );
+  const [activeHelpTopic, setActiveHelpTopic] = useState(combinedValue.activeHelpTopic || null);
 
-  const setActiveHelpTopicByName = React.useCallback(
+  const setActiveHelpTopicByName = useCallback(
     (helpTopicName: string) => {
       const topic = helpTopics.find((t) => t.name === helpTopicName);
       if (!helpTopicName) {
@@ -54,7 +51,7 @@ export const useValuesForHelpTopicContext = (
     [helpTopics],
   );
 
-  const [filteredHelpTopics, setFilteredHelpTopics] = React.useState(
+  const [filteredHelpTopics, setFilteredHelpTopics] = useState(
     combinedValue.filteredHelpTopics || [],
   );
 

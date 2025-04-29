@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { CSSProperties, FC, useContext, useEffect, useRef, useState } from 'react';
 import {
   DrawerActions,
   DrawerCloseButton,
@@ -35,14 +35,14 @@ const getElement = (appendTo: HTMLElement | (() => HTMLElement)) => {
 };
 
 const useScrollTopOnTaskNumberChange = (node: HTMLElement, taskNumber: number): void => {
-  React.useEffect(() => {
+  useEffect(() => {
     if (node) {
       node.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [taskNumber, node]);
 };
 
-const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
+const QuickStartPanelContent: FC<QuickStartPanelContentProps> = ({
   quickStarts = [],
   handleClose,
   activeQuickStartID,
@@ -52,10 +52,10 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
   footerClass,
   ...props
 }) => {
-  const titleRef = React.useRef(null);
+  const titleRef = useRef(null);
   const { getResource, activeQuickStartState, focusOnQuickStart } =
-    React.useContext<QuickStartContextValues>(QuickStartContext);
-  const [contentRef, setContentRef] = React.useState<HTMLDivElement>();
+    useContext<QuickStartContextValues>(QuickStartContext);
+  const [contentRef, setContentRef] = useState<HTMLDivElement>();
   const quickStart = quickStarts.find((qs) => qs.metadata.name === activeQuickStartID);
   const taskNumber = activeQuickStartState?.taskNumber;
   useScrollTopOnTaskNumberChange(contentRef, taskNumber as number);
@@ -74,7 +74,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
     return Number.parseInt(taskNumber as string) + 1;
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (focusOnQuickStart && quickStart) {
       titleRef.current.focus();
     }
@@ -86,7 +86,7 @@ const QuickStartPanelContent: React.FC<QuickStartPanelContentProps> = ({
       data-testid={`qs-drawer-${camelize(quickStart.spec.displayName)}`}
       data-qs={`qs-step-${getStep()}`}
       data-test="quickstart drawer"
-      style={{ '--pf-v6-c-drawer__panel--PaddingBlockStart': '0' } as React.CSSProperties}
+      style={{ '--pf-v6-c-drawer__panel--PaddingBlockStart': '0' } as CSSProperties}
       {...props}
     >
       <div className="pfext-quick-start-panel-content">

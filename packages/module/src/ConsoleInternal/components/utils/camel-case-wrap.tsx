@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { Fragment } from 'react';
 
 const MEMO = {};
 
@@ -16,10 +16,10 @@ export const CamelCaseWrap: React.FC<CamelCaseWrapProps> = ({ value, dataTest })
   const rendered = (
     <span data-test={dataTest}>
       {words.map((word, i) => (
-        <React.Fragment key={i}>
+        <Fragment key={i}>
           {word}
           {i !== words.length - 1 && <wbr />}
-        </React.Fragment>
+        </Fragment>
       ))}
     </span>
   );
