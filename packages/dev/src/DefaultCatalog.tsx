@@ -1,4 +1,3 @@
-import React from 'react';
 import { QuickStartCatalogPage, QuickStart } from '@patternfly/quickstarts';
 
 export const DefaultCatalog = ({ hint }: { hint?: string }) => {

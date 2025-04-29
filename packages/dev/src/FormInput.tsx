@@ -1,4 +1,3 @@
-import React from 'react';
 import { Form, FormGroup, TextInput } from '@patternfly/react-core';
 
 export const FormInput = ({

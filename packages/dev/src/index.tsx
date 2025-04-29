@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 
