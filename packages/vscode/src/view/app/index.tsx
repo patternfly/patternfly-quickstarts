@@ -1,8 +1,7 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
+import { QuickStartsPreview } from './quickstarts';
 
-import "./index.css";
-import { QuickStartsPreview } from "./quickstarts";
+import './index.css';
 
 declare global {
   interface Window {
@@ -14,7 +13,12 @@ declare global {
 
 const vscode = window.acquireVsCodeApi();
 
-ReactDOM.render(
-  <QuickStartsPreview vscode={vscode} initialData={window.initialData} filePath={window.filePath} />,
-  document.getElementById("root")
+const root = createRoot(document.getElementById('root'));
+
+root.render(
+  <QuickStartsPreview
+    vscode={vscode}
+    initialData={window.initialData}
+    filePath={window.filePath}
+  />,
 );

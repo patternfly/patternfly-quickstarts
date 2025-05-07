@@ -1,25 +1,25 @@
-import * as React from 'react';
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import Portal from './Portal';
 
 interface SimplePopperProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const SimplePopper = ({ children }: SimplePopperProps) => {
   const openProp = true;
-  const nodeRef = React.useRef<Element>();
-  const popperRef = React.useRef(null);
-  const [isOpen, setOpenState] = React.useState(openProp);
+  const nodeRef = useRef<Element>(null);
+  const popperRef = useRef(null);
+  const [isOpen, setOpenState] = useState(openProp);
 
-  const setOpen = React.useCallback((newOpen: boolean) => {
+  const setOpen = useCallback((newOpen: boolean) => {
     setOpenState(newOpen);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setOpen(openProp);
   }, [openProp, setOpen]);
 
-  const onKeyDown = React.useCallback(
+  const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.keyCode === 27) {
         setOpen(false);
@@ -28,7 +28,7 @@ const SimplePopper = ({ children }: SimplePopperProps) => {
     [setOpen],
   );
 
-  const onClickOutside = React.useCallback(
+  const onClickOutside = useCallback(
     (e: MouseEvent) => {
       if (!nodeRef.current || (e.target instanceof Node && !nodeRef.current.contains(e.target))) {
         setOpen(false);
@@ -37,7 +37,7 @@ const SimplePopper = ({ children }: SimplePopperProps) => {
     [setOpen],
   );
 
-  const destroy = React.useCallback(() => {
+  const destroy = useCallback(() => {
     if (popperRef.current) {
       popperRef.current.destroy();
       document.removeEventListener('keydown', onKeyDown, true);
@@ -46,7 +46,7 @@ const SimplePopper = ({ children }: SimplePopperProps) => {
     }
   }, [onClickOutside, onKeyDown]);
 
-  const initialize = React.useCallback(() => {
+  const initialize = useCallback(() => {
     if (!nodeRef.current || !isOpen) {
       return;
     }
@@ -54,7 +54,7 @@ const SimplePopper = ({ children }: SimplePopperProps) => {
     destroy();
   }, [isOpen, destroy]);
 
-  const nodeRefCallback = React.useCallback(
+  const nodeRefCallback = useCallback(
     (node) => {
       nodeRef.current = node;
       initialize();
@@ -62,18 +62,18 @@ const SimplePopper = ({ children }: SimplePopperProps) => {
     [initialize],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     initialize();
   }, [initialize]);
 
-  React.useEffect(
+  useEffect(
     () => () => {
       destroy();
     },
     [destroy],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isOpen) {
       destroy();
     }

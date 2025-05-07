@@ -1,6 +1,5 @@
 // TODO: Pull from Patternfly when they add it
 // https://github.com/patternfly/patternfly-design/issues/921#issuecomment-726183814
-import * as React from 'react';
 
 export default (props) => (
   <svg

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useCallback, useContext, useMemo, useState } from 'react';
 import { Tooltip } from '@patternfly/react-core';
 import { QuickStartContext, QuickStartContextValues } from '@quickstarts/utils/quick-start-context';
 import { useEventListener } from '../../hooks';
@@ -10,14 +10,10 @@ interface CopyClipboardProps {
   docContext: Document;
 }
 
-export const CopyClipboard: React.FC<CopyClipboardProps> = ({
-  element,
-  rootSelector,
-  docContext,
-}) => {
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
-  const [showSuccessContent, setShowSuccessContent] = React.useState<boolean>(false);
-  const textToCopy = React.useMemo(() => {
+export const CopyClipboard: FC<CopyClipboardProps> = ({ element, rootSelector, docContext }) => {
+  const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
+  const [showSuccessContent, setShowSuccessContent] = useState<boolean>(false);
+  const textToCopy = useMemo(() => {
     const copyTextId = element.getAttribute(MARKDOWN_COPY_BUTTON_ID);
     return (
       docContext.querySelector(
@@ -29,7 +25,7 @@ export const CopyClipboard: React.FC<CopyClipboardProps> = ({
   useEventListener(
     element,
     'click',
-    React.useCallback(() => {
+    useCallback(() => {
       navigator.clipboard
         .writeText(textToCopy.trim())
         .then(() => {
@@ -42,7 +38,7 @@ export const CopyClipboard: React.FC<CopyClipboardProps> = ({
   useEventListener(
     element,
     'mouseleave',
-    React.useCallback(() => {
+    useCallback(() => {
       setShowSuccessContent(false);
     }, []),
   );
@@ -70,10 +66,7 @@ interface MarkdownCopyClipboardProps {
   rootSelector: string;
 }
 
-const MarkdownCopyClipboard: React.FC<MarkdownCopyClipboardProps> = ({
-  docContext,
-  rootSelector,
-}) => {
+const MarkdownCopyClipboard: FC<MarkdownCopyClipboardProps> = ({ docContext, rootSelector }) => {
   const elements = docContext.querySelectorAll(`${rootSelector} [${MARKDOWN_COPY_BUTTON_ID}]`);
   return elements.length > 0 ? (
     <>

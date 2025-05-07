@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useContext, useState } from 'react';
 import { ExpandableSection, List, ListItem, Stack } from '@patternfly/react-core';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
@@ -13,16 +13,16 @@ interface QuickStartIntroductionProps {
   onTaskSelect: (selectedTaskNumber: number) => void;
 }
 
-const QuickStartIntroduction: React.FC<QuickStartIntroductionProps> = ({
+const QuickStartIntroduction: FC<QuickStartIntroductionProps> = ({
   tasks,
   introduction,
   allTaskStatuses,
   prerequisites,
   onTaskSelect,
 }) => {
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
   const prereqs = prerequisites?.filter((p) => p);
-  const [isPrereqsExpanded, setIsPrereqsExpanded] = React.useState(false);
+  const [isPrereqsExpanded, setIsPrereqsExpanded] = useState(false);
   const prereqList = prereqs?.length > 0 && (
     <ExpandableSection
       toggleText={getResource('View Prerequisites ({{totalPrereqs}})').replace(

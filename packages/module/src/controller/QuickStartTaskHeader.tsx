@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useContext, useEffect, useRef } from 'react';
 import { Title, WizardNavItem } from '@patternfly/react-core';
 import { QuickStartContext } from '../utils/quick-start-context';
 import { QuickStartTaskStatus } from '../utils/quick-start-types';
@@ -16,7 +16,7 @@ interface QuickStartTaskHeaderProps {
   children?: React.ReactNode;
 }
 
-const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
+const QuickStartTaskHeader: FC<QuickStartTaskHeaderProps> = ({
   title,
   taskIndex,
   subtitle,
@@ -26,10 +26,10 @@ const QuickStartTaskHeader: React.FC<QuickStartTaskHeaderProps> = ({
   onTaskSelect,
   children,
 }) => {
-  const titleRef = React.useRef(null);
-  const { focusOnQuickStart } = React.useContext(QuickStartContext);
+  const titleRef = useRef(null);
+  const { focusOnQuickStart } = useContext(QuickStartContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (focusOnQuickStart && isActiveTask) {
       // Focus the WizardNavItem button element that contains the title
       titleRef.current.parentNode.focus();

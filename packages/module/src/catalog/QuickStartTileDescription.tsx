@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useContext, useRef } from 'react';
 import { Button, Flex, Popover } from '@patternfly/react-core';
 import InfoCircleIcon from '@patternfly/react-icons/dist/js/icons/info-circle-icon';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
@@ -8,13 +8,13 @@ interface QuickStartTileDescriptionProps {
   description: string;
   prerequisites?: string[];
 }
-const QuickStartTileDescription: React.FC<QuickStartTileDescriptionProps> = ({
+const QuickStartTileDescription: FC<QuickStartTileDescriptionProps> = ({
   description,
   prerequisites,
 }) => {
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
   const prereqs = prerequisites?.filter((p) => p);
-  const buttonRef = React.useRef<HTMLButtonElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useState } from 'react';
 import { useEventListener } from '../../hooks';
 import { ACCORDION_MARKDOWN_BUTTON_ID, ACCORDION_MARKDOWN_CONTENT_ID } from './const';
 
@@ -7,11 +7,11 @@ interface AccordionShowdownComponentProps {
   contentElement: HTMLElement;
 }
 
-const AccordionShowdownHandler: React.FC<AccordionShowdownComponentProps> = ({
+const AccordionShowdownHandler: FC<AccordionShowdownComponentProps> = ({
   buttonElement,
   contentElement,
 }) => {
-  const [expanded, setExpanded] = React.useState<boolean>(false);
+  const [expanded, setExpanded] = useState<boolean>(false);
 
   const handleClick = () => {
     const expandedModifier = 'pf-m-expanded';
@@ -33,7 +33,7 @@ interface accordionRenderExtensionProps {
   docContext: Document;
 }
 
-const AccordionRenderExtension: React.FC<accordionRenderExtensionProps> = ({ docContext }) => {
+const AccordionRenderExtension: FC<accordionRenderExtensionProps> = ({ docContext }) => {
   const buttonElements = docContext.querySelectorAll(`[id ^= ${ACCORDION_MARKDOWN_BUTTON_ID}]`);
   const contentElements = docContext.querySelectorAll(`[id ^= ${ACCORDION_MARKDOWN_CONTENT_ID}]`);
 

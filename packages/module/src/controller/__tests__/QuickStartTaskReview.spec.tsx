@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Alert } from '@patternfly/react-core';
 import { ShallowWrapper, shallow } from 'enzyme';
 import { allQuickStarts } from '../../data/quick-start-test-data';
@@ -6,8 +5,9 @@ import QuickStartMarkdownView from '../../QuickStartMarkdownView';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
 import { getQuickStartByName } from '../../utils/quick-start-utils';
 import QuickStartTaskReview from '../QuickStartTaskReview';
+import { ComponentProps } from 'react';
 
-type QuickStartTaskReviewProps = React.ComponentProps<typeof QuickStartTaskReview>;
+type QuickStartTaskReviewProps = ComponentProps<typeof QuickStartTaskReview>;
 let wrapper: ShallowWrapper<QuickStartTaskReviewProps>;
 const props: QuickStartTaskReviewProps = {
   review: getQuickStartByName('explore-serverless', allQuickStarts).spec.tasks[0].review,

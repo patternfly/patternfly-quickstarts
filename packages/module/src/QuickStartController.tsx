@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useCallback, useContext, useEffect } from 'react';
 import QuickStartContent from './controller/QuickStartContent';
 import QuickStartFooter from './controller/QuickStartFooter';
 import {
@@ -19,7 +19,7 @@ interface QuickStartControllerProps {
   contentRef?: React.Ref<HTMLDivElement>;
 }
 
-export const QuickStartController: React.FC<QuickStartControllerProps> = ({
+export const QuickStartController: FC<QuickStartControllerProps> = ({
   quickStart,
   nextQuickStarts,
   contentRef,
@@ -40,8 +40,8 @@ export const QuickStartController: React.FC<QuickStartControllerProps> = ({
     setQuickStartTaskStatus,
     nextStep,
     previousStep,
-  } = React.useContext<QuickStartContextValues>(QuickStartContext);
-  React.useEffect(() => {
+  } = useContext<QuickStartContextValues>(QuickStartContext);
+  useEffect(() => {
     // If activeQuickStartID was changed through prop from QuickStartContainer, need to init the state if it does not exist yet
     if (activeQuickStartID && !allQuickStartStates[activeQuickStartID]) {
       setAllQuickStartStates({
@@ -57,17 +57,17 @@ export const QuickStartController: React.FC<QuickStartControllerProps> = ({
     (task, index) => activeQuickStartState[`taskStatus${index}`],
   ) as QuickStartTaskStatus[];
 
-  const handleQuickStartChange = React.useCallback(
+  const handleQuickStartChange = useCallback(
     (quickStartId: string) => setActiveQuickStart(quickStartId),
     [setActiveQuickStart],
   );
 
-  const handleTaskStatusChange = React.useCallback(
+  const handleTaskStatusChange = useCallback(
     (newTaskStatus: QuickStartTaskStatus) => setQuickStartTaskStatus(newTaskStatus),
     [setQuickStartTaskStatus],
   );
 
-  const getQuickStartActiveTask = React.useCallback(() => {
+  const getQuickStartActiveTask = useCallback(() => {
     let activeTaskNumber = 0;
     while (
       activeTaskNumber !== totalTasks &&
@@ -78,12 +78,12 @@ export const QuickStartController: React.FC<QuickStartControllerProps> = ({
     return activeTaskNumber;
   }, [totalTasks, activeQuickStartState]);
 
-  const handleQuickStartContinue = React.useCallback(() => {
+  const handleQuickStartContinue = useCallback(() => {
     const activeTaskNumber = getQuickStartActiveTask();
     setQuickStartTaskNumber(name, activeTaskNumber);
   }, [getQuickStartActiveTask, setQuickStartTaskNumber, name]);
 
-  const handleNext = React.useCallback(() => {
+  const handleNext = useCallback(() => {
     if (status === QuickStartStatus.COMPLETE && taskNumber === totalTasks) {
       return handleQuickStartChange('');
     }
@@ -95,9 +95,9 @@ export const QuickStartController: React.FC<QuickStartControllerProps> = ({
     return nextStep(totalTasks);
   }, [handleQuickStartChange, nextStep, status, taskNumber, totalTasks, handleQuickStartContinue]);
 
-  const handleBack = React.useCallback(() => previousStep(), [previousStep]);
+  const handleBack = useCallback(() => previousStep(), [previousStep]);
 
-  const handleTaskSelect = React.useCallback(
+  const handleTaskSelect = useCallback(
     (selectedTaskNumber: number) => {
       setQuickStartTaskNumber(name, selectedTaskNumber);
     },

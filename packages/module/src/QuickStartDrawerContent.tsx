@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useContext } from 'react';
 import QuickStartPanelContent from './QuickStartPanelContent';
 import { QuickStartContext, QuickStartContextValues } from './utils/quick-start-context';
 import { QuickStart } from './utils/quick-start-types';
@@ -12,7 +12,7 @@ export interface QuickStartDrawerContentProps extends React.HTMLProps<HTMLDivEle
   handleDrawerClose?: (quickStartStatus: string | number) => void;
 }
 
-export const QuickStartDrawerContent: React.FC<QuickStartDrawerContentProps> = ({
+export const QuickStartDrawerContent: FC<QuickStartDrawerContentProps> = ({
   quickStarts = [],
   appendTo,
   fullWidth,
@@ -23,7 +23,7 @@ export const QuickStartDrawerContent: React.FC<QuickStartDrawerContentProps> = (
     activeQuickStartID,
     allQuickStarts = [],
     activeQuickStartState,
-  } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  } = useContext<QuickStartContextValues>(QuickStartContext);
   const combinedQuickStarts = allQuickStarts.concat(quickStarts);
 
   const handleClose = () => {

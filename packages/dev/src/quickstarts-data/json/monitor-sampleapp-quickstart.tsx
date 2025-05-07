@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { QuickStart } from '@patternfly/quickstarts';
 import GithubIcon from '@patternfly/react-icons/dist/js/icons/github-icon';
 

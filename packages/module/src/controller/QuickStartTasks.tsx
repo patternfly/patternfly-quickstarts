@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, Fragment, useContext } from 'react';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QUICKSTART_TASKS_INITIAL_STATES } from '../utils/const';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
@@ -15,7 +15,7 @@ interface QuickStartTaskProps {
   onTaskSelect: (activeQuickStartId) => void;
 }
 
-const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
+const QuickStartTasks: FC<QuickStartTaskProps> = ({
   tasks,
   taskNumber,
   allTaskStatuses,
@@ -23,7 +23,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
   onTaskSelect,
 }) => {
   const { getResource, alwaysShowTaskReview } =
-    React.useContext<QuickStartContextValues>(QuickStartContext);
+    useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <div className="pf-v6-c-wizard pf-v6-c-wizard__nav-list" style={{ padding: '0 0 0 0' }}>
       <ul>
@@ -37,7 +37,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
               (!QUICKSTART_TASKS_INITIAL_STATES.includes(taskStatus) || alwaysShowTaskReview) &&
               review;
             return (
-              <React.Fragment key={title}>
+              <Fragment key={title}>
                 <TaskHeader
                   taskIndex={index + 1}
                   title={title}
@@ -62,7 +62,7 @@ const QuickStartTasks: React.FC<QuickStartTaskProps> = ({
                     </Stack>
                   )}
                 </TaskHeader>
-              </React.Fragment>
+              </Fragment>
             );
           })}
       </ul>

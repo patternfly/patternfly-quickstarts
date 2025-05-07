@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useContext, useMemo } from 'react';
 import { QuickStartContext, QuickStartContextValues } from '@quickstarts/utils/quick-start-context';
 import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
 import { removeTemplateWhitespace } from './utils';
@@ -6,8 +6,8 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import CopyIcon from '@patternfly/react-icons/dist/js/icons/copy-icon';
 
 const useInlineCopyClipboardShowdownExtension = () => {
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
-  return React.useMemo(
+  const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
+  return useMemo(
     () => ({
       type: 'lang',
       regex: /`([^`](.*?)[^`])`{{copy}}/g,

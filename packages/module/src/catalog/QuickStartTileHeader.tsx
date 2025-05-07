@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { Button, Flex } from '@patternfly/react-core';
 
 interface QuickStartTileHeaderProps {
@@ -7,11 +7,7 @@ interface QuickStartTileHeaderProps {
   onSelect: (e: React.FormEvent<HTMLInputElement> | React.MouseEvent<Element, MouseEvent>) => void;
 }
 
-const QuickStartTileHeader: React.FC<QuickStartTileHeaderProps> = ({
-  name,
-  quickStartId,
-  onSelect,
-}) => (
+const QuickStartTileHeader: FC<QuickStartTileHeaderProps> = ({ name, quickStartId, onSelect }) => (
   <Flex flexWrap={{ default: 'nowrap' }}>
     <Button data-test="title" id={quickStartId} variant="link" isInline onClick={onSelect}>
       {name}

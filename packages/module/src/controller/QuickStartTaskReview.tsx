@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { CSSProperties, FC, useContext } from 'react';
 import { Alert, Radio } from '@patternfly/react-core';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
@@ -24,13 +24,13 @@ const getAlertVariant = (status) => {
   }
 };
 
-const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
+const QuickStartTaskReview: FC<QuickStartTaskReviewProps> = ({
   review,
   taskStatus,
   onTaskReview,
 }) => {
   const { instructions, failedTaskHelp: taskHelp } = review;
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
 
   return (
     <Alert
@@ -41,7 +41,7 @@ const QuickStartTaskReview: React.FC<QuickStartTaskReviewProps> = ({
       style={
         {
           marginBottom: 'var(--pf-t--global--spacer--md)',
-        } as React.CSSProperties
+        } as CSSProperties
       }
     >
       <QuickStartMarkdownView content={instructions} />

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { css } from '@patternfly/react-styles';
 import { marked } from 'marked';
 import { useForceRender } from '@console/shared';
@@ -121,7 +121,7 @@ type InnerSyncMarkdownProps = Pick<SyncMarkdownProps, 'renderExtension' | 'exact
   className?: string;
 };
 
-export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
+export const SyncMarkdownView: FC<SyncMarkdownProps> = ({
   content,
   emptyMsg,
   extensions,
@@ -130,10 +130,10 @@ export const SyncMarkdownView: React.FC<SyncMarkdownProps> = ({
   inline,
   className,
 }) => {
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
-  const [markup, setMarkup] = React.useState<string>('');
+  const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
+  const [markup, setMarkup] = useState<string>('');
 
-  React.useEffect(() => {
+  useEffect(() => {
     async function getMd() {
       const md = await markdownConvert(
         content || emptyMsg || getResource('Not available'),
@@ -176,8 +176,8 @@ const RenderExtension: React.FC<RenderExtensionProps> = ({
   docContext,
 }) => {
   const forceRender = useForceRender();
-  const markupRef = React.useRef<string>(null);
-  const shouldRenderExtension = React.useCallback(() => {
+  const markupRef = useRef<string>(null);
+  const shouldRenderExtension = useCallback(() => {
     if (markupRef.current === markup) {
       return true;
     }
@@ -190,7 +190,7 @@ const RenderExtension: React.FC<RenderExtensionProps> = ({
    * which causes the component rendered by renderExtension to receive old copy of document
    * use forceRender to delay the rendering of extension by one render cycle
    */
-  React.useEffect(() => {
+  useEffect(() => {
     if (renderExtension) {
       forceRender();
     }
@@ -201,13 +201,13 @@ const RenderExtension: React.FC<RenderExtensionProps> = ({
   );
 };
 
-const InlineMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
+const InlineMarkdownView: FC<InnerSyncMarkdownProps> = ({
   markup,
   isEmpty,
   renderExtension,
   className,
 }) => {
-  const id = React.useMemo(() => uniqueId('markdown'), []);
+  const id = useMemo(() => uniqueId('markdown'), []);
   return (
     <div className={css({ 'is-empty': isEmpty } as any, className)} id={id}>
       <div dangerouslySetInnerHTML={{ __html: markup }} />
@@ -218,18 +218,18 @@ const InlineMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
   );
 };
 
-const IFrameMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
+const IFrameMarkdownView: FC<InnerSyncMarkdownProps> = ({
   exactHeight,
   markup,
   isEmpty,
   renderExtension,
   className,
 }) => {
-  const [frame, setFrame] = React.useState<HTMLIFrameElement>();
-  const [loaded, setLoaded] = React.useState(false);
-  const updateTimeoutHandle = React.useRef<NodeJS.Timeout>();
+  const [frame, setFrame] = useState<HTMLIFrameElement>();
+  const [loaded, setLoaded] = useState(false);
+  const updateTimeoutHandle = useRef<NodeJS.Timeout>(null);
 
-  const updateDimensions = React.useCallback(() => {
+  const updateDimensions = useCallback(() => {
     if (!frame?.contentWindow?.document.body.firstChild) {
       return;
     }
@@ -248,14 +248,14 @@ const IFrameMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
     });
   }, [frame, exactHeight]);
 
-  React.useEffect(
+  useEffect(
     () => () => {
       clearTimeout(updateTimeoutHandle.current);
     },
     [],
   );
 
-  const onLoad = React.useCallback(() => {
+  const onLoad = useCallback(() => {
     updateDimensions();
     setLoaded(true);
   }, [updateDimensions]);
@@ -302,7 +302,9 @@ const IFrameMarkdownView: React.FC<InnerSyncMarkdownProps> = ({
         sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin"
         srcDoc={contents}
         style={{ border: '0px', display: 'block', width: '100%', height: '0' }}
-        ref={(r) => setFrame(r)}
+        ref={(r) => {
+          setFrame(r);
+        }}
         onLoad={() => onLoad()}
         className={className}
       />

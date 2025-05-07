@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useContext, useState } from 'react';
 import {
   Button,
   Divider,
@@ -30,16 +30,16 @@ interface HelpTopicPanelContentProps {
   onClose: () => void;
 }
 
-const HelpTopicPanelContent: React.FC<HelpTopicPanelContentProps> = ({
+const HelpTopicPanelContent: FC<HelpTopicPanelContentProps> = ({
   activeHelpTopic = null,
   filteredHelpTopics = [],
   isResizable = true,
   onClose,
   ...props
 }) => {
-  const { setActiveHelpTopicByName } = React.useContext<HelpTopicContextValues>(HelpTopicContext);
+  const { setActiveHelpTopicByName } = useContext<HelpTopicContextValues>(HelpTopicContext);
 
-  const [isHelpTopicMenuOpen, setIsHelpTopicMenuOpen] = React.useState(false);
+  const [isHelpTopicMenuOpen, setIsHelpTopicMenuOpen] = useState(false);
 
   const toggleHelpTopicMenu = () => {
     setIsHelpTopicMenuOpen(!isHelpTopicMenuOpen);

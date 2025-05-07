@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useEffect } from 'react';
 import {
   QuickStartContext,
   QuickStartContextValues,
@@ -58,7 +58,7 @@ export interface QuickStartContainerProps extends React.HTMLProps<HTMLDivElement
   isManagedDrawer?: boolean;
 }
 
-export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
+export const QuickStartContainer: FC<QuickStartContainerProps> = ({
   quickStarts,
   children,
   activeQuickStartID,
@@ -105,7 +105,7 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
     ...contextProps,
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (
       quickStarts &&
       JSON.stringify(quickStarts) !== JSON.stringify(valuesForQuickstartContext.allQuickStarts)
@@ -114,7 +114,7 @@ export const QuickStartContainer: React.FC<QuickStartContainerProps> = ({
     }
   }, [quickStarts, valuesForQuickstartContext]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (loading !== valuesForQuickstartContext.loading) {
       valuesForQuickstartContext.setLoading(loading);
     }

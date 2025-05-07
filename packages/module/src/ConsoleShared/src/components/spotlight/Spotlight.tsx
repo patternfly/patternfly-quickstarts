@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useMemo } from 'react';
 import InteractiveSpotlight from './InteractiveSpotlight';
 import StaticSpotlight from './StaticSpotlight';
 
@@ -7,9 +7,9 @@ interface SpotlightProps {
   interactive?: boolean;
 }
 
-const Spotlight: React.FC<SpotlightProps> = ({ selector, interactive }) => {
+const Spotlight: FC<SpotlightProps> = ({ selector, interactive }) => {
   // if target element is a hidden one return null
-  const element = React.useMemo(() => {
+  const element = useMemo(() => {
     const highlightElement = document.querySelector(selector);
     let hiddenElement = highlightElement;
     while (hiddenElement) {

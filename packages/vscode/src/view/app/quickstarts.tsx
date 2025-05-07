@@ -1,8 +1,7 @@
-import * as React from "react";
-import "@patternfly/patternfly/base/patternfly-shield-inheritable.css";
-import "@patternfly/patternfly/patternfly.min.css";
-import "@patternfly/patternfly/utilities/Accessibility/accessibility.css";
-import "@patternfly/quickstarts/dist/quickstarts.css";
+import '@patternfly/patternfly/base/patternfly-shield-inheritable.css';
+import '@patternfly/patternfly/patternfly.min.css';
+import '@patternfly/patternfly/utilities/Accessibility/accessibility.css';
+import '@patternfly/quickstarts/dist/quickstarts.css';
 import {
   ProcedureAsciiDocParser,
   QuickStartCatalogPage,
@@ -10,29 +9,19 @@ import {
   QuickStartDrawer,
   useLocalStorage,
   useValuesForQuickStartContext,
-} from "@patternfly/quickstarts";
-import { Base64 } from "js-base64";
+} from '@patternfly/quickstarts';
+import { Base64 } from 'js-base64';
 
-export const QuickStartsPreview = ({
-  initialData: config,
-  filePath,
-  vscode,
-}) => {
+export const QuickStartsPreview = ({ initialData: config, filePath, vscode }) => {
   const decodedConfig = Base64.decode(config);
   const allQuickStarts = [];
-  if (filePath.endsWith(".adoc")) {
+  if (filePath.endsWith('.adoc')) {
     allQuickStarts.push(ProcedureAsciiDocParser(decodedConfig));
   } else {
     allQuickStarts.push(JSON.parse(decodedConfig));
   }
-  const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage(
-    "quickstartId",
-    ""
-  );
-  const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage(
-    "quickstarts",
-    {}
-  );
+  const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage('quickstartId', '');
+  const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage('quickstarts', {});
   const valuesForQuickstartContext = useValuesForQuickStartContext({
     allQuickStarts,
     activeQuickStartID,

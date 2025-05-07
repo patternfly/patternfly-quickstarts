@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useContext } from 'react';
 import { Button, Flex, FlexItem } from '@patternfly/react-core';
 import { ModalVariant } from '@patternfly/react-core/deprecated';
 import { Modal } from '@console/shared';
@@ -10,12 +10,8 @@ interface QuickStartCloseModalProps {
   onCancel: () => void;
 }
 
-const QuickStartCloseModal: React.FC<QuickStartCloseModalProps> = ({
-  isOpen,
-  onConfirm,
-  onCancel,
-}) => {
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+const QuickStartCloseModal: FC<QuickStartCloseModalProps> = ({ isOpen, onConfirm, onCancel }) => {
+  const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <Modal
       isOpen={isOpen}

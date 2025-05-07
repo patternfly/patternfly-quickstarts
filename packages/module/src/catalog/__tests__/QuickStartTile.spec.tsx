@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Card } from '@patternfly/react-core';
 import { shallow } from 'enzyme';
 import { getQuickStarts } from '../../data/test-utils';

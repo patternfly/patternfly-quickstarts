@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useContext } from 'react';
 import { SyncMarkdownView } from '@console/internal/components/markdown-view';
 import {
   AccordionRenderExtension,
@@ -21,12 +21,12 @@ interface QuickStartMarkdownViewProps {
   className?: string;
 }
 
-const QuickStartMarkdownView: React.FC<QuickStartMarkdownViewProps> = ({
+const QuickStartMarkdownView: FC<QuickStartMarkdownViewProps> = ({
   content,
   exactHeight,
   className,
 }) => {
-  const { markdown } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { markdown } = useContext<QuickStartContextValues>(QuickStartContext);
   const inlineCopyClipboardShowdownExtension = useInlineCopyClipboardShowdownExtension();
   const multilineCopyClipboardShowdownExtension = useMultilineCopyClipboardShowdownExtension();
   const admonitionShowdownExtension = useAdmonitionShowdownExtension();

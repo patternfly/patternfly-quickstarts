@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useMemo } from 'react';
 import { removeTemplateWhitespace } from './utils';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { Alert } from '@patternfly/react-core';
@@ -24,7 +24,7 @@ const admonitionToAlertVariantMap = {
 
 const useAdmonitionShowdownExtension = () =>
   // const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
-  React.useMemo(
+  useMemo(
     () => ({
       type: 'lang',
       regex: /\[(.+)]{{(admonition) ([\w-]+)}}/g,

@@ -1,5 +1,5 @@
 import './spotlight.scss';
-import * as React from 'react';
+import { CSSProperties, FC, useEffect, useState } from 'react';
 import { Portal, SimplePopper } from '../popper';
 
 interface InteractiveSpotlightProps {
@@ -16,9 +16,9 @@ const isInViewport = (elementToCheck: Element) => {
   );
 };
 
-const InteractiveSpotlight: React.FC<InteractiveSpotlightProps> = ({ element }) => {
+const InteractiveSpotlight: FC<InteractiveSpotlightProps> = ({ element }) => {
   const { top, bottom, left, right, height, width } = element.getBoundingClientRect();
-  const style: React.CSSProperties = {
+  const style: CSSProperties = {
     height,
     width,
     top,
@@ -26,9 +26,9 @@ const InteractiveSpotlight: React.FC<InteractiveSpotlightProps> = ({ element }) 
     bottom,
     right,
   };
-  const [clicked, setClicked] = React.useState(false);
+  const [clicked, setClicked] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!clicked) {
       if (!isInViewport(element)) {
         element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });

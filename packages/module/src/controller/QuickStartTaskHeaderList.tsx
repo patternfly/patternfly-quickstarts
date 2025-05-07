@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
 import TaskHeader from './QuickStartTaskHeader';
 
@@ -8,7 +8,7 @@ interface QuickStartTaskHeaderListProps {
   onTaskSelect: (selectedTaskNumber: number) => void;
 }
 
-const QuickStartTaskHeaderList: React.FC<QuickStartTaskHeaderListProps> = ({
+const QuickStartTaskHeaderList: FC<QuickStartTaskHeaderListProps> = ({
   tasks,
   allTaskStatuses,
   onTaskSelect,

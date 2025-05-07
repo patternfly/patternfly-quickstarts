@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { forwardRef } from 'react';
 import { QuickStart, QuickStartTaskStatus } from '../utils/quick-start-types';
 import QuickStartConclusion from './QuickStartConclusion';
 import QuickStartIntroduction from './QuickStartIntroduction';
@@ -14,7 +14,7 @@ interface QuickStartContentProps {
 }
 import './QuickStartContent.scss';
 
-const QuickStartContent = React.forwardRef<HTMLDivElement, QuickStartContentProps>(
+const QuickStartContent = forwardRef<HTMLDivElement, QuickStartContentProps>(
   (
     {
       quickStart,

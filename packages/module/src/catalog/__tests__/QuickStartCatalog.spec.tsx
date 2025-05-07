@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Gallery, Card } from '@patternfly/react-core';
 import { shallow } from 'enzyme';
 import { EmptyBox } from '@console/internal/components/utils';

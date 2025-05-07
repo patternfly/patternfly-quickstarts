@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC, useCallback, useContext } from 'react';
 import { Button, Flex, FlexItem } from '@patternfly/react-core';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStartStatus } from '../utils/quick-start-types';
@@ -12,21 +12,21 @@ interface QuickStartTileFooterProps {
   ) => void;
 }
 
-const QuickStartTileFooter: React.FC<QuickStartTileFooterProps> = ({
+const QuickStartTileFooter: FC<QuickStartTileFooterProps> = ({
   quickStartId,
   status,
   totalTasks,
   onClickContinue,
 }) => {
-  const { getResource } = React.useContext<QuickStartContextValues>(QuickStartContext);
+  const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
   const { activeQuickStartID, startQuickStart, restartQuickStart } =
-    React.useContext<QuickStartContextValues>(QuickStartContext);
+    useContext<QuickStartContextValues>(QuickStartContext);
 
-  const start = React.useCallback(() => {
+  const start = useCallback(() => {
     startQuickStart(quickStartId, totalTasks);
   }, [quickStartId, startQuickStart, totalTasks]);
 
-  const restart = React.useCallback(() => {
+  const restart = useCallback(() => {
     restartQuickStart(quickStartId, totalTasks);
   }, [quickStartId, restartQuickStart, totalTasks]);
 
