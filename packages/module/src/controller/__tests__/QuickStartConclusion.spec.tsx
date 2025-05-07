@@ -6,7 +6,6 @@ import QuickStartMarkdownView from '../../QuickStartMarkdownView';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
 import { getQuickStartByName } from '../../utils/quick-start-utils';
 import QuickStartConclusion from '../QuickStartConclusion';
-import React from 'react';
 
 jest.mock('react', () => {
   const ActualReact = require.requireActual('react');
