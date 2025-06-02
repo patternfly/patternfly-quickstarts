@@ -165,7 +165,12 @@ export const QuickStartDrawer: React.FC<QuickStartDrawerProps> = ({
     setAllQuickStartStates,
     useLegacyHeaderColors,
   } = React.useContext<QuickStartContextValues>(QuickStartContext);
-  const combinedQuickStarts = allQuickStarts.concat(quickStarts);
+  const combinedQuickStarts = [
+    ...allQuickStarts,
+    ...quickStarts,
+  ].filter(
+    (qs, idx, arr) => arr.findIndex(q => q.metadata.name === qs.metadata.name) === idx
+  );
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     // if there is a quick start param, but the quick start is not active, set it
