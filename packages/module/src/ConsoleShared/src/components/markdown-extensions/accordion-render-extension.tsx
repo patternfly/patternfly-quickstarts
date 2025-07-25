@@ -14,14 +14,26 @@ const AccordionShowdownHandler: FC<AccordionShowdownComponentProps> = ({
   const [expanded, setExpanded] = useState<boolean>(false);
 
   const handleClick = () => {
+    const newExpanded = !expanded;
     const expandedModifier = 'pf-m-expanded';
 
-    buttonElement.className = `pf-v6-c-accordion__toggle ${!expanded ? expandedModifier : ''}`;
-    contentElement.hidden = expanded;
-    contentElement.className = `pf-v6-c-accordion__expanded-content ${
-      !expanded ? expandedModifier : ''
-    }`;
-    setExpanded(!expanded);
+    // Find the accordion item element (parent of the button)
+    const accordionItem = buttonElement.closest('.pf-v6-c-accordion__item');
+
+    // Update button - both visual state and aria-expanded
+    buttonElement.className = `pf-v6-c-accordion__toggle ${newExpanded ? expandedModifier : ''}`;
+    buttonElement.setAttribute('aria-expanded', newExpanded.toString());
+    
+    // Update content - both visual state and hidden attribute
+    contentElement.hidden = !newExpanded;
+    contentElement.className = `pf-v6-c-accordion__expandable-content ${newExpanded ? expandedModifier : ''}`;
+    
+    // Update accordion item
+    if (accordionItem) {
+      accordionItem.className = `pf-v6-c-accordion__item ${newExpanded ? expandedModifier : ''}`;
+    }
+    
+    setExpanded(newExpanded);
   };
 
   useEventListener(buttonElement, 'click', handleClick);
