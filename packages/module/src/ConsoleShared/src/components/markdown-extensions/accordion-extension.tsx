@@ -24,9 +24,9 @@ const useAccordionShowdownExtension = () =>
         _command: string,
         _quotedHeading: string,
         accordionHeading: string,
-              ): string => {
-          const accordionId = String(accordionHeading).replace(/\s/g, '-');
-        
+      ): string => {
+        const accordionId = String(accordionHeading).replace(/\s/g, '-');
+
         // Process accordion content with markdown
         const processedContent = marked.parseInline(accordionContent);
         const sanitizedContent = DOMPurify.sanitize(processedContent);
@@ -35,19 +35,14 @@ const useAccordionShowdownExtension = () =>
           renderToStaticMarkup(
             <Accordion>
               <AccordionItem>
-                <AccordionToggle 
-                  id={`${ACCORDION_MARKDOWN_BUTTON_ID}-${accordionId}`}
-                >
+                <AccordionToggle id={`${ACCORDION_MARKDOWN_BUTTON_ID}-${accordionId}`}>
                   {accordionHeading}
                 </AccordionToggle>
-                <AccordionContent 
-                  id={`${ACCORDION_MARKDOWN_CONTENT_ID}-${accordionId}`}
-                  hidden
-                >
+                <AccordionContent id={`${ACCORDION_MARKDOWN_CONTENT_ID}-${accordionId}`} hidden>
                   <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
                 </AccordionContent>
               </AccordionItem>
-            </Accordion>
+            </Accordion>,
           ),
         );
       },

@@ -48,9 +48,10 @@ const useAdmonitionShowdownExtension = () =>
         // Process markdown content directly using marked
         const processedContent = marked.parseInline(content);
         const sanitizedContent = DOMPurify.sanitize(processedContent);
-        
+
         // Handle unknown admonition types by defaulting to NOTE
-        const admonitionConfig = admonitionToAlertVariantMap[admonitionType] || admonitionToAlertVariantMap['NOTE'];
+        const admonitionConfig =
+          admonitionToAlertVariantMap[admonitionType] || admonitionToAlertVariantMap.NOTE;
         const { variant, customIcon } = admonitionConfig;
         const pfAlert = (
           <Alert

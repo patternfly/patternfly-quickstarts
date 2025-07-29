@@ -23,16 +23,18 @@ const AccordionShowdownHandler: FC<AccordionShowdownComponentProps> = ({
     // Update button - both visual state and aria-expanded
     buttonElement.className = `pf-v6-c-accordion__toggle ${newExpanded ? expandedModifier : ''}`;
     buttonElement.setAttribute('aria-expanded', newExpanded.toString());
-    
+
     // Update content - both visual state and hidden attribute
     contentElement.hidden = !newExpanded;
-    contentElement.className = `pf-v6-c-accordion__expandable-content ${newExpanded ? expandedModifier : ''}`;
-    
+    contentElement.className = `pf-v6-c-accordion__expandable-content ${
+      newExpanded ? expandedModifier : ''
+    }`;
+
     // Update accordion item
     if (accordionItem) {
       accordionItem.className = `pf-v6-c-accordion__item ${newExpanded ? expandedModifier : ''}`;
     }
-    
+
     setExpanded(newExpanded);
   };
 

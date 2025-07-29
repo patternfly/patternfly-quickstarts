@@ -24,11 +24,8 @@ export const QuickStartDrawerContent: FC<QuickStartDrawerContentProps> = ({
     allQuickStarts = [],
     activeQuickStartState,
   } = useContext<QuickStartContextValues>(QuickStartContext);
-  const combinedQuickStarts = [
-    ...allQuickStarts,
-    ...quickStarts,
-  ].filter(
-    (qs, idx, arr) => arr.findIndex(q => q.metadata.name === qs.metadata.name) === idx
+  const combinedQuickStarts = [...allQuickStarts, ...quickStarts].filter(
+    (qs, idx, arr) => arr.findIndex((q) => q.metadata.name === qs.metadata.name) === idx,
   );
 
   const handleClose = () => {
