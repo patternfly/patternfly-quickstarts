@@ -47,7 +47,7 @@ const QuickStartIntroduction: FC<QuickStartIntroductionProps> = ({
       <p>
         {getResource(
           'In this quick start, you will complete {{count, number}} task',
-          tasks?.length,
+          tasks?.length || 0,
         ).replace('{{count, number}}', tasks?.length || 0)}
         :
       </p>

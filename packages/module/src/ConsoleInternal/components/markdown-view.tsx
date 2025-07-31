@@ -25,7 +25,7 @@ export const markdownConvert = async (markdown: string, extensions?: ShowdownExt
       return node;
     }
 
-    // add PF content classes
+    // add PF content classes to standard elements (details blocks get handled separately)
     if (node.nodeType === 1) {
       const contentElements = [
         'ul',
@@ -85,7 +85,90 @@ export const markdownConvert = async (markdown: string, extensions?: ShowdownExt
   );
   const markdownWithSubstitutedCodeFences = reverseString(reverseMarkdownWithSubstitutedCodeFences);
 
-  const parsedMarkdown = await marked.parse(markdownWithSubstitutedCodeFences);
+  // Fix malformed HTML entities early in the process
+  let preprocessedMarkdown = markdownWithSubstitutedCodeFences;
+  preprocessedMarkdown = preprocessedMarkdown
+    .replace(/&nbsp([^;])/g, '&nbsp;$1')
+    .replace(/&amp;nbsp;/g, '&nbsp;');
+  preprocessedMarkdown = preprocessedMarkdown.replace(/&nbsp(?![;])/g, '&nbsp;');
+
+  // Process content in segments to ensure markdown parsing continues after HTML blocks
+  const htmlBlockRegex =
+    /(<(?:details|div|section|article)[^>]*>[\s\S]*?<\/(?:details|div|section|article)>)/g;
+
+  let parsedMarkdown = '';
+
+  // Check if there are any HTML blocks
+  if (htmlBlockRegex.test(preprocessedMarkdown)) {
+    // Reset regex for actual processing
+    htmlBlockRegex.lastIndex = 0;
+
+    let lastIndex = 0;
+    let match;
+
+    while ((match = htmlBlockRegex.exec(preprocessedMarkdown)) !== null) {
+      // Process markdown before the HTML block
+      const markdownBefore = preprocessedMarkdown.slice(lastIndex, match.index).trim();
+      if (markdownBefore) {
+        const parsed = await marked.parse(markdownBefore);
+        parsedMarkdown += parsed;
+      }
+
+      // Process the HTML block: parse markdown content inside while preserving HTML structure
+      let htmlBlock = match[1];
+
+      // Find and process markdown content inside HTML tags
+      const contentRegex = />(\s*[\s\S]*?)\s*</g;
+      const contentMatches = [];
+      let contentMatch;
+
+      while ((contentMatch = contentRegex.exec(htmlBlock)) !== null) {
+        const content = contentMatch[1];
+        // Only process content that has markdown formatting but no extension syntax
+        if (
+          content.trim() &&
+          !content.includes('{{') &&
+          (content.includes('**') || content.includes('- ') || content.includes('\n'))
+        ) {
+          // This looks like markdown content without extensions - parse it as block content
+          const parsedContent = await marked.parse(content.trim());
+          // Remove wrapping <p> tags if they exist since we're inside HTML already
+          const cleanedContent = parsedContent.replace(/^<p[^>]*>([\s\S]*)<\/p>[\s]*$/g, '$1');
+          contentMatches.push({
+            original: contentMatch[0],
+            replacement: `>${cleanedContent}<`,
+          });
+        }
+      }
+
+      // Apply the content replacements
+      contentMatches.forEach(({ original, replacement }) => {
+        htmlBlock = htmlBlock.replace(original, replacement);
+      });
+
+      // Apply extensions (like admonitions) to the processed HTML block
+      if (extensions) {
+        extensions.forEach(({ regex, replace }) => {
+          if (regex) {
+            htmlBlock = htmlBlock.replace(regex, replace);
+          }
+        });
+      }
+
+      parsedMarkdown += htmlBlock;
+      lastIndex = htmlBlockRegex.lastIndex;
+    }
+
+    // Process any remaining markdown after the last HTML block
+    const markdownAfter = preprocessedMarkdown.slice(lastIndex).trim();
+    if (markdownAfter) {
+      const parsed = await marked.parse(markdownAfter);
+      parsedMarkdown += parsed;
+    }
+  } else {
+    // No HTML blocks found, process normally
+    parsedMarkdown = await marked.parse(preprocessedMarkdown);
+  }
   // Swap the temporary tokens back to code fences before we run the extensions
   let md = parsedMarkdown.replace(/@@@/g, '```');
 
@@ -93,7 +176,7 @@ export const markdownConvert = async (markdown: string, extensions?: ShowdownExt
     // Convert code spans back to md format before we run the custom extension regexes
     md = md.replace(/<code>(.*)<\/code>/g, '`$1`');
 
-    extensions.forEach(({ regex, replace }) => {
+    extensions.forEach(({ regex, replace }, _index) => {
       if (regex) {
         md = md.replace(regex, replace);
       }
@@ -102,6 +185,7 @@ export const markdownConvert = async (markdown: string, extensions?: ShowdownExt
     // Convert any remaining backticks back into code spans
     md = md.replace(/`(.*)`/g, '<code>$1</code>');
   }
+
   return DOMPurify.sanitize(md);
 };
 
@@ -210,7 +294,10 @@ const InlineMarkdownView: FC<InnerSyncMarkdownProps> = ({
   const id = useMemo(() => uniqueId('markdown'), []);
   return (
     <div className={css({ 'is-empty': isEmpty } as any, className)} id={id}>
-      <div dangerouslySetInnerHTML={{ __html: markup }} />
+      <div
+        style={{ marginBlockEnd: 'var(--pf-t-global--spacer--md)' }}
+        dangerouslySetInnerHTML={{ __html: markup }}
+      />
       {renderExtension && (
         <RenderExtension renderExtension={renderExtension} selector={`#${id}`} markup={markup} />
       )}
@@ -299,6 +386,7 @@ const IFrameMarkdownView: FC<InnerSyncMarkdownProps> = ({
   return (
     <>
       <iframe
+        title="Markdown content preview"
         sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin"
         srcDoc={contents}
         style={{ border: '0px', display: 'block', width: '100%', height: '0' }}

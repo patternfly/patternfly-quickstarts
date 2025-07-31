@@ -4,7 +4,10 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { Alert } from '@patternfly/react-core';
 import LightbulbIcon from '@patternfly/react-icons/dist/js/icons/lightbulb-icon';
 import FireIcon from '@patternfly/react-icons/dist/js/icons/fire-icon';
-import QuickStartMarkdownView from '../../../../QuickStartMarkdownView';
+import { marked } from 'marked';
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const DOMPurify = require('dompurify');
 
 enum AdmonitionType {
   TIP = 'TIP',
@@ -33,15 +36,23 @@ const useAdmonitionShowdownExtension = () =>
         content: string,
         admonitionLabel: string,
         admonitionType: string,
-        groupId: string,
       ): string => {
-        if (!content || !admonitionLabel || !admonitionType || !groupId) {
+        if (!content || !admonitionLabel || !admonitionType) {
+          return text;
+        }
+        if (admonitionLabel !== 'admonition') {
           return text;
         }
         admonitionType = admonitionType.toUpperCase();
 
-        const { variant, customIcon } = admonitionToAlertVariantMap[admonitionType];
-        const mdContent = <QuickStartMarkdownView content={content} />;
+        // Process markdown content directly using marked
+        const processedContent = marked.parseInline(content);
+        const sanitizedContent = DOMPurify.sanitize(processedContent);
+
+        // Handle unknown admonition types by defaulting to NOTE
+        const admonitionConfig =
+          admonitionToAlertVariantMap[admonitionType] || admonitionToAlertVariantMap.NOTE;
+        const { variant, customIcon } = admonitionConfig;
         const pfAlert = (
           <Alert
             variant={variant}
@@ -50,7 +61,7 @@ const useAdmonitionShowdownExtension = () =>
             title={admonitionType}
             className="pfext-markdown-admonition"
           >
-            {mdContent}
+            <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
           </Alert>
         );
         return removeTemplateWhitespace(renderToStaticMarkup(pfAlert));
