@@ -34,4 +34,3 @@ yarn build
 # Quick build of the main module for local dev
 yarn build:quick
 ```
-

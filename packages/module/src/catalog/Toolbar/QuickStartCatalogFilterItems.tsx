@@ -72,7 +72,7 @@ export const QuickStartCatalogFilterCount = ({ quickStartsCount }) => {
   const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
   return (
     <ToolbarItem align={{ default: 'alignEnd' }}>
-      {getResource('{{count, number}} item', quickStartsCount)}
+      { getResource("{{count, number}} item", quickStartsCount).replace('{{count, number}}', quickStartsCount) }
     </ToolbarItem>
   );
 };
