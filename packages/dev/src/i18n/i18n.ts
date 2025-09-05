@@ -71,7 +71,6 @@ i18n
     },
     react: {
       useSuspense: true,
-      wait: true,
     },
     saveMissing: true,
     missingKeyHandler(lng, ns, key) {

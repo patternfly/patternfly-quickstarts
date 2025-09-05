@@ -1,3 +1,4 @@
+import React from 'react';
 import { Title, PageSection } from '@patternfly/react-core';
 
 const centerStyle = {
