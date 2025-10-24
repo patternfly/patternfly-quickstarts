@@ -55,7 +55,7 @@
     "history": "^5.0.0"
   },
   "devDependencies": {
-    "@patternfly/documentation-framework": "^6.0.6",
+    "@patternfly/documentation-framework": "^6.28.8",
     "@patternfly/patternfly": "^6.0.0",
     "@patternfly/react-code-editor": "^6.0.0",
     "@patternfly/react-core": "^6.0.0",
