@@ -14,7 +14,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 18
+          node-version: 20
+      - run: corepack enable
       - uses: actions/cache@v4
         id: yarn-cache
         name: Cache npm deps
@@ -24,7 +25,7 @@ jobs:
             **/node_modules
             ~/.cache/Cypress
           key: ${{ runner.os }}-yarn-16-${{ secrets.CACHE_VERSION }}-${{ hashFiles('yarn.lock') }}
-      - run: yarn install --frozen-lockfile
+      - run: yarn install --immutable
         if: steps.yarn-cache.outputs.cache-hit != 'true'
       - uses: actions/cache@v4
         id: dist
