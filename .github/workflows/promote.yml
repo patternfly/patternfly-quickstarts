@@ -14,12 +14,13 @@ jobs:
       NPM_CONFIG_LEGACY_PEER_DEPS: true
     steps:
       - uses: actions/checkout@v2
-      - name: Build for promotion
-        run: yarn install --frozen-lockfile && yarn build
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
+      - run: corepack enable
+      - name: Build for promotion
+        run: yarn install --immutable && yarn build
       - name: GitHub Tag Name example
         run: |
           echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
