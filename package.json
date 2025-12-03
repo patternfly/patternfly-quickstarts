@@ -64,7 +64,8 @@
     "victory": "37.3.2"
   },
   "resolutions": {
-    "chromedriver": "^104"
+    "chromedriver": "^104",
+    "express": "^4.22.1"
   },
   "jest": {
     "moduleFileExtensions": [
