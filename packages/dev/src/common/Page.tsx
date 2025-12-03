@@ -31,6 +31,7 @@ import { SettingsModal } from '../SettingsModal';
 const AppToolbar = () => {
   const [isModalOpen, setModalOpen] = React.useState(false);
   const [isDarkTheme, setDarkTheme] = React.useState(false);
+  const [isHighContrast, setHighContrast] = React.useState(false);
   const onModalClose = () => setModalOpen(!isModalOpen);
 
   const qsContext = React.useContext(QuickStartContext);
@@ -45,6 +46,15 @@ const AppToolbar = () => {
     }
   };
 
+  const handleHighContrastChange = (isChecked: boolean) => {
+    setHighContrast(isChecked);
+    if (isChecked) {
+      document.documentElement.classList.add('pf-v6-theme-high-contrast');
+    } else {
+      document.documentElement.classList.remove('pf-v6-theme-high-contrast');
+    }
+  };
+
   return (
     <Toolbar id="toolbar">
       <ToolbarContent>
@@ -56,6 +66,15 @@ const AppToolbar = () => {
               label="Dark theme"
               isChecked={isDarkTheme}
               onChange={(_event, isChecked: boolean) => handleDarkThemeChange(isChecked)}
+            />
+          </ToolbarItem>
+          <ToolbarItem>
+            <Switch
+              id="high-contrast-theme-switch"
+              aria-label="Toggle high contrast"
+              label="High contrast theme"
+              isChecked={isHighContrast}
+              onChange={(_event, isChecked: boolean) => handleHighContrastChange(isChecked)}
             />
           </ToolbarItem>
           <ToolbarItem>

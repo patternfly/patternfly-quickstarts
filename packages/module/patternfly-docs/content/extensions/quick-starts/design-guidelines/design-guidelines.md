@@ -17,9 +17,9 @@ sourceLink: https://github.com/patternfly/patternfly-quickstarts/blob/main/packa
 <img src="./img/qs-context.png" alt="A quick start in context of a UI" width="1680"/>
 
 Quick start screens contain a few different components:
-- [Catalog view](/#catalog-view) 
-- [Cards](/#cards) 
-- [Drawer:](/#drawer) Contains an introduction screen, tasks, and a “check your work” module.
+- [Catalog view](/extensions/catalog-view/catalog-item-header) 
+- [Cards](/components/cards) 
+- [Drawer:](/components/drawer) Contains an introduction screen, tasks, and a “check your work” module.
 
 ## Catalog view
 Multiple quick starts are often presented to users in a catalog view of multiple cards.
