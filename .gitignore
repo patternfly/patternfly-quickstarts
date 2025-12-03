@@ -9,5 +9,6 @@ storybook-static
 .env
 stats.html
 .history
+.yarn
 
 .cache

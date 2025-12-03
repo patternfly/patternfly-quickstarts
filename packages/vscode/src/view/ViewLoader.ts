@@ -52,11 +52,18 @@ export default class ViewLoader {
   }
 
   private getWebviewContent(config: string, filePath: string): string {
+    if (!this._panel) {
+      return "";
+    }
     // Local path to main script run in the webview
     const reactAppPathOnDisk = vscode.Uri.file(
       path.join(this._extensionPath, "quickstartsPreview", "quickstartsPreview.js")
     );
+    // Use vscode-resource scheme for older VS Code API compatibility
     const reactAppUri = reactAppPathOnDisk.with({ scheme: "vscode-resource" });
+    // Escape the config and filePath for HTML to prevent XSS and syntax errors
+    const escapedConfig = config.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n").replace(/\r/g, "\\r");
+    const escapedFilePath = filePath.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
     const html = `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -72,8 +79,8 @@ export default class ViewLoader {
 
         <script>
           window.acquireVsCodeApi = acquireVsCodeApi;
-          window.initialData = "${config}";
-          window.filePath = "${filePath}";
+          window.initialData = "${escapedConfig}";
+          window.filePath = "${escapedFilePath}";
         </script>
     </head>
     <body>
@@ -86,7 +93,7 @@ export default class ViewLoader {
   }
 
   private encodeContent(text: string, fileName: string): any {
-    if (fileName.endsWith(".yaml")) {
+    if (fileName && fileName.endsWith(".yaml")) {
       return Base64.encode(JSON.stringify(yamlLoad(text)));
     }
     return Base64.encode(text);
