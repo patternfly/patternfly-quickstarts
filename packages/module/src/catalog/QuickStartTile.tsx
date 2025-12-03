@@ -132,18 +132,14 @@ const QuickStartTile: FC<QuickStartTileProps> = ({
     />
   ) : undefined;
 
+  const cardClasses = `pfext-catalog-item${isActive ? ' pf-m-current' : ''}`;
+
   return (
     <Card
       id={`${id}-catalog-tile`}
       style={{ height: '100%' }}
       data-testid={`qs-card-${camelize(displayName)}`}
-      className="pfext-catalog-item"
-      {...(isActive && {
-        isClickable: true,
-        isSelectable: true,
-        isSelected: true,
-        isClicked: true,
-      })}
+      className={cardClasses}
     >
       <CardHeader
         {...(action && {

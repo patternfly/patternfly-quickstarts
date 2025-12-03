@@ -18,6 +18,7 @@ describe('QuickStartTile', () => {
     );
     const catalogTile = wrapper.find(Card);
     expect(catalogTile.exists()).toBeTruthy();
+    expect(catalogTile.hasClass('pf-m-current')).toBe(false);
   });
 
   it('should load proper catalog tile with featured property', () => {
@@ -31,6 +32,6 @@ describe('QuickStartTile', () => {
     );
     const catalogTile = wrapper.find(Card);
     expect(catalogTile.exists()).toBeTruthy();
-    expect(catalogTile.prop('isSelected')).toBe(true);
+    expect(catalogTile.hasClass('pf-m-current')).toBe(true);
   });
 });
