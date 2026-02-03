@@ -50,7 +50,7 @@ Quick starts are usually surfaced within a catalog as [clickable cards.](/compon
 1. **Icon:** An icon associated with the quick start topic. If no specific icon exists, use the rocket icon.
 1. **Title:** The title (or display name) that briefly identifies the function that the quick start accomplishes. Avoid using the phrase “how to,” and instead begin the title with a gerund (verbs that end in ‘ing’).
     - Example: “Creating a Jupyter notebook”
-1. **Labels:** [Filled labels](/components/label#filled-labels) communicate the estimated completion time and status of a quick start. If the quick start is presented in a mixed catalog of resources, a label can indicate the type of resource.
+1. **Labels:** [Filled labels](/components/label#filled-labels) should be placed in a card to identify quick start experiences and communicate a few high-level details, like estimated completion time and completion status. To signify that a card is linked to a quick start, use a "Quick start" [nonstatus green label](/components/label/design-guidelines#nonstatus-labels). 
 1. **Description:** A description that summarizes the quick start outcome in 4 lines or fewer, without truncating. Begin the description with an action verb. 
     - Example: “Connect to Red Hat OpenShift Streams for Apache Kafka from a Jupyter notebook.”
 1. **Prerequisites (optional):** A bulleted list of prerequisites, displayed in a popover, which outlines permissions needed to complete the tasks, and anything that must be pre-configured before starting the quick start. Avoid phrasing prerequisites as questions. The total number of prerequisites is listed in parentheses on the quick start card.
