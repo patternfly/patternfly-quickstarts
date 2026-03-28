@@ -1339,14 +1339,14 @@ __metadata:
   linkType: hard
 
 "dompurify@npm:^3.2.4":
-  version: 3.3.0
-  resolution: "dompurify@npm:3.3.0"
+  version: 3.3.3
+  resolution: "dompurify@npm:3.3.3"
   dependencies:
     "@types/trusted-types": "npm:^2.0.7"
   dependenciesMeta:
     "@types/trusted-types":
       optional: true
-  checksum: 10c0/66b1787b0bc8250d8f58e13284cf7f5f6bb400a0a55515e7a2a030316a4bb0d8306fdb669c17ed86ed58ff7e53c62b5da4488c2f261d11c58870fe01b8fcc486
+  checksum: 10c0/097c14a21a3f6cb95beded9ecd255f7c3512c42767b048390c747b0fe35736f6a71e02320fc50a9ac2be645834b463e4760915d595d502a56452daf339d0ea9c
   languageName: node
   linkType: hard
 
@@ -2481,7 +2481,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-base64@npm:3.7.8":
+"js-base64@npm:^3.7.8":
   version: 3.7.8
   resolution: "js-base64@npm:3.7.8"
   checksum: 10c0/a4452a7e7f32b0ef568a344157efec00c14593bbb1cf0c113f008dddff7ec515b35147af0cd70a7735adb69a2a2bdee921adffea2ea465e2c856ba50d649b11e
@@ -3250,12 +3250,12 @@ __metadata:
     "@types/react": "npm:^18.2.79"
     css-loader: "npm:^6.7.3"
     i18next-parser: "npm:^9.3.0"
-    js-base64: "npm:3.7.8"
+    js-base64: "npm:^3.7.8"
     js-yaml: "npm:^4.1.1"
     npm-run-all: "npm:^4.1.5"
     null-loader: "npm:^4.0.1"
-    react: "npm:18.3.1"
-    react-dom: "npm:18.3.1"
+    react: "npm:^18.3.1"
+    react-dom: "npm:^18.3.1"
     style-loader: "npm:^3.3.2"
     ts-loader: "npm:^9.4.2"
     tslint: "npm:^6.1.3"
@@ -3274,7 +3274,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:18.3.1":
+"react-dom@npm:^18.3.1":
   version: 18.3.1
   resolution: "react-dom@npm:18.3.1"
   dependencies:
@@ -3286,7 +3286,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:18.3.1":
+"react@npm:^18.3.1":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
   dependencies:
