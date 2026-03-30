@@ -65,7 +65,8 @@
   },
   "resolutions": {
     "chromedriver": "^104",
-    "express": "^4.22.1"
+    "express": "^4.22.1",
+    "picomatch": "2.3.1"
   },
   "jest": {
     "moduleFileExtensions": [
