@@ -1,4 +1,2 @@
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({ adapter: new Adapter() });
+// This file is intentionally left minimal.
+// enzyme setup has been removed in favor of @testing-library/react.

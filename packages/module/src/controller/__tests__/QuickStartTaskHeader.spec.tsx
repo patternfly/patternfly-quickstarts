@@ -1,43 +1,47 @@
-import { ComponentProps } from 'react';
-import { Title, WizardNavItem } from '@patternfly/react-core';
-import { ShallowWrapper, shallow } from 'enzyme';
+import { render, screen, waitFor } from '@testing-library/react';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
+import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
 import QuickStartTaskHeader from '../QuickStartTaskHeader';
 
-type QuickStartTaskHeaderProps = ComponentProps<typeof QuickStartTaskHeader>;
-let wrapper: ShallowWrapper<QuickStartTaskHeaderProps>;
-const props: QuickStartTaskHeaderProps = {
+const contextValues = {
+  ...QuickStartContextDefaults,
+  getResource: (key: string) => key,
+};
+
+const defaultProps = {
   title: 'title',
   taskIndex: 1,
   subtitle: 'subtitle',
   taskStatus: QuickStartTaskStatus.INIT,
-  size: 'lg',
+  size: 'lg' as const,
   isActiveTask: true,
   onTaskSelect: jest.fn(),
 };
 
+const renderWithContext = (props = {}) =>
+  render(
+    <QuickStartContext.Provider value={contextValues}>
+      <QuickStartTaskHeader {...defaultProps} {...props} />
+    </QuickStartContext.Provider>,
+  );
+
 describe('QuickStartTaskHeader', () => {
-  beforeEach(() => {
-    // DOMPurify.addHook = jest.fn();
-    wrapper = shallow(<QuickStartTaskHeader {...props} />);
+  it('should render subtitle for active task', async () => {
+    renderWithContext();
+    await waitFor(() => {
+      expect(
+        screen.getByRole('button', {
+          name: new RegExp(`${defaultProps.title}.*${defaultProps.subtitle}`),
+        }),
+      ).toBeInTheDocument();
+    });
   });
 
-  it('should render subtitle for active task', () => {
-    expect(wrapper.find(WizardNavItem).dive().find(Title).length).toBe(1);
-    expect(
-      wrapper.find(WizardNavItem).dive().find('[data-test-id="quick-start-task-subtitle"]').props()
-        .children,
-    ).toEqual(props.subtitle);
-  });
-  it('should not render subtitle if task is not active', () => {
-    wrapper = shallow(<QuickStartTaskHeader {...props} isActiveTask={false} />);
-    expect(wrapper.find(WizardNavItem).dive().find(Title).length).toBe(1);
-    expect(
-      wrapper
-        .find(WizardNavItem)
-        .dive()
-        .find('[data-test-id="quick-start-task-subtitle"]')
-        .exists(),
-    ).toBe(false);
+  it('should not render subtitle if task is not active', async () => {
+    renderWithContext({ isActiveTask: false });
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: defaultProps.title })).toBeInTheDocument();
+    });
+    expect(screen.queryByText(defaultProps.subtitle)).not.toBeInTheDocument();
   });
 });

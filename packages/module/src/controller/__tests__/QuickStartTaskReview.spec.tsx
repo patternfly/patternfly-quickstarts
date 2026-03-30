@@ -1,42 +1,57 @@
-import { Alert } from '@patternfly/react-core';
-import { ShallowWrapper, shallow } from 'enzyme';
+import { render, screen, waitFor } from '@testing-library/react';
 import { allQuickStarts } from '../../data/quick-start-test-data';
-import QuickStartMarkdownView from '../../QuickStartMarkdownView';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
+import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
 import { getQuickStartByName } from '../../utils/quick-start-utils';
 import QuickStartTaskReview from '../QuickStartTaskReview';
-import { ComponentProps } from 'react';
 
-type QuickStartTaskReviewProps = ComponentProps<typeof QuickStartTaskReview>;
-let wrapper: ShallowWrapper<QuickStartTaskReviewProps>;
-const props: QuickStartTaskReviewProps = {
-  review: getQuickStartByName('explore-serverless', allQuickStarts).spec.tasks[0].review,
+const contextValues = {
+  ...QuickStartContextDefaults,
+  getResource: (key: string) => key,
+};
+
+const review = getQuickStartByName('explore-serverless', allQuickStarts).spec.tasks[0].review;
+
+const defaultProps = {
+  review,
   taskStatus: QuickStartTaskStatus.REVIEW,
   onTaskReview: jest.fn(),
 };
 
+const renderWithContext = (props = {}) =>
+  render(
+    <QuickStartContext.Provider value={contextValues}>
+      <QuickStartTaskReview {...defaultProps} {...props} />
+    </QuickStartContext.Provider>,
+  );
+
 describe('QuickStartTaskReview', () => {
-  it('should render alert with info variant when task status is review', () => {
-    wrapper = shallow(<QuickStartTaskReview {...props} />);
-    expect(wrapper.find(Alert).props().variant).toBe('info');
+  it('should render review prompt with yes/no while task is in review', async () => {
+    renderWithContext();
+    await waitFor(() => {
+      expect(screen.getByRole('alert')).toBeInTheDocument();
+    });
+    expect(screen.getByText('Check your work')).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: 'Yes' })).not.toBeChecked();
+    expect(screen.getByRole('radio', { name: 'No' })).not.toBeChecked();
   });
 
-  it('should render alert with success variant when task status is success', () => {
-    props.taskStatus = QuickStartTaskStatus.SUCCESS;
-    wrapper = shallow(<QuickStartTaskReview {...props} />);
-    expect(wrapper.find(Alert).props().variant).toBe('success');
+  it('should mark Yes selected when task status is success', async () => {
+    renderWithContext({ taskStatus: QuickStartTaskStatus.SUCCESS });
+    await waitFor(() => {
+      expect(screen.getByRole('radio', { name: 'Yes' })).toBeChecked();
+    });
+    expect(screen.getByRole('radio', { name: 'No' })).not.toBeChecked();
   });
 
-  it('should render alert with danger variant when task status is failed', () => {
-    props.taskStatus = QuickStartTaskStatus.FAILED;
-    wrapper = shallow(<QuickStartTaskReview {...props} />);
-    expect(wrapper.find(Alert).props().variant).toBe('danger');
-  });
-
-  it('should render task help in markdown when task status is failed', () => {
-    wrapper = shallow(<QuickStartTaskReview {...props} />);
-    expect(wrapper.find(QuickStartMarkdownView).at(1).props().content).toEqual(
-      props.review.failedTaskHelp,
-    );
+  it('should mark No selected and show failed-task help when task status is failed', async () => {
+    renderWithContext({ taskStatus: QuickStartTaskStatus.FAILED });
+    await waitFor(() => {
+      expect(screen.getByRole('radio', { name: 'No' })).toBeChecked();
+    });
+    expect(screen.getByRole('radio', { name: 'Yes' })).not.toBeChecked();
+    await waitFor(() => {
+      expect(document.body.textContent).toMatch(/This task is incomplete/);
+    });
   });
 });

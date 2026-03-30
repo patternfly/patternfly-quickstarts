@@ -1,37 +1,56 @@
-import { Card } from '@patternfly/react-core';
-import { shallow } from 'enzyme';
+import { render, screen, waitFor } from '@testing-library/react';
 import { getQuickStarts } from '../../data/test-utils';
 import { QuickStartStatus } from '../../utils/quick-start-types';
+import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
 import QuickStartTile from '../QuickStartTile';
 
-describe('QuickStartTile', () => {
-  const quickstarts = getQuickStarts();
+const contextValues = {
+  ...QuickStartContextDefaults,
+  activeQuickStartID: '',
+  setActiveQuickStart: jest.fn(),
+  getResource: (key: string) => key,
+};
 
-  it('should load proper catalog tile without featured property', () => {
-    const wrapper = shallow(
-      <QuickStartTile
-        quickStart={quickstarts[0]}
-        status={QuickStartStatus.NOT_STARTED}
-        onClick={jest.fn()}
-        isActive={false}
-      />,
-    );
-    const catalogTile = wrapper.find(Card);
-    expect(catalogTile.exists()).toBeTruthy();
-    expect(catalogTile.hasClass('pf-m-current')).toBe(false);
+const quickstarts = getQuickStarts();
+
+const renderWithContext = (props: any) =>
+  render(
+    <QuickStartContext.Provider value={contextValues}>
+      <QuickStartTile {...props} />
+    </QuickStartContext.Provider>,
+  );
+
+describe('QuickStartTile', () => {
+  it('should load proper catalog tile without featured property', async () => {
+    const quickStart = quickstarts[0];
+    renderWithContext({
+      quickStart,
+      status: QuickStartStatus.NOT_STARTED,
+      onClick: jest.fn(),
+      isActive: false,
+    });
+    await waitFor(() => {
+      expect(
+        screen.getByRole('button', { name: quickStart.spec.displayName }),
+      ).toBeInTheDocument();
+    });
+    // Status label is omitted for not-started tiles
+    expect(screen.queryByText('In progress')).not.toBeInTheDocument();
   });
 
-  it('should load proper catalog tile with featured property', () => {
-    const wrapper = shallow(
-      <QuickStartTile
-        quickStart={quickstarts[1]}
-        status={QuickStartStatus.IN_PROGRESS}
-        onClick={jest.fn()}
-        isActive
-      />,
-    );
-    const catalogTile = wrapper.find(Card);
-    expect(catalogTile.exists()).toBeTruthy();
-    expect(catalogTile.hasClass('pf-m-current')).toBe(true);
+  it('should load proper catalog tile with featured property', async () => {
+    const quickStart = quickstarts[1];
+    renderWithContext({
+      quickStart,
+      status: QuickStartStatus.IN_PROGRESS,
+      onClick: jest.fn(),
+      isActive: true,
+    });
+    await waitFor(() => {
+      expect(
+        screen.getByRole('button', { name: quickStart.spec.displayName }),
+      ).toBeInTheDocument();
+    });
+    expect(screen.getByText('In progress')).toBeInTheDocument();
   });
 });

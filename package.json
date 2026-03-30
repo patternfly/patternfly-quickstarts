@@ -102,7 +102,8 @@
       "./__mocks__/serverFlags.js",
       "./__mocks__/mutationObserver.js",
       "./__mocks__/websocket.js",
-      "./before-tests.js"
+      "./before-tests.js",
+      "./__mocks__/domPolyfills.js"
     ],
     "coverageDirectory": "__coverage__",
     "coverageReporters": [
@@ -115,7 +116,8 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!**/node_modules/**"
     ],
-    "resolver": "./jest-resolver.js"
+    "resolver": "./jest-resolver.js",
+    "setupTestFrameworkScriptFile": "./jest-setup-framework.js"
   },
   "engines": {
     "node": ">=18.0.0"

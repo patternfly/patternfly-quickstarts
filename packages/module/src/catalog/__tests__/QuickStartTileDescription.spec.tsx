@@ -1,43 +1,44 @@
-import { Popover } from '@patternfly/react-core';
-import { shallow } from 'enzyme';
+import { render, screen, waitFor } from '@testing-library/react';
 import { getQuickStarts } from '../../data/test-utils';
+import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
 import QuickStartTileDescription from '../QuickStartTileDescription';
 
-jest.mock('react', () => {
-  const ActualReact = require.requireActual('react');
-  return {
-    ...ActualReact,
-    useContext: () => jest.fn(),
-  };
-});
+const contextValues = {
+  ...QuickStartContextDefaults,
+  activeQuickStartID: '',
+  startQuickStart: jest.fn(),
+  restartQuickStart: jest.fn(),
+  getResource: (key: string) => key,
+};
 
-xdescribe('QuickStartCatalog', () => {
-  beforeEach(() => {
-    spyOn(React, 'useContext').and.returnValue({
-      activeQuickStartID: '',
-      startQuickStart: () => {},
-      restartQuickStart: () => {},
-      getResource: (key) => `quickstart~${key}`,
+const renderWithContext = (props: any) =>
+  render(
+    <QuickStartContext.Provider value={contextValues}>
+      <QuickStartTileDescription {...props} />
+    </QuickStartContext.Provider>,
+  );
+
+describe('QuickStartTileDescription', () => {
+  it('should show prerequisites only if provided', async () => {
+    const quickStart = getQuickStarts()[0].spec;
+    renderWithContext({ description: quickStart.description });
+    await waitFor(() => {
+      expect(
+        screen.queryByRole('button', { name: 'Show prerequisites' }),
+      ).not.toBeInTheDocument();
     });
   });
 
-  it('should show prerequisites only if provided', () => {
-    // this quick start does not have prereqs
-    const quickStart = getQuickStarts()[0].spec;
-    const QuickStartTileDescriptionWrapper = shallow(
-      <QuickStartTileDescription description={quickStart.description} />,
-    );
-    expect(QuickStartTileDescriptionWrapper.find(Text)).toHaveLength(0);
-  });
-
-  it('shoould render prerequisites inside a popover', () => {
+  it('should render prerequisites trigger when prerequisite list is non-empty', async () => {
     const quickStart = getQuickStarts()[2].spec;
-    const QuickStartTileDescriptionWrapper = shallow(
-      <QuickStartTileDescription
-        description={quickStart.description}
-        prerequisites={quickStart.prerequisites}
-      />,
-    );
-    expect(QuickStartTileDescriptionWrapper.find(Popover)).toHaveLength(1);
+    renderWithContext({
+      description: quickStart.description,
+      prerequisites: quickStart.prerequisites,
+    });
+    await waitFor(() => {
+      expect(
+        screen.getByRole('button', { name: 'Show prerequisites' }),
+      ).toBeInTheDocument();
+    });
   });
 });

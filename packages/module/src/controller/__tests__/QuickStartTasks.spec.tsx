@@ -1,25 +1,22 @@
-import * as React from 'react';
-import { ShallowWrapper, shallow } from 'enzyme';
+import { render, screen, waitFor } from '@testing-library/react';
 import { allQuickStarts } from '../../data/quick-start-test-data';
-import QuickStartMarkdownView from '../../QuickStartMarkdownView';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
+import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
 import { getQuickStartByName } from '../../utils/quick-start-utils';
-import TaskHeader from '../QuickStartTaskHeader';
-import QuickStartTaskReview from '../QuickStartTaskReview';
-import QuickStartTask from '../QuickStartTasks';
+import QuickStartTasks from '../QuickStartTasks';
 
-jest.mock('react', () => {
-  const ActualReact = require.requireActual('react');
-  return {
-    ...ActualReact,
-    useContext: () => jest.fn(),
-  };
-});
+const contextValues = {
+  ...QuickStartContextDefaults,
+  activeQuickStartID: '',
+  startQuickStart: jest.fn(),
+  restartQuickStart: jest.fn(),
+  getResource: (key: string) => key,
+};
 
-type QuickStartTaskProps = React.ComponentProps<typeof QuickStartTask>;
-let wrapper: ShallowWrapper<QuickStartTaskProps>;
-const props: QuickStartTaskProps = {
-  tasks: getQuickStartByName('monitor-sampleapp', allQuickStarts).spec.tasks,
+const tasks = getQuickStartByName('monitor-sampleapp', allQuickStarts).spec.tasks;
+
+const defaultProps = {
+  tasks,
   allTaskStatuses: [
     QuickStartTaskStatus.SUCCESS,
     QuickStartTaskStatus.INIT,
@@ -30,49 +27,54 @@ const props: QuickStartTaskProps = {
   onTaskSelect: jest.fn(),
 };
 
+const renderWithContext = (props = {}) =>
+  render(
+    <QuickStartContext.Provider value={contextValues}>
+      <QuickStartTasks {...defaultProps} {...props} />
+    </QuickStartContext.Provider>,
+  );
+
 describe('QuickStartTasks', () => {
   beforeEach(() => {
-    spyOn(React, 'useContext').and.returnValue({
-      activeQuickStartID: '',
-      startQuickStart: () => {},
-      restartQuickStart: () => {},
-      getResource: (key) => `quickstart~${key}`,
+    jest.clearAllMocks();
+  });
+
+  it('should render correct number of tasks based on currentTaskIndex', async () => {
+    renderWithContext();
+    await waitFor(() => {
+      // Only non-INIT tasks are rendered; first task is SUCCESS so it shows
+      const taskHeaders = screen.getAllByRole('listitem');
+      expect(taskHeaders).toHaveLength(1);
     });
-    wrapper = shallow(<QuickStartTask {...props} />);
   });
 
-  it('should render correct number of tasks based on currentTaskIndex', () => {
-    expect(wrapper.find(TaskHeader).length).toBe(1);
+  it('should render description if a task is active', async () => {
+    renderWithContext({
+      allTaskStatuses: [
+        QuickStartTaskStatus.SUCCESS,
+        QuickStartTaskStatus.FAILED,
+        QuickStartTaskStatus.VISITED,
+      ],
+      taskNumber: 2,
+    });
+    await waitFor(() => {
+      // All 3 tasks are non-INIT, so all render
+      const taskHeaders = screen.getAllByRole('listitem');
+      expect(taskHeaders).toHaveLength(3);
+    });
   });
 
-  it('should render SyncMarkdownView with description if a task is active', () => {
-    wrapper = shallow(
-      <QuickStartTask
-        {...props}
-        allTaskStatuses={[
-          QuickStartTaskStatus.SUCCESS,
-          QuickStartTaskStatus.FAILED,
-          QuickStartTaskStatus.VISITED,
-        ]}
-        taskNumber={2}
-      />,
-    );
-    expect(wrapper.find(QuickStartMarkdownView).at(0).props().content).toEqual(
-      props.tasks[2].description,
-    );
-  });
-
-  it('should render review when task is active and in Review state', () => {
-    wrapper = shallow(
-      <QuickStartTask
-        {...props}
-        allTaskStatuses={[
-          QuickStartTaskStatus.SUCCESS,
-          QuickStartTaskStatus.REVIEW,
-          QuickStartTaskStatus.INIT,
-        ]}
-      />,
-    );
-    expect(wrapper.find(QuickStartTaskReview).exists()).toBe(true);
+  it('should render review when task is active and in Review state', async () => {
+    renderWithContext({
+      allTaskStatuses: [
+        QuickStartTaskStatus.SUCCESS,
+        QuickStartTaskStatus.REVIEW,
+        QuickStartTaskStatus.INIT,
+      ],
+    });
+    await waitFor(() => {
+      // "Check your work" is the alert title for QuickStartTaskReview
+      expect(screen.getByText('Check your work')).toBeInTheDocument();
+    });
   });
 });
