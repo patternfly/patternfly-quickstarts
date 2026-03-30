@@ -1,103 +1,82 @@
-import * as React from 'react';
-import { Button } from '@patternfly/react-core';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import { QuickStartStatus } from '../../utils/quick-start-types';
+import {
+  QuickStartContext,
+  QuickStartContextDefaults,
+} from '../../utils/quick-start-context';
 import QuickStartFooter from '../QuickStartFooter';
 
-jest.mock('react', () => {
-  const ActualReact = require.requireActual('react');
-  return {
-    ...ActualReact,
-    useContext: () => jest.fn(),
-  };
-});
+const contextValues = {
+  ...QuickStartContextDefaults,
+  activeQuickStartID: '',
+  startQuickStart: jest.fn(),
+  restartQuickStart: jest.fn(),
+  getResource: (key: string) => key,
+};
+
+const renderWithContext = (props: any) =>
+  render(
+    <QuickStartContext.Provider value={contextValues}>
+      <QuickStartFooter {...props} />
+    </QuickStartContext.Provider>,
+  );
 
 describe('QuickStartFooter', () => {
-  type QuickStartFooterProps = React.ComponentProps<typeof QuickStartFooter>;
-  let quickStartFooterProps: QuickStartFooterProps;
-  beforeEach(() => {
-    spyOn(React, 'useContext').and.returnValue({
-      activeQuickStartID: '',
-      startQuickStart: () => {},
-      restartQuickStart: () => {},
-      getResource: (key) => `quickstart~${key}`,
-    });
-  });
-
   it('should load Start button for not started tours', () => {
-    quickStartFooterProps = {
+    renderWithContext({
       status: QuickStartStatus.NOT_STARTED,
       footerClass: 'test',
       quickStartId: 'test-quickstart',
-      onNext: () => null,
-      onBack: () => null,
+      onNext: jest.fn(),
+      onBack: jest.fn(),
       totalTasks: 4,
       taskNumber: -1,
-    };
-
-    const quickStartFooterWrapper = shallow(<QuickStartFooter {...quickStartFooterProps} />);
-    const footerButtons = quickStartFooterWrapper.find(Button);
-    expect(footerButtons.exists()).toBeTruthy();
-    expect(footerButtons.length).toEqual(1);
-    expect(footerButtons.at(0).childAt(0).text()).toBe('quickstart~Start');
+    });
+    expect(screen.getByRole('button', { name: 'Start' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Back' })).not.toBeInTheDocument();
   });
 
-  it('should load Continue and Restart buttons for in progress tours at into page', () => {
-    quickStartFooterProps = {
+  it('should load Continue and Restart buttons for in progress tours at intro page', () => {
+    renderWithContext({
       status: QuickStartStatus.IN_PROGRESS,
       footerClass: 'test',
       quickStartId: 'test-quickstart',
-      onNext: () => null,
-      onBack: () => null,
+      onNext: jest.fn(),
+      onBack: jest.fn(),
       totalTasks: 4,
       taskNumber: -1,
-    };
-
-    const quickStartFooterWrapper = shallow(<QuickStartFooter {...quickStartFooterProps} />);
-    const footerButtons = quickStartFooterWrapper.find(Button);
-    expect(footerButtons.exists()).toBeTruthy();
-    expect(footerButtons.length).toEqual(2);
-    expect(footerButtons.at(0).childAt(0).text()).toBe('quickstart~Continue');
-    expect(footerButtons.at(1).childAt(0).text()).toBe('quickstart~Restart');
+    });
+    expect(screen.getByRole('button', { name: 'Continue' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Restart' })).toBeInTheDocument();
   });
 
-  it('should load Next and Back buttons, and Restart link for in progress tours in task page', () => {
-    quickStartFooterProps = {
+  it('should load Next, Back, and Restart buttons for in progress tours in task page', () => {
+    renderWithContext({
       status: QuickStartStatus.IN_PROGRESS,
       footerClass: 'test',
       quickStartId: 'test-quickstart',
-      onNext: () => null,
-      onBack: () => null,
+      onNext: jest.fn(),
+      onBack: jest.fn(),
       totalTasks: 4,
       taskNumber: 2,
-    };
-
-    const quickStartFooterWrapper = shallow(<QuickStartFooter {...quickStartFooterProps} />);
-    const footerButtons = quickStartFooterWrapper.find(Button);
-    expect(footerButtons.exists()).toBeTruthy();
-    expect(footerButtons.length).toEqual(3);
-    expect(footerButtons.at(0).childAt(0).text()).toBe('quickstart~Next');
-    expect(footerButtons.at(1).childAt(0).text()).toBe('quickstart~Back');
-    expect(footerButtons.at(2).childAt(0).text()).toBe('quickstart~Restart');
+    });
+    expect(screen.getByRole('button', { name: 'Next' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Back' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Restart' })).toBeInTheDocument();
   });
 
   it('should load Close, Back and Restart buttons for completed tours in conclusion page', () => {
-    quickStartFooterProps = {
+    renderWithContext({
       status: QuickStartStatus.COMPLETE,
       footerClass: 'test',
       quickStartId: 'test-quickstart',
-      onNext: () => null,
-      onBack: () => null,
+      onNext: jest.fn(),
+      onBack: jest.fn(),
       totalTasks: 4,
       taskNumber: 4,
-    };
-
-    const quickStartFooterWrapper = shallow(<QuickStartFooter {...quickStartFooterProps} />);
-    const footerButtons = quickStartFooterWrapper.find(Button);
-    expect(footerButtons.exists()).toBeTruthy();
-    expect(footerButtons.length).toEqual(3);
-    expect(footerButtons.at(0).childAt(0).text()).toBe('quickstart~Close');
-    expect(footerButtons.at(1).childAt(0).text()).toBe('quickstart~Back');
-    expect(footerButtons.at(2).childAt(0).text()).toBe('quickstart~Restart');
+    });
+    expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Back' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Restart' })).toBeInTheDocument();
   });
 });

@@ -1,25 +1,22 @@
-import { ComponentProps } from 'react';
-import { Button } from '@patternfly/react-core';
-import { ShallowWrapper, shallow } from 'enzyme';
+import { render, waitFor } from '@testing-library/react';
 import { allQuickStarts } from '../../data/quick-start-test-data';
-import QuickStartMarkdownView from '../../QuickStartMarkdownView';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
+import {
+  QuickStartContext,
+  QuickStartContextDefaults,
+} from '../../utils/quick-start-context';
 import { getQuickStartByName } from '../../utils/quick-start-utils';
 import QuickStartConclusion from '../QuickStartConclusion';
 
-jest.mock('react', () => {
-  const ActualReact = require.requireActual('react');
-  return {
-    ...ActualReact,
-    useContext: () => jest.fn(),
-  };
-});
+const contextValues = {
+  ...QuickStartContextDefaults,
+  activeQuickStartID: '',
+  startQuickStart: jest.fn(),
+  restartQuickStart: jest.fn(),
+  getResource: (key: string) => key,
+};
 
-const i18nNS = 'quickstart';
-
-type QuickStartConclusionProps = ComponentProps<typeof QuickStartConclusion>;
-let wrapper: ShallowWrapper<QuickStartConclusionProps>;
-const props: QuickStartConclusionProps = {
+const defaultProps = {
   tasks: getQuickStartByName('explore-pipelines', allQuickStarts).spec.tasks,
   allTaskStatuses: [
     QuickStartTaskStatus.SUCCESS,
@@ -31,52 +28,54 @@ const props: QuickStartConclusionProps = {
   onQuickStartChange: jest.fn(),
 };
 
-xdescribe('QuickStartConclusion', () => {
+const renderWithContext = (props = {}) =>
+  render(
+    <QuickStartContext.Provider value={contextValues}>
+      <QuickStartConclusion {...defaultProps} {...props} />
+    </QuickStartContext.Provider>,
+  );
+
+describe('QuickStartConclusion', () => {
   beforeEach(() => {
-    spyOn(React, 'useContext').and.returnValue({
-      activeQuickStartID: '',
-      startQuickStart: () => {},
-      restartQuickStart: () => {},
-      getResource: (key) => `quickstart~${key}`,
+    jest.clearAllMocks();
+  });
+
+  it('should render conclusion if there are no failed tasks', async () => {
+    renderWithContext();
+    await waitFor(() => {
+      expect(document.body.textContent).toMatch(/conclusion/);
     });
-    wrapper = shallow(<QuickStartConclusion {...props} />);
   });
 
-  it('should render conclusion if there are no failed tasks', () => {
-    expect(wrapper.find(QuickStartMarkdownView).first().props().content).toEqual('conclusion');
+  it('should render link for next quick start if nextQuickStart prop is available and there are no failed tasks', async () => {
+    renderWithContext({
+      nextQuickStarts: [getQuickStartByName('explore-pipelines', allQuickStarts)],
+    });
+    await waitFor(() => {
+      expect(document.body.textContent).toMatch(/Start Installing the Pipelines Operator quick start/);
+    });
   });
 
-  it('should render link for next quick start if nextQuickStart prop is available and there are no failed tasks', () => {
-    wrapper = shallow(
-      <QuickStartConclusion
-        {...props}
-        nextQuickStarts={[getQuickStartByName('explore-pipelines', allQuickStarts)]}
-      />,
-    );
-    expect(wrapper.find(Button).at(0).props().children).toEqual(
-      `${i18nNS}~Start Installing the Pipelines Operator quick start`,
-    );
+  it('should not render link for next quick start if nextQuickStart props is not available', async () => {
+    renderWithContext();
+    await waitFor(() => {
+      expect(document.body.textContent).toMatch(/conclusion/);
+    });
+    expect(document.body.textContent).not.toMatch(/Start .* quick start/);
   });
 
-  it('should not render link for next quick start if nextQuickStart props is not available', () => {
-    expect(wrapper.find(Button).length).toBe(0);
-  });
-
-  it('should not render conclusion, link for next quick start and should render message for retrying if there are failed tasks', () => {
-    wrapper = shallow(
-      <QuickStartConclusion
-        {...props}
-        nextQuickStarts={[getQuickStartByName('explore-pipelines', allQuickStarts)]}
-        allTaskStatuses={[
-          QuickStartTaskStatus.FAILED,
-          QuickStartTaskStatus.SUCCESS,
-          QuickStartTaskStatus.SUCCESS,
-        ]}
-      />,
-    );
-    expect(wrapper.find(QuickStartMarkdownView).first().props().content).toEqual(
-      `${i18nNS}~One or more verifications did not pass during this quick start. Revisit the tasks or the help links, and then try again.`,
-    );
-    expect(wrapper.find(Button).length).toBe(0);
+  it('should not render conclusion and should render message for retrying if there are failed tasks', async () => {
+    renderWithContext({
+      nextQuickStarts: [getQuickStartByName('explore-pipelines', allQuickStarts)],
+      allTaskStatuses: [
+        QuickStartTaskStatus.FAILED,
+        QuickStartTaskStatus.SUCCESS,
+        QuickStartTaskStatus.SUCCESS,
+      ],
+    });
+    await waitFor(() => {
+      expect(document.body.textContent).toMatch(/One or more verifications did not pass/);
+    });
+    expect(document.body.textContent).not.toMatch(/Start .* quick start/);
   });
 });
