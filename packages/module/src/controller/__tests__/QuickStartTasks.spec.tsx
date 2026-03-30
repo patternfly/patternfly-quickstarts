@@ -1,10 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { allQuickStarts } from '../../data/quick-start-test-data';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
-import {
-  QuickStartContext,
-  QuickStartContextDefaults,
-} from '../../utils/quick-start-context';
+import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
 import { getQuickStartByName } from '../../utils/quick-start-utils';
 import QuickStartTasks from '../QuickStartTasks';
 

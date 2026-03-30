@@ -1,9 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { QuickStartStatus } from '../../utils/quick-start-types';
-import {
-  QuickStartContext,
-  QuickStartContextDefaults,
-} from '../../utils/quick-start-context';
+import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
 import QuickStartFooter from '../QuickStartFooter';
 
 const contextValues = {

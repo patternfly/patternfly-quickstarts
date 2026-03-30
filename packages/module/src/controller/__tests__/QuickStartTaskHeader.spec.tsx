@@ -1,9 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
-import {
-  QuickStartContext,
-  QuickStartContextDefaults,
-} from '../../utils/quick-start-context';
+import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
 import QuickStartTaskHeader from '../QuickStartTaskHeader';
 
 const contextValues = {
@@ -32,7 +29,9 @@ describe('QuickStartTaskHeader', () => {
   it('should render subtitle for active task', () => {
     renderWithContext();
     expect(
-      screen.getByRole('button', { name: new RegExp(`${defaultProps.title}.*${defaultProps.subtitle}`) }),
+      screen.getByRole('button', {
+        name: new RegExp(`${defaultProps.title}.*${defaultProps.subtitle}`),
+      }),
     ).toBeInTheDocument();
   });
 

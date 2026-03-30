@@ -1,10 +1,7 @@
 import { render, waitFor } from '@testing-library/react';
 import { allQuickStarts } from '../../data/quick-start-test-data';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
-import {
-  QuickStartContext,
-  QuickStartContextDefaults,
-} from '../../utils/quick-start-context';
+import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
 import { getQuickStartByName } from '../../utils/quick-start-utils';
 import QuickStartConclusion from '../QuickStartConclusion';
 
@@ -52,7 +49,9 @@ describe('QuickStartConclusion', () => {
       nextQuickStarts: [getQuickStartByName('explore-pipelines', allQuickStarts)],
     });
     await waitFor(() => {
-      expect(document.body.textContent).toMatch(/Start Installing the Pipelines Operator quick start/);
+      expect(document.body.textContent).toMatch(
+        /Start Installing the Pipelines Operator quick start/,
+      );
     });
   });
 

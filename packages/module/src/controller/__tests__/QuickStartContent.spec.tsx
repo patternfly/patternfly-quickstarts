@@ -1,10 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { allQuickStarts } from '../../data/quick-start-test-data';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
-import {
-  QuickStartContext,
-  QuickStartContextDefaults,
-} from '../../utils/quick-start-context';
+import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
 import { getQuickStartByName } from '../../utils/quick-start-utils';
 import QuickStartContent from '../QuickStartContent';
 
@@ -18,10 +15,7 @@ const totalTasks = quickStart.spec.tasks.length;
 
 const defaultProps = {
   quickStart,
-  allTaskStatuses: [
-    QuickStartTaskStatus.INIT,
-    QuickStartTaskStatus.INIT,
-  ],
+  allTaskStatuses: [QuickStartTaskStatus.INIT, QuickStartTaskStatus.INIT],
   taskNumber: -1,
   onTaskReview: jest.fn(),
   onTaskSelect: jest.fn(),

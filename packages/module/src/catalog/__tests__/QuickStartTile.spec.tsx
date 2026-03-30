@@ -1,10 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { getQuickStarts } from '../../data/test-utils';
 import { QuickStartStatus } from '../../utils/quick-start-types';
-import {
-  QuickStartContext,
-  QuickStartContextDefaults,
-} from '../../utils/quick-start-context';
+import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
 import QuickStartTile from '../QuickStartTile';
 
 const contextValues = {
@@ -32,9 +29,7 @@ describe('QuickStartTile', () => {
       onClick: jest.fn(),
       isActive: false,
     });
-    expect(
-      screen.getByRole('button', { name: quickStart.spec.displayName }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: quickStart.spec.displayName })).toBeInTheDocument();
     // Status label is omitted for not-started tiles
     expect(screen.queryByText('In progress')).not.toBeInTheDocument();
   });
@@ -47,9 +42,7 @@ describe('QuickStartTile', () => {
       onClick: jest.fn(),
       isActive: true,
     });
-    expect(
-      screen.getByRole('button', { name: quickStart.spec.displayName }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: quickStart.spec.displayName })).toBeInTheDocument();
     expect(screen.getByText('In progress')).toBeInTheDocument();
   });
 });
