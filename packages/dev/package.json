@@ -10,11 +10,11 @@
   },
   "dependencies": {
     "@patternfly/patternfly": "^6.0.0",
-    "@patternfly/quickstarts": "^6.0.0-alpha.0",
+    "@patternfly/quickstarts": "^5.4.1",
     "@patternfly/react-core": "^6.0.0",
     "i18next": "^24.2.3",
     "i18next-browser-languagedetector": "^8.0.0",
-    "i18next-parser": "^9.3.0",
+    "i18next-parser": "^9.4.0",
     "i18next-pseudo": "^2.2.0",
     "lodash-es": "^4.17.21",
     "marked": "^15.0.6",
