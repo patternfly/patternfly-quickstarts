@@ -26,23 +26,29 @@ const renderWithContext = (props = {}) =>
   );
 
 describe('QuickStartTaskReview', () => {
-  it('should render review prompt with yes/no while task is in review', () => {
+  it('should render review prompt with yes/no while task is in review', async () => {
     renderWithContext();
-    expect(screen.getByRole('alert')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByRole('alert')).toBeInTheDocument();
+    });
     expect(screen.getByText('Check your work')).toBeInTheDocument();
     expect(screen.getByRole('radio', { name: 'Yes' })).not.toBeChecked();
     expect(screen.getByRole('radio', { name: 'No' })).not.toBeChecked();
   });
 
-  it('should mark Yes selected when task status is success', () => {
+  it('should mark Yes selected when task status is success', async () => {
     renderWithContext({ taskStatus: QuickStartTaskStatus.SUCCESS });
-    expect(screen.getByRole('radio', { name: 'Yes' })).toBeChecked();
+    await waitFor(() => {
+      expect(screen.getByRole('radio', { name: 'Yes' })).toBeChecked();
+    });
     expect(screen.getByRole('radio', { name: 'No' })).not.toBeChecked();
   });
 
   it('should mark No selected and show failed-task help when task status is failed', async () => {
     renderWithContext({ taskStatus: QuickStartTaskStatus.FAILED });
-    expect(screen.getByRole('radio', { name: 'No' })).toBeChecked();
+    await waitFor(() => {
+      expect(screen.getByRole('radio', { name: 'No' })).toBeChecked();
+    });
     expect(screen.getByRole('radio', { name: 'Yes' })).not.toBeChecked();
     await waitFor(() => {
       expect(document.body.textContent).toMatch(/This task is incomplete/);

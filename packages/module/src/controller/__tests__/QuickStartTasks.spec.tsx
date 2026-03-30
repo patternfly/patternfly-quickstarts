@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { allQuickStarts } from '../../data/quick-start-test-data';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
 import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
@@ -39,14 +39,16 @@ describe('QuickStartTasks', () => {
     jest.clearAllMocks();
   });
 
-  it('should render correct number of tasks based on currentTaskIndex', () => {
+  it('should render correct number of tasks based on currentTaskIndex', async () => {
     renderWithContext();
-    // Only non-INIT tasks are rendered; first task is SUCCESS so it shows
-    const taskHeaders = screen.getAllByRole('listitem');
-    expect(taskHeaders).toHaveLength(1);
+    await waitFor(() => {
+      // Only non-INIT tasks are rendered; first task is SUCCESS so it shows
+      const taskHeaders = screen.getAllByRole('listitem');
+      expect(taskHeaders).toHaveLength(1);
+    });
   });
 
-  it('should render description if a task is active', () => {
+  it('should render description if a task is active', async () => {
     renderWithContext({
       allTaskStatuses: [
         QuickStartTaskStatus.SUCCESS,
@@ -55,12 +57,14 @@ describe('QuickStartTasks', () => {
       ],
       taskNumber: 2,
     });
-    // All 3 tasks are non-INIT, so all render
-    const taskHeaders = screen.getAllByRole('listitem');
-    expect(taskHeaders).toHaveLength(3);
+    await waitFor(() => {
+      // All 3 tasks are non-INIT, so all render
+      const taskHeaders = screen.getAllByRole('listitem');
+      expect(taskHeaders).toHaveLength(3);
+    });
   });
 
-  it('should render review when task is active and in Review state', () => {
+  it('should render review when task is active and in Review state', async () => {
     renderWithContext({
       allTaskStatuses: [
         QuickStartTaskStatus.SUCCESS,
@@ -68,7 +72,9 @@ describe('QuickStartTasks', () => {
         QuickStartTaskStatus.INIT,
       ],
     });
-    // "Check your work" is the alert title for QuickStartTaskReview
-    expect(screen.getByText('Check your work')).toBeInTheDocument();
+    await waitFor(() => {
+      // "Check your work" is the alert title for QuickStartTaskReview
+      expect(screen.getByText('Check your work')).toBeInTheDocument();
+    });
   });
 });

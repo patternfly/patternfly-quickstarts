@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { getQuickStarts } from '../../data/test-utils';
 import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
 import QuickStartCatalog from '../QuickStartCatalog';
@@ -24,12 +24,16 @@ describe('QuickStartCatalog', () => {
     expect(screen.queryByRole('article')).not.toBeInTheDocument();
   });
 
-  it('should load a gallery if QS exist', () => {
+  it('should load a gallery if QS exist', async () => {
     const quickStarts = getQuickStarts();
     renderWithContext({ quickStarts });
     // Each tile exposes the quick start display name as the title control (link-styled button)
-    quickStarts.forEach((qs) => {
-      expect(screen.getByRole('button', { name: qs.spec.displayName })).toBeInTheDocument();
+    await waitFor(() => {
+      quickStarts.forEach((qs) => {
+        expect(
+          screen.getByRole('button', { name: qs.spec.displayName }),
+        ).toBeInTheDocument();
+      });
     });
   });
 });

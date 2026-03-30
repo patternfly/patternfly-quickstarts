@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { getQuickStarts } from '../../data/test-utils';
 import { QuickStartStatus } from '../../utils/quick-start-types';
 import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
@@ -21,7 +21,7 @@ const renderWithContext = (props: any) =>
   );
 
 describe('QuickStartTile', () => {
-  it('should load proper catalog tile without featured property', () => {
+  it('should load proper catalog tile without featured property', async () => {
     const quickStart = quickstarts[0];
     renderWithContext({
       quickStart,
@@ -29,12 +29,16 @@ describe('QuickStartTile', () => {
       onClick: jest.fn(),
       isActive: false,
     });
-    expect(screen.getByRole('button', { name: quickStart.spec.displayName })).toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.getByRole('button', { name: quickStart.spec.displayName }),
+      ).toBeInTheDocument();
+    });
     // Status label is omitted for not-started tiles
     expect(screen.queryByText('In progress')).not.toBeInTheDocument();
   });
 
-  it('should load proper catalog tile with featured property', () => {
+  it('should load proper catalog tile with featured property', async () => {
     const quickStart = quickstarts[1];
     renderWithContext({
       quickStart,
@@ -42,7 +46,11 @@ describe('QuickStartTile', () => {
       onClick: jest.fn(),
       isActive: true,
     });
-    expect(screen.getByRole('button', { name: quickStart.spec.displayName })).toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.getByRole('button', { name: quickStart.spec.displayName }),
+      ).toBeInTheDocument();
+    });
     expect(screen.getByText('In progress')).toBeInTheDocument();
   });
 });

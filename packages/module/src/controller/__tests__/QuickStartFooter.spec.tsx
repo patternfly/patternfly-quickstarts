@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { QuickStartStatus } from '../../utils/quick-start-types';
 import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
 import QuickStartFooter from '../QuickStartFooter';
@@ -19,7 +19,7 @@ const renderWithContext = (props: any) =>
   );
 
 describe('QuickStartFooter', () => {
-  it('should load Start button for not started tours', () => {
+  it('should load Start button for not started tours', async () => {
     renderWithContext({
       status: QuickStartStatus.NOT_STARTED,
       footerClass: 'test',
@@ -29,11 +29,13 @@ describe('QuickStartFooter', () => {
       totalTasks: 4,
       taskNumber: -1,
     });
-    expect(screen.getByRole('button', { name: 'Start' })).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Start' })).toBeInTheDocument();
+    });
     expect(screen.queryByRole('button', { name: 'Back' })).not.toBeInTheDocument();
   });
 
-  it('should load Continue and Restart buttons for in progress tours at intro page', () => {
+  it('should load Continue and Restart buttons for in progress tours at intro page', async () => {
     renderWithContext({
       status: QuickStartStatus.IN_PROGRESS,
       footerClass: 'test',
@@ -43,11 +45,13 @@ describe('QuickStartFooter', () => {
       totalTasks: 4,
       taskNumber: -1,
     });
-    expect(screen.getByRole('button', { name: 'Continue' })).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Continue' })).toBeInTheDocument();
+    });
     expect(screen.getByRole('button', { name: 'Restart' })).toBeInTheDocument();
   });
 
-  it('should load Next, Back, and Restart buttons for in progress tours in task page', () => {
+  it('should load Next, Back, and Restart buttons for in progress tours in task page', async () => {
     renderWithContext({
       status: QuickStartStatus.IN_PROGRESS,
       footerClass: 'test',
@@ -57,12 +61,14 @@ describe('QuickStartFooter', () => {
       totalTasks: 4,
       taskNumber: 2,
     });
-    expect(screen.getByRole('button', { name: 'Next' })).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Next' })).toBeInTheDocument();
+    });
     expect(screen.getByRole('button', { name: 'Back' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Restart' })).toBeInTheDocument();
   });
 
-  it('should load Close, Back and Restart buttons for completed tours in conclusion page', () => {
+  it('should load Close, Back and Restart buttons for completed tours in conclusion page', async () => {
     renderWithContext({
       status: QuickStartStatus.COMPLETE,
       footerClass: 'test',
@@ -72,7 +78,9 @@ describe('QuickStartFooter', () => {
       totalTasks: 4,
       taskNumber: 4,
     });
-    expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    });
     expect(screen.getByRole('button', { name: 'Back' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Restart' })).toBeInTheDocument();
   });

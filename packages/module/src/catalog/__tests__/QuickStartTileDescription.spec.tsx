@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { getQuickStarts } from '../../data/test-utils';
 import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
 import QuickStartTileDescription from '../QuickStartTileDescription';
@@ -19,18 +19,26 @@ const renderWithContext = (props: any) =>
   );
 
 describe('QuickStartTileDescription', () => {
-  it('should show prerequisites only if provided', () => {
+  it('should show prerequisites only if provided', async () => {
     const quickStart = getQuickStarts()[0].spec;
     renderWithContext({ description: quickStart.description });
-    expect(screen.queryByRole('button', { name: 'Show prerequisites' })).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.queryByRole('button', { name: 'Show prerequisites' }),
+      ).not.toBeInTheDocument();
+    });
   });
 
-  it('should render prerequisites trigger when prerequisite list is non-empty', () => {
+  it('should render prerequisites trigger when prerequisite list is non-empty', async () => {
     const quickStart = getQuickStarts()[2].spec;
     renderWithContext({
       description: quickStart.description,
       prerequisites: quickStart.prerequisites,
     });
-    expect(screen.getByRole('button', { name: 'Show prerequisites' })).toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.getByRole('button', { name: 'Show prerequisites' }),
+      ).toBeInTheDocument();
+    });
   });
 });

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { QuickStartTaskStatus } from '../../utils/quick-start-types';
 import { QuickStartContext, QuickStartContextDefaults } from '../../utils/quick-start-context';
 import QuickStartTaskHeader from '../QuickStartTaskHeader';
@@ -26,18 +26,22 @@ const renderWithContext = (props = {}) =>
   );
 
 describe('QuickStartTaskHeader', () => {
-  it('should render subtitle for active task', () => {
+  it('should render subtitle for active task', async () => {
     renderWithContext();
-    expect(
-      screen.getByRole('button', {
-        name: new RegExp(`${defaultProps.title}.*${defaultProps.subtitle}`),
-      }),
-    ).toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.getByRole('button', {
+          name: new RegExp(`${defaultProps.title}.*${defaultProps.subtitle}`),
+        }),
+      ).toBeInTheDocument();
+    });
   });
 
-  it('should not render subtitle if task is not active', () => {
+  it('should not render subtitle if task is not active', async () => {
     renderWithContext({ isActiveTask: false });
-    expect(screen.getByRole('button', { name: defaultProps.title })).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: defaultProps.title })).toBeInTheDocument();
+    });
     expect(screen.queryByText(defaultProps.subtitle)).not.toBeInTheDocument();
   });
 });
