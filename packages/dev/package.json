@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@patternfly/patternfly": "^6.0.0",
-    "@patternfly/quickstarts": "^6.0.0-alpha.0",
+    "@patternfly/quickstarts": "^0.0.0",
     "@patternfly/react-core": "^6.0.0",
     "i18next": "^24.2.3",
     "i18next-browser-languagedetector": "^8.0.0",
