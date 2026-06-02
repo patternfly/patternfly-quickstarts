@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Button, Flex, FlexItem } from '@patternfly/react-core';
-import ExternalLinkAltIcon from '@patternfly/react-icons/dist/js/icons/external-link-alt-icon';
+import RhUiExternalLinkFillIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-external-link-fill-icon';
 import { QuickStartExternal } from '../utils/quick-start-types';
 
 interface QuickStartTileFooterProps {
@@ -22,7 +22,7 @@ const QuickStartTileFooterExternal: FC<QuickStartTileFooterProps> = ({ link, qui
           variant="link"
           aria-label={`Open documentation in new window`}
           isInline
-          icon={<ExternalLinkAltIcon />}
+          icon={<RhUiExternalLinkFillIcon />}
           iconPosition="right"
           id={quickStartId}
           aria-labelledby={`${quickStartId}-external ${quickStartId}`}

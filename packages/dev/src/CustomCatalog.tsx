@@ -16,8 +16,8 @@ import {
   getQuickStartStatus,
   LoadingBox,
 } from '@patternfly/quickstarts';
-import BookmarkIcon from '@patternfly/react-icons/dist/esm/icons/bookmark-icon';
-import OutlinedBookmarkIcon from '@patternfly/react-icons/dist/esm/icons/outlined-bookmark-icon';
+import RhUiBookmarkFillIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-bookmark-fill-icon';
+import RhUiBookmarkIcon from '@patternfly/react-icons/dist/esm/icons/rh-ui-bookmark-icon';
 import {
   Divider,
   Gallery,
@@ -115,7 +115,7 @@ export const CustomCatalog: React.FC = () => {
                             return [...prev, id];
                           });
                         },
-                        icon: bookmarked.includes(id) ? BookmarkIcon : OutlinedBookmarkIcon,
+                        icon: bookmarked.includes(id) ? RhUiBookmarkFillIcon : RhUiBookmarkIcon,
                         'aria-label': 'bookmark',
                       }}
                       quickStart={quickStart}
@@ -156,7 +156,7 @@ export const CustomCatalog: React.FC = () => {
                         return [...prev, id];
                       });
                     },
-                    icon: bookmarked.includes(id) ? BookmarkIcon : OutlinedBookmarkIcon,
+                    icon: bookmarked.includes(id) ? RhUiBookmarkFillIcon : RhUiBookmarkIcon,
                     'aria-label': 'bookmark',
                   }}
                   quickStart={quickStart}
@@ -195,7 +195,7 @@ export const CustomCatalog: React.FC = () => {
                         return [...prev, id];
                       });
                     },
-                    icon: bookmarked.includes(id) ? BookmarkIcon : OutlinedBookmarkIcon,
+                    icon: bookmarked.includes(id) ? RhUiBookmarkFillIcon : RhUiBookmarkIcon,
                     'aria-label': 'bookmark',
                   }}
                   quickStart={quickStart}

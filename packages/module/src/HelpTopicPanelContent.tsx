@@ -18,8 +18,8 @@ import {
 
 import QuickStartMarkdownView from './QuickStartMarkdownView';
 import { HelpTopic } from './utils/help-topic-types';
-import BarsIcon from '@patternfly/react-icons/dist/js/icons/bars-icon';
-import ExternalLinkAltIcon from '@patternfly/react-icons/dist/js/icons/external-link-alt-icon';
+import RhUiMenuBarsIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-menu-bars-icon';
+import RhUiExternalLinkFillIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-external-link-fill-icon';
 
 import { HelpTopicContext, HelpTopicContextValues } from './utils/help-topic-context';
 
@@ -80,7 +80,7 @@ const HelpTopicPanelContent: FC<HelpTopicPanelContentProps> = ({
                 variant="link"
                 aria-label={`Open documentation in new window`}
                 isInline
-                icon={isExternal ? <ExternalLinkAltIcon /> : null}
+                icon={isExternal ? <RhUiExternalLinkFillIcon /> : null}
                 iconPosition="right"
                 style={{ fontSize: 'inherit' }}
               >
@@ -94,7 +94,7 @@ const HelpTopicPanelContent: FC<HelpTopicPanelContentProps> = ({
   );
 
   const content = (
-    <DrawerPanelContent isResizable={isResizable} {...props}>
+    <DrawerPanelContent isResizable={isResizable} isGlass {...props}>
       <div>
         <DrawerHead>
           <div>
@@ -110,7 +110,7 @@ const HelpTopicPanelContent: FC<HelpTopicPanelContentProps> = ({
                   <MenuToggle
                     isFullWidth
                     ref={toggleRef}
-                    icon={<BarsIcon />}
+                    icon={<RhUiMenuBarsIcon />}
                     onClick={toggleHelpTopicMenu}
                     isExpanded={isHelpTopicMenuOpen}
                   >

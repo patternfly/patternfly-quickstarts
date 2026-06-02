@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 import { Button } from '@patternfly/react-core';
-import ArrowRightIcon from '@patternfly/react-icons/dist/js/icons/arrow-right-icon';
+import RhUiArrowRightIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-arrow-right-icon';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStart, QuickStartTask, QuickStartTaskStatus } from '../utils/quick-start-types';
@@ -45,7 +45,7 @@ const QuickStartConclusion: FC<QuickStartConclusionProps> = ({
             variant="link"
             onClick={() => onQuickStartChange(nextQuickStart.metadata.name)}
             isInline
-            icon={<ArrowRightIcon />}
+            icon={<RhUiArrowRightIcon />}
             iconPosition="end"
             isBlock
             key={index}

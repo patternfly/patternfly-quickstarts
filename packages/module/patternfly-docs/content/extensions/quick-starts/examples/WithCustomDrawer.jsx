@@ -94,7 +94,7 @@ export const App = ({ showCardFooters }) => {
   const [drawerContent, setDrawerContent] = React.useState('none');
 
   const otherDrawerPanelContent = (
-    <DrawerPanelContent>
+    <DrawerPanelContent isGlass>
       <DrawerHead>
         <span tabIndex={drawerContent === 'custom' ? 0 : -1}>Drawer panel header</span>
         <DrawerActions>

@@ -21,7 +21,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from '@patternfly/react-core';
-import BarsIcon from '@patternfly/react-icons/dist/js/icons/bars-icon';
+import RhUiMenuBarsIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-menu-bars-icon';
 import LightbulbIcon from '@patternfly/react-icons/dist/js/icons/lightbulb-icon';
 import { QuickStartContext } from '@patternfly/quickstarts';
 import { Link } from 'react-router-dom';
@@ -111,7 +111,7 @@ export const AppHeader = (
       <MastheadToggle>
         <PageToggleButton variant="plain" aria-label="Global navigation">
           <Icon>
-            <BarsIcon />
+            <RhUiMenuBarsIcon />
           </Icon>
         </PageToggleButton>
       </MastheadToggle>
