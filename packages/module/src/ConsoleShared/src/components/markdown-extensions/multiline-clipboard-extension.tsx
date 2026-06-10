@@ -3,7 +3,7 @@ import { useContext, useMemo } from 'react';
 import { QuickStartContext, QuickStartContextValues } from '@quickstarts/utils/quick-start-context';
 import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
 import { renderToStaticMarkup } from 'react-dom/server';
-import CopyIcon from '@patternfly/react-icons/dist/js/icons/copy-icon';
+import RhUiCopyIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-copy-icon';
 
 const useMultilineCopyClipboardShowdownExtension = () => {
   const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
@@ -22,7 +22,7 @@ const useMultilineCopyClipboardShowdownExtension = () => {
                     <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="${getResource(
                       'Copy to clipboard',
                     )}" ${MARKDOWN_COPY_BUTTON_ID}="${groupId}">
-                      ${renderToStaticMarkup(<CopyIcon />)}
+                      ${renderToStaticMarkup(<RhUiCopyIcon />)}
                     </button>
                   </div>
                 </div>

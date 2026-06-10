@@ -23,6 +23,7 @@ interface QuickStartPanelContentProps {
   handleClose: HandleClose;
   appendTo?: HTMLElement | (() => HTMLElement);
   isResizable?: boolean;
+  isGlass?: boolean;
   showClose?: boolean;
   footerClass?: string;
 }
@@ -48,6 +49,7 @@ const QuickStartPanelContent: FC<QuickStartPanelContentProps> = ({
   activeQuickStartID,
   appendTo,
   isResizable = true,
+  isGlass = true,
   showClose = true,
   footerClass,
   ...props
@@ -83,6 +85,7 @@ const QuickStartPanelContent: FC<QuickStartPanelContentProps> = ({
   const content = quickStart ? (
     <DrawerPanelContent
       isResizable={isResizable}
+      isGlass={isGlass}
       data-testid={`qs-drawer-${camelize(quickStart.spec.displayName)}`}
       data-qs={`qs-step-${getStep()}`}
       data-test="quickstart drawer"

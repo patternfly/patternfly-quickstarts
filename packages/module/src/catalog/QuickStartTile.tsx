@@ -1,5 +1,5 @@
 import { FC, useContext, useMemo } from 'react';
-import RocketIcon from '@patternfly/react-icons/dist/js/icons/rocket-icon';
+import RhUiRocketFillIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-rocket-fill-icon';
 import { FallbackImg } from '@console/shared';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 import { QuickStart, QuickStartStatus } from '../utils/quick-start-types';
@@ -8,7 +8,7 @@ import QuickStartTileDescription from './QuickStartTileDescription';
 import QuickStartTileFooter from './QuickStartTileFooter';
 import QuickStartTileFooterExternal from './QuickStartTileFooterExternal';
 import QuickStartTileHeader from './QuickStartTileHeader';
-import OutlinedBookmarkIcon from '@patternfly/react-icons/dist/js/icons/outlined-bookmark-icon';
+import RhUiBookmarkIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-bookmark-icon';
 import {
   Card,
   CardBody,
@@ -22,7 +22,7 @@ import {
   Stack,
   Label,
 } from '@patternfly/react-core';
-import OutlinedClockIcon from '@patternfly/react-icons/dist/js/icons/outlined-clock-icon';
+import RhUiClockFillIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-clock-fill-icon';
 import { StatusIcon } from '@console/shared';
 import './QuickStartTile.scss';
 
@@ -87,7 +87,7 @@ const QuickStartTile: FC<QuickStartTileProps> = ({
           src={icon as string}
           alt=""
           className="pfext-catalog-item-icon__img"
-          fallback={<RocketIcon />}
+          fallback={<RhUiRocketFillIcon />}
         />
       </Icon>
     );
@@ -121,7 +121,7 @@ const QuickStartTile: FC<QuickStartTileProps> = ({
     );
   }, [footer, id, link, status, tasks?.length]);
 
-  const ActionIcon = action?.icon || OutlinedBookmarkIcon;
+  const ActionIcon = action?.icon || RhUiBookmarkIcon;
   const additionalAction = action ? (
     <Button
       aria-label={action['aria-label']}
@@ -156,7 +156,7 @@ const QuickStartTile: FC<QuickStartTileProps> = ({
           <Flex spaceItems={{ default: 'spaceItemsSm' }}>
             {type && <Label color={type.color}>{type.text}</Label>}
             {durationMinutes && (
-              <Label variant="outline" data-test="duration" icon={<OutlinedClockIcon />}>
+              <Label variant="outline" data-test="duration" icon={<RhUiClockFillIcon />}>
                 {getResource('{{duration, number}} minutes', durationMinutes).replace(
                   '{{duration, number}}',
                   durationMinutes,

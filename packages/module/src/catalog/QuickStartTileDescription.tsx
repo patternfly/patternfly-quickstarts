@@ -1,6 +1,6 @@
 import { FC, useContext, useRef } from 'react';
 import { Button, Flex, Popover } from '@patternfly/react-core';
-import InfoCircleIcon from '@patternfly/react-icons/dist/js/icons/info-circle-icon';
+import RhUiInformationFillIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-information-fill-icon';
 import QuickStartMarkdownView from '../QuickStartMarkdownView';
 import { QuickStartContext, QuickStartContextValues } from '../utils/quick-start-context';
 
@@ -38,7 +38,7 @@ const QuickStartTileDescription: FC<QuickStartTileDescriptionProps> = ({
             }}
             aria-label={getResource('Show prerequisites')}
           >
-            <InfoCircleIcon />
+            <RhUiInformationFillIcon />
           </Button>
           <Popover
             aria-label={getResource('Prerequisites')}

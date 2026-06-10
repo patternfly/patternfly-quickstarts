@@ -3,7 +3,7 @@ import { QuickStartContext, QuickStartContextValues } from '@quickstarts/utils/q
 import { MARKDOWN_COPY_BUTTON_ID, MARKDOWN_SNIPPET_ID } from './const';
 import { removeTemplateWhitespace } from './utils';
 import { renderToStaticMarkup } from 'react-dom/server';
-import CopyIcon from '@patternfly/react-icons/dist/js/icons/copy-icon';
+import RhUiCopyIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-copy-icon';
 
 const useInlineCopyClipboardShowdownExtension = () => {
   const { getResource } = useContext<QuickStartContextValues>(QuickStartContext);
@@ -23,7 +23,7 @@ const useInlineCopyClipboardShowdownExtension = () => {
                   <button class="pf-v6-c-button pf-m-plain" aria-label="${getResource(
                     'Copy to clipboard',
                   )}" ${MARKDOWN_COPY_BUTTON_ID}="${groupId}">
-                    ${renderToStaticMarkup(<CopyIcon />)}
+                    ${renderToStaticMarkup(<RhUiCopyIcon />)}
                   </button>
                 </span>
               </span>
