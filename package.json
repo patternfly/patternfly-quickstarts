@@ -5,8 +5,7 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "packages/dev",
-    "packages/module"
+    "packages/*"
   ],
   "scripts": {
     "build": "yarn workspace @patternfly/quickstarts build",
