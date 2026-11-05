@@ -94,7 +94,9 @@ export default class ViewLoader {
 
   private encodeContent(text: string, fileName: string): any {
     if (fileName && fileName.endsWith(".yaml")) {
-      return Base64.encode(JSON.stringify(yamlLoad(text)));
+      // js-yaml v5 throws on empty input; v4 returned undefined
+      const parsed = text.trim().length === 0 ? undefined : yamlLoad(text);
+      return Base64.encode(JSON.stringify(parsed));
     }
     return Base64.encode(text);
   }
