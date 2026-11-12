@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, BrowserRouter, Routes } from 'react-router';
 
 // fonts, variables
 import '@patternfly/patternfly/patternfly.css';

@@ -24,7 +24,7 @@ import {
 import RhUiMenuBarsIcon from '@patternfly/react-icons/dist/js/icons/rh-ui-menu-bars-icon';
 import LightbulbIcon from '@patternfly/react-icons/dist/js/icons/lightbulb-icon';
 import { QuickStartContext } from '@patternfly/quickstarts';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import Nav from '../Nav';
 import { SettingsModal } from '../SettingsModal';
 
