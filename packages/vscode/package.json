@@ -45,7 +45,6 @@
     "watch:views": "webpack --watch --mode development"
   },
   "devDependencies": {
-    "@types/js-yaml": "^4.0.0",
     "@types/mocha": "^2.2.42",
     "@types/node": "^10.12.21",
     "@types/react": "^18.2.79",
@@ -64,7 +63,7 @@
     "@patternfly/quickstarts": "workspace:*",
     "i18next-parser": "^9.4.0",
     "js-base64": "^3.7.8",
-    "js-yaml": "^4.2.0",
+    "js-yaml": "^5.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   }
